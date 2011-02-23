@@ -1,4 +1,4 @@
-\documentclass[openright,final]{memoir}
+\documentclass[openright,final,12pt]{memoir}
 
 % set paper size
 \setstocksize{20.98cm}{14.8cm}
@@ -11,9 +11,10 @@
 
 % import packages
 \usepackage{fullpage}
+\usepackage{color,fancyvrb,relsize}
 
 % import a new font and use the sans-serif version by default
-\usepackage{palatino}
+\usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 
 % latex preferences
@@ -21,7 +22,7 @@
 \tolerance=1000
 
 % put chapters and sections in the toc, only number the chapter
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{0}
 
 \renewcommand{\chaptername}{}
@@ -63,5 +64,6 @@
 \input{intro}
 \input{chap1}
 \input{chap2}
+\input{chap3}
 
 \end{document}
