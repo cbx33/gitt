@@ -1,15 +1,11 @@
 % chap1.tex - Week 1
-\cleardoublepage
-%\phantomsection
-\addcontentsline{toc}{chapter}{Week 1}
-\chapter*{Week 1}
-\section*{Day 1 - ``Things need to change''}
-\subsection*{Meeting the Team}
+\chapter{Week 1}
+\section{Day 1 - ``Things need to change''}
+\subsection{Meeting the Team}
 
 If you're already a seasoned version control user, you may want to skip this chapter.  It's kind of like an introduction to why we even need version control systems in the first place.  This chapter looks at Tamagoyaki Inc's requirements and why they choose the VCS that seemed right for them.  It also deals with the events that led up to the defining "We need a VCS!" discussion.
 
-\begin{quote}In the trenches...
-
+\begin{trenches}
 John sat at his desk and looked out of the window.  The rain was drizzling down the pane, but he didn't care.  It was a quiet Monday morning, the release had gone well on Friday and John was just thinking about implementing the new abstraction layer to the database he'd been asked for.  Through the music playing in his headphones he hardly noticed his boss, the chief designer and the CEO approaching his desk.  
 
 ``John,'' shouted his boss, Markus, ``get your team into the board room.  Now!''
@@ -35,9 +31,9 @@ The room fell silent and a few minutes of silence passed before the meeting was 
 ``It appears that way.''  Said John sullenly.
 
 ``Oh for crying out loud.  How did this happen?  Why wasn't he using the latest version?  And why didn't QA pick up on it?''  Markus looked across the meeting room at John.  ``John, you need to make sure this doesn't happen again.  Find a solution!''
-\end{quote}
+\end{trenches}
 
-\subsection*{The trouble with storage}
+\subsection{The trouble with storage}
 
 It's not like this situation is completely uncommon.  At one point or another most people have managed to pull old code from somewhere and mistakenly use it in place of the latest, up to date, version.  When storing code on network shares or on local disks, it's easy to lose sight of which version is which, no matter how good your naming convention is.  It's like trying to build one of the baked bean puzzles when you have three boxes of them and you tipped all the pieces into one box for simplicities sake.  Not so simple any more is it?
 
@@ -45,13 +41,12 @@ People have a tendency to use folder names which mean something to them.  Howeve
 
 So what's the solution?  Well, in a large number of cases version control can make sure that not only is there a defined place for data to sit, and with a defined structure, but also that you have a full history of the code.  Accountability is very important in code development, especially when releasing software to customers.  In some situations a customer will even mandate that the code being developed for them is stored in a version controlled environment.  In this way, the customer can ask when a certain piece of code was edited, or when an addition first entered the code base.
 
-\section*{Day 3 - ``A possible solution''}
-\subsection*{Version Control Nuances}
+\section{Day 3 - ``A possible solution''}
+\subsection{Version Control Nuances}
 
 There are many offerings for version control out there, Git, Mercurial, Subversion, CVS, and Bazaar to name but a few of the open source ones.  Perhaps a more pertinent question is just which version control system to use.  Each of the has their relative advantages and disadvantages, but some will be suited to certain tasks more that others.  Also, it's worth noting that if you are interacting with other pieces of software, or share some development with another set of developers, it is a good idea to enquire to see what they are using.  Usually you'll find collaboration, forking and patching a lot easier if you're using the same version control system as your upstream or partners.
 
-\begin{quote}In the trenches...
-
+\begin{trenches}
 ``So really it seems like the only real solution to this problem bar Klaus' suggestions of reducing the workforce to only one developer, thank you Klaus,'' Klaus nodded in acknowledgement back to John, ``is to implement a version control system.''
 
 Markus chewed his lip.  ``I can see where you're coming from here John, but aren't version control systems really expensive?''
@@ -59,15 +54,15 @@ Markus chewed his lip.  ``I can see where you're coming from here John, but aren
 ``There are a number of open source offerings we could take a look at first,'' piped up a new voice in the discussion, ``some of them are supposed to be pretty good.''
 
 ``Let's all go away, take a look at the various pros and cons and reconvene tomorrow to discuss the findings,'' said John.  ``Sound fair?''
-\end{quote}
+\end{trenches}
 
 So now we need to take a look at some various features of version control systems and see what the various advantages and disadvantages are of each.  We are going to focus on Git here primarily, as this is what the rest of the book is all about.  It is assumed that if you are reading this book, you have most likely already made the decision about which version control system you are going to use.  So let's talk about the various features that are prevalent in most version control systems.
 
-\subsection*{Distributed Version Control}
+\subsection{Distributed Version Control}
 
 Version control systems usually fit into one of two categories; centralised, or distributed.  Git is a distributed version control system.  It has been designed to run almost everything at a local level.  This will become much more clear when we talk about other features of Git a little later on, but for now just understand that Git isn't tied to a centralised repository.  This is super powerful.  No Really!
 
-\subsection*{Branching}
+\subsection{Branching}
 
 Most version control systems offer branching as part of their default features set.  Branching allows developers to create in essence a clone of their repository and mess around with it, safe in the knowledge that they can switch back to the original whenever they need to.  This allows developers the freedom to experiment with all manner of things without being afraid of affecting the original/clean code base.
 
@@ -75,16 +70,16 @@ Git implements branching in a special way.  Most other version control systems i
 
 The implementation of branching in Git is fast.  Due to the fact that repositories are stored locally, the speed of creating a local branch is limited only by the speed of the disks on a local machine.
 
-\subsection*{Staging}
+\subsection{Staging}
 
 Git deals with commits differently to most other version control systems by introducing the staging area.  The staging area allows developers to prepare their commits before they are written to the repository.  Why is this useful or any different to any other version control system.  In Git you can make a change to a file, add it to the staging area, and then continue to make changes to that file, even though you have not yet actually committed anything.
 It should be noted that it's not absolutely necessary to use the staging area, but it is there for developers wishing to utilise it.
 
-\subsection*{Workflow}
+\subsection{Workflow}
 
 Due to the way that Git has been designed, it's possible to use it in practically any work flow you can think of.  Three of the most common workflows are explained below, and Git can work in any of these, making it one of the more versatile systems out there.
 
-\subsubsection*{Centralised Workflow}
+\subsubsection{Centralised Workflow}
 
 In a centralised workflow, a single shared repository is used.  Multiple developers pull changes from here into local working copies, work on the local version, and then push it back up to the central location.  
 
@@ -94,10 +89,10 @@ Using the centralised model for the workflow, each developer has the same level 
 
 <IMAGE TO GO HERE>
 
-\subsubsection*{Integration Manager Workflow}
+\subsubsection{Integration Manager Workflow}
 The integration manager workflow is similar to the centralised workflow because there is still a \textbf{blessed} repository which everyone uses as a reference.  The difference here is that there is only one person who has the rights to push changes to the \textbf{blessed} repository.  This person is referred to as the Integration Manager.  
 
-\subsubsection*{Blessed}
+\subsubsection{Blessed}
 
 A blessed repository is one which has the approval of the managers of the project.  The blessed repository is supposed to be the de facto standard where all other clones are made from.  If there is one place where code should be correct, it is the blessed repository.  If you are hosting the project in a public place, the blessed repository will usually be the one that is made available to people as a stable point for developing from.
 
@@ -105,7 +100,7 @@ This workflow is handled exceedingly well by Git.  Developers will work on their
 
 <IMAGE TO GO HERE>
 
-\subsubsection*{Dictator and Lieutenant Workflow}
+\subsubsection{Dictator and Lieutenant Workflow}
 
 The dictator and lieutenant workflow is practically an extension to the integration manager workflow.  It is more suited to larger teams, where modules or sections of the code can be assigned to a \textbf{Lieutenant} who is responsible for blessing all of the changes to that particular section.
 
@@ -115,7 +110,7 @@ Once the Lieutenants are happy with their code, they make it available to the Di
 
 The main thing to remember, is that Git can utilise any of these workflows.  This makes it a very flexible system, allowing you to work in whichever way you decide.
 
-\subsection*{Offline Committing}
+\subsection{Offline Committing}
 
 Perhaps one of the most useful and undervalued features of version control systems is that of offline committing.  It may be undervalued because not all version control systems have it.  Offline committing is the ability to continue adding and committing files to the repository without being connected to a centralised repository.  
 
@@ -123,17 +118,17 @@ When travelling or just simply when out of the office, developers and integrator
 
 When returning to the office, the developers simply push their changes to their “public” space, be it local or to a blessed location, and all of the commits that have been made whilst they are away are then made available to the rest of the team, including all history and snapshots.
 
-\subsection*{Developer Interaction}
+\subsection{Developer Interaction}
 
 One factor to consider when choosing a version control system, is that of developer interaction.  By this we are referring to the way in which developers use and interact with the version control system itself.  There are four main methods for VCS interaction
 
-\subsubsection*{Graphical User Interface Client (GUI)}
+\subsubsection{Graphical User Interface Client (GUI)}
 
 A graphical user interface allows the developer, or user, to physically manipulate the repository using a mouse pointer and a graphically rich environment.  A GUI client will typically consist of separate application which is run when a user wants to make changes to a repository such as adding files or commuting changes.  
 
 Some developers prefer having a separate client with which to interact with their repository, whilst others prefer to have things integrated a little more.
 
-\subsubsection*{Shell Extension Integration}
+\subsubsection{Shell Extension Integration}
 
 Shell integration allows the user to interact with their repository using the graphical environment that they would usually use for manipulating files and performing routine directory maintenance.  One of the most common Shell Extensions for Git is the TortoiseGit interface which integrates itself into Windows Explorer, allowing a user to right click on an entity whilst inside a git working tree, and be presented with a context sensitive menu for VCS operations.
 
@@ -141,14 +136,13 @@ Shell integration allows the user to interact with their repository using the gr
 
 The command line interface is favour by many developers as they can script with it and can see exactly what is going on, often in much more detail that with a GUI.  The CLI gives total control over the product and it is worth noting that almost all version control systems start life as command line driven interfaces.  Why is this so?  It can take a lot of time and effort to put all the options and nuances of a system into a GUI.  The CLI will almost always be the most powerful of all tools, especially where version control systems are concerned.
 
-\section*{Day 4 - ``A decision is reached''}
+\section{Day 4 - ``A decision is reached''}
 
-\subsection*{Analysing Your Requirements}
+\subsection{Analysing Your Requirements}
 
 The most important aspect of choosing a version control system, is to define your requirements.  These can be few, or they can be quite specific, let's see what John and his team decide are the most important aspects for them and ultimately what they decide upon.
 
-\begin{quote}In the trenches...
-
+\begin{trenches}
 ``Offline commuting seems like it's a pretty useful thing to have.''  Mike said nodding.  ``Especially with people like John travelling all the time.''
 
 ``I have to admit, it would be nice to be on the plane, and be able to pull all the code together, knowing all of the history of each section,'' replied John.  ``The branching in Git seems to be quite powerful as well.''
@@ -158,7 +152,7 @@ The most important aspect of choosing a version control system, is to define you
 ``And owing to the fact that Git seems to support several workflows, it means we can try them out and see how they work for us.''  Markus looked at the team.  ``Are we settled on Git then?''
 
 The team nodded and everyone walked out of the board room except John.  Things were about to get interesting for him.  Very interesting.
-\end{quote}
+\end{trenches}
 
 Since this book is all about Git, we won't delve too far into the workings or features of other version control systems.  Hopefully, this chapter has given you enough information to go and check out some of the other systems, if you feel the need to.  The main thing to bear in mind is that Git is a Distributed Version Control system.  While this is so, it is equally important to remember that it can be used in the same workflow models as Centralised Version Control systems.
 
@@ -166,14 +160,13 @@ John and his teams requirements are nothing special.  They are a smallish team l
 
 Version control is not a replacement for workflow.  It is not intended to make everything better.  If you have people going off and doing their own thing and being careless about the way they work, version control is not going to suddenly fix everything.  A tool is just that, a tool and version control is no different.  You can buy the messiest builder in the trade a nice shiny new tool box, but unless they have the mindset to want to change, you'll probably find that all the tools end up in the largest compartment at the bottom.
 
-\section*{Day 5 - ``Working like a team''}
+\section{Day 5 - ``Working like a team''}
 
-\subsection*{Team Organisation}
+\subsection{Team Organisation}
 
 Now that we have the basics dealt with, let's take a little look at how John arranges his team, and see whether version control is going to work for them.  It is important that the team understands how the model should work, what they are expected to do and what level of access they have.  Most of the time people will get more frustrated about not know what they should or shouldn't be doing, rather than that they do or don't have access to certain things.
 
-\begin{quote}In the trenches...
-
+\begin{trenches}
 It was 4:36pm on the Friday and the table in the board room was littered with empty coke cans, pizza boxes and one Japanese bento lunchbox, owned by a particularly stubborn member of the team who had vowed never to eat pizza gain.  It had been Marcus' idea to bring in the food reinforcement to help the discussions along.  The team were trying to decide how to organise their model.
 
 ``There's nothing to say we can't use a combination of the models is there?'' asked Mike.
@@ -187,4 +180,4 @@ John raised his eyebrows, ``Not bad Mike,'' he said, genuinely impressed.  After
 ``So, we start on Monday then?'' asked Markus, who had been listening from the other end of the table.  
 
 ``Indeed.''  Announced Klaus, ``Monday we all become Gits!''
-\end{quote}
+\end{trenches}

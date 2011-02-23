@@ -1,13 +1,54 @@
-% intro.tex - Introduction
-\documentclass[a4paper,openright,twoside]{book}
+\documentclass[a4paper,openright,twoside,final]{memoir}
+
+% import packages
+\usepackage{fullpage}
+
+% import a new font and use the sans-serif version by default
+\usepackage{palatino}
+\renewcommand{\familydefault}{\sfdefault}
+
+% latex preferences
 \hyphenpenalty=1000
 \tolerance=1000
-\begin{document}
+
+% put chapters and sections in the toc, only number the chapter
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{0}
+
+% make the pdf have clickable links
+\usepackage[
+  bookmarks,
+  bookmarksopen,
+  bookmarksnumbered=false,
+  colorlinks,
+  pdfpagemode=None,
+  urlcolor=black,
+  citecolor=black,
+  linkcolor=black,
+  pagecolor=black,
+  plainpages=false,
+  pdfpagelabels,
+  pdftitle={Git In the Trenches},
+  pdfauthor={Peter Savage}]{hyperref}
+
+
+% title/author/date
 \title{Git In the Trenches}
 \author{Peter Savage}
+
+\input{commands}
+
 \date{Feburary 2011}
+
+\begin{document}
+
+% preamble stuff
 \maketitle
+\tableofcontents
+
+% include all the individual chapters
 \input{intro}
 \input{chap1}
 \input{chap2}
+
 \end{document}
