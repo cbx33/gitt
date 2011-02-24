@@ -87,18 +87,24 @@ Git handles this workflow just like most other version control systems.  A devel
 
 Using the centralised model for the workflow, each developer has the same level of access to the repository and is considered as \textbf{important} as each other.  For smaller teams, this method will work well, but as teams get larger, a centralised method may get tedious.
 
-<IMAGE TO GO HERE>
+\begin{figure}[htbp]
+\includegraphics[width=6cm]{d1.pdf}
+\end{figure}
 
 \subsubsection{Integration Manager Workflow}
 The integration manager workflow is similar to the centralised workflow because there is still a \textbf{blessed} repository which everyone uses as a reference.  The difference here is that there is only one person who has the rights to push changes to the \textbf{blessed} repository.  This person is referred to as the Integration Manager.  
 
+\begin{framed}[htbp]
 \subsubsection{Blessed}
 
 A blessed repository is one which has the approval of the managers of the project.  The blessed repository is supposed to be the de facto standard where all other clones are made from.  If there is one place where code should be correct, it is the blessed repository.  If you are hosting the project in a public place, the blessed repository will usually be the one that is made available to people as a stable point for developing from.
+\end{framed}
 
 This workflow is handled exceedingly well by Git.  Developers will work on their repositories locally and then once they are happy, will push their changes to a location where the Integration Manager can see them.  The Integration Manager will then review the changes that the developers have made and will merge them into their own local repository.  Once they are happy that everything is working well, the Integration Manager will push their changes to the blessed repository so that all the other developers can access the changes.
 
-<IMAGE TO GO HERE>
+\begin{figure}[htbp]
+\includegraphics[width=6cm]{d1.pdf}
+\end{figure}
 
 \subsubsection{Dictator and Lieutenant Workflow}
 
@@ -106,7 +112,9 @@ The dictator and lieutenant workflow is practically an extension to the integrat
 
 Once the Lieutenants are happy with their code, they make it available to the Dictator.  The Dictator then takes on a role similar to the Integration Manager from the previous model.  In the end, all of the changes are pushed to the blessed repository for the developers at the bottom of the tree to pull from.
 
-<IMAGE TO GO HERE>
+\begin{figure}
+\includegraphics[width=6cm]{d1.pdf}
+\end{figure}
 
 The main thing to remember, is that Git can utilise any of these workflows.  This makes it a very flexible system, allowing you to work in whichever way you decide.
 

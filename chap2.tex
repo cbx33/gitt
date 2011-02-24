@@ -7,7 +7,9 @@ So now we are ready to being delving into and actually using Git, right?  Well, 
 
 Conceptually, the model which was discussed previously is easy to imagine.  We have two dictators, who both have access to the blessed repository and then several developers, who are going to have their changes reviewed and included, by the aforementioned dictators.  The physical representation of the workflow model is summarised in the diagram below.
 
-<IMAGE GOES HERE>
+\begin{figure}[htbp]
+\includegraphics[width=6cm]{d1.pdf}
+\end{figure}
 Tamagoyaki Inc's Physical Structure
 
 The physical structure is all well and good, but it doesn't determine exactly how the data is moved, just who is responsible for it at each stage in the process.  What is required, is a detailed analysis of where the data flows from and to.  A data flow diagram is useful, but not essential.  However, we will create a slightly different form of diagram to show how the data will be moved from one person to another.  Before we go ahead and look at the diagram, let's go back to the trenches to see how the guys are coping with their repository design. 
@@ -64,8 +66,8 @@ john@akira:~/coderepo$ git
 
 What we've done here is create a new directory called coderepo, moved into it, and then run the git init command.  The result of this command is a new directory in the coderepo dir called .git.  This directory will hold a local copy of our entire repository.  This will allow us to create branches, merge changes, rebase things and ultimately push our changes to somewhere else.
 
-
-\subsection{What's inside the Git repository?}
+\begin{framed}
+\subsubsection{What's inside the Git repository?}
 
 Let's take a brief look into the directory structure, to see what this command has created in the \texttt{.git} folder.
 
@@ -102,7 +104,7 @@ john@akira:~/coderepo/.git$
 \textbf{refs} - This folder holds the files that files for local branches, remote branches and tags.
 
 More files and folders may appear here during the running of the repository.
-
+\end{framed}
 
 Something that is crucial to the running of a repository, whether you are an administrator of Git, or a developer who is using it, is an understanding of how Git works.  It is fine to jump in and play with the repository and test the water, but before committing to using Git in a production environment, you should understand what Git actually does in the background in some detail. 
 

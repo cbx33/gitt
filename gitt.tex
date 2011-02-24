@@ -5,10 +5,14 @@
 \setstocksize{20.98cm}{14.8cm}
 \settrimmedsize{20.98cm}{14.8cm}{*}
 \settrims{0in}{0in}
-\settypeblocksize{17.16cm}{10.73cm}{*}
-\setlrmargins{2.16cm}{*}{*}
-\setulmargins{1.91cm}{*}{*}
+%\settypeblocksize{17.16cm}{10.73cm}{*}
+%\setlrmargins{2.16cm}{*}{*}
+%\setulmargins{1.91cm}{*}{*}
+\setlrmarginsandblock{2.16cm}{1.91cm}{*}
+\setulmarginsandblock{1.91cm}{1.91cm}{*}
 \checkandfixthelayout
+\usepackage{graphicx}
+\usepackage{float}
 
 % import packages
 \usepackage{fullpage}
@@ -17,10 +21,6 @@
 % import a new font and use the sans-serif version by default
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
-
-% latex preferences
-\hyphenpenalty=1000
-\tolerance=1000
 
 % put chapters and sections in the toc, only number the chapter
 \setcounter{tocdepth}{3}
@@ -56,6 +56,10 @@
 \date{Feburary 2011}
 
 \begin{document}
+
+% latex preferences
+\hyphenpenalty=1000
+\tolerance=1000
 
 % preamble stuff
 \maketitle
