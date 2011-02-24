@@ -1,10 +1,7 @@
-% chap1.tex - Week 1
-\cleardoublepage
-%\phantomsection
-\addcontentsline{toc}{chapter}{Week 2}
-\chapter*{Week 2}Week 2
-\section*{Day 1 - ``We are coders, we use Git!''}
-\subsection*{Setting Up the Environment}
+% chap2.tex - Week 2
+\chapter{Week 2}
+\section{Day 1 - ``We are coders, we use Git!''}
+\subsection{Setting Up the Environment}
 
 So now we are ready to being delving into and actually using Git, right?  Well, not exactly.  First we have to decide upon how the workflow model we have envisaged is implemented in out version control system.  With Git being so versatile, it's both a blessing and a danger.  It is a good idea to define from early on, exactly how you would like the developers, lieutenants and dictators to behave, before you begin actually committing any code.  Sometimes this isn't possible.  It's quite feasible that you have never used a version control system like Git before and you begin by muddling your way through.  This is normal, but if you are in charge of implementing this type of system for a professional environment, you should really consider first how this is going to work. 
 
@@ -15,7 +12,7 @@ Tamagoyaki Inc's Physical Structure
 
 The physical structure is all well and good, but it doesn't determine exactly how the data is moved, just who is responsible for it at each stage in the process.  What is required, is a detailed analysis of where the data flows from and to.  A data flow diagram is useful, but not essential.  However, we will create a slightly different form of diagram to show how the data will be moved from one person to another.  Before we go ahead and look at the diagram, let's go back to the trenches to see how the guys are coping with their repository design. 
 
-\begin{quote}In the trenches...
+\begin{trenches}
 ``John, why are we all sat in here at 9:45am on Monday morning.''  Klaus whined.  ``I haven't even ingested enough coffee to check emails yet, let alone meet with people.''
 
 John grinned, ``I don't think any amount of coffee will help you there Klaus, it's you winning personality that will pull you through.''  The rest of the team laughed and then subsided as John started drawing furiously on the board.  ``So we have our physical model.  We know which people are going to be in charge of things, but we don't know yet how to arrange our repositories.''
@@ -43,36 +40,36 @@ Simon spoke out, ``Well, I was reading over the weekend about this thing called 
 ``Well, rebasing is pretty darn clever.  Think of it this way.  You have an upstream branch, in this case, our blessed repository.  You are happily making changes.  When the upstream changes, you could merge the changes in from blessed.  If you do this, you create a single commit which merges the changes in.  It works, but...'' he trailed off a little, ``it can cause problems in certain instances.  A better way to handle it is with rebasing.  Rebasing can take all the changes you have made, squirrel them away, pull down all the changes to bring it up to date, and then whack your changes on top.''
 
 John breathed out, ``It sounds pretty cool Simon, but one things is abundantly clear, we need to learn more about the Git basics before we start delving into this merging and rebasing.  Let's spend the rest of the day playing with some test repositories and reconvene tomorrow.''
-\end{quote}
+\end{trenches}
 
 If you've never played with a version control system before it is a good idea to take some time to just play.  Pretty soon you'll have learned the basics and will be in a position where you will want to put your newly honed skills into practice.  Though playing on test repositories is good, it is quite usual that you need to actually use the system in a real environment before real problems arise.  The rest of this chapter is a very quick introduction to Git.  It is presented as an introduction, because it is hoped and expected that the you will take some time out to get to know the system and how it works. 
 
-\subsection*{Initialising A Repository}
+\subsection{Initialising A Repository}
 The first thing we need to do is to understand two very important things: 
 
 \begin{enumerate}
-  \item 1. How to create a Git repository 
-  \item 2. What a Git repository actually is 
+  \item How to create a Git repository 
+  \item What a Git repository actually is 
 \end{enumerate}
 
 The first of these is relatively easy to perform.  
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}]
 john@akira:~$ mkdir coderepo 
 john@akira:~$ cd coderepo 
 john@akira:~/coderepo$ git init 
 Initialized empty Git repository in /home/john/coderepo/.git/ 
 john@akira:~/coderepo$ git 
-\end{verbatim} 
+\end{Verbatim} 
 
 What we've done here is create a new directory called coderepo, moved into it, and then run the git init command.  The result of this command is a new directory in the coderepo dir called .git.  This directory will hold a local copy of our entire repository.  This will allow us to create branches, merge changes, rebase things and ultimately push our changes to somewhere else.
 
 
-\subsection*{What's inside the Git repository?}
+\subsection{What's inside the Git repository?}
 
 Let's take a brief look into the directory structure, to see what this command has created in the \texttt{.git} folder.
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo/.git$ ls -la 
 total 40 
 drwxr-xr-x 7 john john 4096 2011-02-17 19:23 . 
@@ -86,7 +83,7 @@ drwxr-xr-x 2 john john 4096 2011-02-17 19:23 info
 drwxr-xr-x 4 john john 4096 2011-02-17 19:23 objects 
 drwxr-xr-x 4 john john 4096 2011-02-17 19:23 refs 
 john@akira:~/coderepo/.git$ 
-\end{verbatim} 
+\end{Verbatim} 
 
 \textbf{branches} - Though depreciated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.
 
@@ -116,12 +113,12 @@ When a commit is made to the repository, Git stores a few things.  A commit obje
 
 The commit object is also referred to by an SHA-1 hash.  This is different to many other version control systems which use either a number that refers to the repository or a per file version number.  Getting used to seeing 40 character SHA-1 hashes can take a little time.  Saying "I need the commit referred to as  bf81617d6417d9380e06785f8ed23b247bea8f6d," is certainly not as easy as saying you need revision 6.  However, Git handles these hashes well, and you can reference a commit using a few of the characters from the beginning, as long as those characters uniquely refer to that commit, ie, as long as your choice isn't in any way ambiguous.
 
-\section*{Day 2 - ``Making commitments''}
+\section{Day 2 - ``Making commitments''}
 \subsection{Let's Make a Repository}
 
 The most simple way of committing a file into the repository is to create it, or bring it into your working copy and use the commands below.
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/touch my_first_committed_file
 john@akira:~/coderepo$ touch my_first_committed_file
 john@akira:~/coderepo$ git add my_first_committed_file
@@ -130,11 +127,11 @@ john@akira:~/coderepo$ git commit -m 'My First Ever Commit'
  0 files changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 my_first_committed_file
 john@akira:~/coderepo$
-\end{verbatim} 
+\end{Verbatim} 
 
 What we have done here, is to create a new blank file and add it into the repository using Git's add command.  Then we have committed it into the repository.  Let's make a few changes to our working copy and see what the result is.  First we are going to add another two new files, then we are going to make changes to our original file and finally we are going to run git status to see what Git has to say about our changes.
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ echo "Change1" > my_first_committed_file 
 john@akira:~/coderepo$ touch my_second_committed_file
 john@akira:~/coderepo$ touch my_third_committed_file
@@ -142,22 +139,25 @@ john@akira:~/coderepo$ git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
+#   (use "git checkout -- <file>..." to discard changes in 
+working directory)
 #
 #	modified:   my_first_committed_file
 #
 # Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
+#   (use "git add <file>..." to include in what will be 
+committed)
 #
 #	my_second_committed_file
 #	my_third_committed_file
-no changes added to commit (use "git add" and/or "git commit -a")
+no changes added to commit (use "git add" and/or "git commit 
+-a")
 john@akira:~/coderepo$ 
-\end{verbatim} 
+\end{Verbatim} 
 
 So we can see that Git is reporting that there are changes to our first committed file, and that our second and third files are \textbf{untracked}.  Untracked files are ones which Git detects as being present in the working directory, but which haven't yet been added and there for upon running a commit, these files will not be added to the repository.  Notice that if we tried to run a commit now, nothing would actually be committed to the repository.  Even though there are changes to to my\_first\_committed\_file, we have not asked Git to include these.  So, let's go ahead and do that, and at the same time we'll make a few changes to my\_second\_committed\_file, and add those too.
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git add my_first_committed_file
 john@akira:~/coderepo$ echo "Change1" > my_second_committed_file 
 john@akira:~/coderepo$ git add my_second_committed_file
@@ -170,18 +170,18 @@ john@akira:~/coderepo$ git status
 #	new file:   my_second_committed_file
 #
 # Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
+#   (use "git add <file>..." to include in what will be 
+committed)
 #
 #	my_third_committed_file
 john@akira:~/coderepo$ 
-\end{verbatim} 
+\end{Verbatim} 
 
 Now we can see that one of the sections has changed to "Changes to be committed".  So this means that Git has recognised and remembered that we are expecting these files to be committed when we next run a git commit.  
 
-\subsection*{Committing the Uncommitted}
+\subsection{Committing the Uncommitted}
 
-\begin{quote}In the trenches...
-
+\begin{trenches}
 ``John, what is going on here?'' shouted Klaus from across the hallway.  The entire office had heard Klaus banging his hands down on the desk for the last fifteen minutes.  ``John!'' the shout turned into a scream.
 
 ``Calm down Klaus, I'm just coming.''  John walked over to Klaus and pulled up one of the folding plastic chairs.  After a few minutes of fumbling he finally managed to take up his position next to an infuriated Klaus.
@@ -189,12 +189,13 @@ Now we can see that one of the sections has changed to "Changes to be committed"
 ``John, Git is driving me crazy.  I have added files to the repository and I keep running a commit, but the changes aren't getting put into the blasted repo.''  Klaus was clearly distressed and John resisted the urge make jokes.
 
 John pointed at the screen.  ``Run a git status Klaus and I'll show you what the problem is.''
-\end{quote}
+\end{trenches}
 
 To understand what Klaus was getting in a spin about, let's make a change to my\_second\_committed\_file now and see how this affects things.  Remember we have already added the file, but we haven't yet made a commit.
 
-\begin{verbatim} 
-john@akira:~/coderepo$ echo "Change2" >> my_second_committed_file 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ echo "Change2" >> 
+my_second_committed_file 
 john@akira:~/coderepo$ git status
 # On branch master
 # Changes to be committed:
@@ -205,90 +206,98 @@ john@akira:~/coderepo$ git status
 #
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
+#   (use "git checkout -- <file>..." to discard changes in 
+working directory)
 #
 #	modified:   my_second_committed_file
 #
 # Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
+#   (use "git add <file>..." to include in what will be 
+committed)
 #
 #	my_third_committed_file
 john@akira:~/coderepo$ 
-\end{verbatim} 
+\end{Verbatim} 
 
 How interesting!  We now have three sections and one of our files appears twice under both Changes to be committed and Changed but up updated.  What does this mean?  If you remember back, we spoke about a staging area.  This is one area in which Git differs to many version control systems.  When you \textbf{add} a file into the repository, Git will actually make a copy of that file and move it into the staging area.  If you then go ahead and change that file, you would need to run another git add in order for Git to copy your changed file into the staging area.  The most important thing to remember is that Git will only ever commit what is in the staging area.
 
 So, if we go ahead and run our commit now, we will only have the changes marked in Changes to be committed appearing in out repository.  
 
-\begin{verbatim} 
-john@akira:~/coderepo$ git commit -m 'Made a few changes to first and second files'
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git commit -m 'Made a few changes to 
+first and second files'
 [master e86ddea] Made a few changes to first and second files
  2 files changed, 2 insertions(+), 0 deletions(-)
  create mode 100644 my_second_committed_file
 john@akira:~/coderepo$ 
-\end{verbatim} 
+\end{Verbatim} 
 
 In our examples, we have used the syntax \texttt{git commit -m 'Message'}.  This is a slightly special way of committing, it allows us to specify our commit log message on the command line.  If we wanted to, we could run the command git commit and this would open a text editor that we could use to input out commands.
 
-\subsection*{How do we change the commit message editor?}
+\subsection{How do we change the commit message editor?}
 
 We spoke earlier about the configuration file and how it stores information about our Git instance.  Git can use any text editor you require, even a graphical one, though the need rarely arises.  As mentioned earlier, Git has a preference lever when talking about configuration.  First and foremost it will look in the repositories own 'config' file in the .git folder.  Then, it will look in the users \texttt{~/.gitconfig} file.  Finally, Git will look in your distributions own global folder.  
 
 If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 git config core.editor "nano"
-\end{verbatim}
+\end{Verbatim}
 
 If we want the changes to apply globally, meaning it would affect all repositories we administrate as this user, unless overridden by a repository setting, we would run the following;
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 git config --global core.editor "nano"
-\end{verbatim}
+\end{Verbatim}
 
 Let us finish off our round of committing by using the \texttt{git commit -a} option.  This commits all of the changes to files which are already tracked.  In this way, we do not have to specify the files with \texttt{git add}, like we have had to previously.  Any file which has been modified and has previously been added to the repository, will have it's changes committed upon running that command.
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git status 
 # On branch master 
 # Changed but not updated: 
 #   (use "git add <file>..." to update what will be committed) 
-#   (use "git checkout -- <file>..." to discard changes in working directory) 
+#   (use "git checkout -- <file>..." to discard changes in 
+working directory) 
 # 
 #	modified:   my_second_committed_file 
 # 
 # Untracked files: 
-#   (use "git add <file>..." to include in what will be committed) 
+#   (use "git add <file>..." to include in what will be 
+committed) 
 # 
 #	my_third_committed_file 
-no changes added to commit (use "git add" and/or "git commit -a")
-\end{verbatim} 
+no changes added to commit (use "git add" and/or "git commit 
+-a")
+\end{Verbatim} 
 
-\begin{verbatim} 
-john@akira:~/coderepo$ git commit -a -m 'Finished adding initial files' 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git commit -a -m 'Finished adding initial 
+files' 
 [master 6ca160c] Finished adding initial files 
  1 files changed, 1 insertions(+), 0 deletions(-) 
-\end{verbatim} 
+\end{Verbatim} 
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git status 
 # On branch master 
 # Untracked files: 
-#   (use "git add <file>..." to include in what will be committed) 
+#   (use "git add <file>..." to include in what will be 
+committed) 
 # 
 #	my_third_committed_file 
-nothing added to commit but untracked files present (use "git add" to track) 
+nothing added to commit but untracked files present (use "git 
+add" to track) 
 john@akira:~/coderepo$ 
-\end{verbatim} 
+\end{Verbatim} 
 
-\section*{Day 4 - ``Let's do this right, not fast''}
+\section{Day 4 - ``Let's do this right, not fast''}
 
-\subsection*{Uh-Oh I Think I Made A Mistake}
+\subsection{Uh-Oh I Think I Made A Mistake}
 
 So now we are fairly well aquainted with adding files into the repository and performing commits.  In a short while we will learn about how to view the changes we have made and perform diffs against various objects.  Before we close out the week, we need to go back to the trenches one last time.
 
-\begin{quote}In the trenches...
-
+\begin{trenches}
 ``Rob, ya got a second?'' asked Mike.
 
 ``Sure, what's up?'' replied Rob from across the office.  ``Gimme two secs to make this commit.''  The office went silent again whilst Rob's fingers darted across the keyboard.  ``Ahh.  Damn it!'' shouted Rob.  
@@ -302,11 +311,11 @@ Mike chuckled, ``Sorry for interrupting dude.''
 ``Nah, it's OK, I just need to know how to pull this file out of the index.''
 
 ``Git reset,'' shouted a voice.  The stillness of the office was interrupted by a chair free wheeling across the floor.  The occupant of the chair was Klaus.  He seemed proud that he was finally getting to grips with things.  ``You can use git reset to reset a file that's in the index.''  He grabbed at the keyboard, ``Here, lemme show you.''
-\end{quote}
+\end{trenches}
 
 The git reset is great at removing things from the index that you don't want to be there.  Of course, it can do a great many other things, but for now, let us concern ourselves with the scenario presented above.  We are working away, and have added a number of files into the index ready for committing, when we discover that we are actually not ready to commit them.  In the following example, we are going to add the file my\_third\_committed\_file and then remove it from the index.
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git add my_third_committed_file
 john@akira:~/coderepo$ git status
 # On branch master
@@ -316,26 +325,27 @@ john@akira:~/coderepo$ git status
 #	new file:   my_third_committed_file
 #
 john@akira:~/coderepo$ 
-\end{verbatim} 
+\end{Verbatim} 
 
 Notice how my\_third\_committed\_file is now ready to be committed to repository.  The problem is we need to add something more to it before we do.  Remember that when we run the git add command, we are copying the file from our working copy to the index.  If we decide we no longer want that file in the repository, we can run the following.  
 
-\begin{verbatim} 
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git reset my_third_committed_file
 john@akira:~/coderepo$ git status
 # On branch master
 # Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
+#   (use "git add <file>..." to include in what will be 
+committed)
 #
 #	my_third_committed_file
-nothing added to commit but untracked files present (use "git add" to track)
+nothing added to commit but untracked files present (use "git 
+add" to track)
 john@akira:~/coderepo$ 
-\end{verbatim} 
+\end{Verbatim}
 
 We have discarded the file which was residing in the index.  This is very important to note.  We are not moving the file from the index back into our working directory, we are literally just deleting the file from the index.  Our working copy remains unaffected.  We could run the git reset command without appending a file.  If we did this, all the files in the index would have been discarded.  
 
-\begin{quote}In the trenches...
-
+\begin{trenches}
 ``So, I think we are all agreed, I'll keep a version of the repository under Git version control.  Until everyone else feels comfortable with some of the more advanced features.''  John looked around the room for any disagreements but there were none.
 
 ``Agreed John,'' said Markus, ``I'm pleased with how you guys are progressing, very pleased, but like John said, it's far better for us to take our time and to implement this correctly, than to rush it and to end up with something that we can't administrate and that we don't know how it works.''
@@ -343,7 +353,7 @@ We have discarded the file which was residing in the index.  This is very import
 ``So next week, I want you all to start playing with diffing and logs and don't forget we have an important release due too.''  John pushed his glasses further up his nose.  ``The week after that we'll start looking at branching and by then we may be at the stage where we can implement our model.''
 
 Everyone nodded in agreement.
-\end{quote}
+\end{trenches}
 
 We have run through a few basic commands in Git.  If you are familiar with version control systems, then possibly the only real difference you will have noticed is that of the staging area.  It really is powerful, and allows you to organise and prepare your commits, so that they are both meaningful and coherent.
 
