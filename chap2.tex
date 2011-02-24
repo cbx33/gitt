@@ -103,6 +103,7 @@ john@akira:~/coderepo/.git$
 
 More files and folders may appear here during the running of the repository.
 
+
 Something that is crucial to the running of a repository, whether you are an administrator of Git, or a developer who is using it, is an understanding of how Git works.  It is fine to jump in and play with the repository and test the water, but before committing to using Git in a production environment, you should understand what Git actually does in the background in some detail. 
 
 During the writing of this book several people have told me that Git is one of the only version control systems where a good understanding of how the underlying system works is not just highly recommended, but bordering on essential. 
@@ -358,3 +359,19 @@ Everyone nodded in agreement.
 We have run through a few basic commands in Git.  If you are familiar with version control systems, then possibly the only real difference you will have noticed is that of the staging area.  It really is powerful, and allows you to organise and prepare your commits, so that they are both meaningful and coherent.
 
 For Tamagoyaki Inc, their plan to implement version control was far too aggressive.  Most of the members of the team had never even used a version control system.  When deciding to implement version control, it is essential to ensure that you are doing it for the right reasons.  Version control is a tool to help you to keep things in order, but remember tools are nothing without process.  It is process that is key to the order.
+
+\section{Summary - John's Notes}
+\subsection{Commands}
+\texttt{git add} - Add files into the index or staging area
+
+\texttt{git commit } - Commit files into the repository, using text editor for commit message
+
+\texttt{git commit -m '<Message>'} - Commit files into the repository, using the command line to supply commit message
+
+\texttt{git commit -a} - Commit all tracked files into the repository that have changed, using text editor for commit message
+
+\texttt{git reset <path>} - Remove file from index or staging area
+
+\texttt{git status} - Show the status of tracked, changed, untracked files
+\subsection{Terminology}
+\textbf{Branch} - A way of working on the same set of code in parallel without modifications overlapping
