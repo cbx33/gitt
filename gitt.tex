@@ -1,20 +1,21 @@
 % intro.tex - Introduction
-\documentclass[openright,final,12pt]{memoir}
+\documentclass[a5paper,openright,12pt]{memoir}
 
 % set paper size
-\setstocksize{20.98cm}{14.8cm}
-\settrimmedsize{20.98cm}{14.8cm}{*}
-\settrims{0in}{0in}
+
+%\setstocksize{20.98cm}{14.8cm}
+%\settrimmedsize{20.98cm}{14.8cm}{*}
+
+%\settrims{0in}{0in}
 %\settypeblocksize{17.16cm}{10.73cm}{*}
-%\setlrmargins{2.16cm}{*}{*}
-%\setulmargins{1.91cm}{*}{*}
+
 \setlrmarginsandblock{2.16cm}{1.91cm}{*}
 \setulmarginsandblock{1.91cm}{1.91cm}{*}
 \checkandfixthelayout
-\usepackage{graphicx}
-\usepackage{float}
 
 % import packages
+\usepackage{graphicx}
+\usepackage{float}
 \usepackage{fullpage}
 \usepackage{color,fancyvrb,relsize}
 
@@ -26,10 +27,13 @@
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{0}
 
+% make chapter names disappear
 \renewcommand{\chaptername}{}
 \renewcommand{\thechapter}{}
-%in2.16 ou1.91
-%wi14.8 hi20.98
+
+% Just for reference, the margins in2.16 ou1.91
+% and page size wi14.8 hi20.98
+
 % make the pdf have clickable links
 \usepackage[
   bookmarks,
