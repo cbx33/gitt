@@ -10,7 +10,7 @@ Perhaps the best feature of a version control system is the level of accountabil
 By its very nature, a version control system is also a logging system.  Every time we committed something into the repository in the last chapter, we supplied a log message.  In fact, if we don't supply a log message, let us see what happens.
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git status
+john@akira:~/coderepo$ git status
 # On branch master
 # Untracked files:
 #   (use "git add <file>..." to include in what will be 
@@ -19,10 +19,10 @@ committed)
 #	my_third_committed_file
 nothing added to commit but untracked files present (use "git 
 add" to track)
-pete@satsuki:~/coderepo$ git add my_third_committed_file
-pete@satsuki:~/coderepo$ git commit -a -m ''
+john@akira:~/coderepo$ git add my_third_committed_file
+john@akira:~/coderepo$ git commit -a -m ''
 Aborting commit due to empty commit message.
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 So, Git will actually not allow you to commit with a blank message.  This is actually fantastic news, as people are far less likely to write a useless message than they are a blank one.  It is very important that when using a version control system, that you write in a useful commit message.  If you fixed a bug, say so.  If you added a new function, why not put that in too.  When someone wants to find out what a certain commit was for, or even when you come back to the project six months later and realise you've forgotten everything, log messages are crucial in piecing back together a history of development.
