@@ -87,7 +87,7 @@ Git handles this workflow just like most other version control systems.  A devel
 
 Using the centralised model for the workflow, each developer has the same level of access to the repository and is considered as \textbf{important} as each other.  For smaller teams, this method will work well, but as teams get larger, a centralised method may get tedious.
 
-\begin{figure}[h!]
+\begin{figure}[bt]
 	\centering
 	\includegraphics[width=7cm]{images/f-w1-d1.pdf}
 	\caption{Centralised Workflow}
@@ -103,7 +103,7 @@ A blessed repository is one which has the approval of the managers of the projec
 
 This workflow is handled exceedingly well by Git.  Developers will work on their repositories locally and then once they are happy, will push their changes to a location where the Integration Manager can see them.  The Integration Manager will then review the changes that the developers have made and will merge them into their own local repository.  Once they are happy that everything is working well, the Integration Manager will push their changes to the blessed repository so that all the other developers can access the changes.
 
-\begin{figure}[h!]
+\begin{figure}[bt]
 	\centering
 	\includegraphics[width=7cm]{images/f-w1-d2.pdf}
 	\caption{Integration Manager Workflow}
@@ -115,7 +115,7 @@ The dictator and lieutenant workflow is practically an extension to the integrat
 
 Once the Lieutenants are happy with their code, they make it available to the Dictator.  The Dictator then takes on a role similar to the Integration Manager from the previous model.  In the end, all of the changes are pushed to the blessed repository for the developers at the bottom of the tree to pull from.
 
-\begin{figure}[h!]
+\begin{figure}[bt]
 	\centering
 	\includegraphics[width=7cm]{images/f-w1-d3.pdf}
 	\caption{Dictator and Lieutenant Workflow}
