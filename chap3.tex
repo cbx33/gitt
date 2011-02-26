@@ -7,7 +7,7 @@
 
 Perhaps the best feature of a version control system is the level of accountability that it offers if set up correctly.  What do we mean by this?  People often mistake the word \textbf{accountability} for the word \textbf{blame}.  This is not true at all.  Accountability is key in understanding the events that led up to a particular bug being introduced, or a situation occuring.  How this is dealt with, is a up to the management teams, but accountability should not be something that is revered, it should be something that is looked upon as a tool to help define the cause of a problem.
 
-By its very nature, a version control system is also a logging system.  Every time we committed something into the repository in the last chapter, we supplied a log message.  In fact, if we don't supply a log message, let us see what happens.
+By its very nature, a version control system is also a logging system.  Every time we committed something into the repository in the last chapter, we supplied a log message.  In fact, if we don't supply a commit message, let us see what happens.
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git status
@@ -25,7 +25,68 @@ Aborting commit due to empty commit message.
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-So, Git will actually not allow you to commit with a blank message.  This is actually fantastic news, as people are far less likely to write a useless message than they are a blank one.  It is very important that when using a version control system, that you write in a useful commit message.  If you fixed a bug, say so.  If you added a new function, why not put that in too.  When someone wants to find out what a certain commit was for, or even when you come back to the project six months later and realise you've forgotten everything, log messages are crucial in piecing back together a history of development.
+So, Git will actually not allow you to commit with a blank message.  This is actually fantastic news, as people are far less likely to write a useless message than they are a blank one.  It is very important that when using a version control system you write in a useful commit message.  If you fixed a bug, say so.  If you added a new function, why not put that in too.  When someone wants to find out what a certain commit was for, or even when you come back to the project six months later and realise you've forgotten everything, log messages are crucial in piecing back together a history of development.
+
+\begin{trenches}
+``So John, I've been committing and all that,'' started Rob, ``but how do I see the history of what I have done.''
+``It's really pretty simple,'' replied John, ``But it really depends on what you want to know.''
+Rob placed his thumb and forefinger onto his chin.  ``Well, for now, I just want to see a list of all of my commits.''
+``That one's the simplest of all.''
+\end{trenches}
+
+At its simplest, \texttt{git log} will give an output of all of the commits that have been applied to the current branch.  Depending on what type of machine you are using it on, the output from \texttt{git log} will be navigatable, usually using the up and down arrows, with 'q' used to quit.  Let's have a quick look at the output of our test repository and see what the log messages look like.
+
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}]
+john@akira:~/coderepo$ git log
+commit 6ca160c7226731bf80973fc5bc81f6b9beda7795
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Mon Feb 21 20:59:32 2011 +0000
+
+    Finished adding initial files
+
+commit e86ddea25341a75275d316d8ca545aa7c73e97b3
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Mon Feb 21 20:06:57 2011 +0000
+
+    Made a few changes to first and second files
+
+commit 88206926cb60aed53d21ede69f9ca5b7c69cb983
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Sat Feb 19 09:23:47 2011 +0000
+
+    My First Ever Commit
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+
+
+       %git log --no-merges
+           %Show the whole commit history, but skip any merges
+
+       %git log v2.6.12.. include/scsi drivers/scsi
+           %Show all commits since version v2.6.12 that changed any file in the include/scsi or drivers/scsi subdirectories
+
+       %git log --since="2 weeks ago" -- gitk
+           %Show the changes during the last two weeks to the file gitk. The "--" is necessary to avoid confusion with the branch named gitk
+
+       %git log --name-status release..test
+           %Show the commits that are in the "test" branch but not yet in the "release" branch, along with the list of paths each commit modifies.
+
+       %git log --follow builtin-rev-list.c
+           %Shows the commits that changed builtin-rev-list.c, including those commits that occurred before the file was given its present name.
+
+       %git log --branches --not --remotes=origin
+           %Shows all commits that are in any of local branches but not in any of remote tracking branches for origin (what you have that origin
+           %doesn’t).
+
+       %git log master --not --remotes=*/master
+           %Shows all commits that are in local master but not in any remote repository master branches.
+
+       %git log -p -m --first-parent
+           %Shows the history including change diffs, but only from the "main branch" perspective, skipping commits that come from merged branches, and
+           %showing full diffs of changes introduced by the merges. This makes sense only when following a strict policy of merging all topic branches
+           %when staying on a single integration branch.
+
 
 \begin{trenches}
 ``I know John, and next time I will make a note of it, but right now, I'd really like to know where this file got changed, specifically when this function was introduced.''  Klaus pointed at the piece of paper containing a print out
