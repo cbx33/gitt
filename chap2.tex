@@ -238,6 +238,7 @@ john@akira:~/coderepo$
 
 In our examples, we have used the syntax \texttt{git commit -m 'Message'}.  This is a slightly special way of committing, it allows us to specify our commit log message on the command line.  If we wanted to, we could run the command git commit and this would open a text editor that we could use to input out commands.
 
+\begin{framed}
 \subsection{How do we change the commit message editor?}
 
 We spoke earlier about the configuration file and how it stores information about our Git instance.  Git can use any text editor you require, even a graphical one, though the need rarely arises.  As mentioned earlier, Git has a preference lever when talking about configuration.  First and foremost it will look in the repositories own 'config' file in the .git folder.  Then, it will look in the users \texttt{~/.gitconfig} file.  Finally, Git will look in your distributions own global folder.  
@@ -253,6 +254,7 @@ If we want the changes to apply globally, meaning it would affect all repositori
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 git config --global core.editor "nano"
 \end{Verbatim}
+\end{framed}
 
 Let us finish off our round of committing by using the \texttt{git commit -a} option.  This commits all of the changes to files which are already tracked.  In this way, we do not have to specify the files with \texttt{git add}, like we have had to previously.  Any file which has been modified and has previously been added to the repository, will have it's changes committed upon running that command.
 
