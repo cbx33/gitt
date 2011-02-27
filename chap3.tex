@@ -29,8 +29,10 @@ So, Git will actually not allow you to commit with a blank message.  This is act
 
 \begin{trenches}
 ``So John, I've been committing and all that,'' started Rob, ``but how do I see the history of what I have done.''
+
 ``It's really pretty simple,'' replied John, ``But it really depends on what you want to know.''
 Rob placed his thumb and forefinger onto his chin.  ``Well, for now, I just want to see a list of all of my commits.''
+
 ``That one's the simplest of all.''
 \end{trenches}
 
@@ -99,11 +101,17 @@ The \texttt{git log} command shows us a chronological list of all of the commits
 
 \begin{trenches}
 ``I know John, and next time I will make a note of it, but right now, I'd really like to know where this file got changed,'' Klaus pointed at the piece of paper containing a print out, ``specifically when this function was introduced.''
+
 John smiled.  His hands danced over the keyboard as he finished compiling an email.  ``And you've no idea when this was added at all?'' he asked.
+
 ``No, sorry John, I don't.''  He pondered, ``I guess I could write a script to untar all the versions we've created in the last week and search through them.''  He sighed, ``Can't the wonderful Git help us out here?''
+
 A head popped up over the cubicle wall.  ``You wanna find out when a function was introduced to a file?''  It was Rob.  ``After John showed me the basics, I went and read up on it a little.  Git has some really powerful searching within the log tool.''
+
 ``Well come on then,'' blurted Klaus, ``Don't keep me hanging on.''
+
 A chime of the popular 1966 hit sprang out in the office.
+
 Klaus pulled a hand down over his face, ``Oh don't you all start!''
 \end{trenches}
 
@@ -131,11 +139,14 @@ To set up your name and email address, we need to modify the \texttt{gitconfig} 
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 $ git config --global user.name "John Haskins"
-$ git config --global user.email "john.haskins@tamagoyakiinc.koala"
+$ git config --global user.email 
+"john.haskins@tamagoyakiinc.koala"
 \end{Verbatim}
 
 That's it.  Now by default, Git will use this setting whenever you commit to a repository, unless you override it by locally modifying the repository's \texttt{.gitconfig}.
 \end{framed}
+
+\clearpage
 
 \section{Summary - John's Notes}
 \subsection{Commands}
