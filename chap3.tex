@@ -94,6 +94,8 @@ The \texttt{git log} command shows us a chronological list of all of the commits
            %showing full diffs of changes introduced by the merges. This makes sense only when following a strict policy of merging all topic branches
            %when staying on a single integration branch.
 
+\section{Day 2 - ``But I need more information''}
+\subsection{Digging a little deeper}
 
 \begin{trenches}
 ``I know John, and next time I will make a note of it, but right now, I'd really like to know where this file got changed,'' Klaus pointed at the piece of paper containing a print out, ``specifically when this function was introduced.''
@@ -119,7 +121,21 @@ Date:   Mon Feb 21 20:06:57 2011 +0000
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-As you can see
+As you can see 
+
+\begin{framed}
+\subsubsection{Changing your identity}
+Particularly when working with other people, or when publishing your repository to a public location, it's a good idea to make sure people know who you are and how to get in contact with you.  Every time you make a commit to a repository, Git gives the opportunity to take note of who posted the commit.  When you first install Git, it probably won't have the correct information in there for you, so it's important that you take the time to set this up.
+
+To set up your name and email address, we need to modify the \texttt{gitconfig} again.  
+
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
+$ git config --global user.name "John Haskins"
+$ git config --global user.email "john.haskins@tamagoyakiinc.koala"
+\end{Verbatim}
+
+That's it.  Now by default, Git will use this setting whenever you commit to a repository, unless you override it by locally modifying the repository's \texttt{.gitconfig}.
+\end{framed}
 
 \section{Summary - John's Notes}
 \subsection{Commands}
