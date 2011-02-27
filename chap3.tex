@@ -58,7 +58,14 @@ Date:   Sat Feb 19 09:23:47 2011 +0000
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
+The \texttt{git log} command shows us a chronological list of all of the commits to the repository and also gives us several more important pieces of information.  In total there are four pieces of information displayed by default.
 
+\begin{itemize}
+\item \textbf{commit} - This is the SHA-1 hash of the commit object that is stored inside the repository.  You can find more information about this in the \emph{What's inside the Git repository?} section \emph{Week 2}.  This is how we refer to the commit.  If someone asked you in what commit you \emph{Made a few changes to first and second files}, you could reply that you did that in commit e86dd.  As explained earlier, it is good to remember that you don't need to remember or type out the whole \textbf{e86ddea25341a75275d316d8ca545aa7c73e97b3}, only the first part is required.  Generally, the first five characters will do.
+\item \textbf{Author} - This is the name and email address of the author of the commit.  When we begin to look at merging, you will see that the author of a commit, is not necessarily the \emph{committer} of the commit.  If you want to find out more about how to set these options, see the breakout box in this Week, called \emph{Changing your identity}.
+\item \textbf{Date} - The date is simply the date at which the commit was created.  Again, note that when we start looking at merging, the date will be the date the commit was created, not the date it was merged into the repository.
+\item \textbf{Commit Message} - This is the log message that was added along with the commit when it was created.  Hopefully you can now see how important it is to create useful and meaningful messages in here.
+\end{itemize}
 
        %git log --no-merges
            %Show the whole commit history, but skip any merges
@@ -89,5 +96,36 @@ john@akira:~/coderepo$
 
 
 \begin{trenches}
-``I know John, and next time I will make a note of it, but right now, I'd really like to know where this file got changed, specifically when this function was introduced.''  Klaus pointed at the piece of paper containing a print out
+``I know John, and next time I will make a note of it, but right now, I'd really like to know where this file got changed,'' Klaus pointed at the piece of paper containing a print out, ``specifically when this function was introduced.''
+John smiled.  His hands danced over the keyboard as he finished compiling an email.  ``And you've no idea when this was added at all?'' he asked.
+``No, sorry John, I don't.''  He pondered, ``I guess I could write a script to untar all the versions we've created in the last week and search through them.''  He sighed, ``Can't the wonderful Git help us out here?''
+A head popped up over the cubicle wall.  ``You wanna find out when a function was introduced to a file?''  It was Rob.  ``After John showed me the basics, I went and read up on it a little.  Git has some really powerful searching within the log tool.''
+``Well come on then,'' blurted Klaus, ``Don't keep me hanging on.''
+A chime of the popular 1966 hit sprang out in the office.
+Klaus pulled a hand down over his face, ``Oh don't you all start!''
 \end{trenches}
+
+Git can actually do some rather powerful searching to assist a developer in their daily tasks.  It would have been useful if the particular item that was being searched for had been included in the log, but sometimes, things either get missed, or there are just too many changes introduced in one commit to list them all.
+
+In these instances, the \textbf{git log -S<string>} command comes to our aid.  This command will search through the commits in a repository and will return a list of commits which introduced or removed a specific string into the repository.  First of all, let's run this against our test repository.
+
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git log -SChange1
+commit e86ddea25341a75275d316d8ca545aa7c73e97b3
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Mon Feb 21 20:06:57 2011 +0000
+
+    Made a few changes to first and second files
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+As you can see
+
+\section{Summary - John's Notes}
+\subsection{Commands}
+\texttt{git log} - Return a navigatable list of commits to a repository
+
+\texttt{git log -S<string>} - Show all commits that either introduced or removed a particular string from the repository
+
+\subsection{Terminology}
+\textbf{Branch} - A way of working on the same set of code in parallel without modifications overlapping
