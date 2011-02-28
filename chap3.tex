@@ -118,7 +118,6 @@ Klaus pulled a hand down over his face, ``Oh don't you all start!''
 Git can actually do some rather powerful searching to assist a developer in their daily tasks.  It would have been useful if the particular item that was being searched for had been included in the log, but sometimes, things either get missed, or there are just too many changes introduced in one commit to list them all.
 
 In these instances, the \texttt{git log -S<string>} command comes to our aid.  This command will search through the commits in a repository and will return a list of commits which introduced or removed a specific string into the repository.  First of all, let's run this against our test repository.
-In these instances, the \textbf{git log -S<string>} command comes to our aid.  This command will search through the commits in a repository and will return a list of commits which introduced or removed a specific string into the repository.  First of all, let's run this against our test repository.
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git log -SChange1
@@ -131,7 +130,6 @@ john@akira:~/coderepo$
 \end{Verbatim}
 
 As you can see, \texttt{git log} has shown us the commit that instantiated the change.  As you can imagine, when using a large code base, this tool can be invaluable.  It allows us to pinpoint a specific moment when a certain string of text entered the repository.  When running this against a very large repository, this could take a long time, and so the ability to shrink the search scope down will result in a much faster result.  To do this we can append a path to our previous command.  
-As you can see, \textbf{git log} has shown us the commit that instantiated the change.  As you can imagine, when using a large code base, this tool can be invaluable.  It allows us to pinpoint a specific moment when a certain string of text entered the repository.  When running this against a very large repository, this could take a long time, and so the ability to shrink the search scope down will result in a much faster result.  To do this we can append a path to our previous command.  
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git log -SChange2 my_first_committed_file
@@ -144,7 +142,7 @@ Date:   Mon Feb 21 20:59:32 2011 +0000
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-If you remember from our committing back in Week 2, we added the string \texttt{Change2} to the second file but not the first.  So the first time we run this command, it fails, as we are searching against \texttt{my_first_committed_file}.  The second time we run it, we are searching against \texttt{my_second_committed_file} and this is where we see a result.  Commit 6ca16 contains the commit we are looking for.  
+If you remember from our committing back in Week 2, we added the string \texttt{Change2} to the second file but not the first.  So the first time we run this command, it fails, as we are searching against \texttt{my\_first\_committed\_file}.  The second time we run it, we are searching against \texttt{my\_second\_committed\_file} and this is where we see a result.  Commit 6ca16 contains the commit we are looking for.  
 
 \begin{framed}
 \subsubsection{Changing your identity}
