@@ -129,9 +129,20 @@ Date:   Mon Feb 21 20:06:57 2011 +0000
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-As you can see, \textbf{git log} has shown us the commit that instantiated the change.  As you can imagine, when using a large code base, this tool can be invaluable.  It allows us to pinpoint a specific moment when a certain string of text entered the repository.  When running this against a very large repository, this could take a long time, and so the ability to shrink the search scope down will result in a much faster result.  
+As you can see, \textbf{git log} has shown us the commit that instantiated the change.  As you can imagine, when using a large code base, this tool can be invaluable.  It allows us to pinpoint a specific moment when a certain string of text entered the repository.  When running this against a very large repository, this could take a long time, and so the ability to shrink the search scope down will result in a much faster result.  To do this we can append a path to our previous command.  
 
-To do this
+\begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git log -SChange2 my_first_committed_file
+john@akira:~/coderepo$ git log -SChange2 my_second_committed_file
+commit 6ca160c7226731bf80973fc5bc81f6b9beda7795
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Mon Feb 21 20:59:32 2011 +0000
+
+    Finished adding initial files
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+If you remember from our committing back in Week 2, we added the string \texttt{Change2} to the second file but not the first.  So the first time we run this command, it fails, as we are searching against \texttt{my_first_committed_file}.  The second time we run it, we are searching against \texttt{my_second_committed_file} and this is where we see a result.  Commit 6ca16 contains the commit we are looking for.  
 
 \begin{framed}
 \subsubsection{Changing your identity}
@@ -158,3 +169,11 @@ That's it.  Now by default, Git will use this setting whenever you commit to a r
 
 \subsection{Terminology}
 \textbf{Branch} - A way of working on the same set of code in parallel without modifications overlapping
+
+%git log -p
+%DIFFs
+%Patching
+
+%git show master:<path>
+%git diff -- stylesheet.css master:stylesheet.css
+%git checkout -b <branch>
