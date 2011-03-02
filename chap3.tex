@@ -247,8 +247,16 @@ This shows us that \texttt{my\_third\_committed\_file} is actually a new file.  
 
 \texttt{git log -S<string> <path>} - Show all commits that either introduced or removed a particular string from the repository, but restrict the search to a specific path
 
+\texttt{git log HEAD~1..HEAD} - Show all commits between HEAD~1 and HEAD, essentially the last commit
+
+\texttt{git diff HEAD~1..HEAD} - Show the actual differences between HEAD~1 and HEAD
+
 \subsection{Terminology}
 \textbf{Branch} - A way of working on the same set of code in parallel without modifications overlapping
+
+\textbf{Diff} - Shows the actual differences between files
+
+\textbf{Hunk} - A section of a diff output
 
 %git log -p
 %DIFFs
