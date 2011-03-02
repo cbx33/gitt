@@ -1,4 +1,4 @@
-all: clean pdf html
+all: pdf html
 
 pdf:
 	pdflatex gitt.tex
