@@ -2,5 +2,3 @@
 
 Git In The Trenches, or GITT is designed to be a book that focusses on teaching people to use Git by associating with scenarios that are experienced by a fictional company called Tamagoyaki Inc.  Through reading about their day to day lives, the reader will learn not only how to use Git, but why version control systems are important and how to implement them within an organisation.
 
-latex2html -html 4.0,unicode,latin1,utf8 -split 2 gitt.tex 
-
