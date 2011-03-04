@@ -2,6 +2,18 @@
 
 Git In The Trenches, or GITT is designed to be a book that focusses on teaching people to use Git by associating with scenarios that are experienced by a fictional company called Tamagoyaki Inc.  Through reading about their day to day lives, the reader will learn not only how to use Git, but why version control systems are important and how to implement them within an organisation.
 
+# Building the Book
+
+GITT is written using the LaTeX language to be able to generate the PDFs easily and without artifacts.  If you wish to read GITT whilst it is in development phase, you have 3 options.
+
+1. Read the LaTeX source, which really isn't as bad as it sounds
+2. Use `make pdf` to use latex to build the pdf, you will need to have `pdflatex` installed for this 
+3. Use `make html`, which will create a nice folder called `gitt` inside of which should reside an `index.html` with the whole document in one place, without the images.  This will require `latex2html` to be installed (At the moment the `latex2html` will not convert pdf images at all, and so these are not placed in the folder)
+
+# Publishing
+
+It is the intention of the author to make the book available freely online, and eventually offer a printed version via a self publishing site online.  If someone out there thinks the book would do well to be published by a proper print publisher and can help make this happen, please get in contact.  However the book will remain free online no matter what.
+
 # Contributing
 
 The GITT project would love for people to branch off and make alterations to the text, or even start to create translations.  Currently the book is written in LaTeX, but it isn't hard to learn.  You can see the source files in plain text and edit them quite easily.
