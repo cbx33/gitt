@@ -5,7 +5,7 @@
 \section{Day 1 - ``But how do I see what's going on?''}
 \subsection{Logging in Git}
 
-Perhaps the best feature of a version control system is the level of accountability that it offers if set up correctly.  What do we mean by this?  People often mistake the word \textbf{accountability} for the word \textbf{blame}.  This is not true at all.  Accountability is key in understanding the events that led up to a particular bug being introduced, or a situation occuring.  How this is dealt with, is a up to the management teams, but accountability should not be something that is revered, it should be something that is looked upon as a tool to help define the cause of a problem.
+Perhaps the best feature of a version control system is the level of accountability that it offers if set up correctly.  What do we mean by this?  People often mistake the word \textbf{accountability} for the word \textbf{blame}.  This is not true at all.  Accountability is key in understanding the events that led up to a particular bug being introduced, or a situation occurring.  How this is dealt with, is a up to the management teams, but accountability should not be something that is revered, it should be something that is looked upon as a tool to help define the cause of a problem.
 
 By its very nature, a version control system is also a logging system.  Every time we committed something into the repository in the last chapter, we supplied a log message.  In fact, if we don't supply a commit message, let us see what happens.
 
@@ -36,7 +36,7 @@ Rob placed his thumb and forefinger onto his chin.  ``Well, for now, I just want
 ``That one's the simplest of all.''
 \end{trenches}
 
-At its simplest, \texttt{git log} will give an output of all of the commits that have been applied to the current branch.  Depending on what type of machine you are using it on, the output from \texttt{git log} will be navigatable, usually using the up and down arrows, with 'q' used to quit.  Let's have a quick look at the output of our test repository and see what the log messages look like.
+At its simplest, \texttt{git log} will give an output of all of the commits that have been applied to the current branch.  Depending on what type of machine you are using it on, the output from \texttt{git log} will be navigable, usually using the up and down arrows, with 'q' used to quit.  Let's have a quick look at the output of our test repository and see what the log messages look like.
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}]
 john@akira:~/coderepo$ git log
@@ -71,7 +71,7 @@ The \texttt{git log} command shows us a chronological list of all of the commits
 
 \begin{framed}
 \subsubsection{Note on Commit IDs}
-Please note, that if you are following the commits and changes on your local computer, you may not and probably will not have the same commit IDs as are presented in this book.  You are advised to use them here to follow what is happening, but to substitue them with your own values, when you start working with the rest of this chapter.
+Please note, that if you are following the commits and changes on your local computer, you may not and probably will not have the same commit IDs as are presented in this book.  You are advised to use them here to follow what is happening, but to substitute them with your own values, when you start working with the rest of this chapter.
 \end{framed}
 
 \begin{framed}
@@ -140,9 +140,9 @@ If you remember from our committing back in Week 2, we added the string \texttt{
 \section{Day 3 - ``So what actually changed?''}
 \subsection{Doing the diff dance}
 
-Knowing what the committer thinks they committed is brilliant.  However, sometimes it's just not enough.  The reason for this is stated fairly precisely in the first sentance of this paragraph, so let us add a little formatting to being out the real meaning.  Knowing what the committer \emph{thinks} they committed is brilliant.  By looking at the commit message we only know as much as the committer wants us to.  If they are the helpful sort, this will probably all that we need, most of the time.  On the other hand there is always the situation where you'd like to know a little more about what was actually placed into the repository.
+Knowing what the committer thinks they committed is brilliant.  However, sometimes it's just not enough.  The reason for this is stated fairly precisely in the first sentence of this paragraph, so let us add a little formatting to being out the real meaning.  Knowing what the committer \emph{thinks} they committed is brilliant.  By looking at the commit message we only know as much as the committer wants us to.  If they are the helpful sort, this will probably all that we need, most of the time.  On the other hand there is always the situation where you'd like to know a little more about what was actually placed into the repository.
 
-The \texttt{git diff} command can show us exactly that.  For more infomation about diff in general, see the diff breakout box in this chapter.  Think of a diff as an easy way of looking at the differences between two files, surrounded by a little context.  This can often be enhanced by a visual diff viewer, but for now, let's stick with our simple text based \texttt{git diff}.  
+The \texttt{git diff} command can show us exactly that.  For more information about diff in general, see the diff breakout box in this chapter.  Think of a diff as an easy way of looking at the differences between two files, surrounded by a little context.  This can often be enhanced by a visual diff viewer, but for now, let's stick with our simple text based \texttt{git diff}.  
 
 If we want to find out what the changes are between our current commit and one of the previous ones, we can write a command like the one below.  Notice that below, \textbf{e86dd} refers to the second commit that we made to the repository.  
 
@@ -158,7 +158,7 @@ index 3ad4cc3..095b9cd 100644
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-What this is telling us, is that between \textbf{e86dd} and our current commit \textbf{6ca16}, we added the line \emph{Change2} to the file \texttt{my\_second\_committed\_file}.  We can see this by the preceeding \texttt{+} on the line \texttt{Change2}.  Let's make a few changes to our repository and see how the diffs look.  We're actually going to make a few changes to the files using a text editor so that you can't see what we've done.  Then, hopefully, when we run the \texttt{git diff} you'll be able to see clearly what has happened.
+What this is telling us, is that between \textbf{e86dd} and our current commit \textbf{6ca16}, we added the line \emph{Change2} to the file \texttt{my\_second\_committed\_file}.  We can see this by the preceding \texttt{+} on the line \texttt{Change2}.  Let's make a few changes to our repository and see how the diffs look.  We're actually going to make a few changes to the files using a text editor so that you can't see what we've done.  Then, hopefully, when we run the \texttt{git diff} you'll be able to see clearly what has happened.
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git log HEAD~1..HEAD
@@ -172,7 +172,7 @@ john@akira:~/coderepo$
 
 The command \texttt{git log HEAD~1..HEAD} tells Git to show us the git log for all commits between \texttt{HEAD~1} and \texttt{HEAD}.  The notation used here is something new to us, but seeing as HEAD points to the most current commit, HEAD~1 points to the commit previous to HEAD.  In this way, we are telling Git to show us only the most recently commit.  
 
-As it turns out, John Haskins didn't really create a very meaningful log message.  \emph{Messed with a few files} is pretty unhelpful in the grandscheme of things.  So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit \textbf{fa65f}.
+As it turns out, John Haskins didn't really create a very meaningful log message.  \emph{Messed with a few files} is pretty unhelpful in the grand scheme of things.  So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit \textbf{fa65f}.
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git diff HEAD~1..HEAD
@@ -194,7 +194,7 @@ index 0000000..5d27866
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-As you can see, we have several things going on here, so let's take each of them in isolation and see what is going on.  We are going to disect the diff to see what each section means.
+As you can see, we have several things going on here, so let's take each of them in isolation and see what is going on.  We are going to dissect the diff to see what each section means.
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 diff --git a/my_second_committed_file b/my_second_committed_file
@@ -206,7 +206,7 @@ This first line tells us that we are dealing with \texttt{my\_second\_committed\
 index 095b9cd..c9887f8 100644
 \end{Verbatim}
 
-This second line actually tells us the beginning of the object IDs, as they are stored in the repository.  Note that these IDs are not the commit IDs, but the actual blob IDs that Git uses to refer to the file.  For more information on this, checkout the emph{Object's living in harmony} breakout box.
+This second line actually tells us the beginning of the object IDs, as they are stored in the repository.  Note that these IDs are not the commit IDs, but the actual blob IDs that Git uses to refer to the file.  For more information on this, checkout the \emph{Object's living in harmony} breakout box.
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 --- a/my_second_committed_file
@@ -235,13 +235,13 @@ index 0000000..5d27866
 +++ b/my_third_committed_file
 \end{Verbatim}
 
-This shows us that \texttt{my\_third\_committed\_file} is actually a new file.  Notice the \texttt{/dev/null} and the \texttt{0000000} object ID, indiciating that there was no original file.
+This shows us that \texttt{my\_third\_committed\_file} is actually a new file.  Notice the \texttt{/dev/null} and the \texttt{0000000} object ID, indicating that there was no original file.
 
 \clearpage
 
 \section{Summary - John's Notes}
 \subsection{Commands}
-\texttt{git log} - Return a navigatable list of commits to a repository
+\texttt{git log} - Return a navigable list of commits to a repository
 
 \texttt{git log -S<string>} - Show all commits that either introduced or removed a particular string from the repository
 

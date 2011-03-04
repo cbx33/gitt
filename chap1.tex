@@ -14,7 +14,7 @@ Things didn't look good.
  
 \begin{center} * * * \end{center}
 
-``So, what we'd like to know John, is just how a bug that was supposed to have been....'' the CEO back-tracked, ``that was demonstrated as being fixed two weeks ago, made it into the final release of the software?''
+``So, what we'd like to know John, is just how a bug that was supposed to have been\ldots'' the CEO back-tracked, ``that was demonstrated as being fixed two weeks ago, made it into the final release of the software?''
 
 ``I'm sorry,'' John started, before being cut off.
 
@@ -44,7 +44,7 @@ So what's the solution?  Well, in a large number of cases version control can ma
 \section{Day 3 - ``A possible solution''}
 \subsection{Version Control Nuances}
 
-There are many offerings for version control out there, Git, Mercurial, Subversion, CVS, and Bazaar to name but a few of the open source ones.  Perhaps a more pertinent question is just which version control system to use.  Each of the has their relative advantages and disadvantages, but some will be suited to certain tasks more that others.  Also, it's worth noting that if you are interacting with other pieces of software, or share some development with another set of developers, it is a good idea to enquire to see what they are using.  Usually you'll find collaboration, forking and patching a lot easier if you're using the same version control system as your upstream or partners.
+There are many offerings for version control out there, Git, Mercurial, Subversion, CVS, and Bazaar to name but a few of the open source ones.  Perhaps a more pertinent question is just which version control system to use.  Each of them has their relative advantages and disadvantages, but some will be suited to certain tasks more than others.  Also, it's worth noting that if you are interacting with other pieces of software, or share some development with another set of developers, it is a good idea to enquire to see what they are using.  Usually you'll find collaboration, forking and patching a lot easier if you're using the same version control system as your upstream or partners.
 
 \begin{trenches}
 ``So really it seems like the only real solution to this problem bar Klaus' suggestions of reducing the workforce to only one developer, thank you Klaus,'' Klaus nodded in acknowledgement back to John, ``is to implement a version control system.''
@@ -137,7 +137,7 @@ One factor to consider when choosing a version control system, is that of develo
 
 \subsubsection{Graphical User Interface Client (GUI)}
 
-A graphical user interface allows the developer, or user, to physically manipulate the repository using a mouse pointer and a graphically rich environment.  A GUI client will typically consist of separate application which is run when a user wants to make changes to a repository such as adding files or commuting changes.  
+A graphical user interface allows the developer, or user, to physically manipulate the repository using a mouse pointer and a graphically rich environment.  A GUI client will typically consist of separate application which is run when a user wants to make changes to a repository such as adding files or committing changes.  
 
 Some developers prefer having a separate client with which to interact with their repository, whilst others prefer to have things integrated a little more.
 
@@ -156,7 +156,7 @@ The command line interface is favour by many developers as they can script with 
 The most important aspect of choosing a version control system, is to define your requirements.  These can be few, or they can be quite specific, let's see what John and his team decide are the most important aspects for them and ultimately what they decide upon.
 
 \begin{trenches}
-``Offline commuting seems like it's a pretty useful thing to have.''  Mike said nodding.  ``Especially with people like John travelling all the time.''
+``Offline committing seems like it's a pretty useful thing to have.''  Mike said nodding.  ``Especially with people like John travelling all the time.''
 
 ``I have to admit, it would be nice to be on the plane, and be able to pull all the code together, knowing all of the history of each section,'' replied John.  ``The branching in Git seems to be quite powerful as well.''
 
@@ -180,13 +180,13 @@ Version control is not a replacement for workflow.  It is not intended to make e
 Now that we have the basics dealt with, let's take a little look at how John arranges his team, and see whether version control is going to work for them.  It is important that the team understands how the model should work, what they are expected to do and what level of access they have.  Most of the time people will get more frustrated about not know what they should or shouldn't be doing, rather than that they do or don't have access to certain things.
 
 \begin{trenches}
-It was 4:36pm on the Friday and the table in the board room was littered with empty coke cans, pizza boxes and one Japanese bento lunchbox, owned by a particularly stubborn member of the team who had vowed never to eat pizza gain.  It had been Marcus' idea to bring in the food reinforcement to help the discussions along.  The team were trying to decide how to organise their model.
+It was 4:36pm on the Friday and the table in the board room was littered with empty coke cans, pizza boxes and one Japanese bento lunchbox, owned by a particularly stubborn member of the team who had vowed never to eat pizza again.  It had been Marcus' idea to bring in the food reinforcement to help the discussions along.  The team were trying to decide how to organise their model.
 
 ``There's nothing to say we can't use a combination of the models is there?'' asked Mike.
 
 ``I suppose not,'' said John.  ``What did you have in mind.''  His glasses were slipping down his forehead now and he was getting pretty tired.
 
-``Well, I figure, we basically have the software split into two parts.  We have the library, which myself, Klaus and Jack work on.  Then there's the UI elements which Simon, Martha and Rob handle..  I know there are the tools which Eugene works on too.''  Everyone had started to listen to Mike as he continued.  ``John, you don't want to have to deal with the library component as this more Klaus' space.  So why don't we have two dictators.  Klaus and yourself have access to push up to the blessed repository.  John can pull from his guys, Klaus from his and we end up with an good model for version control.''
+``Well, I figure, we basically have the software split into two parts.  We have the library, which myself, Klaus and Jack work on.  Then there's the UI elements which Simon, Martha and Rob handle.  I know there are the tools which Eugene works on too.''  Everyone had started to listen to Mike as he continued.  ``John, you don't want to have to deal with the library component as this more Klaus' space.  So why don't we have two dictators.  Klaus and yourself have access to push up to the blessed repository.  John can pull from his guys, Klaus from his and we end up with an good model for version control.''
 
 John raised his eyebrows, ``Not bad Mike,'' he said, genuinely impressed.  After spending a few hours going through the various models and who was  in charge of what, it felt good to have finally reached a decision.
 
