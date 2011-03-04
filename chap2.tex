@@ -3,7 +3,7 @@
 \section{Day 1 - ``We are coders, we use Git!''}
 \subsection{Setting Up the Environment}
 
-So now we are ready to being delving into and actually using Git, right?  Well, not exactly.  First we have to decide upon how the workflow model we have envisaged is implemented in out version control system.  With Git being so versatile, it's both a blessing and a danger.  It is a good idea to define from early on, exactly how you would like the developers, lieutenants and dictators to behave, before you begin actually committing any code.  Sometimes this isn't possible.  It's quite feasible that you have never used a version control system like Git before and you begin by muddling your way through.  This is normal, but if you are in charge of implementing this type of system for a professional environment, you should really consider first how this is going to work. 
+So now we are ready to begin delving into and actually using Git, right?  Well, not exactly.  First we have to decide upon how the workflow model we have envisaged is implemented in out version control system.  With Git being so versatile, it's both a blessing and a danger.  It is a good idea to define from early on, exactly how you would like the developers, lieutenants and dictators to behave, before you begin actually committing any code.  Sometimes this isn't possible.  It's quite feasible that you have never used a version control system like Git before and you begin by muddling your way through.  This is normal, but if you are in charge of implementing this type of system for a professional environment, you should really consider first how this is going to work. 
 
 Conceptually, the model which was discussed previously is easy to imagine.  We have two dictators, who both have access to the blessed repository and then several developers, who are going to have their changes reviewed and included, by the aforementioned dictators.  The physical representation of the workflow model is summarised in the diagram below.
 
@@ -40,12 +40,12 @@ Simon spoke out, ``Well, I was reading over the weekend about this thing called 
 
 ``What's rebase and how is it different to merging?'' asked Mike. 
 
-``Well, rebasing is pretty darn clever.  Think of it this way.  You have an upstream branch, in this case, our blessed repository.  You are happily making changes.  When the upstream changes, you could merge the changes in from blessed.  If you do this, you create a single commit which merges the changes in.  It works, but...'' he trailed off a little, ``it can cause problems in certain instances.  A better way to handle it is with rebasing.  Rebasing can take all the changes you have made, squirrel them away, pull down all the changes to bring it up to date, and then whack your changes on top.''
+``Well, rebasing is pretty darn clever.  Think of it this way.  You have an upstream branch, in this case, our blessed repository.  You are happily making changes.  When the upstream changes, you could merge the changes in from blessed.  If you do this, you create a single commit which merges the changes in.  It works, but\ldots'' he trailed off a little, ``it can cause problems in certain instances.  A better way to handle it is with rebasing.  Rebasing can take all the changes you have made, squirrel them away, pull down all the changes to bring it up to date, and then whack your changes on top.''
 
 John breathed out, ``It sounds pretty cool Simon, but one things is abundantly clear, we need to learn more about the Git basics before we start delving into this merging and rebasing.  Let's spend the rest of the day playing with some test repositories and reconvene tomorrow.''
 \end{trenches}
 
-If you've never played with a version control system before it is a good idea to take some time to just play.  Pretty soon you'll have learned the basics and will be in a position where you will want to put your newly honed skills into practice.  Though playing on test repositories is good, it is quite usual that you need to actually use the system in a real environment before real problems arise.  The rest of this chapter is a very quick introduction to Git.  It is presented as an introduction, because it is hoped and expected that the you will take some time out to get to know the system and how it works. 
+If you've never played with a version control system before it is a good idea to take some time to just play.  Pretty soon you'll have learnt the basics and will be in a position where you will want to put your newly honed skills into practise.  Though playing on test repositories is good, it is quite usual that you need to actually use the system in a real environment before real problems arise.  The rest of this chapter is a very quick introduction to Git.  It is presented as an introduction, because it is hoped and expected that the you will take some time out to get to know the system and how it works. 
 
 \subsection{Initialising A Repository}
 The first thing we need to do is to understand two very important things: 
@@ -65,7 +65,7 @@ Initialized empty Git repository in /home/john/coderepo/.git/
 john@akira:~/coderepo$ git 
 \end{Verbatim} 
 
-What we've done here is create a new directory called coderepo, moved into it, and then run the git init command.  The result of this command is a new directory in the coderepo dir called .git.  This directory will hold a local copy of our entire repository.  This will allow us to create branches, merge changes, rebase things and ultimately push our changes to somewhere else.
+What we've done here is create a new directory called coderepo, moved into it, and then run the git init command.  The result of this command is a new directory in the coderepo directory called .git.  This directory will hold a local copy of our entire repository.  This will allow us to create branches, merge changes, rebase things and ultimately push our changes to somewhere else.
 
 \begin{framed}
 \subsubsection{What's inside the Git repository?}
@@ -90,7 +90,7 @@ john@akira:~/coderepo/.git$
 
 \textbf{branches} - Though depreciated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.
 
-\textbf{config} - This is the main config file for Git.  It is the first place git looks for upon invocation.  If this file is not present, Git will inspect ~/.gitconfig.  After this, Git will go to /etc/gitconfig.  The file holds information about the remotes, tracking branches, push configurations and many more items.
+\textbf{config} - This is the main configuration file for Git.  It is the first place git looks for upon invocation.  If this file is not present, Git will inspect ~/.gitconfig.  After this, Git will go to /etc/gitconfig.  The file holds information about the remotes, tracking branches, push configurations and many more items.
 
 \textbf{description} - This is a simple text file which gives a description to a repository when being view via gitweb or similar.
 
@@ -115,7 +115,7 @@ Let us take a few minutes to talk about how Git works internally and how the dat
 
 When a commit is made to the repository, Git stores a few things.  A commit object is created.  This contains information about who made the commit, the parent of the commit and points to a tree object.  The tree object describes what the repository looked like at the time of the commit.  In other words the tree object, tells Git what files were in there.  Lastly, Git stores the files that were in the repository under their SHA-1 names in the objects directory.  Of course Git is super clever here because if you have exactly the same file in multiple commits, the SHA-1 hash of that file doesn't change and therefore Git only stores one copy of the file to save space.
 
-The commit object is also referred to by an SHA-1 hash.  This is different to many other version control systems which use either a number that refers to the repository or a per file version number.  Getting used to seeing 40 character SHA-1 hashes can take a little time.  Saying "I need the commit referred to as  bf81617d6417d9380e06785f8ed23b247bea8f6d," is certainly not as easy as saying you need revision 6.  However, Git handles these hashes well, and you can reference a commit using a few of the characters from the beginning, as long as those characters uniquely refer to that commit, ie, as long as your choice isn't in any way ambiguous.
+The commit object is also referred to by an SHA-1 hash.  This is different to many other version control systems which use either a number that refers to the repository or a per file version number.  Getting used to seeing 40 character SHA-1 hashes can take a little time.  Saying "I need the commit referred to as  bf81617d6417d9380e06785f8ed23b247bea8f6d," is certainly not as easy as saying you need revision 6.  However, Git handles these hashes well, and you can reference a commit using a few of the characters from the beginning, as long as those characters uniquely refer to that commit, i.e., as long as your choice isn't in any way ambiguous.
 
 \section{Day 2 - ``Making commitments''}
 \subsection{Let's Make a Repository}
@@ -301,7 +301,7 @@ john@akira:~/coderepo$
 
 \subsection{Uh-Oh I Think I Made A Mistake}
 
-So now we are fairly well aquainted with adding files into the repository and performing commits.  In a short while we will learn about how to view the changes we have made and perform diffs against various objects.  Before we close out the week, we need to go back to the trenches one last time.
+So now we are fairly well acquainted with adding files into the repository and performing commits.  In a short while we will learn about how to view the changes we have made and perform diffs against various objects.  Before we close out the week, we need to go back to the trenches one last time.
 
 \begin{trenches}
 ``Rob, ya got a second?'' asked Mike.
