@@ -42,7 +42,7 @@ Simon spoke out, ``Well, I was reading over the weekend about this thing called 
 
 ``Well, rebasing is pretty darn clever.  Think of it this way.  You have an upstream branch, in this case, our blessed repository.  You are happily making changes.  When the upstream changes, you could merge the changes in from blessed.  If you do this, you create a single commit which merges the changes in.  It works, but\ldots'' he trailed off a little, ``it can cause problems in certain instances.  A better way to handle it is with rebasing.  Rebasing can take all the changes you have made, squirrel them away, pull down all the changes to bring it up to date, and then whack your changes on top.''
 
-John breathed out, ``It sounds pretty cool Simon, but one things is abundantly clear, we need to learn more about the Git basics before we start delving into this merging and rebasing.  Let's spend the rest of the day playing with some test repositories and reconvene tomorrow.''
+John breathed out, ``It sounds pretty cool Simon, but one thing is abundantly clear, we need to learn more about the Git basics before we start delving into this merging and rebasing.  Let's spend the rest of the day playing with some test repositories and reconvene tomorrow.''
 \end{trenches}
 
 If you've never played with a version control system before it is a good idea to take some time to just play.  Pretty soon you'll have learnt the basics and will be in a position where you will want to put your newly honed skills into practise.  Though playing on test repositories is good, it is quite usual that you need to actually use the system in a real environment before real problems arise.  The rest of this chapter is a very quick introduction to Git.  It is presented as an introduction, because it is hoped and expected that the you will take some time out to get to know the system and how it works. 
@@ -88,7 +88,7 @@ drwxr-xr-x 4 john john 4096 2011-02-17 19:23 refs
 john@akira:~/coderepo/.git$ 
 \end{Verbatim} 
 
-\textbf{branches} - Though depreciated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.
+\textbf{branches} - Though deprecated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.
 
 \textbf{config} - This is the main configuration file for Git.  It is the first place git looks for upon invocation.  If this file is not present, Git will inspect ~/.gitconfig.  After this, Git will go to /etc/gitconfig.  The file holds information about the remotes, tracking branches, push configurations and many more items.
 
