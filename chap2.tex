@@ -223,9 +223,9 @@ committed)
 john@akira:~/coderepo$ 
 \end{Verbatim} 
 
-How interesting!  We now have three sections and one of our files appears twice under both Changes to be committed and Changed but up updated.  What does this mean?  If you remember back, we spoke about a staging area.  This is one area in which Git differs to many version control systems.  When you \textbf{add} a file into the repository, Git will actually make a copy of that file and move it into the staging area.  If you then go ahead and change that file, you would need to run another git add in order for Git to copy your changed file into the staging area.  The most important thing to remember is that Git will only ever commit what is in the staging area.
+How interesting!  We now have three sections and one of our files appears twice under both Changes to be committed and Changed but not updated.  What does this mean?  If you remember back, we spoke about a staging area.  This is one area in which Git differs to many version control systems.  When you \textbf{add} a file into the repository, Git will actually make a copy of that file and move it into the staging area.  If you then go ahead and change that file, you would need to run another git add in order for Git to copy your changed file into the staging area.  The most important thing to remember is that Git will only ever commit what is in the staging area.
 
-So, if we go ahead and run our commit now, we will only have the changes marked in Changes to be committed appearing in out repository.  
+So, if we go ahead and run our commit now, we will only have the changes marked in Changes to be committed appearing in our repository.  
 
 \begin{Verbatim}[frame=single,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git commit -m 'Made a few changes to 
@@ -236,7 +236,7 @@ first and second files'
 john@akira:~/coderepo$ 
 \end{Verbatim} 
 
-In our examples, we have used the syntax \texttt{git commit -m 'Message'}.  This is a slightly special way of committing, it allows us to specify our commit log message on the command line.  If we wanted to, we could run the command git commit and this would open a text editor that we could use to input out commands.
+In our examples, we have used the syntax \texttt{git commit -m 'Message'}.  This is a slightly special way of committing, it allows us to specify our commit log message on the command line.  If we wanted to, we could run the command git commit and this would open a text editor that we could use to input our commands.
 
 \begin{framed}
 \subsection{How do we change the commit message editor?}
