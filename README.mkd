@@ -16,4 +16,4 @@ It is the intention of the author to make the book available freely online, and 
 
 # Contributing
 
-The GITT project would love for people to branch off and make alterations to the text, or even start to create translations.  Currently the book is written in LaTeX, but it isn't hard to learn.  You can see the source files in plain text and edit them quite easily.
+The GITT project would love for people to branch off and make alterations to the text, or even start to create translations.  Currently the book is written in LaTeX, but it isn't hard to learn.  You can see the source files in plain text and edit them quite easily.  Also, we are looking for situations in which you may have found yourself whilst using Git, whether you managed to resolve them or not.  GITT is rather scenario based sometimes, so we need situations in which to place the employees at Tamagoyaki Inc.
