@@ -6,7 +6,7 @@
 \subsubsection{The Very Early Days}
 Version control systems have been around for forty years (2011 at the time of writing).  During this time they have undergone an intense amount of change and have evolved into some of the most incredibly powerful tools utlised in software development today.  Chances are that in the early days you will have started off storing different versions of your source code and documents in separate files and folders.  You may have even archived them off to compressed storage files, like zip or tar.  Rest assured, you are not the first person to do this, and in 1972, someone called Marc J. Rochkind, decided to create system for storing revisions of documents and source code.
 
-The system Marc created, was called SCCS and stood for Source Code Control System, in essence probably the most apt description for what we mainly use a version control system for today.  SCCS was originally written for an operating system called OS/360 MVT and was later ported to C, and was used as the most dominant version control system for UNIX, until ten years later, when RCS was introduced.
+The system Marc created was called SCCS and stood for Source Code Control System, in essence probably the most apt description for what we mainly use a version control system for today.  SCCS was originally written for an operating system called OS/360 MVT and was later ported to C, and was used as the most dominant version control system for UNIX, until ten years later, when RCS was introduced.
 
 \subsubsection{Time To Move On}
 In 1982, Walter F. Tichy released RCS, standing for Revision Control System.  It was intended to be a free and off more functionality than SCCS.  RCS is still being maintained, as part of the GNU project, and at the time of writing is about to have its first new release, version 5.8, in over fifteen years.
@@ -36,6 +36,15 @@ As with all version control systems, there are aspects that people dislike.  In 
 Another issue with the tagging model in SVN is that it holds no history information.  This makes it impossible, for example, to take two tags and try to find out all logged commits that occurred from one to the other.  This is the difference between using a copy as a tag, and implementing a reference.  Tags should also be read-only implicitly by their very nature, they should refer to a point in history.  However as tags are implemented as branches in SVN this is not the case.
 
 \subsubsection{Introducing the Linus Factor}
+The Linux kernel was at one point maintained under a source control system called BitKeeper.  The decision, in 2002, to use BitKeeper for the management of the Linux kernel source was rather controversial, the main opposition being that BitKeeper was a proprietary system that was offered by BitMover.  At the time, BitMover offered certain open source projects the opportunity to use BitKeeper at no cost, so long as the community developers did not engage in the creation of a competing tool.
+
+In April 2005, BitKeeper withdrew the free license that it had granted to the open source communities, after allegations of reverse engineering by some parties on an unrelated project.  Due to the way BitKeeper worked, and decisions made regarding licensing it became impossible for several key developers, including Linus himself, of actually owning even a commercial version of BitKeeper.
+
+It was due to these circumstances, that Linus Torvalds himself, decided to begin writing his own version control system that would enable him to have all of the features that he had had available to him with BitKeeper, the most important of these seemingly being a distributed environment.  Linus decided on a set of criteria, which along with a distributed environment, also included a robust safeguard against corruption, be it accidental, or malicious, and very high performance.
+
+Git developement began on the 3rd of April 2005, and by April the 7th, the project had been announced and was already able to host itself.  On June 16th, the relese of the Linux kernel version 2.6.12 was managed by Git.  Junio Hamano, who had been a major contributor to the project, took over maintenance of Git in July, and by December had released version 1.0 to the community.
+
+\subsubsection{Design Changes}
 
 
 
