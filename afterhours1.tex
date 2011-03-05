@@ -13,4 +13,30 @@ In 1982, Walter F. Tichy released RCS, standing for Revision Control System.  It
 
 However, RCS, like it's predecessor SCCS, has no way of dealing with groups of files.  Essentially, each file has its own repository which is stored near to the file under a different name.  Whilst rather advanced, with primitive forms of branching, the interface, commands and version numbering have been described by some as rather cumbersome.  Enter some successors.
 
-CVS was created in 1986, and began life as a set of shell scripts to operate on multiple files, using RCS to perform the actual repository management.  As development continued, this way of working was dropped and CVS began operating on files itself, evolving into a version control system in its own right.
+CVS was created in 1986, and began life as a set of shell scripts to operate on multiple files, using RCS to perform the actual repository management.  As development continued, this way of working was dropped and CVS began operating on files itself, evolving into a version control system in its own right.  The current iteration of CVS was released in 1989 and on Novermber 1 1990, version 1.0 was released to the Free Software Foundation for distribution.
+
+CVS did not version file renames or moves at all as at the time, refactoring - a process of modifying code to improve some non-functional attributes of the software, was often avoided and so the feature was not required.  CVS also did not support atomic commits.  An atomic commit is used by more modern version control systems to safe guard the database.  In essence atomic committing is the act of applying multiple changes in a single operation.  If any of the changes do not apply correctly, all others are reverted and the commit is aborted.  When designing CVS this was not seen as an obstacle, as it was thought by the developers that a server and network should have enough resilience that it would never crash whilst committing.
+
+Whilst active development of CVS has apparently ceased, as of May 2008, it is worth taking note that CVS defined the model for branching that was included and refined in almost all version control systems since.  
+
+\subsubsection{Offering Commercial Support}
+Now that version control was advanced enough and people had begun to rely on VCSs in general, commercial offerings began to spring up.  Three prominant systems that were released within a short time of each other and ClearCase, VSS and Perforce.  All three of these are proprietary systems which were developed and filled a gap in the market for commercially supported systems.  
+
+VSS, originally developed by One Tree Software for several platforms, was continually developed by Microsoft, who bought One Tree Software in 1994, with the one caveat that Microsoft ceased development of all VSS on all platforms other than Windows.  VSS integrated into Visual Studio, Microsoft's Integrated Development Environment.  VSS has now ceased developement, but ClearCase, now developed by a divison of IBM, and Perforce are still being actively developed and maintained.
+
+\subsubsection{The Millenium}
+The millenium brought with it a new breed of version control systems.  Subversion, or SVN as it is colloquially known as, was developed primarily to be a replacement and mostly compatible successor to CVS.  SVN was first released in 2000 and by 2001 was able to sufficiently host its own source code due to its own advancement.  In November 2009 Subversion was accepted into the Apache group and is currently developed and maintained by its community and by several commercial entities.
+
+Subversion brought things to the table that previous version control systems did not.  As it was released as free software, in the same vein as CVS, it was widely adopted by the open source community and later into commercial environments for its vastly improved feature set.  For a start SVN offers true atomic commits.  This gave it a definite advantage over CVS as it was seen as a truly robust alternative.
+
+It also brought in features like the tracking of files through renames and moves, including their entire version history and the versioning of symbolic links.  SVN moved with the times and introduced many other sought after features, such as HTTP serving, cheaper branching, efficient network operation and native support for binary files.  
+
+As with all version control systems, there are aspects that people dislike.  In Subversion, people often fine the implementation of tags - names that point to specific points in the history of a repository, an issue.  In SVN, a tag is actually a branch.  What makes this different to other systems such as Git and its predecessor CVS, which literally point to a specific commit in the tag, SVN actually creates a snapshot of the filesystem, albeit using cheap branching.  Whilst this is lightweight on the repository, it is incredibly heavyweight on the client.
+
+Another issue with the tagging model in SVN is that it holds no history information.  This makes it impossible, for example, to take two tags and try to find out all logged commits that occurred from one to the other.  This is the difference between using a copy as a tag, and implementing a reference.  Tags should also be read-only implicitly by their very nature, they should refer to a point in history.  However as tags are implemented as branches in SVN this is not the case.
+
+\subsubsection{Introducing the Linus Factor}
+
+
+
+
