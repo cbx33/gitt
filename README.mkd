@@ -8,9 +8,9 @@ GITT is written using the LaTeX language to be able to generate the PDFs easily 
 
 1. Read the LaTeX source, which really isn't as bad as it sounds
 2. Use `make pdf` to use latex to build the pdf, you will need to have `pdflatex` installed for this 
- * For ubuntu users, run `sudo apt-get install texlive-latex-base` to get `pdflatex`
+      * For ubuntu users, run `sudo apt-get install texlive-latex-base` to get `pdflatex`
 3. Use `make html`, which will create a nice folder called `gitt` inside of which should reside an `index.html` with the whole document in one place, without the images.  This will require `latex2html` to be installed (At the moment the `latex2html` will not convert pdf images at all, and so these are not placed in the folder)
- * For ubuntu users, run `sudo apt-get install latex2html` to get `latex2html`
+      * For ubuntu users, run `sudo apt-get install latex2html` to get `latex2html`
 
 # Publishing
 
