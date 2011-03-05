@@ -1,0 +1,16 @@
+% chap1.tex - Week 1
+\chapter{Week 1}
+\section{After Hours - ``History Lesson''}
+\subsection{The Beginnings Of Version Control}
+
+\subsubsection{The Very Early Days}
+Version control systems have been around for forty years (2011 at the time of writing).  During this time they have undergone an intense amount of change and have evolved into some of the most incredibly powerful tools utlised in software development today.  Chances are that in the early days you will have started off storing different versions of your source code and documents in separate files and folders.  You may have even archived them off to compressed storage files, like zip or tar.  Rest assured, you are not the first person to do this, and in 1972, someone called Marc J. Rochkind, decided to create system for storing revisions of documents and source code.
+
+The system Marc created, was called SCCS and stood for Source Code Control System, in essence probably the most apt description for what we mainly use a version control system for today.  SCCS was originally written for an operating system called OS/360 MVT and was later ported to C, and was used as the most dominant version control system for UNIX, until ten years later, when RCS was introduced.
+
+\subsubsection{Time To Move On}
+In 1982, Walter F. Tichy released RCS, standing for Revision Control System.  It was intended to be a free and off more functionality than SCCS.  RCS is still being maintained, as part of the GNU project, and at the time of writing is about to have its first new release, version 5.8, in over fifteen years.
+
+However, RCS, like it's predecessor SCCS, has no way of dealing with groups of files.  Essentially, each file has its own repository which is stored near to the file under a different name.  Whilst rather advanced, with primitive forms of branching, the interface, commands and version numbering have been described by some as rather cumbersome.  Enter some successors.
+
+CVS was created in 1986, and began life as a set of shell scripts to operate on multiple files, using RCS to perform the actual repository management.  As development continued, this way of working was dropped and CVS began operating on files itself, evolving into a version control system in its own right.
