@@ -291,7 +291,8 @@ This type of filtering can be exceedingly useful to a developer.  Often when pro
 If the developer can futher categorise the issue, such as, ``I know which file the change must have occured in'', then the following example will demonstrate just how easy it is to filter the results even further.  Even in the simplified example repository that we have been using, running this command filters the output to a single file.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git log -p --since="last week" -- my_second_committed_file
+john@akira:~/coderepo$ git log -p --since="last week" -- 
+my_second_committed_file
 commit fa65f06cc62291bb0cd47aef9e05953d6655fc8e
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
 Date:   Tue Mar 1 21:17:57 2011 +0000
@@ -309,7 +310,7 @@ index 095b9cd..c9887f8 100644
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-See how easy that is.  We no longer have the information for \texttt{my\_third\_committed\_file} present in the output.  We have filtered everything out, but the information we are looking for.  When you are up against deadlines, pouring through pages and pages of diffs and changes can be incredibly time consuming.  Having the tools available to cut that output down to just the relevant material can be life saving.
+See how easy that is.  Note, the \texttt{--} is necessary to tell Git the following string is a path.  We no longer have the information for \texttt{my\_third\_committed\_file} present in the output.  We have filtered everything out, but the information we are looking for.  When you are up against deadlines, pouring through pages and pages of diffs and changes can be incredibly time consuming.  Having the tools available to cut that output down to just the relevant material can be life saving.
 
 \clearpage
 
