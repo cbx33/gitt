@@ -111,7 +111,7 @@ Something that is crucial to the running of a repository, whether you are an adm
 
 During the writing of this book several people have told me that Git is one of the only version control systems where a good understanding of how the underlying system works is not just highly recommended, but bordering on essential. 
 
-Let us take a few minutes to talk about how Git works internally and how the data is actually stored.  Git doesn't store changes to files, but actual snapshots of files at specific points in time.  It refers to these by running an SHA-1 hash against the file.  In this way, it is easy to Git to detect if a file has changed.  If the SHA-1 hash of a file changes, then the file must have been modified. 
+Let us take a few minutes to talk about how Git works internally and how the data is actually stored.  Git doesn't store changes to files, but actual snapshots of files at specific points in time.  It refers to these by running an SHA-1 hash against the file.  By doing this, it is easy to Git to detect if a file has changed.  If the SHA-1 hash of a file changes, then the file must have been modified. 
 
 When a commit is made to the repository, Git stores a few things.  A commit object is created.  This contains information about who made the commit, the parent of the commit and points to a tree object.  The tree object describes what the repository looked like at the time of the commit.  In other words the tree object, tells Git what files were in there.  Lastly, Git stores the files that were in the repository under their SHA-1 names in the objects directory.  Of course Git is super clever here because if you have exactly the same file in multiple commits, the SHA-1 hash of that file doesn't change and therefore Git only stores one copy of the file to save space.
 
@@ -256,7 +256,7 @@ git config --global core.editor "nano"
 \end{Verbatim}
 \end{framed}
 
-Let us finish off our round of committing by using the \texttt{git commit -a} option.  This commits all of the changes to files which are already tracked.  In this way, we do not have to specify the files with \texttt{git add}, like we have had to previously.  Any file which has been modified and has previously been added to the repository, will have it's changes committed upon running that command.
+Let us finish off our round of committing by using the \texttt{git commit -a} option.  This commits all of the changes to files which are already tracked.  Consequently we do not have to specify the files with \texttt{git add}, like we have had to previously.  Any file which has been modified and has previously been added to the repository, will have it's changes committed upon running that command.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git status 
