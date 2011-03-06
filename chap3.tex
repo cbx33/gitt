@@ -252,6 +252,65 @@ She sat down on a near-by chair and wheeled it over to John's desk.  She survery
 ``Easy,'' John quipped, mimicking her mannerisms.  The two broke out in laughter.  ``We can use git log for that, and I think there are some date options too.  Let me check the man page.''
 \end{trenches}
 
+Looking at the man page for git log is a mind trip for the uninitiated.  Weighing in at over 600 lines of text, it is abundantly clear that this tool does a whole lot more than viewing a simple history of commits to the repository.  It is well worth taking the time to read through the current available options by typing \texttt{man git log} on the command line.  If you have the documentation installed, this will yield the \emph{man} page for \texttt{git log}.
+
+Listing all commits in our repository is useful, being able to filter this output is fantastic.  This is one area in which the developers of Git have placed a great deal of time and effort.  For example, we can use \texttt{git log} to not only show us the commit message, but also provide a diff output as well.  This means that for each commit entry in the output, we will see a diff as well.  Now, whilst we are further empowered by having the diff output in chronological order for each commit, we can take things further by filtering the commits.  
+
+Suppose we want to view all the commits that we made in the last week, typing the following into the comand line in our test repository yields the following result.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git log -p --since="last week"
+commit fa65f06cc62291bb0cd47aef9e05953d6655fc8e
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Tue Mar 1 21:17:57 2011 +0000
+
+    Messed with a few files
+
+diff --git a/my_second_committed_file b/my_second_committed_file
+index 095b9cd..c9887f8 100644
+--- a/my_second_committed_file
++++ b/my_second_committed_file
+@@ -1,2 +1 @@
+-Change1
+-Change2
++Changed this file completely
+diff --git a/my_third_committed_file b/my_third_committed_file
+new file mode 100644
+index 0000000..5d27866
+--- /dev/null
++++ b/my_third_committed_file
+@@ -0,0 +1 @@
++Addition to the line
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Notice we get to see the diff that was presented before when we ran our \texttt{git diff HEAD~1..HEAD} command, but this time, as we have used the git log command instead, we get to see the diff output as well.  This is what the \texttt{-p} flag is for.  Take note of the way we have specified the time period that we are interested in.  The section \texttt{--since="last week"} tells Git to filter the output and show only the entries that were committed in the last week.
+
+This type of filtering can be exceedingly useful to a developer.  Often when problems arise, you do not have a defined point in time that you know it was last working.  However most of the time, you can say with some certainty, ``I know it was working two weeks ago''.  Using the methods descibed above, will give the user all of the changes, categorised by commit, that occured in those two weeks, allowing them to narrow down the scope of exactly where to begin looking for the offending changes.
+
+If the developer can futher categorise the issue, such as, ``I know which file the change must have occured in'', then the following example will demonstrate just how easy it is to filter the results even further.  Even in the simplified example repository that we have been using, running this command filters the output to a single file.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git log -p --since="last week" -- my_second_committed_file
+commit fa65f06cc62291bb0cd47aef9e05953d6655fc8e
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Tue Mar 1 21:17:57 2011 +0000
+
+    Messed with a few files
+
+diff --git a/my_second_committed_file b/my_second_committed_file
+index 095b9cd..c9887f8 100644
+--- a/my_second_committed_file
++++ b/my_second_committed_file
+@@ -1,2 +1 @@
+-Change1
+-Change2
++Changed this file completely
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+See how easy that is.  We no longer have the information for \texttt{my\_third\_committed\_file} present in the output.  We have filtered everything out, but the information we are looking for.  When you are up against deadlines, pouring through pages and pages of diffs and changes can be incredibly time consuming.  Having the tools available to cut that output down to just the relevant material can be life saving.
+
 \clearpage
 
 \section{Summary - John's Notes}
