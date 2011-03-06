@@ -256,22 +256,26 @@ She sat down on a near-by chair and wheeled it over to John's desk.  She survery
 
 \section{Summary - John's Notes}
 \subsection{Commands}
-\texttt{git log} - Return a navigable list of commits to a repository
+\begin{itemize}
+\item\texttt{git log} - Return a navigable list of commits to a repository
 
-\texttt{git log -S<string>} - Show all commits that either introduced or removed a particular string from the repository
+\item\texttt{git log -S<string>} - Show all commits that either introduced or removed a particular string from the repository
 
-\texttt{git log -S<string> <path>} - Show all commits that either introduced or removed a particular string from the repository, but restrict the search to a specific path
+\item\texttt{git log -S<string> <path>} - Show all commits that either introduced or removed a particular string from the repository, but restrict the search to a specific path
 
-\texttt{git log HEAD~1..HEAD} - Show all commits between HEAD~1 and HEAD, essentially the last commit
+\item\texttt{git log HEAD~1..HEAD} - Show all commits between HEAD~1 and HEAD, essentially the last commit
 
-\texttt{git diff HEAD~1..HEAD} - Show the actual differences between HEAD~1 and HEAD
+\item\texttt{git diff HEAD~1..HEAD} - Show the actual differences between HEAD~1 and HEAD
+\end{itemize}
 
 \subsection{Terminology}
-\textbf{Branch} - A way of working on the same set of code in parallel without modifications overlapping
+\begin{itemize}
+\item\textbf{Branch} - A way of working on the same set of code in parallel without modifications overlapping
 
-\textbf{Diff} - Shows the actual differences between files
+\item\textbf{Diff} - Shows the actual differences between files
 
-\textbf{Hunk} - A section of a diff output
+\item\textbf{Hunk} - A section of a diff output
+\end{itemize}
 
 %git log -p
 %DIFFs
