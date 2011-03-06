@@ -57,13 +57,13 @@ The first thing we need to do is to understand two very important things:
 
 The first of these is relatively easy to perform.  
 
-\begin{Verbatim}[frame=single,fontsize=\relsize{-3}]
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
 john@akira:~$ mkdir coderepo 
 john@akira:~$ cd coderepo 
 john@akira:~/coderepo$ git init 
 Initialized empty Git repository in /home/john/coderepo/.git/ 
 john@akira:~/coderepo$ git 
-\end{Verbatim} 
+\end{Verbatim}
 
 What we've done here is create a new directory called coderepo, moved into it, and then run the git init command.  The result of this command is a new directory in the coderepo directory called .git.  This directory will hold a local copy of our entire repository.  This will allow us to create branches, merge changes, rebase things and ultimately push our changes to somewhere else.
 
