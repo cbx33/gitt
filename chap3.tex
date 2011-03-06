@@ -285,7 +285,7 @@ index 0000000..5d27866
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Notice we get to see the diff that was presented before when we ran our \texttt{git diff HEAD~1..HEAD} command, but this time, as we have used the git log command instead, we get to see the diff output as well.  This is what the \texttt{-p} flag is for.  Take note of the way we have specified the time period that we are interested in.  The section \texttt{--since="last week"} tells Git to filter the output and show only the entries that were committed in the last week.
+Notice we get to see the diff that was presented before when we ran our \texttt{git diff HEAD~1..HEAD} command, but this time, as we have used the git log command instead, we get to see the diff output as well.  This is what the \texttt{-p} flag is for.  Take note of the way we have specified the time period that we are interested in.  The section \texttt{--since="last week"} tells Git to filter the output and show only the entries that were committed within the last week.
 
 This type of filtering can be exceedingly useful to a developer.  Often when problems arise, you do not have a defined point in time that you know it was last working.  However most of the time, you can say with some certainty, ``I know it was working two weeks ago''.  Using the methods descibed above, will give the user all of the changes, categorised by commit, that occured in those two weeks, allowing them to narrow down the scope of exactly where to begin looking for the offending changes.
 
