@@ -385,8 +385,34 @@ john@akira:~/coderepo$
 
 Notice that instead of using the dynamic reference HEAD, we have now used the tag names \texttt{v0.9} and \texttt{v1.0a} to refer to our previous commits and have returned the combined diff output of all the changes which occured between the two.
 
+\begin{framed}
+\subsection{A little about tags?}
+Tags are great and you should most definitely use them in your repositories to make good reference points, but there is one point that you should always remember.  Though we have not yet delved into the realms of remote branches, it is important to note that once you have tagged a certain commit, and pushed that to the repository, you cannot then remove that tag if someone else clones, or pulls your tags from that remote branch.  This will all become clearer during the next week, but fits in with the overall ethos of working with version control systems, if someone has seen the past, you should not EVER change it.
+\end{framed}
 
+\section{Day 5 - ``Putting things back the way they were''}
+\subsection{Revert, I say.  Revert!}
 
+Whilst working with your repository, something occurs quite often, is the need to go back in time, either temporarily or permanently, or even partially.  Git allows you to do this in a multitude of ways.  Let's see a real life situation where this need could arise.
+
+\begin{trenches}
+``No, I don't have a copy of the file.  I was stupid and after I submitted it to you I er\ldots\deleted it''.  
+
+John gave Michael the raised eyebrow look.  It wasn't the first time Michael had come to him with a similar problem.  Usually John would have had Michael go rooting through the archives to find it.  This time though, he wondered if Git might just come to the rescue.
+
+``Tell ya what Michael,'' he grinned, ``Since this isn't the first time you've come to me with this kind of predicament, why don't you go and find out how to use Git to get the file back.''  Michael sighed.  ``I have tagged the repo each time we created an archive, so tell me what I need to run to extract it.''
+
+\begin{center} * * * \end{center}
+
+``Man'', started Michael running over to John's desk forty five minutes later.  ``I never knew there were so many ways to skin a cat''
+
+Michael was a little out of shape and though he had only crossed a minor distance, he now stood there, leaned over John's desk ever so slightly out of breath.
+
+``So, you learn much?'' asked John.
+
+``Where d'ya want me to start?''
+
+\end{trenches}
 
 %% FINISH up with, tagging, then reverting either with revert or checkoutshow there are multiple ways to skin a cat :)
 
@@ -422,3 +448,5 @@ Notice that instead of using the dynamic reference HEAD, we have now used the ta
 %git show master:<path>
 %git diff -- stylesheet.css master:stylesheet.css
 %git checkout -b <branch>
+
+%SUBMODULE
