@@ -237,7 +237,6 @@ index 0000000..5d27866
 
 This shows us that \texttt{my\_third\_committed\_file} is actually a new file.  Notice the \texttt{/dev/null} and the \texttt{0000000} object ID, indicating that there was no original file.
 
-\section{Day 4 - ``Putting it all together''}
 \subsection{Diffing Over A Range}
 All the operations that we have performed so far have been on one commit.  Whilst important and valuable, it may be that you want to see an entire range of changes.  
 
@@ -313,7 +312,7 @@ john@akira:~/coderepo$
 
 See how easy that is.  Note, the \texttt{--} is necessary to tell Git the following string is a path.  We no longer have the information for \texttt{my\_third\_committed\_file} present in the output.  We have filtered everything out but the information we are looking for.  When you are up against deadlines, pouring through pages and pages of diffs and changes can be incredibly time consuming.  Having the tools available to cut that output down to just the relevant material can be life saving.
 
-\section{Day 5 - ``Finding a good reference point''}
+\section{Day 4 - ``Finding a good reference point''}
 \subsection{Tag you're it!}
 
 During software development, a project will generally get to a point where it is ready to be released to people outside of the development team.  When this grand day occurs, it is crucial that both the developers and the users have a reference point with which to refer to the state of the code.  Having a code name or a version number means that within a very short period of time, both parties can converse about a problem, safe in the knowledge that they are on the same page.
