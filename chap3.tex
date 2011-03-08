@@ -474,21 +474,69 @@ The table below shows the three methods that we have access to now.  Note that t
 \begin{center}
 \end{center}
 
-Let's take a look at each of these in turn.  We are going to be covering two new commands and revisiting an old one.  Let us start with \texttt{git reset}.  We have already met this tool once.  When we used it previously, its purpose was to pull files out of the index that we were not ready to commit.  We were using \texttt{git reset} in its simplest state.  Actually Git can perform several other kinds of reset.  It should be noted here that using this can be quite dangerous as it can affect your index, your working copy and the pointer HEAD.  
+Let's take a look at each of these in turn.  We are going to be covering two new commands and revisiting an old one.  Let us start with \texttt{git reset}.  We have already met this tool once.  When we used it previously, its purpose was to pull files out of the index that we were not ready to commit.  We were using \texttt{git reset} in its simplest state.  Actually Git can perform several other kinds of reset.  It should be noted here that using this can be quite dangerous as it can affect your index, your working copy, your branch and the pointer HEAD.  
 
-In order to use \texttt{git reset} in any sane way to achieve our goal, we would need to look at branching, which at the moment, we are not ready to do.  In short \texttt{git reset} can drastically effect your working copy, affecting multiple files, and before we begin investigating, we really need to learn how to play in a safe environment.  As it appears Michael only wants to pull out a single file, this command could be a little over kill, however it should be noted that we can perform a \texttt{git reset} on a single file.
+In order to use \texttt{git reset} in any sane way to achieve our goal, we would need to look at branching, which at the moment, we are not ready to do.  In short \texttt{git reset} can drastically effect your working copy, affecting multiple files, and before we begin investigating, we really need to learn how to play in a safe environment.  
 
-The next method on our list to discuss is the texttt{git checkout} command.  This command can be used to bring back either a single file or multiple files and once again at this stage, is best employed in conjunction with branches.  At this point, you may be wondering why we are placing such emphasis on the use of branches.  As you will see next week, branches are incredibly powerful things, which allow you to experiment and play with your data, without the risk of losing anything.  
+The next method on our list to discuss is the \texttt{git checkout} command.  This command can be used to bring back either a single file or multiple files and once again at this stage, is best employed in conjunction with branches.  At this point, you may be wondering why we are placing such emphasis on the use of branches.  As you will see next week, branches are incredibly powerful things, which allow you to experiment and play with your data, without the risk of losing anything.  \texttt{git checkout} will pull files from a previous commit into our working copy.  This is something remember.  If we have any changes in our working copy, the checkout will fail.
 
+The last method we can use to view data which was in a previous commit, is the \texttt{git show} command.  This command literally pulls data from a previous version and dumps it to the standard output, a little like the \texttt{cat} command present in almost every single *nix environment.
 
-Method
+Now that we have taken a quick look at our three methods, we must decide which one is going to be the most useful to us.  Looking at the scenario above, we can deduce that we really only need to pull out one file.  If our intention was to do large amounts of work on an old branch and pull many files from it, \texttt{git reset} may have been a good choice.  As we are looking for only a single file, we should consider looking at the checkout and show tools.
 
-revert 
-reset
-show git show 79bc5:gitt.tex
-checkout
+So now let us see how we can use \texttt{git checkout} to take one of our files back to the past.
 
-%% FINISH up with, tagging, then reverting either with revert or checkoutshow there are multiple ways to skin a cat :)
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git status
+# On branch master
+nothing to commit (working directory clean)
+john@akira:~/coderepo$ git checkout v0.9 -- my_second_committed_file
+john@akira:~/coderepo$ cat my_second_committed_file 
+Change1
+john@akira:~/coderepo$ git checkout HEAD -- my_second_committed_file
+john@akira:~/coderepo$ cat my_second_committed_file 
+Changed this file completely
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git status
+# On branch master
+nothing to commit (working directory clean)
+john@akira:~/coderepo$ git checkout v0.9 -- my_second_committed_file
+john@akira:~/coderepo$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   my_second_committed_file
+#
+john@akira:~/coderepo$ git checkout HEAD -- my_second_committed_file
+john@akira:~/coderepo$ git status
+# On branch master
+nothing to commit (working directory clean)
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Notice how we first checked that we didn't have any local modifications by running the \texttt{git status} command.  Then we are safe to run the \texttt{git checkout} command.  We used the \texttt{v0.9} tag from earlier to refer to an earlier commit state.  The next part of the command is the double hyphen (\texttt{--}) that tells Git that what comes after it is the path.  Finally we choose \texttt{my\_second\_committed\_file} as the source file.  After this, when we \texttt{cat} the file, we see that it has changed to what it used to be in \texttt{v0.9}.
+
+We then switch the file back to the latest version by using the \texttt{HEAD} reference.  Note that on the odd occasion, the \texttt{HEAD} reference doesn't always point to where you think it does, but this is an area we are yet to cover.  Then we run the command one more time, but this time we intersperse it with a \texttt{git status} to see that there are changes made to out local working copy.
+
+\subsection{Show me the money}
+The \texttt{git show} command will have largely the same effect, except it grabs us the data without having to change existing files in our working copy.  Let us view a quick example.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git show v0.9:my_second_committed_file
+Change1
+john@akira:~/coderepo$ git show v0.9:my_second_committed_file > temp_file
+john@akira:~/coderepo$ cat temp_file 
+Change1
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+The \texttt{git show} command is rather similar to the checkout command we used a few moments ago.  The only difference is the presence of the colon, instead of the double hyphen.  Notice how the effect of the first command is just to print out the contents of the requested file to the screen.  With the Linux environment it's easy to pipe this output to a new file.  
+
+Hopefully you can now see that there are often several ways to achieve the same result.  
 
 \clearpage
 
