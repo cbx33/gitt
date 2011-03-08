@@ -418,17 +418,18 @@ Where exactly do we start?  Well one of the neat things about Git is that there 
 The table below shows the four methods that we have access to now.  Note that this may not be a definitive list of methods, but that these can give us access to the data we need to view.  The columns are requirements or criteria.  We need to evaluate each command  in order to determine which one is right for us.  Once you have been using Git a while, whese kind of evaluations will become second nature to you.
 
 \begin{center}
-  \begin{tabular}{ | l | l | l | l | l |}
+  \begin{tabular}{ | l | l | l | l | l | l |}
     \hline
     Method Name & 
     \rotatebox{90}{Alters Repository} & 
+    \rotatebox{90}{Can Change History} &
     \rotatebox{90}{Alters Working Copy} & 
     \rotatebox{90}{Reversible} & 
     \rotatebox{90}{Multiple Files} \\ \hline
-    Revert & Yes & Yes & Yes & Yes\\ \hline
-    Reset & Yes & No & Yes & Yes\\ \hline
-    Show & No & No & N/A & No\\ \hline
-    Checkout & No & Yes & No & Yes\\ 
+    Revert & Yes & No & Yes & Yes & Yes\\ \hline
+    Reset & Yes & Yes & No & Yes & Yes\\ \hline
+    Show & No & No & No & N/A & No\\ \hline
+    Checkout & No & No & Yes & No & Yes\\ 
     \hline
   \end{tabular}
 \end{center}
@@ -439,7 +440,7 @@ Method
 
 revert 
 reset
-show
+show git show 79bc5:gitt.tex
 checkout
 
 %% FINISH up with, tagging, then reverting either with revert or checkoutshow there are multiple ways to skin a cat :)
