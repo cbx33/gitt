@@ -453,7 +453,7 @@ Michael was a little out of shape and though he had only crossed a minor distanc
 
 Where exactly do we start?  Well one of the neat things about Git is that there are many ways to produce the same result.  While that may not seem like a benefit now, the trick is knowing just how to use each tool and what the benefit is of each method.  Right now, we are ready to look at four methods for achieving the task of viewing old information in the repository.  So how do we choose which method we wish to use?  We need to answer a few more questions before we are ready to decide.
 
-The table below shows the four methods that we have access to now.  Note that this may not be a definitive list of methods, but that these can give us access to the data we need to view.  The columns are requirements or criteria.  We need to evaluate each command in order to determine which one is right for us.  Once you have been using Git a while, these kind of evaluations will become second nature to you, but right now, we will take a look at all available options, just to see what is out there.
+The table below shows the three methods that we have access to now.  Note that this may not be a definitive list of methods, but that these can give us access to the data we need to view.  The columns are requirements or criteria.  We need to evaluate each command in order to determine which one is right for us.  Once you have been using Git a while, these kind of evaluations will become second nature to you, but right now, we will take a look at all available options, just to see what is out there.
 
 \begin{table}
 \begin{center}
@@ -465,19 +465,21 @@ The table below shows the four methods that we have access to now.  Note that th
     \rotatebox{90}{Alters Working Copy} & 
     \rotatebox{90}{Reversible} & 
     \rotatebox{90}{Multiple Files} \\ \hline
-    Revert & Yes & No & Yes & Yes & Yes\\ \hline
-    Reset & Yes & Yes & No & Yes & Yes\\ \hline
+    Reset & Possibly & Possibly & Possibly & Possibly & Yes\\ \hline
+    Checkout & No & No & Yes & No & Yes\\ \hline
     Show & No & No & No & N/A & No\\ \hline
-    Checkout & No & No & Yes & No & Yes\\ 
-    \hline
   \end{tabular}
 \end{center}
 \end{table}
 \begin{center}
-\textbf{Note: }The actions here are the default actions.  Commands may have parameters to override behaviour.
 \end{center}
 
-Going through these one by one
+Let's take a look at each of these in turn.  We are going to be covering two new commands and revisiting an old one.  Let us start with \texttt{git reset}.  We have already met this tool once.  When we used it previously, its purpose was to pull files out of the index that we were not ready to commit.  We were using \texttt{git reset} in its simplest state.  Actually Git can perform several other kinds of reset.  It should be noted here that using this can be quite dangerous as it can affect your index, your working copy and the pointer HEAD.  
+
+In order to use \texttt{git reset} in any sane way to achieve our goal, we would need to look at branching, which at the moment, we are not ready to do.  In short \texttt{git reset} can drastically effect your working copy, affecting multiple files, and before we begin investigating, we really need to learn how to play in a safe environment.  As it appears Michael only wants to pull out a single file, this command could be a little over kill, however it should be noted that we can perform a \texttt{git reset} on a single file.
+
+The next method on our list to discuss is the texttt{git checkout} command.  This command can be used to bring back either a single file or multiple files and once again at this stage, is best employed in conjunction with branches.  At this point, you may be wondering why we are placing such emphasis on the use of branches.  As you will see next week, branches are incredibly powerful things, which allow you to experiment and play with your data, without the risk of losing anything.  
+
 
 Method
 
