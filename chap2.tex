@@ -67,46 +67,6 @@ john@akira:~/coderepo$ git
 
 What we've done here is create a new directory called coderepo, moved into it, and then run the git init command.  The result of this command is a new directory in the coderepo directory called .git.  This directory will hold a local copy of our entire repository.  This will allow us to create branches, merge changes, rebase things and ultimately push our changes to somewhere else.
 
-\begin{framed}
-\subsubsection{What's inside the Git repository?}
-
-Let's take a brief look into the directory structure, to see what this command has created in the \texttt{.git} folder.
-
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo/.git$ ls -la 
-total 40 
-drwxr-xr-x 7 john john 4096 2011-02-17 19:23 . 
-drwxr-xr-x 3 john john 4096 2011-02-17 19:23 .. 
-drwxr-xr-x 2 john john 4096 2011-02-17 19:23 branches 
--rw-r--r-- 1 john john   92 2011-02-17 19:23 config 
--rw-r--r-- 1 john john   73 2011-02-17 19:23 description 
--rw-r--r-- 1 john john   23 2011-02-17 19:23 HEAD 
-drwxr-xr-x 2 john john 4096 2011-02-17 19:23 hooks 
-drwxr-xr-x 2 john john 4096 2011-02-17 19:23 info 
-drwxr-xr-x 4 john john 4096 2011-02-17 19:23 objects 
-drwxr-xr-x 4 john john 4096 2011-02-17 19:23 refs 
-john@akira:~/coderepo/.git$ 
-\end{Verbatim} 
-
-\textbf{branches} - Though deprecated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.
-
-\textbf{config} - This is the main configuration file for Git.  It is the first place git looks for upon invocation.  If this file is not present, Git will inspect ~/.gitconfig.  After this, Git will go to /etc/gitconfig.  The file holds information about the remotes, tracking branches, push configurations and many more items.
-
-\textbf{description} - This is a simple text file which gives a description to a repository when being view via gitweb or similar.
-
-\textbf{HEAD} - This file is a pointer to the parent commit of your current branch.
-
-\textbf{hooks} - Scripts can be placed in here to perform operations at certain points during the commit process.
-
-\textbf{info} - The info folder contains some additional information about the repository
-
-\textbf{objects} - The is the directory that holds all of the actual files that are stored in the repository.  The files are named by their SHA-1 values.  Inside the folder are a number of directories which make up the first 2 characters of the SHA-1 value.  The remaining portion of the SHA-1 hash is used to name the file.
-
-\textbf{refs} - This folder holds the files that files for local branches, remote branches and tags.
-
-More files and folders may appear here during the running of the repository.
-\end{framed}
-
 Something that is crucial to the running of a repository, whether you are an administrator of Git, or a developer who is using it, is an understanding of how Git works.  It is fine to jump in and play with the repository and test the water, but before committing to using Git in a production environment, you should understand what Git actually does in the background in some detail. 
 
 During the writing of this book several people have told me that Git is one of the only version control systems where a good understanding of how the underlying system works is not just highly recommended, but bordering on essential. 
@@ -238,24 +198,6 @@ john@akira:~/coderepo$
 
 In our examples, we have used the syntax \texttt{git commit -m 'Message'}.  This is a slightly special way of committing, it allows us to specify our commit log message on the command line.  If we wanted to, we could run the command git commit and this would open a text editor that we could use to input our commands.
 
-\begin{framed}
-\subsection{How do we change the commit message editor?}
-
-We spoke earlier about the configuration file and how it stores information about our Git instance.  Git can use any text editor you require, even a graphical one, though the need rarely arises.  As mentioned earlier, Git has a preference lever when talking about configuration.  First and foremost it will look in the repositories own 'config' file in the .git folder.  Then, it will look in the users \texttt{~/.gitconfig} file.  Finally, Git will look in your distributions own global folder.  
-
-If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;
-
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-git config core.editor "nano"
-\end{Verbatim}
-
-If we want the changes to apply globally, meaning it would affect all repositories we administrate as this user, unless overridden by a repository setting, we would run the following;
-
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-git config --global core.editor "nano"
-\end{Verbatim}
-\end{framed}
-
 Let us finish off our round of committing by using the \texttt{git commit -a} option.  This commits all of the changes to files which are already tracked.  Consequently we do not have to specify the files with \texttt{git add}, like we have had to previously.  Any file which has been modified and has previously been added to the repository, will have it's changes committed upon running that command.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
@@ -361,9 +303,37 @@ We have discarded the file which was residing in the index.  This is very import
 Everyone nodded in agreement.
 \end{trenches}
 
+\begin{figure}[hbt]
+\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=black, text=white]
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{.9\textwidth}
+We spoke earlier about the configuration file and how it stores information about our Git instance.  Git can use any text editor you require, even a graphical one, though the need rarely arises.  As mentioned earlier, Git has a preference lever when talking about configuration.  First and foremost it will look in the repositories own 'config' file in the .git folder.  Then, it will look in the users \texttt{~/.gitconfig} file.  Finally, Git will look in your distributions own global folder.  
+
+If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+git config core.editor "nano"
+\end{Verbatim}
+
+If we want the changes to apply globally, meaning it would affect all repositories we administrate as this user, unless overridden by a repository setting, we would run the following;
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+git config --global core.editor "nano"
+\end{Verbatim}
+    \end{minipage}
+};
+\node[fancytitle, right=16pt] at (box.north west) {How do we change the commit message editor?};
+\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Knowledge}};
+\end{tikzpicture}
+\end{figure}
+
 We have run through a few basic commands in Git.  If you are familiar with version control systems, then possibly the only real difference you will have noticed is that of the staging area.  It really is powerful, and allows you to organise and prepare your commits, so that they are both meaningful and coherent.
 
 For Tamagoyaki Inc, their plan to implement version control was far too aggressive.  Most of the members of the team had never even used a version control system.  When deciding to implement version control, it is essential to ensure that you are doing it for the right reasons.  Version control is a tool to help you to keep things in order, but remember tools are nothing without process.  It is process that is key to the order.
+
+
 \clearpage
 \section{Summary - John's Notes}
 \subsection{Commands}

@@ -96,11 +96,6 @@ Using the centralised model for the workflow, each developer has the same level 
 \subsubsection{Integration Manager Workflow}
 The integration manager workflow is similar to the centralised workflow because there is still a \textbf{blessed} repository which everyone uses as a reference.  The difference here is that there is only one person who has the rights to push changes to the \textbf{blessed} repository.  This person is referred to as the Integration Manager.  
 
-\begin{framed}
-\subsubsection{Blessed}
-A blessed repository is one which has the approval of the managers of the project.  The blessed repository is supposed to be the de facto standard where all other clones are made from.  If there is one place where code should be correct, it is the blessed repository.  If you are hosting the project in a public place, the blessed repository will usually be the one that is made available to people as a stable point for developing from.
-\end{framed}
-
 This workflow is handled exceedingly well by Git.  Developers will work on their repositories locally and then once they are happy, will push their changes to a location where the Integration Manager can see them.  The Integration Manager will then review the changes that the developers have made and will merge them into their own local repository.  Once they are happy that everything is working well, the Integration Manager will push their changes to the blessed repository so that all the other developers can access the changes.
 
 \begin{figure}[bt]
@@ -119,6 +114,20 @@ Once the Lieutenants are happy with their code, they make it available to the Di
 	\centering
 	\includegraphics[width=7cm]{images/f-w1-d3.pdf}
 	\caption{Dictator and Lieutenant Workflow}
+\end{figure}
+
+\begin{figure}[hbt]
+\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=black, text=white]
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{.9\textwidth}
+A blessed repository is one which has the approval of the managers of the project.  The blessed repository is supposed to be the de facto standard where all other clones are made from.  If there is one place where code should be correct, it is the blessed repository.  If you are hosting the project in a public place, the blessed repository will usually be the one that is made available to people as a stable point for developing from.
+    \end{minipage}
+};
+\node[fancytitle, right=16pt] at (box.north west) {Blessed};
+\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Terminology}};
+\end{tikzpicture}
 \end{figure}
 
 The main thing to remember, is that Git can utilise any of these workflows.  This makes it a very flexible system, allowing you to work in whichever way you decide.

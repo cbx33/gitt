@@ -4,3 +4,39 @@
 \subsection{A Look At Plumbing}
 
 Talking about objects, trees, commits 
+
+Let's take a brief look into the directory structure, to see what this command has created in the \texttt{.git} folder.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo/.git$ ls -la 
+total 40 
+drwxr-xr-x 7 john john 4096 2011-02-17 19:23 . 
+drwxr-xr-x 3 john john 4096 2011-02-17 19:23 .. 
+drwxr-xr-x 2 john john 4096 2011-02-17 19:23 branches 
+-rw-r--r-- 1 john john   92 2011-02-17 19:23 config 
+-rw-r--r-- 1 john john   73 2011-02-17 19:23 description 
+-rw-r--r-- 1 john john   23 2011-02-17 19:23 HEAD 
+drwxr-xr-x 2 john john 4096 2011-02-17 19:23 hooks 
+drwxr-xr-x 2 john john 4096 2011-02-17 19:23 info 
+drwxr-xr-x 4 john john 4096 2011-02-17 19:23 objects 
+drwxr-xr-x 4 john john 4096 2011-02-17 19:23 refs 
+john@akira:~/coderepo/.git$ 
+\end{Verbatim} 
+
+\textbf{branches} - Though deprecated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.
+
+\textbf{config} - This is the main configuration file for Git.  It is the first place git looks for upon invocation.  If this file is not present, Git will inspect ~/.gitconfig.  After this, Git will go to /etc/gitconfig.  The file holds information about the remotes, tracking branches, push configurations and many more items.
+
+\textbf{description} - This is a simple text file which gives a description to a repository when being view via gitweb or similar.
+
+\textbf{HEAD} - This file is a pointer to the parent commit of your current branch.
+
+\textbf{hooks} - Scripts can be placed in here to perform operations at certain points during the commit process.
+
+\textbf{info} - The info folder contains some additional information about the repository
+
+\textbf{objects} - The is the directory that holds all of the actual files that are stored in the repository.  The files are named by their SHA-1 values.  Inside the folder are a number of directories which make up the first 2 characters of the SHA-1 value.  The remaining portion of the SHA-1 hash is used to name the file.
+
+\textbf{refs} - This folder holds the files that files for local branches, remote branches and tags.
+
+More files and folders may appear here during the running of the repository.
