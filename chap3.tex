@@ -453,14 +453,15 @@ Michael was a little out of shape and though he had only crossed a minor distanc
 
 Where exactly do we start?  Well one of the neat things about Git is that there are many ways to produce the same result.  While that may not seem like a benefit now, the trick is knowing just how to use each tool and what the benefit is of each method.  Right now, we are ready to look at four methods for achieving the task of viewing old information in the repository.  So how do we choose which method we wish to use?  We need to answer a few more questions before we are ready to decide.
 
-The table below shows the four methods that we have access to now.  Note that this may not be a definitive list of methods, but that these can give us access to the data we need to view.  The columns are requirements or criteria.  We need to evaluate each command  in order to determine which one is right for us.  Once you have been using Git a while, whese kind of evaluations will become second nature to you.
+The table below shows the four methods that we have access to now.  Note that this may not be a definitive list of methods, but that these can give us access to the data we need to view.  The columns are requirements or criteria.  We need to evaluate each command in order to determine which one is right for us.  Once you have been using Git a while, these kind of evaluations will become second nature to you, but right now, we will take a look at all available options, just to see what is out there.
 
+\begin{table}
 \begin{center}
   \begin{tabular}{ | l | l | l | l | l | l |}
     \hline
     Method Name & 
     \rotatebox{90}{Alters Repository} & 
-    \rotatebox{90}{Can Change History} &
+    \rotatebox{90}{Changes History} &
     \rotatebox{90}{Alters Working Copy} & 
     \rotatebox{90}{Reversible} & 
     \rotatebox{90}{Multiple Files} \\ \hline
@@ -470,6 +471,10 @@ The table below shows the four methods that we have access to now.  Note that th
     Checkout & No & No & Yes & No & Yes\\ 
     \hline
   \end{tabular}
+\end{center}
+\end{table}
+\begin{center}
+\textbf{Note: }The actions here are the default actions.  Commands may have parameters to override behaviour.
 \end{center}
 
 Going through these one by one
