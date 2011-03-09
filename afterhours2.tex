@@ -3,9 +3,7 @@
 \section{``A Litte Of Git's Internals''}
 \subsection{A Look At Plumbing}
 
-Talking about objects, trees, commits 
-
-Let's take a brief look into the directory structure, to see what this command has created in the \texttt{.git} folder.
+We are going to use the Git repository that we have been playing with in Week 2 and start to take a deeper look at what is actually inside a Git repository.  To begin with, let's take a brief look into the directory structure, to see what has been created with a simple \texttt{git init}  command in the \texttt{.git} folder.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo/.git$ ls -la 
@@ -39,4 +37,4 @@ john@akira:~/coderepo/.git$
 
 \textbf{refs} - This folder holds the files that files for local branches, remote branches and tags.
 
-More files and folders may appear here during the running of the repository.
+More files and folders will appear here during the running of the repository as you begin to start using different features in Git.
