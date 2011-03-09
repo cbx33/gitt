@@ -471,8 +471,6 @@ The table below shows the three methods that we have access to now.  Note that t
   \end{tabular}
 \end{center}
 \end{table}
-\begin{center}
-\end{center}
 
 Let's take a look at each of these in turn.  We are going to be covering two new commands and revisiting an old one.  Let us start with \texttt{git reset}.  We have already met this tool once.  When we used it previously, its purpose was to pull files out of the index that we were not ready to commit.  We were using \texttt{git reset} in its simplest state.  Actually Git can perform several other kinds of reset.  It should be noted here that using this can be quite dangerous as it can affect your index, your working copy, your branch and the pointer HEAD.  
 
@@ -534,9 +532,44 @@ Change1
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-The \texttt{git show} command is rather similar to the checkout command we used a few moments ago.  The only difference is the presence of the colon, instead of the double hyphen.  Notice how the effect of the first command is just to print out the contents of the requested file to the screen.  With the Linux environment it's easy to pipe this output to a new file.  
+The format of the \texttt{git show} command is rather similar to the checkout command we used a few moments ago.  The only difference is the presence of the colon, instead of the double hyphen.  Notice how the effect of the first command is just to print out the contents of the requested file to the screen.  With the Linux environment it is easy to pipe this output to a new file.  In the example above, we pipe the output using the \texttt{>} character to the file called \texttt{temp\_file}
 
-Hopefully you can now see that there are often several ways to achieve the same result.  
+Hopefully you can now see that there are often several ways to achieve the same result and it is important to ensure that you choose the right tool for the job.  The reset command was too dangerous to use, the checkout command modified our working copy, but the show tool allowed us to create a new file, guaranteeing that our working copy remained untouched.
+
+\begin{trenches}
+``So, if I am currently have changes to the file you want, in my local repository,'' began John, ``What command would you recommend I use?''
+
+Michael paused, clearly considering each method in his head.  The noise from the sandwich van's horn rang through the office and Michael immediately stood bolt upright and looked paniced.  ``The van John'' he stuttered, ``The van''
+
+``You can go to the van when you tell me which command I should use.''  John smirked.  Michael was one of the more junior members of the team and the managers often took the opportunity to haze him.
+
+``I'm gonna go with git show,'' he said in a rush.
+
+``Why?'' asked John.
+
+``So you don't harm the working tree.'' replied Michael smoothly, already walking out the door.
+
+``You could have also branched,'' shouted Rob, who was a few steps ahead of him.
+
+\begin{center}* * *\end{center}
+
+``So, what's the status then John?'' asked Markus.
+
+John pressed a button on his laptop and the slideshow on the screen advanced to show an organisational model.  ``Well, we've not had a whole lot of time this week as the release for project Manta, but we've managed to look at logging and diffing, which is something that we really needed to cover.  Klaus also showed everyone how to tag things and went through our version numbering system again as several people had forgotten.''  Everyone in the room looked at Jack.  ``We also found out about how to pull older versions out of the repository in a variety of ways.''
+
+Markus looked pleased, ``So, what's next?''
+
+``Klaus?'' asked John.
+
+``Next, John put my team in charge of defining and teaching everyone about branching and merging.  This is the really important stuff.''  Klaus took over control of the laptop and clicked onto the next slide, which detailed a list of features.  ``We really need to get a good handle on these topics to be successful.  It is key to collaboration''
+
+``Well done team,'' ended Markus, ''Wayne is going to be impressed with this.''
+
+\end{trenches}
+
+We now have a good working knowledge of how to do many key things in Git.  Logging and diffing is supremely important for inspecting what changes have occurred in the repository.  Though the options here are not an exhaustive list, they should give you a basic understanding of how to use the tools.  It is well worth looking at the man pages for these commands to get an idea of just how expansive they can be.  For example, the diff tool can not only show you differences between your working copy and the index, but also between your index and the latest commit, using the \texttt{cached} option.
+
+Next we move on to branching and merging.  Branching can be a tricky subject, so it is important to understand what is happening at the repository level.  It would be prudent to look over the After Hours section for Week 2 before continuing as some of the terminology may be a little confusing otherwise.
 
 \clearpage
 
