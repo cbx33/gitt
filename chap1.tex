@@ -3,7 +3,7 @@
 \section{Day 1 - ``Things need to change''}
 \subsection{Meeting the Team}
 
-If you're already a seasoned version control user, you may want to skip this chapter.  It's kind of like an introduction to why we even need version control systems in the first place.  This chapter looks at Tamagoyaki Inc's requirements and why they choose the VCS that seemed right for them.  Tamagoyaki Inc. create software for turning a standard PC into a media center.  Their product ships to the end user and they rely very heavily on having a good presense at trade shows, in order to bring in sales.  The following conversation describes the events that led up to the defining "We need a VCS!" discussion.
+If you're already a seasoned version control user, you may want to skip this chapter.  It's kind of like an introduction to why we even need version control systems in the first place.  This chapter looks at Tamagoyaki Inc's requirements and why they choose the VCS that seemed right for them.  Tamagoyaki Inc. create software for turning a standard PC into a media center.  Their product ships to the end user and they rely very heavily on having a good presence at trade shows, in order to bring in sales.  The following conversation describes the events that led up to the defining "We need a VCS!" discussion.
 
 \begin{trenches}
 John sat at his desk and looked out of the window.  The rain was drizzling down the pane, but he didn't care.  It was a quiet Monday morning, the release had gone well on Friday and John was just thinking about implementing the new abstraction layer to the database he'd been asked for.  Through the music playing in his headphones he hardly noticed his boss, the chief designer and the CEO approaching his desk.  
@@ -64,7 +64,7 @@ Version control systems usually fit into one of two categories; centralised, or 
 
 \subsection{Branching}
 
-Most version control systems offer branching as part of their default features set.  Branching allows developers to create in essence a clone of their repository and mess around with it, safe in the knowledge that they can switch back to the original whenever they need to.  This allows developers the freedom to experiment with all manner of things without being afraid of affecting the original/clean code base.
+Most version control systems offer branching as part of their default feature set.  Branching allows developers to create in essence a clone of their repository and mess around with it, safe in the knowledge that they can switch back to the original whenever they need to.  This allows developers the freedom to experiment with all manner of things without being afraid of affecting the original/clean code base.
 
 Git implements branching in a special way.  Most other version control systems implement branching in a way that almost creates a separate repository.  This is slow and cumbersome.  Git's branching method gives developers the ability to create multiple local branches to play with.  Due to it's distributed nature, when pushing code to a more central location for others to pull from, developers can choose which branches they want to push, allowing code to be experimented with privately.
 

@@ -265,7 +265,7 @@ She sat down on a near-by chair and wheeled it over to John's desk.  She survery
 
 ``Well, actually Martha, I can see exactly what you mean.  Up until now, there is no difference between the old and the new process.  I'm still in control of all the versions, so nothing has really changed.''  He thought long and hard, ``Tell ya what.  Why don't you give me an operation that you've always wanted to do against our code tree tarballs easily.''
 
-``Easy,'' she snapped back, ``I want to know what changes were made for the last two weeks whilst I had been away on holiday.'' She smiled an almost mischevious smile as she referenced 'The Incident', as it had become known throughout the office.
+``Easy,'' she snapped back, ``I want to know what changes were made for the last two weeks whilst I had been away on holiday.'' She smiled an almost mischievous smile as she referenced 'The Incident', as it had become known throughout the office.
 
 ``Easy,'' John quipped, mimicking her mannerisms.  The two broke out in laughter.  ``We can use git log for that, and I think there are some date options too.  Let me check the man page.''
 \end{trenches}
@@ -274,7 +274,7 @@ Looking at the man page for git log is a mind trip for the uninitiated.  Weighin
 
 Listing all commits in our repository is useful, being able to filter this output is fantastic.  This is one area in which the developers of Git have placed a great deal of time and effort.  For example, we can use \texttt{git log} to not only show us the commit message, but also provide a diff output as well.  This means that for each commit entry in the output, we will see a diff as well.  Now, whilst we are further empowered by having the diff output in chronological order for each commit, we can take things further by filtering the commits.  
 
-Suppose we want to view all the commits that we made in the last week, typing the following into the comand line in our test repository yields the following result.
+Suppose we want to view all the commits that we made in the last week, typing the following into the command line in our test repository yields the following result.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git log -p --since="last week"
@@ -304,9 +304,9 @@ john@akira:~/coderepo$
 
 Notice we get to see the diff that was presented before when we ran our \texttt{git diff HEAD~1..HEAD} command, but this time, as we have used the git log command instead, we get to see the diff output as well.  This is what the \texttt{-p} flag is for.  Take note of the way we have specified the time period that we are interested in.  The section \texttt{--since="last week"} tells Git to filter the output and show only the entries that were committed within the last week.
 
-This type of filtering can be exceedingly useful to a developer.  Often when problems arise, you do not have a defined point in time that you know it was last working.  However most of the time, you can say with some certainty, ``I know it was working two weeks ago''.  Using the methods descibed above, will give the user all of the changes, categorised by commit, that occured in those two weeks, allowing them to narrow down the scope of exactly where to begin looking for the offending changes.
+This type of filtering can be exceedingly useful to a developer.  Often when problems arise, you do not have a defined point in time that you know it was last working.  However most of the time, you can say with some certainty, ``I know it was working two weeks ago''.  Using the methods described above, will give the user all of the changes, categorised by commit, that occurred in those two weeks, allowing them to narrow down the scope of exactly where to begin looking for the offending changes.
 
-If the developer can futher categorise the issue, such as, ``I know which file the change must have occured in'', then the following example will demonstrate just how easy it is to filter the results even further.  Even in the simplified example repository that we have been using, running this command filters the output to a single file.
+If the developer can further categorise the issue, such as, ``I know which file the change must have occurred in'', then the following example will demonstrate just how easy it is to filter the results even further.  Even in the simplified example repository that we have been using, running this command filters the output to a single file.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git log -p --since="last week" -- 
@@ -367,7 +367,7 @@ Inside the \texttt{.git/refs/tags} folder, there is a file for every single tag 
 \end{tikzpicture}
 \end{figure}
 
-Git implements tags in a very elegant way.  A tag is simply a label in Git that points to a single commit object.  The tag name can then be used in place of the SHA-1 to refer to a point in the repositories history.  Due to the simplicity of tags, it is also possible and very simple to tag a commit that occured way into the past.  Let us take a look at a simple tag example.  We will make the current point in the repository \texttt{v1.0a}.
+Git implements tags in a very elegant way.  A tag is simply a label in Git that points to a single commit object.  The tag name can then be used in place of the SHA-1 to refer to a point in the repositories history.  Due to the simplicity of tags, it is also possible and very simple to tag a commit that occurred way into the past.  Let us take a look at a simple tag example.  We will make the current point in the repository \texttt{v1.0a}.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git tag v1.0a
@@ -382,7 +382,7 @@ fa65f06cc62291bb0cd47aef9e05953d6655fc8e
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-By running the \texttt{git rev-parse} with the tag name \texttt{v1.0a}, Git has returned us the SHA-1 hash of the commit we were referring to.  If we look back up at the earlier output, we can see that the most recent commit into the repository was indeed \textbf{fa65f06cc62291bb0cd47aef9e05953d6655fc8e}.  To give us something to work with, let's tag the commit \textbf{e86dd\ldots} with the tage name \texttt{v0.9}.
+By running the \texttt{git rev-parse} with the tag name \texttt{v1.0a}, Git has returned us the SHA-1 hash of the commit we were referring to.  If we look back up at the earlier output, we can see that the most recent commit into the repository was indeed \textbf{fa65f06cc62291bb0cd47aef9e05953d6655fc8e}.  To give us something to work with, let's tag the commit \textbf{e86dd\ldots} with the tag name \texttt{v0.9}.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git tag v0.9 e86dd
@@ -410,7 +410,7 @@ index 0000000..5d27866
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Notice that instead of using the dynamic reference HEAD, we have now used the tag names \texttt{v0.9} and \texttt{v1.0a} to refer to our previous commits and have returned the combined diff output of all the changes which occured between the two.
+Notice that instead of using the dynamic reference HEAD, we have now used the tag names \texttt{v0.9} and \texttt{v1.0a} to refer to our previous commits and have returned the combined diff output of all the changes which occurred between the two.
 
 
 \begin{figure}[hbt]
@@ -539,7 +539,7 @@ Hopefully you can now see that there are often several ways to achieve the same 
 \begin{trenches}
 ``So, if I am currently have changes to the file you want, in my local repository,'' began John, ``What command would you recommend I use?''
 
-Michael paused, clearly considering each method in his head.  The noise from the sandwich van's horn rang through the office and Michael immediately stood bolt upright and looked paniced.  ``The van John'' he stuttered, ``The van''
+Michael paused, clearly considering each method in his head.  The noise from the sandwich van's horn rang through the office and Michael immediately stood bolt upright and looked panicked.  ``The van John'' he stuttered, ``The van''
 
 ``You can go to the van when you tell me which command I should use.''  John smirked.  Michael was one of the more junior members of the team and the managers often took the opportunity to haze him.
 
