@@ -4,3 +4,6 @@ clone bare
 push
 pull
 fetch
+untracked files with .gitignore
+tag listing
+full tags
