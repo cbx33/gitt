@@ -256,19 +256,25 @@ How this book works</A>
 </H1>
 
 <P>
-Welcome to Git In The Trenches or GITT, a book designed to help you both apply and understand the subtleties of Git, perhaps the most powerful version control system in use today.  This book isn't supposed to be purely a technical reference, moreover it is hoped that the experiences and scenarios that you encounter will help give ways to apply Git in practical applications.  Git is a hugely powerful system and once harnessed you are most likely going to wonder how you managed without it.
+Welcome to Git In The Trenches or GITT, a book designed to help you both apply and understand the subtleties of Git, perhaps the most powerful version control system in use today.  This book is not supposed to be purely a technical reference.  If you are looking for something more reference in nature, you should look at ProGit, by Scott Chacon, published by Apress, as it is a wonderfully detailed look at many of the Git commands.  GITT is more of a scenario based book and by reading it, it is hoped that the experiences and scenarios that you encounter will help give ways to apply Git in practical situations.  Git is a hugely powerful system and once harnessed you are most likely going to wonder how you managed without it.
 
 <P>
-GITT follows the lives of some developers at a fictional company called Tamagoyaki Inc.  They are a small software outfit who write bespoke software for people.  It may be that you work for a company that is very similar to Tamagoyaki Inc and you are looking to implement a version control system for your own company, or it could be that you have been using a version control for a long time.  Regardless of which box you fit into, GITT should provide you with some useful knowledge in a way that is designed to help you remember the scenarios and their associated solutions.
+GITT follows the lives of some developers at a fictional company called Tamagoyaki Inc.  They are a small software outfit who write bespoke software for people.  It may be that you work for a company that is very similar to Tamagoyaki Inc and you are looking to implement a version control system for your own company, or it could be that you have been using a version control for a long time and are looking for a helping hand in applying the Git system to your needs.  Regardless of which box you fit into, GITT should provide you with some useful knowledge in a way that is designed to help you remember the scenarios and their associated solutions.
 
 <P>
-The book will follow the lead developer John, as he struggles to bring the company into line by implementing a version control system.  It's not something he's ever really used in earnest and he feels a little out of his depth.  It is hoped that your confidence and knowledge about both version control systems, and Git in particular, will grow whilst reading GITT.  
+The book will follow the lead developer John, as he works to bring the company into line by implementing a version control system.  It's not something he's ever really used in earnest and he feels a little out of his depth.  It is hoped that your confidence and knowledge about both version control systems, and Git in particular, will grow whilst reading GITT.  
 
 <P>
-The chapters are presented as weeks during the implementation of Tamagoyaki Inc's VCS.  Each chapter spells a new week in the project and you will follow the life of John and his colleagues as they solve problems and learn tricks of the Git trade.  As well as presenting and solving common issues, the book will also be littered with breakout boxes, intended to tell you exactly what is happening inside Git at each stage.  This is intended to further your knowledge and understanding of this powerful piece of software.  At the end of each chapter are "John's Notes" which should build into a quick reference guide, also included with the book.
+The chapters are presented as weeks during the implementation of Tamagoyaki Inc's version control system project.  Each chapter spells a new week in the project and you will follow the life of John and his colleagues as they solve problems and learn tricks of the Git trade.  As well as presenting and solving common issues, the book will also be littered with breakout boxes, intended to tell you exactly what is happening inside Git at each stage.  This is intended to further your knowledge and understanding of this powerful piece of software.  At the end of each chapter are "John's Notes" which should build into a quick reference guide, also included with the book.
 
 <P>
-Often knowing the commands is not the only piece of the puzzle.  A good understanding of the underlying system, how it reacts when you press that all important «Enter» button, is essential if you want to be able to hold your cool in a crisis.  So let's start at Week 1 and find out why Tamagoyaki Inc even need a version control system.
+After each week, there is also the opportunity for you to delve further into the guts of what has been presented during the week with the <SPAN  CLASS="textit">After Hours</SPAN> sections.  These sections will take the knowledge that you have learned during the week and take it to a much deeper level, often showing diagrammatic ways of how commits take place, or even looking at the contents of files within the repository file structure itself.  These chapters are not meant to scare you, but are presented in the hope that you can reinforce what you have learned through the week by reading through more complex material.
+
+<P>
+With a system as complicated as Git, knowing the commands is often not the only piece of the puzzle.  A good understanding of the underlying system, and how it reacts when you press that all important «Enter» button is essential if you want to be able to hold your cool in a crisis.  It is rather difficult to break Git.  There are many safeguards in place, but please be aware that you should try all of the items in the book in a test environment first, to ensure they perform, what you expect.  
+
+<P>
+With the introduction over, let's start at Week 1 and find out why Tamagoyaki Inc even need a version control system in the first place.
 
 <H1><A NAME="SECTION00300000000000000000">
 Week 1</A>
@@ -283,7 +289,7 @@ Meeting the Team</A>
 </H2>
 
 <P>
-If you're already a seasoned version control user, you may want to skip this chapter.  It's kind of like an introduction to why we even need version control systems in the first place.  This chapter looks at Tamagoyaki Inc's requirements and why they choose the VCS that seemed right for them.  Tamagoyaki Inc. create software for turning a standard PC into a media center.  Their product ships to the end user and they rely very heavily on having a good presense at trade shows, in order to bring in sales.  The following conversation describes the events that led up to the defining "We need a VCS!" discussion.
+If you're already a seasoned version control user, you may want to skip this chapter.  It's kind of like an introduction to why we even need version control systems in the first place.  This chapter looks at Tamagoyaki Inc's requirements and why they choose the VCS that seemed right for them.  Tamagoyaki Inc. create software for turning a standard PC into a media center.  Their product ships to the end user and they rely very heavily on having a good presence at trade shows, in order to bring in sales.  The following conversation describes the events that led up to the defining "We need a VCS!" discussion.
 
 <P><BLOCKQUOTE><SPAN  CLASS="textbf">In the trenches...
 <BR>
@@ -389,7 +395,7 @@ Branching</A>
 </H2>
 
 <P>
-Most version control systems offer branching as part of their default features set.  Branching allows developers to create in essence a clone of their repository and mess around with it, safe in the knowledge that they can switch back to the original whenever they need to.  This allows developers the freedom to experiment with all manner of things without being afraid of affecting the original/clean code base.
+Most version control systems offer branching as part of their default feature set.  Branching allows developers to create in essence a clone of their repository and mess around with it, safe in the knowledge that they can switch back to the original whenever they need to.  This allows developers the freedom to experiment with all manner of things without being afraid of affecting the original/clean code base.
 
 <P>
 Git implements branching in a special way.  Most other version control systems implement branching in a way that almost creates a separate repository.  This is slow and cumbersome.  Git's branching method gives developers the ability to create multiple local branches to play with.  Due to it's distributed nature, when pushing code to a more central location for others to pull from, developers can choose which branches they want to push, allowing code to be experimented with privately.
@@ -433,7 +439,7 @@ Using the centralised model for the workflow, each developer has the same level 
 
 <P>
 
-<DIV ALIGN="CENTER"><A NAME="136"></A>
+<DIV ALIGN="CENTER"><A NAME="141"></A>
 <TABLE>
 <CAPTION ALIGN="BOTTOM"><STRONG>Figure .1:</STRONG>
 Centralised Workflow</CAPTION>
@@ -456,7 +462,7 @@ This workflow is handled exceedingly well by Git.  Developers will work on their
 
 <P>
 
-<DIV ALIGN="CENTER"><A NAME="143"></A>
+<DIV ALIGN="CENTER"><A NAME="148"></A>
 <TABLE>
 <CAPTION ALIGN="BOTTOM"><STRONG>Figure .2:</STRONG>
 Integration Manager Workflow</CAPTION>
@@ -481,7 +487,7 @@ Once the Lieutenants are happy with their code, they make it available to the Di
 
 <P>
 
-<DIV ALIGN="CENTER"><A NAME="149"></A>
+<DIV ALIGN="CENTER"><A NAME="154"></A>
 <TABLE>
 <CAPTION ALIGN="BOTTOM"><STRONG>Figure .3:</STRONG>
 Dictator and Lieutenant Workflow</CAPTION>
@@ -660,7 +666,7 @@ A Brief History Of Version Control</A>
 <H3><A NAME="SECTION00411100000000000000">
 The Very Early Days</A>
 </H3>
-Version control systems have been around for forty years (2011 at the time of writing).  During this time they have undergone an intense amount of change and have evolved into some of the most incredibly powerful tools utlised in software development today.  Chances are that in the early days you will have started off storing different versions of your source code and documents in separate files and folders.  You may have even archived them off to compressed storage files, like zip or tar.  Rest assured, you are not the first person to do this, and in 1972, someone called Marc J. Rochkind, decided to create system for storing revisions of documents and source code.
+Version control systems have been around for forty years (2011 at the time of writing).  During this time they have undergone an intense amount of change and have evolved into some of the most incredibly powerful tools utilised in software development today.  Chances are that in the early days you will have started off storing different versions of your source code and documents in separate files and folders.  You may have even archived them off to compressed storage files, like zip or tar.  Rest assured, you are not the first person to do this, and in 1972, someone called Marc J. Rochkind, decided to create system for storing revisions of documents and source code.
 
 <P>
 The system Marc created was called SCCS and stood for Source Code Control System, in essence probably the most apt description for what we mainly use a version control system for today.  SCCS was originally written for an operating system called OS/360 MVT and was later ported to C, and was used as the most dominant version control system for UNIX, until ten years later, when RCS was introduced.
@@ -679,7 +685,7 @@ However, RCS, like it's predecessor SCCS, has no way of dealing with groups of f
 CVS was created in 1986, and began life as a set of shell scripts to operate on multiple files, using RCS to perform the actual repository management.  As development continued, this way of working was dropped and CVS began operating on files itself, evolving into a version control system in its own right.  The current iteration of CVS was released in 1989 and on Novermber 1 1990, version 1.0 was released to the Free Software Foundation for distribution.
 
 <P>
-CVS did not version file renames or moves at all as at the time, refactoring - a process of modifying code to improve some non-functional attributes of the software, was often avoided and so the feature was not required.  CVS also did not support atomic commits.  An atomic commit is used by more modern version control systems to safe guard the database.  In essence atomic committing is the act of applying multiple changes in a single operation.  If any of the changes do not apply correctly, all others are reverted and the commit is aborted.  When designing CVS this was not seen as an obstacle, as it was thought by the developers that a server and network should have enough resilience that it would never crash whilst committing.
+CVS did not version file renames or moves at all as at the time, re-factoring - a process of modifying code to improve some non-functional attributes of the software, was often avoided and so the feature was not required.  CVS also did not support atomic commits.  An atomic commit is used by more modern version control systems to safe guard the database.  In essence atomic committing is the act of applying multiple changes in a single operation.  If any of the changes do not apply correctly, all others are reverted and the commit is aborted.  When designing CVS this was not seen as an obstacle, as it was thought by the developers that a server and network should have enough resilience that it would never crash whilst committing.
 
 <P>
 Whilst active development of CVS has apparently ceased, as of May 2008, it is worth taking note that CVS defined the model for branching that was included and refined in almost all version control systems since.  
@@ -689,17 +695,17 @@ Whilst active development of CVS has apparently ceased, as of May 2008, it is wo
 <H3><A NAME="SECTION00411300000000000000">
 Offering Commercial Support</A>
 </H3>
-Now that version control was advanced enough and people had begun to rely on VCSs in general, commercial offerings began to spring up.  Three prominant systems that were released within a short time of each other and ClearCase, VSS and Perforce.  All three of these are proprietary systems which were developed and filled a gap in the market for commercially supported systems.  
+Now that version control was advanced enough and people had begun to rely on VCSs in general, commercial offerings began to spring up.  Three prominent systems that were released within a short time of each other and ClearCase, VSS and Perforce.  All three of these are proprietary systems which were developed and filled a gap in the market for commercially supported systems.  
 
 <P>
-VSS, originally developed by One Tree Software for several platforms, was continually developed by Microsoft, who bought One Tree Software in 1994, with the one caveat that Microsoft ceased development of all VSS on all platforms other than Windows.  VSS integrated into Visual Studio, Microsoft's Integrated Development Environment.  VSS has now ceased developement, but ClearCase, now developed by a divison of IBM, and Perforce are still being actively developed and maintained.
+VSS, originally developed by One Tree Software for several platforms, was continually developed by Microsoft, who bought One Tree Software in 1994, with the one caveat that Microsoft ceased development of all VSS on all platforms other than Windows.  VSS integrated into Visual Studio, Microsoft's Integrated Development Environment.  VSS has now ceased developement, but ClearCase, now developed by a division of IBM, and Perforce are still being actively developed and maintained.
 
 <P>
 
 <H3><A NAME="SECTION00411400000000000000">
-The Millenium</A>
+The Millennium</A>
 </H3>
-The millenium brought with it a new breed of version control systems.  Subversion, or SVN as it is colloquially known as, was developed primarily to be a replacement and mostly compatible successor to CVS.  SVN was first released in 2000 and by 2001 was able to sufficiently host its own source code due to its own advancement.  In November 2009 Subversion was accepted into the Apache group and is currently developed and maintained by its community and by several commercial entities.
+The millennium brought with it a new breed of version control systems.  Subversion, or SVN as it is colloquially known as, was developed primarily to be a replacement and mostly compatible successor to CVS.  SVN was first released in 2000 and by 2001 was able to sufficiently host its own source code due to its own advancement.  In November 2009 Subversion was accepted into the Apache group and is currently developed and maintained by its community and by several commercial entities.
 
 <P>
 Subversion brought things to the table that previous version control systems did not.  As it was released as free software, in the same vein as CVS, it was widely adopted by the open source community and later into commercial environments for its vastly improved feature set.  For a start SVN offers true atomic commits.  This gave it a definite advantage over CVS as it was seen as a truly robust alternative.
@@ -727,7 +733,7 @@ In April 2005, BitKeeper withdrew the free license that it had granted to the op
 It was due to these circumstances, that Linus Torvalds himself, decided to begin writing his own version control system that would enable him to have all of the features that he had had available to him with BitKeeper, the most important of these seemingly being a distributed environment.  Linus decided on a set of criteria, which along with a distributed environment, also included a robust safeguard against corruption, be it accidental, or malicious, and very high performance.
 
 <P>
-Git developement began on the 3rd of April 2005, and by April the 7th, the project had been announced and was already able to host itself.  On June 16th, the relese of the Linux kernel version 2.6.12 was managed by Git.  Junio Hamano, who had been a major contributor to the project, took over maintenance of Git in July, and by December had released version 1.0 to the community.
+Git development began on the 3rd of April 2005, and by April the 7th, the project had been announced and was already able to host itself.  On June 16th, the relese of the Linux kernel version 2.6.12 was managed by Git.  Junio Hamano, who had been a major contributor to the project, took over maintenance of Git in July, and by December had released version 1.0 to the community.
 
 <P>
 Interestingly enough, another project was also created as a result of this chain of events.  Mercurial or Hg as it is often known, began development on April 19th of the same year and was started by Matt Mackall with largely the same goals as Git.  Though Git was chosen to be the version control system used by the Linux kernel, Mercurial is actively used by many other projects and shares a very similar design and concept to Git.
@@ -756,7 +762,7 @@ As mentioned previously every version control system has advantages and disadvan
 <H3><A NAME="SECTION00411700000000000000">
 Wrapping Up</A>
 </H3>
-Though there are many other version control systems out there that are being actively developed, such as Bazaar, Plastic and Dars, to name but a few, we are going to end our historical tale here and continue with learning more about the Git version control system.  There is a plethora of information available on the Internet about version control, so if you want to find more information about any of the systems mentioned here, that would probably be the best place to start.
+Though there are many other version control systems out there that are being actively developed, such as Bazaar, Plastic and Darcs, to name but a few, we are going to end our historical tale here and continue with learning more about the Git version control system.  There is a plethora of information available on the Internet about version control, so if you want to find more information about any of the systems mentioned here, that would probably be the best place to start.
 
 <H1><A NAME="SECTION00500000000000000000">
 Week 2</A>
@@ -778,7 +784,7 @@ Conceptually, the model which was discussed previously is easy to imagine.  We h
 
 <P>
 
-<DIV ALIGN="CENTER"><A NAME="443"></A>
+<DIV ALIGN="CENTER"><A NAME="448"></A>
 <TABLE>
 <CAPTION ALIGN="BOTTOM"><STRONG>Figure .1:</STRONG>
 Tamagoyaki Inc's Physical Structure</CAPTION>
@@ -1250,10 +1256,7 @@ A Look At Plumbing</A>
 </H2>
 
 <P>
-Talking about objects, trees, commits 
-
-<P>
-Let's take a brief look into the directory structure, to see what this command has created in the <TT>.git</TT> folder.
+We are going to use the Git repository that we have been playing with in Week 2 and start to take a deeper look at what is actually inside a Git repository.  To begin with, let's take a brief look into the directory structure, to see what has been created with a simple <TT>git init</TT>  command in the <TT>.git</TT> folder.
 
 <P>
 <PRE>[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
@@ -1297,7 +1300,7 @@ john@akira:~/coderepo/.git$
 <SPAN  CLASS="textbf">refs</SPAN> - This folder holds the files that files for local branches, remote branches and tags.
 
 <P>
-More files and folders may appear here during the running of the repository.
+More files and folders will appear here during the running of the repository as you begin to start using different features in Git.  If we take a look at the repository after the work we did in Week 2, we can see that it looks a little more fleshed out.
 
 <H1><A NAME="SECTION00700000000000000000">
 Week 3</A>
@@ -1638,7 +1641,7 @@ All the operations that we have performed so far have been on one commit.  Whils
 <BLOCKQUOTE>“Well, actually Martha, I can see exactly what you mean.  Up until now, there is no difference between the old and the new process.  I'm still in control of all the versions, so nothing has really changed.”  He thought long and hard, “Tell ya what.  Why don't you give me an operation that you've always wanted to do against our code tree tarballs easily.”
 </BLOCKQUOTE>
 <P>
-<BLOCKQUOTE>“Easy,” she snapped back, “I want to know what changes were made for the last two weeks whilst I had been away on holiday.” She smiled an almost mischevious smile as she referenced 'The Incident', as it had become known throughout the office.
+<BLOCKQUOTE>“Easy,” she snapped back, “I want to know what changes were made for the last two weeks whilst I had been away on holiday.” She smiled an almost mischievous smile as she referenced 'The Incident', as it had become known throughout the office.
 </BLOCKQUOTE>
 <P>
 <BLOCKQUOTE>“Easy,” John quipped, mimicking her mannerisms.  The two broke out in laughter.  “We can use git log for that, and I think there are some date options too.  Let me check the man page.”
@@ -1650,7 +1653,7 @@ Looking at the man page for git log is a mind trip for the uninitiated.  Weighin
 Listing all commits in our repository is useful, being able to filter this output is fantastic.  This is one area in which the developers of Git have placed a great deal of time and effort.  For example, we can use <TT>git log</TT> to not only show us the commit message, but also provide a diff output as well.  This means that for each commit entry in the output, we will see a diff as well.  Now, whilst we are further empowered by having the diff output in chronological order for each commit, we can take things further by filtering the commits.  
 
 <P>
-Suppose we want to view all the commits that we made in the last week, typing the following into the comand line in our test repository yields the following result.
+Suppose we want to view all the commits that we made in the last week, typing the following into the command line in our test repository yields the following result.
 
 <P>
 <PRE>[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
@@ -1683,10 +1686,10 @@ john@akira:~/coderepo$
 Notice we get to see the diff that was presented before when we ran our <TT>git diff HEAD&nbsp;1..HEAD</TT> command, but this time, as we have used the git log command instead, we get to see the diff output as well.  This is what the <TT>-p</TT> flag is for.  Take note of the way we have specified the time period that we are interested in.  The section <TT>-since="last week"</TT> tells Git to filter the output and show only the entries that were committed within the last week.
 
 <P>
-This type of filtering can be exceedingly useful to a developer.  Often when problems arise, you do not have a defined point in time that you know it was last working.  However most of the time, you can say with some certainty, “I know it was working two weeks ago”.  Using the methods descibed above, will give the user all of the changes, categorised by commit, that occured in those two weeks, allowing them to narrow down the scope of exactly where to begin looking for the offending changes.
+This type of filtering can be exceedingly useful to a developer.  Often when problems arise, you do not have a defined point in time that you know it was last working.  However most of the time, you can say with some certainty, “I know it was working two weeks ago”.  Using the methods described above, will give the user all of the changes, categorised by commit, that occurred in those two weeks, allowing them to narrow down the scope of exactly where to begin looking for the offending changes.
 
 <P>
-If the developer can futher categorise the issue, such as, “I know which file the change must have occured in”, then the following example will demonstrate just how easy it is to filter the results even further.  Even in the simplified example repository that we have been using, running this command filters the output to a single file.
+If the developer can further categorise the issue, such as, “I know which file the change must have occurred in”, then the following example will demonstrate just how easy it is to filter the results even further.  Even in the simplified example repository that we have been using, running this command filters the output to a single file.
 
 <P>
 <PRE>[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
@@ -1749,7 +1752,7 @@ The im...
 </DIV>
 
 <P>
-Git implements tags in a very elegant way.  A tag is simply a label in Git that points to a single commit object.  The tag name can then be used in place of the SHA-1 to refer to a point in the repositories history.  Due to the simplicity of tags, it is also possible and very simple to tag a commit that occured way into the past.  Let us take a look at a simple tag example.  We will make the current point in the repository <TT>v1.0a</TT>.
+Git implements tags in a very elegant way.  A tag is simply a label in Git that points to a single commit object.  The tag name can then be used in place of the SHA-1 to refer to a point in the repositories history.  Due to the simplicity of tags, it is also possible and very simple to tag a commit that occurred way into the past.  Let us take a look at a simple tag example.  We will make the current point in the repository <TT>v1.0a</TT>.
 
 <P>
 <PRE>[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
@@ -1768,7 +1771,7 @@ john@akira:~/coderepo$
 </PRE>
 
 <P>
-By running the <TT>git rev-parse</TT> with the tag name <TT>v1.0a</TT>, Git has returned us the SHA-1 hash of the commit we were referring to.  If we look back up at the earlier output, we can see that the most recent commit into the repository was indeed <SPAN  CLASS="textbf">fa65f06cc62291bb0cd47aef9e05953d6655fc8e</SPAN>.  To give us something to work with, let's tag the commit <SPAN  CLASS="textbf">e86dd...</SPAN> with the tage name <TT>v0.9</TT>.
+By running the <TT>git rev-parse</TT> with the tag name <TT>v1.0a</TT>, Git has returned us the SHA-1 hash of the commit we were referring to.  If we look back up at the earlier output, we can see that the most recent commit into the repository was indeed <SPAN  CLASS="textbf">fa65f06cc62291bb0cd47aef9e05953d6655fc8e</SPAN>.  To give us something to work with, let's tag the commit <SPAN  CLASS="textbf">e86dd...</SPAN> with the tag name <TT>v0.9</TT>.
 
 <P>
 <PRE>[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
@@ -1800,7 +1803,7 @@ john@akira:~/coderepo$
 </PRE>
 
 <P>
-Notice that instead of using the dynamic reference HEAD, we have now used the tag names <TT>v0.9</TT> and <TT>v1.0a</TT> to refer to our previous commits and have returned the combined diff output of all the changes which occured between the two.
+Notice that instead of using the dynamic reference HEAD, we have now used the tag names <TT>v0.9</TT> and <TT>v1.0a</TT> to refer to our previous commits and have returned the combined diff output of all the changes which occurred between the two.
 
 <P>
 
@@ -2018,7 +2021,7 @@ Hopefully you can now see that there are often several ways to achieve the same 
 <BR></SPAN>“So, if I am currently have changes to the file you want, in my local repository,” began John, “What command would you recommend I use?”
 </BLOCKQUOTE>
 <P>
-<BLOCKQUOTE>Michael paused, clearly considering each method in his head.  The noise from the sandwich van's horn rang through the office and Michael immediately stood bolt upright and looked paniced.  “The van John” he stuttered, “The van”
+<BLOCKQUOTE>Michael paused, clearly considering each method in his head.  The noise from the sandwich van's horn rang through the office and Michael immediately stood bolt upright and looked panicked.  “The van John” he stuttered, “The van”
 </BLOCKQUOTE>
 <P>
 <BLOCKQUOTE>“You can go to the van when you tell me which command I should use.”  John smirked.  Michael was one of the more junior members of the team and the managers often took the opportunity to haze him.
@@ -2174,7 +2177,7 @@ Acknowledgements</A>
 <H2><A NAME="SECTION001011000000000000000">
 Proofing and Ideas</A>
 </H2>
-These people gave their time and effort to do forking and proofing, and giving marvelous suggestions about the book during development:
+These people gave their time and effort to do forking and proofing, and giving marvellous suggestions about the book during development:
 
 <P>
 Og Maciel
@@ -2237,7 +2240,7 @@ Mathematics Department, Macquarie University, Sydney.
 The command line arguments were: <BR>
  <STRONG>latex2html</STRONG> <TT>-html 4.0,unicode,latin1,utf8 -split 2 gitt.tex</TT>
 <P>
-The translation was initiated by pete on 2011-03-09
+The translation was initiated by pete on 2011-03-10
 <BR><HR>
 <!--Table of Child-Links-->
 <A NAME="CHILD_LINKS"></A>
@@ -2327,7 +2330,7 @@ The translation was initiated by pete on 2011-03-09
 <LI><A NAME="tex2html35"
   HREF="gitt.html#SECTION00411300000000000000">Offering Commercial Support</A>
 <LI><A NAME="tex2html36"
-  HREF="gitt.html#SECTION00411400000000000000">The Millenium</A>
+  HREF="gitt.html#SECTION00411400000000000000">The Millennium</A>
 <LI><A NAME="tex2html37"
   HREF="gitt.html#SECTION00411500000000000000">Introducing the Linus Factor</A>
 <LI><A NAME="tex2html38"
@@ -2485,7 +2488,7 @@ The translation was initiated by pete on 2011-03-09
 <!--End of Navigation Panel-->
 <ADDRESS>
 pete
-2011-03-09
+2011-03-10
 </ADDRESS>
 </BODY>
 </HTML>
