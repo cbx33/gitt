@@ -71,20 +71,15 @@ So, when we commit into the repository we create a commit object.  The commit ob
 So now we know what a basic repository shuld look like, let us go through each stage of our committing in \textbf{Week 2} and see how it is built up at each stage.  Below is a consolidated list of all the objects in the repository.  
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-./01/27bd2d49eea0820868fb2773461c3c0c7d874d
 ./09/5b9cda52807c9c11781ec0a4aee927787b61f1
 ./34/a5dff148e70c12310cda0800d6bcaf82530bdc
 ./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce
 ./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a
-./5d/2786685c15939fd93c66cd00dfdea4bd29da12
 ./6c/a160c7226731bf80973fc5bc81f6b9beda7795
 ./88/206926cb60aed53d21ede69f9ca5b7c69cb983
 ./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65
-./96/551f45496232c0ec6b389731d55fa3d7e1c8fd
-./c9/887f89f1eed98d6b69124527a63f1149a7f927
 ./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391
 ./e8/6ddea25341a75275d316d8ca545aa7c73e97b3
-./fa/65f06cc62291bb0cd47aef9e05953d6655fc8e
 \end{Verbatim}
 
 In order to start rebuilding a picture of out repository, let us first find out what the first commit to our repository was.  Looking back in \emph{Week 2} we can see the following trimmed output.
@@ -149,20 +144,15 @@ john@akira:~/coderepo$
 Fantastic!  We now have a way of confirming the objects are what we think they are.  If we were to run the command against every file in the repository, we would end up with a list that would look something like the one below.  Notice our commit object sat in the middle.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-./01/27bd2d49eea0820868fb2773461c3c0c7d874d		tree
 ./09/5b9cda52807c9c11781ec0a4aee927787b61f1		blob
 ./34/a5dff148e70c12310cda0800d6bcaf82530bdc		tree
 ./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce		blob
 ./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a		tree
-./5d/2786685c15939fd93c66cd00dfdea4bd29da12		blob
 ./6c/a160c7226731bf80973fc5bc81f6b9beda7795		commit
 ./88/206926cb60aed53d21ede69f9ca5b7c69cb983		commit
 ./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65		tree
-./96/551f45496232c0ec6b389731d55fa3d7e1c8fd		tree
-./c9/887f89f1eed98d6b69124527a63f1149a7f927		blob
 ./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391		blob
 ./e8/6ddea25341a75275d316d8ca545aa7c73e97b3		commit
-./fa/65f06cc62291bb0cd47aef9e05953d6655fc8e		commit
 \end{Verbatim}
 
 Now things start to get interesting.  Did you also notice the tree SHA-1 hash mentioned when we ran \texttt{git cat-file -p}?  This is the tree object that stores the file structure.  Why don't we run the command against that file too?
@@ -181,3 +171,46 @@ john@akira:~/coderepo$
 \end{Verbatim}
 
 At first glance one may consider it odd that there is nothing in there.  However, if we take a trip back in time and flick back to the first commit that we made to our repository, you will see that we never actuall put any content in our file at all.  So, the object contains nothing.  Now we can draw up a diagram of our repository after the first commit.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-af2-d2.pdf}
+\caption{Overview of objects in repository after \textbf{first} commit}
+\end{figure}
+
+If we pick another commit object from the list and run our command on it we can see something new has appeared in the output.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+john@akira:~/coderepo$ git cat-file -p e86dde
+tree 3ffa7ab6dafef2bc38a70a39c53604c333ed4d7a
+parent 88206926cb60aed53d21ede69f9ca5b7c69cb983
+author John Haskins <john.haskins@tamagoyakiinc.koala> 1298318817 +0000
+committer John Haskins <john.haskins@tamagoyakiinc.koala> 1298318817 +0000
+
+Made a few changes to first and second files
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+This commit object has an extra field.  This field is the \texttt{parent} field.  It tells Git which commit object is the parent to this one.  We were lucky in our guess that the parent object \textbf{882069} was actually the object we had first encountered.  By knowing this nugget of information, we can actually deduce that the object \textbf{e86dde} was actually the next commit.  Checking in Week 2 will confirm this.  It seems we could now build a complete history of our repository so far.  If we did so, we would end up with a diagram that looked a little like the one below.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-af2-d3.pdf}
+\caption{Overview of objects in repository after \textbf{three} commits}
+\end{figure}
+
+Hopefully you can see from this diagram that Git will reuse objects as discussed above.  This diagram describes the repository layout completely and if you correlate, we have correctly identified and accounted for each object in the repository.  Now we know how to traverse a repository.  In \emph{Week 3} we find the Git commands to let us do that without having to break out the wrenches and resort to plumbing.  After all, why use a wrench to turn on a tap?
+
+\begin{figure}[hbt]
+\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=black, text=white]
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{.9\textwidth}
+It is worth noting that the objects noted above are not the only objects that you will find in the \texttt{objects} folder.  Git will sometimes clean itself up and perform packing operations.  This is out of scope for this chapter though.
+    \end{minipage}
+};
+\node[fancytitle, right=16pt] at (box.north west) {Packing for a holiday?};
+\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Note}};
+\end{tikzpicture}
+\end{figure}
