@@ -57,6 +57,33 @@ The most interesting of the folders here is the \texttt{objects} folder.  This f
 \begin{itemize}
 \item\textbf{commit} - A commit object is an object that describes a specific point in time.  Whenever you perform a \texttt{git commit} from the command line, what you are actually doing is creating one of these objects in the repository.  This object stores information about the committer, the date, a link to the previous commit object and most importantly a link to the tree object of the current commit.
 \item\textbf{tree} - A tree object defines which files were physically included in the commit when it was added to the database.  The tree contains the name of the files that were present in the tree by recording their blob SHA-1 id and their filename.  Sub-folders of a directory will be referenced by another tree object.  In this way, a tree object will contain references to both tree objects and blob objects
-\item\text{blob} - A blob object actually contains the data that resides inside the file.  There is one object generated per revision of a file.  However, if exactly the same data resides in two separate files, then there will only be one object created and that object will be referenced by two trees.  In this way, multiple copies of the same file, or files which have not changed through multiple revisions are not stored multiple times.  Even though Git stores a complete snapshot of the filesystem at every revison.
+\item\textbf{blob} - A blob object actually contains the data that resides inside the file.  There is one object generated per revision of a file.  However, if exactly the same data resides in two separate files, then there will only be one object created and that object will be referenced by two trees.  In this way, multiple copies of the same file, or files which have not changed through multiple revisions are not stored multiple times.  Even though Git stores a complete snapshot of the filesystem at every revison.
 \end{itemize}
+
+So, when we commit into the repository we create a commit object.  The commit objects houses links to a tree.  The tree object contains links to either blobs or trees.  Regardless, the structure of a basic repository may look something a little like Figure 1.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-af2-d1.pdf}
+\caption{Overview of objects in a repository}
+\end{figure}
+
+So now we know what a basic repository shuld look like, let us go through each stage of our committing in \textbf{Week 2} and see how it is built up at each stage.  Below is a consolidated list of all the objects in the repository.  
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+./01/27bd2d49eea0820868fb2773461c3c0c7d874d		tree
+./09/5b9cda52807c9c11781ec0a4aee927787b61f1		blob
+./34/a5dff148e70c12310cda0800d6bcaf82530bdc		tree
+./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce		blob
+./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a		tree
+./5d/2786685c15939fd93c66cd00dfdea4bd29da12		blob
+./6c/a160c7226731bf80973fc5bc81f6b9beda7795		commit
+./88/206926cb60aed53d21ede69f9ca5b7c69cb983		commit
+./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65		tree
+./96/551f45496232c0ec6b389731d55fa3d7e1c8fd		tree
+./c9/887f89f1eed98d6b69124527a63f1149a7f927		blob
+./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391		blob
+./e8/6ddea25341a75275d316d8ca545aa7c73e97b3		commit
+./fa/65f06cc62291bb0cd47aef9e05953d6655fc8e		commit
+\end{Verbatim}
 
