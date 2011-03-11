@@ -28,7 +28,7 @@ pete@satsuki:~/coderepo3/.git$
 
 \textbf{branches} - Though deprecated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.
 
-\textbf{COMMIT_EDITMSG} - This file holds the last commit message that was displayed in the editor.
+\textbf{COMMIT\_EDITMSG} - This file holds the last commit message that was displayed in the editor.
 
 \textbf{config} - This is the main configuration file for Git.  It is the first place git looks for upon invocation.  If this file is not present, Git will inspect ~/.gitconfig.  After this, Git will go to /etc/gitconfig.  The file holds information about the remotes, tracking branches, push configurations and many more items.
 
@@ -44,7 +44,7 @@ pete@satsuki:~/coderepo3/.git$
 
 \textbf{objects} - The is the directory that holds all of the actual files that are stored in the repository.  The files are named by their SHA-1 values.  Inside the folder are a number of directories which make up the first 2 characters of the SHA-1 value.  The remaining portion of the SHA-1 hash is used to name the file.
 
-\textbf{ORIG_HEAD} - Hold the previous SHA-1 hash that HEAD pointed to.  This allows certain operations to go back, in the case of failure.
+\textbf{ORIG\_HEAD} - Hold the previous SHA-1 hash that HEAD pointed to.  This allows certain operations to go back, in the case of failure.
 
 \textbf{refs} - This folder holds the files that files for local branches, remote branches and tags.
 
@@ -55,3 +55,4 @@ The most interesting of the folders here is the \texttt{objects} folder.  This f
 \begin{itemize}
 \item\textbf{commit} - A commit object is an object that describes a specific point in time.  Whenever you perform a \texttt{git commit} from the command line, what you are actually doing is creating one of these objects in the repository.  This object stores information about the committer, the date, a link to the previous commit object and most importantly a link to the tree object of the current commit.
 \item\textbf{tree} - A tree object defines which files were physically included in the commit when it was added to the database.  The tree contains the name of the file
+\end{itemize}
