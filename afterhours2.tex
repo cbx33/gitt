@@ -3,25 +3,32 @@
 \section{``A Litte Of Git's Internals''}
 \subsection{A Look At Plumbing}
 
-We are going to use the Git repository that we have been playing with in Week 2 and start to take a deeper look at what is actually inside a Git repository.  To begin with, let's take a brief look into the directory structure, to see what has been created with a simple \texttt{git init}  command in the \texttt{.git} folder.
+We are going to use the Git repository that we have been playing with in Week 2 and start to take a deeper look at what is actually inside a Git repository.  To begin with, let's take a brief look into the directory structure, to see what has been created in the \texttt{.git} folder.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo/.git$ ls -la 
-total 40 
-drwxr-xr-x 7 john john 4096 2011-02-17 19:23 . 
-drwxr-xr-x 3 john john 4096 2011-02-17 19:23 .. 
-drwxr-xr-x 2 john john 4096 2011-02-17 19:23 branches 
--rw-r--r-- 1 john john   92 2011-02-17 19:23 config 
--rw-r--r-- 1 john john   73 2011-02-17 19:23 description 
--rw-r--r-- 1 john john   23 2011-02-17 19:23 HEAD 
-drwxr-xr-x 2 john john 4096 2011-02-17 19:23 hooks 
-drwxr-xr-x 2 john john 4096 2011-02-17 19:23 info 
-drwxr-xr-x 4 john john 4096 2011-02-17 19:23 objects 
-drwxr-xr-x 4 john john 4096 2011-02-17 19:23 refs 
-john@akira:~/coderepo/.git$ 
+pete@satsuki:~/coderepo3/.git$ ls -la
+total 56
+drwxr-xr-x  8 pete pete 4096 2011-03-10 20:16 .
+drwxr-xr-x  3 pete pete 4096 2011-03-10 20:16 ..
+drwxr-xr-x  2 pete pete 4096 2011-03-10 20:15 branches
+-rw-r--r--  1 pete pete  334 2011-03-10 20:15 COMMIT_EDITMSG
+-rw-r--r--  1 pete pete  107 2011-03-10 20:15 config
+-rw-r--r--  1 pete pete   73 2011-03-10 20:15 description
+-rw-r--r--  1 pete pete   23 2011-03-10 20:15 HEAD
+drwxr-xr-x  2 pete pete 4096 2011-03-10 20:15 hooks
+-rw-r--r--  1 pete pete  208 2011-03-10 20:16 index
+drwxr-xr-x  2 pete pete 4096 2011-03-10 20:15 info
+drwxr-xr-x  3 pete pete 4096 2011-03-10 20:15 logs
+drwxr-xr-x 18 pete pete 4096 2011-03-10 20:15 objects
+-rw-r--r--  1 pete pete   41 2011-03-10 20:16 ORIG_HEAD
+drwxr-xr-x  4 pete pete 4096 2011-03-10 20:15 refs
+pete@satsuki:~/coderepo3/.git$ 
+
 \end{Verbatim} 
 
 \textbf{branches} - Though deprecated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.
+
+\textbf{COMMIT_EDITMSG} - This file holds the last commit message that was displayed in the editor.
 
 \textbf{config} - This is the main configuration file for Git.  It is the first place git looks for upon invocation.  If this file is not present, Git will inspect ~/.gitconfig.  After this, Git will go to /etc/gitconfig.  The file holds information about the remotes, tracking branches, push configurations and many more items.
 
@@ -33,8 +40,18 @@ john@akira:~/coderepo/.git$
 
 \textbf{info} - The info folder contains some additional information about the repository
 
+\textbf{logs} - The logs folder holds various logs regarding Git's operation
+
 \textbf{objects} - The is the directory that holds all of the actual files that are stored in the repository.  The files are named by their SHA-1 values.  Inside the folder are a number of directories which make up the first 2 characters of the SHA-1 value.  The remaining portion of the SHA-1 hash is used to name the file.
+
+\textbf{ORIG_HEAD} - Hold the previous SHA-1 hash that HEAD pointed to.  This allows certain operations to go back, in the case of failure.
 
 \textbf{refs} - This folder holds the files that files for local branches, remote branches and tags.
 
-More files and folders will appear here during the running of the repository as you begin to start using different features in Git.  If we take a look at the repository after the work we did in Week 2, we can see that it looks a little more fleshed out.
+More files and folders will appear here during the running of the repository as you begin to start using different features in Git.
+
+The most interesting of the folders here is the \texttt{objects} folder.  This folder as previously described holds all of the objects that are stored in the repository.  Now, what do we actually mean by objects.  As yet, we have not really defined what an object is.  In Git, an object is either a commit, a tree or a blob.  We need a little more information as the names themselves do not fully describe what the item is.
+
+\begin{itemize}
+\item\textbf{commit} - A commit object is an object that describes a specific point in time.  Whenever you perform a \texttt{git commit} from the command line, what you are actually doing is creating one of these objects in the repository.  This object stores information about the committer, the date, a link to the previous commit object and most importantly a link to the tree object of the current commit.
+\item\textbf{tree} - A tree object defines which files were physically included in the commit when it was added to the database.  The tree contains the name of the file
