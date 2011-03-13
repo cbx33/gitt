@@ -1,6 +1,146 @@
 % afterhours3.tex - Afer Hours Week 3
 \chapter{After Hours Week 3}
-\section{``A Closer Look At Diffs''}
-\subsection{Diff Algorithms}
+\section{``A Closer Look At Diffs and Tags''}
+\subsection{The Diff Utility}
 
-Talking about diff algorithms
+We learnt in \emph{Week 3} how to work with a diff, and what a diff actually represents.  It is interesting to note how old the \texttt{diff} utility actually is and how it works.  The diff algorithm was developed in the early 1970s and the research published in 1976, by Douglas McIlroy, who wrote the original diff utility and James Hunt.  The alrogithm we use today to perform diffs has become known as the Hunt-McIlroy after the research papers authors.
+
+In essence the task of calculating a diff is that of finding the differences between two files on a line by line basis.  Mathematically, this can be described as the LCS or Longest Common Subsequence problem, which is a classic computer science problem.  
+
+Though we are not going to go into the problem in great detail, it is useful to know what actually happens at this level.  Essentially you have two sequences, for now we are going to simplify the problem and work on a string of letters.
+
+Old string: 
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+a b c d e j k l m p r s
+\end{Verbatim}
+
+New string: 
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+a c d f g h i j n o p t u
+\end{Verbatim}
+
+The challenge is to find the longest sequence of items that is present in both of the strings above.  This new sequence is found by deleting items from the first and second set until all that remains is a sequence of common items.  
+
+In our example case, this is as follows
+LCS string: 
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+a c d j p
+\end{Verbatim}
+
+Comparing this to each of our strings above, it is easy to generate a diff.  If the items are present in the \emph{Old string}, but not in the LCS string then they must have been deleted.  Conversely if they are present in the \emph{New string}, but not the LCS, then they must have been additions.  Putting this into practice in our example and marking deletions with \texttt{-} and additions with \texttt{+}, we get the following:
+
+Diff string:
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+b e fghi klm o rs tu
+- - ++++ --- + -- ++
+\end{Verbatim}
+
+The actual algorithm for generating the LCS and the subsequent diff is too complex to describe here and is out of the scope of this book.  This section was included to give you some idea of how Git performs some of its actions internally.
+
+\subsection{More about tags}
+Tags can actually do a little more than just hold a single identifier to a specific commit.  A tag can also have a log message with it, similar to the commit objects we discussed earlier.  In order to invoke this option, we need to use the \texttt{git tag -m 'message'} option.  This will allow us to supply a message to be stored along with the tag.  Let us see how this works in practice.
+
+Firstly we can use the \texttt{git tag} command to show all tags that are currently in the repository.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo$ git tag
+v0.9
+v1.0a
+pete@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Now let us create a new tag and give it some extra information.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo$ git tag v1.0b -m 'This is an annotated tag'
+\end{Verbatim}
+
+Unfortunately Git was not particularly forthcoming with information on the creation of the tag.  On saying that, it is not difficult for us to use the \texttt{git show} command to see what we have done.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo$ git show v1.0b
+tag v1.0b
+Tagger: Peter Savage <silentkeystroke@googlemail.com>
+Date:   Sun Mar 13 12:17:59 2011 +0000
+
+This is an annotated tag
+
+commit fa65f06cc62291bb0cd47aef9e05953d6655fc8e
+Author: Peter Savage <silentkeystroke@googlemail.com>
+Date:   Tue Mar 1 21:17:57 2011 +0000
+
+    Messed with a few files
+
+diff --git a/my_second_committed_file b/my_second_committed_file
+index 095b9cd..c9887f8 100644
+--- a/my_second_committed_file
++++ b/my_second_committed_file
+@@ -1,2 +1 @@
+-Change1
+-Change2
++Changed this file completely
+diff --git a/my_third_committed_file b/my_third_committed_file
+new file mode 100644
+index 0000000..5d27866
+--- /dev/null
++++ b/my_third_committed_file
+@@ -0,0 +1 @@
++Addition to the line
+pete@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Notice that as well as showing us the tag itself, the \texttt{git show} command also gave us a diff of what exactly changed in this commit.  Small details like this are what makes Git in particular a joy to use for developers.
+
+If we found that we had actually created the tag incorrectly, we have two options, we could use the \texttt{-d} option to delete a tag, or we could use the \texttt{-F} option to forcibly overwrite a tag with the same name with different information.  However please remember the warning about tags in \emph{Week 2}.  It is very dangerous to go changing tags, especially if you have already pushed them out somewhere where other people can grab them from.
+
+Now that we have learnt a little about how to play with tags, we should probably take a look under the hood.  This is an After Hours section after all.
+
+The implementation of tags in Git is very simple indeed.  We are going to jump into the \texttt{.git} directory and take a look at a simple output from some commands.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ cd .git/
+john@akira:~/coderepo/.git$ ls
+branches        config       HEAD   index  logs     ORIG_HEAD
+COMMIT_EDITMSG  description  hooks  info   objects  refs
+john@akira:~/coderepo/.git$ cd refs/tags/
+john@akira:~/coderepo/.git/refs/tags$ ls
+v1.0a
+john@akira:~/coderepo/.git/refs/tags$ cat v1.0a 
+fa65f06cc62291bb0cd47aef9e05953d6655fc8e
+john@akira:~/coderepo/.git/refs/tags$ 
+\end{Verbatim}
+
+Inside the \texttt{.git/refs/tags} folder, there is a file for every single tag in the system.  This file contains a single string of characters.  That string looks oddly like an SHA-1 commit to me.  Using the tricks that we learnt in the last After Hours section, we can interrogate the Git repository, by throwing a few wrenches at it.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo4$ git cat-file -p fa65f0
+tree 96551f45496232c0ec6b389731d55fa3d7e1c8fd
+parent 6ca160c7226731bf80973fc5bc81f6b9beda7795
+author Peter Savage <silentkeystroke@googlemail.com> 1299014277 +0000
+committer Peter Savage <silentkeystroke@googlemail.com> 1299014277 +0000
+
+Messed with a few files
+pete@satsuki:~/coderepo$ git cat-file -t fa65f0
+commit
+pete@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Excellent!  Just as we expected.  Just for clarity, let us run the same set of commands against our newly created annotated tag.
+
+pete@satsuki:~/coderepo4$ cd .git/refs/tags
+pete@satsuki:~/coderepo4/.git/refs/tags$ cat v1.0b
+e39d0bfb0d72c985687047cef8b161858466e8c4
+pete@satsuki:~/coderepo4/.git/refs/tags$ git cat-file -t e39d0b
+tag
+pete@satsuki:~/coderepo$ 
+
+Interesting.
+
+pete@satsuki:~/coderepo4/.git/refs/tags$ git cat-file -p e39d0b
+object fa65f06cc62291bb0cd47aef9e05953d6655fc8e
+type commit
+tag v1.0b
+tagger Peter Savage <silentkeystroke@googlemail.com> Sun Mar 13 12:17:59 2011 +0000
+
+This is an annotated tag
+pete@satsuki:~/coderepo4/.git/refs/tags$ 

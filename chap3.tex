@@ -339,34 +339,6 @@ In most version control systems, the word tagging is used to describe a referenc
 
 In this example, the \texttt{1} may refer to the major version number, and will denote a family of versions, often only changing a few times in a projects lifetime.  The \texttt{9} is a minor version number and can refer to a much more frequent release schedule.  You may also see textual items being appended to this version string, like \texttt{rc}, \texttt{b}, and \texttt{a}, denoting \emph{Release Candidate}, \emph{Beta} and \emph{Alpha} respectively.
 
-
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
-The implementation of tags in Git is very simple indeed.  We are going to jump into the \texttt{.git} directory and take a look at a simple output from some commands.
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ cd .git/
-john@akira:~/coderepo/.git$ ls
-branches        config       HEAD   index  logs     ORIG_HEAD
-COMMIT_EDITMSG  description  hooks  info   objects  refs
-john@akira:~/coderepo/.git$ cd refs/tags/
-john@akira:~/coderepo/.git/refs/tags$ ls
-v1.0a
-john@akira:~/coderepo/.git/refs/tags$ cat v1.0a 
-fa65f06cc62291bb0cd47aef9e05953d6655fc8e
-john@akira:~/coderepo/.git/refs/tags$ 
-\end{Verbatim}
-Inside the \texttt{.git/refs/tags} folder, there is a file for every single tag in the system.  This file contains a single string of characters.  That string is the SHA-1 hash of the commit that we are referring to.  It couldn't be any simpler really!
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {How are tags actually implemented?};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Knowledge}};
-\end{tikzpicture}
-\end{figure}
-
 Git implements tags in a very elegant way.  A tag is simply a label in Git that points to a single commit object.  The tag name can then be used in place of the SHA-1 to refer to a point in the repositories history.  Due to the simplicity of tags, it is also possible and very simple to tag a commit that occurred way into the past.  Let us take a look at a simple tag example.  We will make the current point in the repository \texttt{v1.0a}.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
@@ -412,6 +384,7 @@ john@akira:~/coderepo$
 
 Notice that instead of using the dynamic reference HEAD, we have now used the tag names \texttt{v0.9} and \texttt{v1.0a} to refer to our previous commits and have returned the combined diff output of all the changes which occurred between the two.
 
+You can find out more about tags and how to specify more information in the {After Hours Week 3} section at the end of this Week.
 
 \begin{figure}[hbt]
 \tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]

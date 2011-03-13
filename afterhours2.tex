@@ -52,7 +52,7 @@ john@akira:~/coderepo3/.git$
 
 More files and folders will appear here during the running of the repository as you begin to start using different features in Git.
 
-The most interesting of the folders here is the \texttt{objects} folder.  This folder as previously described holds all of the objects that are stored in the repository.  Now, what do we actually mean by objects.  As yet, we have not really defined what an object is.  In Git, an object is either a commit, a tree or a blob.  We need a little more information as the names themselves do not fully describe what the item is.
+The most interesting of the folders here is the \texttt{objects} folder.  This folder as previously described holds all of the objects that are stored in the repository.  Now, what do we actually mean by objects.  As yet, we have not really defined what an object is.  We are going to look now at three types of object that Git places in this directory.  These are the commit, tree and blob objects.  We need a little more information as the names themselves do not fully describe what the item is.
 
 \begin{itemize}
 \item\textbf{commit} - A commit object is an object that describes a specific point in time.  Whenever you perform a \texttt{git commit} from the command line, what you are actually doing is creating one of these objects in the repository.  This object stores information about the committer, the date, a link to the previous commit object and most importantly a link to the tree object of the current commit.
