@@ -43,30 +43,30 @@ Tags can actually do a little more than just hold a single identifier to a speci
 Firstly we can use the \texttt{git tag} command to show all tags that are currently in the repository.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git tag
+pete@akira:~/coderepo$ git tag
 v0.9
 v1.0a
-pete@satsuki:~/coderepo$ 
+pete@akira:~/coderepo$ 
 \end{Verbatim}
 
 Now let us create a new tag and give it some extra information.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git tag v1.0b -m 'This is an annotated tag'
+pete@akira:~/coderepo$ git tag v1.0b -m 'This is an annotated tag'
 \end{Verbatim}
 
 Unfortunately Git was not particularly forthcoming with information on the creation of the tag.  On saying that, it is not difficult for us to use the \texttt{git show} command to see what we have done.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git show v1.0b
+pete@akira:~/coderepo$ git show v1.0b
 tag v1.0b
-Tagger: Peter Savage <silentkeystroke@googlemail.com>
+Tagger: John Haskins <john.haskins@tamagoyakiinc.koala>
 Date:   Sun Mar 13 12:17:59 2011 +0000
 
 This is an annotated tag
 
 commit fa65f06cc62291bb0cd47aef9e05953d6655fc8e
-Author: Peter Savage <silentkeystroke@googlemail.com>
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
 Date:   Tue Mar 1 21:17:57 2011 +0000
 
     Messed with a few files
@@ -86,7 +86,7 @@ index 0000000..5d27866
 +++ b/my_third_committed_file
 @@ -0,0 +1 @@
 +Addition to the line
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 Notice that as well as showing us the tag itself, the \texttt{git show} command also gave us a diff of what exactly changed in this commit.  Small details like this are what makes Git in particular a joy to use for developers.
@@ -104,7 +104,9 @@ branches        config       HEAD   index  logs     ORIG_HEAD
 COMMIT_EDITMSG  description  hooks  info   objects  refs
 john@akira:~/coderepo/.git$ cd refs/tags/
 john@akira:~/coderepo/.git/refs/tags$ ls
+v0.9
 v1.0a
+v1.0b
 john@akira:~/coderepo/.git/refs/tags$ cat v1.0a 
 fa65f06cc62291bb0cd47aef9e05953d6655fc8e
 john@akira:~/coderepo/.git/refs/tags$ 
@@ -113,34 +115,48 @@ john@akira:~/coderepo/.git/refs/tags$
 Inside the \texttt{.git/refs/tags} folder, there is a file for every single tag in the system.  This file contains a single string of characters.  That string looks oddly like an SHA-1 commit to me.  Using the tricks that we learnt in the last After Hours section, we can interrogate the Git repository, by throwing a few wrenches at it.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo4$ git cat-file -p fa65f0
+john@akira:~/coderepo$ git cat-file -p fa65f0
 tree 96551f45496232c0ec6b389731d55fa3d7e1c8fd
 parent 6ca160c7226731bf80973fc5bc81f6b9beda7795
-author Peter Savage <silentkeystroke@googlemail.com> 1299014277 +0000
-committer Peter Savage <silentkeystroke@googlemail.com> 1299014277 +0000
+author John Haskins <john.haskins@tamagoyakiinc.koala> 1299014277 +0000
+committer John Haskins <john.haskins@tamagoyakiinc.koala> 1299014277 +0000
 
 Messed with a few files
-pete@satsuki:~/coderepo$ git cat-file -t fa65f0
+john@akira:~/coderepo$ git cat-file -t fa65f0
 commit
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Excellent!  Just as we expected.  Just for clarity, let us run the same set of commands against our newly created annotated tag.
+Excellent!  Just as we expected.  So Git stores the SHA-1 hash for the commit we are referring to, in a file which has the same name as the tag.  Just for clarity, let us run the same set of commands against our newly created annotated tag.
 
-pete@satsuki:~/coderepo4$ cd .git/refs/tags
-pete@satsuki:~/coderepo4/.git/refs/tags$ cat v1.0b
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ cd .git/refs/tags
+john@akira:~/coderepo/.git/refs/tags$ cat v1.0b
 e39d0bfb0d72c985687047cef8b161858466e8c4
-pete@satsuki:~/coderepo4/.git/refs/tags$ git cat-file -t e39d0b
+john@akira:~/coderepo/.git/refs/tags$
+\end{Verbatim}
+
+Hang on a minute!  Shouldn't the output of the \texttt{v1.0a} and \texttt{v1.0b} files be the same.  There were both created at the same point in the repositories history.  They were both supposed to be pointing to the same commit.  Let us use a little plumbing and see what is going on.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo/.git/refs/tags$ git cat-file -t e39d0b
 tag
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
+\end{Verbatim}
 
-Interesting.
+Interesting.  So it seems as if there is another type of object that can be added to the list.  The \emph{tag} object.  So what exactly is the difference here?  To answer that we need to take a look at the difference between the two tags.  \texttt{v1.0a} was a simple tag, whereas \texttt{v1.0b} is an annotated tag.  
 
-pete@satsuki:~/coderepo4/.git/refs/tags$ git cat-file -p e39d0b
+When the tag was merely a pointer to a commit object, the repository required nothing more that the object that it was referring to, to be stored in the file.  Now we have more information, Git treats the information just as it would any other, by creating an object.  We can investigate this further and use the \texttt{-p} parameter to the \texttt{git cat-file} command to see exactly what is stored within this file.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo/.git/refs/tags$ git cat-file -p e39d0b
 object fa65f06cc62291bb0cd47aef9e05953d6655fc8e
 type commit
 tag v1.0b
-tagger Peter Savage <silentkeystroke@googlemail.com> Sun Mar 13 12:17:59 2011 +0000
+tagger John Haskins <john.haskins@tamagoyakiinc.koala> Sun Mar 13 12:17:59 2011 +0000
 
 This is an annotated tag
-pete@satsuki:~/coderepo4/.git/refs/tags$ 
+john@akira:~/coderepo/.git/refs/tags$ 
+\end{Verbatim}
+
+So an annotated tag contains more information than just the commit ID we are referring to.  This 
