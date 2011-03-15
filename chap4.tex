@@ -12,6 +12,9 @@ First we should start off by describing what branches are and what they can be u
 This is best illustrated by a little demonstration, so we are going to take our testing repository and branch off to try out new, wonderful and wacky things.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ ls 
+my_first_committed_file   my_third_committed_file
+my_second_committed_file  temp_file
 john@akira:~/coderepo$ git branch wacky
 john@akira:~/coderepo$ git branch
 * master
@@ -99,9 +102,36 @@ Date:   Tue Mar 15 20:21:42 2011 +0000
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Brilliant.  Hopefully you can see that we have used \texttt{git log} in a slightly different way to limit the number of commits.  This is what the \texttt{-n} parameter is used for.  However, what happens if we go back to the \textbf{master} branch again?  In theory we should have everything back the way we left it in the master branch.
+Brilliant.  Hopefully you can see that we have used \texttt{git log} in a slightly different way to limit the number of commits.  This is what the \texttt{-n} parameter is used for.  However, what happens if we go back to the \textbf{master} branch again?  In theory we should have everything back the way we left it in the master branch.  Let's move back into our \textbf{master} branch and see the state of play.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git checkout master
+Switched to branch 'master'
+john@akira:~/coderepo$ ls 
+my_first_committed_file   my_third_committed_file
+my_second_committed_file  temp_file
+john@akira:~/coderepo$ git log -n1
+commit fa65f06cc62291bb0cd47aef9e05953d6655fc8e
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Tue Mar 1 21:17:57 2011 +0000
+
+    Messed with a few files
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Comparing that to our previous \texttt{ls} command, we can see that this is exactly what the working tree looked like at the beginning of the chapter.  Let us take a look at a diagram of commits to see what has happened in our repository.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-w4-d1.pdf}
+\caption{Our first branch}
+\end{figure}
 
 BRINGING CHANGES TO new BRANCH
+
+DO THE WHOLE AHHH I HAVE STUFF I WANT IN A NEW BRANCH
+THEN DO THE SAME WITH A COMMIT
+THEN STASH
 
 Before we jump into this, one of the employees at Tamagoyaki has noticed something.
 
