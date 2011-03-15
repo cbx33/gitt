@@ -3,9 +3,107 @@
 %\phantomsection
 \chapter{Week 4}
 \section{Day 1 - ``Finally we're getting somewhere''}
-\subsection{Making a copy}
+\subsection{Planting trees}
 
-Tamagoyaki Inc have now realised that they have to take these things slow and steady if they want to implement a stable and robust system.  This week, they are going to start actually using branches and merging in changes, probably one of the largest topics to cover when doing any type of collaborative development.  Before we jump into this, one of the employees at Tamagoyaki has noticed something.
+Tamagoyaki Inc have now realised that they have to take these things slow and steady if they want to implement a stable and robust system.  This week, they are going to start actually using branches and merging in changes, probably one of the largest topics to cover when doing any type of collaborative development.  
+
+First we should start off by describing what branches are and what they can be used for.  In Git, a branch is just a pointer to a commit in the repository.  At first glance this might not seem any different to a tag.  A tag points to a commit, so does a branch.  So what is the difference?  Let us start playing with branches a little and the answer will become obvious in a while.  Using branches allows you to try things out and even keep a history of the things you try without actually affecting your main branch.
+
+This is best illustrated by a little demonstration, so we are going to take our testing repository and branch off to try out new, wonderful and wacky things.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git branch wacky
+john@akira:~/coderepo$ git branch
+* master
+  wacky
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+From looking at the output, it would appear that our \texttt{git branch wacky} command did not accomplish a whole lot.  Running the \texttt{git branch} command will give us a list of all branches in the repository.  You may have noticed the presence of the \texttt{*} in front of the word \texttt{master}.  This is telling us that we are on the branch called \textbf{master}.  Hang on though.  Did we not just create a new branch called \textbf{wacky}?  Well yes we did.  However we have not yet switched to it.  To do this, we use our good friend \texttt{git checkout}.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git checkout wacky
+Switched to branch 'wacky'
+john@akira:~/coderepo$ git branch
+  master
+* wacky
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Now the \texttt{*} has moved to be in front of the word \texttt{wacky} and we have confirmation from the line above that we have in fact \texttt{Switched to branch 'wacky'}.  Now we are, what can we do?  Well, anything we could do in our previous branch.  Some of you maybe be thinking, but we never created an initial branch called \textbf{master}.  Whilst this is true in one sense, the \texttt{git init} command actually created this branch for us when we initialised the repository.
+
+Running a \texttt{git log} shows us the history of our branch.  
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git log
+commit fa65f06cc62291bb0cd47aef9e05953d6655fc8e
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Tue Mar 1 21:17:57 2011 +0000
+
+    Messed with a few files
+
+commit 6ca160c7226731bf80973fc5bc81f6b9beda7795
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Mon Feb 21 20:59:32 2011 +0000
+
+    Finished adding initial files
+
+commit e86ddea25341a75275d316d8ca545aa7c73e97b3
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Mon Feb 21 20:06:57 2011 +0000
+
+    Made a few changes to first and second files
+
+commit 88206926cb60aed53d21ede69f9ca5b7c69cb983
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Sat Feb 19 09:23:47 2011 +0000
+
+    My First Ever Commit
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+You may notice here that the log that is being displayed is identical to that which we had before in our \textbf{master} branch.  If we now make changes to the \emph{repository} we can take a look and see how this will affect things.  To start with, let us remove a few files from the working tree, commit, then add a few more, stage them and commit the new files.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git rm my_first_committed_file
+rm 'my_first_committed_file'
+john@akira:~/coderepo$ git rm my_second_committed_file
+rm 'my_second_committed_file'
+john@akira:~/coderepo$ git commit -m 'Removed a few files'
+[wacky b5c84a5] Removed a few files
+ 2 files changed, 0 insertions(+), 2 deletions(-)
+ delete mode 100644 my_first_committed_file
+ delete mode 100644 my_second_committed_file
+john@akira:~/coderepo$ echo "A new file" > newfile1
+john@akira:~/coderepo$ echo "Another new file" > newfile2
+john@akira:~/coderepo$ git add newfile*
+john@akira:~/coderepo$ git commit -m 'Added two new files'
+[wacky 8d5140a] Added two new files
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+ create mode 100644 newfile1
+ create mode 100644 newfile2
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+So we have made several new commits to the repository under our new branch.  If we run a Linux \texttt{ls} command to see the files which are in the working tree, we can see that our working copy has indeed altered.  We will also use our \texttt{git log} tool to see what the latest commit is.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ ls
+my_third_committed_file  newfile1  newfile2  temp_file
+john@akira:~/coderepo$ git log -n 1
+commit 8d5140aa7d2bfc43b225afd2549d180dcb16bef6
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Tue Mar 15 20:21:42 2011 +0000
+
+    Added two new files
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Brilliant.  Hopefully you can see that we have used \texttt{git log} in a slightly different way to limit the number of commits.  This is what the \texttt{-n} parameter is used for.  However, what happens if we go back to the \textbf{master} branch again?  In theory we should have everything back the way we left it in the master branch.
+
+BRINGING CHANGES TO new BRANCH
+
+Before we jump into this, one of the employees at Tamagoyaki has noticed something.
 
 \begin{trenches}
 ``So John,'' started Rob, ``Just how are we backing up the repository at the moment?''
