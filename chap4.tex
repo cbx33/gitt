@@ -3,10 +3,39 @@
 %\phantomsection
 \chapter{Week 4}
 \section{Day 1 - ``Finally we're getting somewhere''}
-\subsection{Planting trees}
+\subsection{Making a copy}
+
+Tamagoyaki Inc have now realised that they have to take these things slow and steady if they want to implement a stable and robust system.  This week, they are going to start actually using branches and merging in changes, probably one of the largest topics to cover when doing any type of collaborative development.  Before we jump into this, one of the employees at Tamagoyaki has noticed something.
+
+\begin{trenches}
+``So John,'' started Rob, ``Just how are we backing up the repository at the moment?''
+
+John thought for a moment before replying.  He knew what Rob was getting at, but he hadn't expected Rob to bring the question up in front of Markus.  In truth he had forgotten all about it.  He turned to Markus.
+
+``I'll be honest Markus.  Currently the repository isn't being backed up, but then we are running in parallel with the old system, so it would be the end of the world if we lost it.''
+
+Markus nodded and smiled.  It seemed that John had gotten away with it for now and with that, Klaus shot Rob a piercing glance.  
+
+``Team,'' began Markus, ``we need a definitive way of backing up the new Git repository, and I'd like it done before the end of the day.''  He pointed at a document on the table.  ``This project document has been approved by Wayne, and in there it states we will have a defined backup strategy.  Please don't let me down.''
+
+\begin{center} * * * \end{center}
+
+``Rob you really got to be careful about things like that,'' Klaus said to one of the younger members of the team.  ``You really showed John up in there.''  
+
+``Yeh,'' said Rob, ``I realise that now.''  He stood with his back against the wall and tapped his fingers against the painted surface.  ``I was wondering, do you think John would let me look at the backup system for him as a way of apologising.''
+
+Klaus smiled, it seemed Rob was finally understanding things, ``Go ask him,'' said Klaus, ``He's so snowed under with the BurnForce release that he'll probably let you implement it too''
+
+``Right'' nodded Rob and off he went.
+\end{trenches}
+
+So before we even begin to look at anything like branching, merging or rebasing, we first need to find out how to make a backup of our repository and keep it up to date.  Obviously we could just take the files and copy them, but perhaps a better way of doing this is to clone our repository using the \texttt{git clone} command.  Cloning a repository basically means creating an exact copy of the data in an alternative location.  Well, that's what cloning means isn't it?
+
+The git clone tool doesn't just copy the data though, it does several other things.  Let us create a clone of our test repository 
+
 %branches
 %merge
 %remote tracking
-Itt section about not having anything backed up
+%Itt section about not having anything backed up
 
-Parallel devving - ie...use both git and old for a while
+%Parallel devving - ie...use both git and old for a while
