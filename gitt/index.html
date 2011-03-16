@@ -2731,6 +2731,51 @@ Our first branch</CAPTION>
 </DIV>
 
 <P>
+So there are really two pointers in our repository at the moment, from a branch point of view.  One of them points to commit <SPAN  CLASS="textbf">fa65f0...</SPAN> and is called <SPAN  CLASS="textbf">m</SPAN>aster.  The other is called <SPAN  CLASS="textbf">wacky</SPAN> and points to <SPAN  CLASS="textbf">8d5410
+...</SPAN>.  At this point you may be thinking that branches are pretty much the same thing as tags.  Well, they are except for one important fact.  We are going to use our <TT>git branch</TT> command, with a new parameter, to show us the difference.  Take a look at the output of the following operations.  We have pruned the output of the <TT>git show</TT> command for brievity.
+
+<P>
+<PRE>[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git branch -v
+  master fa65f06 Messed with a few files
+* wacky  8d5140a Added two new files
+john@akira:~/coderepo$ git tag v2.0
+john@akira:~/coderepo$ git show v2.0
+commit 8d5140aa7d2bfc43b225afd2549d180dcb16bef6
+...
+...
+...
+</PRE>
+
+<P>
+So here we have added a tag in our current branch, <SPAN  CLASS="textbf">wacky</SPAN>, and we can see that the commit id for the tag <SPAN  CLASS="textbf">v2.0</SPAN> points to the commit <SPAN  CLASS="textbf">8d5140a</SPAN>.  We can also see that the branch <SPAN  CLASS="textbf">wacky</SPAN> is currently pointing to the same commit ID, <SPAN  CLASS="textbf">8d5140a</SPAN>.  Now let us add another file in, make a commit and see what happens after this.
+
+<P>
+<PRE>[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ echo "New stuff" &gt; another_file
+john@akira:~/coderepo$ git add another_file
+john@akira:~/coderepo$ git commit -m 'Added another file'
+[wacky f91f31e] Added another file
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 another_file
+john@akira:~/coderepo$ git show v2.0 
+commit 8d5140aa7d2bfc43b225afd2549d180dcb16bef6
+...
+...
+...
+john@akira:~/coderepo$ git branch -v
+  master fa65f06 Messed with a few files
+* wacky  f91f31e Added another file
+john@akira:~/coderepo$
+</PRE>
+
+<P>
+How interesting.  The difference between tags and branches now becomes pretty clear.  Whilst a tag always points to the same commit, a branch reference always points to the tip of that branch.  In essence the reference that a branch points to moves as subsequent commits are made.  In doing this, the whole history of the branch can be revealed.  Since we know the latest commit, we also know the parent of that commit and so on and so on.
+
+<P>
+Since a branch is just a pointer to a commit, adding to it, modifying it and deleting it can be done safely, without destroying any data in another branch.  In short, it will allow us to completely redesign whatever is being stored in the repository without worrying about how it will affect our baseline.
+
+<P>
 BRINGING CHANGES TO new BRANCH
 
 <P>
@@ -2858,7 +2903,7 @@ Mathematics Department, Macquarie University, Sydney.
 The command line arguments were: <BR>
  <STRONG>latex2html</STRONG> <TT>-html 4.0,unicode,latin1,utf8 -split 2 gitt.tex</TT>
 <P>
-The translation was initiated by pete on 2011-03-15
+The translation was initiated by pete on 2011-03-16
 <BR><HR>
 <!--Table of Child-Links-->
 <A NAME="CHILD_LINKS"></A>
@@ -3110,7 +3155,7 @@ The translation was initiated by pete on 2011-03-15
 <!--End of Navigation Panel-->
 <ADDRESS>
 pete
-2011-03-15
+2011-03-16
 </ADDRESS>
 </BODY>
 </HTML>
