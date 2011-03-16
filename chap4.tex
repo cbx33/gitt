@@ -131,11 +131,11 @@ So there are really two pointers in our repository at the moment, from a branch 
 \ldots}.  At this point you may be thinking that branches are pretty much the same thing as tags.  Well, they are except for one important fact.  We are going to use our \texttt{git branch} command, with a new parameter, to show us the difference.  Take a look at the output of the following operations.  We have pruned the output of the \texttt{git show} command for brievity.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git branch -v
+john@akira:~/coderepo$ git branch -v
   master fa65f06 Messed with a few files
 * wacky  8d5140a Added two new files
-pete@satsuki:~/coderepo$ git tag v2.0
-pete@satsuki:~/coderepo$ git show v2.0
+john@akira:~/coderepo$ git tag v2.0
+john@akira:~/coderepo$ git show v2.0
 commit 8d5140aa7d2bfc43b225afd2549d180dcb16bef6
 ...
 ...
@@ -145,21 +145,21 @@ commit 8d5140aa7d2bfc43b225afd2549d180dcb16bef6
 So here we have added a tag in our current branch, \textbf{wacky}, and we can see that the commit id for the tag \textbf{v2.0} points to the commit \textbf{8d5140a}.  We can also see that the branch \textbf{wacky} is currently pointing to the same commit ID, \textbf{8d5140a}.  Now let us add another file in, make a commit and see what happens after this.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ echo "New stuff" > another_file
-pete@satsuki:~/coderepo$ git add another_file
-pete@satsuki:~/coderepo$ git commit -m 'Added another file'
+john@akira:~/coderepo$ echo "New stuff" > another_file
+john@akira:~/coderepo$ git add another_file
+john@akira:~/coderepo$ git commit -m 'Added another file'
 [wacky f91f31e] Added another file
  1 files changed, 1 insertions(+), 0 deletions(-)
  create mode 100644 another_file
-pete@satsuki:~/coderepo$ git show v2.0 
+john@akira:~/coderepo$ git show v2.0 
 commit 8d5140aa7d2bfc43b225afd2549d180dcb16bef6
 ...
 ...
 ...
-pete@satsuki:~/coderepo$ git branch -v
+john@akira:~/coderepo$ git branch -v
   master fa65f06 Messed with a few files
 * wacky  f91f31e Added another file
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 How interesting.  The difference between tags and branches now becomes pretty clear.  Whilst a tag always points to the same commit, a branch reference always points to the tip of that branch.  In essence the reference that a branch points to moves as subsequent commits are made.  In doing this, the whole history of the branch can be revealed.  Since we know the latest commit, we also know the parent of that commit and so on and so on.
