@@ -12,3 +12,4 @@ deletions
 Reflog use for head git reset
 make patch
 apply patch
+blame bisect
