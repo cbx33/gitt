@@ -194,24 +194,24 @@ Now we know about branches in general, we should really learn about how to merge
 We could switch into our \textbf{wacky} branch, do a little development, copy the files somewhere else, switch to our \textbf{master} branch, and paste the files over the top.  Now, this is probably the simplest way of merging possible.  In actual fact, this is not really merging at all.  Let us take a litle look at both the command output of a simple merge, explain it a little, and then look at a diagramatic explanation.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git branch
+john@akira:~/coderepo$ git branch
   master
 * wacky
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 Firstly we check just to see what branch we are on.  Next we checkout the branch we want our development branch to be merged into.  In this case, we want to merge \textbf{wacky} into \textbf{master} and so we must first checkout the \textbf{master} branch in order to pull in changes from \textbf{wacky}.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git checkout master
+john@akira:~/coderepo$ git checkout master
 Switched to branch 'master'
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 Now we run the actual merge.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git merge wacky 
+john@akira:~/coderepo$ git merge wacky 
 Updating fa65f06..f91f31e
 Fast-forward
  another_file             |    1 +
@@ -225,22 +225,22 @@ Fast-forward
  delete mode 100644 my_second_committed_file
  create mode 100644 newfile1
  create mode 100644 newfile2
-pete@satsuki:~/coderepo$
+john@akira:~/coderepo$
 \end{Verbatim} 
 
 We can see that the first line after our command shows us which commit we are moving from, and then which commit we should end up on.  In this case we are merging from \textbf{fa65f06} to \textbf{f91f31e}.  The line below this is even more important.  This type of merge is called a \emph{fast-forward} merge.  We have not made any changes to our \textbf{master} branch since we began and subsequently finished out development work, and so instead of having to really merge changes, we have literally just fast-forwarded the \textbf{master} branch, to the same point as our \textbf{wacky} one.  Beneath this text, we see more information about just what is included in the merge.  
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git log -n 1
+john@akira:~/coderepo$ git log -n 1
 commit f91f31ee594ff9edade7675dd0991b9c0f7c469b
-Author: Peter Savage <silentkeystroke@googlemail.com>
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
 Date:   Wed Mar 16 19:21:46 2011 +0000
 
     Added another file
-pete@satsuki:~/coderepo$ git branch
+john@akira:~/coderepo$ git branch
 * master
   wacky
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 Finally, we just check to see that we are in fact on the master branch and that the latest log message is the one from the point we last left the \textbf{wacky} branch.
