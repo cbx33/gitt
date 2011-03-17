@@ -7,7 +7,27 @@
 
 Tamagoyaki Inc have now realised that they have to take these things slow and steady if they want to implement a stable and robust system.  This week, they are going to start actually using branches and merging in changes, probably one of the largest topics to cover when doing any type of collaborative development.  
 
-First we should start off by describing what branches are and what they can be used for.  In Git, a branch is just a pointer to a commit in the repository.  At first glance this might not seem any different to a tag.  A tag points to a commit, so does a branch.  So what is the difference?  Let us start playing with branches a little and the answer will become obvious in a while.  Using branches allows you to try things out and even keep a history of the things you try without actually affecting your main branch.
+\begin{trenches}
+``Dude!'' shouted Eugene from across the office.  ``Dude!!'' he repeated.
+
+No one looked up and the hum of the computers seemed to drown out the mumours of voices and clicking of keys.  
+
+``Dud\ldots'' He was cut off by another voice.  It was Klaus.
+
+``Maybe if you gave us some indication of who you were addressing Eugene,'' said Klaus in his usual matter-of-factly tone, ``we may actually be able to help you.''  
+
+``John!''  Shouted Eugene, as if ignoring Klaus entirely.  The manager hadn't looked up from his monitor as he had advised the tools guy and he now sat there continuing to type with one hand, the other reaching over and yanking out the earbud that was playing a droning beat in John's ear.
+
+``Ouch!'' said John startled.
+
+``Dork wants you,'' said Klaus, using his pet name for Eugene.  
+
+John walked over to Eugene.  ``Sup?!''
+
+``I don't get branches,'' said the developer.  ``I mean I don't get what the heck they do, why I would ever want to use them, and how are they even different to tags anyway?''
+\end{trenches}
+
+First we should probably start off by describing what branches are and what they can be used for.  In Git, a branch is just a pointer to a commit in the repository.  At first glance this might not seem any different to a tag.  A tag points to a commit, so does a branch.  So what is the difference?  Let us start playing with branches a little and the answer will become obvious in a while.  Using branches allows you to try things out and even keep a history of the things you try without actually affecting your main branch.
 
 This is best illustrated by a little demonstration, so we are going to take our testing repository and branch off to try out new, wonderful and wacky things.
 
@@ -165,6 +185,67 @@ john@akira:~/coderepo$
 How interesting.  The difference between tags and branches now becomes pretty clear.  Whilst a tag always points to the same commit, a branch reference always points to the tip of that branch.  In essence the reference that a branch points to moves as subsequent commits are made.  In doing this, the whole history of the branch can be revealed.  Since we know the latest commit, we also know the parent of that commit and so on and so on.
 
 Since a branch is just a pointer to a commit, adding to it, modifying it and deleting it can be done safely, without destroying any data in another branch.  In short, it will allow us to completely redesign whatever is being stored in the repository without worrying about how it will affect our baseline.
+
+\section{Day 2 - ``Branches galore''}
+\subsection{Working with branches}
+
+Now we know about branches in general, we should really learn about how to merge changes from one branch into another.  Branches are fantastic for trying new things out and testing ideas, but if those ideas are successful, we need a way of pulling those changes into our \textbf{master} branch.  Of course we could do it the old fashioned way.  
+
+We could switch into our \textbf{wacky} branch, do a little development, copy the files somewhere else, switch to our \textbf{master} branch, and paste the files over the top.  Now, this is probably the simplest way of merging possible.  In actual fact, this is not really merging at all.  Let us take a litle look at both the command output of a simple merge, explain it a little, and then look at a diagramatic explanation.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo$ git branch
+  master
+* wacky
+pete@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Firstly we check just to see what branch we are on.  Next we checkout the branch we want our development branch to be merged into.  In this case, we want to merge \textbf{wacky} into \textbf{master} and so we must first checkout the \textbf{master} branch in order to pull in changes from \textbf{wacky}.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo$ git checkout master
+Switched to branch 'master'
+pete@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Now we run the actual merge.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo$ git merge wacky 
+Updating fa65f06..f91f31e
+Fast-forward
+ another_file             |    1 +
+ my_first_committed_file  |    1 -
+ my_second_committed_file |    1 -
+ newfile1                 |    1 +
+ newfile2                 |    1 +
+ 5 files changed, 3 insertions(+), 2 deletions(-)
+ create mode 100644 another_file
+ delete mode 100644 my_first_committed_file
+ delete mode 100644 my_second_committed_file
+ create mode 100644 newfile1
+ create mode 100644 newfile2
+pete@satsuki:~/coderepo$
+\end{Verbatim} 
+
+We can see that the first line after our command shows us which commit we are moving from, and then which commit we should end up on.  In this case we are merging from \textbf{fa65f06} to \textbf{f91f31e}.  The line below this is even more important.  This type of merge is called a \emph{fast-forward} merge.  We have not made any changes to our \textbf{master} branch since we began and subsequently finished out development work, and so instead of having to really merge changes, we have literally just fast-forwarded the \textbf{master} branch, to the same point as our \textbf{wacky} one.  Beneath this text, we see more information about just what is included in the merge.  
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo$ git log -n 1
+commit f91f31ee594ff9edade7675dd0991b9c0f7c469b
+Author: Peter Savage <silentkeystroke@googlemail.com>
+Date:   Wed Mar 16 19:21:46 2011 +0000
+
+    Added another file
+pete@satsuki:~/coderepo$ git branch
+* master
+  wacky
+pete@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Finally, we just check to see that we are in fact on the master branch and that the latest log message is the one from the point we last left the \textbf{wacky} branch.
+
+Now let us take a quick look at a diagram to see how this change actually affected the commit flow.  We have included tags in this diagram, so that you can see where they point to as well.
 
 BRINGING CHANGES TO new BRANCH
 
