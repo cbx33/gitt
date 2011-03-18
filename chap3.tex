@@ -240,9 +240,9 @@ The next few lines are telling us which is the original file, and which is the n
 +Changed this file completely
 \end{Verbatim}
 
-The next bunch of lines are generally referred to as a hunk.  The hunk has two important pieces of information.  Section \texttt{-1,2} tells us that in the original file, we are looking at the original file (\texttt{-}), that the starting line where the change takes place is line 1 (\texttt{1}) and that the hunk applies to two lines (\texttt{2}).  The next section tells us that in the new file, the change takes place as line 1, and because the comma and remaining number are omitted, we can infer that the hunk applies to only 1 line.
+Now we see some lines which are generally referred to as a hunk.  The hunk has two important pieces of information.  Section \texttt{-1,2} tells us that in the original file, we are looking at the original file (\texttt{-}), that the starting line where the change takes place is line 1 (\texttt{1}) and that the hunk applies to two lines (\texttt{2}).  The next section tells us that in the new file, the change takes place as line 1, and because the comma and remaining number are omitted, we can infer that the hunk applies to only 1 line.
 
-The next three lines show what happened.  Strings \texttt{Change1} and \texttt{Change2} were deleted from the file, whereas \texttt{Changed this file completely} was added to the file.
+The three following lines show what actually took place.  Strings \texttt{Change1} and \texttt{Change2} were deleted from the file, whereas \texttt{Changed this file completely} was added to the file.
 
 Looking at the next diff segment, we can see it applies to a different file.  Essentially this hunk is no different to the last, the only interesting portion is shown below.
 
