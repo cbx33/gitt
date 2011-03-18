@@ -188,7 +188,7 @@ Date:   Tue Mar 1 21:17:57 2011 +0000
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-The command \texttt{git log HEAD~1..HEAD} tells Git to show us the git log for all commits between \texttt{HEAD~1} and \texttt{HEAD}.  The notation used here is something new to us, but seeing as HEAD points to the most current commit, HEAD~1 points to the commit previous to HEAD.  This is how we tell Git to show us only the most recently commit.  
+The command \texttt{git log HEAD\textasciitilde1..HEAD} tells Git to show us the git log for all commits between \texttt{HEAD~1} and \texttt{HEAD}.  The notation used here is something new to us, but seeing as HEAD points to the most current commit, HEAD~1 points to the commit previous to HEAD.  This is how we tell Git to show us only the most recently commit.  
 
 As it turns out, John Haskins didn't really create a very meaningful log message.  \emph{Messed with a few files} is pretty unhelpful in the grand scheme of things.  So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit \textbf{fa65f}.
 
@@ -302,7 +302,7 @@ index 0000000..5d27866
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Notice we get to see the diff that was presented before when we ran our \texttt{git diff HEAD~1..HEAD} command, but this time, as we have used the git log command instead, we get to see the diff output as well.  This is what the \texttt{-p} flag is for.  Take note of the way we have specified the time period that we are interested in.  The section \texttt{--since="last week"} tells Git to filter the output and show only the entries that were committed within the last week.
+Notice we get to see the diff that was presented before when we ran our \texttt{git diff HEAD\textasciitilde1..HEAD} command, but this time, as we have used the git log command instead, we get to see the diff output as well.  This is what the \texttt{-p} flag is for.  Take note of the way we have specified the time period that we are interested in.  The section \texttt{--since="last week"} tells Git to filter the output and show only the entries that were committed within the last week.
 
 This type of filtering can be exceedingly useful to a developer.  Often when problems arise, you do not have a defined point in time that you know it was last working.  However most of the time, you can say with some certainty, ``I know it was working two weeks ago''.  Using the methods described above, will give the user all of the changes, categorised by commit, that occurred in those two weeks, allowing them to narrow down the scope of exactly where to begin looking for the offending changes.
 
@@ -555,9 +555,9 @@ Next we move on to branching and merging.  Branching can be a tricky subject, so
 
 \item\texttt{git log -S<string> <path>} - Show all commits that either introduced or removed a particular string from the repository, but restrict the search to a specific path
 
-\item\texttt{git log HEAD~1..HEAD} - Show all commits between HEAD~1 and HEAD, essentially the last commit
+\item\texttt{git log HEAD\textasciitilde1..HEAD} - Show all commits between HEAD~1 and HEAD, essentially the last commit
 
-\item\texttt{git diff HEAD~1..HEAD} - Show the actual differences between HEAD~1 and HEAD
+\item\texttt{git diff HEAD\textasciitilde1..HEAD} - Show the actual differences between HEAD~1 and HEAD
 
 \item\texttt{git tag <name>} - Create a tag with the given name
 

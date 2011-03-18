@@ -309,7 +309,7 @@ Everyone nodded in agreement.
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{.9\textwidth}
-We spoke earlier about the configuration file and how it stores information about our Git instance.  Git can use any text editor you require, even a graphical one, though the need rarely arises.  As mentioned earlier, Git has a preference lever when talking about configuration.  First and foremost it will look in the repositories own 'config' file in the .git folder.  Then, it will look in the users \texttt{~/.gitconfig} file.  Finally, Git will look in your distributions own global folder.  
+We spoke earlier about the configuration file and how it stores information about our Git instance.  Git can use any text editor you require, even a graphical one, though the need rarely arises.  As mentioned earlier, Git has a preference lever when talking about configuration.  First and foremost it will look in the repositories own 'config' file in the .git folder.  Then, it will look in the users \texttt{\textasciitilde/.gitconfig} file.  Finally, Git will look in your distributions own global folder.  
 
 If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;
 
