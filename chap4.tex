@@ -309,10 +309,41 @@ john@akira:~/coderepo-clone$
 Let us take a few moments to see what has happened here.  It would appear that our data has been copied successfully.  If you were to run a \texttt{git log} on this dir, you would see all the previous log messages for all our previous commits.  You can also see that if we run \texttt{git status} that we are on the same branch here that we were in our repository when we left it.  In this case, we are in the \textbf{master} branch.
 
 \begin{trenches}
+``Klaus, this doesn't make sense though.  I cloned my repo, but my branches have vanished,'' started Rob, rather worriedly.
+
+``I'm sure they haven't gone anywhere,'' shouted John.  
+
+Rob's reply was quick and certain, ``They have!  Run a git branch on your clone and see for yourself''
+
+``Oh!''
+
+Rob smiled the smug smile of a man who is pleased he was right.
+
+\being{center} * * * \end{center}
+
+``Rob?'' asked John tentatively, aware of his previous state of anguish.
+
+His reply indicated a less than stressed demeanour, ``Sup, dude?''.
+
+John was pleasantly suprised, ``Did you sort out the branch issue?''
+
+Rob begain walking over to John, ``Yeh, try running git branch with the r parameter.''
 
 \end{trenches}
 
-You may be thinking that we now have a detached copy of everything in our repository.  That's not exactly accurate.  Whilst we have all the objects in our repository, we do not yet have our branches set up locally.  They are available, but they have not been setup.  To explain this we need to introduce the concept of remote tracking branches.
+You may be thinking that we now have a detached copy of everything in our repository.  That's not exactly accurate.  Let us run the command that Rob suggested and see what is happening.  
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo-clone$ git branch
+* master
+john@akira:~/coderepo-clone$ git branch -r
+  origin/HEAD -> origin/master
+  origin/master
+  origin/wacky
+john@akira:~/coderepo-clone$ 
+\end{Verbatim}
+
+Whilst we have all the objects in our repository, we do not yet have our branches set up locally.  They are available, but they have not been setup.  To explain this we need to introduce the concept of remote tracking branches.
 
 Now we have a complete copy of our repository in another location.  At the moment we have created this clone on the same machine that our original is.  This isn't really a very good idea for backup purposes.  Git supplies several means with which to talk to a remote machine, but by far the most common of these is to utilise the SSH protocol.  SSH is a secure, encrypted way to communicate with a remote repository.  
 
