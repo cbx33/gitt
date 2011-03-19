@@ -17,3 +17,5 @@ filter-branch
 subtree
 submodule
 guis
+
+quick branch checkout / create in chap3
