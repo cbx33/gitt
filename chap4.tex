@@ -253,18 +253,12 @@ Now let us take a quick look at a diagram to see how this change actually affect
 \caption{Our first merge}
 \end{figure}
 
-\section{Day 3 - ``Tricking the twigs''}
-\subsection{Neat ways to work}
+This picture should make it clear that the fundamental difference between tags and branches is that whilst the pointer to a branch moves with each commit to that branch, a tag points to a single commit only and never changes, unless forcibly so by the user.
 
-There are a number of tricks that we can employ when using branches.  
+\section{Day 3 - ``No backup?''}
+\subsection{Attack of the clones}
 
-BRINGING CHANGES TO new BRANCH
-
-DO THE WHOLE AHHH I HAVE STUFF I WANT IN A NEW BRANCH
-THEN DO THE SAME WITH A COMMIT
-THEN STASH
-
-Before we jump into this, one of the employees at Tamagoyaki has noticed something.
+We now know about basic branching and merging.  At this stage, there is on important topic we must cover briefly, and this is subject of cloning.  Cloning allows you to make a complete copy of your repository, including all of its history and all of the branches.  Let us take a look at a situation which could make use of cloning.
 
 \begin{trenches}
 ``So John,'' started Rob, ``Just how are we backing up the repository at the moment?''
@@ -288,9 +282,60 @@ Klaus smiled, it seemed Rob was finally understanding things, ``Go ask him,'' sa
 ``Right'' nodded Rob and off he went.
 \end{trenches}
 
-So before we even begin to look at anything like branching, merging or rebasing, we first need to find out how to make a backup of our repository and keep it up to date.  Obviously we could just take the files and copy them, but perhaps a better way of doing this is to clone our repository using the \texttt{git clone} command.  Cloning a repository basically means creating an exact copy of the data in an alternative location.  Well, that's what cloning means isn't it?
+So cloning is an excellent way of taking a copy of our repository, in essence it is a simple way of taking a backup of our repository and keeping it up to date.  Obviously we could just take the files and copy them, but a better way of doing this is by utilising the \texttt{git clone} command.  When cloning a repository, we take then entire structure and replicate it, creating an exact copy of the data in an alternative location.  Well, that's what cloning means isn't it?
 
-The git clone tool doesn't just copy the data though, it does several other things.  Let us create a clone of our test repository 
+The git clone tool doesn't just copy the data though, it does several other things.  Let us create a clone of our test repository to another local location.  In this case, we are going to clone the repository into a folder called \texttt{coderepo-clone}.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~$ git clone coderepo coderepo-clone
+Initialized empty Git repository in /home/john/coderepo-clone/.git/
+john@akira:~$ 
+\end{Verbatim}
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~$ cd coderepo-clone
+john@akira:~/coderepo-clone$ ls
+another_file  my_third_committed_file  newfile1  newfile2
+john@akira:~/coderepo-clone$
+\end{Verbatim}
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo-clone$ git status
+# On branch master
+nothing to commit (working directory clean)
+john@akira:~/coderepo-clone$ 
+\end{Verbatim}
+
+Let us take a few moments to see what has happened here.  It would appear that our data has been copied successfully.  If you were to run a \texttt{git log} on this dir, you would see all the previous log messages for all our previous commits.  You can also see that if we run \texttt{git status} that we are on the same branch here that we were in our repository when we left it.  In this case, we are in the \textbf{master} branch.
+
+\begin{trenches}
+
+\end{trenches}
+
+You may be thinking that we now have a detached copy of everything in our repository.  That's not exactly accurate.  Whilst we have all the objects in our repository, we do not yet have our branches set up locally.  They are available, but they have not been setup.  To explain this we need to introduce the concept of remote tracking branches.
+
+Now we have a complete copy of our repository in another location.  At the moment we have created this clone on the same machine that our original is.  This isn't really a very good idea for backup purposes.  Git supplies several means with which to talk to a remote machine, but by far the most common of these is to utilise the SSH protocol.  SSH is a secure, encrypted way to communicate with a remote repository.  
+
+If we assume that for a moment that our user john has now moved to another machine
+
+In the next step, we are assuming that we have another machine where our user john has SSH access, and we are going to clone our repository there.
+
+%POSSIBLY Talk about the SHARED and REFERENCE in a breakout
+%POSSIBLY TALK ABOUT SSH
+%ssh://[user@]host.xz[:port]/path/to/repo.git/
+
+\section{Day 4 - ``Tricking the twigs''}
+\subsection{Neat ways to work with branches}
+
+There are a number of tricks that we can employ when using branches.  They are possible because of the super flexible way in which branches are implemented in Git.  As a branch is literally a pointer to a commit, certain operations are available to a user that other systems just can not implement.  However, we should at this point cover 
+
+BRINGING CHANGES TO new BRANCH
+
+DO THE WHOLE AHHH I HAVE STUFF I WANT IN A NEW BRANCH
+THEN DO THE SAME WITH A COMMIT
+THEN STASH
+
+
 
 %branches
 %merge
