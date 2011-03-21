@@ -286,7 +286,54 @@ Simon grinned inanely to himself.  ``I just started modifying some files and wel
 Rob pointed at Simon's screen.  ``You can just create a new branch now and move all the changes into it in one go.  You can do it in one command actually.''
 \end{trenches}
 
+It is one hundred percent true.  How many times have you been working on something and wished that you could move all the changes you had made to a new safe environment to protect your already good, working code.  Well, the new safe environment we spoke of sounds suspiciously like a branch.  In Git, any changes you have in your working copy can be taken into a new branch by issuing one command.  It is important to note that these changes can also be taken into an existing branch, but you may run into problems if those changes conflict with items already in that branch.
 
+For now let us see how we can take our working copy changes into a new branch to continue development of some wonderful new feature.  We are going to start by making some changes to our newfiles.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo$ echo "and some more changes" >> newfile1
+pete@satsuki:~/coderepo$ echo "and a new feature" >> newfile2
+\end{trenches}
+
+Now we are going to make a new branch and switch into it.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo$ git checkout -b wonderful
+M	newfile1
+M	newfile2
+Switched to a new branch 'wonderful'
+pete@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Did you see that?  We managed to create a new branch and move into it in one go.  The \texttt{git checkout} command is usually what we would use to move into a branch, not create it.  When we use the \texttt{-b} parameter, the \texttt{git checkout} command can be used to create a new branch and switch to it in one go.  Notice we have chosen the name \textbf{wonderful} for this particular branch.  There is also a status output below this that shows we have pulled two modifications into this branch, denoted by the letter \texttt{M} in front of the file name.
+
+Now we can commit these changes.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+pete@satsuki:~/coderepo$ git commit -a -m 'Fantastic new feature'
+[wonderful f0cbf32] Fantastic new feature
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+pete@satsuki:~/coderepo$ git diff master wonderful
+diff --git a/newfile1 b/newfile1
+index 24e7dfa..ef20984 100644
+--- a/newfile1
++++ b/newfile1
+@@ -1 +1,2 @@
+ A new file
++and some more changes
+diff --git a/newfile2 b/newfile2
+index cba16cc..dac4357 100644
+--- a/newfile2
++++ b/newfile2
+@@ -1 +1,2 @@
+ Another new file
++and a new feature
+pete@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+After running the diff, we can see the differences between the \textbf{master} and the \textbf{wonderful} branches.  Looking more closely at the hunks, the only differences between the two branches are those that we made before the branch.  
+
+MAKE CHANGES IN MASTER THEN CONFLICT
 
 BRINGING CHANGES TO new BRANCH
 
