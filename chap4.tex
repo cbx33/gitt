@@ -18,7 +18,7 @@ No one looked up and the hum of the computers seemed to drown out the mumours of
 
 ``John!''  Shouted Eugene, as if ignoring Klaus entirely.  The manager hadn't looked up from his monitor as he had advised the tools guy and he now sat there continuing to type with one hand, the other reaching over and yanking out the earbud that was playing a droning beat in John's ear.
 
-``Ouch!'' said John startled.
+``Ouch!'' said John, slightly startled.
 
 ``Dork wants you,'' said Klaus, using his pet name for Eugene.  
 
@@ -27,7 +27,7 @@ John walked over to Eugene.  ``Sup?!''
 ``I don't get branches,'' said the developer.  ``I mean I don't get what the heck they do, why I would ever want to use them, and how are they even different to tags anyway?''
 \end{trenches}
 
-First we should probably start off by describing what branches are and what they can be used for.  In Git, a branch is just a pointer to a commit in the repository.  At first glance this might not seem any different to a tag.  A tag points to a commit, so does a branch.  So what is the difference?  Let us start playing with branches a little and the answer will become obvious in a while.  Using branches allows you to try things out and even keep a history of the things you try without actually affecting your main branch.
+First, we should probably start off by answering that very question and describing what branches are and what they can be used for.  In Git, a branch is just a pointer to a commit in the repository.  At first glance this might not seem any different to a tag.  A tag points to a commit, so does a branch.  So what distinguishes between the two?  Let us start playing with branches a little and the answer will become obvious in a while.  Branches allow you to try things out and even keep a history of the things you try without actually affecting your main branch.  In essense you are able to take things in a completely different direction, safe in the knowledge that your core code base will be safe.
 
 This is best illustrated by a little demonstration, so we are going to take our testing repository and branch off to try out new, wonderful and wacky things.
 
@@ -42,7 +42,9 @@ john@akira:~/coderepo$ git branch
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-From looking at the output, it would appear that our \texttt{git branch wacky} command did not accomplish a whole lot.  Running the \texttt{git branch} command will give us a list of all branches in the repository.  You may have noticed the presence of the \texttt{*} in front of the word \texttt{master}.  This is telling us that we are on the branch called \textbf{master}.  Hang on though.  Did we not just create a new branch called \textbf{wacky}?  Well yes we did.  However we have not yet switched to it.  To do this, we use our good friend \texttt{git checkout}.
+From looking at the output, it would appear that our \texttt{git branch wacky} command did not accomplish a whole lot.  Running the \texttt{git branch} command will give us a list of all branches in the repository.  You may have noticed the presence of the \texttt{*} in front of the word \texttt{master}.  This is telling us that we are on the branch called \textbf{master}.  Hang on though, did we not just create a new branch called \textbf{wacky}?  
+
+Well yes we did.  However we have not yet switched to it.  To do this, we use our good friend \texttt{git checkout}.  This will change the working copy to reflect the most recent commit in that branch, and will reset our HEAD accordingly, so that it points to this latest commit
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git checkout wacky
@@ -53,9 +55,9 @@ john@akira:~/coderepo$ git branch
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Now the \texttt{*} has moved to be in front of the word \texttt{wacky} and we have confirmation from the line above that we have in fact \texttt{Switched to branch 'wacky'}.  Now we are, what can we do?  Well, anything we could do in our previous branch.  Some of you maybe be thinking, but we never created an initial branch called \textbf{master}.  Whilst this is true in one sense, the \texttt{git init} command actually created this branch for us when we initialised the repository.
+Now the \texttt{*} has moved to be in front of the word \texttt{wacky} and we have confirmation from the line above that we have in fact \texttt{Switched to branch 'wacky'}.  Now we are here in wonderland, what can we do?  Well, potentially anything we could do in our previous branch, but with the added benefit that we are separated.  Some of you maybe be thinking, but we never created an initial branch called \textbf{master}.  Whilst this is true in one sense, the \texttt{git init} command actually created this branch for us when we initialised the repository.
 
-Running a \texttt{git log} shows us the history of our branch.  
+We will start off by taking a deeper look at what is present in our branch.  Running a \texttt{git log} shows us the history of our branch.  
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git log
@@ -85,7 +87,7 @@ Date:   Sat Feb 19 09:23:47 2011 +0000
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-You may notice here that the log that is being displayed is identical to that which we had before in our \textbf{master} branch.  If we now make changes to the \emph{repository} we can take a look and see how this will affect things.  To start with, let us remove a few files from the working tree, commit, then add a few more, stage them and commit the new files.
+You may notice here that the log messages being displayed are identical to that which we had before in our \textbf{master} branch.  This is nothing to be worried about.  You may be wondering how these can be present if we are in a totally separate environment.  Well, though we have branched, the history that led us to this point is the same.  As we have not made any changes yet, we do not notice any divergence.  If we now make changes to the \emph{repository} we can take a look and see how this will affect things.  To start with, let us remove a few files from the working tree, commit these actions, then add a few more, stage them and commit the new files.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git rm my_first_committed_file
@@ -108,7 +110,7 @@ john@akira:~/coderepo$ git commit -m 'Added two new files'
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-So we have made several new commits to the repository under our new branch.  If we run a Linux \texttt{ls} command to see the files which are in the working tree, we can see that our working copy has indeed altered.  We will also use our \texttt{git log} tool to see what the latest commit is.
+So we have made two new commits to the repository under our new branch.  If we run a Linux \texttt{ls} command to see the files which are in the working tree, we can see that our working copy has indeed altered.  We will also use our \texttt{git log} tool to see what the latest commit is.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ ls
@@ -122,7 +124,7 @@ Date:   Tue Mar 15 20:21:42 2011 +0000
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Brilliant.  Hopefully you can see that we have used \texttt{git log} in a slightly different way to limit the number of commits.  This is what the \texttt{-n} parameter is used for.  However, what happens if we go back to the \textbf{master} branch again?  In theory we should have everything back the way we left it in the master branch.  Let's move back into our \textbf{master} branch and see the state of play.
+Brilliant.  As you can see, we have used \texttt{git log} in a slightly different way to limit the number of commits.  This is what the \texttt{-n} parameter is used for.  However, what happens if we go back to the \textbf{master} branch again?  In theory we should have everything back the way we left it just before creating the branch.  Let's move back into our \textbf{master} branch and examine the state of play.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git checkout master
@@ -139,7 +141,7 @@ Date:   Tue Mar 1 21:17:57 2011 +0000
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Comparing that to our previous \texttt{ls} command, we can see that this is exactly what the working tree looked like at the beginning of the chapter.  Let us take a look at a diagram of commits to see what has happened in our repository.
+Comparing that to our previous \texttt{ls} command, we can see that this is exactly what the working tree looked like at the beginning of the chapter.  Let us take a look at a diagram of the commit history to see what has happened in our repository.
 
 \begin{figure}[hbt]
 \centering
@@ -162,7 +164,7 @@ commit 8d5140aa7d2bfc43b225afd2549d180dcb16bef6
 ...
 \end{Verbatim}
 
-So here we have added a tag in our current branch, \textbf{wacky}, and we can see that the commit id for the tag \textbf{v2.0} points to the commit \textbf{8d5140a}.  We can also see that the branch \textbf{wacky} is currently pointing to the same commit ID, \textbf{8d5140a}.  Now let us add another file in, make a commit and see what happens after this.
+So here we have added a tag in our current branch, \textbf{wacky}, and we can see that the commit ID for the tag \textbf{v2.0} points \textbf{8d5140a}.  We can also see that the branch \textbf{wacky} is currently pointing to the same commit ID, \textbf{8d5140a}.  Now let us add another file in, make a commit and see what happens after this.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ echo "New stuff" > another_file
@@ -182,16 +184,18 @@ john@akira:~/coderepo$ git branch -v
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-How interesting.  The difference between tags and branches now becomes pretty clear.  Whilst a tag always points to the same commit, a branch reference always points to the tip of that branch.  In essence the reference that a branch points to moves as subsequent commits are made.  In doing this, the whole history of the branch can be revealed.  Since we know the latest commit, we also know the parent of that commit and so on and so on.
+How interesting.  The difference between tags and branches now becomes pretty clear.  Whilst a tag always points to the same commit, a branch reference always points to the tip of that branch.  In essence the reference that a branch points to moves as subsequent commits are made.  By doing this, the whole history of the branch can be retraced.  Since we know the latest commit, we also know the parent of that commit and so on and so on.
 
-Since a branch is just a pointer to a commit, adding to it, modifying it and deleting it can be done safely, without destroying any data in another branch.  In short, it will allow us to completely redesign whatever is being stored in the repository without worrying about how it will affect our baseline.
+Since a branch is just a pointer to a commit, performing operations like adding, modifying and deleting files in the repository can be done safely, without destroying any data in another branch.  In short, it will allow us to completely redesign whatever is being stored in the current branch without worrying about how it will affect our baseline.  For a developer, this is pretty crucial stuff.  This gives people the chance to play with their data and experiment, which is often where the greatest ideas come from.
 
 \section{Day 2 - ``Branches galore''}
 \subsection{Working with branches}
 
-Now we know about branches in general, we should really learn about how to merge changes from one branch into another.  Branches are fantastic for trying new things out and testing ideas, but if those ideas are successful, we need a way of pulling those changes into our \textbf{master} branch.  Of course we could do it the old fashioned way.  
+Now we know about branches in general, we should really learn about how to merge changes from one branch into another.  Branches are fantastic for trying new things out and testing ideas, but if those ideas are successful, we need a way of pulling those changes into our \textbf{master} branch.  
 
-We could switch into our \textbf{wacky} branch, do a little development, copy the files somewhere else, switch to our \textbf{master} branch, and paste the files over the top.  Now, this is probably the simplest way of merging possible.  In actual fact, this is not really merging at all.  Let us take a litle look at both the command output of a simple merge, explain it a little, and then look at a diagramatic explanation.
+Of course we could do this the old fashioned way.  We could switch into our \textbf{wacky} branch, do a little development, copy the files somewhere else, switch to our \textbf{master} branch, and paste the files over the top.  Now, this is probably the simplest way of merging possible.  In actual fact, this is not really merging at all.  However one thing that would be lost is the history of how that branch has developed over time.  Sometimes this can be crucial for knowing why certain things were changed during the development process.
+
+Let us take a litle look at the command output of a simple merge, explain it a little, and then look at a diagramatic representation.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git branch
@@ -200,7 +204,7 @@ john@akira:~/coderepo$ git branch
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Firstly we check just to see what branch we are on.  Next we checkout the branch we want our development branch to be merged into.  In this case, we want to merge \textbf{wacky} into \textbf{master} and so we must first checkout the \textbf{master} branch in order to pull in changes from \textbf{wacky}.
+Firstly we check just to see what branch we are on.  Next we checkout the branch we want our development branch to be merged into.  In this case, we want to merge \textbf{wacky} into \textbf{master} and so we must first checkout the \textbf{master} branch.  Then we can merge in the changes from our \textbf{wacky} branch.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git checkout master
@@ -208,7 +212,7 @@ Switched to branch 'master'
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Now we run the actual merge.
+Now we can run the actual merge.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git merge wacky 
@@ -228,7 +232,9 @@ Fast-forward
 john@akira:~/coderepo$
 \end{Verbatim} 
 
-We can see that the first line after our command shows us which commit we are moving from, and then which commit we should end up on.  In this case we are merging from \textbf{fa65f06} to \textbf{f91f31e}.  The line below this is even more important.  This type of merge is called a \emph{fast-forward} merge.  We have not made any changes to our \textbf{master} branch since we began and subsequently finished out development work, and so instead of having to really merge changes, we have literally just fast-forwarded the \textbf{master} branch, to the same point as our \textbf{wacky} one.  Beneath this text, we see more information about just what is included in the merge.  
+We can see that the first line after our command shows us which commit \textbf{master} is the latest common ancestor to both branches and then which commit is the last in our new branch.  In this case we are merging from \textbf{fa65f06} to \textbf{f91f31e}.  The line below this is even more important.  This type of merge is called a \emph{fast-forward} merge.  We have not made any changes to our \textbf{master} branch since we began developing and subsequently, after finishing our development work, we literally only require fast-forwarding the \textbf{master} branch to the same point in time as our \textbf{wacky} one.  Beneath this text, we see more information about just what is included in the merge.  
+
+We are going to perform a quick check, to see that we are in fact on the master branch and that the latest log message is the one from the point we last left the \textbf{wacky} branch.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git log -n 1
@@ -243,8 +249,6 @@ john@akira:~/coderepo$ git branch
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Finally, we just check to see that we are in fact on the master branch and that the latest log message is the one from the point we last left the \textbf{wacky} branch.
-
 Now let us take a quick look at a diagram to see how this change actually affected the commit flow.  We have included tags in this diagram, so that you can see where they point to as well.
 
 \begin{figure}[hbt]
@@ -254,6 +258,23 @@ Now let us take a quick look at a diagram to see how this change actually affect
 \end{figure}
 
 This picture should make it clear that the fundamental difference between tags and branches is that whilst the pointer to a branch moves with each commit to that branch, a tag points to a single commit only and never changes, unless forcibly so by the user.
+
+\section{Day 4 - ``Tricking the twigs''}
+\subsection{Neat ways to work with branches}
+
+There are a number of tricks that we can employ when using branches.  They are possible because of the super flexible way in which branches are implemented in Git.  As a branch is literally a pointer to a commit, certain operations are available to a user that other systems just can not implement.  However, we should at this point cover 
+
+BRINGING CHANGES TO new BRANCH
+
+DO THE WHOLE AHHH I HAVE STUFF I WANT IN A NEW BRANCH
+THEN DO THE SAME WITH A COMMIT
+THEN STASH
+
+
+\section{Day 4 - ``Conflicting information''}
+\subsection{What to do when it all goes wrong}
+
+The team have been playing with branches for a few days now and are beginning to settle into the idea of branching often.  As you can see, in Git, a branch is a really simple device for allowing experimentation.  As the implementation of branches is so simple, it is also really fast to switch between branches.  If you have been keeping up with the After Hours sections, you can hopefully see that when switching branches, Git only needs to alter what is different between one working copy and another.
 
 \section{Day 3 - ``No backup?''}
 \subsection{Attack of the clones}
@@ -357,16 +378,6 @@ In the next step, we are assuming that we have another machine where our user jo
 %POSSIBLY TALK ABOUT SSH
 %ssh://[user@]host.xz[:port]/path/to/repo.git/
 
-\section{Day 4 - ``Tricking the twigs''}
-\subsection{Neat ways to work with branches}
-
-There are a number of tricks that we can employ when using branches.  They are possible because of the super flexible way in which branches are implemented in Git.  As a branch is literally a pointer to a commit, certain operations are available to a user that other systems just can not implement.  However, we should at this point cover 
-
-BRINGING CHANGES TO new BRANCH
-
-DO THE WHOLE AHHH I HAVE STUFF I WANT IN A NEW BRANCH
-THEN DO THE SAME WITH A COMMIT
-THEN STASH
 
 
 
