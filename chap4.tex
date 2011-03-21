@@ -262,7 +262,15 @@ This picture should make it clear that the fundamental difference between tags a
 \section{Day 4 - ``Tricking the twigs''}
 \subsection{Neat ways to work with branches}
 
-There are a number of tricks that we can employ when using branches.  They are possible because of the super flexible way in which branches are implemented in Git.  As a branch is literally a pointer to a commit, certain operations are available to a user that other systems just can not implement.  However, we should at this point cover 
+There are a number of tricks that we can employ when using branches.  They are possible because of the super flexible way in which branches are implemented in Git.  As a branch is literally a pointer to a commit, certain operations are available to a user that other systems just can not implement.  However, we should point something out at this point.  Even though we have not yet made any of our repositories public or available to other people, something should always be in the back of your mind.  Allow a few minutes to read the paragraph below.
+
+As someone once said, ``With great power, comes great responsibility.''  Git is hugely powerful.  However, with this power comes a certain level of responsibility.  We are referring here to Git's ability to change history.  If you have watched any science fiction films involving time travel, you should be aware of the difficulties and problems often associated with time travel.  In Git, the same rule applies and the basics of the rule boil down to this: \textbf{If you have made a commit, or path of commits available, you should never ever change anything in the history of those commits or the commits themselves.}  
+
+If you are wondering why this is so important, consider this.  If you are making a series of films, and you have already released the first two of a trilogy, you would not put elements in the third one that contradict the history of the others.  You can not just act like the history of the first two did not happen.  Occasionally this happens in the film industry and what is the reaction of the public?  People get mad.  Sometimes very mad.  This is what will happen if you do the same with Git.  People who are using your repository will end up with many problems and inconsistencies.  \textbf{Do NOT do it, ever}.  There are ways to revert certain behaviour and we will cover this at a later stage.
+
+Having said this, you should not shy away from the awesome capabilities of Git.  We are going to cover a few situations now which you may find yourself in.  Some of them do alter history, some of them do not.  This is why it is important to have an understanding of how Git works.  It can be your best friend, but it can also cause you issues.  If you take the time to tame the beast, it will be one of the most awesome tools in your developers tool bag and can save your life time and time again.  
+
+
 
 BRINGING CHANGES TO new BRANCH
 
