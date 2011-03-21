@@ -115,7 +115,7 @@ So we have made two new commits to the repository under our new branch.  If we r
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ ls
 my_third_committed_file  newfile1  newfile2  temp_file
-john@akira:~/coderepo$ git log -n 1
+john@akira:~/coderepo$ git log -n1
 commit 8d5140aa7d2bfc43b225afd2549d180dcb16bef6
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
 Date:   Tue Mar 15 20:21:42 2011 +0000
@@ -237,7 +237,7 @@ We can see that the first line after our command shows us which commit \textbf{m
 We are going to perform a quick check, to see that we are in fact on the master branch and that the latest log message is the one from the point we last left the \textbf{wacky} branch.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git log -n 1
+john@akira:~/coderepo$ git log -n1
 commit f91f31ee594ff9edade7675dd0991b9c0f7c469b
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
 Date:   Wed Mar 16 19:21:46 2011 +0000
@@ -259,7 +259,7 @@ Now let us take a quick look at a diagram to see how this change actually affect
 
 This picture should make it clear that the fundamental difference between tags and branches is that whilst the pointer to a branch moves with each commit to that branch, a tag points to a single commit only and never changes, unless forcibly so by the user.
 
-\section{Day 4 - ``Tricking the twigs''}
+\section{Day 3 - ``Tricking the twigs''}
 \subsection{Neat ways to work with branches}
 
 There are a number of tricks that we can employ when using branches.  They are possible because of the super flexible way in which branches are implemented in Git.  As a branch is literally a pointer to a commit, certain operations are available to a user that other systems just can not implement.  However, we should point something out at this point.  Even though we have not yet made any of our repositories public or available to other people, something should always be in the back of your mind.  Allow a few minutes to read the paragraph below.
@@ -331,9 +331,15 @@ index cba16cc..dac4357 100644
 pete@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-After running the diff, we can see the differences between the \textbf{master} and the \textbf{wonderful} branches.  Looking more closely at the hunks, the only differences between the two branches are those that we made before the branch.  
+After running the diff, we can see the differences between the \textbf{master} and the \textbf{wonderful} branches.  Looking more closely at the hunks, the only differences between the two branches are those that we made before we created our \textbf{wonderful} branch.  
+
+
 
 MAKE CHANGES IN MASTER THEN CONFLICT
+
+MAKE A NEW COMMIT AND MOVE IT TO A NEW BRANCH
+
+DELETE THE BRANCH RECOVER IT
 
 BRINGING CHANGES TO new BRANCH
 
@@ -347,116 +353,37 @@ THEN STASH
 
 The team have been playing with branches for a few days now and are beginning to settle into the idea of branching often.  As you can see, in Git, a branch is a really simple device for allowing experimentation.  As the implementation of branches is so simple, it is also really fast to switch between branches.  If you have been keeping up with the After Hours sections, you can hopefully see that when switching branches, Git only needs to alter what is different between one working copy and another.
 
-\section{Day 3 - ``No backup?''}
-\subsection{Attack of the clones}
 
-We now know about basic branching and merging.  At this stage, there is on important topic we must cover briefly, and this is subject of cloning.  Cloning allows you to make a complete copy of your repository, including all of its history and all of the branches.  Let us take a look at a situation which could make use of cloning.
+branch
+checout
+log -n1
+branch -v
+show
+merge
+checkout -b
 
-\begin{trenches}
-``So John,'' started Rob, ``Just how are we backing up the repository at the moment?''
+\clearpage
 
-John thought for a moment before replying.  He knew what Rob was getting at, but he hadn't expected Rob to bring the question up in front of Markus.  In truth he had forgotten all about it.  He turned to Markus.
+\section{Summary - John's Notes}
+\subsection{Commands}
+\begin{itemize}
+\item\texttt{git branch <branch_name>} - Creates a new branch with a given name
 
-``I'll be honest Markus.  Currently the repository isn't being backed up, but then we are running in parallel with the old system, so it would be the end of the world if we lost it.''
+\item\texttt{git checkout <branch_name>} - Switches to a new branch
 
-Markus nodded and smiled.  It seemed that John had gotten away with it for now and with that, Klaus shot Rob a piercing glance.  
+\item\texttt{git log -n1} - Limits the output of the log command to only a single line
 
-``Team,'' began Markus, ``we need a definitive way of backing up the new Git repository, and I'd like it done before the end of the day.''  He pointed at a document on the table.  ``This project document has been approved by Wayne, and in there it states we will have a defined backup strategy.  Please don't let me down.''
+\item\texttt{git branch -v} - Verbosely list all local branchs
 
-\begin{center} * * * \end{center}
+\item\texttt{git show <reference>} - Show the information pointed to by the reference
 
-``Rob you really got to be careful about things like that,'' Klaus said to one of the younger members of the team.  ``You really showed John up in there.''  
+\item\texttt{git merge <branch_name>} - Merge in a given branch to the current one
 
-``Yeh,'' said Rob, ``I realise that now.''  He stood with his back against the wall and tapped his fingers against the painted surface.  ``I was wondering, do you think John would let me look at the backup system for him as a way of apologising.''
+\item\texttt{git checkout -b <branch_name>} - Create a new branch and switch into it in one go
 
-Klaus smiled, it seemed Rob was finally understanding things, ``Go ask him,'' said Klaus, ``He's so snowed under with the BurnForce release that he'll probably let you implement it too''
+\end{itemize}
 
-``Right'' nodded Rob and off he went.
-\end{trenches}
-
-So cloning is an excellent way of taking a copy of our repository, in essence it is a simple way of taking a backup of our repository and keeping it up to date.  Obviously we could just take the files and copy them, but a better way of doing this is by utilising the \texttt{git clone} command.  When cloning a repository, we take then entire structure and replicate it, creating an exact copy of the data in an alternative location.  Well, that's what cloning means isn't it?
-
-The git clone tool doesn't just copy the data though, it does several other things.  Let us create a clone of our test repository to another local location.  In this case, we are going to clone the repository into a folder called \texttt{coderepo-clone}.
-
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~$ git clone coderepo coderepo-clone
-Initialized empty Git repository in /home/john/coderepo-clone/.git/
-john@akira:~$ 
-\end{Verbatim}
-
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~$ cd coderepo-clone
-john@akira:~/coderepo-clone$ ls
-another_file  my_third_committed_file  newfile1  newfile2
-john@akira:~/coderepo-clone$
-\end{Verbatim}
-
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo-clone$ git status
-# On branch master
-nothing to commit (working directory clean)
-john@akira:~/coderepo-clone$ 
-\end{Verbatim}
-
-Let us take a few moments to see what has happened here.  It would appear that our data has been copied successfully.  If you were to run a \texttt{git log} on this dir, you would see all the previous log messages for all our previous commits.  You can also see that if we run \texttt{git status} that we are on the same branch here that we were in our repository when we left it.  In this case, we are in the \textbf{master} branch.
-
-\begin{trenches}
-``Klaus, this doesn't make sense though.  I cloned my repo, but my branches have vanished,'' started Rob, rather worriedly.
-
-``I'm sure they haven't gone anywhere,'' shouted John.  
-
-Rob's reply was quick and certain, ``They have!  Run a git branch on your clone and see for yourself''
-
-``Oh!''
-
-Rob smiled the smug smile of a man who is pleased he was right.
-
-\begin{center} * * * \end{center}
-
-``Rob?'' asked John tentatively, aware of his previous state of anguish.
-
-His reply indicated a less than stressed demeanour, ``Sup, dude?''.
-
-John was pleasantly suprised, ``Did you sort out the branch issue?''
-
-Rob begain walking over to John, ``Yeh, try running git branch with the r parameter.''
-
-\end{trenches}
-
-You may be thinking that we now have a detached copy of everything in our repository.  That's not exactly accurate.  Let us run the command that Rob suggested and see what is happening.  
-
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo-clone$ git branch
-* master
-john@akira:~/coderepo-clone$ git branch -r
-  origin/HEAD -> origin/master
-  origin/master
-  origin/wacky
-john@akira:~/coderepo-clone$ 
-\end{Verbatim}
-
-Whilst we have all the objects in our repository, we do not yet have our branches set up locally.  They are available, but they have not been setup.  To explain this we need to introduce the concept of remote tracking branches.  We are familiar with local branches.  Local branches allowed us to make commits locally in a safe and separated environment.  Remote tracking branches are links to remote branches which allow us to track the development of that branch and bring it in to a local one if we so desire.
-
-With a remote tracking branch, we can pull in the changes from the remote repository
-
-Now we have a complete copy of our repository in another location.  At the moment we have created this clone on the same machine that our original is.  This isn't really a very good idea for backup purposes.  Git supplies several means with which to talk to a remote machine, but by far the most common of these is to utilise the SSH protocol.  SSH is a secure, encrypted way to communicate with a remote repository.  
-
-If we assume that for a moment that our user john has now moved to another machine
-
-In the next step, we are assuming that we have another machine where our user john has SSH access, and we are going to clone our repository there.
-
-%POSSIBLY Talk about the SHARED and REFERENCE in a breakout
-%POSSIBLY TALK ABOUT SSH
-%ssh://[user@]host.xz[:port]/path/to/repo.git/
-
-
-
-
-%branches
-%merge
-%remote tracking
-%Itt section about not having anything backed up
-
-%Parallel devving - ie...use both git and old for a while
-
-% git show v1.0.0^{tree}
+\subsection{Terminology}
+\begin{itemize}
+\item Need to think of some !!!!!!!!!!!!!
+\end{itemize}
