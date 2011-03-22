@@ -5,10 +5,6 @@ push
 pull
 fetch
 untracked files with .gitignore
-* tag listing
-* full tags
-* moving files
-* deletions
 Reflog use for head git reset
 make patch
 apply patch
@@ -17,5 +13,3 @@ filter-branch
 subtree
 submodule
 guis
-
-quick branch checkout / create in chap3
