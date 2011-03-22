@@ -422,7 +422,8 @@ The \texttt{git reset} command does not only work for rewinding back in time.  I
 Finally we are going to introduce one more use of the \texttt{git log} command to show us how our repository looks in a semi-graphical way.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate
+john@akira:~/coderepo$ git log --graph --pretty=oneline --all 
+--abbrev-commit --decorate
 * 4fdfe36 (zaney) Made another awesome change
 * 46c2390 Made an awesome change
 | * f0cbf32 (wonderful) Fantastic new feature
@@ -487,12 +488,7 @@ john@akira:~/coderepo$ git branch -v
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-
-
-DELETE THE BRANCH RECOVER IT
-
-THEN STASH
-
+%THEN STASH
 
 \section{Day 5 - ``Conflicting information''}
 \subsection{What to do when it all goes wrong}
