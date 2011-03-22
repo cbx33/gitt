@@ -259,9 +259,6 @@ Now let us take a quick look at a diagram to see how this change actually affect
 
 This picture should make it clear that the fundamental difference between tags and branches is that whilst the pointer to a branch moves with each commit to that branch, a tag points to a single commit only and never changes, unless forcibly so by the user.
 
-\section{Day 3 - ``Tricking the twigs''}
-\subsection{Neat ways to work with branches}
-
 There are a number of tricks that we can employ when using branches.  They are possible because of the super flexible way in which branches are implemented in Git.  As a branch is literally a pointer to a commit, certain operations are available to a user that other systems just can not implement.  However, we should point something out at this point.  Even though we have not yet made any of our repositories public or available to other people, something should always be in the back of your mind.  Allow a few minutes to read the paragraph below.
 
 As someone once said, ``With great power, comes great responsibility.''  Git is hugely powerful.  However, with this power comes a certain level of responsibility.  We are referring here to Git's ability to change history.  If you have watched any science fiction films involving time travel, you should be aware of the difficulties and problems often associated with time travel.  In Git, the same rule applies and the basics of the rule boil down to this: \textbf{If you have made a commit, or path of commits available, you should never ever change anything in the history of those commits or the commits themselves.}  
@@ -332,6 +329,9 @@ john@akira:~/coderepo$
 \end{Verbatim}
 
 After running the diff, we can see the differences between the \textbf{master} and the \textbf{wonderful} branches.  Looking more closely at the hunks, the only differences between the two branches are those that we made before we created our \textbf{wonderful} branch.  We have achieved what we set out to in bringing uncommitted changes from \textbf{master} into \textbf{wonderful} and subsequently committing them.
+
+\section{Day 3 - ``Tricking the twigs''}
+\subsection{More neat ways to work with branches}
 
 This is only the beginning of the fantastic feature set that Git offers.  By knowing how Git handles your data, you can make it work for you.  Let us take a look at another situation you may find yourself in.
 
@@ -439,18 +439,57 @@ john@akira:~/coderepo$
 
 The \texttt{--graph} parameter, tells Git to draw a graph down the left hand column.  The \texttt{--pretty=oneline} parameter reduces the commit details to one line, else we see the entire log message of the commit.  \texttt{--all} shows all branches.  The \texttt{abbrev-commit} in the command tells Git to abbreviate the commit IDs to a sensible length.  Finally, \texttt{--decorate} shows us the tag and branch references.  Hopefully if you compare this tree to the diagram earlier, you will see that the tree is actually completely in order.
 
+Be aware that during this work we have changed the history of at least one of our branches.  Had we pushed our changes to a public server, which is something that will be discussed next week, we would have to force these changes to be accepted at the server end.  Git knows we are trying to change a past that may have been viewed by others and will warn us accordingly.
+
+\section{Day 4 - ``I pressed delete...''}
+\subsection{Regretable information}
+
+So we have had some awesome fun working with branches, and hopefully you can see how utterly powerful Git is.  Sometimes though we can get ourselves into trouble and it is here that Git can also come to our rescue.  Let us learn how to delete a branch.  We are going to delete our \textbf{wacky} branch now as we have already merged it and no longer require it.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git branch -d zaney
+error: The branch 'zaney' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D zaney'.
+john@akira:~/coderepo$ git branch -D zaney
+Deleted branch zaney (was 4fdfe36).
+john@akira:~/coderepo$ git branch -v
+* master    f91f31e Added another file
+  wacky     f91f31e Added another file
+  wonderful f0cbf32 Fantastic new feature
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Ooops.  Despite the firm warning from Git, we have inadvertantly deleted the \textbf{zaney} branch by mistake.  This does happen.  When people are in the thick of it, they do make mistakes and it is comforting to know that Git is able to recover from this, but how?  We have deleted the branch reference that pointed to the commit that was at the tip of the \textbf{zaney} branch by using the \texttt{-d} and \texttt{-D} parameters.  So the question is, does that commit still exist any more?  Maybe we did more damage than we thought.  By deleting all references to the commit, how do we get it back?
+
+Al is most definitely not lost.  Even though we have removed all references to the commits in question, they still exist in the repository.  They will continue to so unless we run a clean up on the repository, which will be covered later, or if the items are left to age for more that at least fourteen days.  This means that we have up to two weeks to try to recover the lost commits.  Of course in practice one would hope that we would perform the recovery much earlier than that.
+
+We already know the commit ID that the branch was pointing to.  Git has been very kind and told us it, just before it carried out the delete.  We are looking for commit \textbf{4fdfe3}.  If we run the command below, we will create and recover our branch in one go.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git branch zaney 4fdfe3
+john@akira:~/coderepo$ git branch -v
+* master    f91f31e Added another file
+  wacky     f91f31e Added another file
+  wonderful f0cbf32 Fantastic new feature
+  zaney     4fdfe36 Made another awesome change
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Our branch has been restored and points to the same point as it did before we deleted it.  As each commit points to its parent, we now have the complete history of \textbf{zaney} restored and can be used as normal.  To complete this action, let us delete the \textbf{wacky} branch.
+
+john@akira:~/coderepo$ git branch -d wacky
+Deleted branch wacky (was f91f31e).
+john@akira:~/coderepo$ git branch -v
+* master    f91f31e Added another file
+  wonderful f0cbf32 Fantastic new feature
+  zaney     4fdfe36 Made another awesome change
+john@akira:~/coderepo$ 
 
 
-MAKE CHANGES IN MASTER THEN CONFLICT
 
-MAKE A NEW COMMIT AND MOVE IT TO A NEW BRANCH
 
 DELETE THE BRANCH RECOVER IT
 
-BRINGING CHANGES TO new BRANCH
-
-DO THE WHOLE AHHH I HAVE STUFF I WANT IN A NEW BRANCH
-THEN DO THE SAME WITH A COMMIT
 THEN STASH
 
 
@@ -458,15 +497,6 @@ THEN STASH
 \subsection{What to do when it all goes wrong}
 
 The team have been playing with branches for a few days now and are beginning to settle into the idea of branching often.  As you can see, in Git, a branch is a really simple device for allowing experimentation.  As the implementation of branches is so simple, it is also really fast to switch between branches.  If you have been keeping up with the After Hours sections, you can hopefully see that when switching branches, Git only needs to alter what is different between one working copy and another.
-
-
-branch
-checout
-log -n1
-branch -v
-show
-merge
-checkout -b
 
 \clearpage
 
@@ -490,6 +520,12 @@ checkout -b
 \item\texttt{git reset --hard <commit\_ref>} - Reset a branch to a specific commit reference
 
 \item\texttt{git log --graph --pretty=oneline --all --abbrev-commit --decorate} - Shows a graphical view of the repository
+
+\item\texttt{git branch -d <branch\_name>} - Delete a branch that has already been merged
+
+\item\texttt{git branch -D <branch\_name>} - Forcibly delete a branch
+
+\item\texttt{git branch <branch\_name> <commit\_ref>} - Create a new branch, starting at the commit reference
 
 \end{itemize}
 
