@@ -477,6 +477,7 @@ john@akira:~/coderepo$
 
 Our branch has been restored and points to the same point as it did before we deleted it.  As each commit points to its parent, we now have the complete history of \textbf{zaney} restored and can be used as normal.  To complete this action, let us delete the \textbf{wacky} branch.
 
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git branch -d wacky
 Deleted branch wacky (was f91f31e).
 john@akira:~/coderepo$ git branch -v
@@ -484,7 +485,7 @@ john@akira:~/coderepo$ git branch -v
   wonderful f0cbf32 Fantastic new feature
   zaney     4fdfe36 Made another awesome change
 john@akira:~/coderepo$ 
-
+\end{Verbatim}
 
 
 
