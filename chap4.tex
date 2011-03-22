@@ -384,10 +384,61 @@ We already discussed one method using \texttt{git revert}, which we are due to c
 
 \begin{enumerate}
 \item Switch to our \textbf{zaney} branch
-\item Fast-forward our zaney branch so that it points to the same commit
+\item Fast-forward our zaney branch so that it points to the same commit using a merge
 \item Switch back to our \textbf{master} branch
 \item Reset our master branch back to the required point in time
 \end{enumerate}
+
+So let us take a look at the command line output and see how we achieve this.  Hopefully you should be familiar with most of the commands.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git checkout zaney
+Switched to branch 'zaney'
+john@akira:~/coderepo$ git merge master
+Updating f91f31e..4fdfe36
+Fast-forward
+ newfile1 |    1 +
+ newfile2 |    1 +
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+john@akira:~/coderepo$ git checkout master
+Switched to branch 'master'
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Now we reach step 4 in our set of instructions.  The one function we do not know how to perform yet is the resetting of our branch back to a previous point in time.  The point we need to rewind back to is the point that we initially created the \textbf{zaney} branch at.  We could have gotten this information by using \texttt{git log}.  Instead, this time we can use the information presented in the merge output to show the common ancestor, which has to be the point that we created our branch at.  In this case it is commit \textbf{f91f31}.
+
+We are now going to perform the last step using an old friend called \texttt{git reset}.  You may be thinking that \texttt{git reset} is only used to reset files in the index, but in fact, \texttt{git reset} can actually perform many more tasks.  We are going to use it with the \texttt{--hard} option.  This option can be dangerous, as it will discard all modifications in the working tree, so use with caution.  If we had uncommitted changes in our repository at this point, we could not have used this option.  Let's use the command and see where we get.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git reset --hard f91f31
+HEAD is now at f91f31e Added another file
+john@akira:~/coderepo$
+\end{Verbatim}
+
+As you can see, we are told that the HEAD of our master branch is now at commit \textbf{f91f31}.  We have successfully rewound our \textbf{master} branch to a previous state.  The \texttt{--hard} parameter reset the index and the working tree to be at the state of the commit we tell it to.  It disregards all working copy and staged modifications, so use it with care.
+
+The \texttt{git reset} command does not only work for rewinding back in time.  It can also be used to move a branch forward in time.  As an example of this, we used a fast-forward merge to move our \textbf{zaney} branch forward to be inline with master.  We could just have easily used \texttt{git reset --hard 4fdfe3} from within the zaney branch, to bring it to the same point as the master.  In fact, thought it looks scary, we could also have used \texttt{git reset --hard master} to reset the \textbf{zaney} branch to be at the same point as \textbf{master}.  Saves typing out those horrid commits does it not?
+
+Finally we are going to introduce one more use of the \texttt{git log} command to show us how our repository looks in a semi-graphical way.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate
+* 4fdfe36 (zaney) Made another awesome change
+* 46c2390 Made an awesome change
+| * f0cbf32 (wonderful) Fantastic new feature
+|/  
+* f91f31e (HEAD, wacky, master) Added another file
+* 8d5140a (v2.0) Added two new files
+* b5c84a5 Removed a few files
+* fa65f06 (v1.0a) Messed with a few files
+* 6ca160c Finished adding initial files
+* e86ddea (v0.9) Made a few changes to first and second files
+* 8820692 My First Ever Commit
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+The \texttt{--graph} parameter, tells Git to draw a graph down the left hand column.  The \texttt{--pretty=oneline} parameter reduces the commit details to one line, else we see the entire log message of the commit.  \texttt{--all} shows all branches.  The \texttt{abbrev-commit} in the command tells Git to abbreviate the commit IDs to a sensible length.  Finally, \texttt{--decorate} shows us the tag and branch references.  Hopefully if you compare this tree to the diagram earlier, you will see that the tree is actually completely in order.
+
 
 
 MAKE CHANGES IN MASTER THEN CONFLICT
