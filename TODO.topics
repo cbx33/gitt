@@ -13,3 +13,7 @@ filter-branch
 subtree
 submodule
 guis
+
+Chap5
+	remote
+	patching
