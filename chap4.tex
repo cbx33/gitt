@@ -291,18 +291,18 @@ It is one hundred percent true.  How many times have you been working on somethi
 For now let us see how we can take our working copy changes into a new branch to continue development of some wonderful new feature.  We are going to start by making some changes to our newfiles.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ echo "and some more changes" >> newfile1
-pete@satsuki:~/coderepo$ echo "and a new feature" >> newfile2
+john@akira:~/coderepo$ echo "and some more changes" >> newfile1
+john@akira:~/coderepo$ echo "and a new feature" >> newfile2
 \end{trenches}
 
 Now we are going to make a new branch and switch into it.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git checkout -b wonderful
+john@akira:~/coderepo$ git checkout -b wonderful
 M	newfile1
 M	newfile2
 Switched to a new branch 'wonderful'
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 Did you see that?  We managed to create a new branch and move into it in one go.  The \texttt{git checkout} command is usually what we would use to move into a branch, not create it.  When we use the \texttt{-b} parameter, the \texttt{git checkout} command can be used to create a new branch and switch to it in one go.  Notice we have chosen the name \textbf{wonderful} for this particular branch.  There is also a status output below this that shows we have pulled two modifications into this branch, denoted by the letter \texttt{M} in front of the file name.
@@ -310,10 +310,10 @@ Did you see that?  We managed to create a new branch and move into it in one go.
 Now we can commit these changes.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git commit -a -m 'Fantastic new feature'
+john@akira:~/coderepo$ git commit -a -m 'Fantastic new feature'
 [wonderful f0cbf32] Fantastic new feature
  2 files changed, 2 insertions(+), 0 deletions(-)
-pete@satsuki:~/coderepo$ git diff master wonderful
+john@akira:~/coderepo$ git diff master wonderful
 diff --git a/newfile1 b/newfile1
 index 24e7dfa..ef20984 100644
 --- a/newfile1
@@ -328,10 +328,28 @@ index cba16cc..dac4357 100644
 @@ -1 +1,2 @@
  Another new file
 +and a new feature
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
-After running the diff, we can see the differences between the \textbf{master} and the \textbf{wonderful} branches.  Looking more closely at the hunks, the only differences between the two branches are those that we made before we created our \textbf{wonderful} branch.  
+After running the diff, we can see the differences between the \textbf{master} and the \textbf{wonderful} branches.  Looking more closely at the hunks, the only differences between the two branches are those that we made before we created our \textbf{wonderful} branch.  We have achieved what we set out to in bringing uncommitted changes from \textbf{master} into \textbf{wonderful} and subsequently committing them.
+
+This is only the beginning of the fantastic feature set that Git offers.  By knowing how Git handles your data, you can make it work for you.  Let us take a look at another situation you may find yourself in.
+
+\begin{trenches}
+``Rob!'' shouted Simon for the fourth time that morning.  ``Rob, I made a real boo boo this time.''
+
+Rob walked over to Simon again, head lolling back on his shoulders and his eyes rolling.  His arms weighed heavily by his side and his walk reminded Simon of that of a zombie.
+
+``What have you done THIS time?'' asked the developer as he reached the desk.
+
+Simon drew in his breath deeply, ``Well, I created a branch, started working away, committing like a good'un, but I only just realised I'm on the wrong branch.  I forgot to switch.''  He hung his head in shame.  ``I'm screwed right?''
+
+``Not necessarily,'' replied his colleague.
+\end{trenches}
+
+This wouldn't work in all situations, but then there are other techniques described later in the book to deal with more special cases.  In this scenario we have created a branch, forgotten to switch into it, and carried on committing as if we were in our new branch.  At first glance it may seem as if we are stuck.  Once we have committed, we can't undo those commits right?  Well, that's not entirely accurate.  
+
+We actually have two ways of clearing up this particular situation.  The first of these is to use \texttt{git revert} to undo the changes of each commit.  Whilst this will work, we have two problems, a) we do not know how to use the \texttt{git revert} tool yet, and b) we can actually handle this situation much more cleanly.  We are going to make a new branch, make a few commits and then look at a diagram of our recent work to see how we can work things out.
 
 
 
@@ -348,7 +366,7 @@ THEN DO THE SAME WITH A COMMIT
 THEN STASH
 
 
-\section{Day 4 - ``Conflicting information''}
+\section{Day 5 - ``Conflicting information''}
 \subsection{What to do when it all goes wrong}
 
 The team have been playing with branches for a few days now and are beginning to settle into the idea of branching often.  As you can see, in Git, a branch is a really simple device for allowing experimentation.  As the implementation of branches is so simple, it is also really fast to switch between branches.  If you have been keeping up with the After Hours sections, you can hopefully see that when switching branches, Git only needs to alter what is different between one working copy and another.
