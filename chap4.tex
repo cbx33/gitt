@@ -351,6 +351,21 @@ This wouldn't work in all situations, but then there are other techniques descri
 
 We actually have two ways of clearing up this particular situation.  The first of these is to use \texttt{git revert} to undo the changes of each commit.  Whilst this will work, we have two problems, a) we do not know how to use the \texttt{git revert} tool yet, and b) we can actually handle this situation much more cleanly.  We are going to make a new branch, make a few commits and then look at a diagram of our recent work to see how we can work things out.
 
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git checkout master
+Switched to branch 'master'
+john@akira:~/coderepo$ git branch zaney
+john@akira:~/coderepo$ echo "and some awesome changes" >> newfile1
+john@akira:~/coderepo$ git commit -a -m 'Made an awesome change'
+[master 46c2390] Made an awesome change
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@akira:~/coderepo$ echo "and some more awesome changes" >> newfile2
+john@akira:~/coderepo$ git commit -a -m 'Made another awesome change'
+[master 4fdfe36] Made another awesome change
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@akira:~/coderepo$ 
+\end{trenches}
+
 
 
 MAKE CHANGES IN MASTER THEN CONFLICT
