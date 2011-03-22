@@ -322,6 +322,9 @@ If we want the changes to apply globally, meaning it would affect all repositori
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 git config --global core.editor "nano"
 \end{Verbatim}
+
+It is worth noting that you can also use the \$EDITOR environment variable to accomplish the same thing.  Many people use this in preference to the modifying the Git configuration simply because many other programs honour this setting.
+
     \end{minipage}
 };
 \node[fancytitle, right=16pt] at (box.north west) {How do we change the commit message editor?};

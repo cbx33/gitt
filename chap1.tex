@@ -66,7 +66,7 @@ Version control systems usually fit into one of two categories; centralised, or 
 
 Most version control systems offer branching as part of their default feature set.  Branching allows developers to create in essence a clone of their repository and mess around with it, safe in the knowledge that they can switch back to the original whenever they need to.  This allows developers the freedom to experiment with all manner of things without being afraid of affecting the original/clean code base.
 
-Git implements branching in a special way.  Most other version control systems implement branching in a way that almost creates a separate repository.  This is slow and cumbersome.  Git's branching method gives developers the ability to create multiple local branches to play with.  Due to it's distributed nature, when pushing code to a more central location for others to pull from, developers can choose which branches they want to push, allowing code to be experimented with privately.
+Git implements branching in a special way.  Most older version control systems implement branching in a way that almost creates a separate copy of the repository.  This is slow and cumbersome.  Git's branching method gives developers the ability to create multiple local branches to play with.  Due to it's distributed nature, when pushing code to a more central location for others to pull from, developers can choose which branches they want to push, allowing code to be experimented with privately.
 
 The implementation of branching in Git is fast.  Due to the fact that repositories are stored locally, the speed of creating a local branch is limited only by the speed of the disks on a local machine.
 
@@ -85,7 +85,7 @@ In a centralised workflow, a single shared repository is used.  Multiple develop
 
 Git handles this workflow just like most other version control systems.  A developer can not push his changes until he has pulled everything up to the latest from the central repository and resolved any conflicts that may arise.
 
-Using the centralised model for the workflow, each developer has the same level of access to the repository and is considered as \textbf{important} as each other.  For smaller teams, this method will work well, but as teams get larger, a centralised method may get tedious.
+Using the centralised model for the workflow, each developer has the same level of access to the repository and is considered as \textbf{important} as each other.  For smaller teams, this method will work well, but as teams get larger, a centralised method may get tedious.  As more and more people start to access the same files, conflicts and other issues often begin appearing more often.
 
 \begin{figure}[bt]
 	\centering
@@ -122,7 +122,7 @@ Once the Lieutenants are happy with their code, they make it available to the Di
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{.9\textwidth}
-A blessed repository is one which has the approval of the managers of the project.  The blessed repository is supposed to be the de facto standard where all other clones are made from.  If there is one place where code should be correct, it is the blessed repository.  If you are hosting the project in a public place, the blessed repository will usually be the one that is made available to people as a stable point for developing from.
+A blessed, or canonical, repository is one which has the approval of the managers of the project.  The blessed repository is supposed to be the de facto standard where all other clones are made from.  If there is one place where code should be correct, it is the blessed repository.  If you are hosting the project in a public place, the blessed repository will usually be the one that is made available to people as a stable point for developing from.
     \end{minipage}
 };
 \node[fancytitle, right=16pt] at (box.north west) {Blessed};
@@ -134,7 +134,7 @@ The main thing to remember, is that Git can utilise any of these workflows.  Thi
 
 \subsection{Offline Committing}
 
-Perhaps one of the most useful and undervalued features of version control systems is that of offline committing.  It may be undervalued because not all version control systems have it.  Offline committing is the ability to continue adding and committing files to the repository without being connected to a centralised repository.  
+Perhaps one of the most useful and undervalued features of distributed version control systems is that of offline committing.  It may be undervalued because not all version control systems have it.  Offline committing is the ability to continue adding and committing files to the repository without being connected to a centralised repository.  
 
 When travelling or just simply when out of the office, developers and integrators alike are able to continue managing code, viewing histories, viewing diffs and committing changes to their repository.  This is all due to the fact that Git does 99\% of all of it's operations locally.  When a repository is cloned, Git actually sets up a copy of the entire repository locally, giving developers the flexibility to work anywhere, without requiring access to the company network.
 
