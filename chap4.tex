@@ -259,7 +259,7 @@ Now let us take a quick look at a diagram to see how this change actually affect
 
 This picture should make it clear that the fundamental difference between tags and branches is that whilst the pointer to a branch moves with each commit to that branch, a tag points to a single commit only and never changes, unless forcibly so by the user.
 
-There are a number of tricks that we can employ when using branches.  They are possible because of the super flexible way in which branches are implemented in Git.  As a branch is literally a pointer to a commit, certain operations are available to a user that other systems just can not implement.  However, we should point something out at this point.  Even though we have not yet made any of our repositories public or available to other people, something should always be in the back of your mind.  Allow a few minutes to read the paragraph below.
+There are a number of tricks that we can employ when using branches.  They are possible because of the super flexible way in which branches are implemented in Git.  As a branch is literally a pointer to a commit, certain operations are available to a user that other systems just can not implement.  However, we should point something out at this point.  Even though we have not yet made any of our repositories public or available to other people, something should always be in the back of your mind.  Allow a few minutes to read the next few paragraphs below.
 
 As someone once said, ``With great power, comes great responsibility.''  Git is hugely powerful.  However, with this power comes a certain level of responsibility.  We are referring here to Git's ability to change history.  If you have watched any science fiction films involving time travel, you should be aware of the difficulties and problems often associated with time travel.  In Git, the same rule applies and the basics of the rule boil down to this: \textbf{If you have made a commit, or path of commits available, you should never ever change anything in the history of those commits or the commits themselves.}  
 
@@ -443,9 +443,9 @@ The \texttt{--graph} parameter, tells Git to draw a graph down the left hand col
 Be aware that during this work we have changed the history of at least one of our branches.  Had we pushed our changes to a public server, which is something that will be discussed next week, we would have to force these changes to be accepted at the server end.  Git knows we are trying to change a past that may have been viewed by others and will warn us accordingly.
 
 \section{Day 4 - ``I pressed delete...''}
-\subsection{Regretable information}
+\subsection{Handling the pressure}
 
-So we have had some awesome fun working with branches, and hopefully you can see how utterly powerful Git is.  Sometimes though we can get ourselves into trouble and it is here that Git can also come to our rescue.  Let us learn how to delete a branch.  We are going to delete our \textbf{wacky} branch now as we have already merged it and no longer require it.
+We have had some awesome fun working with branches, and hopefully you can see how utterly powerful Git is.  Sometimes though we can get ourselves into trouble and it is here that Git can also come to our rescue.  Let us learn how to delete a branch.  We are going to delete our \textbf{wacky} branch now as we have already merged it and no longer require it.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git branch -d zaney
@@ -476,7 +476,7 @@ john@akira:~/coderepo$ git branch -v
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Our branch has been restored and points to the same point as it did before we deleted it.  As each commit points to its parent, we now have the complete history of \textbf{zaney} restored and can be used as normal.  To complete this action, let us delete the \textbf{wacky} branch.
+Our branch has been restored and points to the same point as it did before we deleted it.  As each commit points to its parent, we now have the complete history of \textbf{zaney} restored and the branch can be used as normal.  To complete this action, let us delete the \textbf{wacky} branch as originally intended.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git branch -d wacky
@@ -488,7 +488,7 @@ john@akira:~/coderepo$ git branch -v
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-%THEN STASH
+As you can see, when we deleted \textbf{wacky} we were not warned about unmerged changes.  This is because the \textbf{wacky} branch is at the same point as the \textbf{master} branch.  
 
 \section{Day 5 - ``Conflicting information''}
 \subsection{What to do when it all goes wrong}
