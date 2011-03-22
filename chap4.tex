@@ -364,8 +364,30 @@ john@akira:~/coderepo$ git commit -a -m 'Made another awesome change'
 [master 4fdfe36] Made another awesome change
  1 files changed, 1 insertions(+), 0 deletions(-)
 john@akira:~/coderepo$ 
-\end{trenches}
+\end{Verbatim}
 
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-w4-d3.pdf}
+\caption{Repository including the mistake}
+\end{figure}
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-w4-d4.pdf}
+\caption{Repository showing how things \emph{should} look}
+\end{figure}
+
+Figure 3 shows how our repository looks now, whereas Figure 4 shows how the repository should have looked if we had performed it properly.  You should notice that the positions of \texttt{master} and \texttt{zaney} have switched places.  How can we recify this?
+
+We already discussed one method using \texttt{git revert}, which we are due to cover a little later.  However, because of the way that the history has been written, we can do something very simple.  We are going do the following the following steps.
+
+\begin{enumerate}
+\item Switch to our \textbf{zaney} branch
+\item Fast-forward our zaney branch so that it points to the same commit
+\item Switch back to our \textbf{master} branch
+\item Reset our master branch back to the required point in time
+\end{enumerate}
 
 
 MAKE CHANGES IN MASTER THEN CONFLICT
