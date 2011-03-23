@@ -596,7 +596,7 @@ john@akira:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Using the \texttt{git stash drop} command, we can drop a single stash from the list.  Looking at the log output, we can see that we have multiple branches, \textbf{zaney}, \texttt{wonderful} and \texttt{master}.  Each of the represents a different point of development.
+Using the \texttt{git stash drop} command, we can drop a single stash from the list.  Looking at the log output, we can see that we have multiple branches, \textbf{zaney}, \texttt{wonderful} and \texttt{master}.  Each of these represents a different point of development.  At some point, we should probably consider merging them into our \textbf{master} branch.
 
 \section{Day 5 - ``Conflicting information''}
 \subsection{What to do when it all goes wrong}
@@ -617,7 +617,9 @@ The team have been playing with branches for a few days now and are beginning to
 ``Figures,'' said John.  
 \end{trenches}
 
-Conflicts are bound to happen at some point.  
+Conflicts are bound to happen at some point.  Even the best project processes in the world will sometimes end up with a conflict that has to be resolved.  We should, at this point, clarify what a conflict actually is.  A conflict 
+
+%THIS IS TOO CONFUSING - NEED TO SIMPLIFY
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo2$ git status
