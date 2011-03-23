@@ -596,12 +596,133 @@ john@akira:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Using the \texttt{git stash drop} command, we can drop a single stash from the list.  Looking at the log output, we can see that we have multiple branches, \textbf{zaney}, \texttt{wonderful and \texttt{master}.  Each of the represents a different point of development.
+Using the \texttt{git stash drop} command, we can drop a single stash from the list.  Looking at the log output, we can see that we have multiple branches, \textbf{zaney}, \texttt{wonderful} and \texttt{master}.  Each of the represents a different point of development.
 
 \section{Day 5 - ``Conflicting information''}
 \subsection{What to do when it all goes wrong}
 
 The team have been playing with branches for a few days now and are beginning to settle into the idea of branching often.  As you can see, in Git, a branch is a really simple device for allowing experimentation.  As the implementation of branches is so simple, it is also really fast to switch between branches.  If you have been keeping up with the After Hours sections, you can hopefully see that when switching branches, Git only needs to alter what is different between one working copy and another.
+
+\begin{trenches}
+``Hmm,'' the puzzled noise reverberated round Klaus' corner of the office.  Mumbling commenced.  ``So if I did that, then why is that not \ldots I mean I didn't think \ldots that's probably the problem Klaus.''  He chuckled to himself, hardly noticing the looming figure of John.
+
+``You got a conflict,'' said John matter of factly.
+
+``I can see that,'' came Klaus' reply.  ``The problem is how do I solve it''
+
+``What were you doing?''
+
+``Well I had a few branches I had been working on and I was trying to merge them in.''
+
+``Figures,'' said John.  
+\end{trenches}
+
+Conflicts are bound to happen at some point.  
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo2$ git status
+# On branch master
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	temp_file
+nothing added to commit but untracked files present (use "git add" to track)
+john@akira:~/coderepo2$ git merge wonderful 
+Merge made by recursive.
+ newfile1 |    1 +
+ newfile2 |    1 +
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+john@akira:~/coderepo2$ git merge zaney 
+Auto-merging newfile1
+CONFLICT (content): Merge conflict in newfile1
+Auto-merging newfile2
+CONFLICT (content): Merge conflict in newfile2
+Automatic merge failed; fix conflicts and then commit the result.
+john@akira:~/coderepo2$ cat newfile1
+A new file
+<<<<<<< HEAD
+and some more changes
+=======
+and some awesome changes
+>>>>>>> zaney
+john@akira:~/coderepo2$ cat newfile2
+Another new file
+<<<<<<< HEAD
+and a new feature
+=======
+and some more awesome changes
+>>>>>>> zaney
+john@akira:~/coderepo2$ ls
+another_file  my_third_committed_file  newfile1  newfile2  temp_file
+john@akira:~/coderepo2$ nano newfile1
+
+Error reading /home/john/.nano_history: Permission denied
+
+Press Enter to continue starting nano.
+
+john@akira:~/coderepo2$ cat newfile1 
+A new file
+and some more awesome changes
+john@akira:~/coderepo2$ nano newfile2
+
+Error reading /home/john/.nano_history: Permission denied
+
+Press Enter to continue starting nano.
+
+john@akira:~/coderepo2$ git status
+# On branch master
+# Unmerged paths:
+#   (use "git add/rm <file>..." as appropriate to mark resolution)
+#
+#	both modified:      newfile1
+#	both modified:      newfile2
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	temp_file
+no changes added to commit (use "git add" and/or "git commit -a")
+john@akira:~/coderepo2$ git add newfile1
+john@akira:~/coderepo2$ git add newfile2
+john@akira:~/coderepo2$ git status
+# On branch master
+# Changes to be committed:
+#
+#	modified:   newfile1
+#	modified:   newfile2
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	temp_file
+john@akira:~/coderepo2$ git commit -m 'Fixed conflicts in zaney merge'
+[master a553c44] Fixed conflicts in zaney merge
+john@akira:~/coderepo2$ !git log
+git commit -m 'Fixed conflicts in zaney merge' log
+error: pathspec 'log' did not match any file(s) known to git.
+john@akira:~/coderepo2$ git log --graph --pretty=oneline --all --abbrev-commit --decorate
+*   a553c44 (HEAD, master) Fixed conflicts in zaney merge
+|\  
+| * 4fdfe36 (zaney) Made another awesome change
+| * 46c2390 Made an awesome change
+* |   1db26b3 Merge branch 'wonderful'
+|\ \  
+| * | f0cbf32 (wonderful) Fantastic new feature
+| |/  
+* | 725c961 Continued Development
+* | 6ab599d Important Update
+|/  
+* f91f31e Added another file
+* 8d5140a (v2.0) Added two new files
+* b5c84a5 Removed a few files
+* fa65f06 (v1.0a) Messed with a few files
+* 6ca160c Finished adding initial files
+* e86ddea (v0.9) Made a few changes to first and second files
+* 8820692 My First Ever Commit
+john@akira:~/coderepo2$ gitk --all
+^C
+john@akira:~/coderepo2$ 
+\end{Verbatim}
 
 \clearpage
 
