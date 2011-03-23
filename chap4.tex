@@ -492,7 +492,7 @@ As you can see, when we deleted \textbf{wacky} we were not warned about unmerged
 
 Sometimes you could be in the middle of something when another really important task comes up.  When this happens you are often required to drop everything and carry on with another task.  Often this can be quite difficult.  You may be in a development branch, but unable or unwilling to make a commit at this stage.  So how can we deal with this?
 
-Well, one way of dealing with this situation is to do the steps outlined below;
+Well, one way of dealing with this situation, and this is not necessarily the best way, is to do the steps outlined below;
 
 \begin{enumerate}
 \item Make a new branch called something like WIP
@@ -548,6 +548,55 @@ index dba885d..b3a5cc5 100644
 +Number strings rule 1234
 john@akira:~/coderepo$ 
 \end{Verbatim}
+
+As you can see, the \texttt{-p} option to the \texttt{git stash show} command shows us exactly what is contained in the stash.  We can apply this stash by running the following;
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git stash apply stash@{0} 
+# On branch master
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   another_file
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	temp_file
+no changes added to commit (use "git add" and/or "git commit -a")
+john@akira:~/coderepo$ git commit -a -m 'Continued Development'
+[master 725c961] Continued Development
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@akira:~/coderepo$ git stash list
+stash@{0}: WIP on master: f91f31e Added another file
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Our stash has been applied to the current branch, in our case \textbf{master}, and we have gone ahead and committed these changes into the repository.  Interestingly, our stash still exists.  If we had used the \texttt{git stash pop} command instead of the \texttt{git stash apply}, our stash would have been removed.  Of course we can have multiple stashes in our repository.  For completeness sake, let us learn how to manually remove a stash, and take a look at how our repository looks with our semi-graphical \texttt{git log}
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git stash drop stash@{0} 
+Dropped stash@{0} (e994874521ebea57b798150d3936e41e50c49386)
+john@akira:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate
+* 725c961 (HEAD, master) Continued Development
+* 6ab599d Important Update
+| * 4fdfe36 (zaney) Made another awesome change
+| * 46c2390 Made an awesome change
+|/  
+| * f0cbf32 (wonderful) Fantastic new feature
+|/  
+* f91f31e Added another file
+* 8d5140a (v2.0) Added two new files
+* b5c84a5 Removed a few files
+* fa65f06 (v1.0a) Messed with a few files
+* 6ca160c Finished adding initial files
+* e86ddea (v0.9) Made a few changes to first and second files
+* 8820692 My First Ever Commit
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Using the \texttt{git stash drop} command, we can drop a single stash from the list.  Looking at the log output, we can see that we have multiple branches, \textbf{zaney}, \texttt{wonderful and \texttt{master}.  Each of the represents a different point of development.
 
 \section{Day 5 - ``Conflicting information''}
 \subsection{What to do when it all goes wrong}
