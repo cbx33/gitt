@@ -492,7 +492,62 @@ As you can see, when we deleted \textbf{wacky} we were not warned about unmerged
 
 Sometimes you could be in the middle of something when another really important task comes up.  When this happens you are often required to drop everything and carry on with another task.  Often this can be quite difficult.  You may be in a development branch, but unable or unwilling to make a commit at this stage.  So how can we deal with this?
 
-Well, one way of dealing with this is with 
+Well, one way of dealing with this situation is to do the steps outlined below;
+
+\begin{enumerate}
+\item Make a new branch called something like WIP
+\item Pull changes into this new branch
+\item Commit changes into WIP branch
+\item Switch back to the branch we need to work on
+\item Make our changes and commit them
+\item Merge in our WIP branch on top with the \texttt{--no-commit} option
+\item Delete the WIP branch
+\item Continue development in our original branch
+\end{enumerate}
+
+To me, that seems like a lot of work.  OK, the benefit is a fairly awesome one, but at the cost of considerable command line hackery to get there.  It would be nice if there was an easy way to do the above, and though someone of you maybe screaming something like \emph{shell script} right about now, you can rest your fingers.  We actualy have another tool in the Git toolbox to help us out.
+
+The \texttt{git stash} command is used for exactly these situations.  Let us make a quick example of how to use it in our test repository.  To begin with we are going to make a few changes to the \textbf{master} branch, before we are interrupted.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git checkout master
+Already on 'master'
+john@akira:~/coderepo$ echo "Number strings rule 1234" >> another_file 
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+So now we are interrupted and we have to make some important, and urgent changes to our \textbf{master} branch.  The example that follows is one way that we could use the \texttt{git stash} command to help us out.  
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git stash
+Saved working directory and index state WIP on master: f91f31e Added another file
+HEAD is now at f91f31e Added another file
+john@akira:~/coderepo$ nano my_third_committed_file 
+john@akira:~/coderepo$ echo "Some mega important changes" >> my_third_committed_file 
+john@akira:~/coderepo$ git commit -a -m 'Important Update'
+[master 6ab599d] Important Update
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+So using the \texttt{git stash} command, we have squirreled all of our developmental changes away into a \emph{stash}.  Now we have completed the mega important change that just could not wait, we are ready to pull our changes back from the stash.  First let us see just what the stash contains.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git stash list
+stash@{0}: WIP on master: f91f31e Added another file
+john@akira:~/coderepo$ git stash show stash@{0}
+ another_file |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@akira:~/coderepo$ git stash show stash@{0} -p
+diff --git a/another_file b/another_file
+index dba885d..b3a5cc5 100644
+--- a/another_file
++++ b/another_file
+@@ -1 +1,2 @@
+ New stuff
++Number strings rule 1234
+john@akira:~/coderepo$ 
+\end{Verbatim}
 
 \section{Day 5 - ``Conflicting information''}
 \subsection{What to do when it all goes wrong}
