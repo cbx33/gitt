@@ -516,22 +516,22 @@ Conflicts are bound to happen at some point.  Even the best project processes in
 First we are going to add a little change to one of our files.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ echo "Another update to this file" >> my_third_committed_file 
-pete@satsuki:~/coderepo$ git commit -a -m 'Updated third file'
+john@akira:~/coderepo$ echo "Another update to this file" >> my_third_committed_file 
+john@akira:~/coderepo$ git commit -a -m 'Updated third file'
 [master 51ddc5c] Updated third file
  1 files changed, 1 insertions(+), 0 deletions(-)
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 Now let us merge in our \textbf{wonderful} branch.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git merge wonderful
+john@akira:~/coderepo$ git merge wonderful
 Merge made by recursive.
  newfile1 |    1 +
  newfile2 |    1 +
  2 files changed, 2 insertions(+), 0 deletions(-)
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 So far, our merge has gone pretty well.  We have taken all of the changes that were made in the \textbf{wonderful} branch and pulled them into our \textbf{master} branch.  If we wanted to, we could continue on making changes to the \textbf{wonderful} branch and we could keep pulling changes in from one to the other as time went by.  Figure 5 shows what our repository looks like now.
@@ -545,15 +545,15 @@ So far, our merge has gone pretty well.  We have taken all of the changes that w
 Our repository tree looks a little strange now.  Notice that the most recent commit, \textbf{ba0bfc}, has two parents.  Can this be true?  If we run our \texttt{git show} command against that commit ID, we see something new.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git show ba0bfc
+john@akira:~/coderepo$ git show ba0bfc
 commit ba0bfc89b76d70fa1fbd897c6f5e8055cfdb774a
 Merge: 51ddc5c f0cbf32
-Author: Peter Savage <silentkeystroke@googlemail.com>
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
 Date:   Thu Mar 24 20:28:25 2011 +0000
 
     Merge branch 'wonderful'
 
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 Notice the line \texttt{Merge: 51ddc5c f0cbf32}, which simply tells us that this is a special type of commit, a merge commit.  When we previously performed a merge, the branch we were merging back into had not changed since we branched off and did our development work.  If you remember, we called this a \emph{fast-forward} merge, simply because we moved our \emph{destination} branch forwards to meet the tip of the development branch.
@@ -565,25 +565,25 @@ So now the history of this latest commit actually relies on two previous commits
 Let us now remove that third file before merging in the \textbf{zaney} branch.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git rm my_third_committed_file
+john@akira:~/coderepo$ git rm my_third_committed_file
 rm 'my_third_committed_file'
-pete@satsuki:~/coderepo$ git commit -a -m 'Removed third file'
+john@akira:~/coderepo$ git commit -a -m 'Removed third file'
 [master b9164cd] Removed third file
  1 files changed, 0 insertions(+), 2 deletions(-)
  delete mode 100644 my_third_committed_file
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 So now we are ready to merge in the \textbf{zaney} branch.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-pete@satsuki:~/coderepo$ git merge zaney
+john@akira:~/coderepo$ git merge zaney
 Auto-merging newfile1
 CONFLICT (content): Merge conflict in newfile1
 Auto-merging newfile2
 CONFLICT (content): Merge conflict in newfile2
 Automatic merge failed; fix conflicts and then commit the result.
-pete@satsuki:~/coderepo$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
 
 Oh dear!  That probably did not go as well as we had hoped.  We have two conflicts.  The first is in \texttt{newfile1} and the second in \texttt{newfile2}.  You may be wondering why.  The last commit we made did not make any changes to either of those files, so why do we suddenly have a conflict?  When using a version control system like Git, conflicts are an every day part of life.  A conflict does not mean you have done something wrong.  It simply means that the automatic merging algorithm can not merge the changes.
