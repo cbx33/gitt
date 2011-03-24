@@ -3,125 +3,104 @@
 %\phantomsection
 \chapter{Week 5}
 
-\section{Day 1 - ``Conflicting information''}
-\subsection{What to do when it all goes wrong}
+\section{Day 1 - ``My private little stash''}
+\subsection{Getting interrrupted}
 
-The team have been playing with branches for a few days now and are beginning to settle into the idea of branching often.  As you can see, in Git, a branch is a really simple device for allowing experimentation and development.  As the implementation of branches is so simple, it is also really fast to switch between branches.  If you have been keeping up with the \emph{After Hours} sections, you can hopefully see that when switching branches, Git only needs to alter what is different between one working copy and another.
+Sometimes you could be in the middle of something when another really important task comes up.  When this happens you are often required to drop everything and carry on with another task.  Often this can be quite difficult.  You may be in a development branch, but unable or unwilling to make a commit at this stage.  So how can we deal with this?
 
-Let us see what new issues the team runs into during Week 5.
+Well, one way of dealing with this situation, and this is not necessarily the best way, is to do the steps outlined below;
 
-\begin{trenches}
-``Hmm,'' the puzzled noise reverberated round Klaus' corner of the office.  Mumbling commenced.  ``So if I did that, then why is that not \ldots I mean I didn't think \ldots that's probably the problem Klaus \ldots sill 'luser'.''  He chuckled to himself, hardly noticing the looming figure of John.
+\begin{enumerate}
+\item Make a new branch called something like WIP
+\item Pull changes into this new branch
+\item Commit changes into WIP branch
+\item Switch back to the branch we need to work on
+\item Make our changes and commit them
+\item Merge in our WIP branch on top with the \texttt{--no-commit} option
+\item Delete the WIP branch
+\item Continue development in our original branch
+\end{enumerate}
 
-``You got a conflict,'' said John matter of factly.
+To me, that seems like a lot of work.  OK, the benefit is a fairly awesome one, but at the cost of considerable command line hackery to get there.  It would be nice if there was an easy way to do the above, and though someone of you maybe screaming something like \emph{shell script} right about now, you can rest your fingers.  We actualy have another tool in the Git toolbox to help us out.
 
-``I can see that,'' came Klaus' reply.  ``The problem is how do I solve it''
-
-``What were you doing?''
-
-``Well I had a few branches I had been working on and I was trying to merge them in.''
-
-``Figures,'' said John.  
-\end{trenches}
-
-Conflicts are bound to happen at some point.  Even the best project processes in the world will sometimes end up with a conflict that has to be resolved.  We should, at this point, clarify what a conflict actually is.  A conflict occurs when an attempt is made to reconcile multiple changes to the same section of a file at the same time.  This usually means that the same line of code is modified by two different parties at the same time.  Now that we have several branches in our test repository, let us merge them back into master and see if we come up with a conflict.
-
-
-
-%THIS IS TOO CONFUSING - NEED TO SIMPLIFY
+The \texttt{git stash} command is used for exactly these situations.  Let us make a quick example of how to use it in our test repository.  To begin with we are going to make a few changes to the \textbf{master} branch, before we are interrupted.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo2$ git status
+john@akira:~/coderepo$ git checkout master
+Already on 'master'
+john@akira:~/coderepo$ echo "Number strings rule 1234" >> another_file 
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+So now we are interrupted and we have to make some important, and urgent changes to our \textbf{master} branch.  The example that follows is one way that we could use the \texttt{git stash} command to help us out.  
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git stash
+Saved working directory and index state WIP on master: f91f31e Added another file
+HEAD is now at f91f31e Added another file
+john@akira:~/coderepo$ nano my_third_committed_file 
+john@akira:~/coderepo$ echo "Some mega important changes" >> my_third_committed_file 
+john@akira:~/coderepo$ git commit -a -m 'Important Update'
+[master 6ab599d] Important Update
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+So using the \texttt{git stash} command, we have squirreled all of our developmental changes away into a \emph{stash}.  Now we have completed the mega important change that just could not wait, we are ready to pull our changes back from the stash.  First let us see just what the stash contains.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git stash list
+stash@{0}: WIP on master: f91f31e Added another file
+john@akira:~/coderepo$ git stash show stash@{0}
+ another_file |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@akira:~/coderepo$ git stash show stash@{0} -p
+diff --git a/another_file b/another_file
+index dba885d..b3a5cc5 100644
+--- a/another_file
++++ b/another_file
+@@ -1 +1,2 @@
+ New stuff
++Number strings rule 1234
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+As you can see, the \texttt{-p} option to the \texttt{git stash show} command shows us exactly what is contained in the stash.  We can apply this stash by running the following;
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git stash apply stash@{0} 
 # On branch master
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
 #
-#	temp_file
-nothing added to commit but untracked files present (use "git add" to track)
-john@akira:~/coderepo2$ git merge wonderful 
-Merge made by recursive.
- newfile1 |    1 +
- newfile2 |    1 +
- 2 files changed, 2 insertions(+), 0 deletions(-)
-john@akira:~/coderepo2$ git merge zaney 
-Auto-merging newfile1
-CONFLICT (content): Merge conflict in newfile1
-Auto-merging newfile2
-CONFLICT (content): Merge conflict in newfile2
-Automatic merge failed; fix conflicts and then commit the result.
-john@akira:~/coderepo2$ cat newfile1
-A new file
-<<<<<<< HEAD
-and some more changes
-=======
-and some awesome changes
->>>>>>> zaney
-john@akira:~/coderepo2$ cat newfile2
-Another new file
-<<<<<<< HEAD
-and a new feature
-=======
-and some more awesome changes
->>>>>>> zaney
-john@akira:~/coderepo2$ ls
-another_file  my_third_committed_file  newfile1  newfile2  temp_file
-john@akira:~/coderepo2$ nano newfile1
-
-Error reading /home/john/.nano_history: Permission denied
-
-Press Enter to continue starting nano.
-
-john@akira:~/coderepo2$ cat newfile1 
-A new file
-and some more awesome changes
-john@akira:~/coderepo2$ nano newfile2
-
-Error reading /home/john/.nano_history: Permission denied
-
-Press Enter to continue starting nano.
-
-john@akira:~/coderepo2$ git status
-# On branch master
-# Unmerged paths:
-#   (use "git add/rm <file>..." as appropriate to mark resolution)
-#
-#	both modified:      newfile1
-#	both modified:      newfile2
+#	modified:   another_file
 #
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
 #
 #	temp_file
 no changes added to commit (use "git add" and/or "git commit -a")
-john@akira:~/coderepo2$ git add newfile1
-john@akira:~/coderepo2$ git add newfile2
-john@akira:~/coderepo2$ git status
-# On branch master
-# Changes to be committed:
-#
-#	modified:   newfile1
-#	modified:   newfile2
-#
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#
-#	temp_file
-john@akira:~/coderepo2$ git commit -m 'Fixed conflicts in zaney merge'
-[master a553c44] Fixed conflicts in zaney merge
-john@akira:~/coderepo2$ !git log
-git commit -m 'Fixed conflicts in zaney merge' log
-error: pathspec 'log' did not match any file(s) known to git.
-john@akira:~/coderepo2$ git log --graph --pretty=oneline --all --abbrev-commit --decorate
-*   a553c44 (HEAD, master) Fixed conflicts in zaney merge
-|\  
+john@akira:~/coderepo$ git commit -a -m 'Continued Development'
+[master 725c961] Continued Development
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@akira:~/coderepo$ git stash list
+stash@{0}: WIP on master: f91f31e Added another file
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+Our stash has been applied to the current branch, in our case \textbf{master}, and we have gone ahead and committed these changes into the repository.  Interestingly, our stash still exists.  If we had used the \texttt{git stash pop} command instead of the \texttt{git stash apply}, our stash would have been removed.  Of course we can have multiple stashes in our repository.  For completeness sake, let us learn how to manually remove a stash, and take a look at how our repository looks with our semi-graphical \texttt{git log}
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git stash drop stash@{0} 
+Dropped stash@{0} (e994874521ebea57b798150d3936e41e50c49386)
+john@akira:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate
+* 725c961 (HEAD, master) Continued Development
+* 6ab599d Important Update
 | * 4fdfe36 (zaney) Made another awesome change
 | * 46c2390 Made an awesome change
-* |   1db26b3 Merge branch 'wonderful'
-|\ \  
-| * | f0cbf32 (wonderful) Fantastic new feature
-| |/  
-* | 725c961 Continued Development
-* | 6ab599d Important Update
+|/  
+| * f0cbf32 (wonderful) Fantastic new feature
 |/  
 * f91f31e Added another file
 * 8d5140a (v2.0) Added two new files
@@ -130,10 +109,11 @@ john@akira:~/coderepo2$ git log --graph --pretty=oneline --all --abbrev-commit -
 * 6ca160c Finished adding initial files
 * e86ddea (v0.9) Made a few changes to first and second files
 * 8820692 My First Ever Commit
-john@akira:~/coderepo2$ gitk --all
-^C
-john@akira:~/coderepo2$ 
+john@akira:~/coderepo$ 
 \end{Verbatim}
+
+Using the \texttt{git stash drop} command, we can drop a single stash from the list.
+
 
 \section{Day 1 - ``No backup?''}
 \subsection{Attack of the clones}
