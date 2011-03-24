@@ -588,9 +588,120 @@ john@akira:~/coderepo$
 
 Oh dear!  That probably did not go as well as we had hoped.  We have two conflicts.  The first is in \texttt{newfile1} and the second in \texttt{newfile2}.  You may be wondering why.  The last commit we made did not make any changes to either of those files, so why do we suddenly have a conflict?  When using a version control system like Git, conflicts are an every day part of life.  A conflict does not mean you have done something wrong.  It simply means that the automatic merging algorithm can not merge the changes.
 
-In this case we have a conflict because the files have changed in both sides of the merge, since they diverged.  Rephrasing this slightly: Since the point when we created the branch \textbf{zaney}, at commit \textbf{8d5410}, both the \textbf{master} branch and the \textbf{zaney} branch have both modified the same files in the same places.  Right now, our merge is paused.  For now, let us abort the merge so that we can take a closer look at what happened.
+In this case we have a conflict because the files have changed in both sides of the merge, since they diverged.  Rephrasing this slightly: Since the point when we created the branch \textbf{zaney}, at commit \textbf{8d5140}, both the \textbf{master} branch and the \textbf{zaney} branch have both modified the same files in the same places.  Right now, our merge is paused.  For now, let us abort the merge so that we can take a closer look at what happened.
 
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git reset --merge
+john@akira:~/coderepo$ 
+\end{Verbatim}
 
+So let us compare the changes between our latest common ancestor and our branch tips.  We will first look at the difference between the ancestor and our \textbf{master} branch, but limit it to the files with conflicts.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git diff 8d5140 master -- newfile*
+diff --git a/newfile1 b/newfile1
+index 24e7dfa..ef20984 100644
+--- a/newfile1
++++ b/newfile1
+@@ -1 +1,2 @@
+ A new file
++and some more changes
+diff --git a/newfile2 b/newfile2
+index cba16cc..dac4357 100644
+--- a/newfile2
++++ b/newfile2
+@@ -1 +1,2 @@
+ Another new file
++and a new feature
+\end{Verbatim}
+
+Now we will do the same between the common ancestor and the tip of \textbf{zaney}.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git diff 8d5140 zaney -- newfile*
+diff --git a/newfile1 b/newfile1
+index 24e7dfa..d94dacc 100644
+--- a/newfile1
++++ b/newfile1
+@@ -1 +1,2 @@
+ A new file
++and some awesome changes
+diff --git a/newfile2 b/newfile2
+index cba16cc..45659d7 100644
+--- a/newfile2
++++ b/newfile2
+@@ -1 +1,2 @@
+ Another new file
++and some more awesome changes
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+So hopefully you can see that we have tried to change the second line in both files.  This is where the conflict is arising from.  Let us try to run the merge again and this time we will resolve the conflicts manually.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git merge zaney
+Auto-merging newfile1
+CONFLICT (content): Merge conflict in newfile1
+Auto-merging newfile2
+CONFLICT (content): Merge conflict in newfile2
+Automatic merge failed; fix conflicts and then commit the result.
+john@akira:~/coderepo$ cat newfile1
+A new file
+<<<<<<< HEAD
+and some more changes
+=======
+and some awesome changes
+>>>>>>> zaney
+john@akira:~/coderepo$ cat newfile2
+Another new file
+<<<<<<< HEAD
+and a new feature
+=======
+and some more awesome changes
+>>>>>>> zaney
+john@akira:~/coderepo$ 
+\end{Verbatim}
+
+We have displayed the contents of \texttt{newfile1} and \texttt{newfile2} during this merge.  At the moment, no commits have been made and we have a chance to tell Git exactly what these files should look like.  You should be able to see that Git has modified the files to show us what both the branches think the file should look like.  At the top, just after the \texttt{<<<<<<< HEAD} is how the line was modified in the \textbf{master} branch.  We then have a divider \texttt{=======} and after that we have the line, as it was modified in the \textbf{zaney} branch, followed by \texttt{>>>>>>> zaney}.  We can now edit these files manually, remove the dividers, header and footer and commit the result.  
+
+We are going to edit \texttt{newfile1} to look like this:
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+A new file
+and some more awesome changes
+\end{Verbatim}
+
+We will also edit \texttt{newfile2} to look like this:
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+Another new file
+and a new awesome feature
+\end{Verbatim}
+
+Now we have resolved the conflicts and set the files straight, we can add the files and commit the result.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~/coderepo$ git add newfile*
+john@akira:~/coderepo$ git commit -a -m 'Merged in zaney'
+[master af7293c] Merged in zaney
+john@akira:~/coderepo$ git log -n2
+commit af7293c53f744a820c3a3f19c038d488756afb32
+Merge: b9164cd 4fdfe36
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Thu Mar 24 22:37:35 2011 +0000
+
+    Merged in zaney
+
+commit b9164cd641f3c9ba3ac1a97ec1b7f98736c40e20
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Thu Mar 24 21:36:25 2011 +0000
+
+    Removed third file
+john@akira:~/coderepo$ 
+
+\end{Verbatim}
+
+Our merge has been completed.  Let us now see what our repository looks like graphically.
 
 \clearpage
 
