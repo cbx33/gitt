@@ -709,6 +709,7 @@ Our merge has been completed.  Let us now see what our repository looks like gra
 \caption{Repository state after \textbf{zaney} merge}
 \end{figure}
 
+So, at the end of this week, we have learnt how to create branches, how to merge them, and how to resolve conflicts.  It should be stressed that a conflict is not a \textbf{bad} thing.  Conflicts do happen and when they do you should simply take your time and resolve the conflict in order to represent the \emph{best of both worlds}.  The \emph{After Hours} section for Week 4, takes a closer look at merging and explains some more about what branches are at a repository level.
 
 \clearpage
 
@@ -738,6 +739,10 @@ Our merge has been completed.  Let us now see what our repository looks like gra
 \item\texttt{git branch -D <branch\_name>} - Forcibly delete a branch
 
 \item\texttt{git branch <branch\_name> <commit\_ref>} - Create a new branch, starting at the commit reference
+
+\item\texttt{git reset --merge} - Abort a merge and reset back to pre-merge state
+
+\item\texttt{git diff <commit\_1> <commit\_2> -- <files> - Show the difference between the two commits, for certain files
 
 \end{itemize}
 
