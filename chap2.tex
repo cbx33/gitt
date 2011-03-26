@@ -62,7 +62,6 @@ john@akira:~$ mkdir coderepo
 john@akira:~$ cd coderepo 
 john@akira:~/coderepo$ git init 
 Initialized empty Git repository in /home/john/coderepo/.git/ 
-john@akira:~/coderepo$ git 
 \end{Verbatim}
 
 What we've done here is create a new directory called coderepo, moved into it, and then run the git init command.  The result of this command is a new directory in the coderepo directory called .git.  This directory will hold a local copy of our entire repository.  This will allow us to create branches, merge changes, rebase things and ultimately push our changes to somewhere else.
@@ -83,7 +82,6 @@ The commit object is also referred to by an SHA-1 hash.  This is different to ma
 The most simple way of committing a file into the repository is to create it, or bring it into your working copy and use the commands below.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/touch my_first_committed_file
 john@akira:~/coderepo$ touch my_first_committed_file
 john@akira:~/coderepo$ git add my_first_committed_file
 john@akira:~/coderepo$ git commit -m 'My First Ever Commit'
