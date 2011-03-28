@@ -7,3 +7,25 @@ I think I am using 1.7.1 Git
 Get vetting from someone on the history of version control systems
 Come up with more breakout boxes :)
 Come up with more items for terminology
+
+
+%git log -p
+%DIFFs
+%Patching
+
+%git show master:<path>
+%git diff -- stylesheet.css master:stylesheet.css
+%git checkout -b <branch>
+
+%SUBMODULE
+
+
+%branches
+%merge
+%remote tracking
+%Itt section about not having anything backed up
+
+%Parallel devving - ie...use both git and old for a while
+
+% git show v1.0.0^{tree}
+

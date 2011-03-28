@@ -2,46 +2,31 @@
 \documentclass[a5paper,openright,12pt]{memoir}
 
 % set paper size
-
-%\setstocksize{20.98cm}{14.8cm}
-%\settrimmedsize{20.98cm}{14.8cm}{*}
-
-%\settrims{0in}{0in}
-%\settypeblocksize{17.16cm}{10.73cm}{*}
-
 \setlrmarginsandblock{2.16cm}{1.91cm}{*}
 \setulmarginsandblock{1.91cm}{1.91cm}{*}
 \checkandfixthelayout
 
-% import packages
+% Import packages
 \usepackage{graphicx}
-%\usepackage{float}
-
-%DISABLED BECAUSE OF MARGIN ISSUE
-%\usepackage{fullpage}
-
 \usepackage{color,fancyvrb,relsize}
 \usepackage[final]{microtype}
 \usepackage{tikz}
 
-% import a new font and use the sans-serif version by default
+% Import a new font and use the sans-serif version by default
 \usepackage{lmodern}
 \renewcommand{\familydefault}{\sfdefault}
 
-% put chapters and sections in the toc, only number the chapter
+% Put chapters and sections in the toc, only number the chapter
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{0}
 
-% make chapter names disappear
+% Make chapter names disappear
 \renewcommand{\chaptername}{}
 \renewcommand{\thechapter}{}
 \renewcommand{\tablename}{}
 \renewcommand{\thetable}{}
 
-% Just for reference, the margins in2.16 ou1.91
-% and page size wi14.8 hi20.98
-
-% make the pdf have clickable links
+% Make the pdf have clickable links
 \usepackage[
   bookmarks,
   bookmarksopen,
@@ -58,7 +43,7 @@
   pdfauthor={Peter Savage}]{hyperref}
 
 
-% title/author/date
+% Title/author/date
 \title{Git In the Trenches}
 \author{Peter Savage}
 
@@ -68,16 +53,16 @@
 
 \begin{document}
 
-% latex preferences
+% Latex preferences
 \hyphenpenalty=1000
 \tolerance=1000
 
-% preamble stuff
+% Preamble stuff
 \maketitle
 \cleardoublepage
 \tableofcontents
 
-% include all the individual chapters
+% Include all the individual chapters
 \input{intro}
 \input{chap1}
 \input{afterhours1}
