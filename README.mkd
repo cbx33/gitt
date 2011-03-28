@@ -2,6 +2,21 @@
 
 Git In The Trenches, or GITT is designed to be a book that focusses on teaching people to use Git by associating with scenarios that are experienced by a fictional company called Tamagoyaki Inc.  Through reading about their day to day lives, the reader will learn not only how to use Git, but why version control systems are important and how to implement them within an organisation.
 
+# Book Contents
+
+The summary below shows a list of already complete chapters and items which are pending
+
+1. Analysing VCS requirements
+2. Initialising a repo, adding files, removing files, committing, resetting
+3. Logging, diffing, tagging, viewing historical data
+4. Branching, merging, deleting branch, recovering branch, dealing with conflicts
+
+After Hours
+
+1. History of version control, svn, cvs, git
+2. Simple Git internals, how commits are stored
+3. Indepth look at diff and how tags are stored
+
 # Building the Book
 
 GITT is written using the LaTeX language to be able to generate the PDFs easily and without artifacts.  If you wish to read GITT whilst it is in development phase, you have 3 options.
