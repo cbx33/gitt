@@ -3,10 +3,51 @@
 %\phantomsection
 \chapter{Week 5}
 
-\section{Day 1 - ``This isn't working John''}
+\section{Day 1 - ``This isn't working for me John''}
 \subsection{Dealing with resistance}
 
+So, now that the team have discovered the basics of branching, they are conceptually ready to start using it in earnest.  When implementing a version control system, or shifting from one to another, it is important to make sure that the users are happy with the system and know how to use it.  Training is a big issue.
 
+It would seem that the team have coped with the initial usage of Git and that they have utilised each others talents in specific areas to pull together a good learning environment.  However, one thing to bare in mind is that some users may secretly be having a far worse experience than their colleagues.  It is also common for these people to suffer in silence, or to wait until they are asked for their opinions on the system before they bring up any issues.
+
+It is because of these very factors that you should probably consider employing a parallel implementation.  This is exactly what John decided to do with Tamagoyaki Inc's implementation of Git.  Whilst a parallel implementation does take duplicate effort in some areas, it also allows the team to return to their original system, should insurmoutable obstacles present themselves.  However, a parallel implementation should never be an excuse not to eventually shift over to the new system, unless serious issues are discovered.
+
+\begin{trenches}
+``I'm sorry John, but I just can't do this anymore!''  Eugene was leaning over the partition wall, the keys that hung around his neck clattering loudly as he swayed.  ``You hard core devs may be happy with all that command line junk, but I'm a GUI kinda guy.  It doesn't come as easily for me as if does for you.''
+
+``You should learn how to use a computer properly then,'' shouted Klaus before laughing.
+
+Eugene was livid, ``You're such a damn elitist Klaus.  I'm so glad I don't have to share a pod with you anymore, you a zealot.''  With that, Eugene was off, flinging open the door to the office area and stomping off to his desk.
+
+``Nice one Klaus,'' said John, ``You know, you could be a little more tactful.  We do still need sign off from him to complete this project.''
+
+Klaus shrugged.
+
+\begin{center} * * * \end{center}
+
+``Listen Eugene, I think I have a way to help you out.  There is a GUI component to Git that you can use.''  John was trying his best, but five minutes of grovelling to Eugene, hadn't exactly paid off.
+
+``I'll try your GUI, but if I don't like it, I'm not signing off.''  He was serious too.  ``I don't have time to waste learning this system, I never needed versioning before, why should I need it now.''
+
+``We have to work together on things now Eugene,'' began John, ``You know there is a merger looming, right?''  
+
+Eugene looked up, a little stunned.
+
+``We have to show we can function well as a team, that we have everything in hand.''
+
+``OK'' said Eugene, ``I'll give it my best shot''
+\end{trenches}
+
+Sometimes, dealing with resistance to new systems is hard.  In Tamagoyaki Inc, John was blessed with the fact that only one developer didn't like the system he had picked.  Fortunately, the developer in question was only really concerned with the lack of a GUI, something that Git actually provides anyway.
+
+It is very important to listen to users issues and questions.  Often they may discover a big hole in your initial planning which you would never have seen.  It can be difficult for one person to understand the entire process in place during development, no matter how well documented it is, going through a period of User Acceptance Testing is crucial before complete adoption is even considered.
+
+Let us take a while to explore the build in GUI that Git comes bundled with.
+
+\subsection{A little bit of graphics}
+Whilst using a GUI can be faster for some operations, it is also worth noting that with very few exceptions, GUI's are often less feature rich than their CLI counterparts.  It is very time consuming to write a GUI that can deal with every command option a user desires, so often the GUI will handle the most common use cases, leaving the CLI to handle special cases.
+
+Git is no exception to this rule.  Whilst the gui component is a very capable tool indeed, it does lack most of the advanced functionality that can be found on the command line.  In fact, there are even some of the basic parameters to some of the commands that we have used earlier, that are not available in the GUI counterpart.
 
 \clearpage
 
@@ -15,16 +56,6 @@
 \begin{itemize}
 
 \item\texttt{git stash} - Short for \texttt{git stash save}, creates a stash of local modifications
-
-\item\texttt{git stash apply <stash\_name>} - Applies a stash back onto a branch
-
-\item\texttt{git stash drop <stash\_name>} - Remove a stash from the stash list
-
-\item\texttt{git stash list} - Show a list of current stashes
-
-\item\texttt{git stash show <stash\_name>} - Show information about a specific stash
-
-\item\texttt{git stash show <stash\_name> -p} - Show the contents of a stash
 
 \end{itemize}
 
