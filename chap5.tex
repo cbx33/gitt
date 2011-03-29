@@ -12,6 +12,23 @@ It would seem that the team have coped with the initial usage of Git and that th
 
 It is because of these very factors that you should probably consider employing a parallel implementation.  This is exactly what John decided to do with Tamagoyaki Inc's implementation of Git.  Whilst a parallel implementation does take duplicate effort in some areas, it also allows the team to return to their original system, should insurmoutable obstacles present themselves.  However, a parallel implementation should never be an excuse not to eventually shift over to the new system, unless serious issues are discovered.
 
+\begin{figure}[hbt]
+\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=black, text=white]
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{.9\textwidth}
+Parallel implementation means keeping your old system running, whilst bringing up a new one.  It incurs extra effort in many areas, such as system administration, backups and system usage, but it allows people to evaluate a product in a real life situation.  Usually people people will have completed all of their preliminary testing before moving onto Parallel implementation.  It would be assumed that you were fairly certain that your were going to move forward with a final implementation, before taking the time of setting up and training people on the new system.
+\newline
+\newline
+It does however allow people to continue with the day jobs, without the risk of issues with the new system completely blocking them from working.  This is often a critical factor when implementing a new system.  If the system is successful, over time, the users will migrate away from the old system and start using the new system exclusively.  Care should also be taken that whilst in the midst of parallel implementation, both systems remain up to date at all times, this is often the trickiest part.  In Tamagoyaki Inc's case, because they were just using tarballs of their code base, it is easy for them to tar up a folder, as well as commit it to the repository.
+    \end{minipage}
+};
+\node[fancytitle, right=16pt] at (box.north west) {Parallel Implementation};
+\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Terminology}};
+\end{tikzpicture}
+\end{figure}
+
 \begin{trenches}
 ``I'm sorry John, but I just can't do this anymore!''  Eugene was leaning over the partition wall, the keys that hung around his neck clattering loudly as he swayed.  ``You hard core devs may be happy with all that command line junk, but I'm a GUI kinda guy.  It doesn't come as easily for me as if does for you.''
 
@@ -33,7 +50,7 @@ Klaus shrugged.
 
 Eugene looked up, a little stunned.
 
-``We have to show we can function well as a team, that we have everything in hand.''
+``We have to show we can function well as a team, that we have everything in hand.  Let's leave the integration till the end of the week, to give you a little more time to get used to things.''
 
 ``OK'' said Eugene, ``I'll give it my best shot''
 \end{trenches}
@@ -49,13 +66,29 @@ Whilst using a GUI can be faster for some operations, it is also worth noting th
 
 Git is no exception to this rule.  Whilst the gui component is a very capable tool indeed, it does lack most of the advanced functionality that can be found on the command line.  In fact, there are even some of the basic parameters to some of the commands that we have used earlier, that are not available in the GUI counterpart.
 
+We can invoke the GUI by running the \texttt{git gui} command.  We will be presented with a window similar to that in Figure 1.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=11cm]{images/f-w5-d1.png}
+\caption{Initial Git GUI view}
+\end{figure}
+
+This initial window is composed of four key areas
+\begin{itemize}
+\item \textbf{Unstaged (1)} - This area on the screen shows all of the items present in the working copy which are unstaged, that is to say they have not yet been added to the index and so will not be included if a commit were to take place.
+\item \textbf{Staged (2)} - This area on the screen shows all of the items present in the index or staging area.  Everything listed here will be included if a commit takes place.
+\item \textbf{Content View(3)} - This region of the window will show the contents of an item if it is selected in either the Unstaged or Staged areas.  If the file is already tracked, then the window will show a diff between the last committed version and the chosen version.
+\item \textbf{Commit (4)} - From the commit section of the screen, the commit message can be written, the commit performed, the directory rescanned for changes, as well as other operations.
+\end{itemize}
+
 \clearpage
 
 \section{Summary - John's Notes}
 \subsection{Commands}
 \begin{itemize}
 
-\item\texttt{git stash} - Short for \texttt{git stash save}, creates a stash of local modifications
+\item\texttt{git gui} - Invokes the Git gui tool
 
 \end{itemize}
 
