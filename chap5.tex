@@ -98,7 +98,7 @@ This is the only file in our working copy which contains unstaged changes.  That
 \caption{Content view of \texttt{temp\_file}}
 \end{figure}
 
-In the top banner section of the \textbf{Content View} we see an indication of the file's status.  In this case it is \textbf{Untracked} and \textbf{not staged}.  We can change this by clicking on the small blank page icon to the left of the file name in the \textbf{Unstaged} area of the screen.
+In the top banner section of the \textbf{Content View} we see an indication of the file's status.  In this case it is \textbf{Untracked} and \textbf{not staged}.  We can change this by clicking on the small blank page icon to the left of the file name in the \textbf{Unstaged} area of the screen, see Figure 4.
 
 \begin{figure}[hbt]
 \centering
@@ -106,17 +106,23 @@ In the top banner section of the \textbf{Content View} we see an indication of t
 \caption{Staged section}
 \end{figure}
 
+Now the file has moved into the \textbf{Staged} area of the screen as would be equivilent to us doing a \texttt{git add temp\_file}.  The file has been added to the index and is now ready for committing.  We also notice a difference in the \textbf{Content View} of \texttt{temp\_file}.  This can be seen in Figure 5.
+
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=11cm]{images/f-w5-d5.png}
 \caption{Content view of \texttt{temp\_file}}
 \end{figure}
 
+Now the bar reads that the file is \textbf{Staged for commit}, which is exactly what we expect.  We are now going to fill out a commit message, which can be seen in Figure 6, and press the \textbf{Commit} button, to initialise a commit into the repository.
+
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=11cm]{images/f-w5-d6.png}
 \caption{Preparing for commit}
 \end{figure}
+
+It should be noted here that we could have performed multiple operations here, adding several files to the the staging area before pressing that all important \textbf{Commit} button.  We will finish this section off by checking the status area at the very bottom of the screen.  In Figure 7, you should see that our latest operation has been summarised by the string \texttt{Created commit 35243bf8: Added temp\_file}
 
 \begin{figure}[hbt]
 \centering
