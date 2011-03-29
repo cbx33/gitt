@@ -66,7 +66,7 @@ Whilst using a GUI can be faster for some operations, it is also worth noting th
 
 Git is no exception to this rule.  Whilst the gui component is a very capable tool indeed, it does lack most of the advanced functionality that can be found on the command line.  In fact, there are even some of the basic parameters to some of the commands that we have used earlier, that are not available in the GUI counterpart.
 
-We can invoke the GUI by running the \texttt{git gui} command.  We will be presented with a window similar to that in Figure 1.
+We can invoke the GUI by running the \texttt{git gui} command.  We will be presented with a window similar to that in Figure 1.  Note that in this case, we are running it against our test repository that we have been working on through previous chapters.
 
 \begin{figure}[hbt]
 \centering
@@ -81,6 +81,48 @@ This initial window is composed of four key areas
 \item \textbf{Content View(3)} - This region of the window will show the contents of an item if it is selected in either the Unstaged or Staged areas.  If the file is already tracked, then the window will show a diff between the last committed version and the chosen version.
 \item \textbf{Commit (4)} - From the commit section of the screen, the commit message can be written, the commit performed, the directory rescanned for changes, as well as other operations.
 \end{itemize}
+
+If we take a closer look at the \textbf{Unstaged} area of the screen, we see something interesting.  This is shown in Figure 2.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=5cm]{images/f-w5-d2.png}
+\caption{Unstaged section}
+\end{figure}
+
+This is the only file in our working copy which contains unstaged changes.  That should not be surprising as this file has never been added to the repository so it is not considered \textbf{tracked} by Git.  If you remember, it was actually a temporary file that we piped some output to in an earlier chapter.  If we click on the filename of this file, the \textbf{Content View} area changes to show Figure 3.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=11cm]{images/f-w5-d3.png}
+\caption{Content view of \texttt{temp\_file}}
+\end{figure}
+
+In the top banner section of the \textbf{Content View} we see an indication of the file's status.  In this case it is \textbf{Untracked} and \textbf{not staged}.  We can change this by clicking on the small blank page icon to the left of the file name in the \textbf{Unstaged} area of the screen.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=5cm]{images/f-w5-d4.png}
+\caption{Staged section}
+\end{figure}
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=11cm]{images/f-w5-d5.png}
+\caption{Content view of \texttt{temp\_file}}
+\end{figure}
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=11cm]{images/f-w5-d6.png}
+\caption{Preparing for commit}
+\end{figure}
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=11cm]{images/f-w5-d7.png}
+\caption{Status message showing new commit ID}
+\end{figure}
 
 \clearpage
 
