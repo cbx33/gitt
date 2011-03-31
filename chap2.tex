@@ -58,11 +58,11 @@ The first thing we need to do is to understand two very important things:
 The first of these is relatively easy to perform.  
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-john@akira:~$ mkdir coderepo 
-john@akira:~$ cd coderepo 
-john@akira:~/coderepo$ git init 
-Initialized empty Git repository in /home/john/coderepo/.git/ 
-john@akira:~/coderepo$
+john@satsuki:~$ mkdir coderepo
+john@satsuki:~$ cd coderepo/
+john@satsuki:~/coderepo$ git init
+Initialized empty Git repository in /home/john/coderepo/.git/
+john@satsuki:~/coderepo$
 \end{Verbatim}
 
 What we've done here is create a new directory called coderepo, moved into it, and then run the git init command.  The result of this command is a new directory in the coderepo directory called .git.  This directory will hold a local copy of our entire repository.  This will allow us to create branches, merge changes, rebase things and ultimately push our changes to somewhere else.
@@ -83,22 +83,22 @@ The commit object is also referred to by an SHA-1 hash.  This is different to ma
 The most simple way of committing a file into the repository is to create it, or bring it into your working copy and use the commands below.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ touch my_first_committed_file
-john@akira:~/coderepo$ git add my_first_committed_file
-john@akira:~/coderepo$ git commit -m 'My First Ever Commit'
-[master (root-commit) 8820692] My First Ever Commit
+john@satsuki:~/coderepo$ touch my_first_committed_file
+john@satsuki:~/coderepo$ git add my_first_committed_file
+john@satsuki:~/coderepo$ git commit -m 'My First Ever Commit'
+[master (root-commit) cfe23cb] My First Ever Commit
  0 files changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 my_first_committed_file
-john@akira:~/coderepo$
+john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
 What we have done here, is to create a new blank file and add it into the repository using Git's add command.  Then we have committed it into the repository.  Let's make a few changes to our working copy and see what the result is.  First we are going to add another two new files, then we are going to make changes to our original file and finally we are going to run git status to see what Git has to say about our changes.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ echo "Change1" > my_first_committed_file 
-john@akira:~/coderepo$ touch my_second_committed_file
-john@akira:~/coderepo$ touch my_third_committed_file
-john@akira:~/coderepo$ git status
+john@satsuki:~/coderepo$ echo "Change1" > my_first_committed_file
+john@satsuki:~/coderepo$ touch my_second_committed_file
+john@satsuki:~/coderepo$ touch my_third_committed_file
+john@satsuki:~/coderepo$ git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
@@ -113,18 +113,18 @@ committed)
 #
 #	my_second_committed_file
 #	my_third_committed_file
-no changes added to commit (use "git add" and/or "git commit 
--a")
-john@akira:~/coderepo$ 
+no changes added to commit (use "git add" and/or "git 
+commit -a")
+john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
 So we can see that Git is reporting that there are changes to our first committed file, and that our second and third files are \textbf{untracked}.  Untracked files are ones which Git detects as being present in the working directory, but which haven't yet been added and there for upon running a commit, these files will not be added to the repository.  Notice that if we tried to run a commit now, nothing would actually be committed to the repository.  Even though there are changes to to my\_first\_committed\_file, we have not asked Git to include these.  So, let's go ahead and do that, and at the same time we'll make a few changes to my\_second\_committed\_file, and add those too.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git add my_first_committed_file
-john@akira:~/coderepo$ echo "Change1" > my_second_committed_file 
-john@akira:~/coderepo$ git add my_second_committed_file
-john@akira:~/coderepo$ git status
+john@satsuki:~/coderepo$ git add my_first_committed_file
+john@satsuki:~/coderepo$ echo "Change1" > my_second_committed_file 
+john@satsuki:~/coderepo$ git add my_second_committed_file
+john@satsuki:~/coderepo$ git status
 # On branch master
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
@@ -137,7 +137,7 @@ john@akira:~/coderepo$ git status
 committed)
 #
 #	my_third_committed_file
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
 Now we can see that one of the sections has changed to "Changes to be committed".  So this means that Git has recognised and remembered that we are expecting these files to be committed when we next run a git commit.  
@@ -157,9 +157,9 @@ John pointed at the screen.  ``Run a git status Klaus and I'll show you what the
 To understand what Klaus was getting in a spin about, let's make a change to my\_second\_committed\_file now and see how this affects things.  Remember we have already added the file, but we haven't yet made a commit.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ echo "Change2" >> 
+john@satsuki:~/coderepo$ echo "Change2" >> 
 my_second_committed_file 
-john@akira:~/coderepo$ git status
+john@satsuki:~/coderepo$ git status
 # On branch master
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
@@ -167,6 +167,42 @@ john@akira:~/coderepo$ git status
 #	modified:   my_first_committed_file
 #	new file:   my_second_committed_file
 #
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be 
+committed)
+#   (use "git checkout -- <file>..." to discard changes in 
+working directory)
+#
+#	modified:   my_second_committed_file
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be 
+committed)
+#
+#	my_third_committed_file
+john@satsuki:~/coderepo$ 
+\end{Verbatim} 
+
+How interesting!  We now have three sections and one of our files appears twice under both Changes to be committed and Changed but not updated.  What does this mean?  If you remember back, we spoke about a staging area.  This is one area in which Git differs to many version control systems.  When you \textbf{add} a file into the repository, Git will actually make a copy of that file and move it into the staging area.  If you then go ahead and change that file, you would need to run another git add in order for Git to copy your changed file into the staging area.  The most important thing to remember is that Git will only ever commit what is in the staging area.
+
+So, if we go ahead and run our commit now, we will only have the changes marked in Changes to be committed appearing in our repository.  
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo$ git commit -m 'Made a few changes to 
+first and second files'
+[master 163f061] Made a few changes to first and second files
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+ create mode 100644 my_second_committed_file
+john@satsuki:~/coderepo$ 
+\end{Verbatim} 
+
+In our examples, we have used the syntax \texttt{git commit -m 'Message'}.  This is a slightly special way of committing, it allows us to specify our commit log message on the command line.  If we wanted to, we could run the command git commit and this would open a text editor that we could use to input our commands.
+
+Let us finish off our round of committing by using the \texttt{git commit -a} option.  This commits all of the changes to files which are already tracked.  Consequently we do not have to specify the files with \texttt{git add}, like we have had to previously.  Any file which has been modified and has previously been added to the repository, will have it's changes committed upon running that command.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo$ git status
+# On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
 #   (use "git checkout -- <file>..." to discard changes in 
@@ -179,63 +215,31 @@ working directory)
 committed)
 #
 #	my_third_committed_file
-john@akira:~/coderepo$ 
-\end{Verbatim} 
-
-How interesting!  We now have three sections and one of our files appears twice under both Changes to be committed and Changed but not updated.  What does this mean?  If you remember back, we spoke about a staging area.  This is one area in which Git differs to many version control systems.  When you \textbf{add} a file into the repository, Git will actually make a copy of that file and move it into the staging area.  If you then go ahead and change that file, you would need to run another git add in order for Git to copy your changed file into the staging area.  The most important thing to remember is that Git will only ever commit what is in the staging area.
-
-So, if we go ahead and run our commit now, we will only have the changes marked in Changes to be committed appearing in our repository.  
-
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git commit -m 'Made a few changes to 
-first and second files'
-[master e86ddea] Made a few changes to first and second files
- 2 files changed, 2 insertions(+), 0 deletions(-)
- create mode 100644 my_second_committed_file
-john@akira:~/coderepo$ 
-\end{Verbatim} 
-
-In our examples, we have used the syntax \texttt{git commit -m 'Message'}.  This is a slightly special way of committing, it allows us to specify our commit log message on the command line.  If we wanted to, we could run the command git commit and this would open a text editor that we could use to input our commands.
-
-Let us finish off our round of committing by using the \texttt{git commit -a} option.  This commits all of the changes to files which are already tracked.  Consequently we do not have to specify the files with \texttt{git add}, like we have had to previously.  Any file which has been modified and has previously been added to the repository, will have it's changes committed upon running that command.
-
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git status 
-# On branch master 
-# Changed but not updated: 
-#   (use "git add <file>..." to update what will be committed) 
-#   (use "git checkout -- <file>..." to discard changes in 
-working directory) 
-# 
-#	modified:   my_second_committed_file 
-# 
-# Untracked files: 
-#   (use "git add <file>..." to include in what will be 
-committed) 
-# 
-#	my_third_committed_file 
 no changes added to commit (use "git add" and/or "git commit 
 -a")
+john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git commit -a -m 'Finished adding initial 
-files' 
-[master 6ca160c] Finished adding initial files 
- 1 files changed, 1 insertions(+), 0 deletions(-) 
+john@satsuki:~/coderepo$ git commit -a -m 'Finished adding 
+initial files'
+[master 9938a0c] Finished adding initial files
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git status 
-# On branch master 
-# Untracked files: 
+john@satsuki:~/coderepo$ git status
+# On branch master
+# Untracked files:
 #   (use "git add <file>..." to include in what will be 
-committed) 
-# 
-#	my_third_committed_file 
-nothing added to commit but untracked files present (use "git 
-add" to track) 
-john@akira:~/coderepo$ 
+committed)
+#
+#	my_third_committed_file
+nothing added to commit but untracked files present (use 
+"git add" to track)
+john@satsuki:~/coderepo$ 
+
 \end{Verbatim} 
 
 \section{Day 4 - ``Let's do this right, not fast''}
@@ -263,31 +267,31 @@ Mike chuckled, ``Sorry for interrupting dude.''
 The git reset is great at removing things from the index that you don't want to be there.  Of course, it can do a great many other things, but for now, let us concern ourselves with the scenario presented above.  We are working away, and have added a number of files into the index ready for committing, when we discover that we are actually not ready to commit them.  In the following example, we are going to add the file my\_third\_committed\_file and then remove it from the index.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git add my_third_committed_file
-john@akira:~/coderepo$ git status
+john@satsuki:~/coderepo$ git add my_third_committed_file
+john@satsuki:~/coderepo$ git status
 # On branch master
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
 #
 #	new file:   my_third_committed_file
 #
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
 Notice how my\_third\_committed\_file is now ready to be committed to repository.  The problem is we need to add something more to it before we do.  Remember that when we run the git add command, we are copying the file from our working copy to the index.  If we decide we no longer want that file in the repository, we can run the following.  
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git reset my_third_committed_file
-john@akira:~/coderepo$ git status
+john@satsuki:~/coderepo$ git reset my_third_committed_file
+john@satsuki:~/coderepo$ git status
 # On branch master
 # Untracked files:
 #   (use "git add <file>..." to include in what will be 
 committed)
 #
 #	my_third_committed_file
-nothing added to commit but untracked files present (use "git 
-add" to track)
-john@akira:~/coderepo$ 
+nothing added to commit but untracked files present (use 
+"git add" to track)
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 We have discarded the file which was residing in the index.  This is very important to note.  We are not moving the file from the index back into our working directory, we are literally just deleting the file from the index.  Our working copy remains unaffected.  We could run the git reset command without appending a file.  If we did this, all the files in the index would have been discarded.  
