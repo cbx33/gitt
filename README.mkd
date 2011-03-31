@@ -10,6 +10,7 @@ The summary below shows a list of already complete chapters and items which are 
 2. Initialising a repo, adding files, removing files, committing, resetting
 3. Logging, diffing, tagging, viewing historical data
 4. Branching, merging, deleting branch, recovering branch, dealing with conflicts
+5. GUI usage
 
 After Hours
 
