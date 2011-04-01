@@ -480,18 +480,16 @@ john@satsuki:~/coderepo$ git branch -v
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-<=============== GOT TO HERE
-
-Our branch has been restored and points to the same point as it did before we deleted it.  As each commit points to its parent, we now have the complete history of \textbf{zaney} restored and the branch can be used as normal.  To complete this action, let us delete the \textbf{wacky} branch as originally intended.
+Our branch has been restored and points to the same place as it did before we deleted it.  As each commit points to its parent, we now have the complete history of \textbf{zaney} restored and the branch can be used as normal.  To complete this action, let us delete the \textbf{wacky} branch as originally intended.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git branch -d wacky
-Deleted branch wacky (was f91f31e).
-john@akira:~/coderepo$ git branch -v
-* master    f91f31e Added another file
-  wonderful f0cbf32 Fantastic new feature
-  zaney     4fdfe36 Made another awesome change
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ git branch -d wacky
+Deleted branch wacky (was 9710177).
+john@satsuki:~/coderepo$ git branch -v
+* master    9710177 Added another file
+  wonderful cfbecab Fantastic new feature
+  zaney     7cc32db Made another awesome change
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 As you can see, when we deleted \textbf{wacky} we were not warned about unmerged changes.  This is because the \textbf{wacky} branch is at the same point as the \textbf{master} branch.  
@@ -522,22 +520,22 @@ Conflicts are bound to happen at some point.  Even the best project processes in
 First we are going to add a little change to one of our files.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ echo "Another update to this file" >> my_third_committed_file 
-john@akira:~/coderepo$ git commit -a -m 'Updated third file'
-[master 51ddc5c] Updated third file
+john@satsuki:~/coderepo$ echo "Another update to this file" >> my_third_committed_file 
+john@satsuki:~/coderepo$ git commit -a -m 'Updated third file'
+[master 4ac9201] Updated third file
  1 files changed, 1 insertions(+), 0 deletions(-)
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 Now let us merge in our \textbf{wonderful} branch.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git merge wonderful
+john@satsuki:~/coderepo$ git merge wonderful
 Merge made by recursive.
  newfile1 |    1 +
  newfile2 |    1 +
  2 files changed, 2 insertions(+), 0 deletions(-)
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 So far, our merge has gone pretty well.  We have taken all of the changes that were made in the \textbf{wonderful} branch and pulled them into our \textbf{master} branch.  If we wanted to, we could continue on making changes to the \textbf{wonderful} branch and we could keep pulling changes in from one to the other as time went by.  Figure 5 shows what our repository looks like now.
@@ -548,21 +546,21 @@ So far, our merge has gone pretty well.  We have taken all of the changes that w
 \caption{Repository state after \textbf{wonderful} merge}
 \end{figure}
 
-Our repository tree looks a little strange now.  Notice that the most recent commit, \textbf{ba0bfc}, has two parents.  Can this be true?  If we run our \texttt{git show} command against that commit ID, we see something new.
+Our repository tree looks a little strange now.  Notice that the most recent commit, \textbf{b119573}, has two parents.  Can this be true?  If we run our \texttt{git show} command against that commit ID, we see something new.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git show ba0bfc
-commit ba0bfc89b76d70fa1fbd897c6f5e8055cfdb774a
-Merge: 51ddc5c f0cbf32
+john@satsuki:~/coderepo$ git show b119573
+commit b119573f4508514c55e1c4e3bebec0ab3667d071
+Merge: 4ac9201 cfbecab
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
-Date:   Thu Mar 24 20:28:25 2011 +0000
+Date:   Fri Apr 1 07:35:13 2011 +0100
 
     Merge branch 'wonderful'
 
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-Notice the line \texttt{Merge: 51ddc5c f0cbf32}, which simply tells us that this is a special type of commit, a merge commit.  When we previously performed a merge, the branch we were merging back into had not changed since we branched off and did our development work.  If you remember, we called this a \emph{fast-forward} merge, simply because we moved our \emph{destination} branch forwards to meet the tip of the development branch.
+Notice the line \texttt{Merge: 4ac9201 cfbecab}, which simply tells us that this is a special type of commit, a merge commit.  When we previously performed a merge, the branch we were merging back into had not changed since we branched off and did our development work.  If you remember, we called this a \emph{fast-forward} merge, simply because we moved our \emph{destination} branch forwards to meet the tip of the development branch.
 
 This time things are a little different.  During out development time on \textbf{wonderful}, something changed on \textbf{master}.  We did not make many alterations, but just the fact that we made some changed the way the merge was performed.  In fact, we can see this if we look at the first line after the merge.  Instead of indicating a \emph{fast-forward} merge, it now states that the merge was \emph{recursive}.  If you are interested in the different types of merge algorithms, you should read the \emph{After Hours} section for this chapter.
 
@@ -571,40 +569,40 @@ So now the history of this latest commit actually relies on two previous commits
 Let us now remove that third file before merging in the \textbf{zaney} branch.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git rm my_third_committed_file
+john@satsuki:~/coderepo$ git rm my_third_committed_file
 rm 'my_third_committed_file'
-john@akira:~/coderepo$ git commit -a -m 'Removed third file'
-[master b9164cd] Removed third file
+john@satsuki:~/coderepo$ git commit -a -m 'Removed third file'
+[master ed2301b] Removed third file
  1 files changed, 0 insertions(+), 2 deletions(-)
  delete mode 100644 my_third_committed_file
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 So now we are ready to merge in the \textbf{zaney} branch.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git merge zaney
+john@satsuki:~/coderepo$ git merge zaney
 Auto-merging newfile1
 CONFLICT (content): Merge conflict in newfile1
 Auto-merging newfile2
 CONFLICT (content): Merge conflict in newfile2
 Automatic merge failed; fix conflicts and then commit the result.
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 Oh dear!  That probably did not go as well as we had hoped.  We have two conflicts.  The first is in \texttt{newfile1} and the second in \texttt{newfile2}.  You may be wondering why.  The last commit we made did not make any changes to either of those files, so why do we suddenly have a conflict?  When using a version control system like Git, conflicts are an every day part of life.  A conflict does not mean you have done something wrong.  It simply means that the automatic merging algorithm can not merge the changes.
 
-In this case we have a conflict because the files have changed in both sides of the merge, since they diverged.  Rephrasing this slightly: Since the point when we created the branch \textbf{zaney}, at commit \textbf{8d5140}, both the \textbf{master} branch and the \textbf{zaney} branch have both modified the same files in the same places.  Right now, our merge is paused.  For now, let us abort the merge so that we can take a closer look at what happened.
+In this case we have a conflict because the files have changed in both sides of the merge, since they diverged.  Rephrasing this slightly: Since the point when we created the branch \textbf{zaney}, at commit \textbf{55fb69}, both the \textbf{master} branch and the \textbf{zaney} branch have both modified the same files in the same places.  Right now, our merge is paused.  For now, let us abort the merge so that we can take a closer look at what happened.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git reset --merge
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ git reset --merge
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 So let us compare the changes between our latest common ancestor and our branch tips.  We will first look at the difference between the ancestor and our \textbf{master} branch, but limit it to the files with conflicts.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git diff 8d5140 master -- newfile*
+john@satsuki:~/coderepo$ git diff 55fb69 master -- newfile*
 diff --git a/newfile1 b/newfile1
 index 24e7dfa..ef20984 100644
 --- a/newfile1
@@ -619,12 +617,13 @@ index cba16cc..dac4357 100644
 @@ -1 +1,2 @@
  Another new file
 +and a new feature
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 Now we will do the same between the common ancestor and the tip of \textbf{zaney}.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git diff 8d5140 zaney -- newfile*
+john@satsuki:~/coderepo$ git diff 55fb69 zaney -- newfile*
 diff --git a/newfile1 b/newfile1
 index 24e7dfa..d94dacc 100644
 --- a/newfile1
@@ -639,33 +638,33 @@ index cba16cc..45659d7 100644
 @@ -1 +1,2 @@
  Another new file
 +and some more awesome changes
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 So hopefully you can see that we have tried to change the second line in both files.  This is where the conflict is arising from.  Let us try to run the merge again and this time we will resolve the conflicts manually.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git merge zaney
+john@satsuki:~/coderepo$ git merge zaney
 Auto-merging newfile1
 CONFLICT (content): Merge conflict in newfile1
 Auto-merging newfile2
 CONFLICT (content): Merge conflict in newfile2
 Automatic merge failed; fix conflicts and then commit the result.
-john@akira:~/coderepo$ cat newfile1
+john@satsuki:~/coderepo$ cat newfile1
 A new file
 <<<<<<< HEAD
 and some more changes
 =======
 and some awesome changes
 >>>>>>> zaney
-john@akira:~/coderepo$ cat newfile2
+john@satsuki:~/coderepo$ cat newfile2
 Another new file
 <<<<<<< HEAD
 and a new feature
 =======
 and some more awesome changes
 >>>>>>> zaney
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 We have displayed the contents of \texttt{newfile1} and \texttt{newfile2} during this merge.  At the moment, no commits have been made and we have a chance to tell Git exactly what these files should look like.  You should be able to see that Git has modified the files to show us what both the branches think the file should look like.  At the top, just after the \texttt{<<<<<<< HEAD} is how the line was modified in the \textbf{master} branch.  We then have a divider \texttt{=======} and after that we have the line, as it was modified in the \textbf{zaney} branch, followed by \texttt{>>>>>>> zaney}.  We can now edit these files manually, remove the dividers, header and footer and commit the result.  
@@ -687,24 +686,23 @@ and a new awesome feature
 Now we have resolved the conflicts and set the files straight, we can add the files and commit the result.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git add newfile*
-john@akira:~/coderepo$ git commit -a -m 'Merged in zaney'
-[master af7293c] Merged in zaney
-john@akira:~/coderepo$ git log -n2
-commit af7293c53f744a820c3a3f19c038d488756afb32
-Merge: b9164cd 4fdfe36
+john@satsuki:~/coderepo$ git add newfile*
+john@satsuki:~/coderepo$ git commit -a -m 'Merged in zaney'
+[master d50ffb2] Merged in zaney
+john@satsuki:~/coderepo$ git log -n2
+commit d50ffb2fa536d869f2c4e89e8d6a48e0a29c5cc1
+Merge: ed2301b 7cc32db
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
-Date:   Thu Mar 24 22:37:35 2011 +0000
+Date:   Fri Apr 1 07:42:04 2011 +0100
 
     Merged in zaney
 
-commit b9164cd641f3c9ba3ac1a97ec1b7f98736c40e20
+commit ed2301ba223a63a5a930b536a043444e019460a7
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
-Date:   Thu Mar 24 21:36:25 2011 +0000
+Date:   Fri Apr 1 07:37:34 2011 +0100
 
     Removed third file
-john@akira:~/coderepo$ 
-
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 Our merge has been completed.  Let us now see what our repository looks like graphically, in Figure 6.
