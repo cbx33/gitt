@@ -7,6 +7,7 @@ Get vetting from someone on the history of version control systems
 Come up with more breakout boxes :)
 Come up with more items for terminology
 
+Make sure to ref the version of git
 
 %git log -p
 %DIFFs
