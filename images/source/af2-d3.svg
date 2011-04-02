@@ -228,8 +228,8 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1280"
-     inkscape:window-height="956"
+     inkscape:window-width="1024"
+     inkscape:window-height="699"
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="1">
@@ -250,7 +250,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -336,7 +336,7 @@
          sodipodi:role="line"
          id="tspan4001-3"
          x="50"
-         y="157.36218">882069</tspan></text>
+         y="157.36218">cfe23c</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
@@ -481,7 +481,7 @@
          sodipodi:role="line"
          id="tspan4001-3-8"
          x="50"
-         y="242.36212">e86dde</tspan></text>
+         y="242.36212">163f06</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
@@ -626,7 +626,7 @@
          sodipodi:role="line"
          id="tspan4001-3-8-8"
          x="50"
-         y="327.36212">6ca160</tspan></text>
+         y="327.36212">9938a0</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"

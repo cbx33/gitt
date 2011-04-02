@@ -8,24 +8,22 @@ This After Hours section is going to get a little deep.  For some of you it may 
 To start with, we are going to use the Git repository that we have been playing with in Week 2 and take a deeper look at what is actually inside a Git repository.  Let us view the directory structure, to see what has been created in the \texttt{.git} folder.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo3/.git$ ls -la
-total 56
-drwxr-xr-x  8 john john 4096 2011-03-10 20:16 .
-drwxr-xr-x  3 john john 4096 2011-03-10 20:16 ..
-drwxr-xr-x  2 john john 4096 2011-03-10 20:15 branches
--rw-r--r--  1 john john  334 2011-03-10 20:15 COMMIT_EDITMSG
--rw-r--r--  1 john john  107 2011-03-10 20:15 config
--rw-r--r--  1 john john   73 2011-03-10 20:15 description
--rw-r--r--  1 john john   23 2011-03-10 20:15 HEAD
-drwxr-xr-x  2 john john 4096 2011-03-10 20:15 hooks
--rw-r--r--  1 john john  208 2011-03-10 20:16 index
-drwxr-xr-x  2 john john 4096 2011-03-10 20:15 info
-drwxr-xr-x  3 john john 4096 2011-03-10 20:15 logs
-drwxr-xr-x 18 john john 4096 2011-03-10 20:15 objects
--rw-r--r--  1 john john   41 2011-03-10 20:16 ORIG_HEAD
-drwxr-xr-x  4 john john 4096 2011-03-10 20:15 refs
-john@akira:~/coderepo3/.git$ 
-
+john@satsuki:~/coderepo/.git$ ls -la
+total 52
+drwxr-xr-x  8 john john 4096 2011-03-31 20:35 .
+drwxr-xr-x  3 john john 4096 2011-03-31 20:28 ..
+drwxr-xr-x  2 john john 4096 2011-03-31 20:22 branches
+-rw-r--r--  1 john john   30 2011-03-31 20:34 COMMIT_EDITMSG
+-rw-r--r--  1 john john   92 2011-03-31 20:22 config
+-rw-r--r--  1 john john   73 2011-03-31 20:22 description
+-rw-r--r--  1 john john   23 2011-03-31 20:22 HEAD
+drwxr-xr-x  2 john john 4096 2011-03-31 20:22 hooks
+-rw-r--r--  1 john john  208 2011-03-31 20:35 index
+drwxr-xr-x  2 john john 4096 2011-03-31 20:22 info
+drwxr-xr-x  3 john john 4096 2011-03-31 20:27 logs
+drwxr-xr-x 13 john john 4096 2011-03-31 20:34 objects
+drwxr-xr-x  4 john john 4096 2011-03-31 20:22 refs
+john@satsuki:~/coderepo/.git$
 \end{Verbatim}
 
 \textbf{branches} - Though deprecated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.
@@ -46,7 +44,7 @@ john@akira:~/coderepo3/.git$
 
 \textbf{objects} - The is the directory that holds all of the actual files that are stored in the repository.  The files are named by their SHA-1 values.  Inside the folder are a number of directories which make up the first 2 characters of the SHA-1 value.  The remaining portion of the SHA-1 hash is used to name the file.
 
-\textbf{ORIG\_HEAD} - Hold the previous SHA-1 hash that HEAD pointed to.  This allows certain operations to go back, in the case of failure.
+\textbf{ORIG\_HEAD} - Hold the previous SHA-1 hash that HEAD pointed to.  This allows certain operations to go back, in the case of failure. (Not present in our listing)
 
 \textbf{refs} - This folder holds the files that files for local branches, remote branches and tags.
 
@@ -72,37 +70,37 @@ So now we know what a basic repository shuld look like, let us go through each s
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
 ./09/5b9cda52807c9c11781ec0a4aee927787b61f1
+./16/3f06147a449e724d0cfd484c3334709e8e1fce
 ./34/a5dff148e70c12310cda0800d6bcaf82530bdc
 ./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce
 ./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a
-./6c/a160c7226731bf80973fc5bc81f6b9beda7795
-./88/206926cb60aed53d21ede69f9ca5b7c69cb983
 ./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65
+./99/38a0c30940dccaeddce4bb2eb151fba3a21ae5
+./cf/e23cbe0150fda69a004e301828097935ec4397
 ./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391
-./e8/6ddea25341a75275d316d8ca545aa7c73e97b3
 \end{Verbatim}
 
 In order to start rebuilding a picture of our repository, let us first find out what the first commit to our repository was.  Looking back in \emph{Week 2} we can see the following trimmed output.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-[master (root-commit) 8820692] My First Ever Commit
+[master (root-commit) cfe23cb] My First Ever Commit
 \end{Verbatim}
 
-So we need to start with the object that begins \texttt{8820692}.  Remember in the description above about the SHA-1 hashes, the first two bytes are the directory name.  We are looking for a file that starts with the characters \texttt{20692} and it will be in the directory called \texttt{88}.  By George!  Looking at the list above, we can see that there is one file which fits the bill.  In fact it would be a little ambiguous if there were two.  It \emph{could} happen that we would have two SHA-1 hashes  that started with the same seven characters, but it's not likely.  The line we are interested in is listed below.
+So we need to start with the object that begins \texttt{cfe23cb}.  Remember in the description above about the SHA-1 hashes, the first two bytes are the directory name.  We are looking for a file that starts with the characters \texttt{e23cb} and it will be in the directory called \texttt{cf}.  By George!  Looking at the list above, we can see that there is one file which fits the bill.  In fact it would be a little ambiguous if there were two.  It \emph{could} happen that we would have two SHA-1 hashes  that started with the same seven characters, but it's not likely.  The line we are interested in is listed below.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-./88/206926cb60aed53d21ede69f9ca5b7c69cb983}
+./cf/e23cbe0150fda69a004e301828097935ec4397}
 \end{Verbatim}
 
 It would be nice if we could find out a little more about this object, and confirm that it is what we expect it to be.  to start with, let us run the linux \texttt{file} command on it, to see what it makes of it.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-john@akira:~/coderepo/.git/objects/88$ file 206926cb60aed53d21ede69f9ca5b7c69cb983 
-206926cb60aed53d21ede69f9ca5b7c69cb983: VAX COFF executable not stripped
-john@akira:~/coderepo/.git/objects/88$ 
+john@satsuki:~/coderepo/.git/objects/cf$ file e23cbe0150fda69a004e301828097935ec4397 
+e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable - version 5185
+john@satsuki:~/coderepo/.git/objects/cf$ 
 \end{Verbatim}
 
-The \texttt{file} command, tells us that the file is actually of \texttt{VAX COFF executable not stripped} filetype.  This is obviously not correct.  Git stores its objects by Zlib compressing them, which is why it is difficult for the \texttt{file} command to make any sense out of them.  Later in the book, you will find out exactly how to generate your own repository from scratch, but for now, let us just understand that Git first creates a header for the content, then adds the content to the header, creates the SHA-1 hash of such data and finally Zlib compresses it to store to disk.
+The \texttt{file} command, tells us that the file is actually of \texttt{VAX COFF executable - version 5185} filetype.  This is obviously not correct.  Git stores its objects by Zlib compressing them, which is why it is difficult for the \texttt{file} command to make any sense out of them.  Later in the book, you will find out exactly how to generate your own repository from scratch, but for now, let us just understand that Git first creates a header for the content, then adds the content to the header, creates the SHA-1 hash of such data and finally Zlib compresses it to store to disk.
 
 \subsection{Out comes the wrench}
 Wouldn't it be nice if we could view the data that was inside the file simply, without having to write out own tools.  If you look through the Git man page, you will find one listed under the \textbf{Interrogation} section, called \texttt{git cat-file}.  Anyone who has spent any time with Git will know what the \texttt{cat} command does.  \texttt{cat} is used to display the contents of files.  In Git, this command is used to display the contents, type or size of a repository object, be it either of type commit, tree or blob.
@@ -128,46 +126,46 @@ Commands which get a little down and dirty with the details are called Plumbing 
 If we run this plumbing command against our object, and supply the \texttt{-t} parameter, \texttt{git cat-file} will tell us the type of the object.  If we run it with the \texttt{-s} parameter, it will tell us the size.  Finally, running it with the \texttt{-p} parameter we can see what the object actually contains.  Each of these has been demonstrated below.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-john@akira:~/coderepo$ git cat-file -t 882069
+john@satsuki:~/coderepo$ git cat-file -t cfe23c
 commit
-john@akira:~/coderepo$ git cat-file -s 882069
-211
-john@akira:~/coderepo$ git cat-file -p 882069
+john@satsuki:~/coderepo$ git cat-file -s cfe23c
+215
+john@satsuki:~/coderepo$ git cat-file -p cfe23c
 tree 34a5dff148e70c12310cda0800d6bcaf82530bdc
-author John Haskins <john.haskins@tamagoyakiinc.koala> 1298107427 +0000
-committer John Haskins <john.haskins@tamagoyakiinc.koala> 1298107427 +0000
+author John Haskins <john.haskins@tamagoyakiinc.koala> 1301599664 +0100
+committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301599664 +0100
 
 My First Ever Commit
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 Fantastic!  We now have a way of confirming the objects are what we think they are.  If we were to run the command against every file in the repository, we would end up with a list that would look something like the one below.  Notice our commit object sat in the middle.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-./09/5b9cda52807c9c11781ec0a4aee927787b61f1		blob
+./09/5b9cda52807c9c11781ec0a4aee927787b61f1     blob
+./16/3f06147a449e724d0cfd484c3334709e8e1fce     commit
 ./34/a5dff148e70c12310cda0800d6bcaf82530bdc		tree
 ./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce		blob
 ./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a		tree
-./6c/a160c7226731bf80973fc5bc81f6b9beda7795		commit
-./88/206926cb60aed53d21ede69f9ca5b7c69cb983		commit
 ./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65		tree
+./99/38a0c30940dccaeddce4bb2eb151fba3a21ae5     commit
+./cf/e23cbe0150fda69a004e301828097935ec4397     commit
 ./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391		blob
-./e8/6ddea25341a75275d316d8ca545aa7c73e97b3		commit
 \end{Verbatim}
 
 Now things start to get interesting.  Did you also notice the tree SHA-1 hash mentioned when we ran \texttt{git cat-file -p}?  This is the tree object that stores the file structure.  Why don't we run the command against that file too?
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-john@akira:~/coderepo$ git cat-file -p 34a5dff
+john@satsuki:~/coderepo$ git cat-file -p 34a5dff
 100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391	my_first_committed_file
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 We can now see a list of all files that were present in that snapshot of the working tree.  In our case this just happens to be one file.  Using our command one last time against the object name of the file, we can see the actual contents of the file.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-john@akira:~/coderepo$ git cat-file -p e69de29
-john@akira:~/coderepo$
+john@satsuki:~/coderepo$ git cat-file -p e69de29
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 At first glance one may consider it odd that there is nothing in there.  However, if we take a trip back in time and flick back to the first commit that we made to our repository, you will see that we never actuall put any content in our file at all.  So, the object contains nothing.  Now we can draw up a diagram of our repository after the first commit.
@@ -181,17 +179,17 @@ At first glance one may consider it odd that there is nothing in there.  However
 If we pick another commit object from the list and run our command on it we can see something new has appeared in the output.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-john@akira:~/coderepo$ git cat-file -p e86dde
+john@satsuki:~/coderepo$ git cat-file -p 163f061
 tree 3ffa7ab6dafef2bc38a70a39c53604c333ed4d7a
-parent 88206926cb60aed53d21ede69f9ca5b7c69cb983
-author John Haskins <john.haskins@tamagoyakiinc.koala> 1298318817 +0000
-committer John Haskins <john.haskins@tamagoyakiinc.koala> 1298318817 +0000
+parent cfe23cbe0150fda69a004e301828097935ec4397
+author John Haskins <john.haskins@tamagoyakiinc.koala> 1301599979 +0100
+committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301599979 +0100
 
 Made a few changes to first and second files
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-This commit object has an extra field.  This field is the \texttt{parent} field.  It tells Git which commit object is the parent to this one.  We were lucky in our guess that the parent object \textbf{882069} was actually the object we had first encountered.  By knowing this nugget of information, we can actually deduce that the object \textbf{e86dde} was actually the next commit.  Checking in Week 2 will confirm this.  It seems we could now build a complete history of our repository so far.  If we did so, we would end up with a diagram that looked a little like the one below.
+This commit object has an extra field.  This field is the \texttt{parent} field.  It tells Git which commit object is the parent to this one.  We were lucky in our guess that the parent object \textbf{cfe23cb} was actually the object we had first encountered.  By knowing this nugget of information, we can actually deduce that the object \textbf{9938a0c} was actually the next commit.  Checking in Week 2 will confirm this.  It seems we could now build a complete history of our repository so far.  If we did so, we would end up with a diagram that looked a little like the one below.
 
 \begin{figure}[hbt]
 \centering
