@@ -75,12 +75,12 @@ We can invoke the GUI by running the \texttt{git gui} command.  We will be prese
 \end{figure}
 
 This initial window is composed of four key areas
-\begin{itemize}
-\item \textbf{Unstaged (1)} - This area on the screen shows all of the items present in the working copy which are unstaged, that is to say they have not yet been added to the index and so will not be included if a commit were to take place.
-\item \textbf{Staged (2)} - This area on the screen shows all of the items present in the index or staging area.  Everything listed here will be included if a commit takes place.
-\item \textbf{Content View(3)} - This region of the window will show the contents of an item if it is selected in either the Unstaged or Staged areas.  If the file is already tracked, then the window will show a diff between the last committed version and the chosen version.
-\item \textbf{Commit (4)} - From the commit section of the screen, the commit message can be written, the commit performed, the directory rescanned for changes, as well as other operations.
-\end{itemize}
+\begin{enumerate}
+\item \textbf{Unstaged} - This area on the screen shows all of the items present in the working copy which are unstaged, that is to say they have not yet been added to the index and so will not be included if a commit were to take place.
+\item \textbf{Staged} - This area on the screen shows all of the items present in the index or staging area.  Everything listed here will be included if a commit takes place.
+\item \textbf{Content View} - This region of the window will show the contents of an item if it is selected in either the Unstaged or Staged areas.  If the file is already tracked, then the window will show a diff between the last committed version and the chosen version.
+\item \textbf{Commit} - From the commit section of the screen, the commit message can be written, the commit performed, the directory rescanned for changes, as well as other operations.
+\end{enumerate}
 
 If we take a closer look at the \textbf{Unstaged} area of the screen, we see something interesting.  This is shown in Figure 2.
 
@@ -133,7 +133,27 @@ It should be noted here that we could have performed multiple operations here, a
 \section{Day 2 - ``Back to logging''}
 \subsection{Visualisation to the max}
 
-With the basic operations down, as we discovered in Week 1, let us now move on to using the GUI to view the history of our database.  The visualiser that is bundled with Git is packed with features and can be invoked in one of two ways, either by running \texttt{gitk} from the command line, or by choosing \textbf{\emph{Repository - Visualize All Branch History}} or \textbf{\emph{Repository - Visualize master's Branch History}}, the latter is worded with the assumption that you are on the \textbf{master} branch of course.
+With the basic operations down, as we discovered in Week 1, let us now move on to using the GUI to view the history of our database.  The visualiser that is bundled with Git is packed with features and can be invoked in one of two ways, either by running \texttt{gitk} from the command line, or by choosing \textbf{\emph{Repository - Visualize All Branch History}} or \textbf{\emph{Repository - Visualize master's Branch History}}, the latter menu item is worded with the assumption that you are on the \textbf{master} branch of course.
+
+Whichever way we begin an instance of \texttt{gitk}, we are likely to end up with a screen like the one in Figure 8.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=11cm]{images/f-w5-d8.png}
+\caption{Initial \texttt{gitk} view}
+\end{figure} 
+
+Let us spend a few minutes familiarising ourselves with the layout of the \texttt{gitk} tool.  The window is split up into roughly seven different areas.  We will take a brief look at each of these below.
+
+\begin{enumerate}
+\item \textbf{History Graph} - This area of the screen gives a graphical representation of the history of our repository.  Similar to the \texttt{git log --graph} option that we used previously, the graph here is much more readable.
+\item \textbf{Committer History} - The committer history tells us the person who added the commit which is horizontally adjacent in the commit graph.  
+\item \textbf{Date History} - The date history is very similar to the committer history section of the screen and shows us a simple view of the date of the commit which is horizontally adjacent.
+\item \textbf{History Search} - This section of the screen allows you to narrow down and highlight a subset of commits which meet a certain criteria.  It also allows you to navigate through these results.
+\item \textbf{Commit Search} - Once you have highlighted a commit, the commit search section allows you to find specific strings within that commit, including looking at just old or new lines to the repository.
+\item \textbf{Content View} - This window actually shows the data that was stored in the commit and allows you scroll through either changes or complete files.
+\item \textbf{File System View} - The file system view shows you a list of files that were either modified in a specified commit, or that were present in the commit.
+\end{enumerate}
 
 
 
