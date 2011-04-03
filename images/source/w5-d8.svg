@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="w5-d8.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.65"
+     inkscape:cx="745.71429"
+     inkscape:cy="345.71429"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1024"
+     inkscape:window-height="699"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <image
+       y="344.13141"
+       x="152.61539"
+       id="image3212"
+       xlink:href="file:///home/pete/book2/GITT/images/raster/w5-d8.png"
+       height="718"
+       width="1024" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="path3082"
+       sodipodi:cx="371.53845"
+       sodipodi:cy="600.82373"
+       sodipodi:rx="23.846153"
+       sodipodi:ry="23.846153"
+       d="m 371.53845,624.66988 a 23.846153,23.846153 0 1 1 0,0"
+       sodipodi:start="1.5707964"
+       sodipodi:end="7.8539816"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="translate(-21.538462,-75.384615)" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold"
+       x="341.69232"
+       y="536.20831"
+       id="text3084"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3086"
+         x="341.69232"
+         y="536.20831"
+         style="font-size:36px">1</tspan></text>
+    <path
+       transform="translate(323.84616,-76.153853)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="path3082-4"
+       sodipodi:cx="371.53845"
+       sodipodi:cy="600.82373"
+       sodipodi:rx="23.846153"
+       sodipodi:ry="23.846153"
+       d="m 371.53845,624.66988 a 23.846153,23.846153 0 1 1 0,0"
+       sodipodi:start="1.5707964"
+       sodipodi:end="7.8539816"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold"
+       x="687.0769"
+       y="535.43915"
+       id="text3084-5"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3086-3"
+         x="687.0769"
+         y="535.43915"
+         style="font-size:36px">2</tspan></text>
+    <path
+       transform="translate(623.84616,-76.153856)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="path3082-4-0"
+       sodipodi:cx="371.53845"
+       sodipodi:cy="600.82373"
+       sodipodi:rx="23.846153"
+       sodipodi:ry="23.846153"
+       d="m 371.53845,624.66988 a 23.846153,23.846153 0 1 1 0,0"
+       sodipodi:start="1.5707964"
+       sodipodi:end="7.8539816"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold"
+       x="987.07697"
+       y="535.43909"
+       id="text3084-5-7"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3086-3-2"
+         x="987.07697"
+         y="535.43909"
+         style="font-size:36px">3</tspan></text>
+    <path
+       transform="translate(296.15385,83.846145)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="path3082-4-9"
+       sodipodi:cx="371.53845"
+       sodipodi:cy="600.82373"
+       sodipodi:rx="23.846153"
+       sodipodi:ry="23.846153"
+       d="m 371.53845,624.66988 a 23.846153,23.846153 0 1 1 0,0"
+       sodipodi:start="1.5707964"
+       sodipodi:end="7.8539816"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold"
+       x="659.38458"
+       y="695.43915"
+       id="text3084-5-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3086-3-3"
+         x="659.38458"
+         y="695.43915"
+         style="font-size:36px">4</tspan></text>
+    <path
+       transform="translate(-76.153832,145.38461)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="path3082-4-9-0"
+       sodipodi:cx="371.53845"
+       sodipodi:cy="600.82373"
+       sodipodi:rx="23.846153"
+       sodipodi:ry="23.846153"
+       d="m 371.53845,624.66988 a 23.846153,23.846153 0 1 1 0,0"
+       sodipodi:start="1.5707964"
+       sodipodi:end="7.8539816"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold"
+       x="287.0769"
+       y="756.9776"
+       id="text3084-5-9-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3086-3-3-4"
+         x="287.0769"
+         y="756.9776"
+         style="font-size:36px">5</tspan></text>
+    <path
+       transform="translate(86.923086,285.38461)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="path3082-4-9-3"
+       sodipodi:cx="371.53845"
+       sodipodi:cy="600.82373"
+       sodipodi:rx="23.846153"
+       sodipodi:ry="23.846153"
+       d="m 371.53845,624.66988 a 23.846153,23.846153 0 1 1 0,0"
+       sodipodi:start="1.5707964"
+       sodipodi:end="7.8539816"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold"
+       x="450.15384"
+       y="896.97766"
+       id="text3084-5-9-6"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3086-3-3-3"
+         x="450.15384"
+         y="896.97766"
+         style="font-size:36px">6</tspan></text>
+    <path
+       transform="translate(602.3077,286.92306)"
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="path3082-4-9-34"
+       sodipodi:cx="371.53845"
+       sodipodi:cy="600.82373"
+       sodipodi:rx="23.846153"
+       sodipodi:ry="23.846153"
+       d="m 371.53845,624.66988 a 23.846153,23.846153 0 1 1 0,0"
+       sodipodi:start="1.5707964"
+       sodipodi:end="7.8539816"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold"
+       x="965.53845"
+       y="898.51605"
+       id="text3084-5-9-4"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/pete/book2/GITT/images/f-w5-d1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3086-3-3-39"
+         x="965.53845"
+         y="898.51605"
+         style="font-size:36px">7</tspan></text>
+  </g>
+</svg>
