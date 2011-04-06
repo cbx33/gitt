@@ -181,7 +181,7 @@ Above the \textbf{File System View} pan is a button to switch between \texttt{Pa
 
 So as you can see, the \texttt{gitk} tool is already quite powerful.  We are now going to take things a step further.  Remember in \textbf{Week 3} we had a way of searching the repository for the introduction of a string.  We can do the exact same thing with \texttt{gitk}.  
 
-We are going to drop down the box which currently reads \texttt{contains:} and change it to \texttt{add/removing string:}.  Then we are going to enter \texttt{Change1} into the field on the right.  Your changes should look similar to Figure 11.
+We are going to drop down the box which currently reads \texttt{contains:} in the \textbf{History Search} pane and change it to \texttt{add/removing string:}.  Then we are going to enter \texttt{Change1} into the field on the right.  Your changes should look similar to Figure 11.
 
 \begin{figure}[hbt]
 \centering
@@ -198,6 +198,12 @@ After you have finished typing you should already have noticed a difference in t
 \end{figure} 
 
 If you remember from Week 3, when we first ran the \texttt{git log -SChange1} command, we were presented with only one commit.  That was titled, \texttt{Made a few changes to first and second files}.  Our repository has moved on since then and we can see that that particular string, \texttt{Change1} was added or removed in two other commits as well.  This was when we totally changed \texttt{my\_second\_committed\_file} and when we removed \texttt{my\_first\_committed\_file} a little later.  The \textbf{Next} and \textbf{Previous} buttons can be used to navigate through the search results.
+
+Now that we have found the commits that contain the change to the string we are looking for.  The question is, where in the file does this change occur?  We can now use the \textbf{Commit Search} pane to see this.  Typing \texttt{Change1} into this search box will highlight the relevant text in the \texttt{Content View} pane below.  It really is as easy as that.
+
+Whilst it is a great idea to remember and use the command line arguments and parameters, it is also useful to know that these other tools are available.  They should not be frowned upon, as some command line purists do.  GUI tools are as much a part of the development process as their command line counterparts.  Both have their uses and the most important lesson of all is to know when to use which.  This lesson will most likely come with experience and time, or as a friend of mine used to put it, old age.
+
+
 
 \clearpage
 
