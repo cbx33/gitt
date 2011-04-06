@@ -165,7 +165,23 @@ To start with, let us take a look at the graph that is present in \textbf{Histor
 
 The historical graph shows us all active branches, tags and commits.  From looking at this it is easy to see where our merges occured and where the branch HEADs point to.  The branches are identified by green rectangles, and the tags as yellow labels.  Each circle on the graph is a commit and is linked to the panes on the right, where you can see the committer and date information.
 
+If we select the \textbf{master} branch HEAD, which should be the top commit, (in fact on opening \texttt{gitk} this should already be selected), we should see a pane similar to Figure 10 in the \textbf{Content View} section of the screen.
 
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-w5-d10.png}
+\caption{Graphical history of repository}
+\end{figure} 
+
+Notice in this that we have two parents listed, which is what we would expect, as the last commit we did was that of a merge from \textbf{zaney} into \textbf{master}.  Notice also that below this, we get to see a diff output of exactly what changed during this merge.  Interestingly, it shows that \texttt{newfile1} loses one line from parent \textbf{ed2301b} and another from parent \textbf{7cc32db}.  These are both replaced by the next line, which reads \texttt{and some more awesome changes}.
+
+The current commit is a little special as it is a merge.  If you choose any normal commit, you can use the \texttt{Diff}, \texttt{Old version} and \texttt{New version} buttons to either show what the file used to look like (Old), what it looks like now (New), or the default view which is the Diff and shows the combination of the changes.
+
+Above the \textbf{File System View} pan is a button to switch between \textt{Patch} and \texttt{Tree} views.  By default, this is set to \texttt{Patch} and changes what the \textbf{Content View} pane displays.  When set to \texttt{Patch}, this shows us the changes between the old commit and the new one.  However, when we switch this to \texttt{Tree} view the \textbf{Content View} pane changes to show the contents of a file selected from its pane, at the current commit.  In this way, it allows you to browse and display files from previous commits graphically and effortlessly.  Simply select the commit, selected \texttt{Tree} mode, choose the file, et voila, it is presented in the \textbf{Content View} pane.
+
+So as you can see, the \texttt{gitk} tool is already quite powerful.  We are now going to take things a step further.  Remember in \textbf{Week 3} 
+
+We can do some other clever
 
 \clearpage
 
