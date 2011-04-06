@@ -170,7 +170,7 @@ If we select the \textbf{master} branch HEAD, which should be the top commit, (i
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d10.png}
-\caption{Graphical history of repository}
+\caption{Content view of master HEAD}
 \end{figure} 
 
 Notice in this that we have two parents listed, which is what we would expect, as the last commit we did was that of a merge from \textbf{zaney} into \textbf{master}.  Notice also that below this, we get to see a diff output of exactly what changed during this merge.  Interestingly, it shows that \texttt{newfile1} loses one line from parent \textbf{ed2301b} and another from parent \textbf{7cc32db}.  These are both replaced by the next line, which reads \texttt{and some more awesome changes}.
@@ -186,7 +186,7 @@ We are going to drop down the box which currently reads \texttt{contains:} and c
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d11.png}
-\caption{Graphical history of repository}
+\caption{Searching for a string}
 \end{figure} 
 
 After you have finished typing you should already have noticed a difference in the \textbf{History Graph} pane.  Notice how some commits are now highlighted in bold, as demonstrated in Figure 12?
@@ -194,7 +194,7 @@ After you have finished typing you should already have noticed a difference in t
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d12.png}
-\caption{Graphical history of repository}
+\caption{Search results}
 \end{figure} 
 
 If you remember from Week 3, when we first ran the \texttt{git log -SChange1} command, we were presented with only one commit.  That was titled, \texttt{Made a few changes to first and second files}.  Our repository has moved on since then and we can see that that particular string, \texttt{Change1} was added or removed in two other commits as well.  This was when we totally changed \texttt{my\_second\_committed\_file} and when we removed \texttt{my\_first\_committed\_file} a little later.  The \textbf{Next} and \textbf{Previous} buttons can be used to navigate through the search results.
