@@ -216,16 +216,26 @@ Whilst it is a great idea to remember and use the command line arguments and par
 Eugene breathed in deeply.  Knowing Eugene, it wouldn't be anything amazing, but nevertheless, his interest had been piqued.
 \end{trenches}
 
+The \texttt{gitk} tool has a pretty awesome feature called \emph{views}.  Sometimes it may be necessary to keep track of everything a certain person has done.  Or maybe see anything that has happened in the last week.  You may even be interested in people adding certain strings to the repository.  The \emph{views} feature allows you to do just that.  By setting up a view, you can filter the results that are displayed in \texttt{gitk}, byt simply switching to it.  
+
+In the example we are going to go back to the search we made previously and filter the history for any changes to \texttt{my\_first\_committed\_file} that add or remove the string \texttt{Change1}.  First we are going to load the dialog box, by using the menu \textbf{\emph{View - New View...}}.  The resulting dialog is displayed below and we have already filled in the required information.
+
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d13.png}
-\caption{Search results}
+\caption{Setting up a \emph{view}}
 \end{figure} 
+
+We changed the \textbf{View Name} to be \texttt{Change1}.  This is simply an identifier that will allow us to choose our view in the future.  We have also ticked the \textbf{Remember this view}.  Ticking this box ensures that the view is remembered once we close \texttt{gitk}.  Sometimes, this behaviour is not desired, but in our case we want this view to be available every time we start \texttt{gitk}.
+
+There are many options which we can set, but in our case we have chosen to simply add \texttt{Change1} to the \textbf{Changes to files:} section.  This is equivalent to the search that we performed earlier.  We have also filtered the files which are included in the results, by putting, \texttt{my\_first\_committed\_file} in the \textbf{Enter files and directories to be included} box.
+
+The result of this view is shown in Figure 14.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d14.png}
-\caption{Search results}
+\caption{View results}
 \end{figure} 
 
 
