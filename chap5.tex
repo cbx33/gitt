@@ -203,7 +203,6 @@ Now that we have found the commits that contain the change to the string we are 
 
 Whilst it is a great idea to remember and use the command line arguments and parameters, it is also useful to know that these other tools are available.  GUI tools should not be frowned upon, as some command line purists do.  GUI tools are as much a part of the development process as their command line counterparts.  Both have their uses and the most important lesson of all is to know when to use which.  This lesson will most likely come with experience and time, or as a friend of mine used to put it, old age.
 
-\section{Day 3 - ``Advanced Views''}
 \subsection{Customising the visualisation}
 
 \begin{trenches}
@@ -230,7 +229,7 @@ We changed the \textbf{View Name} to be \texttt{Change1}.  This is simply an ide
 
 There are many options which we can set, but in our case we have chosen to simply add \texttt{Change1} to the \textbf{Changes to files:} section.  This is equivalent to the search that we performed earlier.  We have also filtered the files which are included in the results, by putting, \texttt{my\_first\_committed\_file} in the \textbf{Enter files and directories to be included} box.
 
-The result of this view is shown in Figure 14.
+The result of this view is shown in Figure 14.  Notice that instead of all the commits being shown, we are just shown the two that we are interested in.  Both of these commits are referred to earlier in the chapter, when we ran the search manually in \texttt{gitk}
 
 \begin{figure}[hbt]
 \centering
@@ -238,6 +237,11 @@ The result of this view is shown in Figure 14.
 \caption{View results}
 \end{figure} 
 
+This ends our tour of the \texttt{gitk} utility.  Hopefully you have seen that it can actually present a large amount of information in a very compact and usable way.  As such it should not be forgotten about and should remain part of your arsenal of Git tools.
+
+\section{Day 3 - ``Advanced Techniques''}
+\subsection{Getting more done graphically}
+Whilst \texttt{git gui} can perform commits.  It is interesting to note that it can do a whole lot more.  One feature, which can be exceedingly useful is the \textbf{File Browser}.  This is invoked by using the \textbf{\emph{Repository - Browse Branch's Files...}} menu item.
 
 \clearpage
 
@@ -246,6 +250,8 @@ The result of this view is shown in Figure 14.
 \begin{itemize}
 
 \item\texttt{git gui} - Invokes the Git gui tool
+
+\item\texttt{gitk} - Starts an instance of the graphical history tool for Git
 
 \end{itemize}
 
