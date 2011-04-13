@@ -243,6 +243,52 @@ This ends our tour of the \texttt{gitk} utility.  Hopefully you have seen that i
 \subsection{Getting more done graphically}
 Whilst \texttt{git gui} can perform commits.  It is interesting to note that it can do a whole lot more.  One feature, which can be exceedingly useful is the \textbf{File Browser}.  This is invoked by using the \textbf{\emph{Repository - Browse Branch's Files...}} menu item.
 
+We can now select the point at which we want to browse the repository.  By default we are presented with a list ofthe branches present in the repository.  Note we can also choose tags, by selecting the appropriate option in the radio box.  We can also put things like \texttt{HEAD} and \texttt{HEAD~1} into the \textbf{Revision Expression:} text field.  
+
+The dialog box is shown in Figure 15.  Notice also that when we hover over the branch names, we are presented with a small pop up, telling us who made the last commit to the branch and what the commit message was.  Clicking the \textbf{Browse} button will take us to the next window, where we can choose the file we wish to view.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-w5-d15.png}
+\caption{Point in history dialog}
+\end{figure} 
+
+The file choosing dialog is rather plain.  Just double clicking on a file will start the \texttt{git gui blame} tool.  Though primarily used as a way to see who, or what was responsible for a specific change to a line, this tool is also useful for seeing how a file has changed over time.  The file chooser dialog is shown in Figure 16.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-w5-d16.png}
+\caption{File chooser}
+\end{figure} 
+
+Once selected, the file is displayed in its own window.  The window is split into two sections.  The top part of the window displays the actual content of the file, along with some commit IDs on the left.  In the lower part of the window, more information on a specific commit is shown.  This window is shown in Figure 17.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-w5-d17.png}
+\caption{File viewer}
+\end{figure} 
+
+Clicking on a line in the view above, will turn that section green and will display the information related to that commit in the lower pane, along with the complete commit message.  It will also highlight all other lines in the current file that were also modified in that commit.  As shown in Figure 18.
+
+Already this is a very powerful tool, much like the \texttt{gitk} too for visualising the history of the repository, \texttt{git gui blame} is also very useful for working through the events that led to the current version of a particular file.  In larger files, being able to click on a portion and have it highlight every other line in that file that was changed in that commit can be extremely useful.  By right clicking on the file, we can also choose the \textbf{Show History Context}, which will load \texttt{gitk} and move the commit history pane to show the commit we are currently interested in.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-w5-d18.png}
+\caption{File viewer, highlighting a commit}
+\end{figure} 
+
+You should have noticed by now that each line has a commit ID associated with it, two in fact.  These are in fact links, and by clicking on these, we can wind the history of the file, back to that point, so that it shows not the state at which it originally did, but now the state as it was in the selected commit.  This is shown in Figure 19.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-w5-d19.png}
+\caption{Going back to a previous commit}
+\end{figure} 
+
+Again this is a hugely powerful tool.  You can navigate back to the current version of the file, or if you have clicked on several to get to your current point, review a history of your path, by clicking on the green arrow at the top of the screen.  You will be presented with a drop down menu, and from here you can choose which point you wish to return to.  
+
 \clearpage
 
 \section{Summary - John's Notes}
