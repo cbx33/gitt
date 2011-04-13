@@ -29,3 +29,5 @@ Make sure to ref the version of git
 
 % git show v1.0.0^{tree}
 
+
+TREEISH IN CHAP 5?
