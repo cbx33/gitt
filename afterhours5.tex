@@ -1,6 +1,52 @@
 % afterhours5.tex - Afer Hours Week 5
 \chapter{After Hours Week 5}
 \section{``Splitting up commits the easy way''}
-\subsection{Taking Git GUI that little bit further}
+\subsection{Taking commits that little bit further}
 
-Talk about line by line commits in both gui and in cli
+Sometimes, putting everything in a single commit just is not a good idea.  Imagine you have pulled in number of updates to your working directory.  You may want to split these up.  It is true that you could simply \texttt{git add} only the files you want to include in the commit.  However, what happens when you have change four or five different things in the same file, and you want to split that commit up into five different commits.
+
+There are two ways you can approach this.  The first is to copy the file in question out of the working directory, reset the working copy back to the last committed and copy your changes in line by line.  This can be time consuming and frustrating and when yo uare working on many files, it can be totally impracticle.  What we neeed is a way to include or exclude certain lines of a file.
+
+To demonstrate this we are going to create a new branch called \textbf{fantasy} and we are going to make several changes to a few files.  We are then going to show how the same process can be achieved by using both the GUI and the command line.
+
+So let us start by creating our branch and making some changes as shown below.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo$ git checkout -b fantasy
+Switched to a new branch 'fantasy'
+john@satsuki:~/coderepo$ echo "This is line 1" > newfile1 
+john@satsuki:~/coderepo$ echo "This is line 2" >> newfile1
+john@satsuki:~/coderepo$ echo "This is line 3" >> newfile1
+john@satsuki:~/coderepo$ echo "This is line 4" >> newfile1
+john@satsuki:~/coderepo$ echo "This is a new line" >> newfile2 
+john@satsuki:~/coderepo$ echo "This is another new line" >> newfile2 
+\end{Verbatim}
+
+Let us now just run a \texttt{git diff} to see exactly what the changes are.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo$ git diff
+diff --git a/newfile1 b/newfile1
+index 44640b2..0eccf1a 100644
+--- a/newfile1
++++ b/newfile1
+@@ -1,2 +1,4 @@
+-A new file
+-and some more awesome changes
++This is line 1
++This is line 2
++This is line 3
++This is line 4
+diff --git a/newfile2 b/newfile2
+index 3545c1d..40efcce 100644
+--- a/newfile2
++++ b/newfile2
+@@ -1,2 +1,4 @@
+ Another new file
+ and a new awesome feature
++This is a new line
++This is another new line
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Now, we could just do \texttt{git commit -a} and be done with it, but what if we really wanted to split this information up into four commits?  We will introduce a new parameter to our \texttt{git add} tool from before.  We are going to use the \texttt{git add -p} or \texttt{git add --patch}
