@@ -316,14 +316,24 @@ If we now run our \texttt{git gui} command, we will see the changes that are pre
 \caption{Changes to \texttt{newfile2}}
 \end{figure} 
 
+If we right click on one of the green lines, remembering that green is short for an \textbf{addition}, we get a menu which we have not seen before.  Among other things, this menu has the ability to stage a specific line or hunk for commit.  In our case we are going to hit the \textbf{Stage Hunk For Commit} and then move on to the next file, \texttt{newfile1}.
+
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-af5-d2.png}
-\caption{Changes to \texttt{newfile2}}
+\caption{Changes to \texttt{newfile1}}
 \end{figure} 
+
+Now we are looking at \texttt{newfile1}, we can use the \textbf{Stage Line For Commit} to add specific lines into the staging area.  The file is shown in Figure 2.  As our file is so small, we can run into problems if we just choose lines at random and stage them.  This is because it is hard for Git to find context around which to associate the change.  The context is the area immediately surrounding the change we are making.  In order to reduce the risk of the error occuring, we are simply going to start at the top, and select the first three lines for committing, by right clicking on each on in turn and choosing the \textbf{Stage Line For Commit} option from the menu.
+
+We have the changes that we expect ready to be committed.  If we want to check one last time that they are right, we can use the \textbf{Staged Changes} pane on the left to choose the file and inspect the diff.  Once we are happy we can use the \textbf{Commit} area of the window to type our commit message and emblazen our changes forever.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-af5-d3.png}
-\caption{Changes to \texttt{newfile2}}
+\caption{Changes to \texttt{newfile1} after staging}
 \end{figure} 
+
+Figure 3, shows what our file looks like after the first commit.  Interestingly, as our file is so small, you will probably find that \texttt{git gui} throws a corrupt patch error if you try to just commit the next line.  As we mentioned earlier, it is always a good idea to know how to use the command line tools for precisely this reason.  Often you are dealing with special cases, that the GUI just can not handle.  In these cases, you may find you need to switch to the command line interface, to get the job done.
+
+So in the \emph{After Hours} section this week, we have found two ways to do the same complex task, one graphical and one command based.  Staging commits in this way may seem rather odd, but it will help you to keep your commits exceedingly exact.  Whilst this may not matter on a personal project, for Tamagoyaki Inc, grouping the right lines together in a commit will be an extremely useful process to have available.
