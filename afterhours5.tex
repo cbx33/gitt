@@ -336,4 +336,16 @@ We have the changes that we expect ready to be committed.  If we want to check o
 
 Figure 3, shows what our file looks like after the first commit.  Interestingly, as our file is so small, you will probably find that \texttt{git gui} throws a corrupt patch error if you try to just commit the next line.  As we mentioned earlier, it is always a good idea to know how to use the command line tools for precisely this reason.  Often you are dealing with special cases, that the GUI just can not handle.  In these cases, you may find you need to switch to the command line interface, to get the job done.
 
+Let us now move back to our \textbf{master} branch and remove the \textbf{fantasy} branch.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo$ git checkout master
+Switched to branch 'master'
+john@satsuki:~/coderepo$ git branch -D fantasy
+Deleted branch fantasy (was 29ceede).
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Notice that because we used the capitol \texttt{-D} parameter, we were not asked if we were sure we wanted to delete the \textbf{fantasy} branch.
+
 So in the \emph{After Hours} section this week, we have found two ways to do the same complex task, one graphical and one command based.  Staging commits in this way may seem rather odd, but it will help you to keep your commits exceedingly exact.  Whilst this may not matter on a personal project, for Tamagoyaki Inc, grouping the right lines together in a commit will be an extremely useful process to have available.
