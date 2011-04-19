@@ -51,25 +51,25 @@ john@satsuki:~/coderepo$
 So now we are interrupted and we have to make some important, and urgent changes to our \textbf{master} branch.  The example that follows is one way that we could use the \texttt{git stash} command to help us out.  
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git stash
-Saved working directory and index state WIP on master: f91f31e Added another file
-HEAD is now at f91f31e Added another file
-john@akira:~/coderepo$ echo "Some mega important changes" >> newfile1
-john@akira:~/coderepo$ git commit -a -m 'Important Update'
-[master 6ab599d] Important Update
+john@satsuki:~/coderepo$ git stash
+Saved working directory and index state WIP on master: d50ffb2 Merged in zaney
+HEAD is now at d50ffb2 Merged in zaney
+john@satsuki:~/coderepo$ echo "Some mega important changes" >> newfile1
+john@satsuki:~/coderepo$ git commit -a -m 'Important Update'
+[master 9cb2af2] Important Update
  1 files changed, 1 insertions(+), 0 deletions(-)
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 So using the \texttt{git stash} command, we have squirreled all of our developmental changes away into a \emph{stash}.  Now we have completed the mega important change that just could not wait, we are ready to pull our changes back from the stash.  First let us see just what the stash contains.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git stash list
-stash@{0}: WIP on master: f91f31e Added another file
-john@akira:~/coderepo$ git stash show stash@{0}
+john@satsuki:~/coderepo$ git stash list
+stash@{0}: WIP on master: d50ffb2 Merged in zaney
+john@satsuki:~/coderepo$ git stash show stash@{0}
  another_file |    1 +
  1 files changed, 1 insertions(+), 0 deletions(-)
-john@akira:~/coderepo$ git stash show stash@{0} -p
+john@satsuki:~/coderepo$ git stash show stash@{0} -p
 diff --git a/another_file b/another_file
 index dba885d..b3a5cc5 100644
 --- a/another_file
@@ -77,13 +77,13 @@ index dba885d..b3a5cc5 100644
 @@ -1 +1,2 @@
  New stuff
 +Number strings rule 1234
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 As you can see, the \texttt{-p} option to the \texttt{git stash show} command shows us exactly what is contained in the stash.  We can apply this stash by running the following;
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git stash apply stash@{0} 
+john@satsuki:~/coderepo$ git stash apply stash@{0}
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
@@ -94,14 +94,15 @@ john@akira:~/coderepo$ git stash apply stash@{0}
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
 #
+#	my_third_committed_file
 #	temp_file
 no changes added to commit (use "git add" and/or "git commit -a")
-john@akira:~/coderepo$ git commit -a -m 'Continued Development'
-[master 725c961] Continued Development
+john@satsuki:~/coderepo$ git commit -a -m 'Continued Development'
+[master 37950f8] Continued Development
  1 files changed, 1 insertions(+), 0 deletions(-)
-john@akira:~/coderepo$ git stash list
-stash@{0}: WIP on master: f91f31e Added another file
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ git stash list
+stash@{0}: WIP on master: d50ffb2 Merged in zaney
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 Our stash has been applied to the current branch, in our case \textbf{master}, and we have gone ahead and committed these changes into the repository.  In this case we didn't have anything else to add to the index before we went ahead and committed it.  
@@ -109,24 +110,30 @@ Our stash has been applied to the current branch, in our case \textbf{master}, a
 Interestingly though, our stash still exists.  If we had used the \texttt{git stash pop} command instead of the \texttt{git stash apply}, our stash would have been removed.  Of course we can have multiple stashes in our repository.  For completeness sake, let us learn how to manually remove a stash, and take a look at how our repository looks with our semi-graphical \texttt{git log}
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git stash drop stash@{0} 
-Dropped stash@{0} (e994874521ebea57b798150d3936e41e50c49386)
-john@akira:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate
-* 725c961 (HEAD, master) Continued Development
-* 6ab599d Important Update
-| * 4fdfe36 (zaney) Made another awesome change
-| * 46c2390 Made an awesome change
+john@satsuki:~/coderepo$ git stash drop stash@{0}
+Dropped stash@{0} (193f27172fc0df278105b981815c7718204030d8)
+john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate
+* 37950f8 (HEAD, master) Continued Development
+* 9cb2af2 Important Update
+*   d50ffb2 Merged in zaney
+|\  
+| * 7cc32db (zaney) Made another awesome change
+| * a27d49e Made an awesome change
+* | ed2301b Removed third file
+* |   b119573 Merge branch 'wonderful'
+|\ \  
+| * | cfbecab (wonderful) Fantastic new feature
+| |/  
+* | 4ac9201 Updated third file
 |/  
-| * f0cbf32 (wonderful) Fantastic new feature
-|/  
-* f91f31e Added another file
-* 8d5140a (v2.0) Added two new files
-* b5c84a5 Removed a few files
-* fa65f06 (v1.0a) Messed with a few files
-* 6ca160c Finished adding initial files
-* e86ddea (v0.9) Made a few changes to first and second files
-* 8820692 My First Ever Commit
-john@akira:~/coderepo$ 
+* 9710177 Added another file
+* 55fb69f (v2.0) Added two new files
+* 4a155e4 Removed a few files
+* a022d4d (tag: v1.0b, v1.0a) Messed with a few files
+* 9938a0c Finished adding initial files
+* 163f061 (v0.9) Made a few changes to first and second files
+* cfe23cb My First Ever Commit
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 So using the \texttt{git stash drop} command, you can see that it is fairly simple to drop a single stash from the list.
