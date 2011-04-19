@@ -215,7 +215,7 @@ Rob begain walking over to John, ``Yeh, try running git branch with the r parame
 
 \end{trenches}
 
-You may be thinking that we now have a detached copy of everything in our repository.  That's not exactly accurate.  Let us run the command that Rob suggested and see what is happening.  
+You may be thinking that we now have a detached copy of the other branches in our repository.  That's not exactly accurate.  Let us run the command that Rob suggested and see what is happening.  
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo-cl$ git branch
@@ -228,9 +228,98 @@ john@satsuki:~/coderepo-cl$ git branch -r
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
 
-Whilst we have all the objects in our repository, we do not yet have our branches set up locally.  They are available, but they have not been setup.  To explain this we need to introduce the concept of remote tracking branches.  We are familiar with local branches.  Local branches allowed us to make commits locally in a safe and separated environment.  Remote tracking branches are links to remote branches which allow us to track the development of that branch and bring it in to a local one if we so desire.
+Whilst we have all the objects in our repository, we do not yet have our branches set up locally.  They are available, but they have not yet been setup locally.  To explain this we need to introduce the concept of remote tracking branches.  We are familiar with local branches.  Local branches allowed us to make commits locally in a safe and separated environment.  Remote tracking branches are links to remote branches which allow us to track the development of that branch and bring it in to a local one if we so desire.
 
-With a remote tracking branch, we can pull in the changes from the remote repository
+Let us take a look at what we can do with these remote tracking branches.  Notice in the output above, we have the word \texttt{origin} in front of the branch names.  When we clone a repository, Git automatically sets up what is called a \emph{remote}.  We can view this by using the \texttt{git remote} tool.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git remote
+origin
+john@satsuki:~/coderepo-cl$ git remote -v
+origin	/home/john/coderepo (fetch)
+origin	/home/john/coderepo (push)
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+As you can see from the output above, the \textbf{origin} remote definition points to the original folder that our repository came from.  So now we know that when referring to \texttt{origin/master}, we are really talking about the \textbf{master} branch which is located at the remote location \textbf{origin}.
+
+We are going to spend a little while now learning about remote branches and how they differ to local branches.  Let us spend a few minutes trying some of our normal operations against a remote branch.  The first operation we are going to try is a diff.  We are going to run a diff between our current \textbf{master} branch and the \textbf{wonderful} branch as it stands in the original repository, so we should be diffing between \texttt{master} and \texttt{origin/wonderful}.  For brivety, we are also goign to limit the changes shown to those which affect \texttt{newfile1} only, by appending \texttt{ -- <filename>} to the command.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git diff master origin/wonderful -- newfile1
+diff --git a/newfile1 b/newfile1
+index f32a0e6..ef20984 100644
+--- a/newfile1
++++ b/newfile1
+@@ -1,3 +1,2 @@
+ A new file
+-and some more awesome changes
+-Some mega important changes
++and some more changes
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+So we can see that our diff command completed successfully.  Note that this command requires no connection to our \textbf{origin} repository, as all of the data has been cloned locally, more on this later.  If we run a \texttt{git log} command, the output is as expected.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git log origin/master -- newfile1
+commit 9cb2af2a00fd2253060e6bf8cc6c377b3d55ecea
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Tue Apr 19 16:43:59 2011 +0100
+
+    Important Update
+
+commit d50ffb2fa536d869f2c4e89e8d6a48e0a29c5cc1
+Merge: ed2301b 7cc32db
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Fri Apr 1 07:42:04 2011 +0100
+
+    Merged in zaney
+
+...
+...
+...
+\end{Verbatim}
+
+Again, this requires no connection to the \textbf{origin} repository at all.  Let us try something really funky now, let us try checking out a remote branch so that we can view the filesystem.  We are now going to try checking out the remote branch called \textbf{wonderful}.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git checkout origin/wonderful
+Note: checking out 'origin/wonderful'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at cfbecab... Fantastic new feature
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+Interesting.  This is not what we are used to seeing.  When we have checked out branches before, we have always been presented with a \texttt{Switched to branch 'xxxxxx'} message.  Now we are seeing a funny message about having a detatched HEAD.  This is because we are not actually on a branch.  We can make changes as we are advised, we can even make commits, but these will not actually become integrated into any branches.  In essence they would be left dangling and after time, because no branch points to them, they would get deleted by garbage collection routines.
+
+Running the \texttt{git branch} command below confirms our suspicions.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git branch -v
+* (no branch) cfbecab Fantastic new feature
+  master      37950f8 Continued Development
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+So we really need to figure out how to make these branches exist locally so that we can commit to them and retain those commits.  To do this we use the \texttt{git branch} tool again, but we use it in a slightly different manner.
+
+%CONTINUE FROM HERE
+
+With a remote tracking branch, we can pull in the changes from the remote repository.  In our case, the remote repository is in the \texttt{coderepo} directory that we created at the start of the book.  In the \texttt{coderepo-cl} directory we have a separate, self-contained copy of the repository.  At the moment, because no changes have occured to either, they contain exactly the same data.
+
+What we are going to do now is make some changes to our original repository and see how we can view those changes
+
+DEFAULT GIT PULL
 
 Now we have a complete copy of our repository in another location.  At the moment we have created this clone on the same machine that our original is.  This isn't really a very good idea for backup purposes.  Git supplies several means with which to talk to a remote machine, but by far the most common of these is to utilise the SSH protocol.  SSH is a secure, encrypted way to communicate with a remote repository.  
 
