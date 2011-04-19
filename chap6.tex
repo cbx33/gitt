@@ -37,7 +37,7 @@ Well, one way of dealing with this situation, and this is not necessarily the be
 \item Continue development in our original branch
 \end{enumerate}
 
-To me, that seems like a lot of work.  OK, the benefit is a fairly awesome one, but at the cost of considerable command line hackery to get there.  It would be nice if there was an easy way to do the above, and though someone of you maybe screaming something like \emph{shell script} right about now, you can rest your fingers.  We actualy have another tool in the Git toolbox to help us out.
+That may seem like a lot of work.  OK, the benefit is a fairly awesome one, but at the cost of considerable command line hackery to get there.  It would be nice if there was an easy way to do the above, and though someone of you may be screaming something like \emph{shell script} right about now, you can rest your fingers.  We actualy have another tool in the Git toolbox to help us out.
 
 The \texttt{git stash} command is used for exactly these situations.  Let us make a quick example of how to use it in our test repository.  To begin with we are going to make a few changes to the \textbf{master} branch, before we are interrupted.
 
@@ -105,7 +105,9 @@ stash@{0}: WIP on master: f91f31e Added another file
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Our stash has been applied to the current branch, in our case \textbf{master}, and we have gone ahead and committed these changes into the repository.  Interestingly, our stash still exists.  If we had used the \texttt{git stash pop} command instead of the \texttt{git stash apply}, our stash would have been removed.  Of course we can have multiple stashes in our repository.  For completeness sake, let us learn how to manually remove a stash, and take a look at how our repository looks with our semi-graphical \texttt{git log}
+Our stash has been applied to the current branch, in our case \textbf{master}, and we have gone ahead and committed these changes into the repository.  In this case we didn't have anything else to add to the index before we went ahead and committed it.  
+
+Interestingly though, our stash still exists.  If we had used the \texttt{git stash pop} command instead of the \texttt{git stash apply}, our stash would have been removed.  Of course we can have multiple stashes in our repository.  For completeness sake, let us learn how to manually remove a stash, and take a look at how our repository looks with our semi-graphical \texttt{git log}
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@akira:~/coderepo$ git stash drop stash@{0} 
@@ -128,7 +130,7 @@ john@akira:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --
 john@akira:~/coderepo$ 
 \end{Verbatim}
 
-Using the \texttt{git stash drop} command, we can drop a single stash from the list.
+So using the \texttt{git stash drop} command, you can see that it is fairly simple to drop a single stash from the list.
 
 
 \section{Day 2 - ``What?! No backup?''}
@@ -141,7 +143,7 @@ We now know about basic branching and merging.  At this stage, there is on impor
 
 John thought for a moment before replying.  He knew what Rob was getting at, but he hadn't expected Rob to bring the question up in front of Markus.  In truth he had forgotten all about it.  He turned to Markus.
 
-``I'll be honest Markus.  Currently the repository isn't being backed up, but then we are running in parallel with the old system, so it would be the end of the world if we lost it.''
+``I'll be honest Markus.  Currently the repository isn't being backed up, but then we are running in parallel with the old system, so it wouldn't be the end of the world if we lost it.''
 
 Markus nodded and smiled.  It seemed that John had gotten away with it for now and with that, Klaus shot Rob a piercing glance.  
 
@@ -158,7 +160,7 @@ Klaus smiled, it seemed Rob was finally understanding things, ``Go ask him,'' sa
 ``Right'' nodded Rob and off he went.
 \end{trenches}
 
-So cloning is an excellent way of taking a copy of our repository, in essence it is a simple way of taking a backup of our repository and keeping it up to date.  Obviously we could just take the files and copy them, but a better way of doing this is by utilising the \texttt{git clone} command.  When cloning a repository, we take then entire structure and replicate it, creating an exact copy of the data in an alternative location.  Well, that's what cloning means isn't it?
+So cloning is an excellent way of taking a copy of our repository, in essence it is a simple way of taking a backup of our repository and then with a little more work, we can keep that clone up to date.  Obviously we could just take the files and copy them, but a better way of doing this is by utilising the \texttt{git clone} command.  When cloning a repository, we take then entire structure and replicate it, creating an exact copy of the data in an alternative location.  Well, that's what cloning means isn't it?
 
 The git clone tool doesn't just copy the data though, it does several other things.  Let us create a clone of our test repository to another local location.  In this case, we are going to clone the repository into a folder called \texttt{coderepo-clone}.
 
