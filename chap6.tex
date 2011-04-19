@@ -42,10 +42,10 @@ That may seem like a lot of work.  OK, the benefit is a fairly awesome one, but 
 The \texttt{git stash} command is used for exactly these situations.  Let us make a quick example of how to use it in our test repository.  To begin with we are going to make a few changes to the \textbf{master} branch, before we are interrupted.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@akira:~/coderepo$ git checkout master
+john@satsuki:~/coderepo$ git checkout master
 Already on 'master'
-john@akira:~/coderepo$ echo "Number strings rule 1234" >> another_file 
-john@akira:~/coderepo$ 
+john@satsuki:~/coderepo$ echo "Number strings rule 1234" >> another_file
+john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 So now we are interrupted and we have to make some important, and urgent changes to our \textbf{master} branch.  The example that follows is one way that we could use the \texttt{git stash} command to help us out.  
@@ -54,8 +54,7 @@ So now we are interrupted and we have to make some important, and urgent changes
 john@akira:~/coderepo$ git stash
 Saved working directory and index state WIP on master: f91f31e Added another file
 HEAD is now at f91f31e Added another file
-john@akira:~/coderepo$ nano my_third_committed_file 
-john@akira:~/coderepo$ echo "Some mega important changes" >> my_third_committed_file 
+john@akira:~/coderepo$ echo "Some mega important changes" >> newfile1
 john@akira:~/coderepo$ git commit -a -m 'Important Update'
 [master 6ab599d] Important Update
  1 files changed, 1 insertions(+), 0 deletions(-)
@@ -171,6 +170,7 @@ john@akira:~$
 \end{Verbatim}
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo$
 john@akira:~$ cd coderepo-clone
 john@akira:~/coderepo-clone$ ls
 another_file  my_third_committed_file  newfile1  newfile2
