@@ -315,9 +315,52 @@ So we really need to figure out how to make these branches exist locally so that
 
 %CONTINUE FROM HERE
 
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git checkout -b wonderful origin/wonderful 
+Branch wonderful set up to track remote branch wonderful from origin.
+Switched to a new branch 'wonderful'
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git remote show origin
+* remote origin
+  Fetch URL: /home/john/coderepo
+  Push  URL: /home/john/coderepo
+  HEAD branch: master
+  Remote branches:
+    master    tracked
+    wonderful tracked
+    zaney     tracked
+  Local branches configured for 'git pull':
+    master    merges with remote master
+    wonderful merges with remote wonderful
+  Local refs configured for 'git push':
+    master    pushes to master    (up to date)
+    wonderful pushes to wonderful (up to date)
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
 With a remote tracking branch, we can pull in the changes from the remote repository.  In our case, the remote repository is in the \texttt{coderepo} directory that we created at the start of the book.  In the \texttt{coderepo-cl} directory we have a separate, self-contained copy of the repository.  At the moment, because no changes have occured to either, they contain exactly the same data.
 
 What we are going to do now is make some changes to our original repository and see how we can view those changes
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git remote show origin
+* remote origin
+  Fetch URL: /home/john/coderepo
+  Push  URL: /home/john/coderepo
+  HEAD branch: master
+  Remote branches:
+    master    tracked
+    wonderful tracked
+    zaney     tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
 
 DEFAULT GIT PULL
 
