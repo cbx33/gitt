@@ -259,7 +259,28 @@ index f32a0e6..ef20984 100644
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
 
-So we can see that our diff command completed successfully.  Note that this command requires no connection to our \textbf{origin} repository, as all of the data has been cloned locally, more on this later.  If we run a \texttt{git log} command, the output is as expected.
+So we can see that our diff command completed successfully.  Note that this command requires no connection to our \textbf{origin} repository, as all of the data has been cloned locally, more on this later.  
+
+Let us run another command now and learn a little more about what the remote reference \textbf{origin} really means.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git remote show origin
+* remote origin
+  Fetch URL: /home/john/coderepo
+  Push  URL: /home/john/coderepo
+  HEAD branch: master
+  Remote branches:
+    master    tracked
+    wonderful tracked
+    zaney     tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+Though this command introduces some terms that we are not yet familiar with yet, like push, pull and fetch, we can see that the the \textbf{origin} remote has been set up to \emph{track} three branches called, \textbf{master}, \textbf{wonderful} and \textbf{zaney}.  So although these branches are not yet usable in the way a local branch would be, it is comforting to know that Git does know about them.  Let us continue playing with the remote branch and run a \texttt{git log} command against it.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo-cl$ git log origin/master -- newfile1
@@ -281,7 +302,7 @@ Date:   Fri Apr 1 07:42:04 2011 +0100
 ...
 \end{Verbatim}
 
-Again, this requires no connection to the \textbf{origin} repository at all.  Let us try something really funky now, let us try checking out a remote branch so that we can view the filesystem.  We are now going to try checking out the remote branch called \textbf{wonderful}.
+Again, this requires no connection to the \textbf{origin} repository at all and works as exepcted.  Let us try something really funky now, let us try checking out a remote branch so that we can view the filesystem.  We are now going to try checking out the remote branch called \textbf{wonderful}.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo-cl$ git checkout origin/wonderful
@@ -300,7 +321,7 @@ HEAD is now at cfbecab... Fantastic new feature
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
 
-Interesting.  This is not what we are used to seeing.  When we have checked out branches before, we have always been presented with a \texttt{Switched to branch 'xxxxxx'} message.  Now we are seeing a funny message about having a detatched HEAD.  This is because we are not actually on a branch.  We can make changes as we are advised, we can even make commits, but these will not actually become integrated into any branches.  In essence they would be left dangling and after time, because no branch points to them, they would get deleted by garbage collection routines.
+Interesting.  This is not what we are used to seeing.  When we have checked out branches before, we have always been presented with a \texttt{Switched to branch 'xxxxxx'} message.  Now we are seeing a funny message about having a detatched HEAD.  This is because we are not actually on a branch.  We can make changes as we are advised, we can even make commits, but these will not actually become integrated into any branches.  In essence these commits would be left dangling and after time, because no branch points to them, they would get deleted by garbage collection routines.
 
 Running the \texttt{git branch} command below confirms our suspicions.
 
@@ -311,9 +332,7 @@ john@satsuki:~/coderepo-cl$ git branch -v
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
 
-So we really need to figure out how to make these branches exist locally so that we can commit to them and retain those commits.  To do this we use the \texttt{git branch} tool again, but we use it in a slightly different manner.
-
-%CONTINUE FROM HERE
+So we really need to figure out how to make these branches exist locally so that we can commit to them and retain those commits.  To do this we use the \texttt{git branch} tool again, but we use it in a slightly different manner.  
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo-cl$ git checkout -b wonderful origin/wonderful 
@@ -321,6 +340,8 @@ Branch wonderful set up to track remote branch wonderful from origin.
 Switched to a new branch 'wonderful'
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
+
+We are now on a local instance of the \textbf{wonderful} branch.  Let us take a minute to understand what that means.  As Git is a distributed environment, our local \textbf{wonderful} branch, is not going to be synchronised with the remote end automatically.  It would require effort on our part.  What this does mean though, is that we are able to begin committing to this branch and experimenting with it.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo-cl$ git remote show origin
@@ -344,23 +365,6 @@ john@satsuki:~/coderepo-cl$
 With a remote tracking branch, we can pull in the changes from the remote repository.  In our case, the remote repository is in the \texttt{coderepo} directory that we created at the start of the book.  In the \texttt{coderepo-cl} directory we have a separate, self-contained copy of the repository.  At the moment, because no changes have occured to either, they contain exactly the same data.
 
 What we are going to do now is make some changes to our original repository and see how we can view those changes
-
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@satsuki:~/coderepo-cl$ git remote show origin
-* remote origin
-  Fetch URL: /home/john/coderepo
-  Push  URL: /home/john/coderepo
-  HEAD branch: master
-  Remote branches:
-    master    tracked
-    wonderful tracked
-    zaney     tracked
-  Local branch configured for 'git pull':
-    master merges with remote master
-  Local ref configured for 'git push':
-    master pushes to master (up to date)
-john@satsuki:~/coderepo-cl$ 
-\end{Verbatim}
 
 DEFAULT GIT PULL
 
