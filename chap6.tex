@@ -430,9 +430,18 @@ remote: Total 3 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (3/3), done.
 From /home/john/coderepo
    cfbecab..1c3206a  wonderful  -> origin/wonderful
-john@satsuki:~/coderepo-cl$ git branch
-  master
-* wonderful
+john@satsuki:~/coderepo-cl$ git diff wonderful origin/wonderful 
+diff --git a/another_file b/another_file
+index dba885d..b3a5cc5 100644
+--- a/another_file
++++ b/another_file
+@@ -1 +1,2 @@
+ New stuff
++Number strings rule 1234
+...
+...
+...
+
 john@satsuki:~/coderepo-cl$ git merge origin/wonderful 
 Updating cfbecab..1c3206a
 Fast-forward
@@ -446,6 +455,13 @@ Fast-forward
  create mode 100644 newfile3
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
+
+As you can see, the two commands that we used were \texttt{git fetch} and the more familiar \texttt{git merge}.  The \texttt{git fetch} command literally visits the remote repository, in our case we asked for \textbf{origin}, and finds which objects are new.  These are then copied to the local clone, and the HEADs of the various remote branches are updated.  We now rerun our \texttt{git diff}, only this time, we see a great many more changes than before.  Finally we initiate a \texttt{git merge} to pull the changes from the now up to date remote branch to our local one.
+
+We could have used the \texttt{git pull} command here, and if we had supplied no parameters to it, it would have achieved the exact same outcome.  The only difference would have been running one command instead of two.  Please note, that there are occasions when you would require one over the other, but as an introduction, this should be sufficient.
+
+\section{Day 5 - ``I'm putting my foot down?''}
+\subsection{Pushing back!}
 
 
 
