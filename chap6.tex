@@ -350,6 +350,13 @@ john@satsuki:~/coderepo-cl$
 
 We are now on a local instance of the \textbf{wonderful} branch.  Let us take a minute to understand what that means.  As Git is a distributed environment, our local \textbf{wonderful} branch, is not going to be synchronised with the remote end automatically.  It would require effort on our part.  What this does mean though, is that we are able to begin committing to this branch and experimenting with it.
 
+\section{Day 4 - ``Help I'm no longer up to date?''}
+\subsection{Pulling changes, not teeth}
+
+With a remote tracking branch, we can pull in the changes from the remote repository.  In our case, the remote repository is in the \texttt{coderepo} directory that we created at the start of the book.  In the \texttt{coderepo-cl} directory we have a separate, self-contained copy of the repository.  At the moment, because no changes have occured to either, they contain exactly the same data.
+
+By running the \texttt{git remote} tool again, we can see which branches are set up locally to track their remote counterparts in \textbf{origin}.
+
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo-cl$ git remote show origin
 * remote origin
@@ -369,9 +376,78 @@ john@satsuki:~/coderepo-cl$ git remote show origin
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
 
-With a remote tracking branch, we can pull in the changes from the remote repository.  In our case, the remote repository is in the \texttt{coderepo} directory that we created at the start of the book.  In the \texttt{coderepo-cl} directory we have a separate, self-contained copy of the repository.  At the moment, because no changes have occured to either, they contain exactly the same data.
+What we are going to do now is make some changes to our original repository and see how we can view those changes and indeed pull them into our current local working repository, or clone.  Note that in the following code examples we have switched back to working on our original repository, in the \texttt{coderepo} folder.
 
-What we are going to do now is make some changes to our original repository and see how we can view those changes
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ cd ../coderepo
+john@satsuki:~/coderepo$ git branch
+* master
+  wonderful
+  zaney
+john@satsuki:~/coderepo$ git checkout wonderful 
+Switched to branch 'wonderful'
+john@satsuki:~/coderepo$ git merge master
+Updating cfbecab..37950f8
+Fast-forward
+ another_file            |    1 +
+ my_third_committed_file |    1 -
+ newfile1                |    3 ++-
+ newfile2                |    2 +-
+ 4 files changed, 4 insertions(+), 3 deletions(-)
+ delete mode 100644 my_third_committed_file
+john@satsuki:~/coderepo$ echo "These changes are in the origin" >> newfile3
+john@satsuki:~/coderepo$ git add newfile3
+john@satsuki:~/coderepo$ git commit -a -m 'Added a new file'
+[wonderful 1c3206a] Added a new file
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 newfile3
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+As you can see, we have switched back to working on our old \textbf{orgin} and have bought \textbf{wonderful} to be in line with master and have added a new file and committed the changes.  Now let us go back to our clone and see if we can see those changes.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo$ cd ../coderepo-cl/
+john@satsuki:~/coderepo-cl$ git diff wonderful origin/
+origin/HEAD        origin/master      origin/wonderful   origin/zaney 
+john@satsuki:~/coderepo-cl$ git diff wonderful origin/wonderful 
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+That seems a little odd at first glance.  We have tried to view a diff between our local \textbf{wonderful} branch and the remote \textbf{origin/wonderful} branch.  Interestingly, Git is telling us that there is no difference.  Hang on though, we just made some changes above.  
+
+Remember before we discussed the fact that our clone was disconnected from the \textbf{origin} copy?  What this means is that unless we ask Git, it won't update details about what is present in the remote copy.  Once this is up to date, we can pull the changes into our local copy of the remote branch?  Interestingly there are actually two ways to do this.
+
+The first method is by running a \texttt{git pull} command.  If you remember the output from the \texttt{git remote show origin}, you may remember that it showed that there was a local branch configured for \texttt{'git pull'} and the details it gave for the \textbf{wonderful} branch were as follows; \texttt{wonderful merges with remote wonderful}.  What this means, is that when we run a \texttt{git pull} from inside the \textbf{wonderful} branch, Git will automatically contact the remote repository, update the list of changes and merge them into the local branch if possible.
+
+We mentioned that there were two methods to perform the procedure.  Whilst the first one is to use \texttt{git pull}, the second one actually achieves an almost identical result, but by running two commands instead of one.  In point of fact, these two commands are executed by the \texttt{git pull} command.  Running them as two separate commands allows us to understand a little more about what is happening.  Let us run the command and then explain what we have done.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git fetch origin
+remote: Counting objects: 4, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From /home/john/coderepo
+   cfbecab..1c3206a  wonderful  -> origin/wonderful
+john@satsuki:~/coderepo-cl$ git branch
+  master
+* wonderful
+john@satsuki:~/coderepo-cl$ git merge origin/wonderful 
+Updating cfbecab..1c3206a
+Fast-forward
+ another_file            |    1 +
+ my_third_committed_file |    1 -
+ newfile1                |    3 ++-
+ newfile2                |    2 +-
+ newfile3                |    1 +
+ 5 files changed, 5 insertions(+), 3 deletions(-)
+ delete mode 100644 my_third_committed_file
+ create mode 100644 newfile3
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+
 
 DEFAULT GIT PULL
 
