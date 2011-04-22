@@ -481,7 +481,63 @@ Klaus smiled and his head appeared over the cubicle.  ``Come over here genius an
 
 Bare?  Non-bare?  At first glance, this may seem confusing.  It isn't exactly an intuitive word to describe a repository but what Klaus mentioned was absolutely true.  In Git, if you want to push changes back to a repository, instead of pulling them, the repository that you push to should be what is called a \emph{bare} repository.  What this means is that the repository has no working copy.
 
-At first glance this may seem like a 
+HERE WILL BE SOMETHING ABOUT WHY YOU CAN'T PUSH TO IT
+
+At first glance this may seem like a rather odd thing to want.  Why would we want a repository that doesn't have a working tree?  The simple answer is that a \emph{bare} repository allows us to be able to push changes into it.  Let us recreate the error message that Rob was talking about.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ echo "This is another update to newfile3" >> newfile3
+john@satsuki:~/coderepo-cl$ git commit -a -m 'Added more to newfile3'
+[wonderful dbf1e9a] Added more to newfile3
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+\end{Verbatim}
+
+We have made a modification to the \textbf{wonderful} branch.  So let us now try to push that back to the \textbf{origin} remote repository with the \texttt{git push} command.
+ 
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git push
+Counting objects: 5, done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 335 bytes, done.
+Total 3 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+remote: error: refusing to update checked out branch: refs/heads/wonderful
+remote: error: By default, updating the current branch in a non-bare repository
+remote: error: is denied, because it will make the index and work tree inconsistent
+remote: error: with what you pushed, and will require 'git reset --hard' to match
+remote: error: the work tree to HEAD.
+remote: error: 
+remote: error: You can set 'receive.denyCurrentBranch' configuration variable to
+remote: error: 'ignore' or 'warn' in the remote repository to allow pushing into
+remote: error: its current branch; however, this is not recommended unless you
+remote: error: arranged to update its work tree to match what you pushed in some
+remote: error: other way.
+remote: error: 
+remote: error: To squelch this message and still keep the default behaviour, set
+remote: error: 'receive.denyCurrentBranch' configuration variable to 'refuse'.
+To /home/john/coderepo
+ ! [remote rejected] wonderful -> wonderful (branch is currently checked out)
+error: failed to push some refs to '/home/john/coderepo'
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+Bingo!  There is the error we were looking for.  In order to get round this, we are going to create another clone of the repository in \textt{coderepo}.  This time however, we are going to pass an option to it when we create it.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ cd ..
+john@satsuki:~$ git clone coderepo coderepo-bk --bare
+Initialized empty Git repository in /home/john/coderepo-bk/
+john@satsuki:~$ cd coderepo-bk/
+john@satsuki:~/coderepo-bk$ ls
+branches  config  description  HEAD  hooks  info  objects  packed-refs  refs
+john@satsuki:~/coderepo-bk$ cd ..
+john@satsuki:~$ cd coderepo-cl/
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+As you can see, creating the clone with the \texttt{--bare} option has had a definite effect on the structure of the clone itself.  In fact, the contents of the \texttt{coderepo-bk} folder look remarkably similar to the \texttt{.git} folder found in our normal working tree.  They are in fact, one and the same.  We have removed the need for a separate \texttt{.git} folder because we do not require a working tree.  Therefore, the contents of the \texttt{.git} folder and placed in the root \texttt{coderepo-bk} folder.
+
+We are getting closer to making our push.  We have created a \emph{bare} repository, which we should now be able to push to.  The problem is, we have not yet defined our new repository as a remote location in the \texttt{coderepo-cl} repository.  This is something we will do now.
 
 DEFAULT GIT PULL
 
