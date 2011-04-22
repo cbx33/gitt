@@ -463,7 +463,25 @@ We could have used the \texttt{git pull} command here, and if we had supplied no
 \section{Day 5 - ``I'm putting my foot down?''}
 \subsection{Pushing back!}
 
+\begin{trenches}
+We now know a lot about remote locations right?  We are ready to start collaborating with someone.  Let us first see how Tamagoyaki are getting on with things.
 
+``But I know I have the remote right Simon, it's giving some weird error about refusing to update it.''  Rob was getting more than a little cross now.  
+
+``Maybe you got the command wrong?'' asked Simon.
+
+Rob slammed his hands down on the keyboard, ``Well then you come over here and type it, but I don't understand how hard it is to write git push.''  He shook his head, ``I even checked using the git remote tool and the push is apparently all set up.''
+
+``Are you trying to push to a non-bare repository?'' Chirped Klaus.  He had been listening to the discussion escalate from mild annoyance to key shattering intrusion.  ``You can't push to a non-bare repository, else everything gets out of sync.''
+
+``What do you mean bare?'' asked Rob.
+
+Klaus smiled and his head appeared over the cubicle.  ``Come over here genius and I'll show you,'' he said with the slightest amount of gloat at being one of the only people to know something about Git that Rob didn't.
+\end{trenches}
+
+Bare?  Non-bare?  At first glance, this may seem confusing.  It isn't exactly an intuitive word to describe a repository but what Klaus mentioned was absolutely true.  In Git, if you want to push changes back to a repository, instead of pulling them, the repository that you push to should be what is called a \emph{bare} repository.  What this means is that the repository has no working copy.
+
+At first glance this may seem like a 
 
 DEFAULT GIT PULL
 
