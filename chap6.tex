@@ -537,15 +537,106 @@ john@satsuki:~/coderepo-cl$
 
 As you can see, creating the clone with the \texttt{--bare} option has had a definite effect on the structure of the clone itself.  In fact, the contents of the \texttt{coderepo-bk} folder look remarkably similar to the \texttt{.git} folder found in our normal working tree.  They are in fact, one and the same.  We have removed the need for a separate \texttt{.git} folder because we do not require a working tree.  Therefore, the contents of the \texttt{.git} folder and placed in the root \texttt{coderepo-bk} folder.
 
-We are getting closer to making our push.  We have created a \emph{bare} repository, which we should now be able to push to.  The problem is, we have not yet defined our new repository as a remote location in the \texttt{coderepo-cl} repository.  This is something we will do now.
+We are getting closer to making our push.  We have created a \emph{bare} repository, which we should now be able to push to.  The problem is, we have not yet defined our new repository as a remote location in the \texttt{coderepo-cl} repository.  This is something we will do now and to do this, we will use our \texttt{git remote} tool once more, this time employing the \texttt{add} parameter.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git remote add backup /home/john/coderepo-bk
+john@satsuki:~/coderepo-cl$ git remote show backup
+* remote backup
+  Fetch URL: /home/john/coderepo-bk
+  Push  URL: /home/john/coderepo-bk
+  HEAD branch: wonderful
+  Remote branches:
+    master    new (next fetch will store in remotes/backup)
+    wonderful new (next fetch will store in remotes/backup)
+    zaney     new (next fetch will store in remotes/backup)
+  Local refs configured for 'git push':
+    master    pushes to master    (up to date)
+    wonderful pushes to wonderful (fast-forwardable)
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+We have created a remote called backup.  As you can see, some interrogation of the remote repository has taken place.  It is already aware of the branches present in our remote location.  Let us do a \texttt{git fetch} to update the local references.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git fetch backup
+From /home/john/coderepo-bk
+ * [new branch]      master     -> backup/master
+ * [new branch]      wonderful  -> backup/wonderful
+ * [new branch]      zaney      -> backup/zaney
+john@satsuki:~/coderepo-cl$ git remote show backup
+* remote backup
+  Fetch URL: /home/john/coderepo-bk
+  Push  URL: /home/john/coderepo-bk
+  HEAD branch: wonderful
+  Remote branches:
+    master    tracked
+    wonderful tracked
+    zaney     tracked
+  Local refs configured for 'git push':
+    master    pushes to master    (up to date)
+    wonderful pushes to wonderful (fast-forwardable)
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+Now we can see that all of the remote references for our \textbf{backup} remote have been updated.  If we run a diff against our local \textbf{wonderful} branch and the remote branch \textbf{backup/wonderful}, we can see the differences.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git diff wonderful backup/wonderful 
+diff --git a/newfile3 b/newfile3
+index 7268b97..638113c 100644
+--- a/newfile3
++++ b/newfile3
+@@ -1,2 +1 @@
+ These changes are in the origin
+-This is another update to newfile3
+john@satsuki:~/coderepo-cl$ git branch -v
+\end{Verbatim}
+
+There we go!  Those are the changes we just committed to the local repository.  The last thing we need to do is to initiate a \texttt{git push}.  We are going to have to define which remote we wish to push to now for two reasons.  The first is that now we have two remotes, and so Git would not know if we meant \textbf{origin} or \textbf{backup}.  The second reason is that by default, the \textbf{wonderful} branch is set up to push to the \textbf{origin} remote.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git push backup
+Counting objects: 5, done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 335 bytes, done.
+Total 3 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+To /home/john/coderepo-bk
+   1c3206a..dbf1e9a  wonderful -> wonderful
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+There we go, we have now managed to push our changes to a remote location.  In this case, we have pushed an update from the \textbf{wonderful} branch to the \textbf{backup/wonderful branch}.  If we wanted to, we could have pushed our repository to a new branch name, or indeed any of the existing branch names.
+
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@satsuki:~/coderepo-cl$ git push backup wonderful:newbranch
+Total 0 (delta 0), reused 0 (delta 0)
+To /home/john/coderepo-bk
+ * [new branch]      wonderful -> newbranch
+john@satsuki:~/coderepo-cl$ git remote show backup
+* remote backup
+  Fetch URL: /home/john/coderepo-bk
+  Push  URL: /home/john/coderepo-bk
+  HEAD branch (remote HEAD is ambiguous, may be one of the following):
+    newbranch
+    wonderful
+  Remote branches:
+    master    tracked
+    newbranch tracked
+    wonderful tracked
+    zaney     tracked
+  Local refs configured for 'git push':
+    master    pushes to master    (up to date)
+    wonderful pushes to wonderful (up to date)
+john@satsuki:~/coderepo-cl$ 
+\end{Verbatim}
+
+By specifying the local and remote branch using the \texttt{local:remote} syntax, we have told Git to push our local \textbf{wonderful} branch to the remote branch called \textbf{newbranch}.  As the \textbf{newbranch} did not exist in the remote \textbf{backup} repository, it was created, as can be seen above.
+
+So this ends the Week.  We have learnt a lot more about how to play with branches and remotes.  In the \emph{After Hours} section, we will take a deeper look at remote branches and how they are configured and represented in Git.
 
 DEFAULT GIT PULL
-
-Now we have a complete copy of our repository in another location.  At the moment we have created this clone on the same machine that our original is.  This isn't really a very good idea for backup purposes.  Git supplies several means with which to talk to a remote machine, but by far the most common of these is to utilise the SSH protocol.  SSH is a secure, encrypted way to communicate with a remote repository.  
-
-If we assume that for a moment that our user john has now moved to another machine
-
-In the next step, we are assuming that we have another machine where our user john has SSH access, and we are going to clone our repository there.
 
 %POSSIBLY Talk about the SHARED and REFERENCE in a breakout
 %POSSIBLY TALK ABOUT SSH
@@ -569,9 +660,41 @@ In the next step, we are assuming that we have another machine where our user jo
 
 \item\texttt{git stash show <stash\_name> -p} - Show the contents of a stash
 
+\item\texttt{git clone <local> <remote>} - Clone a Git repository, from the local to the remote location.
+
+\item\texttt{git branch -r} - Show all remote branch references
+
+\item\texttt{git remote} - Show a list of remote repositories
+
+\item\texttt{git remote -v} - Show a more detailed list of remote repositories
+
+\item\texttt{git diff <branch> <remote>/<branch> -- <file>} - Show the differences between the two branches, one local, one remote, for a particular file.
+
+\item\texttt{git remote show <remote>} - Show detailed information about tracked branches for the speficied remote repository
+
+\item\texttt{git log <remote>/<branch> -- <file>} - Show the log of the remote branch spcified for a particular file
+
+\item\texttt{git checkout <remote>/<branch>} - Checkout a remote branch, leaving the local working tree in a detached HEAD state
+
+\item\texttt{git checkout -b <branch> <remote>/<branch>} - Create and switch to a new branch, which is set up to track a remote branch specified
+
+\item\texttt{git fetch <remote>} - Fetch updates to the remote branch specified including all objects and branches
+
+\item\texttt{git pull} - When configured, fetches and merges a remote branch into the currently checked out branch.
+
+\item\texttt{git clone <local> <remote> --bare} - Creates a bare repository, suitable for pushing into
+
+\item\texttt{git push} - When configured, pushes all changes up to the configured remote branch
+
+\item\texttt{git push <remote> <local\_branch>:<remote\_branch>} - Pushes a local branch to a remote location with a different name
+
 \end{itemize}
 
 \subsection{Terminology}
 \begin{itemize}
 \item\textbf{Stash} - A temporary storage of local modifications that can be brough back onto the branch at a later date
+\item\textbf{Remote} - A copy of a repository, or part of a repository in a remote location
+\item\textbf{Pull} - Merging changes from a remote branch into a current local one
+\item\textbf{Push} - Pushing changes from a local branch into a remote one
+\item\textbf{Fetch} - Pull into the loca repository, all new objects and update all branch HEADs to point to the same commits as the remote location
 \end{itemize}
