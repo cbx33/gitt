@@ -362,7 +362,8 @@ john@satsuki:~/coderepo$ echo "and some awesome changes" >> newfile1
 john@satsuki:~/coderepo$ git commit -a -m 'Made an awesome change'
 [master a27d49e] Made an awesome change
  1 files changed, 1 insertions(+), 0 deletions(-)
-john@satsuki:~/coderepo$ echo "and some more awesome changes" >> newfile2
+john@satsuki:~/coderepo$ echo "and some more awesome changes" >> 
+ newfile2
 john@satsuki:~/coderepo$ git commit -a -m 'Made another awesome change'
 [master 7cc32db] Made another awesome change
  1 files changed, 1 insertions(+), 0 deletions(-)
@@ -520,7 +521,8 @@ Conflicts are bound to happen at some point.  Even the best project processes in
 First we are going to add a little change to one of our files.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@satsuki:~/coderepo$ echo "Another update to this file" >> my_third_committed_file 
+john@satsuki:~/coderepo$ echo "Another update to this file" >> 
+ my_third_committed_file 
 john@satsuki:~/coderepo$ git commit -a -m 'Updated third file'
 [master 4ac9201] Updated third file
  1 files changed, 1 insertions(+), 0 deletions(-)
@@ -738,7 +740,7 @@ So, at the end of this week, we have learnt how to create branches, how to merge
 
 \item\texttt{git reset --hard <commit\_ref>} - Reset a branch to a specific commit reference
 
-\item\texttt{git log --graph --pretty=oneline --all --abbrev-commit --decorate} - Shows a graphical view of the repository
+\item\texttt{git log --graph --pretty=oneline --all \newline --abbrev-commit --decorate} - Shows a graphical view of the repository
 
 \item\texttt{git log --graph --oneline --all --decorate} - A shorter form of the above command
 
@@ -750,7 +752,7 @@ So, at the end of this week, we have learnt how to create branches, how to merge
 
 \item\texttt{git reset --merge} - Abort a merge and reset back to pre-merge state
 
-\item\texttt{git diff <commit\_1> <commit\_2> -- <files>}- Show the difference between the two commits, for certain files
+\item\texttt{git diff <commit\_1> <commit\_2> -- <files>} - Show the difference between the two commits, for certain files
 
 \end{itemize}
 
