@@ -52,6 +52,8 @@ john@satsuki:~/coderepo-af4$
 
 In our example, \texttt{git merge-base} uses two parameters to speficy the two heads that we wish to merge.  We can see that the commit that Git suggests as the \emph{Best Common Ancestor} is what we suggested above, \textbf{9710177}.  We have reused our \texttt{git cat-file} command to prove that the commit is the one we suggested, as you can see, the commit messages match.
 
+This explains how a simple merge takes place, Git will find the common ancestor, and try to merge in the differences to produce a merged version.  If the merge cannot take place, then as shown in \emph{Week 4}, Git will put all the changes in the file, label them, and then raise a conflict for the user to resolve.  
 
+With the information presented here, you should now be able to reread the descriptions above and understand what is going on at a base level.  If you require further information on merging, there is a wealth of documentation and papers about merge algorithms on the Internet.
 
 %reflog head
