@@ -44,7 +44,8 @@ The \texttt{git stash} command is used for exactly these situations.  Let us mak
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo$ git checkout master
 Already on 'master'
-john@satsuki:~/coderepo$ echo "Number strings rule 1234" >> another_file
+john@satsuki:~/coderepo$ echo "Number strings rule 1234" >> 
+ another_file
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
@@ -52,7 +53,8 @@ So now we are interrupted and we have to make some important, and urgent changes
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo$ git stash
-Saved working directory and index state WIP on master: d50ffb2 Merged in zaney
+Saved working directory and index state WIP on master: d50ffb2 Merged 
+ in zaney
 HEAD is now at d50ffb2 Merged in zaney
 john@satsuki:~/coderepo$ echo "Some mega important changes" >> newfile1
 john@satsuki:~/coderepo$ git commit -a -m 'Important Update'
@@ -87,7 +89,8 @@ john@satsuki:~/coderepo$ git stash apply stash@{0}
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
+#   (use "git checkout -- <file>..." to discard changes in working 
+ directory)
 #
 #	modified:   another_file
 #
@@ -112,7 +115,8 @@ Interestingly though, our stash still exists.  If we had used the \texttt{git st
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo$ git stash drop stash@{0}
 Dropped stash@{0} (193f27172fc0df278105b981815c7718204030d8)
-john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate
+john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all 
+ --abbrev-commit --decorate
 * 37950f8 (HEAD, master) Continued Development
 * 9cb2af2 Important Update
 *   d50ffb2 Merged in zaney
@@ -253,7 +257,8 @@ As you can see from the output above, the \textbf{origin} remote definition poin
 We are going to spend a little while now learning about remote branches and how they differ to local branches.  Let us spend a few minutes trying some of our normal operations against a remote branch.  The first operation we are going to try is a diff.  We are going to run a diff between our current \textbf{master} branch and the \textbf{wonderful} branch as it stands in the original repository, so we should be diffing between \texttt{master} and \texttt{origin/wonderful}.  For brivety, we are also goign to limit the changes shown to those which affect \texttt{newfile1} only, by appending \texttt{ -- <filename>} to the command.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@satsuki:~/coderepo-cl$ git diff master origin/wonderful -- newfile1
+john@satsuki:~/coderepo-cl$ git diff master origin/wonderful -- 
+ newfile1
 diff --git a/newfile1 b/newfile1
 index f32a0e6..ef20984 100644
 --- a/newfile1
@@ -315,12 +320,14 @@ Again, this requires no connection to the \textbf{origin} repository at all and 
 john@satsuki:~/coderepo-cl$ git checkout origin/wonderful
 Note: checking out 'origin/wonderful'.
 
-You are in 'detached HEAD' state. You can look around, make experimental
-changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by performing another checkout.
+You are in 'detached HEAD' state. You can look around, make 
+experimental changes and commit them, and you can discard any 
+commits you make in this state without impacting any branches 
+by performing another checkout.
 
-If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -b with the checkout command again. Example:
+If you want to create a new branch to retain commits you create, you 
+may do so (now or later) by using -b with the checkout command again. 
+Example:
 
   git checkout -b new_branch_name
 
@@ -395,7 +402,8 @@ Fast-forward
  newfile2                |    2 +-
  4 files changed, 4 insertions(+), 3 deletions(-)
  delete mode 100644 my_third_committed_file
-john@satsuki:~/coderepo$ echo "These changes are in the origin" >> newfile3
+john@satsuki:~/coderepo$ echo "These changes are in the origin" >> 
+ newfile3
 john@satsuki:~/coderepo$ git add newfile3
 john@satsuki:~/coderepo$ git commit -a -m 'Added a new file'
 [wonderful 1c3206a] Added a new file
@@ -501,7 +509,8 @@ Now this causes a problem when we are trying to see what has been modified in th
 At first glance this may seem like a rather odd thing to want.  Why would we want a repository that doesn't have a working tree?  The simple answer is that a \emph{bare} repository allows us to be able to push changes into it.  Let us recreate the error message that Rob was talking about.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@satsuki:~/coderepo-cl$ echo "This is another update to newfile3" >> newfile3
+john@satsuki:~/coderepo-cl$ echo "This is another update to newfile3" 
+ >> newfile3
 john@satsuki:~/coderepo-cl$ git commit -a -m 'Added more to newfile3'
 [wonderful dbf1e9a] Added more to newfile3
  1 files changed, 1 insertions(+), 0 deletions(-)
@@ -516,20 +525,23 @@ Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 335 bytes, done.
 Total 3 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (3/3), done.
-remote: error: refusing to update checked out branch: refs/heads/wonderful
-remote: error: By default, updating the current branch in a non-bare repository
-remote: error: is denied, because it will make the index and work tree inconsistent
-remote: error: with what you pushed, and will require 'git reset --hard' to match
-remote: error: the work tree to HEAD.
+remote: error: refusing to update checked out branch: 
+ refs/heads/wonderful
+remote: error: By default, updating the current branch in a non-bare 
+remote: error: repository is denied, because it will make the index 
+remote: error: and work tree inconsistent with what you pushed, and 
+remote: error: will require 'git reset --hard' to match the work 
+remote: error: tree to HEAD.
 remote: error: 
-remote: error: You can set 'receive.denyCurrentBranch' configuration variable to
-remote: error: 'ignore' or 'warn' in the remote repository to allow pushing into
-remote: error: its current branch; however, this is not recommended unless you
-remote: error: arranged to update its work tree to match what you pushed in some
-remote: error: other way.
+remote: error: You can set 'receive.denyCurrentBranch' configuration 
+remote: error: variable to 'ignore' or 'warn' in the remote repository 
+remote: error: to allow pushing into its current branch; however, this 
+remote: error: is not recommended unless you arranged to update its 
+remote: error: work tree to match what you pushed in some other way.
 remote: error: 
-remote: error: To squelch this message and still keep the default behaviour, set
-remote: error: 'receive.denyCurrentBranch' configuration variable to 'refuse'.
+remote: error: To squelch this message and still keep the default 
+remote: error: behaviour, set 'receive.denyCurrentBranch' configuration 
+remote: error: variable to 'refuse'.
 To /home/john/coderepo
  ! [remote rejected] wonderful -> wonderful (branch is currently checked out)
 error: failed to push some refs to '/home/john/coderepo'
@@ -544,7 +556,8 @@ john@satsuki:~$ git clone coderepo coderepo-bk --bare
 Initialized empty Git repository in /home/john/coderepo-bk/
 john@satsuki:~$ cd coderepo-bk/
 john@satsuki:~/coderepo-bk$ ls
-branches  config  description  HEAD  hooks  info  objects  packed-refs  refs
+branches  config  description  HEAD  hooks  info  objects  
+packed-refs  refs
 john@satsuki:~/coderepo-bk$ cd ..
 john@satsuki:~$ cd coderepo-cl/
 john@satsuki:~/coderepo-cl$ 
@@ -555,7 +568,8 @@ As you can see, creating the clone with the \texttt{--bare} option has had a def
 We are getting closer to making our push.  We have created a \emph{bare} repository, which we should now be able to push to.  The problem is, we have not yet defined our new repository as a remote location in the \texttt{coderepo-cl} repository.  This is something we will do now and to do this, we will use our \texttt{git remote} tool once more, this time employing the \texttt{add} parameter.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
-john@satsuki:~/coderepo-cl$ git remote add backup /home/john/coderepo-bk
+john@satsuki:~/coderepo-cl$ git remote add backup 
+ /home/john/coderepo-bk
 john@satsuki:~/coderepo-cl$ git remote show backup
 * remote backup
   Fetch URL: /home/john/coderepo-bk
@@ -701,7 +715,7 @@ DEFAULT GIT PULL
 
 \item\texttt{git push} - When configured, pushes all changes up to the configured remote branch
 
-\item\texttt{git push <remote> <local\_branch>:<remote\_branch>} - Pushes a local branch to a remote location with a different name
+\item\texttt{git push <remote> <local\_brch>:<remote\_brch>} - Pushes a local branch to a remote location with a different name
 
 \end{itemize}
 
