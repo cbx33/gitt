@@ -27,3 +27,18 @@ This merge is the most reliable and has performed well in practice. It has also 
 
 
 
+\begin{figure}[hbt]
+\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=black, text=white]
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{.9\textwidth}
+
+
+
+    \end{minipage}
+};
+\node[fancytitle, right=16pt] at (box.north west) {Git config for pushing and pulling};
+\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Information}};
+\end{tikzpicture}
+\end{figure}
