@@ -95,8 +95,10 @@ So we need to start with the object that begins \texttt{cfe23cb}.  Remember in t
 It would be nice if we could find out a little more about this object, and confirm that it is what we expect it to be.  to start with, let us run the linux \texttt{file} command on it, to see what it makes of it.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
-john@satsuki:~/coderepo/.git/objects/cf$ file e23cbe0150fda69a004e301828097935ec4397 
-e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable - version 5185
+john@satsuki:~/coderepo/.git/objects/cf$ file 
+ e23cbe0150fda69a004e301828097935ec4397 
+e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable - 
+ version 5185
 john@satsuki:~/coderepo/.git/objects/cf$ 
 \end{Verbatim}
 
@@ -133,7 +135,8 @@ john@satsuki:~/coderepo$ git cat-file -s cfe23c
 john@satsuki:~/coderepo$ git cat-file -p cfe23c
 tree 34a5dff148e70c12310cda0800d6bcaf82530bdc
 author John Haskins <john.haskins@tamagoyakiinc.koala> 1301599664 +0100
-committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301599664 +0100
+committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301599664 
+ +0100
 
 My First Ever Commit
 john@satsuki:~/coderepo$ 
@@ -144,20 +147,21 @@ Fantastic!  We now have a way of confirming the objects are what we think they a
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
 ./09/5b9cda52807c9c11781ec0a4aee927787b61f1     blob
 ./16/3f06147a449e724d0cfd484c3334709e8e1fce     commit
-./34/a5dff148e70c12310cda0800d6bcaf82530bdc		tree
-./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce		blob
-./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a		tree
-./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65		tree
+./34/a5dff148e70c12310cda0800d6bcaf82530bdc     tree
+./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce     blob
+./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a     tree
+./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65     tree
 ./99/38a0c30940dccaeddce4bb2eb151fba3a21ae5     commit
 ./cf/e23cbe0150fda69a004e301828097935ec4397     commit
-./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391		blob
+./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391     blob
 \end{Verbatim}
 
 Now things start to get interesting.  Did you also notice the tree SHA-1 hash mentioned when we ran \texttt{git cat-file -p}?  This is the tree object that stores the file structure.  Why don't we run the command against that file too?
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
 john@satsuki:~/coderepo$ git cat-file -p 34a5dff
-100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391	my_first_committed_file
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391	
+ my_first_committed_file
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
@@ -183,7 +187,8 @@ john@satsuki:~/coderepo$ git cat-file -p 163f061
 tree 3ffa7ab6dafef2bc38a70a39c53604c333ed4d7a
 parent cfe23cbe0150fda69a004e301828097935ec4397
 author John Haskins <john.haskins@tamagoyakiinc.koala> 1301599979 +0100
-committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301599979 +0100
+committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301599979 
+ +0100
 
 Made a few changes to first and second files
 john@satsuki:~/coderepo$ 
