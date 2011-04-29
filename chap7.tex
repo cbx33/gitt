@@ -29,12 +29,29 @@ Now we have done exactly as before and cloned our repository to a local folder c
 SSH isn't the only protocol that Git can use.  We have already looked at two; local and SSH.  In fact, Git supports a further two protocols and these are HTTP/S and Git's own GIT protocol.  We are going to take a quick look at the Git protocol next, before moving on to HTTP/S.
 
 \subsection{The Git Protocol}
-The Git protocol is the fastest transfer protocol out there for Git repositories.  This should come as no surprise, since it was developed exclusively for use within a Git environment.  It does however have a relatively large drawback.  The drawback is that it provides absolutely no authentication.  For this reason, enabling the Git protocol on a repository and running the server backend, (described later), will allow anyone who can talk to the servers port complete read access to the repository.
+The GIT protocol is the fastest transfer protocol out there for Git repositories.  This should come as no surprise, since it was developed exclusively for use within a Git environment.  It does however have a relatively large drawback.  The drawback is that it provides absolutely no authentication.  For this reason, enabling the GIT protocol on a repository and running the server backend, (described later), will allow anyone who can talk to the servers port complete read access to the repository.
 
-If you are serving a large repository on the Internet for example, this could actually be rather beneficial and will allow you to serve pulls quickly and efficiently.  However, though it is possible to enable \emph{pushing} using the Git protocol, the lack of security would mean that anyone who could see the server and connect to the port, usually 9418, could make changes to the repository.  This is usually entirely undesirable and as such people will often couple a read-only GIT protocol with a writable SSH protocol for the developers that need push access.
+If you are serving a large repository on the Internet for example, this could actually be rather beneficial and will allow you to serve pulls quickly and efficiently.  However, though it is possible to enable \emph{pushing} using the GIT protocol, the lack of security would mean that anyone who could see the server and connect to the port, usually 9418, could make changes to the repository.  This is usually entirely undesirable and as such people will often couple a read-only GIT protocol with a writable SSH protocol for the developers that need push access.
 
 \subsection{The HTTP/S Protocol}
+Just as with the GIT protocol, Git can support the HTTP/HTTPS protocol as well.  Setting up this is usually as simple as creating a bare clone of your repository, keeping it up to date, usually via a post-update-hook, which is described later in the book, and simply allowing clients access to this server area.  
 
+Note that the above is only to provide read-only access over HTTP.  It is possible to allow writable access, ie pushing, over HTTPS, but this is more complicated to set up and is outside the scope of this book.
+
+\subsection{Protocol decision}
+Tamagoyaki are about to embark on their decision making process regarding which protocols to use and how to perform their collaboration between themselves and their external partners.  They are going to have to take multiple things into consideration, such as security, speed, administration and storage.  When you begin to implement the Git system yourself, you too will have to think about these decisions and answer questions like;
+
+\begin{itemize}
+\item Who is going to require access to the repository?
+\item How many people are going to require access to the repository?
+\item Is the information sensitive, either from an IP perspective or from a customer point of view?
+\item How large is the data that we are hosting?
+\item How large is the change set?
+\item Do we need a QA area?
+\item Do we need a Production area?
+\end{itemize}
+
+This is just a short list of the questions that you will need to consider when implementing a full on Git environment.  The beauty of the Git system though, is that it is flexible and very difficult to box yourself into a corner, where a decision made early on prohibits a different approach later on.
 
 The Git
 
