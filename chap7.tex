@@ -3,18 +3,41 @@
 %\phantomsection
 \chapter{Week 7}
 
-\section{Day 1 - ``Now let's work together''}
-\subsection{Pure collaboration}
-
-
-
 How to collab, pushing, rebasing, merging, patches
 
 \section{Day 1 - ``Networking with a difference''}
 \subsection{Pushing across a LAN}
 
-Now we have a complete copy of our repository in another location.  At the moment we have created this clone on the same machine that our original is.  This isn't really a very good idea for backup purposes.  Git supplies several means with which to talk to a remote machine, but by far the most common of these is to utilise the SSH protocol.  SSH is a secure, encrypted way to communicate with a remote repository.  
+Now we have a complete copy of our repository in another location.  At the moment we have created this clone on the same machine that our original is.  This isn't really a very good idea for backup purposes.  Git supplies several means with which to talk to a remote machine, but by far the most common of these is to utilise the SSH protocol.  SSH is a secure, encrypted way to communicate with a remote repository.  Which is a must for pushing to an important repository that people are going to pull information from.
 
-If we assume that for a moment that our user john has now moved to another machine
+If we assume that for a moment that our user \emph{john} has now moved to another machine and now wishes to clone a repository that he had on his original machine to this new one.  The commands are identical to that which we used before.  We are going to assume that \emph{john} already has SSH access to the machine.  In this way, we can issue the commands as follows.
 
-In the next step, we are assuming that we have another machine where our user john has SSH access, and we are going to clone our repository there.
+\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+john@akira:~$ git clone ssh://john@satsuki/home/john/coderepo coderepo-ne
+Initialized empty Git repository in /home/john/coderepo-ne/.git/
+john@akira's password: 
+remote: Counting objects: 53, done.
+remote: Compressing objects: 100% (36/36), done.
+Receiving objects: 100% (53/53), 4.84 KiB, done.
+Resolving deltas: 100% (10/10), done.
+remote: Total 53 (delta 10), reused 0 (delta 0)
+john@akira:~$ 
+\end{Verbatim}
+
+Now we have done exactly as before and cloned our repository to a local folder called \texttt{coderepo-ne} from the remote url \texttt{ssh://john@satsuki/home/john/coderepo}.  Notice the use of \texttt{ssh://} to denote the specification of the SSH protocol.  We have also put the users name in the url of the remote path.  If the SSH server was running on a different port to usual, that is, on a port other than 22, we could have also added a port number preceeded by a colon after the hostname.
+
+SSH isn't the only protocol that Git can use.  We have already looked at two; local and SSH.  In fact, Git supports a further two protocols and these are HTTP/S and Git's own GIT protocol.  We are going to take a quick look at the Git protocol next, before moving on to HTTP/S.
+
+\subsection{The Git Protocol}
+The Git protocol is the fastest transfer protocol out there for Git repositories.  This should come as no surprise, since it was developed exclusively for use within a Git environment.  It does however have a relatively large drawback.  The drawback is that it provides absolutely no authentication.  For this reason, enabling the Git protocol on a repository and running the server backend, (described later), will allow anyone who can talk to the servers port complete read access to the repository.
+
+If you are serving a large repository on the Internet for example, this could actually be rather beneficial and will allow you to serve pulls quickly and efficiently.  However, though it is possible to enable \emph{pushing} using the Git protocol, the lack of security would mean that anyone who could see the server and connect to the port, usually 9418, could make changes to the repository.  This is usually entirely undesirable and as such people will often couple a read-only GIT protocol with a writable SSH protocol for the developers that need push access.
+
+\subsection{The HTTP/S Protocol}
+
+
+The Git
+
+\section{Day 2 - ``Now let's work together''}
+\subsection{Pure collaboration}
+
