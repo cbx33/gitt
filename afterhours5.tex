@@ -5,7 +5,7 @@
 
 Sometimes, putting everything in a single commit just is not a good idea.  Imagine you have pulled in number of updates to your working directory.  You may want to split these up.  It is true that you could simply \texttt{git add} only the files you want to include in the commit.  However, what happens when you have change four or five different things in the same file, and you want to split that commit up into five different commits.
 
-There are two ways you can approach this.  The first is to copy the file in question out of the working directory, reset the working copy back to the last committed and copy your changes in line by line.  This can be time consuming and frustrating and when yo uare working on many files, it can be totally impracticle.  What we neeed is a way to include or exclude certain lines of a file.
+There are two ways you can approach this.  The first is to copy the file in question out of the working directory, reset the working copy back to the last committed and copy your changes in line by line.  This can be time consuming and frustrating and when yo uare working on many files, it can be totally impractical.  What we need is a way to include or exclude certain lines of a file.
 
 To demonstrate this we are going to create a new branch called \textbf{fantasy} and we are going to make several changes to a few files.  We are then going to show how the same process can be achieved by using both the GUI and the command line.
 
@@ -324,9 +324,9 @@ If we right click on one of the green lines, remembering that green is short for
 \caption{Changes to \texttt{newfile1}}
 \end{figure} 
 
-Now we are looking at \texttt{newfile1}, we can use the \textbf{Stage Line For Commit} to add specific lines into the staging area.  The file is shown in Figure 2.  As our file is so small, we can run into problems if we just choose lines at random and stage them.  This is because it is hard for Git to find context around which to associate the change.  The context is the area immediately surrounding the change we are making.  In order to reduce the risk of the error occuring, we are simply going to start at the top, and select the first three lines for committing, by right clicking on each on in turn and choosing the \textbf{Stage Line For Commit} option from the menu.
+Now we are looking at \texttt{newfile1}, we can use the \textbf{Stage Line For Commit} to add specific lines into the staging area.  The file is shown in Figure 2.  As our file is so small, we can run into problems if we just choose lines at random and stage them.  This is because it is hard for Git to find context around which to associate the change.  The context is the area immediately surrounding the change we are making.  In order to reduce the risk of the error occurring, we are simply going to start at the top, and select the first three lines for committing, by right clicking on each on in turn and choosing the \textbf{Stage Line For Commit} option from the menu.
 
-We have the changes that we expect ready to be committed.  If we want to check one last time that they are right, we can use the \textbf{Staged Changes} pane on the left to choose the file and inspect the diff.  Once we are happy we can use the \textbf{Commit} area of the window to type our commit message and emblazen our changes forever.
+We have the changes that we expect ready to be committed.  If we want to check one last time that they are right, we can use the \textbf{Staged Changes} pane on the left to choose the file and inspect the diff.  Once we are happy we can use the \textbf{Commit} area of the window to type our commit message and emblazon our changes forever.
 
 \begin{figure}[hbt]
 \centering

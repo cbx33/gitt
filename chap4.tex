@@ -27,7 +27,7 @@ John walked over to Eugene.  ``Sup?!''
 ``I don't get branches,'' said the developer.  ``I mean I don't get what the heck they do, why I would ever want to use them, and how are they even different to tags anyway?''
 \end{trenches}
 
-First, we should probably start off by answering that very question and describing what branches are and what they can be used for.  In Git, a branch is just a pointer to a commit in the repository.  At first glance this might not seem any different to a tag.  A tag points to a commit, so does a branch.  So what distinguishes between the two?  Let us start playing with branches a little and the answer will become obvious in a while.  Branches allow you to try things out and even keep a history of the things you try without actually affecting your main branch.  In essense you are able to take things in a completely different direction, safe in the knowledge that your core code base will be safe.
+First, we should probably start off by answering that very question and describing what branches are and what they can be used for.  In Git, a branch is just a pointer to a commit in the repository.  At first glance this might not seem any different to a tag.  A tag points to a commit, so does a branch.  So what distinguishes between the two?  Let us start playing with branches a little and the answer will become obvious in a while.  Branches allow you to try things out and even keep a history of the things you try without actually affecting your main branch.  In essence you are able to take things in a completely different direction, safe in the knowledge that your core code base will be safe.
 
 This is best illustrated by a little demonstration, so we are going to take our testing repository and branch off to try out new, wonderful and wacky things.
 
@@ -150,7 +150,7 @@ Comparing that to our previous \texttt{ls} command, we can see that this is exac
 \end{figure}
 
 So there are really two pointers in our repository at the moment, from a branch point of view.  One of them points to commit \textbf{a022d4d\ldots} and is called \textbf master.  The other is called \textbf{wacky} and points to \textbf{55fb69f
-\ldots}.  At this point you may be thinking that branches are pretty much the same thing as tags.  Well, they are except for one important fact.  We are going to use our \texttt{git branch} command, with a new parameter, to show us the difference.  Take a look at the output of the following operations.  We have pruned the output of the \texttt{git show} command for brievity.
+\ldots}.  At this point you may be thinking that branches are pretty much the same thing as tags.  Well, they are except for one important fact.  We are going to use our \texttt{git branch} command, with a new parameter, to show us the difference.  Take a look at the output of the following operations.  We have pruned the output of the \texttt{git show} command for brevity.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo$ git checkout wacky 
@@ -197,7 +197,7 @@ Now we know about branches in general, we should really learn about how to merge
 
 Of course we could do this the old fashioned way.  We could switch into our \textbf{wacky} branch, do a little development, copy the files somewhere else, switch to our \textbf{master} branch, and paste the files over the top.  Now, this is probably the simplest way of merging possible.  In actual fact, this is not really merging at all.  However one thing that would be lost is the history of how that branch has developed over time.  Sometimes this can be crucial for knowing why certain things were changed during the development process.
 
-Let us take a litle look at the command output of a simple merge, explain it a little, and then look at a diagramatic representation.
+Let us take a litle look at the command output of a simple merge, explain it a little, and then look at a diagrammatic representation.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo$ git branch
@@ -465,7 +465,7 @@ john@satsuki:~/coderepo$ git branch -v
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-Ooops.  Despite the firm warning from Git, we have inadvertantly deleted the \textbf{zaney} branch by mistake.  This does happen.  When people are in the thick of it, they do make mistakes and it is comforting to know that Git is able to recover from this, but how?  We have deleted the branch reference that pointed to the commit that was at the tip of the \textbf{zaney} branch by using the \texttt{-d} and \texttt{-D} parameters.  So the question is, does that commit still exist any more?  Maybe we did more damage than we thought.  By deleting all references to the commit, how do we get it back?
+Ooops.  Despite the firm warning from Git, we have inadvertently deleted the \textbf{zaney} branch by mistake.  This does happen.  When people are in the thick of it, they do make mistakes and it is comforting to know that Git is able to recover from this, but how?  We have deleted the branch reference that pointed to the commit that was at the tip of the \textbf{zaney} branch by using the \texttt{-d} and \texttt{-D} parameters.  So the question is, does that commit still exist any more?  Maybe we did more damage than we thought.  By deleting all references to the commit, how do we get it back?
 
 All is most definitely not lost.  Even though we have removed all references to the commits in question, they still exist in the repository.  They will continue to so unless we run a clean up on the repository, which will be covered later, or if the items are left to age for more that at least fourteen days.  This means that we have up to two weeks to try to recover the lost commits.  Of course in practice one would hope that we would perform the recovery much earlier than that.
 
