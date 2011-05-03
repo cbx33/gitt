@@ -10,7 +10,7 @@ So, now that the team have discovered the basics of branching, they are conceptu
 
 It would seem that the team have coped with the initial usage of Git and that they have utilised each others talents in specific areas to pull together a good learning environment.  However, one thing to bare in mind is that some users may secretly be having a far worse experience than their colleagues.  It is also common for these people to suffer in silence, or to wait until they are asked for their opinions on the system before they bring up any issues.
 
-It is because of these very factors that you should probably consider employing a parallel implementation.  This is exactly what John decided to do with Tamagoyaki Inc's implementation of Git.  Whilst a parallel implementation does take duplicate effort in some areas, it also allows the team to return to their original system, should insurmoutable obstacles present themselves.  However, a parallel implementation should never be an excuse not to eventually shift over to the new system, unless serious issues are discovered.
+It is because of these very factors that you should probably consider employing a parallel implementation.  This is exactly what John decided to do with Tamagoyaki Inc's implementation of Git.  Whilst a parallel implementation does take duplicate effort in some areas, it also allows the team to return to their original system, should insurmountable obstacles present themselves.  However, a parallel implementation should never be an excuse not to eventually shift over to the new system, unless serious issues are discovered.
 
 \begin{figure}[hbt]
 \tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
@@ -106,7 +106,7 @@ In the top banner section of the \textbf{Content View} we see an indication of t
 \caption{Staged section}
 \end{figure}
 
-Now the file has moved into the \textbf{Staged} area of the screen as would be equivilent to us doing a \texttt{git add temp\_file}.  The file has been added to the index and is now ready for committing.  We also notice a difference in the \textbf{Content View} of \texttt{temp\_file}.  This can be seen in Figure 5.
+Now the file has moved into the \textbf{Staged} area of the screen as would be equivalent to us doing a \texttt{git add temp\_file}.  The file has been added to the index and is now ready for committing.  We also notice a difference in the \textbf{Content View} of \texttt{temp\_file}.  This can be seen in Figure 5.
 
 \begin{figure}[hbt]
 \centering
@@ -155,7 +155,7 @@ Let us spend a few minutes familiarising ourselves with the layout of the \textt
 \item \textbf{File System View} - The file system view shows you a list of files that were either modified in a specified commit, or that were present in the commit.
 \end{enumerate}
 
-To start with, let us take a look at the graph that is present in \textbf{History Graph} section of the screen in Figure 9.  Essentially this is just a very simplifed version of the graphs we were drawing in the previous chapter.  As you can see, the only information that appears to be missing from the graph is the commit ID, which can be obtained quite easily by clicking on the relevant commit and viewing the string presented just below the graph pane.
+To start with, let us take a look at the graph that is present in \textbf{History Graph} section of the screen in Figure 9.  Essentially this is just a very simplified version of the graphs we were drawing in the previous chapter.  As you can see, the only information that appears to be missing from the graph is the commit ID, which can be obtained quite easily by clicking on the relevant commit and viewing the string presented just below the graph pane.
 
 \begin{figure}[hbt]
 \centering
@@ -163,7 +163,7 @@ To start with, let us take a look at the graph that is present in \textbf{Histor
 \caption{Graphical history of repository}
 \end{figure} 
 
-The historical graph shows us all active branches, tags and commits.  From looking at this it is easy to see where our merges occured and where the branch HEADs point to.  The branches are identified by green rectangles, and the tags as yellow labels.  Each circle on the graph is a commit and is linked to the panes on the right, where you can see the committer and date information.
+The historical graph shows us all active branches, tags and commits.  From looking at this it is easy to see where our merges occurred and where the branch HEADs point to.  The branches are identified by green rectangles, and the tags as yellow labels.  Each circle on the graph is a commit and is linked to the panes on the right, where you can see the committer and date information.
 
 If we select the \textbf{master} branch HEAD, which should be the top commit, (in fact on opening \texttt{gitk} this should already be selected), we should see a pane similar to Figure 10 in the \textbf{Content View} section of the screen.
 
@@ -243,7 +243,7 @@ This ends our tour of the \texttt{gitk} utility.  Hopefully you have seen that i
 \subsection{Getting more done graphically}
 Whilst \texttt{git gui} can perform commits.  It is interesting to note that it can do a whole lot more.  One feature, which can be exceedingly useful is the \textbf{File Browser}.  This is invoked by using the \textbf{\emph{Repository - Browse Branch's Files...}} menu item.
 
-We can now select the point at which we want to browse the repository.  By default we are presented with a list ofthe branches present in the repository.  Note we can also choose tags, by selecting the appropriate option in the radio box.  We can also put things like \texttt{HEAD} and \texttt{HEAD~1} into the \textbf{Revision Expression:} text field.  
+We can now select the point at which we want to browse the repository.  By default we are presented with a list of the branches present in the repository.  Note we can also choose tags, by selecting the appropriate option in the radio box.  We can also put things like \texttt{HEAD} and \texttt{HEAD~1} into the \textbf{Revision Expression:} text field.  
 
 The dialog box is shown in Figure 15.  Notice also that when we hover over the branch names, we are presented with a small pop up, telling us who made the last commit to the branch and what the commit message was.  Clicking the \textbf{Browse} button will take us to the next window, where we can choose the file we wish to view.
 
@@ -290,9 +290,9 @@ You should have noticed by now that each line has a commit ID associated with it
 Again this is a hugely powerful tool.  You can navigate back to the current version of the file, or if you have clicked on several to get to your current point, review a history of your path, by clicking on the green arrow at the top of the screen.  You will be presented with a drop down menu, and from here you can choose which point you wish to return to.  
 
 \subsection{Our last stop}
-We have shown a number of things that Git can do in its GUI form.  We are not going to dwell on the graphical interface any further as you should already be familiar with the \textbf{Merge} and \textbf{Branch} menu items, which are present.  The have a number of options which are also avilable from the command line.  
+We have shown a number of things that Git can do in its GUI form.  We are not going to dwell on the graphical interface any further as you should already be familiar with the \textbf{Merge} and \textbf{Branch} menu items, which are present.  The have a number of options which are also available from the command line.  
 
-The \textbf{Branch} menu allows you to do the familiar proceudres, such as checkout, create, rename and delete.  It also provides a limited reset feature.  The \textbf{Merge} menu provides shortcuts for running a merge, as well as aborting it.  
+The \textbf{Branch} menu allows you to do the familiar procedures, such as checkout, create, rename and delete.  It also provides a limited reset feature.  The \textbf{Merge} menu provides shortcuts for running a merge, as well as aborting it.  
 
 It is here that we are going part with our newest tool in order to return to the command line interface once more.  We have one more trick up our sleeve and this will be presented in the \emph{After Hours} section for the week.  As previously stated, the GUI tools form an important part of your version control arsenal.  Never be afraid to use them.  Remember, at the end of the day, you should be focussed on getting the job done and using whichever tools you require to do just that.
 

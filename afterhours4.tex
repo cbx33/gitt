@@ -3,11 +3,11 @@
 \section{``Merge merge merge''}
 \subsection{How does merging work?}
 
-To start with, we need to define which merging strategy we are talking about.  In Git there are multiple ways to instruct a merge to take place.  Bwloe is a brief list of the options that you can supply to the \texttt{git merge} command along with a brief description of how each one affects the merge process.  We will explain the details a little more further on.
+To start with, we need to define which merging strategy we are talking about.  In Git there are multiple ways to instruct a merge to take place.  Below is a brief list of the options that you can supply to the \texttt{git merge} command along with a brief description of how each one affects the merge process.  We will explain the details a little more further on.
 
 \begin{itemize}
 \item\textbf{resolve} - A two headed merge strategy using a 3-way merge algorithm.  This is used by default in Git.
-\item\textbf{recursive} - A two headed merge strategy using a 3-way merge algorithm.  This algorithm looks at situations where multiple common ancestors are eligable and creates a merged tree of the common ancestors to be used as a reference.  Usually, this method has less conflicts and carries with it multiple sub-options.
+\item\textbf{recursive} - A two headed merge strategy using a 3-way merge algorithm.  This algorithm looks at situations where multiple common ancestors are eligible and creates a merged tree of the common ancestors to be used as a reference.  Usually, this method has less conflicts and carries with it multiple sub-options.
 \item\textbf{octopus} - This merge strategy can merge in multiple heads.  When trying to pull multiple topic branches into a single merge, an \textbf{octopus} is the default method that Git will use.
 \item\textbf{ours} - Another multiple head strategy, which simply ignores all changes from the other branches.  At first it may sound like a useless idea, but it could be used to keep the history of a branch without actually keeping the branch itself.
 \item\textbf{subtree} - A much more advanced merge strategy based on the \textbf{recursive} which trees are adjusted to result in a better merge.

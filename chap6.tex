@@ -6,7 +6,7 @@
 \section{Day 1 - ``My private little stash''}
 \subsection{Getting interrrupted}
 
-We're getting close to the point where we can really start using Git as we originally intended, the team at Tamagoyaki Inc. are also getting much more aquainted with the operations of both version control and Git in particular.  Unfortunately things don't always go as smoothly as we would like.  The following scenario demonstrates just this.
+We're getting close to the point where we can really start using Git as we originally intended, the team at Tamagoyaki Inc. are also getting much more acquainted with the operations of both version control and Git in particular.  Unfortunately things don't always go as smoothly as we would like.  The following scenario demonstrates just this.
 
 \begin{trenches}
 ``Yeh but Martha, I need you to work on this fix now!  Not in five minutes.''
@@ -37,7 +37,7 @@ Well, one way of dealing with this situation, and this is not necessarily the be
 \item Continue development in our original branch
 \end{enumerate}
 
-That may seem like a lot of work.  OK, the benefit is a fairly awesome one, but at the cost of considerable command line hackery to get there.  It would be nice if there was an easy way to do the above, and though someone of you may be screaming something like \emph{shell script} right about now, you can rest your fingers.  We actualy have another tool in the Git toolbox to help us out.
+That may seem like a lot of work.  OK, the benefit is a fairly awesome one, but at the cost of considerable command line hackery to get there.  It would be nice if there was an easy way to do the above, and though someone of you may be screaming something like \emph{shell script} right about now, you can rest your fingers.  We actually have another tool in the Git toolbox to help us out.
 
 The \texttt{git stash} command is used for exactly these situations.  Let us make a quick example of how to use it in our test repository.  To begin with we are going to make a few changes to the \textbf{master} branch, before we are interrupted.
 
@@ -63,7 +63,7 @@ john@satsuki:~/coderepo$ git commit -a -m 'Important Update'
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-So using the \texttt{git stash} command, we have squirreled all of our developmental changes away into a \emph{stash}.  Now we have completed the mega important change that just could not wait, we are ready to pull our changes back from the stash.  First let us see just what the stash contains.
+So using the \texttt{git stash} command, we have squirrelled all of our developmental changes away into a \emph{stash}.  Now we have completed the mega important change that just could not wait, we are ready to pull our changes back from the stash.  First let us see just what the stash contains.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo$ git stash list
@@ -172,7 +172,7 @@ Klaus smiled, it seemed Rob was finally understanding things, ``Go ask him,'' sa
 
 So cloning is an excellent way of taking a copy of our repository, in essence it is a simple way of taking a backup of our repository and then with a little more work, we can keep that clone up to date.  Obviously we could just take the files and copy them, but a better way of doing this is by utilising the \texttt{git clone} command.  When cloning a repository, we take then entire structure and replicate it, creating an exact copy of the data in an alternative location.  Well, that's what cloning means isn't it?
 
-The git clone tool doesn't just copy the data though, it does several other things.  Let us create a clone of our test repository to another local location.  In this case, we are going to clone the repository into a folder called \texttt{coderepo-clone}.
+The git clone tool doesn't just copy the data though, it does several other things.  Let us create a clone of our test repository to another local location.  In this case, we are going to clone the repository into a folder called \texttt{coderepo-cl}.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~$ git clone coderepo coderepo-cl
@@ -220,9 +220,9 @@ Rob smiled the smug smile of a man who is pleased he was right.
 
 His reply indicated a less than stressed demeanour, ``Sup, dude?''.
 
-John was pleasantly suprised, ``Did you sort out the branch issue?''
+John was pleasantly surprised, ``Did you sort out the branch issue?''
 
-Rob begain walking over to John, ``Yeh, try running git branch with the r parameter.''
+Rob began walking over to John, ``Yeh, try running git branch with the r parameter.''
 
 \end{trenches}
 
@@ -254,7 +254,7 @@ john@satsuki:~/coderepo-cl$
 
 As you can see from the output above, the \textbf{origin} remote definition points to the original folder that our repository came from.  So now we know that when referring to \texttt{origin/master}, we are really talking about the \textbf{master} branch which is located at the remote location \textbf{origin}.
 
-We are going to spend a little while now learning about remote branches and how they differ to local branches.  Let us spend a few minutes trying some of our normal operations against a remote branch.  The first operation we are going to try is a diff.  We are going to run a diff between our current \textbf{master} branch and the \textbf{wonderful} branch as it stands in the original repository, so we should be diffing between \texttt{master} and \texttt{origin/wonderful}.  For brivety, we are also goign to limit the changes shown to those which affect \texttt{newfile1} only, by appending \texttt{ -- <filename>} to the command.
+We are going to spend a little while now learning about remote branches and how they differ to local branches.  Let us spend a few minutes trying some of our normal operations against a remote branch.  The first operation we are going to try is a diff.  We are going to run a diff between our current \textbf{master} branch and the \textbf{wonderful} branch as it stands in the original repository, so we should be diffing between \texttt{master} and \texttt{origin/wonderful}.  For brevity, we are also going to limit the changes shown to those which affect \texttt{newfile1} only, by appending \texttt{ -- <filename>} to the command.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo-cl$ git diff master origin/wonderful -- 
@@ -292,7 +292,7 @@ john@satsuki:~/coderepo-cl$ git remote show origin
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
 
-Though this command introduces some terms that we are not yet familiar with yet, like push, pull and fetch, we can see that the the \textbf{origin} remote has been set up to \emph{track} three branches called, \textbf{master}, \textbf{wonderful} and \textbf{zaney}.  So although these branches are not yet usable in the way a local branch would be, it is comforting to know that Git does know about them.  Let us continue playing with the remote branch and run a \texttt{git log} command against it.
+Though this command introduces some terms that we are not yet familiar with yet, like push, pull and fetch, we can see that the \textbf{origin} remote has been set up to \emph{track} three branches called, \textbf{master}, \textbf{wonderful} and \textbf{zaney}.  So although these branches are not yet usable in the way a local branch would be, it is comforting to know that Git does know about them.  Let us continue playing with the remote branch and run a \texttt{git log} command against it.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo-cl$ git log origin/master -- newfile1
@@ -314,7 +314,7 @@ Date:   Fri Apr 1 07:42:04 2011 +0100
 ...
 \end{Verbatim}
 
-Again, this requires no connection to the \textbf{origin} repository at all and works as exepcted.  Let us try something really funky now, let us try checking out a remote branch so that we can view the filesystem.  We are now going to try checking out the remote branch called \textbf{wonderful}.
+Again, this requires no connection to the \textbf{origin} repository at all and works as expected.  Let us try something really funky now, let us try checking out a remote branch so that we can view the filesystem.  We are now going to try checking out the remote branch called \textbf{wonderful}.
 
 \begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
 john@satsuki:~/coderepo-cl$ git checkout origin/wonderful
@@ -360,7 +360,7 @@ We are now on a local instance of the \textbf{wonderful} branch.  Let us take a 
 \section{Day 4 - ``Help I'm no longer up to date?''}
 \subsection{Pulling changes, not teeth}
 
-With a remote tracking branch, we can pull in the changes from the remote repository.  In our case, the remote repository is in the \texttt{coderepo} directory that we created at the start of the book.  In the \texttt{coderepo-cl} directory we have a separate, self-contained copy of the repository.  At the moment, because no changes have occured to either, they contain exactly the same data.
+With a remote tracking branch, we can pull in the changes from the remote repository.  In our case, the remote repository is in the \texttt{coderepo} directory that we created at the start of the book.  In the \texttt{coderepo-cl} directory we have a separate, self-contained copy of the repository.  At the moment, because no changes have occurred to either, they contain exactly the same data.
 
 By running the \texttt{git remote} tool again, we can see which branches are set up locally to track their remote counterparts in \textbf{origin}.
 
@@ -699,9 +699,9 @@ DEFAULT GIT PULL
 
 \item\texttt{git diff <branch> <remote>/<branch> -- <file>} - Show the differences between the two branches, one local, one remote, for a particular file.
 
-\item\texttt{git remote show <remote>} - Show detailed information about tracked branches for the speficied remote repository
+\item\texttt{git remote show <remote>} - Show detailed information about tracked branches for the specified remote repository
 
-\item\texttt{git log <remote>/<branch> -- <file>} - Show the log of the remote branch spcified for a particular file
+\item\texttt{git log <remote>/<branch> -- <file>} - Show the log of the remote branch specified for a particular file
 
 \item\texttt{git checkout <remote>/<branch>} - Checkout a remote branch, leaving the local working tree in a detached HEAD state
 
@@ -721,9 +721,9 @@ DEFAULT GIT PULL
 
 \subsection{Terminology}
 \begin{itemize}
-\item\textbf{Stash} - A temporary storage of local modifications that can be brough back onto the branch at a later date
+\item\textbf{Stash} - A temporary storage of local modifications that can be brought back onto the branch at a later date
 \item\textbf{Remote} - A copy of a repository, or part of a repository in a remote location
 \item\textbf{Pull} - Merging changes from a remote branch into a current local one
 \item\textbf{Push} - Pushing changes from a local branch into a remote one
-\item\textbf{Fetch} - Pull into the loca repository, all new objects and update all branch HEADs to point to the same commits as the remote location
+\item\textbf{Fetch} - Pull into the local repository, all new objects and update all branch HEADs to point to the same commits as the remote location
 \end{itemize}
