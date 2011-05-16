@@ -10,8 +10,10 @@ html:
 
 clean:
 	rm gitt -Rf
+	rm -f *.aux *.log *.out *.toc gitt.pdf
 
 join:
 	pdfjoin images/source/fcover.pdf gitt.pdf --rotateoversize 'false' --outfile output.pdf
 
 final: pdf join
+
