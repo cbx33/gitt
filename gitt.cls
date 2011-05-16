@@ -63,8 +63,8 @@
 % give us a begin{trenches}
 \newenvironment{trenches}{\begin{quote}\begin{rmfamily}\textbf{In the trenches\ldots\\\\}}{\end{rmfamily}\end{quote}}
 
-% attempted the same for codeoutput but didn't work
-\newenvironment{codeoutput}{\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]}{\end{Verbatim}}
+% Set the default formatting options for the Verbatim environment
+\fvset{frame=leftline,framerule=1mm,fontsize=\relsize{-3}}
 
 % Callout boxes
 \newsavebox{\callout@contents}

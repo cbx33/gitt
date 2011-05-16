@@ -41,7 +41,7 @@ That may seem like a lot of work.  OK, the benefit is a fairly awesome one, but 
 
 The \texttt{git stash} command is used for exactly these situations.  Let us make a quick example of how to use it in our test repository.  To begin with we are going to make a few changes to the \textbf{master} branch, before we are interrupted.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git checkout master
 Already on 'master'
 john@satsuki:~/coderepo$ echo "Number strings rule 1234" >> 
@@ -51,7 +51,7 @@ john@satsuki:~/coderepo$
 
 So now we are interrupted and we have to make some important, and urgent changes to our \textbf{master} branch.  The example that follows is one way that we could use the \texttt{git stash} command to help us out.  
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git stash
 Saved working directory and index state WIP on master: d50ffb2 Merged 
  in zaney
@@ -65,7 +65,7 @@ john@satsuki:~/coderepo$
 
 So using the \texttt{git stash} command, we have squirrelled all of our developmental changes away into a \emph{stash}.  Now we have completed the mega important change that just could not wait, we are ready to pull our changes back from the stash.  First let us see just what the stash contains.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git stash list
 stash@{0}: WIP on master: d50ffb2 Merged in zaney
 john@satsuki:~/coderepo$ git stash show stash@{0}
@@ -84,7 +84,7 @@ john@satsuki:~/coderepo$
 
 As you can see, the \texttt{-p} option to the \texttt{git stash show} command shows us exactly what is contained in the stash.  We can apply this stash by running the following;
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git stash apply stash@{0}
 # On branch master
 # Changed but not updated:
@@ -112,7 +112,7 @@ Our stash has been applied to the current branch, in our case \textbf{master}, a
 
 Interestingly though, our stash still exists.  If we had used the \texttt{git stash pop} command instead of the \texttt{git stash apply}, our stash would have been removed.  Of course we can have multiple stashes in our repository.  For completeness sake, let us learn how to manually remove a stash, and take a look at how our repository looks with our semi-graphical \texttt{git log}
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git stash drop stash@{0}
 Dropped stash@{0} (193f27172fc0df278105b981815c7718204030d8)
 john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all 
@@ -174,20 +174,20 @@ So cloning is an excellent way of taking a copy of our repository, in essence it
 
 The git clone tool doesn't just copy the data though, it does several other things.  Let us create a clone of our test repository to another local location.  In this case, we are going to clone the repository into a folder called \texttt{coderepo-cl}.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~$ git clone coderepo coderepo-cl
 Initialized empty Git repository in /home/john/coderepo-cl/.git/
 john@satsuki:~$ 
 \end{Verbatim}
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~$ cd coderepo-cl
 john@satsuki:~/coderepo-cl$ ls 
 another_file  newfile1  newfile2
 john@satsuki:~/coderepo-cl$
 \end{Verbatim}
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git status
 # On branch master
 nothing to commit (working directory clean)
@@ -228,7 +228,7 @@ Rob began walking over to John, ``Yeh, try running git branch with the r paramet
 
 You may be thinking that we now have a detached copy of the other branches in our repository.  That's not exactly accurate.  Let us run the command that Rob suggested and see what is happening.  
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git branch
 * master
 john@satsuki:~/coderepo-cl$ git branch -r
@@ -243,7 +243,7 @@ Whilst we have all the objects in our repository, we do not yet have our branche
 
 Let us take a look at what we can do with these remote tracking branches.  Notice in the output above, we have the word \texttt{origin} in front of the branch names.  When we clone a repository, Git automatically sets up what is called a \emph{remote}.  We can view this by using the \texttt{git remote} tool.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git remote
 origin
 john@satsuki:~/coderepo-cl$ git remote -v
@@ -256,7 +256,7 @@ As you can see from the output above, the \textbf{origin} remote definition poin
 
 We are going to spend a little while now learning about remote branches and how they differ to local branches.  Let us spend a few minutes trying some of our normal operations against a remote branch.  The first operation we are going to try is a diff.  We are going to run a diff between our current \textbf{master} branch and the \textbf{wonderful} branch as it stands in the original repository, so we should be diffing between \texttt{master} and \texttt{origin/wonderful}.  For brevity, we are also going to limit the changes shown to those which affect \texttt{newfile1} only, by appending \texttt{ -- <filename>} to the command.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git diff master origin/wonderful -- 
  newfile1
 diff --git a/newfile1 b/newfile1
@@ -275,7 +275,7 @@ So we can see that our diff command completed successfully.  Note that this comm
 
 Let us run another command now and learn a little more about what the remote reference \textbf{origin} really means.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git remote show origin
 * remote origin
   Fetch URL: /home/john/coderepo
@@ -294,7 +294,7 @@ john@satsuki:~/coderepo-cl$
 
 Though this command introduces some terms that we are not yet familiar with yet, like push, pull and fetch, we can see that the \textbf{origin} remote has been set up to \emph{track} three branches called, \textbf{master}, \textbf{wonderful} and \textbf{zaney}.  So although these branches are not yet usable in the way a local branch would be, it is comforting to know that Git does know about them.  Let us continue playing with the remote branch and run a \texttt{git log} command against it.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git log origin/master -- newfile1
 commit 9cb2af2a00fd2253060e6bf8cc6c377b3d55ecea
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -316,7 +316,7 @@ Date:   Fri Apr 1 07:42:04 2011 +0100
 
 Again, this requires no connection to the \textbf{origin} repository at all and works as expected.  Let us try something really funky now, let us try checking out a remote branch so that we can view the filesystem.  We are now going to try checking out the remote branch called \textbf{wonderful}.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git checkout origin/wonderful
 Note: checking out 'origin/wonderful'.
 
@@ -339,7 +339,7 @@ Interesting.  This is not what we are used to seeing.  When we have checked out 
 
 Running the \texttt{git branch} command below confirms our suspicions.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git branch -v
 * (no branch) cfbecab Fantastic new feature
   master      37950f8 Continued Development
@@ -348,7 +348,7 @@ john@satsuki:~/coderepo-cl$
 
 So we really need to figure out how to make these branches exist locally so that we can commit to them and retain those commits.  To do this we use the \texttt{git branch} tool again, but we use it in a slightly different manner.  
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git checkout -b wonderful origin/wonderful 
 Branch wonderful set up to track remote branch wonderful from origin.
 Switched to a new branch 'wonderful'
@@ -364,7 +364,7 @@ With a remote tracking branch, we can pull in the changes from the remote reposi
 
 By running the \texttt{git remote} tool again, we can see which branches are set up locally to track their remote counterparts in \textbf{origin}.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git remote show origin
 * remote origin
   Fetch URL: /home/john/coderepo
@@ -385,7 +385,7 @@ john@satsuki:~/coderepo-cl$
 
 What we are going to do now is make some changes to our original repository and see how we can view those changes and indeed pull them into our current local working repository, or clone.  Note that in the following code examples we have switched back to working on our original repository, in the \texttt{coderepo} folder.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ cd ../coderepo
 john@satsuki:~/coderepo$ git branch
 * master
@@ -414,7 +414,7 @@ john@satsuki:~/coderepo$
 
 As you can see, we have switched back to working on our old \textbf{orgin} and have bought \textbf{wonderful} to be in line with master and have added a new file and committed the changes.  Now let us go back to our clone and see if we can see those changes.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ cd ../coderepo-cl/
 john@satsuki:~/coderepo-cl$ git diff wonderful origin/
 origin/HEAD        origin/master      origin/wonderful   origin/zaney 
@@ -430,7 +430,7 @@ The first method is by running a \texttt{git pull} command.  If you remember the
 
 We mentioned that there were two methods to perform the procedure.  Whilst the first one is to use \texttt{git pull}, the second one actually achieves an almost identical result, but by running two commands instead of one.  In point of fact, these two commands are executed by the \texttt{git pull} command.  Running them as two separate commands allows us to understand a little more about what is happening.  Let us run the command and then explain what we have done.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git fetch origin
 remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2), done.
@@ -498,7 +498,7 @@ Now this causes a problem when we are trying to see what has been modified in th
 
 At first glance this may seem like a rather odd thing to want.  Why would we want a repository that doesn't have a working tree?  The simple answer is that a \emph{bare} repository allows us to be able to push changes into it.  Let us recreate the error message that Rob was talking about.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ echo "This is another update to newfile3" 
  >> newfile3
 john@satsuki:~/coderepo-cl$ git commit -a -m 'Added more to newfile3'
@@ -508,7 +508,7 @@ john@satsuki:~/coderepo-cl$ git commit -a -m 'Added more to newfile3'
 
 We have made a modification to the \textbf{wonderful} branch.  So let us now try to push that back to the \textbf{origin} remote repository with the \texttt{git push} command.
  
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git push
 Counting objects: 5, done.
 Compressing objects: 100% (3/3), done.
@@ -540,7 +540,7 @@ john@satsuki:~/coderepo-cl$
 
 Bingo!  There is the error we were looking for.  In order to get round this, we are going to create another clone of the repository in \texttt{coderepo}.  This time however, we are going to pass an option to it when we create it.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ cd ..
 john@satsuki:~$ git clone coderepo coderepo-bk --bare
 Initialized empty Git repository in /home/john/coderepo-bk/
@@ -557,7 +557,7 @@ As you can see, creating the clone with the \texttt{--bare} option has had a def
 
 We are getting closer to making our push.  We have created a \emph{bare} repository, which we should now be able to push to.  The problem is, we have not yet defined our new repository as a remote location in the \texttt{coderepo-cl} repository.  This is something we will do now and to do this, we will use our \texttt{git remote} tool once more, this time employing the \texttt{add} parameter.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git remote add backup 
  /home/john/coderepo-bk
 john@satsuki:~/coderepo-cl$ git remote show backup
@@ -577,7 +577,7 @@ john@satsuki:~/coderepo-cl$
 
 We have created a remote called backup.  As you can see, some interrogation of the remote repository has taken place.  It is already aware of the branches present in our remote location.  Let us do a \texttt{git fetch} to update the local references.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git fetch backup
 From /home/john/coderepo-bk
  * [new branch]      master     -> backup/master
@@ -600,7 +600,7 @@ john@satsuki:~/coderepo-cl$
 
 Now we can see that all of the remote references for our \textbf{backup} remote have been updated.  If we run a diff against our local \textbf{wonderful} branch and the remote branch \textbf{backup/wonderful}, we can see the differences.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git diff wonderful backup/wonderful 
 diff --git a/newfile3 b/newfile3
 index 7268b97..638113c 100644
@@ -614,7 +614,7 @@ john@satsuki:~/coderepo-cl$ git branch -v
 
 There we go!  Those are the changes we just committed to the local repository.  The last thing we need to do is to initiate a \texttt{git push}.  We are going to have to define which remote we wish to push to now for two reasons.  The first is that now we have two remotes, and so Git would not know if we meant \textbf{origin} or \textbf{backup}.  The second reason is that by default, the \textbf{wonderful} branch is set up to push to the \textbf{origin} remote.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git push backup
 Counting objects: 5, done.
 Compressing objects: 100% (3/3), done.
@@ -628,7 +628,7 @@ john@satsuki:~/coderepo-cl$
 
 There we go, we have now managed to push our changes to a remote location.  In this case, we have pushed an update from the \textbf{wonderful} branch to the \textbf{backup/wonderful branch}.  If we wanted to, we could have pushed our repository to a new branch name, or indeed any of the existing branch names.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git push backup wonderful:newbranch
 Total 0 (delta 0), reused 0 (delta 0)
 To /home/john/coderepo-bk

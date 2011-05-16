@@ -7,7 +7,7 @@ This After Hours section is going to get a little deep.  For some of you it may 
 
 To start with, we are going to use the Git repository that we have been playing with in Week 2 and take a deeper look at what is actually inside a Git repository.  Let us view the directory structure, to see what has been created in the \texttt{.git} folder.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo/.git$ ls -la
 total 52
 drwxr-xr-x  8 john john 4096 2011-03-31 20:35 .
@@ -68,7 +68,7 @@ So, when we commit into the repository we create a commit object.  The commit ob
 
 So now we know what a basic repository should look like, let us go through each stage of our committing in \textbf{Week 2} and see how it is built up at each stage.  Below is a consolidated list of all the objects in the repository.  
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+\begin{Verbatim}
 ./09/5b9cda52807c9c11781ec0a4aee927787b61f1
 ./16/3f06147a449e724d0cfd484c3334709e8e1fce
 ./34/a5dff148e70c12310cda0800d6bcaf82530bdc
@@ -82,19 +82,19 @@ So now we know what a basic repository should look like, let us go through each 
 
 In order to start rebuilding a picture of our repository, let us first find out what the first commit to our repository was.  Looking back in \emph{Week 2} we can see the following trimmed output.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+\begin{Verbatim}
 [master (root-commit) cfe23cb] My First Ever Commit
 \end{Verbatim}
 
 So we need to start with the object that begins \texttt{cfe23cb}.  Remember in the description above about the SHA-1 hashes, the first two bytes are the directory name.  We are looking for a file that starts with the characters \texttt{e23cb} and it will be in the directory called \texttt{cf}.  By George!  Looking at the list above, we can see that there is one file which fits the bill.  In fact it would be a little ambiguous if there were two.  It \emph{could} happen that we would have two SHA-1 hashes  that started with the same seven characters, but it's not likely.  The line we are interested in is listed below.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+\begin{Verbatim}
 ./cf/e23cbe0150fda69a004e301828097935ec4397}
 \end{Verbatim}
 
 It would be nice if we could find out a little more about this object, and confirm that it is what we expect it to be.  to start with, let us run the linux \texttt{file} command on it, to see what it makes of it.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+\begin{Verbatim}
 john@satsuki:~/coderepo/.git/objects/cf$ file 
  e23cbe0150fda69a004e301828097935ec4397 
 e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable - 
@@ -117,7 +117,7 @@ Commands which get a little down and dirty with the details are called Plumbing 
 
 If we run this plumbing command against our object, and supply the \texttt{-t} parameter, \texttt{git cat-file} will tell us the type of the object.  If we run it with the \texttt{-s} parameter, it will tell us the size.  Finally, running it with the \texttt{-p} parameter we can see what the object actually contains.  Each of these has been demonstrated below.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git cat-file -t cfe23c
 commit
 john@satsuki:~/coderepo$ git cat-file -s cfe23c
@@ -134,7 +134,7 @@ john@satsuki:~/coderepo$
 
 Fantastic!  We now have a way of confirming the objects are what we think they are.  If we were to run the command against every file in the repository, we would end up with a list that would look something like the one below.  Notice our commit object sat in the middle.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+\begin{Verbatim}
 ./09/5b9cda52807c9c11781ec0a4aee927787b61f1     blob
 ./16/3f06147a449e724d0cfd484c3334709e8e1fce     commit
 ./34/a5dff148e70c12310cda0800d6bcaf82530bdc     tree
@@ -148,7 +148,7 @@ Fantastic!  We now have a way of confirming the objects are what we think they a
 
 Now things start to get interesting.  Did you also notice the tree SHA-1 hash mentioned when we ran \texttt{git cat-file -p}?  This is the tree object that stores the file structure.  Why don't we run the command against that file too?
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git cat-file -p 34a5dff
 100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391	
  my_first_committed_file
@@ -157,7 +157,7 @@ john@satsuki:~/coderepo$
 
 We can now see a list of all files that were present in that snapshot of the working tree.  In our case this just happens to be one file.  Using our command one last time against the object name of the file, we can see the actual contents of the file.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git cat-file -p e69de29
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
@@ -172,7 +172,7 @@ At first glance one may consider it odd that there is nothing in there.  However
 
 If we pick another commit object from the list and run our command on it we can see something new has appeared in the output.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git cat-file -p 163f061
 tree 3ffa7ab6dafef2bc38a70a39c53604c333ed4d7a
 parent cfe23cbe0150fda69a004e301828097935ec4397

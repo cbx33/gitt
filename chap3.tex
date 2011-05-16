@@ -10,7 +10,7 @@ Perhaps the best feature of a version control system is the level of accountabil
 
 By its very nature, a version control system is also a logging system.  Every time we committed something into the repository in the last chapter, we supplied a log message.  In fact, if we don't supply a commit message, let us see what happens.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git status
 # On branch master
 # Untracked files:
@@ -40,7 +40,7 @@ Rob placed his thumb and forefinger onto his chin.  ``Well, for now, I just want
 
 At its simplest, \texttt{git log} will give an output of all of the commits that have been applied to the current branch.  Depending on what type of machine you are using it on, the output from \texttt{git log} will be navigable, usually using the up and down arrows, with 'q' used to quit.  Let's have a quick look at the output of our test repository and see what the log messages look like.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git log
 commit 9938a0c30940dccaeddce4bb2eb151fba3a21ae5
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -81,7 +81,7 @@ Particularly when working with other people, or when publishing your repository 
 
 To set up your name and email address, we need to modify the \texttt{gitconfig} again.  
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 $ git config --global user.name "John Haskins"
 $ git config --global user.email 
 "john.haskins@tamagoyakiinc.koala"
@@ -113,7 +113,7 @@ Git can actually do some rather powerful searching to assist a developer in thei
 
 In these instances, the \texttt{git log -S<string>} command comes to our aid.  This command will search through the commits in a repository and will return a list of commits which introduced or removed a specific string into the repository.  First of all, let's run this against our test repository.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git log -SChange1
 commit 163f06147a449e724d0cfd484c3334709e8e1fce
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -125,7 +125,7 @@ john@satsuki:~/coderepo$
 
 You can see that \texttt{git log} has shown us the commit that instantiated the change.  As you can imagine, when using a large code base, this tool can be invaluable.  It allows us to pinpoint a specific moment when a certain string of text entered the repository.  When running this against a very large repository, this could take a long time, and so the ability to shrink the search scope down will result in a much faster result.  To do this we can append a path to our previous command.  
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git log -SChange2 my_first_committed_file
 john@satsuki:~/coderepo$ git log -SChange2 my_second_committed_file
 commit 9938a0c30940dccaeddce4bb2eb151fba3a21ae5
@@ -147,7 +147,7 @@ The \texttt{git diff} command can show us exactly that.  For more information ab
 
 If we want to find out what the changes are between our current commit and one of the previous ones, we can write a command like the one below.  Notice that below, \textbf{163f06} refers to the second commit that we made to the repository.  
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git diff 163f06
 diff --git a/my_second_committed_file b/my_second_committed_file
 index 3ad4cc3..095b9cd 100644
@@ -161,7 +161,7 @@ john@satsuki:~/coderepo$
 
 What this is telling us, is that between \textbf{e86dd} and our current commit \textbf{6ca16}, we added the line \emph{Change2} to the file \texttt{my\_second\_committed\_file}.  We can see this by the preceding \texttt{+} on the line \texttt{Change2}.  Let's make a few changes to our repository and see how the diffs look.  We're actually going to make a few changes to the files using a text editor so that you can't see what we've done.  Then, hopefully, when we run the \texttt{git diff} you'll be able to see clearly what has happened.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git log HEAD~1..HEAD
 commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -175,7 +175,7 @@ The command \texttt{git log HEAD\textasciitilde1..HEAD} tells Git to show us the
 
 As it turns out, John Haskins didn't really create a very meaningful log message.  \emph{Messed with a few files} is pretty unhelpful in the grand scheme of things.  So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit \textbf{a022d4}.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git diff HEAD~1..HEAD
 diff --git a/my_second_committed_file b/my_second_committed_file
 index 095b9cd..c9887f8 100644
@@ -197,26 +197,26 @@ john@satsuki:~/coderepo$
 
 As you can see, we have several things going on here, so let's take each of them in isolation and see what is going on.  We are going to dissect the diff to see what each section means.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 diff --git a/my_second_committed_file b/my_second_committed_file
 \end{Verbatim}
 
 This first line tells us that we are dealing with \newline\texttt{my\_second\_committed\_file}.  This is showing that we are comparing the first revision, or a, against the second revision, b.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 index 095b9cd..c9887f8 100644
 \end{Verbatim}
 
 This second line actually tells us the beginning of the object IDs, as they are stored in the repository.  Note that these IDs are not the commit IDs, but the actual blob IDs that Git uses to refer to the file.  For more information on this, checkout the \emph{Object's living in harmony} breakout box.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 --- a/my_second_committed_file
 +++ b/my_second_committed_file
 \end{Verbatim}
 
 The next few lines are telling us which is the original file, and which is the new file, so we can use this as a reference.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 @@ -1,2 +1 @@
 -Change1
 -Change2
@@ -229,7 +229,7 @@ The three following lines show what actually took place.  Strings \texttt{Change
 
 Looking at the next diff segment, we can see it applies to a different file.  Essentially this hunk is no different to the last, the only interesting portion is shown below.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 new file mode 100644
 index 0000000..5d27866
 --- /dev/null
@@ -259,7 +259,7 @@ Listing all commits in our repository is useful, being able to filter this outpu
 
 Suppose we want to view all the commits that we made in the last week, typing the following into the command line in our test repository yields the following result.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git log -p --since="last week"
 commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -292,7 +292,7 @@ This type of filtering can be exceedingly useful to a developer.  Often when pro
 
 If the developer can further categorise the issue, such as, ``I know which file the change must have occurred in'', then the following example will demonstrate just how easy it is to filter the results even further.  Even in the simplified example repository that we have been using, running this command filters the output to a single file.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git log -p --since="last week" -- 
 my_second_committed_file
 commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
@@ -353,14 +353,14 @@ In this example, the \texttt{1} may refer to the major version number, and will 
 
 Git implements tags in a very elegant way.  A tag is simply a label in Git that points to a single commit object.  The tag name can then be used in place of the SHA-1 to refer to a point in the repositories history.  Due to the simplicity of tags, it is also possible and very simple to tag a commit that occurred way into the past.  Let us take a look at a simple tag example.  We will make the current point in the repository \texttt{v1.0a}.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git tag v1.0a
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 On its own, this doesn't really tell us much, but running the following, shows us a little more information
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git rev-parse v1.0a
 a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
 john@satsuki:~/coderepo$ 
@@ -368,14 +368,14 @@ john@satsuki:~/coderepo$
 
 By running the \texttt{git rev-parse} with the tag name \texttt{v1.0a}, Git has returned us the SHA-1 hash of the commit we were referring to.  If we look back up at the earlier output, we can see that the most recent commit into the repository was indeed \textbf{a022d4d1edc69970b4e8b3fe1da3dccd943a55e4}.  To give us something to work with, let's tag the commit \textbf{163f06\ldots} with the tag name \texttt{v0.9}.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git tag v0.9 163f06
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
 Now, we can do the following;
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git diff v0.9..v1.0a
 diff --git a/my_second_committed_file b/my_second_committed_file
 index 3ad4cc3..c9887f8 100644
@@ -459,7 +459,7 @@ Now that we have taken a quick look at our three methods, we must decide which o
 
 So now let us see how we can use \texttt{git checkout} to take one of our files back to the past.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git status
 # On branch master
 nothing to commit (working directory clean)
@@ -472,7 +472,7 @@ Changed this file completely
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git status
 # On branch master
 nothing to commit (working directory clean)
@@ -498,7 +498,7 @@ We then switch the file back to the latest version by using the \texttt{HEAD} re
 \subsection{Show me the money}
 The \texttt{git show} command will have largely the same effect, except it grabs us the data without having to change existing files in our working copy.  Let us view a quick example.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git show v0.9:my_second_committed_file
 Change1
 john@satsuki:~/coderepo$ git show v0.9:my_second_committed_file > 
