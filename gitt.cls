@@ -90,5 +90,9 @@
   \end{figure}%
 }
 
+% Indicates thought breaks
+\newcommand{\thoughtbreak}{%
+  \par\begin{center}*\quad*\quad*\end{center}\par
+}
 
 
