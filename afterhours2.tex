@@ -107,23 +107,13 @@ The \texttt{file} command, tells us that the file is actually of \texttt{VAX COF
 \subsection{Out comes the wrench}
 Wouldn't it be nice if we could view the data that was inside the file simply, without having to write out own tools.  If you look through the Git man page, you will find one listed under the \textbf{Interrogation} section, called \texttt{git cat-file}.  Anyone who has spent any time with Git will know what the \texttt{cat} command does.  \texttt{cat} is used to display the contents of files.  In Git, this command is used to display the contents, type or size of a repository object, be it either of type commit, tree or blob.
 
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
+\begin{callout}{Information}{What's with all the wrenches?}
 You may have noticed the less than subtle references to plumbing.  Git has two types of commands.  Those that are readily available to the end user, and those that are not.  
 
 The commands that are readily available to the end user are called Porcelain commands because they have been refined and are simple to use, think Tap and Sink.  
 
 Commands which get a little down and dirty with the details are called Plumbing commands because they are dealing with the primitive objects that make things work, think Pipes and Joints.
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {What's with all the wrenches?};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Information}};
-\end{tikzpicture}
-\end{figure}
+\end{callout}
 
 If we run this plumbing command against our object, and supply the \texttt{-t} parameter, \texttt{git cat-file} will tell us the type of the object.  If we run it with the \texttt{-s} parameter, it will tell us the size.  Finally, running it with the \texttt{-p} parameter we can see what the object actually contains.  Each of these has been demonstrated below.
 
@@ -204,16 +194,7 @@ This commit object has an extra field.  This field is the \texttt{parent} field.
 
 Hopefully you can see from this diagram that Git will reuse objects as discussed above.  This diagram describes the repository layout completely and if you correlate, we have correctly identified and accounted for each object in the repository.  Now we know how to traverse a repository.  In \emph{Week 3} we find the Git commands to let us do that without having to break out the wrenches and resort to plumbing.  After all, why use a wrench to turn on a tap?
 
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
+\begin{callout}{Note}{Packing for a holiday?}
 It is worth noting that the objects noted above are not the only objects that you will find in the \texttt{objects} folder.  Git will sometimes clean itself up and perform packing operations.  This is out of scope for this chapter though.
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {Packing for a holiday?};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Note}};
-\end{tikzpicture}
-\end{figure}
+\end{callout}
+

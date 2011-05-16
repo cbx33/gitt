@@ -306,12 +306,7 @@ We have discarded the file which was residing in the index.  This is very import
 Everyone nodded in agreement.
 \end{trenches}
 
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
+\begin{callout}{Knowledge}{How do we change the commit message editor?}
 We spoke earlier about the configuration file and how it stores information about our Git instance.  Git can use any text editor you require, even a graphical one, though the need rarely arises.  As mentioned earlier, Git has a preference lever when talking about configuration.  First and foremost it will look in the repositories own 'config' file in the .git folder.  Then, it will look in the users \texttt{\textasciitilde/.gitconfig} file.  Finally, Git will look in your distributions own global folder.  
 
 If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;
@@ -327,13 +322,7 @@ git config --global core.editor "nano"
 \end{Verbatim}
 
 It is worth noting that you can also use the \$EDITOR environment variable to accomplish the same thing.  Many people use this in preference to the modifying the Git configuration simply because many other programs honour this setting.
-
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {How do we change the commit message editor?};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Knowledge}};
-\end{tikzpicture}
-\end{figure}
+\end{callout}
 
 Now we know how to add files into the repository.  The question is, what do we do if we need to remove a file, or even rename it.  Well, git has some commands to help with that.  \texttt{git rm} and \texttt{git mv} delete and move files respectively.  Usually when you want to remove files from the repository, or move them, this is how you will handle it, but what if you have already deleted a tracked file manually?  Well, you have two options.  You could run \texttt{git commit -a}, but remember this will commit all changes to tracked files.  You could also run a \texttt{git rm <filename>} with the name of the file you have just deleted.  Git will then push that change into the staging area ready for commit.  The same applies to moving a file
 

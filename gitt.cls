@@ -6,6 +6,10 @@
 
 \ProvidesClass{gitt}[2011/05/15 v1.0.0 GITT book design]
 
+\DeclareOption*{%
+  \PassOptionsToClass{\CurrentOption}{memoir}%
+}
+\ProcessOptions*\relax
 
 
 \LoadClass[a5paper,openright,12pt]{memoir}
@@ -61,4 +65,30 @@
 
 % attempted the same for codeoutput but didn't work
 \newenvironment{codeoutput}{\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]}{\end{Verbatim}}
+
+% Callout boxes
+\newsavebox{\callout@contents}
+\newcommand{\callout@type}{}
+\newcommand{\callout@title}{}
+\newenvironment{callout}[2]{%
+  \xdef\callout@type{#1}% typeset in a box along the left
+  \xdef\callout@title{#2}% typeset in a box along the top
+  \begin{lrbox}{\callout@contents}%
+    \begin{minipage}{.9\textwidth}%
+}{%
+    \end{minipage}%
+  \end{lrbox}%
+  \begin{figure}[hbt]%
+    \tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
+    \tikzstyle{fancytitle} = [fill=black, text=white]
+    \hskip-10pt% allows the type block to hang into the left margin
+    \begin{tikzpicture}%
+      \node[mybox] (box) {\usebox{\callout@contents}};
+      \node[fancytitle, right=16pt] at (box.north west) {\callout@title};
+      \node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{\callout@type}};
+    \end{tikzpicture}%
+  \end{figure}%
+}
+
+
 

@@ -72,26 +72,11 @@ The \texttt{git log} command shows us a chronological list of all of the commits
 \item \textbf{Commit Message} - This is the log message that was added along with the commit when it was created.  Hopefully you can now see how important it is to create useful and meaningful messages in here.
 \end{itemize}
 
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
+\begin{callout}{Note}{Note on Commit IDs}
 Please note, that if you are following the commits and changes on your local computer, you may not and probably will not have the same commit IDs as are presented in this book.  You are advised to use them here to follow what is happening, but to substitute them with your own values, when you start working with the rest of this chapter.
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {Note on Commit IDs};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Note}};
-\end{tikzpicture}
-\end{figure}
+\end{callout}
 
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
+\begin{callout}{Note}{Changing your identity}
 Particularly when working with other people, or when publishing your repository to a public location, it's a good idea to make sure people know who you are and how to get in contact with you.  Every time you make a commit to a repository, Git gives the opportunity to take note of who posted the commit.  When you first install Git, it probably won't have the correct information in there for you, so it's important that you take the time to set this up.
 
 To set up your name and email address, we need to modify the \texttt{gitconfig} again.  
@@ -103,12 +88,7 @@ $ git config --global user.email
 \end{Verbatim}
 
 That's it.  Now by default, Git will use this setting whenever you commit to a repository, unless you override it by locally modifying the repository's \texttt{.gitconfig}.
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {Changing your identity};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Note}};
-\end{tikzpicture}
-\end{figure}
+\end{callout}
 
 \section{Day 2 - ``But I need more information''}
 \subsection{Digging a little deeper}
@@ -418,19 +398,9 @@ Notice that instead of using the dynamic reference HEAD, we have now used the ta
 
 You can find out more about tags and how to specify more information in the \emph{After Hours} section at the end of this Week.
 
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
+\begin{callout}{Note}{A little about tags}
 Tags are great and you should most definitely use them in your repositories to make good reference points, but there is one point that you should always remember.  Though we have not yet delved into the realms of remote branches, it is important to note that once you have tagged a certain commit, and pushed that to the repository, you cannot then remove that tag if someone else clones, or pulls your tags from that remote branch.  This will all become clearer during the next week, but fits in with the overall ethos of working with version control systems, if someone has seen the past, you should not EVER change it.
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {A little about tags};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Note}};
-\end{tikzpicture}
-\end{figure}
+\end{callout}
 
 \section{Day 5 - ``Putting things back the way they were''}
 \subsection{Revert, I say.  Revert!}

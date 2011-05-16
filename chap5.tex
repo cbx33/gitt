@@ -12,22 +12,12 @@ It would seem that the team have coped with the initial usage of Git and that th
 
 It is because of these very factors that you should probably consider employing a parallel implementation.  This is exactly what John decided to do with Tamagoyaki Inc's implementation of Git.  Whilst a parallel implementation does take duplicate effort in some areas, it also allows the team to return to their original system, should insurmountable obstacles present themselves.  However, a parallel implementation should never be an excuse not to eventually shift over to the new system, unless serious issues are discovered.
 
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
+\begin{callout}{Terminology}{Parallel Implementation}
 Parallel implementation means keeping your old system running, whilst bringing up a new one.  It incurs extra effort in many areas, such as system administration, backups and system usage, but it allows people to evaluate a product in a real life situation.  Usually people will have completed all of their preliminary testing before moving onto Parallel implementation.  It would be assumed that you were fairly certain that your were going to move forward with a final implementation, before taking the time of setting up and training people on the new system.
 \newline
 \newline
 It does however allow people to continue with the day jobs, without the risk of issues with the new system completely blocking them from working.  This is often a critical factor when implementing a new system.  If the system is successful, over time, the users will migrate away from the old system and start using the new system exclusively.  Care should also be taken that whilst in the midst of parallel implementation, both systems remain up to date at all times, this is often the trickiest part.  In Tamagoyaki Inc's case, because they were just using tarballs of their code base, it is easy for them to tar up a folder, as well as commit it to the repository.
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {Parallel Implementation};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Terminology}};
-\end{tikzpicture}
-\end{figure}
+\end{callout}
 
 \begin{trenches}
 ``I'm sorry John, but I just can't do this anymore!''  Eugene was leaning over the partition wall, the keys that hung around his neck clattering loudly as he swayed.  ``You hard core devs may be happy with all that command line junk, but I'm a GUI kinda guy.  It doesn't come as easily for me as if does for you.''

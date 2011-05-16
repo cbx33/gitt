@@ -489,22 +489,12 @@ Klaus smiled and his head appeared over the cubicle.  ``Come over here genius an
 
 Bare?  Non-bare?  At first glance, this may seem confusing.  It isn't exactly an intuitive word to describe a repository but what Klaus mentioned was absolutely true.  In Git, if you want to push changes back to a repository, instead of pulling them, the repository that you push to should be what is called a \emph{bare} repository.  What this means is that the repository has no working copy.
 
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
+\begin{callout}{Note}{Pushing to a non-bare repository}
 As mentioned, pushing to a non-bare repository is not a good idea.  When you push to a repository, you update the objects in the objects database.  This will affect commits, blobs and trees.  We should make a distinction here.  We are really only worried about pushing to a branch which is currently checked out.  Pushing to a non-bare repository will mean that the index will get changed, as it should reflect what the branch looks like at HEAD.  
 \newline
 \newline
 Now this causes a problem when we are trying to see what has been modified in the working directory when compared to the HEAD.  As our working copy will contain older versions of the files than are in the index, it will appear as if many more changes have occured and we risk undoing those changes.  For these reasons, it is much simpler just to push only to bare repositories.
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {Pushing to a non-bare repository};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Note}};
-\end{tikzpicture}
-\end{figure}
+\end{callout}
 
 At first glance this may seem like a rather odd thing to want.  Why would we want a repository that doesn't have a working tree?  The simple answer is that a \emph{bare} repository allows us to be able to push changes into it.  Let us recreate the error message that Rob was talking about.
 
