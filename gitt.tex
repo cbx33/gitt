@@ -1,58 +1,11 @@
-% intro.tex - Introduction
-\documentclass[a5paper,openright,12pt]{memoir}
-
-% set paper size
-\setlrmarginsandblock{2.16cm}{1.91cm}{*}
-\setulmarginsandblock{1.91cm}{1.91cm}{*}
-\checkandfixthelayout
-
-% Import packages
-\usepackage{graphicx}
-\usepackage{color,fancyvrb,relsize}
-\usepackage[final]{microtype}
-\usepackage{tikz}
-
-% Import a new font and use the sans-serif version by default
-\usepackage{lmodern}
-\renewcommand{\familydefault}{\sfdefault}
-
-% Put chapters and sections in the toc, only number the chapter
-\setcounter{tocdepth}{3}
-\setcounter{secnumdepth}{0}
-
-% Make chapter names disappear
-\renewcommand{\chaptername}{}
-\renewcommand{\thechapter}{}
-\renewcommand{\tablename}{}
-\renewcommand{\thetable}{}
-
-% Make the pdf have clickable links
-\usepackage[
-  bookmarks,
-  bookmarksopen,
-  bookmarksnumbered=false,
-  colorlinks,
-  pdfpagemode=None,
-  urlcolor=black,
-  citecolor=black,
-  linkcolor=black,
-  pagecolor=black,
-  plainpages=false,
-  pdfpagelabels,
-  pdftitle={Git In the Trenches},
-  pdfauthor={Peter Savage}]{hyperref}
+\documentclass{gitt}
 
 % Title/author/date
 \title{Git In the Trenches}
 \author{Peter Savage}
-\input{commands}
 \date{February 2011}
 
 \begin{document}
-
-% Latex preferences
-\hyphenpenalty=1000
-\tolerance=1000
 
 % Preamble stuff
 \maketitle
@@ -60,21 +13,21 @@
 \tableofcontents
 
 % Include all the individual chapters
-\input{intro}
-\input{chap1}
-\input{afterhours1}
-\input{chap2}
-\input{afterhours2}
-\input{chap3}
-\input{afterhours3}
-\input{chap4}
-\input{afterhours4}
-\input{chap5}
-\input{afterhours5}
-\input{chap6}
-\input{afterhours6}
-\input{chap7}
-\input{afterhours7}
-\input{ack}
+\include{intro}
+\include{chap1}
+\include{afterhours1}
+\include{chap2}
+\include{afterhours2}
+\include{chap3}
+\include{afterhours3}
+\include{chap4}
+\include{afterhours4}
+\include{chap5}
+\include{afterhours5}
+\include{chap6}
+\include{afterhours6}
+\include{chap7}
+\include{afterhours7}
+\include{ack}
 
 \end{document}
