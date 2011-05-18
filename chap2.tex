@@ -57,7 +57,7 @@ The first thing we need to do is to understand two very important things:
 
 The first of these is relatively easy to perform.  
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}]
+\begin{Verbatim}
 john@satsuki:~$ mkdir coderepo
 john@satsuki:~$ cd coderepo/
 john@satsuki:~/coderepo$ git init
@@ -82,7 +82,7 @@ The commit object is also referred to by an SHA-1 hash.  This is different to ma
 
 The most simple way of committing a file into the repository is to create it, or bring it into your working copy and use the commands below.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ touch my_first_committed_file
 john@satsuki:~/coderepo$ git add my_first_committed_file
 john@satsuki:~/coderepo$ git commit -m 'My First Ever Commit'
@@ -94,7 +94,7 @@ john@satsuki:~/coderepo$
 
 What we have done here, is to create a new blank file and add it into the repository using Git's add command.  Then we have committed it into the repository.  Let's make a few changes to our working copy and see what the result is.  First we are going to add another two new files, then we are going to make changes to our original file and finally we are going to run git status to see what Git has to say about our changes.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ echo "Change1" > my_first_committed_file
 john@satsuki:~/coderepo$ touch my_second_committed_file
 john@satsuki:~/coderepo$ touch my_third_committed_file
@@ -120,7 +120,7 @@ john@satsuki:~/coderepo$
 
 So we can see that Git is reporting that there are changes to our first committed file, and that our second and third files are \textbf{untracked}.  Untracked files are ones which Git detects as being present in the working directory, but which haven't yet been added and there for upon running a commit, these files will not be added to the repository.  Notice that if we tried to run a commit now, nothing would actually be committed to the repository.  Even though there are changes to to my\_first\_committed\_file, we have not asked Git to include these.  So, let's go ahead and do that, and at the same time we'll make a few changes to my\_second\_committed\_file, and add those too.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git add my_first_committed_file
 john@satsuki:~/coderepo$ echo "Change1" > my_second_committed_file 
 john@satsuki:~/coderepo$ git add my_second_committed_file
@@ -156,7 +156,7 @@ John pointed at the screen.  ``Run a git status Klaus and I'll show you what the
 
 To understand what Klaus was getting in a spin about, let's make a change to my\_second\_committed\_file now and see how this affects things.  Remember we have already added the file, but we haven't yet made a commit.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ echo "Change2" >> 
  my_second_committed_file 
 john@satsuki:~/coderepo$ git status
@@ -187,7 +187,7 @@ How interesting!  We now have three sections and one of our files appears twice 
 
 So, if we go ahead and run our commit now, we will only have the changes marked in Changes to be committed appearing in our repository.  
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git commit -m 'Made a few changes to 
 first and second files'
 [master 163f061] Made a few changes to first and second files
@@ -200,7 +200,7 @@ In our examples, we have used the syntax \texttt{git commit -m 'Message'}.  This
 
 Let us finish off our round of committing by using the \texttt{git commit -a} option.  This commits all of the changes to files which are already tracked.  Consequently we do not have to specify the files with \texttt{git add}, like we have had to previously.  Any file which has been modified and has previously been added to the repository, will have it's changes committed upon running that command.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git status
 # On branch master
 # Changed but not updated:
@@ -220,7 +220,7 @@ no changes added to commit (use "git add" and/or "git commit
 john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git commit -a -m 'Finished adding 
  initial files'
 [master 9938a0c] Finished adding initial files
@@ -228,7 +228,7 @@ john@satsuki:~/coderepo$ git commit -a -m 'Finished adding
 john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git status
 # On branch master
 # Untracked files:
@@ -266,7 +266,7 @@ Mike chuckled, ``Sorry for interrupting dude.''
 
 The git reset is great at removing things from the index that you don't want to be there.  Of course, it can do a great many other things, but for now, let us concern ourselves with the scenario presented above.  We are working away, and have added a number of files into the index ready for committing, when we discover that we are actually not ready to commit them.  In the following example, we are going to add the file my\_third\_committed\_file and then remove it from the index.
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git add my_third_committed_file
 john@satsuki:~/coderepo$ git status
 # On branch master
@@ -280,7 +280,7 @@ john@satsuki:~/coderepo$
 
 Notice how my\_third\_committed\_file is now ready to be committed to repository.  The problem is we need to add something more to it before we do.  Remember that when we run the git add command, we are copying the file from our working copy to the index.  If we decide we no longer want that file in the repository, we can run the following.  
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 john@satsuki:~/coderepo$ git reset my_third_committed_file
 john@satsuki:~/coderepo$ git status
 # On branch master
@@ -306,34 +306,23 @@ We have discarded the file which was residing in the index.  This is very import
 Everyone nodded in agreement.
 \end{trenches}
 
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
+\begin{callout}{Knowledge}{How do we change the commit message editor?}
 We spoke earlier about the configuration file and how it stores information about our Git instance.  Git can use any text editor you require, even a graphical one, though the need rarely arises.  As mentioned earlier, Git has a preference lever when talking about configuration.  First and foremost it will look in the repositories own 'config' file in the .git folder.  Then, it will look in the users \texttt{\textasciitilde/.gitconfig} file.  Finally, Git will look in your distributions own global folder.  
 
 If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 git config core.editor "nano"
 \end{Verbatim}
 
 If we want the changes to apply globally, meaning it would affect all repositories we administrate as this user, unless overridden by a repository setting, we would run the following;
 
-\begin{Verbatim}[frame=leftline,framerule=1mm,fontsize=\relsize{-3}] 
+\begin{Verbatim}
 git config --global core.editor "nano"
 \end{Verbatim}
 
 It is worth noting that you can also use the \$EDITOR environment variable to accomplish the same thing.  Many people use this in preference to the modifying the Git configuration simply because many other programs honour this setting.
-
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {How do we change the commit message editor?};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Knowledge}};
-\end{tikzpicture}
-\end{figure}
+\end{callout}
 
 Now we know how to add files into the repository.  The question is, what do we do if we need to remove a file, or even rename it.  Well, git has some commands to help with that.  \texttt{git rm} and \texttt{git mv} delete and move files respectively.  Usually when you want to remove files from the repository, or move them, this is how you will handle it, but what if you have already deleted a tracked file manually?  Well, you have two options.  You could run \texttt{git commit -a}, but remember this will commit all changes to tracked files.  You could also run a \texttt{git rm <filename>} with the name of the file you have just deleted.  Git will then push that change into the staging area ready for commit.  The same applies to moving a file
 
