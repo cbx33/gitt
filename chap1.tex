@@ -12,7 +12,7 @@ John sat at his desk and looked out of the window.  The rain was drizzling down 
 
 Things didn't look good. 
  
-\begin{center} * * * \end{center}
+\thoughtbreak
 
 ``So, what we'd like to know John, is just how a bug that was supposed to have been\ldots'' the CEO back-tracked, ``that was demonstrated as being fixed two weeks ago, made it into the final release of the software?''
 
@@ -24,7 +24,7 @@ Things didn't look good.
 
 The room fell silent and a few minutes of silence passed before the meeting was drawn to a close and John and his team were allowed to leave.
 
-\begin{center} * * * \end{center}
+\thoughtbreak
 
 ``So, you're telling me that when Simon came back from holiday, he picked up an older copy of the library from the network share and pushed his latest code into that?''  Markus was holding back the anger.
 
@@ -116,19 +116,9 @@ Once the Lieutenants are happy with their code, they make it available to the Di
 	\caption{Dictator and Lieutenant Workflow}
 \end{figure}
 
-\begin{figure}[hbt]
-\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-\tikzstyle{fancytitle} =[fill=black, text=white]
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{.9\textwidth}
+\begin{callout}{Terminology}{Blessed}
 A blessed, or canonical, repository is one which has the approval of the managers of the project.  The blessed repository is supposed to be the de facto standard where all other clones are made from.  If there is one place where code should be correct, it is the blessed repository.  If you are hosting the project in a public place, the blessed repository will usually be the one that is made available to people as a stable point for developing from.
-    \end{minipage}
-};
-\node[fancytitle, right=16pt] at (box.north west) {Blessed};
-\node[fancytitle, rounded corners] at (box.west) {\rotatebox{90}{Terminology}};
-\end{tikzpicture}
-\end{figure}
+\end{callout}
 
 The main thing to remember, is that Git can utilise any of these workflows.  This makes it a very flexible system, allowing you to work in whichever way you decide.
 
