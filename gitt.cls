@@ -39,6 +39,9 @@
 \renewcommand{\tablename}{}
 \renewcommand{\thetable}{}
 
+% Print just the chapter name without 'Chapter #.' in the running heads
+\renewcommand\chaptermark[1]{\markboth{\memUChead{#1}}{}}%
+
 % Make the pdf have clickable links
 \RequirePackage[
   bookmarks,
