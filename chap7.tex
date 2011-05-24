@@ -83,4 +83,12 @@ The room fell silent for a while, until the comments had transitioned for immedi
 
 \end{trenches}
 
-The idea of having a Mob repository 
+The idea of having a Mob repository is not anything new.  Many people decide to split up their teams in this way especially within a company.  For larger repositories it makes a lot of sense as not only does it help to keep development altogether in one place, but it also saves on space and administration overhead.  Managing many smaller repositories is often a lot more time consuming than managing several larger ones.  
+
+However you should always look at the situation and the scenario carefully to see which is going to suit you best.  For Tamagoyaki, there is the prospect of the teams growing soon and so they require a way to get the data organised fairly quickly and effortlessly.  Having many small repositories would likely confuse new members to the team, so the decision to move forward with team based and site based repositories makes sense.
+
+Tamagoyaki are proposing to have a single repository which will be the \emph{blessed} repository we discussed way back at the beginning of the book.  This repository will likely hold three branches.  These will relate to development, quality assurance and released.  To this end it will allow other teams to gain access to features that the other teams are working on, through the development branch.  It will allow a QA manager to work on the quality assurance branch and finally, it will allow someone to push these changes through to the released branch.  
+
+The idea is that all development work stays in the development branch.  For Tamagoyaki Inc. this branch will likely contain mostly finished, but largely untested works.  The teams will work together inside their mob repositories to create new functionality.  Once they are happy, their team leader will push their changes up into the development branch on the \emph{blessed} repository.  This branch is not gauranteed to be stable.  Sometimes things will break but the development branch is a place that all of the work of the various teams comes together.  
+
+Once the teams hit feature freeze, the point at which they will no longer take any more new features into the code base, they will ask the QA manager to create a QA branch.  Bug fixes for current issues will be committed here and when all bugs have been fixed and the code is ready to be released, the release branch will be synced with a specific commit of the QA branch.  
