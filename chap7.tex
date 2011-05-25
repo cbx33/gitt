@@ -61,7 +61,7 @@ We are now armed with a much clearer idea of how Git works and indeed we are now
 \begin{trenches}
 ``So I still maintain that we follow the original plan,'' said Rob.  ``Each person has their own repository and is the master of their own commits''
 
-John shook his head.  ``On a small scale,'' he began, ``that might work.''  He paused for a breath.  "But we need to think about scalability too.  Whilst I don't think all development work should be in one repository, I also don't think the best way to go is to have a repo for every person.''
+John shook his head.  ``On a small scale,'' he began, ``that might work.''  He paused for a breath.  ``But we need to think about scalability too.  Whilst I don't think all development work should be in one repository, I also don't think the best way to go is to have a repo for every person.''
 
 ``I know it's a rarity, but I gotta agree with John.''  Klaus spoke whilst idly stabbing his pen lighty into a blob of what looked like modelling clay.  ``Think what the chimp would say to it too.''
 
@@ -91,4 +91,30 @@ Tamagoyaki are proposing to have a single repository which will be the \emph{ble
 
 The idea is that all development work stays in the development branch.  For Tamagoyaki Inc. this branch will likely contain mostly finished, but largely untested works.  The teams will work together inside their mob repositories to create new functionality.  Once they are happy, their team leader will push their changes up into the development branch on the \emph{blessed} repository.  This branch is not gauranteed to be stable.  Sometimes things will break but the development branch is a place that all of the work of the various teams comes together.  
 
-Once the teams hit feature freeze, the point at which they will no longer take any more new features into the code base, they will ask the QA manager to create a QA branch.  Bug fixes for current issues will be committed here and when all bugs have been fixed and the code is ready to be released, the release branch will be synced with a specific commit of the QA branch.  
+Once the teams hit feature freeze, the point at which they will no longer take any more new features into the code base, they will ask the QA manager to create a \textbf{QA} branch.  Bug fixes for current issues will be committed here and when all bugs have been fixed and the code is ready to be released, the release branch will be synced with a specific commit of the \textbf{QA} branch.  
+
+If this all sounds a little confusing, we will take a few minutes to digest what we have come up with and draw a few diagrams.  The beauty of Git is that it is so configurable and supports almost limitless workflows.  Unfortunately this can also be a drawback because no two Git setups are generally alike.  The set up of Git is totally customised to the situation or scenario at hand.  In our case, we have merged together two of the workflow models that we presented in the early chapters.
+
+We are using a \emph{blessed} repository with which to store our crown jewels.  This is the repository that contains our main \textbf{release} branch.  This branch will always contain reliable stable releases.  Sure it may contain history of how we reached the stable release, but on a checkout, it will be a solid, buildable, pristine release.  This repository also contains our \textbf{QA} branch.  This is the branch that upon checkout would contain a fairly polished version of the product, but it may still have a few bugs and issues.  Then we have our development branch.  This is where the integration managers from the various teams would pull the code from their teams into a single code base, ready for the QA manager to begin his testing.  This setup may not work for you.  You may require more levels, you may require less.  The fact of the matter is that Git allows you to make that distinction.  
+
+For the developers, we have the team mob repositories.  These repositories will contain multiple branches that the various team members will push to, so that the integration managers are able to pull those changes into the \textbf{dev} branch on the \emph{blessed} repository.
+
+One item we have not yet touched upon is how to bring changes in from one branch to another.  We have one method which we met earlier, called \emph{Merging}.  However there are other options open to us, such as patching and rebasing.  Why are they important you might ask?  Sometimes merging is not the best way to approach the situation.  
+
+\begin{trenches}
+John was beginning to get a little frustrated now.  Some members of the team were clearly not understanding what he was saying and he was fighting hard not to raise his voice.  ``It is just messy for me to review is all I am saying.  I would much prefer not to have to see all those merge commits in the history when you are developing a simple feature.''
+
+``We could always look at using a rebase.''  Martha seemed anxious to calm John down.  ``I haven't really played with it enough yet, but rebase could be what we are looking for.''
+
+``What does rebase do when it's at home.''  Sneered Klaus, rolling his eyes.
+
+Martha picked up the red board pen from the board room table and gingerly took off the lid.  She walked over to the whiteboard.  ``For small topics or features,'' she began, ``where you are not going to have to publish it, it would make sense to use rebase.''  She began drawing little diagrams with circles on the board.  ``Rebasing will allow you to take your branch, pick up all the development you have done, update the branch underneath to bring it inline with your blessed dev branch for example, and then replay your development on top.''
+
+``Won't that change your history?  Isn't that a big big no no?''
+
+``Yes it will change your history, and that's why for somethings it isn't appropriate.  But it may be just the ticket for what we are trying to do.''
+
+John smiled.  He was beginning to feel like the team members were starting to embrace Git's potential. 
+\end{trenches}
+
+As you know, each time you merge you create a merge commit.  Whilst this is not a problem, it can leave the tree looking messy.  If you are working on a small feature in a branch, and you want to get the latest features and updates from the dev branch, but you do not want the hastle and untidyness of generating a ton of merge commits.  The best way to get round this is to use the rebase tool.
