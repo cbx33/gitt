@@ -24,6 +24,7 @@
 \RequirePackage{color,fancyvrb,relsize}
 \RequirePackage[final]{microtype}
 \RequirePackage{tikz}
+\RequirePackage{pdfpages}
 
 % Import a new font and use the sans-serif version by default
 \RequirePackage{lmodern}
