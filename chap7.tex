@@ -95,7 +95,13 @@ Once the teams hit feature freeze, the point at which they will no longer take a
 
 If this all sounds a little confusing, we will take a few minutes to digest what we have come up with and draw a few diagrams.  The beauty of Git is that it is so configurable and so by design supports almost limitless workflows.  Unfortunately this can also be a drawback because no two Git setups are generally alike.  The set up of Git is totally customised to the situation or scenario at hand.  In our case, we have merged together two of the workflow models that we presented in the early chapters.
 
-We are using a \emph{blessed} repository with which to store our crown jewels.  This is the repository that contains our main \textbf{release} branch.  This branch will always contain reliable stable releases.  Sure it may contain history of how we reached the stable release, but on a checkout, it will be a solid, buildable, pristine release.  This repository also contains our \textbf{QA} branch.  This is the branch that upon checkout would contain a fairly polished version of the product, but it may still have a few bugs and issues.  Then we have our development branch.  This is where the integration managers from the various teams would pull the code from their teams into a single code base, ready for the QA manager to begin his testing.  This setup may not work for you.  You may require more levels, you may require less.  The fact of the matter is that Git allows you to make that distinction.  
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-w7-d1.pdf}
+\caption{Our workflow}
+\end{figure}
+
+We are using a \emph{blessed} repository with which to store our crown jewels.  This is the repository that contains our main \textbf{release} branch.  This branch will always contain reliable stable releases.  Sure, it may contain history of how we reached the stable release, but on a checkout, it will be a solid, buildable, pristine, tagged release.  This repository also contains our \textbf{QA} branch.  This is the branch that upon checkout would contain a fairly polished version of the product, but it may still have a few bugs and issues.  Then we have our development branch.  This is where the integration managers from the various teams would pull the code from their teams into a single code base, ready for the QA manager to begin his testing.  This setup may not work for you.  You may require more levels, you may require less.  The fact of the matter is that Git allows you to make that distinction.  
 
 For the developers, we have the team mob repositories.  These repositories will contain multiple branches that the various team members will push to, so that the integration managers are able to pull those changes into the \textbf{dev} branch on the \emph{blessed} repository.
 
@@ -119,4 +125,32 @@ John smiled.  He was beginning to feel like the team members were starting to em
 
 As you know, each time you merge you create a merge commit.  Whilst this is not a problem, it can leave the tree looking messy.  If you are working on a small feature in a branch, and you want to get the latest features and updates from the dev branch, but you do not want the hastle and untidyness of generating a ton of merge commits.  The best way to get round this is to use the rebase tool.
 
-As Martha mentioned, the rebase tool can find a common ancestor between two branches, pick up the new commits on your new branch, update the branch underneath and the replay your commits on top.  Figure 1 below demonstrates this.
+As mentioned, the rebase tool can find a common ancestor between two branches, pick up the new commits on your new branch, update the branch underneath and the replay your commits on top.  Figure 2, shows a fairly standard commit tree.  We have made commits \textbf{A} and \textbf{B}, and then we branch off and create \textbf{C} and textbf{D}.  It could well be that the \textbf{master} branch containing \textbf{A} and \textbf{B} actually came from an external source, and we are looking to do some development in our own branch locally.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-w7-d2.pdf}
+\caption{Standard commit tree example}
+\end{figure}
+
+Now what will inevitably happen is that some more development will continue in the source project, which is represented in the Figure below by commits \textbf{E} and \textbf{F}.  This is shown below in Figure 3.  In our use case, we actually want these new changes to be present during our development.  Let us see how we can handle this.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-w7-d3.pdf}
+\caption{Continued development}
+\end{figure}
+
+We could quite happily merge the \textbf{master} branch into our own, but that would result in a merge commit being added, plus the fact that as we go further down the line, our development work would be interlaced with various updates from the \textbf{master}.  A better way to handle this sometimes, is by using the rebase tool which will achieve the results displayed below in Figure 4.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-w7-d4.pdf}
+\caption{A rebase in action}
+\end{figure}
+
+As you can see we have a slight alteration to the diagram.  Commits \textbf{C} and \textbf{D} have little ticks next to them.  This is to indicate that they are actually not the same commits as before.  You may be wondering why?  Think about it for a few minutes.  In Git, every commits SHA-1 hash is based not only on the contents of that commit, but also on the parent.  In this way, if we move these commits, then their SHA-1 hashes are going to change.  Our notation is simply stating that although the contents of these commits is the same, they are the \textbf{C} and \textbf{D} that we remember, their identifier will change.  
+
+Remember our discussion about changing the past?  This is very relevant here.  Rebasing is the ultimate way to change the past.  Over the next few days, we are going to demonstrate a number of ways that rebase can aid you in your development and produce a clean and structured commit history.  However, care must be taken not to rebase something which others have already pulled.  Remember, with great power, comes great responsibility.
+
+Let us now turn out attention to actually looking at an example of the rebase tool.  We are going to take our example repository and create a branch.  Then we are going to do some work on the \textbf{master} branch and try rebasing our changes.
