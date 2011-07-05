@@ -1,9 +1,4 @@
-Staged commits by line
-clone
-clone bare
-push
-pull
-fetch
+REAL TOPICS
 untracked files with .gitignore
 Reflog use for head git reset
 make patch
@@ -12,8 +7,7 @@ blame bisect
 filter-branch
 subtree
 submodule
-guis
 
-Chap5
-	remote
-	patching
+BREAKOUTS
+push/pull tags
+Non FF push (breaking laws of physics)
