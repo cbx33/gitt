@@ -2,6 +2,7 @@ all: pdf html
 
 pdf:
 	pdflatex gitt.tex
+	makeindex gitt
 	pdflatex gitt.tex
 	pdflatex gitt.tex
 
