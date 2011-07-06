@@ -109,7 +109,7 @@
 \index{#1@\texttt{#2}}
 }
 
-%\newcommand{\indexgit}[1]{%
-%\texttt{git #1}%
-%\index{git commands!#1@\texttt{#1}}%
-%}
+\newcommand{\indexgit}[1]{%
+\texttt{git #1}%
+\index{git commands!#1@\texttt{#1}}%
+}
