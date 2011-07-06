@@ -154,3 +154,44 @@ As you can see we have a slight alteration to the diagram.  Commits \textbf{C} a
 Remember our discussion about changing the past?  This is very relevant here.  Rebasing is the ultimate way to change the past.  Over the next few days, we are going to demonstrate a number of ways that rebase can aid you in your development and produce a clean and structured commit history.  However, care must be taken not to rebase something which others have already pulled.  Remember, with great power, comes great responsibility.
 
 Let us now turn out attention to actually looking at an example of the rebase tool.  We are going to take our example repository and create a branch.  Then we are going to do some work on the \textbf{master} branch and try rebasing our changes.
+
+\section{Day 3 - ``Rebasing our commitments''}
+\subsection{Rebase examples}
+
+We are now going to go back to our \texttt{coderepo} folder.  This is the one we cloned from in Week 6 to create the \texttt{coderepo-cl} repository.  When we left this repository, we were at commit \textbf{1c3206a}.  If you have played with the repository at all, it would be a good opportunity for you to bring the wonderful branch to that point.  We are also going to Fast Forward the master branch to that same point to.  Before reading on, try to remember what commands we would use to do this and then check below to see if you are right.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git checkout wonderful
+Already on 'wonderful'
+john@satsuki:~/coderepo$ git reset --hard 1c3206a
+HEAD is now at 1c3206a Added a new file
+john@satsuki:~/coderepo$
+\end{Verbatim}
+
+So we begin by ensuring that we are on the \textbf{wonderful} branch.  Then we perform a hard reset, to ensure that the HEAD of \textbf{wonderful} points to the commit \textbf{1c3206a}.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git checkout master
+Switched to branch 'master'
+john@satsuki:~/coderepo$ git merge wonderful 
+Updating 37950f8..1c3206a
+Fast-forward
+ newfile3 |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 newfile3
+john@satsuki:~/coderepo$
+\end{Verbatim}
+
+Next we use the \texttt{git merge} command as before to bring the \textbf{master} branch in line with the \textbf{wonderful} branch.  As there have been no more commits to \textbf{master} since we worked on \textbf{wonderful}, it means that once again, the merge can be a simple Fast Forward merge, allowing us to simple change which commit HEAD points to within the \textbf{master} branch.
+
+\begin{Verbatim} 
+john@satsuki:~/coderepo$ git branch -v
+  master    1c3206a Added a new file
+* wonderful 1c3206a Added a new file
+  zaney     7cc32db Made another awesome change
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Finally, we run a \texttt{git branch} command to confirm that the branches point to the same commit.  Remember there are other ways we could have achieved this, using \texttt{git log} for example.  Now that we can see they point to the same place, we can continue with our introduction to the \texttt{git rebase} command.
+
+
