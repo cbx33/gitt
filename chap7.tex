@@ -267,6 +267,7 @@ r 8c6a66b Updated another file
 pick b91ec84 Updated another file again
 \end{Verbatim}
 
+Notice that we replaced the beginning of the second line, original starting with \texttt{pick}, with the letter \texttt{r}.  Using the list of available functions above, we can easily see that the \texttt{r} corresponds to the \emph{reword} function, which will allow us to change the wording that we have used for that particular commit.  On saving this and closing this file, Git quickly presents us with another editor window.  This time the window contains a more familiar commit message setup.  We will modify it to show the same as below, and then close the editor.
 
 \begin{Verbatim}
 Updated another file 2nd time
@@ -285,14 +286,76 @@ Updated another file 2nd time
 #       temp_file
 \end{Verbatim}
 
-
+After Git completes working on the rebase, we are presented with the result of our operation.
 
 \begin{Verbatim}
-john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate -n 4
-* 34a4a92 (HEAD, wonderful) Updated another file again
-* 8d1ea68 Updated another file 2nd time
+john@satsuki:~/coderepo$ git rebase -i HEAD~3
+[detached HEAD 7c35dde] Updated another file 2nd time
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+Successfully rebased and updated refs/heads/wonderful.
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+So Git has completed the operation, and by running an abbreviated \texttt{git log} command, we can see that the fruits of our labour have resulted in the second commit having its working changed.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all 
+ --abbrev-commit --decorate -n 4
+* aeb5679 (HEAD, wonderful) Updated another file again
+* 7c35dde Updated another file 2nd time
 * c0e2f5b Updated another file
 * 1c3206a (master) Added a new file
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+\begin{callout}{Note}{Rebasing and the hashes}
+If you have been paying attention to the SHA-1 hashes as we have been moving through this last piece on rebasing, you may have noticed something interesting.  Though there are commits that we have not altered at all, the commit IDs have indeed changed.  If we take the example where we re-worded the second commit, it is clear to see that subsequent commits have their IDs changed.  In the example, we modified commit \textbf{8c6a66b}, but we left \textbf{b91ec84} untouched.  In the resulting tree, both have had their IDs changed.
+\newline
+\newline
+The reason for this is simple, remember we are replaying commits.  In a sense we are re-commiting the changes that were made during that commit.  As we have stated previously, Git is cryptographically secure.  By this we mean that each commit relies on the commit that preceeds it.  So, if we change the ID of a preceeding commit, all subsequent ones have to change also.
+\end{callout}
+
+Let us try this rebase again.  This time we will use the sqush option to merge the two similar commits into one.  We will run the same command as before; \texttt{git rebase -i HEAD~3}.  This time we will use the \texttt{s} prefix to the line to choose \emph{squashing} as our method.  We could have used the word \texttt{sqush} instead of \texttt{s}, but for the laziness in all of us, we will opt for the single letter versions for now.
+
+\begin{Verbatim}
+pick c0e2f5b Updated another file
+s 7c35dde Updated another file 2nd time
+pick aeb5679 Updated another file again
+
+# Rebase 1c3206a..aeb5679 onto 1c3206a
+\end{Verbatim}
+
+Now when we save and close the file, we are presented with a slightly different screen.  As we are squashing several commits together into one, we need to choose a commit message.  The message needs to be descriptive enough that it will accturately let a developer see what has been updated in this single commit.  We will delete these lines and replace them with the comment \texttt{Updated another file with 2 edits}.
+
+\begin{Verbatim}
+# This is a combination of 2 commits.
+# The first commit's message is:
+
+Updated another file
+
+# This is the 2nd commit message:
+
+Updated another file 2nd time
+\end{Verbatim}
+
+After completion, Git shows us that the rebase has been successful.
+
+\begin{Verbatim}
+[detached HEAD 1ffe37f] Updated another file with 2 edits
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+Successfully rebased and updated refs/heads/wonderful.
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+By using the \texttt{git log} message, we can see that the two commits have indeed been replaced by one.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all 
+ --abbrev-commit --decorate -n 4
+* 4d91aab (HEAD, wonderful) Updated another file again
+* 1ffe37f Updated another file with 2 edits
+* 1c3206a (master) Added a new file
+* 37950f8 Continued Development
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
