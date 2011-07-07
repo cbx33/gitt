@@ -315,7 +315,7 @@ If you have been paying attention to the SHA-1 hashes as we have been moving thr
 The reason for this is simple, remember we are replaying commits.  In a sense we are re-commiting the changes that were made during that commit.  As we have stated previously, Git is cryptographically secure.  By this we mean that each commit relies on the commit that preceeds it.  So, if we change the ID of a preceeding commit, all subsequent ones have to change also.
 \end{callout}
 
-Let us try this rebase again.  This time we will use the sqush option to merge the two similar commits into one.  We will run the same command as before; \texttt{git rebase -i HEAD~3}.  This time we will use the \texttt{s} prefix to the line to choose \emph{squashing} as our method.  We could have used the word \texttt{sqush} instead of \texttt{s}, but for the laziness in all of us, we will opt for the single letter versions for now.
+Let us try this rebase again.  This time we will use the sqush option to merge the two similar commits into one.  We will run the same command as before; \texttt{git rebase -i HEAD\textasciitilde3}.  This time we will use the \texttt{s} prefix to the line to choose \emph{squashing} as our method.  We could have used the word \texttt{sqush} instead of \texttt{s}, but for the laziness in all of us, we will opt for the single letter versions for now.
 
 \begin{Verbatim}
 pick c0e2f5b Updated another file
@@ -399,8 +399,15 @@ john@satsuki:~/coderepo$
 You may have noticed that we seem to have introduced a new command here called \texttt{git logg}.  The command seems to do exactly the same as our \texttt{git log --graph --pretty=oneline --all --abbrev-commit --decorate} command.  For more information about what we have done here, see the callout called \textbf{An alias in our midst}.
 
 \begin{callout}{Information}{An alias in our midst}
-Some times, you will get tired of typing the same old long string of parameters into Git.  Though some people tend to frown upon using them, aliases can significantly increase your productivity, by allowing you to shortcut annoyingly long commands.  You may have noticed our \texttt{git log --graph --pretty=oneline --all --abbrev-commit --decorate} command from before.  It is awfully long.  Let us create an alias called \texttt{git logg}
+Some times, you will get tired of typing the same old long string of parameters into Git.  Though some people tend to frown upon using them, aliases can significantly increase your productivity, by allowing you to shortcut annoyingly long commands.  You may have noticed our \texttt{git log --graph --pretty=oneline --all --abbrev-commit --decorate} command from before.  It is awfully long.  Let us create an alias called \texttt{git logg}.  
 
-THIS IS NOT FINISHED
+There are multiple ways to do this, but we are going to get a little down and dirty and edit the \texttt{.git/config} file in our repository.  You will find a few \emph{stanzas} which start like this \texttt{[core]}, followed by a number of lines.  If you don't already have one, use the editor to add \texttt{[alias]} at the end of the file, so that your file has a section looking like the following.
 
+\begin{Verbatim}
+[alias]
+        logg = log --graph --pretty=oneline --all 
+ \carriagereturn \dlsh --abbrev-commit --decorate
+\end{Verbatim}
+
+Once saved, we can use \texttt{git logg} just like any other Git command.  As you can see from the example in the text, we can even append more parameters that the parent command \texttt{git log} usually accepts.  So we can do things like \texttt{git logg -n5} to get only five entries.
 \end{callout}
