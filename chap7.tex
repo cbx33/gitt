@@ -6,7 +6,7 @@
 \section{Day 1 - ``Networking with a difference''}
 \subsection{Pushing across a LAN}
 
-Now we have a complete copy of our repository in another location.  At the moment we have created this clone on the same machine that our original is.  This isn't really a very good idea for backup purposes.  Git supplies several means with which to talk to a remote machine, but by far the most common of these is to utilise the SSH protocol.  SSH is a secure, encrypted way to communicate with a remote repository.  Which is a must for pushing to an important repository that people are going to pull information from.
+\index{SSH}Now we have a complete copy of our repository in another location.  At the moment we have created this clone on the same machine that our original is.  This isn't really a very good idea for backup purposes.  Git supplies several means with which to talk to a remote machine, but by far the most common of these is to utilise the SSH protocol.  SSH is a secure, encrypted way to communicate with a remote repository.  Which is a must for pushing to an important repository that people are going to pull information from.
 
 If we assume that for a moment that our user \emph{john} has now moved to another machine and now wishes to clone a repository that he had on his original machine to this new one.  The commands are identical to that which we used before.  We are going to assume that \emph{john} already has SSH access to the machine.  In this way, we can issue the commands as follows.
 
@@ -24,7 +24,7 @@ john@akira:~$
 
 Now we have done exactly as before and cloned our repository to a local folder called \texttt{coderepo-ne} from the remote url \texttt{ssh://john@satsuki/home/john/coderepo}.  Notice the use of \texttt{ssh://} to denote the specification of the SSH protocol.  We have also put the users name in the url of the remote path.  If the SSH server was running on a different port to usual, that is, on a port other than 22, we could have also added a port number preceeded by a colon after the hostname.
 
-SSH isn't the only protocol that Git can use.  We have already looked at two; local and SSH.  In fact, Git supports a further two protocols and these are HTTP/S and Git's own GIT protocol.  We are going to take a quick look at the Git protocol next, before moving on to HTTP/S.
+\index{Git!Protocol}SSH isn't the only protocol that Git can use.  We have already looked at two; local and SSH.  In fact, Git supports a further two protocols and these are HTTP/S and Git's own GIT protocol.  We are going to take a quick look at the Git protocol next, before moving on to HTTP/S.
 
 \subsection{The Git Protocol}
 The GIT protocol is the fastest transfer protocol out there for Git repositories.  This should come as no surprise, since it was developed exclusively for use within a Git environment.  It does however have a relatively large drawback.  The drawback is that it provides absolutely no authentication.  For this reason, enabling the GIT protocol on a repository and running the server backend, (described later), will allow anyone who can talk to the servers port complete read access to the repository.
@@ -32,12 +32,12 @@ The GIT protocol is the fastest transfer protocol out there for Git repositories
 If you are serving a large repository on the Internet for example, this could actually be rather beneficial and will allow you to serve pulls quickly and efficiently.  However, though it is possible to enable \emph{pushing} using the GIT protocol, the lack of security would mean that anyone who could see the server and connect to the port, usually 9418, could make changes to the repository.  This is usually entirely undesirable and as such people will often couple a read-only GIT protocol with a writable SSH protocol for the developers that need push access.
 
 \subsection{The HTTP/S Protocol}
-Just as with the GIT protocol, Git can support the HTTP/HTTPS protocol as well.  Setting up this is usually as simple as creating a bare clone of your repository, keeping it up to date, usually via a post-update-hook, which is described later in the book, and simply allowing clients access to this server area.  
+\index{HTTP/S Protocol}Just as with the GIT protocol, Git can support the HTTP/HTTPS protocol as well.  Setting up this is usually as simple as creating a bare clone of your repository, keeping it up to date, usually via a post-update-hook, which is described later in the book, and simply allowing clients access to this server area.  
 
 Note that the above is only to provide read-only access over HTTP.  It is possible to allow writable access, ie pushing, over HTTPS, but this is more complicated to set up and is outside the scope of this book.
 
 \subsection{Protocol decision}
-Tamagoyaki are about to embark on their decision making process regarding which protocols to use and how to perform their collaboration between themselves and their external partners.  They are going to have to take multiple things into consideration, such as security, speed, administration and storage.  When you begin to implement the Git system yourself, you too will have to think about these decisions and answer questions like:
+\index{protocol decision}Tamagoyaki are about to embark on their decision making process regarding which protocols to use and how to perform their collaboration between themselves and their external partners.  They are going to have to take multiple things into consideration, such as security, speed, administration and storage.  When you begin to implement the Git system yourself, you too will have to think about these decisions and answer questions like:
 
 \begin{itemize}
 \item Who is going to require access to the repository?
@@ -81,11 +81,11 @@ The room fell silent for a while, until the comments had transitioned from immed
 
 \end{trenches}
 
-The idea of having a Mob repository is not anything new.  Many people decide to split up their teams in this way especially within a company.  For larger repositories it makes a lot of sense as not only does it help to keep development altogether in one place, but it also saves on space and administration overhead.  Managing many smaller repositories is often a lot more time consuming than managing several larger ones.  
+\index{mob repository}The idea of having a Mob repository is not anything new.  Many people decide to split up their teams in this way especially within a company.  For larger repositories it makes a lot of sense as not only does it help to keep development altogether in one place, but it also saves on space and administration overhead.  Managing many smaller repositories is often a lot more time consuming than managing several larger ones.  
 
 However you should always look at the situation and the scenario carefully to see which is going to suit you best.  For Tamagoyaki, there is the prospect of the teams growing soon and so they require a way to get the data organised fairly quickly and effortlessly.  Having many small repositories would likely confuse new members to the team, so the decision to move forward with team based and site based repositories makes sense.
 
-Tamagoyaki are proposing to have a single repository which will be the \emph{blessed} repository we discussed way back at the beginning of the book.  This repository will likely hold three branches.  These will relate to development, quality assurance and releases.  To this end it will allow one team to gain access to features that the other teams are working on, via the development branch.  It will allow a QA manager to work on the quality assurance branch and finally, it will allow someone to push these changes through to the released branch.  
+\index{blessed repository}Tamagoyaki are proposing to have a single repository which will be the \emph{blessed} repository we discussed way back at the beginning of the book.  This repository will likely hold three branches.  These will relate to development, quality assurance and releases.  To this end it will allow one team to gain access to features that the other teams are working on, via the development branch.  It will allow a QA manager to work on the quality assurance branch and finally, it will allow someone to push these changes through to the released branch.  
 
 The idea is that all development work stays in the development branch.  For Tamagoyaki Inc. this branch will likely contain mostly finished, but largely untested works.  The teams will work together inside their mob repositories to create new functionality.  Once they are happy, their team leader will push their changes up into the development branch on the \emph{blessed} repository.  This branch is not gauranteed to be stable.  Sometimes things will break but the development branch is a place that all of the work of the various teams comes together.  
 
@@ -121,9 +121,9 @@ Martha picked up the red board pen from the board room table and gingerly took o
 John smiled.  He was beginning to feel like the team members were starting to embrace Git's potential. 
 \end{trenches}
 
-As you know, each time you merge you create a merge commit.  Whilst this is not a problem, it can leave the tree looking messy.  If you are working on a small feature in a branch, and you want to get the latest features and updates from the dev branch, but you do not want the hastle and untidyness of generating a ton of merge commits.  The best way to get round this is to use the rebase tool.
+\index{rebasing}As you know, each time you merge you create a merge commit.  Whilst this is not a problem, it can leave the tree looking messy.  If you are working on a small feature in a branch, and you want to get the latest features and updates from the dev branch, but you do not want the hastle and untidyness of generating a ton of merge commits.  The best way to get round this is to use the rebase tool.
 
-As mentioned, the rebase tool can find a common ancestor between two branches, pick up the new commits on your new branch, update the branch underneath and the replay your commits on top.  Figure 2, shows a fairly standard commit tree.  We have made commits \textbf{A} and \textbf{B}, and then we branch off and create \textbf{C} and textbf{D}.  It could well be that the \textbf{master} branch containing \textbf{A} and \textbf{B} actually came from an external source, and we are looking to do some development in our own branch locally.
+\index{replaying commits}As mentioned, the rebase tool can find a common ancestor between two branches, pick up the new commits on your new branch, update the branch underneath and the replay your commits on top.  Figure 2, shows a fairly standard commit tree.  We have made commits \textbf{A} and \textbf{B}, and then we branch off and create \textbf{C} and textbf{D}.  It could well be that the \textbf{master} branch containing \textbf{A} and \textbf{B} actually came from an external source, and we are looking to do some development in our own branch locally.
 
 \begin{figure}[hbt]
 \centering
@@ -190,7 +190,7 @@ john@satsuki:~/coderepo$ git branch -v
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-Finally, we run a \texttt{git branch} command to confirm that the branches point to the same commit.  Remember there are other ways we could have achieved this, using \texttt{git log} for example.  Now that we can see they point to the same place, we can continue with our introduction to the \texttt{git rebase} command.  We will start by making some commits to the \textbf{wonderful} branch and see how we can update our underlying master branch.
+Finally, we run a \texttt{git branch} command to confirm that the branches point to the same commit.  Remember there are other ways we could have achieved this, using \texttt{git log} for example.  Now that we can see they point to the same place, we can continue with our introduction to the \indexgit{rebase} command.  We will start by making some commits to the \textbf{wonderful} branch and see how we can update our underlying master branch.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ echo "New Changes" >> another_file 
@@ -227,7 +227,7 @@ Before we continue, there is a problem in the trenches.
 Martha giggled. ``Rebase can do a lot more than just replaying commits you know.  Some of the more simpler tasks are \ldots well \ldots let me show you.''
 \end{trenches}
 
-Looking at our example commits, it would appear that we have made the same mistake as Simon.  Our commits, \textbf{c0e2f5b} and textbf{8c6a66b} have got the same commit message.  Not very helpful at all.  Let us see how \texttt{git rebase} can help us out here.
+\index{rebasing!interactive}Looking at our example commits, it would appear that we have made the same mistake as Simon.  Our commits, \textbf{c0e2f5b} and textbf{8c6a66b} have got the same commit message.  Not very helpful at all.  Let us see how \texttt{git rebase} can help us out here.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git rebase -i HEAD~3 
@@ -265,7 +265,7 @@ r 8c6a66b Updated another file
 pick b91ec84 Updated another file again
 \end{Verbatim}
 
-Notice that we replaced the beginning of the second line, original starting with \texttt{pick}, with the letter \texttt{r}.  Using the list of available functions above, we can easily see that the \texttt{r} corresponds to the \emph{reword} function, which will allow us to change the wording that we have used for that particular commit.  On saving this and closing this file, Git quickly presents us with another editor window.  This time the window contains a more familiar commit message setup.  We will modify it to show the same as below, and then close the editor.
+\index{rebasing!editing messages}Notice that we replaced the beginning of the second line, original starting with \texttt{pick}, with the letter \texttt{r}.  Using the list of available functions above, we can easily see that the \texttt{r} corresponds to the \emph{reword} function, which will allow us to change the wording that we have used for that particular commit.  On saving this and closing this file, Git quickly presents us with another editor window.  This time the window contains a more familiar commit message setup.  We will modify it to show the same as below, and then close the editor.
 
 \begin{Verbatim}
 Updated another file 2nd time
@@ -323,7 +323,7 @@ pick aeb5679 Updated another file again
 # Rebase 1c3206a..aeb5679 onto 1c3206a
 \end{Verbatim}
 
-Now when we save and close the file, we are presented with a slightly different screen.  As we are squashing several commits together into one, we need to choose a commit message.  The message needs to be descriptive enough that it will accturately let a developer see what has been updated in this single commit.  We will delete these lines and replace them with the comment \texttt{Updated another file with 2 edits}.
+\index{rebasing!squashing}Now when we save and close the file, we are presented with a slightly different screen.  As we are squashing several commits together into one, we need to choose a commit message.  The message needs to be descriptive enough that it will accturately let a developer see what has been updated in this single commit.  We will delete these lines and replace them with the comment \texttt{Updated another file with 2 edits}.
 
 \begin{Verbatim}
 # This is a combination of 2 commits.
@@ -366,7 +366,7 @@ Martha ruffled Simon's hair.  She liked his youthful enthusiasm.  ``How about we
 \section{Day 4 - ``Starting to get rebased''}
 \subsection{Using rebase with branches}
 
-Up until now we have used \texttt{git rebase} to work on our current branch, modifying a few things here and there.  This is actually one of the simplest things that rebase can perform, and as hinted to in our workflow design, we can actually use \texttt{git rebase} to perform something called \emph{Continuous Integration}.
+\index{continuous integration}Up until now we have used \texttt{git rebase} to work on our current branch, modifying a few things here and there.  This is actually one of the simplest things that rebase can perform, and as hinted to in our workflow design, we can actually use \texttt{git rebase} to perform something called \emph{Continuous Integration}.
 
 As we stated before, one of the most interesting uses of using \texttt{git rebase} is to update your branch with changes from another, whilst keeping your development intact.  The great part about it is that there is no messy merging, your commits appear at the end of the tree which makes things nice and tidy.  Let us go back to our example and add some more commits to the \textbf{master} branch.
 
@@ -397,7 +397,7 @@ john@satsuki:~/coderepo$
 You may have noticed that we seem to have introduced a new command here called \texttt{git logg}.  The command seems to do exactly the same as our \texttt{git log --graph --pretty=oneline --all --abbrev-commit --decorate} command.  For more information about what we have done here, see the callout called \textbf{An alias in our midst}.
 
 \begin{callout}{Information}{An alias in our midst}
-Some times, you will get tired of typing the same old long string of parameters into Git.  Though some people tend to frown upon using them, aliases can significantly increase your productivity, by allowing you to shortcut annoyingly long commands.  You may have noticed our \texttt{git log --graph --pretty=oneline --all --abbrev-commit --decorate} command from before.  It is awfully long.  Let us create an alias called \texttt{git logg}.  
+\index{aliases}Some times, you will get tired of typing the same old long string of parameters into Git.  Though some people tend to frown upon using them, aliases can significantly increase your productivity, by allowing you to shortcut annoyingly long commands.  You may have noticed our \texttt{git log --graph --pretty=oneline --all --abbrev-commit --decorate} command from before.  It is awfully long.  Let us create an alias called \texttt{git logg}.  
 
 There are multiple ways to do this, but we are going to get a little down and dirty and edit the \texttt{.git/config} file in our repository.  You will find a few \emph{stanzas} which start like this \texttt{[core]}, followed by a number of lines.  If you don't already have one, use the editor to add \texttt{[alias]} at the end of the file, so that your file has a section looking like the following.
 
@@ -430,7 +430,7 @@ john@satsuki:~/coderepo$
 
 We started by checking out the \textbf{wonderful}.  With the \texttt{git rebase master} command, we told Git to take all of the changes in our topic branch called \textbf{wonderful}, and replay them on top of the new \textbf{master}.  We could have also used the command \texttt{git rebase master topic} which would actually have done the original \texttt{git checkout} for us.  
 
-Notice again, that our commit IDs have changed.  The contents, in this case, remain identical, as we have not hit upon any conflicts during out rebase.  If we had, we would have to have resolved that, and then run the \texttt{git rebase --continue}, or \texttt{git rebase --abort} to abort the rebase completely.
+\index{rebasing!continuing}\index{rebasing!aborting}Notice again, that our commit IDs have changed.  The contents, in this case, remain identical, as we have not hit upon any conflicts during out rebase.  If we had, we would have to have resolved that, and then run the \texttt{git rebase --continue}, or \texttt{git rebase --abort} to abort the rebase completely.
 
 So, our wonderful branch is now sat on top of the new development changes and instead of having two diverging branch heads, we now have a single branch which \textbf{wonderful} extends from.
 
@@ -444,7 +444,7 @@ Martha got up from her seat.  It hadn't been fifteen minutes since she had shown
 ``Well, I kinda rebased, but I wish I hadn't now, cos it all went wrong.  How can I go back?''
 \end{trenches}
 
-It's an interesting question.  How would we move back again?  We have rewritten history, how could we possibly hope to go back again?  We have discussed before how most things in Git are never really immediately gone, even if we delete them.  Does this apply here too?  Of course it does.  Remember that a branch is really just defined by which commit the HEAD points to.  Let us draw a few diagrams to show how the tree of commits looks before and after our rebase.
+\index{rebasing!undoing}It's an interesting question.  How would we move back again?  We have rewritten history, how could we possibly hope to go back again?  We have discussed before how most things in Git are never really immediately gone, even if we delete them.  Does this apply here too?  Of course it does.  Remember that a branch is really just defined by which commit the HEAD points to.  Let us draw a few diagrams to show how the tree of commits looks before and after our rebase.
 
 \begin{figure}[hbt]
 \centering
@@ -460,7 +460,7 @@ Figure 5 shows our repository before we perform the rebase.  We can quite clearl
 \caption{Our repository after the rebase}
 \end{figure}
 
-The grey commits are no longer referenced.  No branche HEADs point to them, and no other commits rely upon them.  In short they have been orphaned, or are left \index{dangling}\emph{dangling}.  A dangling commit has no references left pointing to it.  Remember each commit relies on its parent.  Therefore because the HEAD of \textbf{wonderful} now points to \textbf{5167cce}, and that in turn points to \textbf{551086e}.  The original commit line is unchanged.
+\index{dangling}The grey commits are no longer referenced.  No branche HEADs point to them, and no other commits rely upon them.  In short they have been orphaned, or are left \index{dangling}\emph{dangling}.  A dangling commit has no references left pointing to it.  Remember each commit relies on its parent.  Therefore because the HEAD of \textbf{wonderful} now points to \textbf{5167cce}, and that in turn points to \textbf{551086e}.  The original commit line is unchanged.
 
 Thinking back to previous weeks, we have had a similar situation before.  If we know the commit ID that we wish to return to, there really is nothing more complicated than issuing a \texttt{git reset}.  The only tricky part is knowing the commit you wish to return to.
 
@@ -643,7 +643,7 @@ We have reached the end of our tour with the rebase tool.  It is exceedingly pow
 
 \subsection{Terminology}
 \begin{itemize}
-\item\textbf{SSH} - A type of secure network protocol
-\item\textbf{HTTP} - The protocol that is used to serve internet pages
-\item\textbf{Rebase} - Used primarily for lifting commits and reapplying them to another base branch
+\index{Terminology!SSH}\item\textbf{SSH} - A type of secure network protocol
+\index{Terminology!HTTP}\item\textbf{HTTP} - The protocol that is used to serve internet pages
+\index{Terminology!Rebase}\item\textbf{Rebase} - Used primarily for lifting commits and reapplying them to another base branch
 \end{itemize}
