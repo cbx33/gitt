@@ -39,7 +39,7 @@ It's not like this situation is completely uncommon.  At one point or another mo
 
 People have a tendency to use folder names which mean something to them.  However it doesn't necessarily follow that this name means something to another developer.  ``Version 2.3 - fixed bug a'' only means something to you if you know what bug a is and something like ``Version 2.3 - fixed bug a(2)'' is even worse.  Unfortunately allowing people to free form type their own descriptive file names will always lead to problems like this.  When these files are stored on a network share, the problem is exacerbated ten fold because there is often no fixed reference point.
 
-So what's the solution?  Well, in a large number of cases version control can make sure that not only is there a defined place for data to sit, and with a defined structure, but also that you have a full history of the code.  Accountability is very important in code development, especially when releasing software to customers.  In some situations a customer will even mandate that the code being developed for them is stored in a version controlled environment.  In this way, the customer can ask when a certain piece of code was edited, or when an addition first entered the code base.
+\index{Version Control}So what's the solution?  Well, in a large number of cases version control can make sure that not only is there a defined place for data to sit, and with a defined structure, but also that you have a full history of the code.  Accountability is very important in code development, especially when releasing software to customers.  In some situations a customer will even mandate that the code being developed for them is stored in a version controlled environment.  In this way, the customer can ask when a certain piece of code was edited, or when an addition first entered the code base.
 
 \section{Day 3 - ``A possible solution''}
 \subsection{Version Control Nuances}
@@ -58,11 +58,11 @@ Markus chewed his lip.  ``I can see where you're coming from here John, but aren
 
 So now we need to take a look at some various features of version control systems and see what the various advantages and disadvantages are of each.  We are going to focus on Git here primarily, as this is what the rest of the book is all about.  It is assumed that if you are reading this book, you have most likely already made the decision about which version control system you are going to use.  So let's talk about the various features that are prevalent in most version control systems.
 
-\subsection{Distributed Version Control}
+\index{Distributed Version Control}\subsection{Distributed Version Control}
 
 Version control systems usually fit into one of two categories; centralised, or distributed.  Git is a distributed version control system.  It has been designed to run almost everything at a local level.  This will become much more clear when we talk about other features of Git a little later on, but for now just understand that Git isn't tied to a centralised repository.  This is super powerful.  No Really!
 
-\subsection{Branching}
+\index{Branching}\subsection{Branching}
 
 Most version control systems offer branching as part of their default feature set.  Branching allows developers to create in essence a clone of their repository and mess around with it, safe in the knowledge that they can switch back to the original whenever they need to.  This allows developers the freedom to experiment with all manner of things without being afraid of affecting the original/clean code base.
 
@@ -70,16 +70,16 @@ Git implements branching in a special way.  Most older version control systems i
 
 The implementation of branching in Git is fast.  Due to the fact that repositories are stored locally, the speed of creating a local branch is limited only by the speed of the disks on a local machine.
 
-\subsection{Staging}
+\index{Staging}\subsection{Staging}
 
 Git deals with commits differently to most other version control systems by introducing the staging area.  The staging area allows developers to prepare their commits before they are written to the repository.  Why is this useful or any different to any other version control system.  In Git you can make a change to a file, add it to the staging area, and then continue to make changes to that file, even though you have not yet actually committed anything.
 It should be noted that it's not absolutely necessary to use the staging area, but it is there for developers wishing to utilise it.
 
-\subsection{Workflow}
+\index{workflow}\subsection{Workflow}
 
 Due to the way that Git has been designed, it's possible to use it in practically any work flow you can think of.  Three of the most common workflows are explained below, and Git can work in any of these, making it one of the more versatile systems out there.
 
-\subsubsection{Centralised Workflow}
+\index{workflow!Centralised}\subsubsection{Centralised Workflow}
 
 In a centralised workflow, a single shared repository is used.  Multiple developers pull changes from here into local working copies, work on the local version, and then push it back up to the central location.  
 
@@ -93,7 +93,7 @@ Using the centralised model for the workflow, each developer has the same level 
 	\caption{Centralised Workflow}
 \end{figure}
 
-\subsubsection{Integration Manager Workflow}
+\index{workflow!Integration Manager}\subsubsection{Integration Manager Workflow}
 The integration manager workflow is similar to the centralised workflow because there is still a \textbf{blessed} repository which everyone uses as a reference.  The difference here is that there is only one person who has the rights to push changes to the \textbf{blessed} repository.  This person is referred to as the Integration Manager.  
 
 This workflow is handled exceedingly well by Git.  Developers will work on their repositories locally and then once they are happy, will push their changes to a location where the Integration Manager can see them.  The Integration Manager will then review the changes that the developers have made and will merge them into their own local repository.  Once they are happy that everything is working well, the Integration Manager will push their changes to the blessed repository so that all the other developers can access the changes.
@@ -104,7 +104,7 @@ This workflow is handled exceedingly well by Git.  Developers will work on their
 	\caption{Integration Manager Workflow}
 \end{figure}
 
-\subsubsection{Dictator and Lieutenant Workflow}
+\index{workflow!Dictator and Lieutenant}\subsubsection{Dictator and Lieutenant Workflow}
 
 The dictator and lieutenant workflow is practically an extension to the integration manager workflow.  It is more suited to larger teams, where modules or sections of the code can be assigned to a \textbf{Lieutenant} who is responsible for blessing all of the changes to that particular section.
 
@@ -116,13 +116,13 @@ Once the Lieutenants are happy with their code, they make it available to the Di
 	\caption{Dictator and Lieutenant Workflow}
 \end{figure}
 
-\begin{callout}{Terminology}{Blessed}
+\begin{callout}{Terminology}{Blessed}\index{blessed (repository)}
 A blessed, or canonical, repository is one which has the approval of the managers of the project.  The blessed repository is supposed to be the de facto standard where all other clones are made from.  If there is one place where code should be correct, it is the blessed repository.  If you are hosting the project in a public place, the blessed repository will usually be the one that is made available to people as a stable point for developing from.
 \end{callout}
 
 The main thing to remember, is that Git can utilise any of these workflows.  This makes it a very flexible system, allowing you to work in whichever way you decide.
 
-\subsection{Offline Committing}
+\index{offline commiting}\subsection{Offline Committing}
 
 Perhaps one of the most useful and undervalued features of distributed version control systems is that of offline committing.  It may be undervalued because not all version control systems have it.  Offline committing is the ability to continue adding and committing files to the repository without being connected to a centralised repository.  
 
@@ -130,21 +130,21 @@ When travelling or just simply when out of the office, developers and integrator
 
 When returning to the office, the developers simply push their changes to their ``public'' space, be it local or to a blessed location, and all of the commits that have been made whilst they are away are then made available to the rest of the team, including all history and snapshots.
 
-\subsection{Developer Interaction}
+\index{developer interaction}\subsection{Developer Interaction}
 
 One factor to consider when choosing a version control system, is that of developer interaction.  By this we are referring to the way in which developers use and interact with the version control system itself.  There are four main methods for VCS interaction
 
-\subsubsection{Graphical User Interface Client (GUI)}
+\index{user interface}\index{user interface!GUI}\subsubsection{Graphical User Interface Client (GUI)}
 
 A graphical user interface allows the developer, or user, to physically manipulate the repository using a mouse pointer and a graphically rich environment.  A GUI client will typically consist of separate application which is run when a user wants to make changes to a repository such as adding files or committing changes.  
 
 Some developers prefer having a separate client with which to interact with their repository, whilst others prefer to have things integrated a little more.
 
-\subsubsection{Shell Extension Integration}
+\index{user interface!shell extension}\subsubsection{Shell Extension Integration}
 
 Shell integration allows the user to interact with their repository using the graphical environment that they would usually use for manipulating files and performing routine directory maintenance.  One of the most common Shell Extensions for Git is the TortoiseGit interface which integrates itself into Windows Explorer, allowing a user to right click on an entity whilst inside a git working tree, and be presented with a context sensitive menu for VCS operations.
 
-\subsubsection{Command Line Interface (CLI)}
+\index{user interface!command line}\subsubsection{Command Line Interface (CLI)}
 
 The command line interface is favour by many developers as they can script with it and can see exactly what is going on, often in much more detail that with a GUI.  The CLI gives total control over the product and it is worth noting that almost all version control systems start life as command line driven interfaces.  Why is this so?  It can take a lot of time and effort to put all the options and nuances of a system into a GUI.  The CLI will almost always be the most powerful of all tools, especially where version control systems are concerned.
 
@@ -174,7 +174,7 @@ Version control is not a replacement for workflow.  It is not intended to make e
 
 \section{Day 5 - ``Working like a team''}
 
-\subsection{Team Organisation}
+\index{team organisation}\subsection{Team Organisation}
 
 Now that we have the basics dealt with, let's take a little look at how John arranges his team, and see whether version control is going to work for them.  It is important that the team understands how the model should work, what they are expected to do and what level of access they have.  Most of the time people will get more frustrated about not know what they should or shouldn't be doing, rather than that they do or don't have access to certain things.
 

@@ -65,15 +65,15 @@ Initialized empty Git repository in /home/john/coderepo/.git/
 john@satsuki:~/coderepo$
 \end{Verbatim}
 
-What we've done here is create a new directory called coderepo, moved into it, and then run the git init command.  The result of this command is a new directory in the coderepo directory called .git.  This directory will hold a local copy of our entire repository.  This will allow us to create branches, merge changes, rebase things and ultimately push our changes to somewhere else.
+What we've done here is create a new directory called coderepo, moved into it, and then run the \indexgit{init} command.  The result of this command is a new directory in the coderepo directory called \texttt{.git}.  This directory will hold a local copy of our entire repository.  This will allow us to create branches, merge changes, rebase things and ultimately push our changes to somewhere else.
 
 Something that is crucial to the running of a repository, whether you are an administrator of Git, or a developer who is using it, is an understanding of how Git works.  It is fine to jump in and play with the repository and test the water, but before committing to using Git in a production environment, you should understand what Git actually does in the background in some detail. 
 
 During the writing of this book several people have told me that Git is one of the only version control systems where a good understanding of how the underlying system works is not just highly recommended, but bordering on essential. 
 
-Let us take a few minutes to talk about how Git works internally and how the data is actually stored.  Git doesn't store changes to files, but actual snapshots of files at specific points in time.  It refers to these by running an SHA-1 hash against the file.  By doing this, it is easy to Git to detect if a file has changed.  If the SHA-1 hash of a file changes, then the file must have been modified. 
+Let us take a few minutes to talk about how Git works internally and how the data is actually stored.  Git doesn't store changes to files, but actual snapshots of files at specific points in time.  It refers to these by running an \index{SHA-1}SHA-1 hash against the file.  By doing this, it is easy to Git to detect if a file has changed.  If the SHA-1 hash of a file changes, then the file must have been modified. 
 
-When a commit is made to the repository, Git stores a few things.  A commit object is created.  This contains information about who made the commit, the parent of the commit and points to a tree object.  The tree object describes what the repository looked like at the time of the commit.  In other words the tree object, tells Git what files were in there.  Lastly, Git stores the files that were in the repository under their SHA-1 names in the objects directory.  Of course Git is super clever here because if you have exactly the same file in multiple commits, the SHA-1 hash of that file doesn't change and therefore Git only stores one copy of the file to save space.
+When a commit is made to the repository, Git stores a few things.  A \index{commit}commit object is created.  This contains information about who made the commit, the parent of the commit and points to a tree object.  The tree object describes what the repository looked like at the time of the commit.  In other words the tree object, tells Git what files were in there.  Lastly, Git stores the files that were in the repository under their SHA-1 names in the objects directory.  Of course Git is super clever here because if you have exactly the same file in multiple commits, the SHA-1 hash of that file doesn't change and therefore Git only stores one copy of the file to save space.
 
 The commit object is also referred to by an SHA-1 hash.  This is different to many other version control systems which use either a number that refers to the repository or a per file version number.  Getting used to seeing 40 character SHA-1 hashes can take a little time.  Saying "I need the commit referred to as  bf81617d6417d9380e06785f8ed23b247bea8f6d," is certainly not as easy as saying you need revision 6.  However, Git handles these hashes well, and you can reference a commit using a few of the characters from the beginning, as long as those characters uniquely refer to that commit, i.e., as long as your choice isn't in any way ambiguous.
 
@@ -92,7 +92,7 @@ john@satsuki:~/coderepo$ git commit -m 'My First Ever Commit'
 john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
-What we have done here, is to create a new blank file and add it into the repository using Git's add command.  Then we have committed it into the repository.  Let's make a few changes to our working copy and see what the result is.  First we are going to add another two new files, then we are going to make changes to our original file and finally we are going to run git status to see what Git has to say about our changes.
+What we have done here, is to create a new blank file and add it into the repository using the \indexgit{add} command.  Then we have committed it into the repository using the \indexgit{commit} command.  Let's make a few changes to our working copy and see what the result is.  First we are going to add another two new files, then we are going to make changes to our original file and finally we are going to run git status to see what Git has to say about our changes.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ echo "Change1" > my_first_committed_file
@@ -118,7 +118,7 @@ no changes added to commit (use "git add" and/or "git
 john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
-So we can see that Git is reporting that there are changes to our first committed file, and that our second and third files are \textbf{untracked}.  Untracked files are ones which Git detects as being present in the working directory, but which haven't yet been added and there for upon running a commit, these files will not be added to the repository.  Notice that if we tried to run a commit now, nothing would actually be committed to the repository.  Even though there are changes to to my\_first\_committed\_file, we have not asked Git to include these.  So, let's go ahead and do that, and at the same time we'll make a few changes to my\_second\_committed\_file, and add those too.
+So we can see that \indexgit{status} is reporting that there are changes to our first committed file, and that our second and third files are \textbf{untracked}.  \index{untracked!files}Untracked files are ones which Git detects as being present in the working directory, but which haven't yet been added and there for upon running a commit, these files will not be added to the repository.  Notice that if we tried to run a commit now, nothing would actually be committed to the repository.  Even though there are changes to to my\_first\_committed\_file, we have not asked Git to include these.  So, let's go ahead and do that, and at the same time we'll make a few changes to my\_second\_committed\_file, and add those too.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git add my_first_committed_file
@@ -140,7 +140,7 @@ john@satsuki:~/coderepo$ git status
 john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
-Now we can see that one of the sections has changed to "Changes to be committed".  So this means that Git has recognised and remembered that we are expecting these files to be committed when we next run a git commit.  
+Now we can see that one of the sections has changed to "Changes to be committed".  So this means that Git has recognised and remembered that we are expecting these files to be committed when we next run a \texttt{git commit}.  
 
 \subsection{Committing the Uncommitted}
 
@@ -183,7 +183,7 @@ john@satsuki:~/coderepo$ git status
 john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
-How interesting!  We now have three sections and one of our files appears twice under both Changes to be committed and Changed but not updated.  What does this mean?  If you remember back, we spoke about a staging area.  This is one area in which Git differs to many version control systems.  When you \textbf{add} a file into the repository, Git will actually make a copy of that file and move it into the staging area.  If you then go ahead and change that file, you would need to run another git add in order for Git to copy your changed file into the staging area.  The most important thing to remember is that Git will only ever commit what is in the staging area.
+How interesting!  We now have three sections and one of our files appears twice under both Changes to be committed and Changed but not updated.  What does this mean?  If you remember back, we spoke about a \index{staging}staging area.  This is one area in which Git differs to many version control systems.  When you \textbf{add} a file into the repository, Git will actually make a copy of that file and move it into the staging area.  If you then go ahead and change that file, you would need to run another git add in order for Git to copy your changed file into the staging area.  The most important thing to remember is that Git will only ever commit what is in the staging area.
 
 So, if we go ahead and run our commit now, we will only have the changes marked in Changes to be committed appearing in our repository.  
 
@@ -294,7 +294,7 @@ nothing added to commit but untracked files present (use
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-We have discarded the file which was residing in the index.  This is very important to note.  We are not moving the file from the index back into our working directory, we are literally just deleting the file from the index.  Our working copy remains unaffected.  We could run the git reset command without appending a file.  If we did this, all the files in the index would have been discarded.  
+We have discarded the file which was residing in the index.  This is very important to note.  We are not moving the file from the index back into our working directory, we are literally just deleting the file from the index.  Our working copy remains unaffected.  We could run the \indexgit{reset} command without appending a file.  If we did this, all the files in the index would have been discarded.  
 
 \begin{trenches}
 ``So, I think we are all agreed, I'll keep a version of the repository under Git version control.  Until everyone else feels comfortable with some of the more advanced features.''  John looked around the room for any disagreements but there were none.
@@ -306,7 +306,7 @@ We have discarded the file which was residing in the index.  This is very import
 Everyone nodded in agreement.
 \end{trenches}
 
-\begin{callout}{Knowledge}{How do we change the commit message editor?}
+\begin{callout}{Knowledge}{How do we change the commit message editor?}\index{changing!commit editor}
 We spoke earlier about the configuration file and how it stores information about our Git instance.  Git can use any text editor you require, even a graphical one, though the need rarely arises.  As mentioned earlier, Git has a preference lever when talking about configuration.  First and foremost it will look in the repositories own 'config' file in the .git folder.  Then, it will look in the users \texttt{\textasciitilde/.gitconfig} file.  Finally, Git will look in your distributions own global folder.  
 
 If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;
@@ -324,7 +324,7 @@ git config --global core.editor "nano"
 It is worth noting that you can also use the \$EDITOR environment variable to accomplish the same thing.  Many people use this in preference to the modifying the Git configuration simply because many other programs honour this setting.
 \end{callout}
 
-Now we know how to add files into the repository.  The question is, what do we do if we need to remove a file, or even rename it.  Well, git has some commands to help with that.  \texttt{git rm} and \texttt{git mv} delete and move files respectively.  Usually when you want to remove files from the repository, or move them, this is how you will handle it, but what if you have already deleted a tracked file manually?  Well, you have two options.  You could run \texttt{git commit -a}, but remember this will commit all changes to tracked files.  You could also run a \texttt{git rm <filename>} with the name of the file you have just deleted.  Git will then push that change into the staging area ready for commit.  The same applies to moving a file
+\index{files!moving}\index{files!deleting}\index{files!adding}Now we know how to add files into the repository.  The question is, what do we do if we need to remove a file, or even rename it.  Well, git has some commands to help with that.  \indexgit{rm} and \indexgit{mv} delete and move files respectively.  Usually when you want to remove files from the repository, or move them, this is how you will handle it, but what if you have already deleted a tracked file manually?  Well, you have two options.  You could run \texttt{git commit -a}, but remember this will commit all changes to tracked files.  You could also run a \texttt{git rm <filename>} with the name of the file you have just deleted.  Git will then push that change into the staging area ready for commit.  The same applies to moving a file
 
 However, it is worth noting something in the way that Git handles renames.  Git does not track renames explicitly.  This means that by running the \texttt{git mv <source> <dest>} command, you are essentially running a Linux \texttt{mv} command, followed by the \texttt{git rm} on the source file and \texttt{git add} on the destination file.  Running the \texttt{git mv} command is a shorthand way of doing just that.  It is worth playing with this to ensure that you understand what is happening.  As an exercise, inspect the repository after each command so that you understand at what point Git recognises your actions as a rename.
 
@@ -352,7 +352,7 @@ For Tamagoyaki Inc, their plan to implement version control was far too aggressi
 
 \subsection{Terminology}
 \begin{itemize}
-\item\textbf{Branch} - A way of working on the same set of code in parallel without modifications overlapping
+\index{Terminology!Branch}\item\textbf{Branch} - A way of working on the same set of code in parallel without modifications overlapping
 
-\item\textbf{Commit} - A group of objects and a tree in a Git repository
+\index{Terminology!Commit}\item\textbf{Commit} - A group of objects and a tree in a Git repository
 \end{itemize}
