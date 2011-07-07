@@ -369,3 +369,38 @@ Martha ruffled Simon's hair.  She liked his youthful enthusiasm.  ``How about we
 \subsection{Using rebase with branches}
 
 Up until now we have used \texttt{git rebase} to work on our current branch, modifying a few things here and there.  This is actually one of the simplest things that rebase can perform, and as hinted to in our workflow design, we can actually use \texttt{git rebase} to perform something called \emph{Continuous Integration}.
+
+As we stated before, one of the most interesting uses of using \texttt{git rebase} is to update your branch with changes from another, whilst keeping your development intact.  The great part about it is that there is no messy merging, your commits appear at the end of the tree which makes things nice and tidy.  Let us go back to our example and add some more commits to the \textbf{master} branch.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git checkout master
+Switched to branch 'master'
+john@satsuki:~/coderepo$ touch cont_dev
+john@satsuki:~/coderepo$ echo "New info" >> cont_dev 
+john@satsuki:~/coderepo$ git add cont_dev
+john@satsuki:~/coderepo$ git commit -a -m 'Start new dev'
+[master 1968324] Start new dev
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 cont_dev
+john@satsuki:~/coderepo$ echo "A cool function" >> cont_dev 
+john@satsuki:~/coderepo$ git commit -a -m 'Finished new dev'
+[master f8d5100] Finished new dev
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@satsuki:~/coderepo$ git logg -n5
+* f8d5100 (HEAD, master) Finished new dev
+* 1968324 Start new dev
+| * 4d91aab (wonderful) Updated another file again
+| * 1ffe37f Updated another file with 2 edits
+|/  
+* 1c3206a Added a new file
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+You may have noticed that we seem to have introduced a new command here called \texttt{git logg}.  The command seems to do exactly the same as our \texttt{git log --graph --pretty=oneline --all --abbrev-commit --decorate} command.  For more information about what we have done here, see the callout called \textbf{An alias in our midst}.
+
+\begin{callout}{Information}{An alias in our midst}
+Some times, you will get tired of typing the same old long string of parameters into Git.  Though some people tend to frown upon using them, aliases can significantly increase your productivity, by allowing you to shortcut annoyingly long commands.  You may have noticed our \texttt{git log --graph --pretty=oneline --all --abbrev-commit --decorate} command from before.  It is awfully long.  Let us create an alias called \texttt{git logg}
+
+THIS IS NOT FINISHED
+
+\end{callout}
