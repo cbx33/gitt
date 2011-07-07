@@ -4,6 +4,12 @@
 \subsection{How does merging work?}
 
 To start with, we need to define which merging strategy we are talking about.  In Git there are multiple ways to instruct a merge to take place.  Below is a brief list of the options that you can supply to the \texttt{git merge} command along with a brief description of how each one affects the merge process.  We will explain the details a little more further on.
+\index{merging!types}
+\index{merging!types!resolve}
+\index{merging!types!recursive}
+\index{merging!types!octopus}
+\index{merging!types!ours}
+\index{merging!types!subtree}
 
 \begin{itemize}
 \item\textbf{resolve} - A two headed merge strategy using a 3-way merge algorithm.  This is used by default in Git.
@@ -23,7 +29,7 @@ Now that we are aware of the different options available to us, let us discuss w
 
 For arguments sake, let us say that we were on the \textbf{wonderful} branch, and we wanted to merge the \textbf{zaney} branch into it.  Using a standard 3-way merge algorithm, this would mean taking our current branch, which we will call \textbf{A}, the \textbf{zaney} branch, which we will call \textbf{B} and a parent which we will \textbf{C}.  Why do we need this parent?  What is it used for?
 
-In order to merge changes from a specific file together, we need to know exactly how that file has changed over time.  In order to know that, we need to have a common starting point.  By that we mean that we need to have a state in both of the branches history, where \textbf{A} and \textbf{B} were the same.  In a version control system, this is most easily achieved by finding a commit that is common to the history of both branches.  This commit is called the \emph{Best Common Ancestor}.
+\index{Best Common Ancestor}In order to merge changes from a specific file together, we need to know exactly how that file has changed over time.  In order to know that, we need to have a common starting point.  By that we mean that we need to have a state in both of the branches history, where \textbf{A} and \textbf{B} were the same.  In a version control system, this is most easily achieved by finding a commit that is common to the history of both branches.  This commit is called the \emph{Best Common Ancestor}.
 
 Usually, when developing software, the code tree will be branched at various points along the way.  Sometimes we may need to merge these branches together, or merge these branches back into the master branch.  Which ever way we do it, we will need to find a common ancestor.  Figure 2, demonstrates a couple of possible merge proposals, and one of their common ancestors.
 
@@ -33,7 +39,7 @@ Usually, when developing software, the code tree will be branched at various poi
 \caption{Finding the \emph{Best Common Ancestor}}
 \end{figure}
 
-As you can see from the second example, branch \textbf{B} was created from a commit above the \emph{Common Ancestor}, but the \emph{Common Ancestor} remains the same.  
+\index{Common Ancestor}As you can see from the second example, branch \textbf{B} was created from a commit above the \emph{Common Ancestor}, but the \emph{Common Ancestor} remains the same.  
 
 Let us go back to our example above.  We are attempting to merge in \textbf{zaney} to the \textbf{wonderful} branch.  We need to find the \textbf{C} in our equation.  To do this we could pour over Figure 1.  This should yield the result to be commit \textbf{9710177}.  Is there are way we can ask Git to do the same thing?  The following output introduces a new command that is used to find the \emph{Best Common Ancestor} for a given merge proposal.
 
@@ -51,7 +57,7 @@ Added another file
 john@satsuki:~/coderepo-af4$ 
 \end{Verbatim}
 
-In our example, \texttt{git merge-base} uses two parameters to speficy the two heads that we wish to merge.  We can see that the commit that Git suggests as the \emph{Best Common Ancestor} is what we suggested above, \textbf{9710177}.  We have reused our \texttt{git cat-file} command to prove that the commit is the one we suggested, as you can see, the commit messages match.
+In our example, \indexgit{merge-base} uses two parameters to speficy the two heads that we wish to merge.  We can see that the commit that Git suggests as the \emph{Best Common Ancestor} is what we suggested above, \textbf{9710177}.  We have reused our \texttt{git cat-file} command to prove that the commit is the one we suggested, as you can see, the commit messages match.
 
 This explains how a simple merge takes place, Git will find the common ancestor, and try to merge in the differences to produce a merged version.  If the merge cannot take place, then as shown in \emph{Week 4}, Git will put all the changes in the file, label them, and then raise a conflict for the user to resolve.  
 

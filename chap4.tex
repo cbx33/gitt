@@ -42,7 +42,7 @@ john@satsuki:~/coderepo$ git branch
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-From looking at the output, it would appear that our \texttt{git branch wacky} command did not accomplish a whole lot.  Running the \texttt{git branch} command will give us a list of all branches in the repository.  You may have noticed the presence of the \texttt{*} in front of the word \texttt{master}.  This is telling us that we are on the branch called \textbf{master}.  Hang on though, did we not just create a new branch called \textbf{wacky}?  
+From looking at the output, it would appear that our \texttt{git branch wacky} command did not accomplish a whole lot.  Running the \indexgit{branch} command will give us a list of all branches in the repository.  You may have noticed the presence of the \texttt{*} in front of the word \texttt{master}.  This is telling us that we are on the branch called \textbf{master}.  Hang on though, did we not just create a new branch called \textbf{wacky}?  
 
 Well yes we did.  However we have not yet switched to it.  To do this, we use our good friend \texttt{git checkout}.  This will change the working copy to reflect the most recent commit in that branch, and will reset our HEAD accordingly, so that it points to this latest commit
 
@@ -110,7 +110,7 @@ john@satsuki:~/coderepo$ git commit -m 'Added two new files'
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-So we have made two new commits to the repository under our new branch.  If we run a Linux \texttt{ls} command to see the files which are in the working tree, we can see that our working copy has indeed altered.  We will also use our \texttt{git log} tool to see what the latest commit is.
+\index{Linux commands!ls}So we have made two new commits to the repository under our new branch.  If we run a Linux \texttt{ls} command to see the files which are in the working tree, we can see that our working copy has indeed altered.  We will also use our \texttt{git log} tool to see what the latest commit is.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ ls
@@ -149,7 +149,7 @@ Comparing that to our previous \texttt{ls} command, we can see that this is exac
 \caption{Our first branch}
 \end{figure}
 
-So there are really two pointers in our repository at the moment, from a branch point of view.  One of them points to commit \textbf{a022d4d\ldots} and is called \textbf master.  The other is called \textbf{wacky} and points to \textbf{55fb69f
+\index{pointers}So there are really two pointers in our repository at the moment, from a branch point of view.  One of them points to commit \textbf{a022d4d\ldots} and is called \textbf master.  The other is called \textbf{wacky} and points to \textbf{55fb69f
 \ldots}.  At this point you may be thinking that branches are pretty much the same thing as tags.  Well, they are except for one important fact.  We are going to use our \texttt{git branch} command, with a new parameter, to show us the difference.  Take a look at the output of the following operations.  We have pruned the output of the \texttt{git show} command for brevity.
 
 \begin{Verbatim}
@@ -197,7 +197,7 @@ Now we know about branches in general, we should really learn about how to merge
 
 Of course we could do this the old fashioned way.  We could switch into our \textbf{wacky} branch, do a little development, copy the files somewhere else, switch to our \textbf{master} branch, and paste the files over the top.  Now, this is probably the simplest way of merging possible.  In actual fact, this is not really merging at all.  However one thing that would be lost is the history of how that branch has developed over time.  Sometimes this can be crucial for knowing why certain things were changed during the development process.
 
-Let us take a litle look at the command output of a simple merge, explain it a little, and then look at a diagrammatic representation.
+\index{merging}Let us take a litle look at the command output of a simple merge, explain it a little, and then look at a diagrammatic representation.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git branch
@@ -216,6 +216,7 @@ john@satsuki:~/coderepo$
 
 Now we can run the actual merge.
 
+\index{merging!fast-forward}
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git merge wacky 
 Updating a022d4d..9710177
@@ -234,7 +235,7 @@ Fast-forward
 john@satsuki:~/coderepo$ 
 \end{Verbatim} 
 
-We can see that the first line after our command shows us which commit \textbf{master} is the latest common ancestor to both branches and then which commit is the last in our new branch.  In this case we are merging from \textbf{a022d4d} to \textbf{9710177}.  The line below this is even more important.  This type of merge is called a \emph{fast-forward} merge.  We have not made any changes to our \textbf{master} branch since we began developing and subsequently, after finishing our development work, we literally only require fast-forwarding the \textbf{master} branch to the same point in time as our \textbf{wacky} one.  Beneath this text, we see more information about just what is included in the merge.  
+We can see that the first line after our \indexgit{merge} command shows us which commit \textbf{master} is the latest common ancestor to both branches and then which commit is the last in our new branch.  In this case we are merging from \textbf{a022d4d} to \textbf{9710177}.  The line below this is even more important.  This type of merge is called a \emph{fast-forward} merge.  We have not made any changes to our \textbf{master} branch since we began developing and subsequently, after finishing our development work, we literally only require fast-forwarding the \textbf{master} branch to the same point in time as our \textbf{wacky} one.  Beneath this text, we see more information about just what is included in the merge.  
 
 We are going to perform a quick check, to see that we are in fact on the master branch and that the latest log message is the one from the point we last left the \textbf{wacky} branch.
 
@@ -259,7 +260,7 @@ Now let us take a quick look at a diagram to see how this change actually affect
 \caption{Our first merge}
 \end{figure}
 
-This picture should make it clear that the fundamental difference between tags and branches is that whilst the pointer to a branch moves with each commit to that branch, a tag points to a single commit only and never changes, unless forcibly so by the user.
+\index{tagging!difference to branch}\index{branching!difference to tags}This picture should make it clear that the fundamental difference between tags and branches is that whilst the pointer to a branch moves with each commit to that branch, a tag points to a single commit only and never changes, unless forcibly so by the user.
 
 There are a number of tricks that we can employ when using branches.  They are possible because of the super flexible way in which branches are implemented in Git.  As a branch is literally a pointer to a commit, certain operations are available to a user that other systems just can not implement.  However, we should point something out at this point.  Even though we have not yet made any of our repositories public or available to other people, something should always be in the back of your mind.  Allow a few minutes to read the next few paragraphs below.
 
@@ -287,7 +288,7 @@ Rob pointed at Simon's screen.  ``You can just create a new branch now and move 
 
 It is one hundred percent true.  How many times have you been working on something and wished that you could move all the changes you had made to a new safe environment to protect your already good, working code.  Well, the new safe environment we spoke of sounds suspiciously like a branch.  In Git, any changes you have in your working copy can be taken into a new branch by issuing one command.  It is important to note that these changes can also be taken into an existing branch, but you may run into problems if those changes conflict with items already in that branch.
 
-For now let us see how we can take our working copy changes into a new branch to continue development of some wonderful new feature.  We are going to start by making some changes to our newfiles.
+\index{branching}For now let us see how we can take our working copy changes into a new branch to continue development of some wonderful new feature.  We are going to start by making some changes to our newfiles.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ echo "and some more changes" >> newfile1
@@ -352,7 +353,7 @@ Simon drew in his breath deeply, ``Well, I created a branch, started working awa
 
 This wouldn't work in all situations, but then there are other techniques described later in the book to deal with more special cases.  In this scenario we have created a branch, forgotten to switch into it, and carried on committing as if we were in our new branch.  At first glance it may seem as if we are stuck.  Once we have committed, we can't undo those commits right?  Well, that's not entirely accurate.  
 
-We actually have two ways of clearing up this particular situation.  The first of these is to use \texttt{git revert} to undo the changes of each commit.  Whilst this will work, we have two problems, a) we do not know how to use the \texttt{git revert} tool yet, and b) we can actually handle this situation much more cleanly.  We are going to make a new branch, make a few commits and then look at a diagram of our recent work to see how we can work things out.
+We actually have two ways of clearing up this particular situation.  The first of these is to use \indexgit{revert} to undo the changes of each commit.  Whilst this will work, we have two problems, a) we do not know how to use the \texttt{git revert} tool yet, and b) we can actually handle this situation much more cleanly.  We are going to make a new branch, make a few commits and then look at a diagram of our recent work to see how we can work things out.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git checkout master
@@ -419,7 +420,7 @@ HEAD is now at 9710177 Added another file
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-As you can see, we are told that the HEAD of our master branch is now at commit \textbf{9710177}.  We have successfully rewound our \textbf{master} branch to a previous state.  The \texttt{--hard} parameter reset the index and the working tree to be at the state of the commit we tell it to.  It disregards all working copy and staged modifications, so use it with care.
+As you can see, we are told that the HEAD of our master branch is now at commit \textbf{9710177}.  \index{rewinding}We have successfully rewound our \textbf{master} branch to a previous state.  The \texttt{--hard} parameter reset the index and the working tree to be at the state of the commit we tell it to.  It disregards all working copy and staged modifications, so use it with care.
 
 The \texttt{git reset} command does not only work for rewinding back in time.  It can also be used to move a branch forward in time.  As an example of this, we used a fast-forward merge to move our \textbf{zaney} branch forward to be inline with master.  We could just have easily used \texttt{git reset --hard 7cc32db} from within the zaney branch, to bring it to the same point as the master.  In fact, though it looks scary, we could also have used \texttt{git reset --hard master} to reset the \textbf{zaney} branch to be at the same point as \textbf{master}.  Saves typing out those horrid commits does it not?
 
@@ -443,14 +444,14 @@ john@satsuki:~/coderepo$
 
 \end{Verbatim}
 
-The \texttt{--graph} parameter, tells Git to draw a graph down the left hand column.  The \texttt{--pretty=oneline} parameter reduces the commit details to one line, else we see the entire log message of the commit.  \texttt{--all} shows all branches.  The \texttt{abbrev-commit} in the command tells Git to abbreviate the commit IDs to a sensible length.  Finally, \texttt{--decorate} shows us the tag and branch references.  Hopefully if you compare this tree to the diagram earlier, you will see that the tree is actually completely in order.
+\index{graphing}The \texttt{--graph} parameter, tells Git to draw a graph down the left hand column.  The \texttt{--pretty=oneline} parameter reduces the commit details to one line, else we see the entire log message of the commit.  \texttt{--all} shows all branches.  The \texttt{abbrev-commit} in the command tells Git to abbreviate the commit IDs to a sensible length.  Finally, \texttt{--decorate} shows us the tag and branch references.  Hopefully if you compare this tree to the diagram earlier, you will see that the tree is actually completely in order.
 
 Be aware that during this work we have changed the history of at least one of our branches.  Had we pushed our changes to a public server, which is something that will be discussed next week, we would have to force these changes to be accepted at the server end.  Git knows we are trying to change a past that may have been viewed by others and will warn us accordingly.
 
 \section{Day 4 - ``I pressed delete...''}
 \subsection{Handling the pressure}
 
-We have had some awesome fun working with branches, and hopefully you can see how utterly powerful Git is.  Sometimes though we can get ourselves into trouble and it is here that Git can also come to our rescue.  Let us learn how to delete a branch.  We are going to delete our \textbf{wacky} branch now as we have already merged it and no longer require it.
+\index{branching!deleting}\index{branching!recovering}We have had some awesome fun working with branches, and hopefully you can see how utterly powerful Git is.  Sometimes though we can get ourselves into trouble and it is here that Git can also come to our rescue.  Let us learn how to delete a branch.  We are going to delete our \textbf{wacky} branch now as we have already merged it and no longer require it.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git branch -d zaney 
@@ -498,7 +499,7 @@ As you can see, when we deleted \textbf{wacky} we were not warned about unmerged
 \section{Day 5 - ``Conflicting information''}
 \subsection{What to do when it all goes wrong}
 
-The team have been playing with branches for a few days now and are beginning to settle into the idea of branching often.  As you can see, in Git, a branch is a really simple device for allowing experimentation and development.  As the implementation of branches is so simple, it is also really fast to switch between branches.  If you have been keeping up with the \emph{After Hours} sections, you can hopefully see that when switching branches, Git only needs to alter what is different between one working copy and another.
+\index{conflicts}The team have been playing with branches for a few days now and are beginning to settle into the idea of branching often.  As you can see, in Git, a branch is a really simple device for allowing experimentation and development.  As the implementation of branches is so simple, it is also really fast to switch between branches.  If you have been keeping up with the \emph{After Hours} sections, you can hopefully see that when switching branches, Git only needs to alter what is different between one working copy and another.
 
 Let us see what new issues the team runs into during Week 4.
 
@@ -564,7 +565,7 @@ john@satsuki:~/coderepo$
 
 Notice the line \texttt{Merge: 4ac9201 cfbecab}, which simply tells us that this is a special type of commit, a merge commit.  When we previously performed a merge, the branch we were merging back into had not changed since we branched off and did our development work.  If you remember, we called this a \emph{fast-forward} merge, simply because we moved our \emph{destination} branch forwards to meet the tip of the development branch.
 
-This time things are a little different.  During out development time on \textbf{wonderful}, something changed on \textbf{master}.  We did not make many alterations, but just the fact that we made some changed the way the merge was performed.  In fact, we can see this if we look at the first line after the merge.  Instead of indicating a \emph{fast-forward} merge, it now states that the merge was \emph{recursive}.  If you are interested in the different types of merge algorithms, you should read the \emph{After Hours} section for this chapter.
+\index{merging!non fast-forward}This time things are a little different.  During out development time on \textbf{wonderful}, something changed on \textbf{master}.  We did not make many alterations, but just the fact that we made some changed the way the merge was performed.  In fact, we can see this if we look at the first line after the merge.  Instead of indicating a \emph{fast-forward} merge, it now states that the merge was \emph{recursive}.  If you are interested in the different types of merge algorithms, you should read the \emph{After Hours} section for this chapter.
 
 So now the history of this latest commit actually relies on two previous commits.  The changes that have been introduced in these commits are merged together to form a combined tree of files.  This is the snapshot that is represented in commit \textbf{ba0bfc}.
 
@@ -596,6 +597,7 @@ Oh dear!  That probably did not go as well as we had hoped.  We have two conflic
 
 In this case we have a conflict because the files have changed in both sides of the merge, since they diverged.  Rephrasing this slightly: Since the point when we created the branch \textbf{zaney}, at commit \textbf{55fb69}, both the \textbf{master} branch and the \textbf{zaney} branch have both modified the same files in the same places.  Right now, our merge is paused.  For now, let us abort the merge so that we can take a closer look at what happened.
 
+\index{merging!resetting}
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git reset --merge
 john@satsuki:~/coderepo$ 
