@@ -49,7 +49,7 @@ index 3545c1d..40efcce 100644
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-Now, we could just do \texttt{git commit -a} and be done with it, but what if we really wanted to split this information up into four commits?  We will introduce a new parameter to our \texttt{git add} tool from before.  We are going to use the \texttt{git add -p} or \texttt{git add --patch}.  This will allow us to interactively edit the hunks before they are committed.  To begin with, let us run \texttt{git add -p} and see what it is we need to do.
+\index{hunk editing (cli)}Now, we could just do \texttt{git commit -a} and be done with it, but what if we really wanted to split this information up into four commits?  We will introduce a new parameter to our \texttt{git add} tool from before.  We are going to use the \texttt{git add -p} or \texttt{git add --patch}.  This will allow us to interactively edit the hunks before they are committed.  To begin with, let us run \texttt{git add -p} and see what it is we need to do.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git add -p
@@ -262,7 +262,7 @@ Date:   Wed Apr 13 23:55:32 2011 +0100
     Added first line
 \end{Verbatim}
 
-Next we are going to see how to perform exactly the same procedure using \texttt{git gui}.  For a start, we are going to reset our branch HEAD and our index back to their state before we made the last four commits, however we are going to leave the working copy files in the state they were after these last four commits.  This is called a \textbf{mixed} reset, as it modifies the staging area and the HEAD, but does not touch the working files.
+\index{hunk editing(gui)}Next we are going to see how to perform exactly the same procedure using \texttt{git gui}.  For a start, we are going to reset our branch HEAD and our index back to their state before we made the last four commits, however we are going to leave the working copy files in the state they were after these last four commits.  This is called a \textbf{mixed} reset, as it modifies the staging area and the HEAD, but does not touch the working files.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git log --oneline

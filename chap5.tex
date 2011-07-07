@@ -13,6 +13,7 @@ It would seem that the team have coped with the initial usage of Git and that th
 It is because of these very factors that you should probably consider employing a parallel implementation.  This is exactly what John decided to do with Tamagoyaki Inc's implementation of Git.  Whilst a parallel implementation does take duplicate effort in some areas, it also allows the team to return to their original system, should insurmountable obstacles present themselves.  However, a parallel implementation should never be an excuse not to eventually shift over to the new system, unless serious issues are discovered.
 
 \begin{callout}{Terminology}{Parallel Implementation}
+\index{Parallel Implementation}
 Parallel implementation means keeping your old system running, whilst bringing up a new one.  It incurs extra effort in many areas, such as system administration, backups and system usage, but it allows people to evaluate a product in a real life situation.  Usually people will have completed all of their preliminary testing before moving onto Parallel implementation.  It would be assumed that you were fairly certain that your were going to move forward with a final implementation, before taking the time of setting up and training people on the new system.
 \newline
 \newline
@@ -52,11 +53,12 @@ It is very important to listen to users issues and questions.  Often they may di
 Let us take a while to explore the build in GUI that Git comes bundled with.
 
 \subsection{A little bit of graphics}
+\index{Git!Graphical Interface}
 Whilst using a GUI can be faster for some operations, it is also worth noting that with very few exceptions, GUI's are often less feature rich than their CLI counterparts.  It is very time consuming to write a GUI that can deal with every command option a user desires, so often the GUI will handle the most common use cases, leaving the CLI to handle special cases.
 
 Git is no exception to this rule.  Whilst the gui component is a very capable tool indeed, it does lack most of the advanced functionality that can be found on the command line.  In fact, there are even some of the basic parameters to some of the commands that we have used earlier, that are not available in the GUI counterpart.
 
-We can invoke the GUI by running the \texttt{git gui} command.  We will be presented with a window similar to that in Figure 1.  Note that in this case, we are running it against our test repository that we have been working on through previous chapters.
+We can invoke the GUI by running the \indexgit{gui} command.  We will be presented with a window similar to that in Figure 1.  Note that in this case, we are running it against our test repository that we have been working on through previous chapters.
 
 \begin{figure}[hbt]
 \centering
@@ -72,7 +74,7 @@ This initial window is composed of four key areas
 \item \textbf{Commit} - From the commit section of the screen, the commit message can be written, the commit performed, the directory rescanned for changes, as well as other operations.
 \end{enumerate}
 
-If we take a closer look at the \textbf{Unstaged} area of the screen, we see something interesting.  This is shown in Figure 2.
+\index{GUI!unstaged}If we take a closer look at the \textbf{Unstaged} area of the screen, we see something interesting.  This is shown in Figure 2.
 
 \begin{figure}[hbt]
 \centering
@@ -88,7 +90,7 @@ This is the only file in our working copy which contains unstaged changes.  That
 \caption{Content view of \texttt{temp\_file}}
 \end{figure}
 
-In the top banner section of the \textbf{Content View} we see an indication of the file's status.  In this case it is \textbf{Untracked} and \textbf{not staged}.  We can change this by clicking on the small blank page icon to the left of the file name in the \textbf{Unstaged} area of the screen, see Figure 4.
+\index{GUI!content view (git gui)}In the top banner section of the \textbf{Content View} we see an indication of the file's status.  In this case it is \textbf{Untracked} and \textbf{not staged}.  We can change this by clicking on the small blank page icon to the left of the file name in the \textbf{Unstaged} area of the screen, see Figure 4.
 
 \begin{figure}[hbt]
 \centering
@@ -96,7 +98,7 @@ In the top banner section of the \textbf{Content View} we see an indication of t
 \caption{Staged section}
 \end{figure}
 
-Now the file has moved into the \textbf{Staged} area of the screen as would be equivalent to us doing a \texttt{git add temp\_file}.  The file has been added to the index and is now ready for committing.  We also notice a difference in the \textbf{Content View} of \texttt{temp\_file}.  This can be seen in Figure 5.
+\index{GUI!staged}Now the file has moved into the \textbf{Staged} area of the screen as would be equivalent to us doing a \texttt{git add temp\_file}.  The file has been added to the index and is now ready for committing.  We also notice a difference in the \textbf{Content View} of \texttt{temp\_file}.  This can be seen in Figure 5.
 
 \begin{figure}[hbt]
 \centering
@@ -123,7 +125,7 @@ It should be noted here that we could have performed multiple operations here, a
 \section{Day 2 - ``Back to logging''}
 \subsection{Visualisation to the max}
 
-With the basic operations down, as we discovered in Week 1, let us now move on to using the GUI to view the history of our database.  The visualiser that is bundled with Git is packed with features and can be invoked in one of two ways, either by running \texttt{gitk} from the command line, or by choosing \textbf{\emph{Repository - Visualize All Branch History}} or \textbf{\emph{Repository - Visualize master's Branch History}}, the latter menu item is worded with the assumption that you are on the \textbf{master} branch of course.
+\index{gitk@\texttt{gitk}}With the basic operations down, as we discovered in Week 1, let us now move on to using the GUI to view the history of our database.  The visualiser that is bundled with Git is packed with features and can be invoked in one of two ways, either by running \texttt{gitk} from the command line, or by choosing \textbf{\emph{Repository - Visualize All Branch History}} or \textbf{\emph{Repository - Visualize master's Branch History}}, the latter menu item is worded with the assumption that you are on the \textbf{master} branch of course.
 
 Whichever way we begin an instance of \texttt{gitk}, we are likely to end up with a screen like the one in Figure 8.
 
@@ -137,15 +139,15 @@ Let us spend a few minutes familiarising ourselves with the layout of the \textt
 
 \begin{enumerate}
 \item \textbf{History Graph} - This area of the screen gives a graphical representation of the history of our repository.  Similar to the \texttt{git log --graph} option that we used previously, the graph here is much more readable.
-\item \textbf{Committer History} - The committer history tells us the person who added the commit which is horizontally adjacent in the commit graph.  
-\item \textbf{Date History} - The date history is very similar to the committer history section of the screen and shows us a simple view of the date of the commit which is horizontally adjacent.
-\item \textbf{History Search} - This section of the screen allows you to narrow down and highlight a subset of commits which meet a certain criteria.  It also allows you to navigate through these results.
+\index{GUI!committer history}\item \textbf{Committer History} - The committer history tells us the person who added the commit which is horizontally adjacent in the commit graph.  
+\index{GUI!date history}\item \textbf{Date History} - The date history is very similar to the committer history section of the screen and shows us a simple view of the date of the commit which is horizontally adjacent.
+\index{GUI!history search}\item \textbf{History Search} - This section of the screen allows you to narrow down and highlight a subset of commits which meet a certain criteria.  It also allows you to navigate through these results.
 \item \textbf{Commit Search} - Once you have highlighted a commit, the commit search section allows you to find specific strings within that commit, including looking at just old or new lines to the repository.
 \item \textbf{Content View} - This window actually shows the data that was stored in the commit and allows you scroll through either changes or complete files.
 \item \textbf{File System View} - The file system view shows you a list of files that were either modified in a specified commit, or that were present in the commit.
 \end{enumerate}
 
-To start with, let us take a look at the graph that is present in \textbf{History Graph} section of the screen in Figure 9.  Essentially this is just a very simplified version of the graphs we were drawing in the previous chapter.  As you can see, the only information that appears to be missing from the graph is the commit ID, which can be obtained quite easily by clicking on the relevant commit and viewing the string presented just below the graph pane.
+\index{GUI!history graph}To start with, let us take a look at the graph that is present in \textbf{History Graph} section of the screen in Figure 9.  Essentially this is just a very simplified version of the graphs we were drawing in the previous chapter.  As you can see, the only information that appears to be missing from the graph is the commit ID, which can be obtained quite easily by clicking on the relevant commit and viewing the string presented just below the graph pane.
 
 \begin{figure}[hbt]
 \centering
@@ -155,7 +157,7 @@ To start with, let us take a look at the graph that is present in \textbf{Histor
 
 The historical graph shows us all active branches, tags and commits.  From looking at this it is easy to see where our merges occurred and where the branch HEADs point to.  The branches are identified by green rectangles, and the tags as yellow labels.  Each circle on the graph is a commit and is linked to the panes on the right, where you can see the committer and date information.
 
-If we select the \textbf{master} branch HEAD, which should be the top commit, (in fact on opening \texttt{gitk} this should already be selected), we should see a pane similar to Figure 10 in the \textbf{Content View} section of the screen.
+\index{GUI!content view (gitk)}If we select the \textbf{master} branch HEAD, which should be the top commit, (in fact on opening \texttt{gitk} this should already be selected), we should see a pane similar to Figure 10 in the \textbf{Content View} section of the screen.
 
 \begin{figure}[hbt]
 \centering
@@ -167,7 +169,7 @@ Notice in this that we have two parents listed, which is what we would expect, a
 
 The current commit is a little special as it is a merge.  If you choose any normal commit, you can use the \texttt{Diff}, \texttt{Old version} and \texttt{New version} buttons to either show what the file used to look like (Old), what it looks like now (New), or the default view which is the Diff and shows the combination of the changes.
 
-Above the \textbf{File System View} pan is a button to switch between \texttt{Patch} and \texttt{Tree} views.  By default, this is set to \texttt{Patch} and changes what the \textbf{Content View} pane displays.  When set to \texttt{Patch}, this shows us the changes between the old commit and the new one.  However, when we switch this to \texttt{Tree} view the \textbf{Content View} pane changes to show the contents of a file selected from its pane, at the current commit.  In this way, it allows you to browse and display files from previous commits graphically and effortlessly.  Simply select the commit, selected \texttt{Tree} mode, choose the file, et voila, it is presented in the \textbf{Content View} pane.
+\index{GUI!file system}Above the \textbf{File System View} pan is a button to switch between \texttt{Patch} and \texttt{Tree} views.  By default, this is set to \texttt{Patch} and changes what the \textbf{Content View} pane displays.  When set to \texttt{Patch}, this shows us the changes between the old commit and the new one.  However, when we switch this to \texttt{Tree} view the \textbf{Content View} pane changes to show the contents of a file selected from its pane, at the current commit.  In this way, it allows you to browse and display files from previous commits graphically and effortlessly.  Simply select the commit, selected \texttt{Tree} mode, choose the file, et voila, it is presented in the \textbf{Content View} pane.
 
 So as you can see, the \texttt{gitk} tool is already quite powerful.  We are now going to take things a step further.  Remember in \textbf{Week 3} we had a way of searching the repository for the introduction of a string.  We can do the exact same thing with \texttt{gitk}.  
 
@@ -189,7 +191,7 @@ After you have finished typing you should already have noticed a difference in t
 
 If you remember from Week 3, when we first ran the \texttt{git log -SChange1} command, we were presented with only one commit.  That was titled, \texttt{Made a few changes to first and second files}.  Our repository has moved on since then and we can see that that particular string, \texttt{Change1} was added or removed in two other commits as well.  This was when we totally changed \texttt{my\_second\_committed\_file} and when we removed \texttt{my\_first\_committed\_file} a little later.  The \textbf{Next} and \textbf{Previous} buttons can be used to navigate through the search results.
 
-Now that we have found the commits that contain the change to the string we are looking for.  The question is, where in the file does this change occur?  We can now use the \textbf{Commit Search} pane to see this.  Typing \texttt{Change1} into this search box will highlight the relevant text in the \texttt{Content View} pane below.  It really is as easy as that.
+\index{GUI!commit search}Now that we have found the commits that contain the change to the string we are looking for.  The question is, where in the file does this change occur?  We can now use the \textbf{Commit Search} pane to see this.  Typing \texttt{Change1} into this search box will highlight the relevant text in the \texttt{Content View} pane below.  It really is as easy as that.
 
 Whilst it is a great idea to remember and use the command line arguments and parameters, it is also useful to know that these other tools are available.  GUI tools should not be frowned upon, as some command line purists do.  GUI tools are as much a part of the development process as their command line counterparts.  Both have their uses and the most important lesson of all is to know when to use which.  This lesson will most likely come with experience and time, or as a friend of mine used to put it, old age.
 
@@ -231,7 +233,7 @@ This ends our tour of the \texttt{gitk} utility.  Hopefully you have seen that i
 
 \section{Day 4 - ``Advanced Techniques''}
 \subsection{Getting more done graphically}
-Whilst \texttt{git gui} can perform commits.  It is interesting to note that it can do a whole lot more.  One feature, which can be exceedingly useful is the \textbf{File Browser}.  This is invoked by using the \textbf{\emph{Repository - Browse Branch's Files...}} menu item.
+\index{GUI!file browser}Whilst \texttt{git gui} can perform commits.  It is interesting to note that it can do a whole lot more.  One feature, which can be exceedingly useful is the \textbf{File Browser}.  This is invoked by using the \textbf{\emph{Repository - Browse Branch's Files...}} menu item.
 
 We can now select the point at which we want to browse the repository.  By default we are presented with a list of the branches present in the repository.  Note we can also choose tags, by selecting the appropriate option in the radio box.  We can also put things like \texttt{HEAD} and \texttt{HEAD~1} into the \textbf{Revision Expression:} text field.  
 
@@ -243,7 +245,7 @@ The dialog box is shown in Figure 15.  Notice also that when we hover over the b
 \caption{Point in history dialog}
 \end{figure} 
 
-The file choosing dialog is rather plain.  Just double clicking on a file will start the \texttt{git gui blame} tool.  Though primarily used as a way to see who, or what was responsible for a specific change to a line, this tool is also useful for seeing how a file has changed over time.  The file chooser dialog is shown in Figure 16.
+The file choosing dialog is rather plain.  Just double clicking on a file will start the \indexgit{gui blame} tool.  Though primarily used as a way to see who, or what was responsible for a specific change to a line, this tool is also useful for seeing how a file has changed over time.  The file chooser dialog is shown in Figure 16.
 
 \begin{figure}[hbt]
 \centering
@@ -261,7 +263,7 @@ Once selected, the file is displayed in its own window.  The window is split int
 
 Clicking on a line in the view above, will turn that section green and will display the information related to that commit in the lower pane, along with the complete commit message.  It will also highlight all other lines in the current file that were also modified in that commit.  As shown in Figure 18.
 
-Already this is a very powerful tool, much like the \texttt{gitk} too for visualising the history of the repository, \texttt{git gui blame} is also very useful for working through the events that led to the current version of a particular file.  In larger files, being able to click on a portion and have it highlight every other line in that file that was changed in that commit can be extremely useful.  By right clicking on the file, we can also choose the \textbf{Show History Context}, which will load \texttt{gitk} and move the commit history pane to show the commit we are currently interested in.
+Already this is a very powerful tool, much like the \texttt{gitk} too for visualising the history of the repository, \texttt{git gui blame} is also very useful for working through the events that led to the current version of a particular file.  In larger files, being able to click on a portion and have it highlight every other line in that file that was changed in that commit can be extremely useful.  \index{history context}By right clicking on the file, we can also choose the \textbf{Show History Context}, which will load \texttt{gitk} and move the commit history pane to show the commit we are currently interested in.
 
 \begin{figure}[hbt]
 \centering
@@ -303,5 +305,5 @@ It is here that we are going part with our newest tool in order to return to the
 \subsection{Terminology}
 \begin{itemize}
 
-\item\textbf{Blame} - A way of find the commit that caused an issue in the repository.
+\index{Terminology!Blame}\item\textbf{Blame} - A way of find the commit that caused an issue in the repository.
 \end{itemize}
