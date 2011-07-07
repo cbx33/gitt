@@ -526,4 +526,126 @@ john@satsuki:~/coderepo$ git logg -n7
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-Notice our branch is now created and looking at the log, it contains the same two commits and the tree looks as we would expect.  We have our \texttt{another\_file} updated in both branches.
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-w7-d7.pdf}
+\caption{Our repository after the recovery}
+\end{figure}
+
+Notice our branch is now created and looking at the log, it contains the same two commits and the tree looks as we would expect.  We have our \texttt{another\_file} updates in both branches.
+
+\section{Day 5 - ``I could rebase the world''}
+\subsection{Migrating commits}
+
+We are almost at the end our our journey with the rebase tool and have one more stop before we start looking at other features of Git.  
+
+\begin{trenches}
+Rob was sitting with his head on the table.  Every few seconds he would lift it up before thumping it down again.  It was obvious to everyone in the office that Rob had done something wrong.  In the end it was John who broke the rhythmic bass drum.  He pulled up a chair next to the desk.
+
+``Come on Rob,'' started John, ``What's eating you?''
+
+``Well, I have been working away, commiting to a branch, but it wasn't the right one.''  He looked like he was almost in tears.
+
+John frowned, ``Can't you just move a new branch forward and then rewind the other one?''
+
+``No.''  His voice was tired and weary.  ``The ancestor of the branch isn't right.  I thought I had branched from master, but I'd actually branched from a dev branch.  Now I can't find a way to bring my commits back.  Short of cherry picking each one, but I have over fifty of them.  Guess it's time to start scripting.''
+
+John smiled and shook his head, ``Don't worry Rob, I have a better plan''
+\end{trenches}
+
+\index{cherry picking}Cherry picking is a method of copying the contents of one commit into another and is something that we will pick up on later, but we will first look at our final use of rebase.  Imagine the scenario painted above.  You made a branch, have been merrily committing for hours, before realising that actually you branched from the wrong place.
+
+In Git, this isn't a problem.  Things get complicated if you've been doing more advanced operations during this period, but if you have been simply adding commits, we can use rebase to migrate that tree of commits to a different ancestor.
+
+Take the example we have been working on, currently we have a \textbf{master} branch and a \textbf{wonderful} branch, and these differ.  Let us say we are currently sitting on the \textbf{wonderful} branch, but we thought we were on the \textbf{branch} and we created a new branch called develop.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git checkout -b develop
+Switched to a new branch 'develop'
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Now let us commit a few files and see what we can do about fixing our problem.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ echo "new dev work" >> newfile3 
+john@satsuki:~/coderepo$ git commit -a
+[develop eb7f633] Some new dev work
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@satsuki:~/coderepo$ echo "newer dev work" >> newfile2 
+john@satsuki:~/coderepo$ git commit -a
+[develop 5e0964b] More new deving
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Let us use our little log alias and see the work we just did on our \textbf{"master"} branch.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git logg -n8
+* 5e0964b (HEAD, develop) More new deving
+* eb7f633 Some new dev work
+* 4d91aab (wonderful) Updated another file again
+* 1ffe37f Updated another file with 2 edits
+| * 5167cce (keeprebase) Updated another file again
+| * 551086e Updated another file with 2 edits
+| * f8d5100 (master) Finished new dev
+| * 1968324 Start new dev
+|/  
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Whoops!  The commits were supposed to be on a branch that stemmed from \textbf{master}, not one that stems from \textbf{wonderful}.  This is where \texttt{git rebase} comes to our assistance once more.  With one command, we can move those commits to a branch that stems from \textbf{master}.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git rebase --onto master wonderful develop 
+First, rewinding head to replay your work on top of it...
+Applying: Some new dev work
+Applying: More new deving
+john@satsuki:~/coderepo$ git logg -n8
+* aed985c (HEAD, develop) More new deving
+* af3c6d7 Some new dev work
+| * 5167cce (keeprebase) Updated another file again
+| * 551086e Updated another file with 2 edits
+|/  
+* f8d5100 (master) Finished new dev
+* 1968324 Start new dev
+| * 4d91aab (wonderful) Updated another file again
+| * 1ffe37f Updated another file with 2 edits
+|/  
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Notice in the output above that we have used our \texttt{git rebase} tool with a new \texttt{--onto master} parameter.  Basically the syntax is stating that we would like to take the commits between \textbf{wonderful} and \textbf{develop} and place them onto \textbf{master} instead.
+
+To clean up our repository, we are going to delete our \textbf{keeprebase} branch.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git branch -D keeprebase
+Deleted branch keeprebase (was 5167cce).
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+We have reached the end of our tour with the rebase tool.  It is exceedingly powerful and is definitely one of the tools that you should understand before using.  As stated before, do not forget the fact that rebasing changes history.  In all cases that we have used rebase, commit IDs have been changed and therefore you must be very careful when using it.
+
+\clearpage
+
+\section{Summary - John's Notes}
+\subsection{Commands}
+\begin{itemize}
+
+\item\texttt{git rebase -i HEAD~3} - Runs the rebase tool interactively for the last three commits 
+
+\item\texttt{git rebase <branchA> <branchB>} - Lift all commits between the common ancestor of branchA and branchB and replay them on top of branchB
+
+\item\texttt{git branch <branch\_name> <startpoint>} - Create a new branch starting from a definte start point
+
+\item\texttt{git rebase --onto master <branchC> \newline <branchA> <branchB>} - Lift all commits between the common ancestor of branchA and branchB and replay them on top of branchC
+\end{itemize}
+
+\subsection{Terminology}
+\begin{itemize}
+\item\textbf{SSH} - A type of secure network protocol
+\item\textbf{HTTP} - The protocol that is used to serve internet pages
+\item\textbf{Rebase} - Used primarily for lifting commits and reapplying them to another base branch
+\end{itemize}
