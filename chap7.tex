@@ -411,3 +411,51 @@ There are multiple ways to do this, but we are going to get a little down and di
 
 Once saved, we can use \texttt{git logg} just like any other Git command.  As you can see from the example in the text, we can even append more parameters that the parent command \texttt{git log} usually accepts.  So we can do things like \texttt{git logg -n5} to get only five entries.
 \end{callout}
+
+So we have two development trees, our \textbf{master} which is what our development work is based on, and our \textbf{wonderful} branch, which is where we are performing our development work.  The task now is to update the \textbf{wonderful} branch, with all of the changes that have taken place in \textbf{master}.  To do this, we use the \texttt{git rebase} tool once more, but this time in a slightly different manner.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git checkout wonderful 
+Switched to branch 'wonderful'
+john@satsuki:~/coderepo$ git rebase master
+First, rewinding head to replay your work on top of it...
+Applying: Updated another file with 2 edits
+Applying: Updated another file again
+john@satsuki:~/coderepo$ git logg -n5
+* 5167cce (HEAD, wonderful) Updated another file again
+* 551086e Updated another file with 2 edits
+* f8d5100 (master) Finished new dev
+* 1968324 Start new dev
+* 1c3206a Added a new file
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+We started by checking out the \textbf{wonderful}.  With the \texttt{git rebase master} command, we told Git to take all of the changes in our topic branch called \textbf{wonderful}, and replay them on top of the new \textbf{master}.  We could have also used the command \texttt{git rebase master topic} which would actually have done the original \texttt{git checkout} for us.  
+
+Notice again, that our commit IDs have changed.  The contents, in this case, remain identical, as we have not hit upon any conflicts during out rebase.  If we had, we would have to have resolved that, and then run the \texttt{git rebase --continue}, or \texttt{git rebase --abort} to abort the rebase completely.
+
+So, our wonderful branch is now sat on top of the new development changes and instead of having two diverging branch heads, we now have a single branch which \textbf{wonderful} extends from.
+
+\begin{trenches}
+``Martha!''  Simon shouted across the office at the seemingly new Git expert.  ``HELP!!''
+
+Martha got up from her seat.  It hadn't been fifteen minutes since she had shown Simon how to rebase branches and now he was calling her again.  At first she had tried to ignore it, but the waves of SOS had plunged through the headphones and reverberated round her head one too many times.  She placed the music on hold and put the headphones on the desk.
+
+``What's up Simon?'' she asked, smiling at John who was chuckling to himself at his desk.
+
+``Well, I kinda rebased, but I wish I hadn't now, cos it all went wrong.  How can I go back?''
+\end{trenches}
+
+It's an interesting question.  How would we move back again?  We have rewritten history, how could we possibly hope to go back again?  We have discussed before how most things in Git are never really immediately gone, even if we delete them.  Does this apply here too?  Of course it does.  Remember that a branch is really just defined by which commit the HEAD points to.  Let us draw a diagram to show how the tree of commits looks before and after our rebase.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-w7-d5.pdf}
+\caption{Our repository before the rebase}
+\end{figure}
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=9cm]{images/f-w7-d6.pdf}
+\caption{Our repository after the rebase}
+\end{figure}
