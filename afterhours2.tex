@@ -2,7 +2,8 @@
 \chapter{After Hours Week 2}
 \section{``A Little Of Git's Internals''}
 \subsection{A Look At Plumbing}
-
+\index{Plumbing}
+\index{Git!directory structure}
 This After Hours section is going to get a little deep.  For some of you it may be more information than you bargained for.  However, sometimes, when the worst happens, it is comforting to know that you at least have a basic understanding of what is happening under the hood.  These After Hours sections are designed to give you that knowledge.  They are for the people who are not just satisfied with knowing that things work, but they want to know \emph{why} things work.
 
 To start with, we are going to use the Git repository that we have been playing with in Week 2 and take a deeper look at what is actually inside a Git repository.  Let us view the directory structure, to see what has been created in the \texttt{.git} folder.
@@ -28,13 +29,13 @@ john@satsuki:~/coderepo/.git$
 
 \textbf{branches} - Though deprecated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.
 
-\textbf{COMMIT\_EDITMSG} - This file holds the last commit message that was displayed in the editor.
+\index{COMMIT\_EDITMSG}\textbf{COMMIT\_EDITMSG} - This file holds the last commit message that was displayed in the editor.
 
 \textbf{config} - This is the main configuration file for Git.  It is the first place git looks for upon invocation.  If this file is not present, Git will inspect \texttt{\textasciitilde/.gitconfig}.  After this, Git will go to \texttt{/etc/gitconfig}.  The file holds information about the remotes, tracking branches, push configurations and many more items.
 
 \textbf{description} - This is a simple text file which gives a description to a repository when being view via gitweb or similar.
 
-\textbf{HEAD} - This file is a pointer to the parent commit of your current branch.
+\index{HEAD}\textbf{HEAD} - This file is a pointer to the parent commit of your current branch.
 
 \textbf{hooks} - Scripts can be placed in here to perform operations at certain points during the commit process.
 
@@ -44,7 +45,7 @@ john@satsuki:~/coderepo/.git$
 
 \textbf{objects} - The is the directory that holds all of the actual files that are stored in the repository.  The files are named by their SHA-1 values.  Inside the folder are a number of directories which make up the first 2 characters of the SHA-1 value.  The remaining portion of the SHA-1 hash is used to name the file.
 
-\textbf{ORIG\_HEAD} - Hold the previous SHA-1 hash that HEAD pointed to.  This allows certain operations to go back, in the case of failure. (Not present in our listing)
+\index{ORIG\_HEAD}\textbf{ORIG\_HEAD} - Hold the previous SHA-1 hash that HEAD pointed to.  This allows certain operations to go back, in the case of failure. (Not present in our listing)
 
 \textbf{refs} - This folder holds the files that files for local branches, remote branches and tags.
 
@@ -53,9 +54,9 @@ More files and folders will appear here during the running of the repository as 
 The most interesting of the folders here is the \texttt{objects} folder.  This folder as previously described holds all of the objects that are stored in the repository.  Now, what do we actually mean by objects.  As yet, we have not really defined what an object is.  We are going to look now at three types of object that Git places in this directory.  These are the commit, tree and blob objects.  We need a little more information as the names themselves do not fully describe what the item is.
 
 \begin{itemize}
-\item\textbf{commit} - A commit object is an object that describes a specific point in time.  Whenever you perform a \texttt{git commit} from the command line, what you are actually doing is creating one of these objects in the repository.  This object stores information about the committer, the date, a link to the previous commit object and most importantly a link to the tree object of the current commit.
-\item\textbf{tree} - A tree object defines which files were physically included in the commit when it was added to the database.  The tree contains the name of the files that were present in the tree by recording their blob SHA-1 id and their filename.  Sub-folders of a directory will be referenced by another tree object.  In this way, a tree object will contain references to both tree objects and blob objects
-\item\textbf{blob} - A blob object actually contains the data that resides inside the file.  There is one object generated per revision of a file.  However, if exactly the same data resides in two separate files, then there will only be one object created and that object will be referenced by two trees.  In this way, multiple copies of the same file, or files which have not changed through multiple revisions are not stored multiple times.  Even though Git stores a complete snapshot of the filesystem at every revison.
+\index{commit!internals}\item\textbf{commit} - A commit object is an object that describes a specific point in time.  Whenever you perform a \texttt{git commit} from the command line, what you are actually doing is creating one of these objects in the repository.  This object stores information about the committer, the date, a link to the previous commit object and most importantly a link to the tree object of the current commit.
+\index{tree!internals}\item\textbf{tree} - A tree object defines which files were physically included in the commit when it was added to the database.  The tree contains the name of the files that were present in the tree by recording their blob SHA-1 id and their filename.  Sub-folders of a directory will be referenced by another tree object.  In this way, a tree object will contain references to both tree objects and blob objects
+\index{blob!internals}\item\textbf{blob} - A blob object actually contains the data that resides inside the file.  There is one object generated per revision of a file.  However, if exactly the same data resides in two separate files, then there will only be one object created and that object will be referenced by two trees.  In this way, multiple copies of the same file, or files which have not changed through multiple revisions are not stored multiple times.  Even though Git stores a complete snapshot of the filesystem at every revison.
 \end{itemize}
 
 So, when we commit into the repository we create a commit object.  The commit objects houses links to a tree.  The tree object contains links to either blobs or trees.  Regardless, the structure of a basic repository may look something a little like Figure 1.
@@ -115,7 +116,7 @@ The commands that are readily available to the end user are called Porcelain com
 Commands which get a little down and dirty with the details are called Plumbing commands because they are dealing with the primitive objects that make things work, think Pipes and Joints.
 \end{callout}
 
-If we run this plumbing command against our object, and supply the \texttt{-t} parameter, \texttt{git cat-file} will tell us the type of the object.  If we run it with the \texttt{-s} parameter, it will tell us the size.  Finally, running it with the \texttt{-p} parameter we can see what the object actually contains.  Each of these has been demonstrated below.
+If we run this plumbing command against our object, and supply the \texttt{-t} parameter, \indexgit{cat-file} will tell us the type of the object.  If we run it with the \texttt{-s} parameter, it will tell us the size.  Finally, running it with the \texttt{-p} parameter we can see what the object actually contains.  Each of these has been demonstrated below.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git cat-file -t cfe23c
@@ -195,6 +196,6 @@ This commit object has an extra field.  This field is the \texttt{parent} field.
 Hopefully you can see from this diagram that Git will reuse objects as discussed above.  This diagram describes the repository layout completely and if you correlate, we have correctly identified and accounted for each object in the repository.  Now we know how to traverse a repository.  In \emph{Week 3} we find the Git commands to let us do that without having to break out the wrenches and resort to plumbing.  After all, why use a wrench to turn on a tap?
 
 \begin{callout}{Note}{Packing for a holiday?}
-It is worth noting that the objects noted above are not the only objects that you will find in the \texttt{objects} folder.  Git will sometimes clean itself up and perform packing operations.  This is out of scope for this chapter though.
+\index{packing}It is worth noting that the objects noted above are not the only objects that you will find in the \texttt{objects} folder.  Git will sometimes clean itself up and perform packing operations.  This is out of scope for this chapter though.
 \end{callout}
 
