@@ -6,7 +6,7 @@
 \section{Day 1 - ``My private little stash''}
 \subsection{Getting interrrupted}
 
-We're getting close to the point where we can really start using Git as we originally intended, the team at Tamagoyaki Inc. are also getting much more acquainted with the operations of both version control and Git in particular.  Unfortunately things don't always go as smoothly as we would like.  The following scenario demonstrates just this.
+\index{stashing}We're getting close to the point where we can really start using Git as we originally intended, the team at Tamagoyaki Inc. are also getting much more acquainted with the operations of both version control and Git in particular.  Unfortunately things don't always go as smoothly as we would like.  The following scenario demonstrates just this.
 
 \begin{trenches}
 ``Yeh but Martha, I need you to work on this fix now!  Not in five minutes.''
@@ -39,7 +39,7 @@ Well, one way of dealing with this situation, and this is not necessarily the be
 
 That may seem like a lot of work.  OK, the benefit is a fairly awesome one, but at the cost of considerable command line hackery to get there.  It would be nice if there was an easy way to do the above, and though someone of you may be screaming something like \emph{shell script} right about now, you can rest your fingers.  We actually have another tool in the Git toolbox to help us out.
 
-The \texttt{git stash} command is used for exactly these situations.  Let us make a quick example of how to use it in our test repository.  To begin with we are going to make a few changes to the \textbf{master} branch, before we are interrupted.
+The \indexgit{stash} command is used for exactly these situations.  Let us make a quick example of how to use it in our test repository.  To begin with we are going to make a few changes to the \textbf{master} branch, before we are interrupted.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git checkout master
@@ -49,7 +49,7 @@ john@satsuki:~/coderepo$ echo "Number strings rule 1234" >>
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-So now we are interrupted and we have to make some important, and urgent changes to our \textbf{master} branch.  The example that follows is one way that we could use the \texttt{git stash} command to help us out.  
+\index{stashing!adding}So now we are interrupted and we have to make some important, and urgent changes to our \textbf{master} branch.  The example that follows is one way that we could use the \texttt{git stash} command to help us out.  
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git stash
@@ -82,7 +82,7 @@ index dba885d..b3a5cc5 100644
 john@satsuki:~/coderepo$ 
 \end{Verbatim}
 
-As you can see, the \texttt{-p} option to the \texttt{git stash show} command shows us exactly what is contained in the stash.  We can apply this stash by running the following;
+\index{stashing!showing}As you can see, the \texttt{-p} option to the \texttt{git stash show} command shows us exactly what is contained in the stash.  We can apply this stash by running the following;
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git stash apply stash@{0}
@@ -110,7 +110,7 @@ john@satsuki:~/coderepo$
 
 Our stash has been applied to the current branch, in our case \textbf{master}, and we have gone ahead and committed these changes into the repository.  In this case we didn't have anything else to add to the index before we went ahead and committed it.  
 
-Interestingly though, our stash still exists.  If we had used the \texttt{git stash pop} command instead of the \texttt{git stash apply}, our stash would have been removed.  Of course we can have multiple stashes in our repository.  For completeness sake, let us learn how to manually remove a stash, and take a look at how our repository looks with our semi-graphical \texttt{git log}
+\index{stashing!removing}Interestingly though, our stash still exists.  If we had used the \texttt{git stash pop} command instead of the \texttt{git stash apply}, our stash would have been removed.  Of course we can have multiple stashes in our repository.  For completeness sake, let us learn how to manually remove a stash, and take a look at how our repository looks with our semi-graphical \texttt{git log}
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git stash drop stash@{0}
@@ -170,7 +170,7 @@ Klaus smiled, it seemed Rob was finally understanding things, ``Go ask him,'' sa
 ``Right'' nodded Rob and off he went.
 \end{trenches}
 
-So cloning is an excellent way of taking a copy of our repository, in essence it is a simple way of taking a backup of our repository and then with a little more work, we can keep that clone up to date.  Obviously we could just take the files and copy them, but a better way of doing this is by utilising the \texttt{git clone} command.  When cloning a repository, we take then entire structure and replicate it, creating an exact copy of the data in an alternative location.  Well, that's what cloning means isn't it?
+\index{cloning}So cloning is an excellent way of taking a copy of our repository, in essence it is a simple way of taking a backup of our repository and then with a little more work, we can keep that clone up to date.  Obviously we could just take the files and copy them, but a better way of doing this is by utilising the \indexgit{clone} command.  When cloning a repository, we take then entire structure and replicate it, creating an exact copy of the data in an alternative location.  Well, that's what cloning means isn't it?
 
 The git clone tool doesn't just copy the data though, it does several other things.  Let us create a clone of our test repository to another local location.  In this case, we are going to clone the repository into a folder called \texttt{coderepo-cl}.
 
@@ -226,7 +226,7 @@ Rob began walking over to John, ``Yeh, try running git branch with the r paramet
 
 \end{trenches}
 
-You may be thinking that we now have a detached copy of the other branches in our repository.  That's not exactly accurate.  Let us run the command that Rob suggested and see what is happening.  
+\index{branching!remote}You may be thinking that we now have a detached copy of the other branches in our repository.  That's not exactly accurate.  Let us run the command that Rob suggested and see what is happening.  
 
 \begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git branch
@@ -241,7 +241,7 @@ john@satsuki:~/coderepo-cl$
 
 Whilst we have all the objects in our repository, we do not yet have our branches set up locally.  They are available, but they have not yet been setup locally.  To explain this we need to introduce the concept of remote tracking branches.  We are familiar with local branches.  Local branches allowed us to make commits locally in a safe and separated environment.  Remote tracking branches are links to remote branches which allow us to track the development of that branch and bring it in to a local one if we so desire.
 
-Let us take a look at what we can do with these remote tracking branches.  Notice in the output above, we have the word \texttt{origin} in front of the branch names.  When we clone a repository, Git automatically sets up what is called a \emph{remote}.  We can view this by using the \texttt{git remote} tool.
+Let us take a look at what we can do with these remote tracking branches.  Notice in the output above, we have the word \texttt{origin} in front of the branch names.  When we clone a repository, Git automatically sets up what is called a \emph{remote}.  We can view this by using the \indexgit{remote} tool.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git remote
@@ -335,7 +335,7 @@ HEAD is now at cfbecab... Fantastic new feature
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
 
-Interesting.  This is not what we are used to seeing.  When we have checked out branches before, we have always been presented with a \texttt{Switched to branch 'xxxxxx'} message.  Now we are seeing a funny message about having a detatched HEAD.  This is because we are not actually on a branch.  We can make changes as we are advised, we can even make commits, but these will not actually become integrated into any branches.  In essence these commits would be left dangling and after time, because no branch points to them, they would get deleted by garbage collection routines.
+\index{dangling}Interesting.  This is not what we are used to seeing.  When we have checked out branches before, we have always been presented with a \texttt{Switched to branch 'xxxxxx'} message.  Now we are seeing a funny message about having a detatched HEAD.  This is because we are not actually on a branch.  We can make changes as we are advised, we can even make commits, but these will not actually become integrated into any branches.  In essence these commits would be left dangling and after time, because no branch points to them, they would get deleted by garbage collection routines.
 
 Running the \texttt{git branch} command below confirms our suspicions.
 
@@ -346,7 +346,7 @@ john@satsuki:~/coderepo-cl$ git branch -v
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
 
-So we really need to figure out how to make these branches exist locally so that we can commit to them and retain those commits.  To do this we use the \texttt{git branch} tool again, but we use it in a slightly different manner.  
+\index{branching!tracking}So we really need to figure out how to make these branches exist locally so that we can commit to them and retain those commits.  To do this we use the \texttt{git branch} tool again, but we use it in a slightly different manner.  
 
 \begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git checkout -b wonderful origin/wonderful 
@@ -426,7 +426,7 @@ That seems a little odd at first glance.  We have tried to view a diff between o
 
 Remember before we discussed the fact that our clone was disconnected from the \textbf{origin} copy?  What this means is that unless we ask Git, it won't update details about what is present in the remote copy.  Once this is up to date, we can pull the changes into our local copy of the remote branch?  Interestingly there are actually two ways to do this.
 
-The first method is by running a \texttt{git pull} command.  If you remember the output from the \texttt{git remote show origin}, you may remember that it showed that there was a local branch configured for \texttt{'git pull'} and the details it gave for the \textbf{wonderful} branch were as follows; \texttt{wonderful merges with remote wonderful}.  What this means, is that when we run a \texttt{git pull} from inside the \textbf{wonderful} branch, Git will automatically contact the remote repository, update the list of changes and merge them into the local branch if possible.
+\index{branching!updating remote}The first method is by running a \indexgit{pull} command.  If you remember the output from the \texttt{git remote show origin}, you may remember that it showed that there was a local branch configured for \texttt{'git pull'} and the details it gave for the \textbf{wonderful} branch were as follows; \texttt{wonderful merges with remote wonderful}.  What this means, is that when we run a \texttt{git pull} from inside the \textbf{wonderful} branch, Git will automatically contact the remote repository, update the list of changes and merge them into the local branch if possible.
 
 We mentioned that there were two methods to perform the procedure.  Whilst the first one is to use \texttt{git pull}, the second one actually achieves an almost identical result, but by running two commands instead of one.  In point of fact, these two commands are executed by the \texttt{git pull} command.  Running them as two separate commands allows us to understand a little more about what is happening.  Let us run the command and then explain what we have done.
 
@@ -464,7 +464,7 @@ Fast-forward
 john@satsuki:~/coderepo-cl$ 
 \end{Verbatim}
 
-As you can see, the two commands that we used were \texttt{git fetch} and the more familiar \texttt{git merge}.  The \texttt{git fetch} command literally visits the remote repository, in our case we asked for \textbf{origin}, and finds which objects are new.  These are then copied to the local clone, and the HEADs of the various remote branches are updated.  We now rerun our \texttt{git diff}, only this time, we see a great many more changes than before.  Finally we initiate a \texttt{git merge} to pull the changes from the now up to date remote branch to our local one.
+As you can see, the two commands that we used were \indexgit{fetch} and the more familiar \texttt{git merge}.  The \texttt{git fetch} command literally visits the remote repository, in our case we asked for \textbf{origin}, and finds which objects are new.  These are then copied to the local clone, and the HEADs of the various remote branches are updated.  We now rerun our \texttt{git diff}, only this time, we see a great many more changes than before.  Finally we initiate a \texttt{git merge} to pull the changes from the now up to date remote branch to our local one.
 
 We could have used the \texttt{git pull} command here, and if we had supplied no parameters to it, it would have achieved the exact same outcome.  The only difference would have been running one command instead of two.  Please note, that there are occasions when you would require one over the other, but as an introduction, this should be sufficient.
 
@@ -487,7 +487,7 @@ Rob slammed his hands down on the keyboard, ``Well then you come over here and t
 Klaus smiled and his head appeared over the cubicle.  ``Come over here genius and I'll show you,'' he said with the slightest amount of gloat at being one of the only people to know something about Git that Rob didn't.
 \end{trenches}
 
-Bare?  Non-bare?  At first glance, this may seem confusing.  It isn't exactly an intuitive word to describe a repository but what Klaus mentioned was absolutely true.  In Git, if you want to push changes back to a repository, instead of pulling them, the repository that you push to should be what is called a \emph{bare} repository.  What this means is that the repository has no working copy.
+\index{bare repository}\index{non-bare repository}\index{pushing}Bare?  Non-bare?  At first glance, this may seem confusing.  It isn't exactly an intuitive word to describe a repository but what Klaus mentioned was absolutely true.  In Git, if you want to push changes back to a repository, instead of pulling them, the repository that you push to should be what is called a \emph{bare} repository.  What this means is that the repository has no working copy.
 
 \begin{callout}{Note}{Pushing to a non-bare repository}
 As mentioned, pushing to a non-bare repository is not a good idea.  When you push to a repository, you update the objects in the objects database.  This will affect commits, blobs and trees.  We should make a distinction here.  We are really only worried about pushing to a branch which is currently checked out.  Pushing to a non-bare repository will mean that the index will get changed, as it should reflect what the branch looks like at HEAD.  
@@ -506,7 +506,7 @@ john@satsuki:~/coderepo-cl$ git commit -a -m 'Added more to newfile3'
  1 files changed, 1 insertions(+), 0 deletions(-)
 \end{Verbatim}
 
-We have made a modification to the \textbf{wonderful} branch.  So let us now try to push that back to the \textbf{origin} remote repository with the \texttt{git push} command.
+We have made a modification to the \textbf{wonderful} branch.  So let us now try to push that back to the \textbf{origin} remote repository with the \indexgit{push} command.
  
 \begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git push
@@ -555,7 +555,7 @@ john@satsuki:~/coderepo-cl$
 
 As you can see, creating the clone with the \texttt{--bare} option has had a definite effect on the structure of the clone itself.  In fact, the contents of the \texttt{coderepo-bk} folder look remarkably similar to the \texttt{.git} folder found in our normal working tree.  They are in fact, one and the same.  We have removed the need for a separate \texttt{.git} folder because we do not require a working tree.  Therefore, the contents of the \texttt{.git} folder and placed in the root \texttt{coderepo-bk} folder.
 
-We are getting closer to making our push.  We have created a \emph{bare} repository, which we should now be able to push to.  The problem is, we have not yet defined our new repository as a remote location in the \texttt{coderepo-cl} repository.  This is something we will do now and to do this, we will use our \texttt{git remote} tool once more, this time employing the \texttt{add} parameter.
+\index{remote!adding}We are getting closer to making our push.  We have created a \emph{bare} repository, which we should now be able to push to.  The problem is, we have not yet defined our new repository as a remote location in the \texttt{coderepo-cl} repository.  This is something we will do now and to do this, we will use our \texttt{git remote} tool once more, this time employing the \texttt{add} parameter.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo-cl$ git remote add backup 
@@ -711,9 +711,9 @@ DEFAULT GIT PULL
 
 \subsection{Terminology}
 \begin{itemize}
-\item\textbf{Stash} - A temporary storage of local modifications that can be brought back onto the branch at a later date
-\item\textbf{Remote} - A copy of a repository, or part of a repository in a remote location
-\item\textbf{Pull} - Merging changes from a remote branch into a current local one
-\item\textbf{Push} - Pushing changes from a local branch into a remote one
-\item\textbf{Fetch} - Pull into the local repository, all new objects and update all branch HEADs to point to the same commits as the remote location
+\index{Terminology!Stash}\item\textbf{Stash} - A temporary storage of local modifications that can be brought back onto the branch at a later date
+\index{Terminology!Remote}\item\textbf{Remote} - A copy of a repository, or part of a repository in a remote location
+\index{Terminology!Pull}\item\textbf{Pull} - Merging changes from a remote branch into a current local one
+\index{Terminology!Push}\item\textbf{Push} - Pushing changes from a local branch into a remote one
+\index{Terminology!Fetch}\item\textbf{Fetch} - Pull into the local repository, all new objects and update all branch HEADs to point to the same commits as the remote location
 \end{itemize}
