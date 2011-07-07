@@ -446,7 +446,7 @@ Martha got up from her seat.  It hadn't been fifteen minutes since she had shown
 ``Well, I kinda rebased, but I wish I hadn't now, cos it all went wrong.  How can I go back?''
 \end{trenches}
 
-It's an interesting question.  How would we move back again?  We have rewritten history, how could we possibly hope to go back again?  We have discussed before how most things in Git are never really immediately gone, even if we delete them.  Does this apply here too?  Of course it does.  Remember that a branch is really just defined by which commit the HEAD points to.  Let us draw a diagram to show how the tree of commits looks before and after our rebase.
+It's an interesting question.  How would we move back again?  We have rewritten history, how could we possibly hope to go back again?  We have discussed before how most things in Git are never really immediately gone, even if we delete them.  Does this apply here too?  Of course it does.  Remember that a branch is really just defined by which commit the HEAD points to.  Let us draw a few diagrams to show how the tree of commits looks before and after our rebase.
 
 \begin{figure}[hbt]
 \centering
@@ -454,8 +454,76 @@ It's an interesting question.  How would we move back again?  We have rewritten 
 \caption{Our repository before the rebase}
 \end{figure}
 
+Figure 5 shows our repository before we perform the rebase.  We can quite clearly see that there are two branches, diverging from the common ancestor, \textbf{1c3206a}.  In Figure 6, we see the repository after the rebase has taken place.  Notice that the two commits that \emph{were} forming the \textbf{wonderful} branch are now coloured in grey.
+
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=9cm]{images/f-w7-d6.pdf}
 \caption{Our repository after the rebase}
 \end{figure}
+
+The grey commits are no longer referenced.  No branche HEADs point to them, and no other commits rely upon them.  In short they have been orphaned, or are left \index{dangling}\emph{dangling}.  A dangling commit has no references left pointing to it.  Remember each commit relies on its parent.  Therefore because the HEAD of \textbf{wonderful} now points to \textbf{5167cce}, and that in turn points to \textbf{551086e}.  The original commit line is unchanged.
+
+Thinking back to previous weeks, we have had a similar situation before.  If we know the commit ID that we wish to return to, there really is nothing more complicated than issuing a \texttt{git reset}.  The only tricky part is knowing the commit you wish to return to.
+
+\index{reflog}We do however have a weapon at our disposal.  The \texttt{git log} tool can be used with the \texttt{-g}.  This parameter forces the Git to refer to the \emph{reflog} for entries, instead of traversing the usualy tree.  If you remember, the reflog is our key to seeing what happened in the past.  It holds a list of all the previous HEADs of each branch.  By supplying the branch name, we can see everything that happened to the \textbf{wonderful} branch.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git log -g wonderful -n2
+commit 5167cce7864ca71420ce5dc37ec9b3f931727db3
+Reflog: wonderful@{0} (John Haskins <john.haskins@tamagoyakiinc.koala>)
+Reflog message: rebase finished: refs/heads/wonderful onto f8d5100142b43ffaba9bb
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Wed Jul 6 09:30:40 2011 +0100
+
+    Updated another file again
+
+commit 4d91aab57aaad020e62486805e25d0d6f06fdc3e
+Reflog: wonderful@{1} (John Haskins <john.haskins@tamagoyakiinc.koala>)
+Reflog message: rebase -i (finish): refs/heads/wonderful onto 1c3206a
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Wed Jul 6 09:30:40 2011 +0100
+
+    Updated another file again
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+As you can see, the log shows that we recently completed two rebases.  The first resulted in an ID of \textbf{4d91aab} and the second resulted in \textbf{5167cce}.  As it happens, we are trying to get back to the end of that first rebase, before we ran the second.  So if we run the reset against that ID, we should return to our pre-rebased state.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git reset --hard 4d91aab
+HEAD is now at 4d91aab Updated another file again
+john@satsuki:~/coderepo$ git logg -n5
+* f8d5100 (master) Finished new dev
+* 1968324 Start new dev
+| * 4d91aab (HEAD, wonderful) Updated another file again
+| * 1ffe37f Updated another file with 2 edits
+|/  
+* 1c3206a Added a new file
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+As you can see, even though the commit messages are identical, the history of them differs.  Obviously now, it is our rebased version which is left dangling and if it continues to go unused, it will eventually be deleted.  Of course it is also possible to create a branch to point to the dangling commit.  In this way it would never get deleted.  Let us just see how we could achieve this.
+
+Armed with the knowledge that the commit we are looking for is \textbf{5167cce}, we can run the \texttt{git branch} command and specify a starting point.
+
+\begin{Verbatim}
+john@satsuki:~/coderepo$ git branch keeprebase 5167cce
+john@satsuki:~/coderepo$ git branch -v
+  keeprebase 5167cce Updated another file again
+  master     f8d5100 Finished new dev
+* wonderful  4d91aab Updated another file again
+  zaney      7cc32db Made another awesome change
+john@satsuki:~/coderepo$ git logg -n7
+* 5167cce (keeprebase) Updated another file again
+* 551086e Updated another file with 2 edits
+* f8d5100 (master) Finished new dev
+* 1968324 Start new dev
+| * 4d91aab (HEAD, wonderful) Updated another file again
+| * 1ffe37f Updated another file with 2 edits
+|/  
+* 1c3206a Added a new file
+john@satsuki:~/coderepo$ 
+\end{Verbatim}
+
+Notice our branch is now created and looking at the log, it contains the same two commits and the tree looks as we would expect.  We have our \texttt{another\_file} updated in both branches.
