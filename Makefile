@@ -14,7 +14,7 @@ clean:
 	rm -f *.aux *.log *.out *.toc *.idx *.ind *.ilg gitt.pdf
 
 join:
-	pdfjoin images/source/fcover.pdf gitt.pdf --rotateoversize 'false' --outfile output.pdf
+	pdfjoin images/fcover-new.pdf gitt.pdf --rotateoversize 'false' --outfile output.pdf
 
 final: pdf join
 

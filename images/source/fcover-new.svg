@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="0.48.1 r9760"
+   version="1.1"
+   id="svg2"
+   height="744.09448"
+   width="524.40942"
+   sodipodi:docname="fcover-new.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4314">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop4316" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop4318" />
+    </linearGradient>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible">
+      <path
+         id="path3859"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-1"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3859-6"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4309"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4311"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4313"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4315"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4317"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4319"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-5"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3859-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-10"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3859-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-8"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3859-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4557"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4559"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4561"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4563"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4565"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4567"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4569"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4571"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4573"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4575"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4277">
+      <rect
+         style="opacity:0.86238535;fill:#b35014;fill-opacity:1;stroke:none"
+         id="rect4279"
+         width="536.54749"
+         height="761.61615"
+         x="-8.0381651"
+         y="302.80328"
+         ry="0" />
+    </clipPath>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4314"
+       id="radialGradient4320"
+       cx="264.26562"
+       cy="378.35938"
+       fx="264.26562"
+       fy="378.35938"
+       r="306.45312"
+       gradientTransform="matrix(1,0,0,1.3115281,0,-117.86957)"
+       gradientUnits="userSpaceOnUse" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5581">
+      <rect
+         ry="31.333687"
+         y="368.49228"
+         x="88.861565"
+         height="258.46912"
+         width="300.82034"
+         id="rect5583"
+         style="fill:#000000;fill-opacity:1;stroke:none"
+         transform="matrix(0.94843763,0.31696381,-0.31696381,0.94843763,0,0)" />
+    </clipPath>
+    <filter
+       inkscape:collect="always"
+       id="filter5617">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.80738799"
+         id="feGaussianBlur5619" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.65931569"
+     inkscape:cx="56.348874"
+     inkscape:cy="166.80794"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="693"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     borderlayer="true" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-308.26769)">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4448"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+       transform="matrix(0.94843763,-0.31696381,0.31696381,0.94843763,-80.919166,467.17365)"><flowRegion
+         id="flowRegion4450"><rect
+           id="rect4452"
+           width="494.34714"
+           height="496.35669"
+           x="16.07633"
+           y="14.631019"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono" /></flowRegion><flowPara
+         id="flowPara4456">* aed985c (HEAD, develop) More new deving</flowPara><flowPara
+         id="flowPara4458">* af3c6d7 Some new dev work</flowPara><flowPara
+         id="flowPara4460">* f8d5100 (master) Finished new dev</flowPara><flowPara
+         id="flowPara4462">* 1968324 Start new dev</flowPara><flowPara
+         id="flowPara4464">| * 4d91aab (wonderful) Updated another file again</flowPara><flowPara
+         id="flowPara4466">| * 1ffe37f Updated another file with 2 edits</flowPara><flowPara
+         id="flowPara4468">|/  </flowPara><flowPara
+         id="flowPara4470">* 1c3206a Added a new file</flowPara><flowPara
+         id="flowPara4472">* 37950f8 Continued Development</flowPara><flowPara
+         id="flowPara4474">* 9cb2af2 Important Update</flowPara><flowPara
+         id="flowPara4476">*   d50ffb2 Merged in zaney</flowPara><flowPara
+         id="flowPara4478">|\  </flowPara><flowPara
+         id="flowPara4480">| * 7cc32db (zaney) Made another awesome change</flowPara><flowPara
+         id="flowPara4482">| * a27d49e Made an awesome change</flowPara><flowPara
+         id="flowPara4484">* | ed2301b Removed third file</flowPara><flowPara
+         id="flowPara4486">* |   b119573 Merge branch 'wonderful'</flowPara><flowPara
+         id="flowPara4488">|\ \  </flowPara><flowPara
+         id="flowPara4490">| * | cfbecab Fantastic new feature</flowPara><flowPara
+         id="flowPara4492">| |/  </flowPara><flowPara
+         id="flowPara4494">* | 4ac9201 Updated third file</flowPara><flowPara
+         id="flowPara4496">|/  </flowPara><flowPara
+         id="flowPara4498">* 9710177 Added another file</flowPara><flowPara
+         id="flowPara4500">* 55fb69f (tag: v2.0) Added two new files</flowPara><flowPara
+         id="flowPara4502">* 4a155e4 Removed a few files</flowPara><flowPara
+         id="flowPara4504">* a022d4d (tag: v1.0b, tag: v1.0a) Messed with a few files</flowPara><flowPara
+         id="flowPara4506">* 9938a0c Finished adding initial files</flowPara><flowPara
+         id="flowPara4508">* 163f061 (tag: v0.9) Made a few changes to first and second files</flowPara><flowPara
+         id="flowPara4510">* cfe23cb My First Ever Commit</flowPara><flowPara
+         id="flowPara4512">john@satsuki:~/coderepo$ </flowPara><flowPara
+         id="flowPara4514" /></flowRoot>    <rect
+       style="opacity:1;fill:#2d2d2d;fill-opacity:1;stroke:none"
+       id="rect3142"
+       width="1174.0947"
+       height="245.26596"
+       x="-318.73663"
+       y="835.85162"
+       ry="31.333687" />
+    <text
+       xml:space="preserve"
+       style="font-size:22.53083801000000008px;font-style:oblique;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#f9f9f9;fill-opacity:1;stroke:none;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold Oblique"
+       x="376.75809"
+       y="1025.5909"
+       id="text5120"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5122"
+         x="376.75809"
+         y="1025.5909">Peter Savage</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:41.7665596px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS Bold"
+       x="330.55014"
+       y="890.71558"
+       id="text5116"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5118"
+         x="330.55014"
+         y="890.71558"
+         style="-inkscape-font-specification:LMSansDemiCond10 Semi-Bold;font-family:LMSansDemiCond10;font-weight:600;font-style:normal;font-stretch:normal;font-variant:normal">Git In The Trenches</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4448-6"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono;filter:url(#filter5617)"
+       transform="matrix(0.94843763,-0.31696381,0.31696381,0.94843763,-80.867179,467.20962)"
+       clip-path="url(#clipPath5581)"><flowRegion
+         id="flowRegion4450-6"><rect
+           id="rect4452-0"
+           width="494.34714"
+           height="496.35669"
+           x="16.07633"
+           y="14.631019"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono" /></flowRegion><flowPara
+         id="flowPara4456-4">* aed985c (HEAD, develop) More new deving</flowPara><flowPara
+         id="flowPara4458-5">* af3c6d7 Some new dev work</flowPara><flowPara
+         id="flowPara4460-8">* f8d5100 (master) Finished new dev</flowPara><flowPara
+         id="flowPara4462-2">* 1968324 Start new dev</flowPara><flowPara
+         id="flowPara4464-8">| * 4d91aab (wonderful) Updated another file again</flowPara><flowPara
+         id="flowPara4466-6">| * 1ffe37f Updated another file with 2 edits</flowPara><flowPara
+         id="flowPara4468-8">|/  </flowPara><flowPara
+         id="flowPara4470-5">* 1c3206a Added a new file</flowPara><flowPara
+         id="flowPara4472-3">* 37950f8 Continued Development</flowPara><flowPara
+         id="flowPara4474-4">* 9cb2af2 Important Update</flowPara><flowPara
+         id="flowPara4476-0">*   d50ffb2 Merged in zaney</flowPara><flowPara
+         id="flowPara4478-1">|\  </flowPara><flowPara
+         id="flowPara4480-7">| * 7cc32db (zaney) Made another awesome change</flowPara><flowPara
+         id="flowPara4482-7">| * a27d49e Made an awesome change</flowPara><flowPara
+         id="flowPara4484-8">* | ed2301b Removed third file</flowPara><flowPara
+         id="flowPara4486-0">* |   b119573 Merge branch 'wonderful'</flowPara><flowPara
+         id="flowPara4488-8">|\ \  </flowPara><flowPara
+         id="flowPara4490-9">| * | cfbecab Fantastic new feature</flowPara><flowPara
+         id="flowPara4492-7">| |/  </flowPara><flowPara
+         id="flowPara4494-8">* | 4ac9201 Updated third file</flowPara><flowPara
+         id="flowPara4496-3">|/  </flowPara><flowPara
+         id="flowPara4498-9">* 9710177 Added another file</flowPara><flowPara
+         id="flowPara4500-7">* 55fb69f (tag: v2.0) Added two new files</flowPara><flowPara
+         id="flowPara4502-2">* 4a155e4 Removed a few files</flowPara><flowPara
+         id="flowPara4504-5">* a022d4d (tag: v1.0b, tag: v1.0a) Messed with a few files</flowPara><flowPara
+         id="flowPara4506-0">* 9938a0c Finished adding initial files</flowPara><flowPara
+         id="flowPara4508-2">* 163f061 (tag: v0.9) Made a few changes to first and second files</flowPara><flowPara
+         id="flowPara4510-4">* cfe23cb My First Ever Commit</flowPara><flowPara
+         id="flowPara4512-8">john@satsuki:~/coderepo$ </flowPara><flowPara
+         id="flowPara4514-0" /></flowRoot>  </g>
+</svg>
