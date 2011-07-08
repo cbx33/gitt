@@ -29,6 +29,8 @@
 \RequirePackage[final]{microtype}
 \RequirePackage{tikz}
 \RequirePackage{makeidx}
+\RequirePackage{eso-pic}
+\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}
 \makeindex
 
 % Import a new font and use the sans-serif version by default
@@ -104,6 +106,16 @@
   \par\begin{center}*\quad*\quad*\end{center}\par
 }
 
+% Inserts a full-page graphic.
+\newcommand{\coverpage}[1]{%
+  \thispagestyle{empty}%
+  \IfFileExists{#1}{%
+    \AddToShipoutPicture*{\put(0,0){\includegraphics[width=\paperwidth,height=\paperheight]{#1}}}%
+  }{%
+    \ClassWarningNoLine{gitt}{Missing cover page graphic:\MessageBreak #1}%
+  }%
+  \null\cleardoublepage%
+}
 
 \newcommand{\indexref}[1]{%
 \index{#1|textit}%
