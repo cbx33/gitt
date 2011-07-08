@@ -12,9 +12,3 @@ html:
 clean:
 	rm gitt -Rf
 	rm -f *.aux *.log *.out *.toc *.idx *.ind *.ilg gitt.pdf
-
-join:
-	pdfjoin images/fcover-new.pdf gitt.pdf --rotateoversize 'false' --outfile output.pdf
-
-final: pdf join
-
