@@ -19,6 +19,10 @@
 \setulmarginsandblock{1.91cm}{1.91cm}{*}
 \checkandfixthelayout
 
+% Reset the figure numbering at the beginning of each chapter and print only
+% the figure number (not including the chapter number).
+\renewcommand{\thefigure}{\arabic{figure}}
+
 % Import packages
 \RequirePackage{graphicx}
 \RequirePackage{color,fancyvrb,relsize}
