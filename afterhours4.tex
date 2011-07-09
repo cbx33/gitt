@@ -43,7 +43,7 @@ Usually, when developing software, the code tree will be branched at various poi
 
 Let us go back to our example above.  We are attempting to merge in \textbf{zaney} to the \textbf{wonderful} branch.  We need to find the \textbf{C} in our equation.  To do this we could pour over Figure 1.  This should yield the result to be commit \textbf{9710177}.  Is there are way we can ask Git to do the same thing?  The following output introduces a new command that is used to find the \emph{Best Common Ancestor} for a given merge proposal.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo-af4$ git merge-base wonderful zaney
 9710177657ae00665ca8f8027b17314346a5b1c4
 john@satsuki:~/coderepo-af4$ git cat-file -p 9710177
@@ -55,7 +55,7 @@ committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301613377
 
 Added another file
 john@satsuki:~/coderepo-af4$ 
-\end{Verbatim}
+\end{code}
 
 In our example, \indexgit{merge-base} uses two parameters to speficy the two heads that we wish to merge.  We can see that the commit that Git suggests as the \emph{Best Common Ancestor} is what we suggested above, \textbf{9710177}.  We have reused our \texttt{git cat-file} command to prove that the commit is the one we suggested, as you can see, the commit messages match.
 

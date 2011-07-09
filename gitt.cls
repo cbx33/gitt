@@ -129,3 +129,40 @@
 \texttt{git #1}%
 \index{git commands!#1@\texttt{#1}}%
 }
+
+% Colour definitions
+\definecolor{lightgrey}{gray}{.96}
+
+\RequirePackage{listings}
+\RequirePackage{courier}
+\lstnewenvironment{code}{
+  \lstset{
+%    language=bash,
+    basicstyle=\scriptsize\ttfamily,
+    identifierstyle=\scriptsize\ttfamily,
+    commentstyle=\scriptsize\ttfamily,
+    stringstyle=\scriptsize\ttfamily,
+    keywordstyle=\scriptsize\bfseries\ttfamily,
+%    numbers=left,
+%    numberstyle=\tiny,
+%    stepnumber=5,
+%    numbersep=3pt,
+    backgroundcolor=\color{lightgrey},
+    frame=leftline,
+    framerule=1mm,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    framexleftmargin=2pt,
+    framexrightmargin=2pt,
+    xleftmargin=10pt,
+    xrightmargin=2pt,
+    breaklines=true,
+    breakatwhitespace=true,
+    breakindent=4pt,
+%    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\backslash}},
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow}},
+    tabsize=2,
+    showstringspaces=false
+  }
+  \vspace{1em}
+}{\vspace{1em}}
