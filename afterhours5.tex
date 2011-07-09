@@ -11,7 +11,7 @@ To demonstrate this we are going to create a new branch called \textbf{fantasy} 
 
 So let us start by creating our branch and making some changes as shown below.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git checkout -b fantasy
 Switched to a new branch 'fantasy'
 john@satsuki:~/coderepo$ echo "This is line 1" > newfile1 
@@ -20,11 +20,11 @@ john@satsuki:~/coderepo$ echo "This is line 3" >> newfile1
 john@satsuki:~/coderepo$ echo "This is line 4" >> newfile1
 john@satsuki:~/coderepo$ echo "This is a new line" >> newfile2 
 john@satsuki:~/coderepo$ echo "This is another new line" >> newfile2 
-\end{Verbatim}
+\end{code}
 
 Let us now just run a \texttt{git diff} to see exactly what the changes are.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git diff
 diff --git a/newfile1 b/newfile1
 index 44640b2..0eccf1a 100644
@@ -47,11 +47,11 @@ index 3545c1d..40efcce 100644
 +This is a new line
 +This is another new line
 john@satsuki:~/coderepo$ 
-\end{Verbatim}
+\end{code}
 
 \index{hunk editing (cli)}Now, we could just do \texttt{git commit -a} and be done with it, but what if we really wanted to split this information up into four commits?  We will introduce a new parameter to our \texttt{git add} tool from before.  We are going to use the \texttt{git add -p} or \texttt{git add --patch}.  This will allow us to interactively edit the hunks before they are committed.  To begin with, let us run \texttt{git add -p} and see what it is we need to do.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git add -p
 diff --git a/newfile1 b/newfile1
 index 44640b2..0eccf1a 100644
@@ -65,11 +65,11 @@ index 44640b2..0eccf1a 100644
 +This is line 3
 +This is line 4
 Stage this hunk [y,n,q,a,d,/,e,?]? 
-\end{Verbatim}
+\end{code}
 
 We are given the options of \texttt{y,n,q,a,d,/,e,?}.  At first glance, this may seem rather daunting.  Let us choose the \texttt{?} and see what help is presented to us.
 
-\begin{Verbatim}
+\begin{code}
 Stage this hunk [y,n,q,a,d,/,e,?]? ?   
 y - stage this hunk
 n - do not stage this hunk
@@ -93,7 +93,7 @@ e - manually edit the current hunk
 +This is line 3
 +This is line 4
 Stage this hunk [y,n,q,a,d,/,e,?]? 
-\end{Verbatim}
+\end{code}
 
 So it appears that Git is offering us the opportunity to either 
 \begin{itemize}
@@ -110,7 +110,7 @@ In fact, though the help mentioned a \textbf{split} command, we do not have this
 
 Here we are left in our chosen text editor, to either add, modify or remove lines from the hunk.  In our case, we are going to delete a few lines.  We only want to leave the first line of additions.  Just because we delete the others does not mean they are deleted from the working copy.  Remember, we are not editing the actual files here.  Just the hunks that are going to be staged.
 
-\begin{Verbatim}
+\begin{code}
 # Manual hunk edit mode -- see bottom for a quick guide
 @@ -1,2 +1,4 @@
 -A new file
@@ -128,11 +128,11 @@ Here we are left in our chosen text editor, to either add, modify or remove line
 # marked for staging. If it does not apply cleanly, you will be given
 # an opportunity to edit again. If all lines of the hunk are removed,
 # then the edit is aborted and the hunk is left unchanged.
-\end{Verbatim}
+\end{code}
 
 After the deletes, the editors file should look like this.
 
-\begin{Verbatim}
+\begin{code}
 # Manual hunk edit mode -- see bottom for a quick guide
 @@ -1,2 +1,4 @@
 -A new file
@@ -147,11 +147,11 @@ After the deletes, the editors file should look like this.
 # marked for staging. If it does not apply cleanly, you will be given
 # an opportunity to edit again. If all lines of the hunk are removed,
 # then the edit is aborted and the hunk is left unchanged.
-\end{Verbatim}
+\end{code}
 
 Once we quit our editor, we are then asked about the next hunk.  In our case, we are going to apply all of the changes to our second file during this commit.  To do this we are going to use the \texttt{a} option.
 
-\begin{Verbatim}
+\begin{code}
 diff --git a/newfile2 b/newfile2
 index 3545c1d..40efcce 100644
 --- a/newfile2
@@ -164,11 +164,11 @@ index 3545c1d..40efcce 100644
 Stage this hunk [y,n,q,a,d,/,e,?]? a
 
 john@satsuki:~/coderepo$ 
-\end{Verbatim}
+\end{code}
 
 At first glance, we do not appear to have been left with any indication that anything has taken place.  In order to perform a check we shall run out obligatory \texttt{git diff}, both between the working copy and the index, and between the index and the last commit.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git diff
 diff --git a/newfile1 b/newfile1
 index f702b65..0eccf1a 100644
@@ -180,11 +180,11 @@ index f702b65..0eccf1a 100644
 +This is line 3
 +This is line 4
 john@satsuki:~/coderepo$ 
-\end{Verbatim}
+\end{code}
 
 So above, we can see that the difference between the working copy and the index, or staging area, is the last three lines that we are not ready to commit yet.  Below we can see the difference between the staging area and the last commit to the repository.  This includes the three lines that we included during our interactive commit preparation.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git diff --cached
 diff --git a/newfile1 b/newfile1
 index 44640b2..f702b65 100644
@@ -204,11 +204,11 @@ index 3545c1d..40efcce 100644
 +This is a new line
 +This is another new line
 john@satsuki:~/coderepo$ 
-\end{Verbatim}
+\end{code}
 
 We can now commit in the normal way, and continue to edit the working copy to stage the sections we require.  The following output is shortened for brevity.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git commit -m 'Added first line'
 [fantasy 03bd20c] Added first line
  2 files changed, 3 insertions(+), 2 deletions(-)
@@ -231,11 +231,11 @@ john@satsuki:~/coderepo$ git add -p
 ...
 ...
 ...
-\end{Verbatim}
+\end{code}
 
 We have gone through the process of editing each hunk for each commit and have performed the commits.  
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log
 commit a59e73b1dc571318a1154aa4c2fc591ab6f1f395
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -260,11 +260,11 @@ Author: John Haskins <john.haskins@tamagoyakiinc.koala>
 Date:   Wed Apr 13 23:55:32 2011 +0100
 
     Added first line
-\end{Verbatim}
+\end{code}
 
 \index{hunk editing(gui)}Next we are going to see how to perform exactly the same procedure using \texttt{git gui}.  For a start, we are going to reset our branch HEAD and our index back to their state before we made the last four commits, however we are going to leave the working copy files in the state they were after these last four commits.  This is called a \textbf{mixed} reset, as it modifies the staging area and the HEAD, but does not touch the working files.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log --oneline
 a59e73b Added fourth line
 3ca3d62 Added third line
@@ -279,11 +279,11 @@ Unstaged changes after reset:
 M	newfile1
 M	newfile2
 john@satsuki:~/coderepo$ 
-\end{Verbatim}
+\end{code}
 
 Now we will run a diff, just to be sure.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git diff
 diff --git a/newfile1 b/newfile1
 index 44640b2..0eccf1a 100644
@@ -306,7 +306,7 @@ index 3545c1d..40efcce 100644
 +This is a new line
 +This is another new line
 john@satsuki:~/coderepo$ 
-\end{Verbatim}
+\end{code}
 
 If we now run our \texttt{git gui} command, we will see the changes that are present, once we click on one of the files in the left hand portion of the screen.  Let us start with \texttt{newfile2} as we want every change from that file present in this commit.  Figure 1 shows what \texttt{git gui} looks like at this stage.
 
@@ -338,13 +338,13 @@ Figure 3, shows what our file looks like after the first commit.  Interestingly,
 
 Let us now move back to our \textbf{master} branch and remove the \textbf{fantasy} branch.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git checkout master
 Switched to branch 'master'
 john@satsuki:~/coderepo$ git branch -D fantasy
 Deleted branch fantasy (was 29ceede).
 john@satsuki:~/coderepo$ 
-\end{Verbatim}
+\end{code}
 
 Notice that because we used the capitol \texttt{-D} parameter, we were not asked if we were sure we wanted to delete the \textbf{fantasy} branch.
 
