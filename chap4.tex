@@ -10,7 +10,7 @@ Tamagoyaki Inc have now realised that they have to take these things slow and st
 \begin{trenches}
 ``Dude!'' shouted Eugene from across the office.  ``Dude!!'' he repeated.
 
-No one looked up and the hum of the computers seemed to drown out the mumours of voices and clicking of keys.  
+No one looked up and the hum of the computers seemed to drown out the murmurs of voices and clicking of keys.  
 
 ``Dud\ldots'' He was cut off by another voice.  It was Klaus.
 
@@ -197,7 +197,7 @@ Now we know about branches in general, we should really learn about how to merge
 
 Of course we could do this the old fashioned way.  We could switch into our \textbf{wacky} branch, do a little development, copy the files somewhere else, switch to our \textbf{master} branch, and paste the files over the top.  Now, this is probably the simplest way of merging possible.  In actual fact, this is not really merging at all.  However one thing that would be lost is the history of how that branch has developed over time.  Sometimes this can be crucial for knowing why certain things were changed during the development process.
 
-\index{merging}Let us take a litle look at the command output of a simple merge, explain it a little, and then look at a diagrammatic representation.
+\index{merging}Let us take a little look at the command output of a simple merge, explain it a little, and then look at a diagrammatic representation.
 
 \begin{code}
 john@satsuki:~/coderepo$ git branch
@@ -383,7 +383,7 @@ john@satsuki:~/coderepo$
 \caption{Repository showing how things \emph{should} look}
 \end{figure}
 
-Figure 3 shows how our repository looks now, whereas Figure 4 shows how the repository should have looked if we had performed it properly.  You should notice that the positions of \texttt{master} and \texttt{zaney} have switched places.  How can we recify this?
+Figure 3 shows how our repository looks now, whereas Figure 4 shows how the repository should have looked if we had performed it properly.  You should notice that the positions of \texttt{master} and \texttt{zaney} have switched places.  How can we rectify this?
 
 We already discussed one method using \texttt{git revert}, which we are due to cover a little later.  However, because of the way that the history has been written, we can do something very simple.  We are going do the following the following steps.
 
@@ -422,7 +422,7 @@ john@satsuki:~/coderepo$
 
 As you can see, we are told that the HEAD of our master branch is now at commit \textbf{9710177}.  \index{rewinding}We have successfully rewound our \textbf{master} branch to a previous state.  The \texttt{--hard} parameter reset the index and the working tree to be at the state of the commit we tell it to.  It disregards all working copy and staged modifications, so use it with care.
 
-The \texttt{git reset} command does not only work for rewinding back in time.  It can also be used to move a branch forward in time.  As an example of this, we used a fast-forward merge to move our \textbf{zaney} branch forward to be inline with master.  We could just have easily used \texttt{git reset --hard 7cc32db} from within the zaney branch, to bring it to the same point as the master.  In fact, though it looks scary, we could also have used \texttt{git reset --hard master} to reset the \textbf{zaney} branch to be at the same point as \textbf{master}.  Saves typing out those horrid commits does it not?
+The \texttt{git reset} command does not only work for rewinding back in time.  It can also be used to move a branch forward in time.  As an example of this, we used a fast-forward merge to move our \textbf{zaney} branch forward to be in-line with master.  We could just have easily used \texttt{git reset --hard 7cc32db} from within the zaney branch, to bring it to the same point as the master.  In fact, though it looks scary, we could also have used \texttt{git reset --hard master} to reset the \textbf{zaney} branch to be at the same point as \textbf{master}.  Saves typing out those horrid commits does it not?
 
 Finally we are going to introduce one more use of the \texttt{git log} command to show us how our repository looks in a semi-graphical way.
 
@@ -732,7 +732,7 @@ So, at the end of this week, we have learnt how to create branches, how to merge
 
 \item\texttt{git log -n1} - Limits the output of the log command to only a single commit
 
-\item\texttt{git branch -v} - Verbosely list all local branchs
+\item\texttt{git branch -v} - Verbosely list all local branches
 
 \item\texttt{git show <reference>} - Show the information pointed to by the reference
 
