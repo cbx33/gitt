@@ -18,18 +18,18 @@ Once was a simple clone called \texttt{coderepo-cl} and the other was a bare rep
 The \texttt{coderepo-cl} and the \texttt{coderepo-bk} repositories were both cloned from \texttt{coderepo}, but it was \texttt{coderepo-cl} that was configured to pull from one and push to the other.
 Running a simple \texttt{git remote -v} command, confirms this configuration.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo-cl$ git remote -v
 backup	/home/john/coderepo-bk (fetch)
 backup	/home/john/coderepo-bk (push)
 origin	/home/john/coderepo (fetch)
 origin	/home/john/coderepo (push)
 john@satsuki:~/coderepo-cl$
-\end{Verbatim}
+\end{code}
 
 We can get even more information by running the \texttt{git remote show} tool with the remote name as a parameter.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo-cl$ git remote show origin
 * remote origin
   Fetch URL: /home/john/coderepo
@@ -46,12 +46,12 @@ john@satsuki:~/coderepo-cl$ git remote show origin
     master    pushes to master    (up to date)
     wonderful pushes to wonderful (up to date)
 john@satsuki:~/coderepo-cl$
-\end{Verbatim}
+\end{code}
 
 How though, is this data set up and configured from within Git itself.
 Looking at the \texttt{.git/config} file, we can see a glimpse of this.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo-cl$ cat .git/config
 [core]
 	repositoryformatversion = 0
@@ -71,6 +71,6 @@ john@satsuki:~/coderepo-cl$ cat .git/config
 	url = /home/john/coderepo-bk
 	fetch = +refs/heads/*:refs/remotes/backup/*
 john@satsuki:~/coderepo-cl$
-\end{Verbatim}
+\end{code}
 
 As you can see

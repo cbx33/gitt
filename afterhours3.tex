@@ -15,23 +15,23 @@ Though we are not going to go into the problem in great detail, it is useful to 
 Essentially you have two sequences, for now we are going to simplify the problem and work on a string of letters.
 
 Old string:
-\begin{Verbatim}
+\begin{code}
 a b c d e j k l m p r s
-\end{Verbatim}
+\end{code}
 
 New string:
-\begin{Verbatim}
+\begin{code}
 a c d f g h i j n o p t u
-\end{Verbatim}
+\end{code}
 
 The challenge is to find the longest sequence of items that is present in both of the strings above.
 This new sequence is found by deleting items from the first and second set until all that remains is a sequence of common items.
 
 In our example case, this is as follows
 LCS string:
-\begin{Verbatim}
+\begin{code}
 a c d j p
-\end{Verbatim}
+\end{code}
 
 Comparing this to each of our strings above, it is easy to generate a diff.
 If the items are present in the \emph{Old string}, but not in the LCS string then they must have been deleted.
@@ -39,10 +39,10 @@ Conversely if they are present in the \emph{New string}, but not the LCS, then t
 Putting this into practice in our example and marking deletions with \texttt{-} and additions with \texttt{+}, we get the following:
 
 Diff string:
-\begin{Verbatim}
+\begin{code}
 b e fghi klm o rs tu
 - - ++++ --- + -- ++
-\end{Verbatim}
+\end{code}
 
 The actual algorithm for generating the LCS and the subsequent diff is too complex to describe here and is out of the scope of this book.
 This section was included to give you some idea of how Git performs some of its actions internally.
@@ -57,24 +57,24 @@ Let us see how this works in practice.
 
 Firstly we can use the \texttt{git tag} command to show all tags that are currently in the repository.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git tag
 v0.9
 v1.0a
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Now let us create a new tag and give it some extra information.
 \index{tagging!annotated}
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git tag v1.0b -m 'This is an annotated tag'
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Unfortunately Git was not particularly forthcoming with information on the creation of the tag.
 On saying that, it is not difficult for us to use the \texttt{git show} command to see what we have done.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git show v1.0b
 tag v1.0b
 Tagger: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -104,7 +104,7 @@ index 0000000..5d27866
 @@ -0,0 +1 @@
 +Addition to the line
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Notice that as well as showing us the tag itself, the \texttt{git show} command also gave us a diff of what exactly changed in this commit.
 Small details like this are what makes Git in particular a joy to use for developers.
@@ -119,7 +119,7 @@ This is an After Hours section after all.
 The implementation of tags in Git is very simple indeed.
 We are going to jump into the \texttt{.git} directory and take a look at a simple output from some commands.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ cd .git/
 john@satsuki:~/coderepo/.git$ ls
 branches        config       HEAD   index  logs     refs
@@ -130,14 +130,14 @@ v0.9  v1.0a  v1.0b
 john@satsuki:~/coderepo/.git/refs/tags$ cat v1.0a
 a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
 john@satsuki:~/coderepo/.git/refs/tags$
-\end{Verbatim}
+\end{code}
 
 Inside the \texttt{.git/refs/tags} folder, there is a file for every single tag in the system.
 This file contains a single string of characters.
 That string looks oddly like an SHA-1 commit to me.
 Using the tricks that we learnt in the last After Hours section, we can interrogate the Git repository, by throwing a few wrenches at it.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git cat-file -p a022d4
 tree 96551f45496232c0ec6b389731d55fa3d7e1c8fd
 parent 9938a0c30940dccaeddce4bb2eb151fba3a21ae5
@@ -149,29 +149,29 @@ Messed with a few files
 john@satsuki:~/coderepo$ git cat-file -t a022d4
 commit
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Excellent! Just as we expected.
 So Git stores the SHA-1 hash for the commit we are referring to, in a file which has the same name as the tag.
 Just for clarity, let us run the same set of commands against our newly created annotated tag.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ cd .git/refs/tags/
 john@satsuki:~/coderepo/.git/refs/tags$ cat v1.0b
 6cbcf47957589bf4b84cc934a26731636d021574
 john@satsuki:~/coderepo/.git/refs/tags$
-\end{Verbatim}
+\end{code}
 
 Hang on a minute! Shouldn't the output of the \texttt{v1.0a} and \texttt{v1.0b} files be the same.
 There were both created at the same point in the repositories history.
 They were both supposed to be pointing to the same commit.
 Let us use a little plumbing and see what is going on.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git cat-file -t 6cbcf4
 tag
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Interesting.
 So it seems as if there is another type of object that can be added to the list.
@@ -183,7 +183,7 @@ When the tag was merely a pointer to a commit object, the repository required no
 Now we have more information, Git treats the information just as it would any other, by creating an object.
 We can investigate this further and use the \texttt{-p} parameter to the \texttt{git cat-file} command to see exactly what is stored within this file.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git cat-file -p 6cbcf4
 object a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
 type commit
@@ -193,7 +193,7 @@ tagger John Haskins <john.haskins@tamagoyakiinc.koala>
 
 This is an annotated tag
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 So an annotated tag contains more information than just the commit ID we are referring to.
 This is pretty handy and later on in the book we will start talking about topics like signed tags, which are required if you wish to verify the identity of the person claiming to have created the tag.

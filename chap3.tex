@@ -16,7 +16,7 @@ By its very nature, a version control system is also a logging system.
 Every time we committed something into the repository in the last chapter, we supplied a log message.
 In fact, if we don't supply a commit message, let us see what happens.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git status
 # On branch master
 # Untracked files:
@@ -31,7 +31,7 @@ john@satsuki:~/coderepo$ git commit -a -m ''
 Aborting commit due to empty commit message.
 john@satsuki:~/coderepo$ git reset my_third_committed_file
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Git will actually not allow you to commit with a blank message.
 This is actually fantastic news, as people are far less likely to write a useless message than they are a blank one.
@@ -56,7 +56,7 @@ At its simplest, \indexgit{log} will give an output of all of the commits that h
 Depending on what type of machine you are using it on, the output from \texttt{git log} will be navigable, usually using the up and down arrows, with 'q' used to quit.
 Let's have a quick look at the output of our test repository and see what the log messages look like.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log
 commit 9938a0c30940dccaeddce4bb2eb151fba3a21ae5
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -77,7 +77,7 @@ Date:   Thu Mar 31 20:27:44 2011 +0100
     My First Ever Commit
 john@satsuki:~/coderepo$
 
-\end{Verbatim}
+\end{code}
 
 The \texttt{git log} command shows us a chronological list of all of the commits to the repository and also gives us several more important pieces of information.
 In total there are four pieces of information displayed by default.
@@ -110,11 +110,11 @@ When you first install Git, it probably won't have the correct information in th
 
 To set up your name and email address, we need to modify use \indexgit{config} again.
 
-\begin{Verbatim}
+\begin{code}
 $ git config --global user.name "John Haskins"
 $ git config --global user.email
 "john.haskins@tamagoyakiinc.koala"
-\end{Verbatim}
+\end{code}
 
 That's it.
 Now by default, Git will use this setting whenever you commit to a repository, unless you override it by locally modifying the repository's \texttt{.gitconfig}.
@@ -155,7 +155,7 @@ It would have been useful if the particular item that was being searched for had
 This command will search through the commits in a repository and will return a list of commits which introduced or removed a specific string into the repository.
 First of all, let's run this against our test repository.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log -SChange1
 commit 163f06147a449e724d0cfd484c3334709e8e1fce
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -163,7 +163,7 @@ Date:   Thu Mar 31 20:32:59 2011 +0100
 
     Made a few changes to first and second files
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 You can see that \texttt{git log} has shown us the commit that instantiated the change.
 As you can imagine, when using a large code base, this tool can be invaluable.
@@ -171,7 +171,7 @@ It allows us to pinpoint a specific moment when a certain string of text entered
 When running this against a very large repository, this could take a long time, and so the ability to shrink the search scope down will result in a much faster result.
 To do this we can append a path to our previous command.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log -SChange2 my_first_committed_file
 john@satsuki:~/coderepo$ git log -SChange2 my_second_committed_file
 commit 9938a0c30940dccaeddce4bb2eb151fba3a21ae5
@@ -180,7 +180,7 @@ Date:   Thu Mar 31 20:34:23 2011 +0100
 
     Finished adding initial files
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 If you remember from our committing back in Week 2, we added the string \texttt{Change2} to the second file but not the first.
 So the first time we run this command, it fails, as we are searching against \texttt{my\_first\_committed\_file}.
@@ -206,7 +206,7 @@ This can often be enhanced by a visual diff viewer, but for now, let's stick wit
 If we want to find out what the changes are between our current commit and one of the previous ones, we can write a command like the one below.
 Notice that below, \textbf{163f06} refers to the second commit that we made to the repository.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git diff 163f06
 diff --git a/my_second_committed_file b/my_second_committed_file
 index 3ad4cc3..095b9cd 100644
@@ -216,7 +216,7 @@ index 3ad4cc3..095b9cd 100644
  Change1
 +Change2
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 What this is telling us, is that between \textbf{e86dd} and our current commit \textbf{6ca16}, we added the line \emph{Change2} to the file \texttt{my\_second\_committed\_file}.
 We can see this by the preceding \texttt{+} on the line \texttt{Change2}.
@@ -224,7 +224,7 @@ Let's make a few changes to our repository and see how the diffs look.
 We're actually going to make a few changes to the files using a text editor so that you can't see what we've done.
 Then, hopefully, when we run the \texttt{git diff} you'll be able to see clearly what has happened.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log HEAD~1..HEAD
 commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -232,7 +232,7 @@ Date:   Thu Mar 31 22:05:55 2011 +0100
 
     Messed with a few files
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 The command \texttt{git log HEAD\textasciitilde1..HEAD} tells Git to show us the git log for all commits between \texttt{HEAD~1} and \texttt{HEAD}.
 The notation used here is something new to us, but seeing as HEAD points to the most current commit, HEAD~1 points to the commit previous to HEAD.
@@ -242,7 +242,7 @@ As it turns out, John Haskins didn't really create a very meaningful log message
 \emph{Messed with a few files} is pretty unhelpful in the grand scheme of things.
 So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit \textbf{a022d4}.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git diff HEAD~1..HEAD
 diff --git a/my_second_committed_file b/my_second_committed_file
 index 095b9cd..c9887f8 100644
@@ -260,39 +260,39 @@ index 0000000..5d27866
 @@ -0,0 +1 @@
 +Addition to the line
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 As you can see, we have several things going on here, so let's take each of them in isolation and see what is going on.
 We are going to dissect the diff to see what each section means.
 
-\begin{Verbatim}
+\begin{code}
 diff --git a/my_second_committed_file b/my_second_committed_file
-\end{Verbatim}
+\end{code}
 
 This first line tells us that we are dealing with \newline\texttt{my\_second\_committed\_file}.
 This is showing that we are comparing the first revision, or a, against the second revision, b.
 
-\begin{Verbatim}
+\begin{code}
 index 095b9cd..c9887f8 100644
-\end{Verbatim}
+\end{code}
 
 This second line actually tells us the beginning of the object IDs, as they are stored in the repository.
 Note that these IDs are not the commit IDs, but the actual blob IDs that Git uses to refer to the file.
 For more information on this, checkout the \emph{Object's living in harmony} breakout box.
 
-\begin{Verbatim}
+\begin{code}
 --- a/my_second_committed_file
 +++ b/my_second_committed_file
-\end{Verbatim}
+\end{code}
 
 The next few lines are telling us which is the original file, and which is the new file, so we can use this as a reference.
 
-\begin{Verbatim}
+\begin{code}
 @@ -1,2 +1 @@
 -Change1
 -Change2
 +Changed this file completely
-\end{Verbatim}
+\end{code}
 
 \index{diff!hunk}Now we see some lines which are generally referred to as a hunk.
 The hunk has two important pieces of information.
@@ -305,12 +305,12 @@ Strings \texttt{Change1} and \texttt{Change2} were deleted from the file, wherea
 Looking at the next diff segment, we can see it applies to a different file.
 Essentially this hunk is no different to the last, the only interesting portion is shown below.
 
-\begin{Verbatim}
+\begin{code}
 new file mode 100644
 index 0000000..5d27866
 --- /dev/null
 +++ b/my_third_committed_file
-\end{Verbatim}
+\end{code}
 
 This shows us that \texttt{my\_third\_committed\_file} is actually a new file.
 Notice the \texttt{/dev/null} and the \texttt{0000000} object ID, indicating that there was no original file.
@@ -352,7 +352,7 @@ Now, whilst we are further empowered by having the diff output in chronological 
 Suppose we want to view all the commits that we made in the last week, typing the following into the command line in our test repository yields the following result.
 
 \index{diff!from a date}
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log -p --since="last week"
 commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -377,7 +377,7 @@ index 0000000..5d27866
 +Addition to the line
 
 ...
-\end{Verbatim}
+\end{code}
 
 Notice we get to see the diff that was presented before when we ran our \texttt{git diff HEAD\textasciitilde1..HEAD} command, but this time, as we have used the git log command instead, we get to see the diff output as well.
 This is what the \texttt{-p} flag is for.
@@ -392,7 +392,7 @@ Using the methods described above, will give the user all of the changes, catego
 If the developer can further categorise the issue, such as, ``I know which file the change must have occurred in'', then the following example will demonstrate just how easy it is to filter the results even further.
 Even in the simplified example repository that we have been using, running this command filters the output to a single file.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log -p --since="last week" --
 my_second_committed_file
 commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
@@ -438,7 +438,7 @@ index 0000000..3ad4cc3
 @@ -0,0 +1 @@
 +Change1
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 See how easy that is.
 Note, the \texttt{--} is necessary to tell Git the following string is a path.
@@ -470,31 +470,31 @@ Due to the simplicity of tags, it is also possible and very simple to tag a comm
 Let us take a look at a simple tag example.
 We will make the current point in the repository \texttt{v1.0a}.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git tag v1.0a
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 On its own, this output from \indexgit{tag} doesn't really tell us much, but running the following, shows us a little more information
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git rev-parse v1.0a
 a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 By running the \indexgit{rev-parse} with the tag name \texttt{v1.0a}, Git has returned us the SHA-1 hash of the commit we were referring to.
 If we look back up at the earlier output, we can see that the most recent commit into the repository was indeed \textbf{a022d4d1edc69970b4e8b3fe1da3dccd943a55e4}.
 To give us something to work with, let's tag the commit \textbf{163f06\ldots} with the tag name \texttt{v0.9}.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git tag v0.9 163f06
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Now, we can do the following;
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git diff v0.9..v1.0a
 diff --git a/my_second_committed_file b/my_second_committed_file
 index 3ad4cc3..c9887f8 100644
@@ -511,7 +511,7 @@ index 0000000..5d27866
 @@ -0,0 +1 @@
 +Addition to the line
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Notice that instead of using the dynamic reference HEAD, we have now used the tag names \texttt{v0.9} and \texttt{v1.0a} to refer to our previous commits and have returned the combined diff output of all the changes which occurred between the two.
 
@@ -615,7 +615,7 @@ As we are looking for only a single file, we should consider looking at the chec
 
 So now let us see how we can use \texttt{git checkout} to take one of our files back to the past.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git status
 # On branch master
 nothing to commit (working directory clean)
@@ -626,9 +626,9 @@ john@satsuki:~/coderepo$ git checkout HEAD -- my_second_committed_file
 john@satsuki:~/coderepo$ cat my_second_committed_file
 Changed this file completely
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git status
 # On branch master
 nothing to commit (working directory clean)
@@ -645,7 +645,7 @@ john@satsuki:~/coderepo$ git status
 # On branch master
 nothing to commit (working directory clean)
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Notice how we first checked that we didn't have any local modifications by running the \texttt{git status} command.
 Then we are safe to run the \texttt{git checkout} command.
@@ -662,7 +662,7 @@ Then we run the command one more time, but this time we intersperse it with a \t
 The \texttt{git show} command will have largely the same effect, except it grabs us the data without having to change existing files in our working copy.
 Let us view a quick example.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git show v0.9:my_second_committed_file
 Change1
 john@satsuki:~/coderepo$ git show v0.9:my_second_committed_file >
@@ -670,7 +670,7 @@ john@satsuki:~/coderepo$ git show v0.9:my_second_committed_file >
 john@satsuki:~/coderepo$ cat temp_file
 Change1
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 The format of the \texttt{git show} command is rather similar to the checkout command we used a few moments ago.
 The only difference is the presence of the colon, instead of the double hyphen.

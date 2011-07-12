@@ -45,7 +45,7 @@ In essence you are able to take things in a completely different direction, safe
 
 This is best illustrated by a little demonstration, so we are going to take our testing repository and branch off to try out new, wonderful and wacky things.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ ls
 my_first_committed_file   my_third_committed_file
 my_second_committed_file  temp_file
@@ -54,7 +54,7 @@ john@satsuki:~/coderepo$ git branch
 * master
   wacky
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 From looking at the output, it would appear that our \texttt{git branch wacky} command did not accomplish a whole lot.
 Running the \indexgit{branch} command will give us a list of all branches in the repository.
@@ -67,14 +67,14 @@ However we have not yet switched to it.
 To do this, we use our good friend \texttt{git checkout}.
 This will change the working copy to reflect the most recent commit in that branch, and will reset our HEAD accordingly, so that it points to this latest commit
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git checkout wacky
 Switched to branch 'wacky'
 john@satsuki:~/coderepo$ git branch
   master
 * wacky
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Now the \texttt{*} has moved to be in front of the word \texttt{wacky} and we have confirmation from the line above that we have in fact \texttt{Switched to branch 'wacky'}.
 Now we are here in wonderland, what can we do? Well, potentially anything we could do in our previous branch, but with the added benefit that we are separated.
@@ -84,7 +84,7 @@ Whilst this is true in one sense, the \texttt{git init} command actually created
 We will start off by taking a deeper look at what is present in our branch.
 Running a \texttt{git log} shows us the history of our branch.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log
 commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -110,7 +110,7 @@ Date:   Thu Mar 31 20:27:44 2011 +0100
 
     My First Ever Commit
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 You may notice here that the log messages being displayed are identical to that which we had before in our \textbf{master} branch.
 This is nothing to be worried about.
@@ -120,7 +120,7 @@ As we have not made any changes yet, we do not notice any divergence.
 If we now make changes to the \emph{repository} we can take a look and see how this will affect things.
 To start with, let us remove a few files from the working tree, commit these actions, then add a few more, stage them and commit the new files.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git rm my_first_committed_file
 rm 'my_first_committed_file'
 john@satsuki:~/coderepo$ git rm my_second_committed_file
@@ -139,13 +139,13 @@ john@satsuki:~/coderepo$ git commit -m 'Added two new files'
  create mode 100644 newfile1
  create mode 100644 newfile2
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 \index{Linux commands!ls}So we have made two new commits to the repository under our new branch.
 If we run a Linux \texttt{ls} command to see the files which are in the working tree, we can see that our working copy has indeed altered.
 We will also use our \texttt{git log} tool to see what the latest commit is.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ ls
 my_third_committed_file  newfile1  newfile2  temp_file
 john@satsuki:~/coderepo$ git log -n1
@@ -155,7 +155,7 @@ Date:   Fri Apr 1 00:10:49 2011 +0100
 
     Added two new files
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Brilliant.
 As you can see, we have used \texttt{git log} in a slightly different way to limit the number of commits.
@@ -163,7 +163,7 @@ This is what the \texttt{-n} parameter is used for.
 However, what happens if we go back to the \textbf{master} branch again? In theory we should have everything back the way we left it just before creating the branch.
 Let's move back into our \textbf{master} branch and examine the state of play.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git checkout master
 Switched to branch 'master'
 john@satsuki:~/coderepo$ ls
@@ -176,7 +176,7 @@ Date:   Thu Mar 31 22:05:55 2011 +0100
 
     Messed with a few files
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Comparing that to our previous \texttt{ls} command, we can see that this is exactly what the working tree looked like at the beginning of the chapter.
 Let us take a look at a diagram of the commit history to see what has happened in our repository.
@@ -197,7 +197,7 @@ We are going to use our \texttt{git branch} command, with a new parameter, to sh
 Take a look at the output of the following operations.
 We have pruned the output of the \texttt{git show} command for brevity.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git checkout wacky
 Switched to branch 'wacky'
 john@satsuki:~/coderepo$ git branch -v
@@ -209,13 +209,13 @@ commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd
 ...
 ...
 ...
-\end{Verbatim}
+\end{code}
 
 So here we have added a tag in our current branch, \textbf{wacky}, and we can see that the commit ID for the tag \textbf{v2.0} points \textbf{55fb69f}.
 We can also see that the branch \textbf{wacky} is currently pointing to the same commit ID, \textbf{55fb69f}.
 Now let us add another file in, make a commit and see what happens after this.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ echo "New stuff" > another_file
 john@satsuki:~/coderepo$ git add another_file
 john@satsuki:~/coderepo$ git commit -m 'Added another file'
@@ -231,7 +231,7 @@ john@satsuki:~/coderepo$ git branch -v
   master a022d4d Messed with a few files
 * wacky  9710177 Added another file
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 How interesting.
 The difference between tags and branches now becomes pretty clear.
@@ -260,28 +260,28 @@ Sometimes this can be crucial for knowing why certain things were changed during
 
 \index{merging}Let us take a little look at the command output of a simple merge, explain it a little, and then look at a diagrammatic representation.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git branch
   master
 * wacky
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Firstly we check just to see what branch we are on.
 Next we checkout the branch we want our development branch to be merged into.
 In this case, we want to merge \textbf{wacky} into \textbf{master} and so we must first checkout the \textbf{master} branch.
 Then we can merge in the changes from our \textbf{wacky} branch.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git checkout master
 Switched to branch 'master'
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Now we can run the actual merge.
 
 \index{merging!fast-forward}
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git merge wacky
 Updating a022d4d..9710177
 Fast-forward
@@ -297,7 +297,7 @@ Fast-forward
  create mode 100644 newfile1
  create mode 100644 newfile2
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 We can see that the first line after our \indexgit{merge} command shows us which commit \textbf{master} is the latest common ancestor to both branches and then which commit is the last in our new branch.
 In this case we are merging from \textbf{a022d4d} to \textbf{9710177}.
@@ -308,7 +308,7 @@ Beneath this text, we see more information about just what is included in the me
 
 We are going to perform a quick check, to see that we are in fact on the master branch and that the latest log message is the one from the point we last left the \textbf{wacky} branch.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log -n1
 commit 9710177657ae00665ca8f8027b17314346a5b1c4
 Author: John Haskins <john.haskins@tamagoyakiinc.koala>
@@ -319,7 +319,7 @@ john@satsuki:~/coderepo$ git branch
 * master
   wacky
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Now let us take a quick look at a diagram to see how this change actually affected the commit flow.
 We have included tags in this diagram, so that you can see where they point to as well.
@@ -393,21 +393,21 @@ It is important to note that these changes can also be taken into an existing br
 \index{branching}For now let us see how we can take our working copy changes into a new branch to continue development of some wonderful new feature.
 We are going to start by making some changes to our newfiles.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ echo "and some more changes" >> newfile1
 john@satsuki:~/coderepo$ echo "and a new feature" >> newfile2
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Now we are going to make a new branch and switch into it.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git checkout -b wonderful
 M	newfile1
 M	newfile2
 Switched to a new branch 'wonderful'
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Did you see that? We managed to create a new branch and move into it in one go.
 The \texttt{git checkout} command is usually what we would use to move into a branch, not create it.
@@ -417,7 +417,7 @@ There is also a status output below this that shows we have pulled two modificat
 
 Now we can commit these changes.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git commit -a -m 'Fantastic new feature'
 [wonderful cfbecab] Fantastic new feature
  2 files changed, 2 insertions(+), 0 deletions(-)
@@ -437,7 +437,7 @@ index cba16cc..dac4357 100644
  Another new file
 +and a new feature
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 After running the diff, we can see the differences between the \textbf{master} and the \textbf{wonderful} branches.
 Looking more closely at the hunks, the only differences between the two branches are those that we made before we created our \textbf{wonderful} branch.
@@ -476,7 +476,7 @@ The first of these is to use \indexgit{revert} to undo the changes of each commi
 Whilst this will work, we have two problems, a) we do not know how to use the \texttt{git revert} tool yet, and b) we can actually handle this situation much more cleanly.
 We are going to make a new branch, make a few commits and then look at a diagram of our recent work to see how we can work things out.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git checkout master
 Already on 'master'
 john@satsuki:~/coderepo$ git branch zaney
@@ -490,7 +490,7 @@ john@satsuki:~/coderepo$ git commit -a -m 'Made another awesome change'
 [master 7cc32db] Made another awesome change
  1 files changed, 1 insertions(+), 0 deletions(-)
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 \begin{figure}[hbt]
 \centering
@@ -522,7 +522,7 @@ We are going do the following the following steps.
 So let us take a look at the command line output and see how we achieve this.
 Hopefully you should be familiar with most of the commands.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git checkout zaney
 Switched to branch 'zaney'
 john@satsuki:~/coderepo$ git merge master
@@ -534,7 +534,7 @@ Fast-forward
 john@satsuki:~/coderepo$ git checkout master
 Switched to branch 'master'
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Now we reach step 4 in our set of instructions.
 The one function we do not know how to perform yet is the resetting of our branch back to a previous point in time.
@@ -550,11 +550,11 @@ This option can be dangerous, as it will discard all modifications in the workin
 If we had uncommitted changes in our repository at this point, we could not have used this option.
 Let's use the command and see where we get.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git reset --hard 9710177
 HEAD is now at 9710177 Added another file
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 As you can see, we are told that the HEAD of our master branch is now at commit \textbf{9710177}.
 \index{rewinding}We have successfully rewound our \textbf{master} branch to a previous state.
@@ -570,7 +570,7 @@ Saves typing out those horrid commits does it not?
 
 Finally we are going to introduce one more use of the \texttt{git log} command to show us how our repository looks in a semi-graphical way.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all
 --abbrev-commit  --decorate
 * 7cc32db (zaney) Made another awesome change
@@ -586,7 +586,7 @@ john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all
 * cfe23cb My First Ever Commit
 john@satsuki:~/coderepo$
 
-\end{Verbatim}
+\end{code}
 
 \index{graphing}The \texttt{--graph} parameter, tells Git to draw a graph down the left hand column.
 The \texttt{--pretty=oneline} parameter reduces the commit details to one line, else we see the entire log message of the commit.
@@ -607,7 +607,7 @@ Sometimes though we can get ourselves into trouble and it is here that Git can a
 Let us learn how to delete a branch.
 We are going to delete our \textbf{wacky} branch now as we have already merged it and no longer require it.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git branch -d zaney
 error: The branch 'zaney' is not fully merged.
 If you are sure you want to delete it, run 'git branch -D zaney'.
@@ -618,7 +618,7 @@ john@satsuki:~/coderepo$ git branch -v
   wacky     9710177 Added another file
   wonderful cfbecab Fantastic new feature
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Ooops.
 Despite the firm warning from Git, we have inadvertently deleted the \textbf{zaney} branch by mistake.
@@ -638,7 +638,7 @@ Git has been very kind and told us it, just before it carried out the delete.
 We are looking for commit \textbf{7cc32db}.
 If we run the command below, we will create and recover our branch in one go.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git branch zaney 7cc32db
 john@satsuki:~/coderepo$ git branch -v
 * master    9710177 Added another file
@@ -646,13 +646,13 @@ john@satsuki:~/coderepo$ git branch -v
   wonderful cfbecab Fantastic new feature
   zaney     7cc32db Made another awesome change
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Our branch has been restored and points to the same place as it did before we deleted it.
 As each commit points to its parent, we now have the complete history of \textbf{zaney} restored and the branch can be used as normal.
 To complete this action, let us delete the \textbf{wacky} branch as originally intended.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git branch -d wacky
 Deleted branch wacky (was 9710177).
 john@satsuki:~/coderepo$ git branch -v
@@ -660,7 +660,7 @@ john@satsuki:~/coderepo$ git branch -v
   wonderful cfbecab Fantastic new feature
   zaney     7cc32db Made another awesome change
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 As you can see, when we deleted \textbf{wacky} we were not warned about unmerged changes.
 This is because the \textbf{wacky} branch is at the same point as the \textbf{master} branch.
@@ -702,25 +702,25 @@ Now that we have several branches in our test repository, let us merge them back
 
 First we are going to add a little change to one of our files.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ echo "Another update to this file" >>
  my_third_committed_file
 john@satsuki:~/coderepo$ git commit -a -m 'Updated third file'
 [master 4ac9201] Updated third file
  1 files changed, 1 insertions(+), 0 deletions(-)
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Now let us merge in our \textbf{wonderful} branch.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git merge wonderful
 Merge made by recursive.
  newfile1 |    1 +
  newfile2 |    1 +
  2 files changed, 2 insertions(+), 0 deletions(-)
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 So far, our merge has gone pretty well.
 We have taken all of the changes that were made in the \textbf{wonderful} branch and pulled them into our \textbf{master} branch.
@@ -737,7 +737,7 @@ Our repository tree looks a little strange now.
 Notice that the most recent commit, \textbf{b119573}, has two parents.
 Can this be true? If we run our \texttt{git show} command against that commit ID, we see something new.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git show b119573
 commit b119573f4508514c55e1c4e3bebec0ab3667d071
 Merge: 4ac9201 cfbecab
@@ -747,7 +747,7 @@ Date:   Fri Apr 1 07:35:13 2011 +0100
     Merge branch 'wonderful'
 
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Notice the line \texttt{Merge: 4ac9201 cfbecab}, which simply tells us that this is a special type of commit, a merge commit.
 When we previously performed a merge, the branch we were merging back into had not changed since we branched off and did our development work.
@@ -766,7 +766,7 @@ This is the snapshot that is represented in commit \textbf{ba0bfc}.
 
 Let us now remove that third file before merging in the \textbf{zaney} branch.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git rm my_third_committed_file
 rm 'my_third_committed_file'
 john@satsuki:~/coderepo$ git commit -a -m 'Removed third file'
@@ -774,11 +774,11 @@ john@satsuki:~/coderepo$ git commit -a -m 'Removed third file'
  1 files changed, 0 insertions(+), 2 deletions(-)
  delete mode 100644 my_third_committed_file
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 So now we are ready to merge in the \textbf{zaney} branch.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git merge zaney
 Auto-merging newfile1
 CONFLICT (content): Merge conflict in newfile1
@@ -786,7 +786,7 @@ Auto-merging newfile2
 CONFLICT (content): Merge conflict in newfile2
 Automatic merge failed; fix conflicts and then commit the result.
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Oh dear! That probably did not go as well as we had hoped.
 We have two conflicts.
@@ -802,15 +802,15 @@ Right now, our merge is paused.
 For now, let us abort the merge so that we can take a closer look at what happened.
 
 \index{merging!resetting}
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git reset --merge
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 So let us compare the changes between our latest common ancestor and our branch tips.
 We will first look at the difference between the ancestor and our \textbf{master} branch, but limit it to the files with conflicts.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git diff 55fb69 master -- newfile*
 diff --git a/newfile1 b/newfile1
 index 24e7dfa..ef20984 100644
@@ -827,11 +827,11 @@ index cba16cc..dac4357 100644
  Another new file
 +and a new feature
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Now we will do the same between the common ancestor and the tip of \textbf{zaney}.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git diff 55fb69 zaney -- newfile*
 diff --git a/newfile1 b/newfile1
 index 24e7dfa..d94dacc 100644
@@ -848,13 +848,13 @@ index cba16cc..45659d7 100644
  Another new file
 +and some more awesome changes
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 So hopefully you can see that we have tried to change the second line in both files.
 This is where the conflict is arising from.
 Let us try to run the merge again and this time we will resolve the conflicts manually.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git merge zaney
 Auto-merging newfile1
 CONFLICT (content): Merge conflict in newfile1
@@ -876,7 +876,7 @@ and a new feature
 and some more awesome changes
 >>>>>>> zaney
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 We have displayed the contents of \texttt{newfile1} and \texttt{newfile2} during this merge.
 At the moment, no commits have been made and we have a chance to tell Git exactly what these files should look like.
@@ -887,21 +887,21 @@ We can now edit these files manually, remove the dividers, header and footer and
 
 We are going to edit \texttt{newfile1} to look like this:
 
-\begin{Verbatim}
+\begin{code}
 A new file
 and some more awesome changes
-\end{Verbatim}
+\end{code}
 
 We will also edit \texttt{newfile2} to look like this:
 
-\begin{Verbatim}
+\begin{code}
 Another new file
 and a new awesome feature
-\end{Verbatim}
+\end{code}
 
 Now we have resolved the conflicts and set the files straight, we can add the files and commit the result.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git add newfile*
 john@satsuki:~/coderepo$ git commit -a -m 'Merged in zaney'
 [master d50ffb2] Merged in zaney
@@ -919,7 +919,7 @@ Date:   Fri Apr 1 07:37:34 2011 +0100
 
     Removed third file
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Our merge has been completed.
 Let us now see what our repository looks like graphically, in Figure 6.
