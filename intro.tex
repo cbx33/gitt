@@ -3,21 +3,41 @@
 \chapter{Introduction}
 \section{How this book works}
 
-Welcome to Git In The Trenches or GITT, a book designed to help you both apply and understand the subtleties of Git, perhaps the most powerful version control system in use today.  This book is not supposed to be purely a technical reference.  If you are looking for something more reference in nature, you should look at ProGit, by Scott Chacon, published by Apress, as it is a wonderfully detailed look at many of the Git commands.  GITT is more of a scenario based book and by reading it, it is hoped that the experiences and scenarios that you encounter will help give ways to apply Git in practical situations.  Git is a hugely powerful system and once harnessed you are most likely going to wonder how you managed without it.
+Welcome to Git In The Trenches or GITT, a book designed to help you both apply and understand the subtleties of Git, perhaps the most powerful version control system in use today.
+This book is not supposed to be purely a technical reference.
+If you are looking for something more reference in nature, you should look at ProGit, by Scott Chacon, published by Apress, as it is a wonderfully detailed look at many of the Git commands.
+GITT is more of a scenario based book and by reading it, it is hoped that the experiences and scenarios that you encounter will help give ways to apply Git in practical situations.
+Git is a hugely powerful system and once harnessed you are most likely going to wonder how you managed without it.
 
-GITT follows the lives of some developers at a fictional company called Tamagoyaki Inc.  They are a small software outfit who write bespoke software for people.  It may be that you work for a company that is very similar to Tamagoyaki Inc and you are looking to implement a version control system for your own company, or it could be that you have been using a version control for a long time and are looking for a helping hand in applying the Git system to your needs.  Regardless of which box you fit into, GITT should provide you with some useful knowledge in a way that is designed to help you remember the scenarios and their associated solutions.
+GITT follows the lives of some developers at a fictional company called Tamagoyaki Inc.
+They are a small software outfit who write bespoke software for people.
+It may be that you work for a company that is very similar to Tamagoyaki Inc and you are looking to implement a version control system for your own company, or it could be that you have been using a version control for a long time and are looking for a helping hand in applying the Git system to your needs.
+Regardless of which box you fit into, GITT should provide you with some useful knowledge in a way that is designed to help you remember the scenarios and their associated solutions.
 
-The book will follow the lead developer John, as he works to bring the company into line by implementing a version control system.  It's not something he's ever really used in earnest and he feels a little out of his depth.  It is hoped that your confidence and knowledge about both version control systems, and Git in particular, will grow whilst reading GITT.  
+The book will follow the lead developer John, as he works to bring the company into line by implementing a version control system.
+It's not something he's ever really used in earnest and he feels a little out of his depth.
+It is hoped that your confidence and knowledge about both version control systems, and Git in particular, will grow whilst reading GITT.
 
-The chapters are presented as weeks during the implementation of Tamagoyaki Inc's version control system project.  Each chapter spells a new week in the project and you will follow the life of John and his colleagues as they solve problems and learn tricks of the Git trade.  As well as presenting and solving common issues, the book will also be littered with breakout boxes, intended to tell you exactly what is happening inside Git at each stage.  This is intended to further your knowledge and understanding of this powerful piece of software.  At the end of each chapter are "John's Notes" which should build into a quick reference guide, also included with the book.
+The chapters are presented as weeks during the implementation of Tamagoyaki Inc's version control system project.
+Each chapter spells a new week in the project and you will follow the life of John and his colleagues as they solve problems and learn tricks of the Git trade.
+As well as presenting and solving common issues, the book will also be littered with breakout boxes, intended to tell you exactly what is happening inside Git at each stage.
+This is intended to further your knowledge and understanding of this powerful piece of software.
+At the end of each chapter are "John's Notes" which should build into a quick reference guide, also included with the book.
 
-After each week, there is also the opportunity for you to delve further into the guts of what has been presented during the week with the \emph{After Hours} sections.  These sections will take the knowledge that you have learned during the week and take it to a much deeper level, often showing diagrammatic ways of how commits take place, or even looking at the contents of files within the repository file structure itself.  These chapters are not meant to scare you, but are presented in the hope that you can reinforce what you have learned through the week by reading through more complex material.
+After each week, there is also the opportunity for you to delve further into the guts of what has been presented during the week with the \emph{After Hours} sections.
+These sections will take the knowledge that you have learned during the week and take it to a much deeper level, often showing diagrammatic ways of how commits take place, or even looking at the contents of files within the repository file structure itself.
+These chapters are not meant to scare you, but are presented in the hope that you can reinforce what you have learned through the week by reading through more complex material.
 
-With a system as complicated as Git, knowing the commands is often not the only piece of the puzzle.  A good understanding of the underlying system, and how it reacts when you press that all important \textbf{Enter} button is essential if you want to be able to hold your cool in a crisis.  It is rather difficult to break Git.  There are many safeguards in place, but please be aware that you should try all of the items in the book in a test environment first, to ensure they perform, what you expect.  
+With a system as complicated as Git, knowing the commands is often not the only piece of the puzzle.
+A good understanding of the underlying system, and how it reacts when you press that all important \textbf{Enter} button is essential if you want to be able to hold your cool in a crisis.
+It is rather difficult to break Git.
+There are many safeguards in place, but please be aware that you should try all of the items in the book in a test environment first, to ensure they perform, what you expect.
 
 Talk about linux
 
-In the text of the book you will find numerous output listings like the one below.  These not only show you the commands that are being run to interact with the Git system, but also the output that you should expect to see.  Sometimes your output will differ to that which is in the book, but the output has been provided so that you can follow what is happening at each stage.
+In the text of the book you will find numerous output listings like the one below.
+These not only show you the commands that are being run to interact with the Git system, but also the output that you should expect to see.
+Sometimes your output will differ to that which is in the book, but the output has been provided so that you can follow what is happening at each stage.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ ls -la
@@ -28,13 +48,16 @@ drwxr-xr-x 13 john john 4096 2011-07-09 20:02 ..
 -rw-r--r--  1 john john   25 2011-07-07 19:12 cont_dev
 drwxrwxr-x  8 john john 4096 2011-07-07 19:17 .git
 -rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file
-john@satsuki:~/coderepo$ 
+john@satsuki:~/coderepo$
 \end{Verbatim}
 
-References in the text to commit IDs and branch names will usually be written in \textbf{bold} and words of general interest will be \emph{emphasied}.  Where commands of directory names are referred to in the text, they will be written in a \texttt{monospace} font for easy distinction.  Throughout the book, you may also encounter \emph{callout} boxes, like the one below.  
+References in the text to commit IDs and branch names will usually be written in \textbf{bold} and words of general interest will be \emph{emphasied}.
+Where commands of directory names are referred to in the text, they will be written in a \texttt{monospace} font for easy distinction.
+Throughout the book, you may also encounter \emph{callout} boxes, like the one below.
 
 \begin{callout}{Information}{Callout boxes}
-These boxes are used to convey extra information, or to more accurately define terminology.  They are there to give you that little bit of extra information.
+These boxes are used to convey extra information, or to more accurately define terminology.
+They are there to give you that little bit of extra information.
 \end{callout}
 
 With the introduction over, let's start at Week 1 and find out why Tamagoyaki Inc even need a version control system in the first place.

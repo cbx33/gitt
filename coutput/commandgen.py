@@ -4,13 +4,13 @@ import sys
 BASE="/tmp/gitcreate"
 
 class command:
-	
+
 	command = None
 	real_command = None
 	date = None
 	com_id = None
 	output = None
-	
+
 	def __init__(self, com_id, command, date=None):
 		self.set_com_id(com_id)
 		self.set_command(command)
@@ -19,16 +19,16 @@ class command:
 			self.set_date(date)
 			the_command = the_command + ' --date="' + self.date + '"'
 		self.real_command = the_command
-		
+
 	def set_com_id(self, com_id):
 		self.com_id = com_id
 
 	def set_command(self, command):
 		self.command = command
-	
+
 	def set_date(self, date):
 		self.date = date
-		
+
 	def set_output(self, output):
 		self.output = output
 
@@ -66,7 +66,7 @@ command(24,'git status'),
 
 for command in commands:
 	print command.com_id, command.command
-	
+
 	proc = subprocess.Popen(command.command, shell=True, cwd=BASE, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
 	outer = proc.stdout.read()
 	outer += proc.stderr.read()
@@ -74,4 +74,4 @@ for command in commands:
 	f = open("outputs/" + str(command.com_id) + ".txt", "w")
 	f.write(outer)
 	f.close()
-	
+

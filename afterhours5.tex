@@ -3,23 +3,31 @@
 \section{``Splitting up commits the easy way''}
 \subsection{Taking commits that little bit further}
 
-Sometimes, putting everything in a single commit just is not a good idea.  Imagine you have pulled in number of updates to your working directory.  You may want to split these up.  It is true that you could simply \texttt{git add} only the files you want to include in the commit.  However, what happens when you have change four or five different things in the same file, and you want to split that commit up into five different commits.
+Sometimes, putting everything in a single commit just is not a good idea.
+Imagine you have pulled in number of updates to your working directory.
+You may want to split these up.
+It is true that you could simply \texttt{git add} only the files you want to include in the commit.
+However, what happens when you have change four or five different things in the same file, and you want to split that commit up into five different commits.
 
-There are two ways you can approach this.  The first is to copy the file in question out of the working directory, reset the working copy back to the last committed and copy your changes in line by line.  This can be time consuming and frustrating and when yo uare working on many files, it can be totally impractical.  What we need is a way to include or exclude certain lines of a file.
+There are two ways you can approach this.
+The first is to copy the file in question out of the working directory, reset the working copy back to the last committed and copy your changes in line by line.
+This can be time consuming and frustrating and when yo uare working on many files, it can be totally impractical.
+What we need is a way to include or exclude certain lines of a file.
 
-To demonstrate this we are going to create a new branch called \textbf{fantasy} and we are going to make several changes to a few files.  We are then going to show how the same process can be achieved by using both the GUI and the command line.
+To demonstrate this we are going to create a new branch called \textbf{fantasy} and we are going to make several changes to a few files.
+We are then going to show how the same process can be achieved by using both the GUI and the command line.
 
 So let us start by creating our branch and making some changes as shown below.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git checkout -b fantasy
 Switched to a new branch 'fantasy'
-john@satsuki:~/coderepo$ echo "This is line 1" > newfile1 
+john@satsuki:~/coderepo$ echo "This is line 1" > newfile1
 john@satsuki:~/coderepo$ echo "This is line 2" >> newfile1
 john@satsuki:~/coderepo$ echo "This is line 3" >> newfile1
 john@satsuki:~/coderepo$ echo "This is line 4" >> newfile1
-john@satsuki:~/coderepo$ echo "This is a new line" >> newfile2 
-john@satsuki:~/coderepo$ echo "This is another new line" >> newfile2 
+john@satsuki:~/coderepo$ echo "This is a new line" >> newfile2
+john@satsuki:~/coderepo$ echo "This is another new line" >> newfile2
 \end{Verbatim}
 
 Let us now just run a \texttt{git diff} to see exactly what the changes are.
@@ -46,10 +54,13 @@ index 3545c1d..40efcce 100644
  and a new awesome feature
 +This is a new line
 +This is another new line
-john@satsuki:~/coderepo$ 
+john@satsuki:~/coderepo$
 \end{Verbatim}
 
-\index{hunk editing (cli)}Now, we could just do \texttt{git commit -a} and be done with it, but what if we really wanted to split this information up into four commits?  We will introduce a new parameter to our \texttt{git add} tool from before.  We are going to use the \texttt{git add -p} or \texttt{git add --patch}.  This will allow us to interactively edit the hunks before they are committed.  To begin with, let us run \texttt{git add -p} and see what it is we need to do.
+\index{hunk editing (cli)}Now, we could just do \texttt{git commit -a} and be done with it, but what if we really wanted to split this information up into four commits?  We will introduce a new parameter to our \texttt{git add} tool from before.
+We are going to use the \texttt{git add -p} or \texttt{git add --patch}.
+This will allow us to interactively edit the hunks before they are committed.
+To begin with, let us run \texttt{git add -p} and see what it is we need to do.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git add -p
@@ -64,13 +75,15 @@ index 44640b2..0eccf1a 100644
 +This is line 2
 +This is line 3
 +This is line 4
-Stage this hunk [y,n,q,a,d,/,e,?]? 
+Stage this hunk [y,n,q,a,d,/,e,?]?
 \end{Verbatim}
 
-We are given the options of \texttt{y,n,q,a,d,/,e,?}.  At first glance, this may seem rather daunting.  Let us choose the \texttt{?} and see what help is presented to us.
+We are given the options of \texttt{y,n,q,a,d,/,e,?}.
+At first glance, this may seem rather daunting.
+Let us choose the \texttt{?} and see what help is presented to us.
 
 \begin{Verbatim}
-Stage this hunk [y,n,q,a,d,/,e,?]? ?   
+Stage this hunk [y,n,q,a,d,/,e,?]? ?
 y - stage this hunk
 n - do not stage this hunk
 q - quit, do not stage this hunk nor any of the remaining ones
@@ -92,23 +105,30 @@ e - manually edit the current hunk
 +This is line 2
 +This is line 3
 +This is line 4
-Stage this hunk [y,n,q,a,d,/,e,?]? 
+Stage this hunk [y,n,q,a,d,/,e,?]?
 \end{Verbatim}
 
-So it appears that Git is offering us the opportunity to either 
+So it appears that Git is offering us the opportunity to either
 \begin{itemize}
 \item Stage it
 \item Do not stage it
-\item Quit, 
+\item Quit,
 \item Stage it and all remaining hunks
 \item Do not stage it or any of the remaining ones
 \item Search for a regex
 \item Edit the hunk
 \end{itemize}
 
-In fact, though the help mentioned a \textbf{split} command, we do not have this option available to us, due to the nature of our hunk.  Instead, if we wish to split this hunk, we are going to have to edit it manually.  To do this we will choose the \texttt{e} option.
+In fact, though the help mentioned a \textbf{split} command, we do not have this option available to us, due to the nature of our hunk.
+Instead, if we wish to split this hunk, we are going to have to edit it manually.
+To do this we will choose the \texttt{e} option.
 
-Here we are left in our chosen text editor, to either add, modify or remove lines from the hunk.  In our case, we are going to delete a few lines.  We only want to leave the first line of additions.  Just because we delete the others does not mean they are deleted from the working copy.  Remember, we are not editing the actual files here.  Just the hunks that are going to be staged.
+Here we are left in our chosen text editor, to either add, modify or remove lines from the hunk.
+In our case, we are going to delete a few lines.
+We only want to leave the first line of additions.
+Just because we delete the others does not mean they are deleted from the working copy.
+Remember, we are not editing the actual files here.
+Just the hunks that are going to be staged.
 
 \begin{Verbatim}
 # Manual hunk edit mode -- see bottom for a quick guide
@@ -149,7 +169,9 @@ After the deletes, the editors file should look like this.
 # then the edit is aborted and the hunk is left unchanged.
 \end{Verbatim}
 
-Once we quit our editor, we are then asked about the next hunk.  In our case, we are going to apply all of the changes to our second file during this commit.  To do this we are going to use the \texttt{a} option.
+Once we quit our editor, we are then asked about the next hunk.
+In our case, we are going to apply all of the changes to our second file during this commit.
+To do this we are going to use the \texttt{a} option.
 
 \begin{Verbatim}
 diff --git a/newfile2 b/newfile2
@@ -163,10 +185,11 @@ index 3545c1d..40efcce 100644
 +This is another new line
 Stage this hunk [y,n,q,a,d,/,e,?]? a
 
-john@satsuki:~/coderepo$ 
+john@satsuki:~/coderepo$
 \end{Verbatim}
 
-At first glance, we do not appear to have been left with any indication that anything has taken place.  In order to perform a check we shall run out obligatory \texttt{git diff}, both between the working copy and the index, and between the index and the last commit.
+At first glance, we do not appear to have been left with any indication that anything has taken place.
+In order to perform a check we shall run out obligatory \texttt{git diff}, both between the working copy and the index, and between the index and the last commit.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git diff
@@ -179,10 +202,12 @@ index f702b65..0eccf1a 100644
 +This is line 2
 +This is line 3
 +This is line 4
-john@satsuki:~/coderepo$ 
+john@satsuki:~/coderepo$
 \end{Verbatim}
 
-So above, we can see that the difference between the working copy and the index, or staging area, is the last three lines that we are not ready to commit yet.  Below we can see the difference between the staging area and the last commit to the repository.  This includes the three lines that we included during our interactive commit preparation.
+So above, we can see that the difference between the working copy and the index, or staging area, is the last three lines that we are not ready to commit yet.
+Below we can see the difference between the staging area and the last commit to the repository.
+This includes the three lines that we included during our interactive commit preparation.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git diff --cached
@@ -203,10 +228,11 @@ index 3545c1d..40efcce 100644
  and a new awesome feature
 +This is a new line
 +This is another new line
-john@satsuki:~/coderepo$ 
+john@satsuki:~/coderepo$
 \end{Verbatim}
 
-We can now commit in the normal way, and continue to edit the working copy to stage the sections we require.  The following output is shortened for brevity.
+We can now commit in the normal way, and continue to edit the working copy to stage the sections we require.
+The following output is shortened for brevity.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git commit -m 'Added first line'
@@ -233,7 +259,7 @@ john@satsuki:~/coderepo$ git add -p
 ...
 \end{Verbatim}
 
-We have gone through the process of editing each hunk for each commit and have performed the commits.  
+We have gone through the process of editing each hunk for each commit and have performed the commits.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git log
@@ -262,7 +288,9 @@ Date:   Wed Apr 13 23:55:32 2011 +0100
     Added first line
 \end{Verbatim}
 
-\index{hunk editing(gui)}Next we are going to see how to perform exactly the same procedure using \texttt{git gui}.  For a start, we are going to reset our branch HEAD and our index back to their state before we made the last four commits, however we are going to leave the working copy files in the state they were after these last four commits.  This is called a \textbf{mixed} reset, as it modifies the staging area and the HEAD, but does not touch the working files.
+\index{hunk editing(gui)}Next we are going to see how to perform exactly the same procedure using \texttt{git gui}.
+For a start, we are going to reset our branch HEAD and our index back to their state before we made the last four commits, however we are going to leave the working copy files in the state they were after these last four commits.
+This is called a \textbf{mixed} reset, as it modifies the staging area and the HEAD, but does not touch the working files.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git log --oneline
@@ -278,7 +306,7 @@ john@satsuki:~/coderepo$ git reset --mixed d50ffb2
 Unstaged changes after reset:
 M	newfile1
 M	newfile2
-john@satsuki:~/coderepo$ 
+john@satsuki:~/coderepo$
 \end{Verbatim}
 
 Now we will run a diff, just to be sure.
@@ -305,36 +333,51 @@ index 3545c1d..40efcce 100644
  and a new awesome feature
 +This is a new line
 +This is another new line
-john@satsuki:~/coderepo$ 
+john@satsuki:~/coderepo$
 \end{Verbatim}
 
-If we now run our \texttt{git gui} command, we will see the changes that are present, once we click on one of the files in the left hand portion of the screen.  Let us start with \texttt{newfile2} as we want every change from that file present in this commit.  Figure 1 shows what \texttt{git gui} looks like at this stage.
+If we now run our \texttt{git gui} command, we will see the changes that are present, once we click on one of the files in the left hand portion of the screen.
+Let us start with \texttt{newfile2} as we want every change from that file present in this commit.
+Figure 1 shows what \texttt{git gui} looks like at this stage.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-af5-d1.png}
 \caption{Changes to \texttt{newfile2}}
-\end{figure} 
+\end{figure}
 
-If we right click on one of the green lines, remembering that green is short for an \textbf{addition}, we get a menu which we have not seen before.  Among other things, this menu has the ability to stage a specific line or hunk for commit.  In our case we are going to hit the \textbf{Stage Hunk For Commit} and then move on to the next file, \texttt{newfile1}.
+If we right click on one of the green lines, remembering that green is short for an \textbf{addition}, we get a menu which we have not seen before.
+Among other things, this menu has the ability to stage a specific line or hunk for commit.
+In our case we are going to hit the \textbf{Stage Hunk For Commit} and then move on to the next file, \texttt{newfile1}.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-af5-d2.png}
 \caption{Changes to \texttt{newfile1}}
-\end{figure} 
+\end{figure}
 
-Now we are looking at \texttt{newfile1}, we can use the \textbf{Stage Line For Commit} to add specific lines into the staging area.  The file is shown in Figure 2.  As our file is so small, we can run into problems if we just choose lines at random and stage them.  This is because it is hard for Git to find context around which to associate the change.  The context is the area immediately surrounding the change we are making.  In order to reduce the risk of the error occurring, we are simply going to start at the top, and select the first three lines for committing, by right clicking on each on in turn and choosing the \textbf{Stage Line For Commit} option from the menu.
+Now we are looking at \texttt{newfile1}, we can use the \textbf{Stage Line For Commit} to add specific lines into the staging area.
+The file is shown in Figure 2.
+As our file is so small, we can run into problems if we just choose lines at random and stage them.
+This is because it is hard for Git to find context around which to associate the change.
+The context is the area immediately surrounding the change we are making.
+In order to reduce the risk of the error occurring, we are simply going to start at the top, and select the first three lines for committing, by right clicking on each on in turn and choosing the \textbf{Stage Line For Commit} option from the menu.
 
-We have the changes that we expect ready to be committed.  If we want to check one last time that they are right, we can use the \textbf{Staged Changes} pane on the left to choose the file and inspect the diff.  Once we are happy we can use the \textbf{Commit} area of the window to type our commit message and emblazon our changes forever.
+We have the changes that we expect ready to be committed.
+If we want to check one last time that they are right, we can use the \textbf{Staged Changes} pane on the left to choose the file and inspect the diff.
+Once we are happy we can use the \textbf{Commit} area of the window to type our commit message and emblazon our changes forever.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-af5-d3.png}
 \caption{Changes to \texttt{newfile1} after staging}
-\end{figure} 
+\end{figure}
 
-Figure 3, shows what our file looks like after the first commit.  Interestingly, as our file is so small, you will probably find that \texttt{git gui} throws a corrupt patch error if you try to just commit the next line.  As we mentioned earlier, it is always a good idea to know how to use the command line tools for precisely this reason.  Often you are dealing with special cases, that the GUI just can not handle.  In these cases, you may find you need to switch to the command line interface, to get the job done.
+Figure 3, shows what our file looks like after the first commit.
+Interestingly, as our file is so small, you will probably find that \texttt{git gui} throws a corrupt patch error if you try to just commit the next line.
+As we mentioned earlier, it is always a good idea to know how to use the command line tools for precisely this reason.
+Often you are dealing with special cases, that the GUI just can not handle.
+In these cases, you may find you need to switch to the command line interface, to get the job done.
 
 Let us now move back to our \textbf{master} branch and remove the \textbf{fantasy} branch.
 
@@ -343,9 +386,11 @@ john@satsuki:~/coderepo$ git checkout master
 Switched to branch 'master'
 john@satsuki:~/coderepo$ git branch -D fantasy
 Deleted branch fantasy (was 29ceede).
-john@satsuki:~/coderepo$ 
+john@satsuki:~/coderepo$
 \end{Verbatim}
 
 Notice that because we used the capitol \texttt{-D} parameter, we were not asked if we were sure we wanted to delete the \textbf{fantasy} branch.
 
-So in the \emph{After Hours} section this week, we have found two ways to do the same complex task, one graphical and one command based.  Staging commits in this way may seem rather odd, but it will help you to keep your commits exceedingly exact.  Whilst this may not matter on a personal project, for Tamagoyaki Inc, grouping the right lines together in a commit will be an extremely useful process to have available.
+So in the \emph{After Hours} section this week, we have found two ways to do the same complex task, one graphical and one command based.
+Staging commits in this way may seem rather odd, but it will help you to keep your commits exceedingly exact.
+Whilst this may not matter on a personal project, for Tamagoyaki Inc, grouping the right lines together in a commit will be an extremely useful process to have available.

@@ -6,59 +6,90 @@
 \section{Day 1 - ``This isn't working for me John''}
 \subsection{Dealing with resistance}
 
-So, now that the team have discovered the basics of branching, they are conceptually ready to start using it in earnest.  When implementing a version control system, or shifting from one to another, it is important to make sure that the users are happy with the system and know how to use it.  Training is a big issue.
+So, now that the team have discovered the basics of branching, they are conceptually ready to start using it in earnest.
+When implementing a version control system, or shifting from one to another, it is important to make sure that the users are happy with the system and know how to use it.
+Training is a big issue.
 
-It would seem that the team have coped with the initial usage of Git and that they have utilised each others talents in specific areas to pull together a good learning environment.  However, one thing to bare in mind is that some users may secretly be having a far worse experience than their colleagues.  It is also common for these people to suffer in silence, or to wait until they are asked for their opinions on the system before they bring up any issues.
+It would seem that the team have coped with the initial usage of Git and that they have utilised each others talents in specific areas to pull together a good learning environment.
+However, one thing to bare in mind is that some users may secretly be having a far worse experience than their colleagues.
+It is also common for these people to suffer in silence, or to wait until they are asked for their opinions on the system before they bring up any issues.
 
-It is because of these very factors that you should probably consider employing a parallel implementation.  This is exactly what John decided to do with Tamagoyaki Inc's implementation of Git.  Whilst a parallel implementation does take duplicate effort in some areas, it also allows the team to return to their original system, should insurmountable obstacles present themselves.  However, a parallel implementation should never be an excuse not to eventually shift over to the new system, unless serious issues are discovered.
+It is because of these very factors that you should probably consider employing a parallel implementation.
+This is exactly what John decided to do with Tamagoyaki Inc's implementation of Git.
+Whilst a parallel implementation does take duplicate effort in some areas, it also allows the team to return to their original system, should insurmountable obstacles present themselves.
+However, a parallel implementation should never be an excuse not to eventually shift over to the new system, unless serious issues are discovered.
 
 \begin{callout}{Terminology}{Parallel Implementation}
 \index{Parallel Implementation}
-Parallel implementation means keeping your old system running, whilst bringing up a new one.  It incurs extra effort in many areas, such as system administration, backups and system usage, but it allows people to evaluate a product in a real life situation.  Usually people will have completed all of their preliminary testing before moving onto Parallel implementation.  It would be assumed that you were fairly certain that your were going to move forward with a final implementation, before taking the time of setting up and training people on the new system.
+Parallel implementation means keeping your old system running, whilst bringing up a new one.
+It incurs extra effort in many areas, such as system administration, backups and system usage, but it allows people to evaluate a product in a real life situation.
+Usually people will have completed all of their preliminary testing before moving onto Parallel implementation.
+It would be assumed that you were fairly certain that your were going to move forward with a final implementation, before taking the time of setting up and training people on the new system.
 \newline
 \newline
-It does however allow people to continue with the day jobs, without the risk of issues with the new system completely blocking them from working.  This is often a critical factor when implementing a new system.  If the system is successful, over time, the users will migrate away from the old system and start using the new system exclusively.  Care should also be taken that whilst in the midst of parallel implementation, both systems remain up to date at all times, this is often the trickiest part.  In Tamagoyaki Inc's case, because they were just using tarballs of their code base, it is easy for them to tar up a folder, as well as commit it to the repository.
+It does however allow people to continue with the day jobs, without the risk of issues with the new system completely blocking them from working.
+This is often a critical factor when implementing a new system.
+If the system is successful, over time, the users will migrate away from the old system and start using the new system exclusively.
+Care should also be taken that whilst in the midst of parallel implementation, both systems remain up to date at all times, this is often the trickiest part.
+In Tamagoyaki Inc's case, because they were just using tarballs of their code base, it is easy for them to tar up a folder, as well as commit it to the repository.
 \end{callout}
 
 \begin{trenches}
-``I'm sorry John, but I just can't do this anymore!''  Eugene was leaning over the partition wall, the keys that hung around his neck clattering loudly as he swayed.  ``You hard core devs may be happy with all that command line junk, but I'm a GUI kinda guy.  It doesn't come as easily for me as if does for you.''
+``I'm sorry John, but I just can't do this anymore!''  Eugene was leaning over the partition wall, the keys that hung around his neck clattering loudly as he swayed.
+``You hard core devs may be happy with all that command line junk, but I'm a GUI kinda guy.
+It doesn't come as easily for me as if does for you.''
 
 ``You should learn how to use a computer properly then,'' shouted Klaus before laughing.
 
-Eugene was livid, ``You're such a damn elitist Klaus.  I'm so glad I don't have to share a pod with you anymore, you zealot.''  With that, Eugene was off, flinging open the door to the office area and stomping off to his desk.
+Eugene was livid, ``You're such a damn elitist Klaus.
+I'm so glad I don't have to share a pod with you anymore, you zealot.''  With that, Eugene was off, flinging open the door to the office area and stomping off to his desk.
 
-``Nice one Klaus,'' said John, ``You know, you could be a little more tactful.  We do still need sign off from him to complete this project.''
+``Nice one Klaus,'' said John, ``You know, you could be a little more tactful.
+We do still need sign off from him to complete this project.''
 
 Klaus shrugged.
 
 \thoughtbreak
 
-``Listen Eugene, I think I have a way to help you out.  There is a GUI component to Git that you can use.''  John was trying his best, but five minutes of grovelling to Eugene, hadn't exactly paid off.
+``Listen Eugene, I think I have a way to help you out.
+There is a GUI component to Git that you can use.''  John was trying his best, but five minutes of grovelling to Eugene, hadn't exactly paid off.
 
-``I'll try your GUI, but if I don't like it, I'm not signing off.''  He was serious too.  ``I don't have time to waste learning this system, I never needed versioning before, why should I need it now.''
+``I'll try your GUI, but if I don't like it, I'm not signing off.''  He was serious too.
+``I don't have time to waste learning this system, I never needed versioning before, why should I need it now.''
 
-``We have to work together on things now Eugene,'' began John, ``You know there is a merger looming, right?''  
+``We have to work together on things now Eugene,'' began John, ``You know there is a merger looming, right?''
 
 Eugene looked up, a little stunned.
 
-``We have to show we can function well as a team, that we have everything in hand.  Let's leave the integration till the end of the week, to give you a little more time to get used to things.''
+``We have to show we can function well as a team, that we have everything in hand.
+Let's leave the integration till the end of the week, to give you a little more time to get used to things.''
 
 ``OK'' said Eugene, ``I'll give it my best shot''
 \end{trenches}
 
-Sometimes, dealing with resistance to new systems is hard.  In Tamagoyaki Inc, John was blessed with the fact that only one developer didn't like the system he had picked.  Fortunately, the developer in question was only really concerned with the lack of a GUI, something that Git actually provides anyway.
+Sometimes, dealing with resistance to new systems is hard.
+In Tamagoyaki Inc, John was blessed with the fact that only one developer didn't like the system he had picked.
+Fortunately, the developer in question was only really concerned with the lack of a GUI, something that Git actually provides anyway.
 
-It is very important to listen to users issues and questions.  Often they may discover a big hole in your initial planning which you would never have seen.  Never dismiss a concern before looking into it as it can be difficult for one person to understand the entire process in place during development, no matter how well documented it is.  Going through a period of User Acceptance Testing is crucial before complete adoption is even considered.
+It is very important to listen to users issues and questions.
+Often they may discover a big hole in your initial planning which you would never have seen.
+Never dismiss a concern before looking into it as it can be difficult for one person to understand the entire process in place during development, no matter how well documented it is.
+Going through a period of User Acceptance Testing is crucial before complete adoption is even considered.
 
 Let us take a while to explore the build in GUI that Git comes bundled with.
 
 \subsection{A little bit of graphics}
 \index{Git!Graphical Interface}
-Whilst using a GUI can be faster for some operations, it is also worth noting that with very few exceptions, GUI's are often less feature rich than their CLI counterparts.  It is very time consuming to write a GUI that can deal with every command option a user desires, so often the GUI will handle the most common use cases, leaving the CLI to handle special cases.
+Whilst using a GUI can be faster for some operations, it is also worth noting that with very few exceptions, GUI's are often less feature rich than their CLI counterparts.
+It is very time consuming to write a GUI that can deal with every command option a user desires, so often the GUI will handle the most common use cases, leaving the CLI to handle special cases.
 
-Git is no exception to this rule.  Whilst the gui component is a very capable tool indeed, it does lack most of the advanced functionality that can be found on the command line.  In fact, there are even some of the basic parameters to some of the commands that we have used earlier, that are not available in the GUI counterpart.
+Git is no exception to this rule.
+Whilst the gui component is a very capable tool indeed, it does lack most of the advanced functionality that can be found on the command line.
+In fact, there are even some of the basic parameters to some of the commands that we have used earlier, that are not available in the GUI counterpart.
 
-We can invoke the GUI by running the \indexgit{gui} command.  We will be presented with a window similar to that in Figure 1.  Note that in this case, we are running it against our test repository that we have been working on through previous chapters.
+We can invoke the GUI by running the \indexgit{gui} command.
+We will be presented with a window similar to that in Figure 1.
+Note that in this case, we are running it against our test repository that we have been working on through previous chapters.
 
 \begin{figure}[hbt]
 \centering
@@ -69,12 +100,15 @@ We can invoke the GUI by running the \indexgit{gui} command.  We will be present
 This initial window is composed of four key areas
 \begin{enumerate}
 \item \textbf{Unstaged} - This area on the screen shows all of the items present in the working copy which are unstaged, that is to say they have not yet been added to the index and so will not be included if a commit were to take place.
-\item \textbf{Staged} - This area on the screen shows all of the items present in the index or staging area.  Everything listed here will be included if a commit takes place.
-\item \textbf{Content View} - This region of the window will show the contents of an item if it is selected in either the Unstaged or Staged areas.  If the file is already tracked, then the window will show a diff between the last committed version and the chosen version.
+\item \textbf{Staged} - This area on the screen shows all of the items present in the index or staging area.
+Everything listed here will be included if a commit takes place.
+\item \textbf{Content View} - This region of the window will show the contents of an item if it is selected in either the Unstaged or Staged areas.
+If the file is already tracked, then the window will show a diff between the last committed version and the chosen version.
 \item \textbf{Commit} - From the commit section of the screen, the commit message can be written, the commit performed, the directory rescanned for changes, as well as other operations.
 \end{enumerate}
 
-\index{GUI!unstaged}If we take a closer look at the \textbf{Unstaged} area of the screen, we see something interesting.  This is shown in Figure 2.
+\index{GUI!unstaged}If we take a closer look at the \textbf{Unstaged} area of the screen, we see something interesting.
+This is shown in Figure 2.
 
 \begin{figure}[hbt]
 \centering
@@ -82,7 +116,10 @@ This initial window is composed of four key areas
 \caption{Unstaged section}
 \end{figure}
 
-This is the only file in our working copy which contains unstaged changes.  That should not be surprising as this file has never been added to the repository so it is not considered \textbf{tracked} by Git.  If you remember, it was actually a temporary file that we piped some output to in an earlier chapter.  If we click on the filename of this file, the \textbf{Content View} area changes to show Figure 3.
+This is the only file in our working copy which contains unstaged changes.
+That should not be surprising as this file has never been added to the repository so it is not considered \textbf{tracked} by Git.
+If you remember, it was actually a temporary file that we piped some output to in an earlier chapter.
+If we click on the filename of this file, the \textbf{Content View} area changes to show Figure 3.
 
 \begin{figure}[hbt]
 \centering
@@ -90,7 +127,9 @@ This is the only file in our working copy which contains unstaged changes.  That
 \caption{Content view of \texttt{temp\_file}}
 \end{figure}
 
-\index{GUI!content view (git gui)}In the top banner section of the \textbf{Content View} we see an indication of the file's status.  In this case it is \textbf{Untracked} and \textbf{not staged}.  We can change this by clicking on the small blank page icon to the left of the file name in the \textbf{Unstaged} area of the screen, see Figure 4.
+\index{GUI!content view (git gui)}In the top banner section of the \textbf{Content View} we see an indication of the file's status.
+In this case it is \textbf{Untracked} and \textbf{not staged}.
+We can change this by clicking on the small blank page icon to the left of the file name in the \textbf{Unstaged} area of the screen, see Figure 4.
 
 \begin{figure}[hbt]
 \centering
@@ -98,7 +137,10 @@ This is the only file in our working copy which contains unstaged changes.  That
 \caption{Staged section}
 \end{figure}
 
-\index{GUI!staged}Now the file has moved into the \textbf{Staged} area of the screen as would be equivalent to us doing a \texttt{git add temp\_file}.  The file has been added to the index and is now ready for committing.  We also notice a difference in the \textbf{Content View} of \texttt{temp\_file}.  This can be seen in Figure 5.
+\index{GUI!staged}Now the file has moved into the \textbf{Staged} area of the screen as would be equivalent to us doing a \texttt{git add temp\_file}.
+The file has been added to the index and is now ready for committing.
+We also notice a difference in the \textbf{Content View} of \texttt{temp\_file}.
+This can be seen in Figure 5.
 
 \begin{figure}[hbt]
 \centering
@@ -106,7 +148,8 @@ This is the only file in our working copy which contains unstaged changes.  That
 \caption{Content view of \texttt{temp\_file}}
 \end{figure}
 
-Now the bar reads that the file is \textbf{Staged for commit}, which is exactly what we expect.  We are now going to fill out a commit message, which can be seen in Figure 6, and press the \textbf{Commit} button, to initialise a commit into the repository.
+Now the bar reads that the file is \textbf{Staged for commit}, which is exactly what we expect.
+We are now going to fill out a commit message, which can be seen in Figure 6, and press the \textbf{Commit} button, to initialise a commit into the repository.
 
 \begin{figure}[hbt]
 \centering
@@ -114,7 +157,9 @@ Now the bar reads that the file is \textbf{Staged for commit}, which is exactly 
 \caption{Preparing for commit}
 \end{figure}
 
-It should be noted here that we could have performed multiple operations here, adding several files to the the staging area before pressing that all important \textbf{Commit} button.  We will finish this section off by checking the status area at the very bottom of the screen.  In Figure 7, you should see that our latest operation has been summarised by the string \texttt{Created commit 35243bf8: Added temp\_file}
+It should be noted here that we could have performed multiple operations here, adding several files to the the staging area before pressing that all important \textbf{Commit} button.
+We will finish this section off by checking the status area at the very bottom of the screen.
+In Figure 7, you should see that our latest operation has been summarised by the string \texttt{Created commit 35243bf8: Added temp\_file}
 
 \begin{figure}[hbt]
 \centering
@@ -125,7 +170,8 @@ It should be noted here that we could have performed multiple operations here, a
 \section{Day 2 - ``Back to logging''}
 \subsection{Visualisation to the max}
 
-\index{gitk@\texttt{gitk}}With the basic operations down, as we discovered in Week 1, let us now move on to using the GUI to view the history of our database.  The visualiser that is bundled with Git is packed with features and can be invoked in one of two ways, either by running \texttt{gitk} from the command line, or by choosing \textbf{\emph{Repository - Visualize All Branch History}} or \textbf{\emph{Repository - Visualize master's Branch History}}, the latter menu item is worded with the assumption that you are on the \textbf{master} branch of course.
+\index{gitk@\texttt{gitk}}With the basic operations down, as we discovered in Week 1, let us now move on to using the GUI to view the history of our database.
+The visualiser that is bundled with Git is packed with features and can be invoked in one of two ways, either by running \texttt{gitk} from the command line, or by choosing \textbf{\emph{Repository - Visualize All Branch History}} or \textbf{\emph{Repository - Visualize master's Branch History}}, the latter menu item is worded with the assumption that you are on the \textbf{master} branch of course.
 
 Whichever way we begin an instance of \texttt{gitk}, we are likely to end up with a screen like the one in Figure 8.
 
@@ -133,29 +179,38 @@ Whichever way we begin an instance of \texttt{gitk}, we are likely to end up wit
 \centering
 \includegraphics[width=11cm]{images/f-w5-d8.png}
 \caption{Initial \texttt{gitk} view}
-\end{figure} 
+\end{figure}
 
-Let us spend a few minutes familiarising ourselves with the layout of the \texttt{gitk} tool.  The window is split up into roughly seven different areas.  We will take a brief look at each of these below.
+Let us spend a few minutes familiarising ourselves with the layout of the \texttt{gitk} tool.
+The window is split up into roughly seven different areas.
+We will take a brief look at each of these below.
 
 \begin{enumerate}
-\item \textbf{History Graph} - This area of the screen gives a graphical representation of the history of our repository.  Similar to the \texttt{git log --graph} option that we used previously, the graph here is much more readable.
-\index{GUI!committer history}\item \textbf{Committer History} - The committer history tells us the person who added the commit which is horizontally adjacent in the commit graph.  
+\item \textbf{History Graph} - This area of the screen gives a graphical representation of the history of our repository.
+Similar to the \texttt{git log --graph} option that we used previously, the graph here is much more readable.
+\index{GUI!committer history}\item \textbf{Committer History} - The committer history tells us the person who added the commit which is horizontally adjacent in the commit graph.
 \index{GUI!date history}\item \textbf{Date History} - The date history is very similar to the committer history section of the screen and shows us a simple view of the date of the commit which is horizontally adjacent.
-\index{GUI!history search}\item \textbf{History Search} - This section of the screen allows you to narrow down and highlight a subset of commits which meet a certain criteria.  It also allows you to navigate through these results.
+\index{GUI!history search}\item \textbf{History Search} - This section of the screen allows you to narrow down and highlight a subset of commits which meet a certain criteria.
+It also allows you to navigate through these results.
 \item \textbf{Commit Search} - Once you have highlighted a commit, the commit search section allows you to find specific strings within that commit, including looking at just old or new lines to the repository.
 \item \textbf{Content View} - This window actually shows the data that was stored in the commit and allows you scroll through either changes or complete files.
 \item \textbf{File System View} - The file system view shows you a list of files that were either modified in a specified commit, or that were present in the commit.
 \end{enumerate}
 
-\index{GUI!history graph}To start with, let us take a look at the graph that is present in \textbf{History Graph} section of the screen in Figure 9.  Essentially this is just a very simplified version of the graphs we were drawing in the previous chapter.  As you can see, the only information that appears to be missing from the graph is the commit ID, which can be obtained quite easily by clicking on the relevant commit and viewing the string presented just below the graph pane.
+\index{GUI!history graph}To start with, let us take a look at the graph that is present in \textbf{History Graph} section of the screen in Figure 9.
+Essentially this is just a very simplified version of the graphs we were drawing in the previous chapter.
+As you can see, the only information that appears to be missing from the graph is the commit ID, which can be obtained quite easily by clicking on the relevant commit and viewing the string presented just below the graph pane.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d9.png}
 \caption{Graphical history of repository}
-\end{figure} 
+\end{figure}
 
-The historical graph shows us all active branches, tags and commits.  From looking at this it is easy to see where our merges occurred and where the branch HEADs point to.  The branches are identified by green rectangles, and the tags as yellow labels.  Each circle on the graph is a commit and is linked to the panes on the right, where you can see the committer and date information.
+The historical graph shows us all active branches, tags and commits.
+From looking at this it is easy to see where our merges occurred and where the branch HEADs point to.
+The branches are identified by green rectangles, and the tags as yellow labels.
+Each circle on the graph is a commit and is linked to the panes on the right, where you can see the committer and date information.
 
 \index{GUI!content view (gitk)}If we select the \textbf{master} branch HEAD, which should be the top commit, (in fact on opening \texttt{gitk} this should already be selected), we should see a pane similar to Figure 10 in the \textbf{Content View} section of the screen.
 
@@ -163,130 +218,208 @@ The historical graph shows us all active branches, tags and commits.  From looki
 \centering
 \includegraphics[width=10cm]{images/f-w5-d10.png}
 \caption{Content view of master HEAD}
-\end{figure} 
+\end{figure}
 
-Notice in this that we have two parents listed, which is what we would expect, as the last commit we did was that of a merge from \textbf{zaney} into \textbf{master}.  Notice also that below this, we get to see a diff output of exactly what changed during this merge.  Interestingly, it shows that \texttt{newfile1} loses one line from parent \textbf{ed2301b} and another from parent \textbf{7cc32db}.  These are both replaced by the next line, which reads \texttt{and some more awesome changes}.
+Notice in this that we have two parents listed, which is what we would expect, as the last commit we did was that of a merge from \textbf{zaney} into \textbf{master}.
+Notice also that below this, we get to see a diff output of exactly what changed during this merge.
+Interestingly, it shows that \texttt{newfile1} loses one line from parent \textbf{ed2301b} and another from parent \textbf{7cc32db}.
+These are both replaced by the next line, which reads \texttt{and some more awesome changes}.
 
-The current commit is a little special as it is a merge.  If you choose any normal commit, you can use the \texttt{Diff}, \texttt{Old version} and \texttt{New version} buttons to either show what the file used to look like (Old), what it looks like now (New), or the default view which is the Diff and shows the combination of the changes.
+The current commit is a little special as it is a merge.
+If you choose any normal commit, you can use the \texttt{Diff}, \texttt{Old version} and \texttt{New version} buttons to either show what the file used to look like (Old), what it looks like now (New), or the default view which is the Diff and shows the combination of the changes.
 
-\index{GUI!file system}Above the \textbf{File System View} pan is a button to switch between \texttt{Patch} and \texttt{Tree} views.  By default, this is set to \texttt{Patch} and changes what the \textbf{Content View} pane displays.  When set to \texttt{Patch}, this shows us the changes between the old commit and the new one.  However, when we switch this to \texttt{Tree} view the \textbf{Content View} pane changes to show the contents of a file selected from its pane, at the current commit.  In this way, it allows you to browse and display files from previous commits graphically and effortlessly.  Simply select the commit, selected \texttt{Tree} mode, choose the file, et voila, it is presented in the \textbf{Content View} pane.
+\index{GUI!file system}Above the \textbf{File System View} pan is a button to switch between \texttt{Patch} and \texttt{Tree} views.
+By default, this is set to \texttt{Patch} and changes what the \textbf{Content View} pane displays.
+When set to \texttt{Patch}, this shows us the changes between the old commit and the new one.
+However, when we switch this to \texttt{Tree} view the \textbf{Content View} pane changes to show the contents of a file selected from its pane, at the current commit.
+In this way, it allows you to browse and display files from previous commits graphically and effortlessly.
+Simply select the commit, selected \texttt{Tree} mode, choose the file, et voila, it is presented in the \textbf{Content View} pane.
 
-So as you can see, the \texttt{gitk} tool is already quite powerful.  We are now going to take things a step further.  Remember in \textbf{Week 3} we had a way of searching the repository for the introduction of a string.  We can do the exact same thing with \texttt{gitk}.  
+So as you can see, the \texttt{gitk} tool is already quite powerful.
+We are now going to take things a step further.
+Remember in \textbf{Week 3} we had a way of searching the repository for the introduction of a string.
+We can do the exact same thing with \texttt{gitk}.
 
-We are going to drop down the box which currently reads \texttt{contains:} in the \textbf{History Search} pane and change it to \texttt{add/removing string:}.  Then we are going to enter \texttt{Change1} into the field on the right.  Your changes should look similar to Figure 11.
+We are going to drop down the box which currently reads \texttt{contains:} in the \textbf{History Search} pane and change it to \texttt{add/removing string:}.
+Then we are going to enter \texttt{Change1} into the field on the right.
+Your changes should look similar to Figure 11.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d11.png}
 \caption{Searching for a string}
-\end{figure} 
+\end{figure}
 
-After you have finished typing you should already have noticed a difference in the \textbf{History Graph} pane.  Notice how some commits are now highlighted in bold, as demonstrated in Figure 12?
+After you have finished typing you should already have noticed a difference in the \textbf{History Graph} pane.
+Notice how some commits are now highlighted in bold, as demonstrated in Figure 12?
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d12.png}
 \caption{Search results}
-\end{figure} 
+\end{figure}
 
-If you remember from Week 3, when we first ran the \texttt{git log -SChange1} command, we were presented with only one commit.  That was titled, \texttt{Made a few changes to first and second files}.  Our repository has moved on since then and we can see that that particular string, \texttt{Change1} was added or removed in two other commits as well.  This was when we totally changed \texttt{my\_second\_committed\_file} and when we removed \texttt{my\_first\_committed\_file} a little later.  The \textbf{Next} and \textbf{Previous} buttons can be used to navigate through the search results.
+If you remember from Week 3, when we first ran the \texttt{git log -SChange1} command, we were presented with only one commit.
+That was titled, \texttt{Made a few changes to first and second files}.
+Our repository has moved on since then and we can see that that particular string, \texttt{Change1} was added or removed in two other commits as well.
+This was when we totally changed \texttt{my\_second\_committed\_file} and when we removed \texttt{my\_first\_committed\_file} a little later.
+The \textbf{Next} and \textbf{Previous} buttons can be used to navigate through the search results.
 
-\index{GUI!commit search}Now that we have found the commits that contain the change to the string we are looking for.  The question is, where in the file does this change occur?  We can now use the \textbf{Commit Search} pane to see this.  Typing \texttt{Change1} into this search box will highlight the relevant text in the \texttt{Content View} pane below.  It really is as easy as that.
+\index{GUI!commit search}Now that we have found the commits that contain the change to the string we are looking for.
+The question is, where in the file does this change occur?  We can now use the \textbf{Commit Search} pane to see this.
+Typing \texttt{Change1} into this search box will highlight the relevant text in the \texttt{Content View} pane below.
+It really is as easy as that.
 
-Whilst it is a great idea to remember and use the command line arguments and parameters, it is also useful to know that these other tools are available.  GUI tools should not be frowned upon, as some command line purists do.  GUI tools are as much a part of the development process as their command line counterparts.  Both have their uses and the most important lesson of all is to know when to use which.  This lesson will most likely come with experience and time, or as a friend of mine used to put it, old age.
+Whilst it is a great idea to remember and use the command line arguments and parameters, it is also useful to know that these other tools are available.
+GUI tools should not be frowned upon, as some command line purists do.
+GUI tools are as much a part of the development process as their command line counterparts.
+Both have their uses and the most important lesson of all is to know when to use which.
+This lesson will most likely come with experience and time, or as a friend of mine used to put it, old age.
 
 \subsection{Customising the visualisation}
 
 \begin{trenches}
-``Eugene,'' called Klaus as the tools developer walked past him.  ``Could I borrow you for a second?''
+``Eugene,'' called Klaus as the tools developer walked past him.
+``Could I borrow you for a second?''
 
-``I guess,'' said Eugene coldly.  ``What is it that you want exactly?''
+``I guess,'' said Eugene coldly.
+``What is it that you want exactly?''
 
-``Well,'' Klaus began, ``I started using the GUI tools a little and found something you might consider interesting.  I know you spend a lot of time switching between different versions of our code looking for various functions and things and I found this cool tool in the GUI.''
+``Well,'' Klaus began, ``I started using the GUI tools a little and found something you might consider interesting.
+I know you spend a lot of time switching between different versions of our code looking for various functions and things and I found this cool tool in the GUI.''
 
-Eugene breathed in deeply.  Knowing Eugene, it wouldn't be anything amazing, but nevertheless, his interest had been piqued.
+Eugene breathed in deeply.
+Knowing Eugene, it wouldn't be anything amazing, but nevertheless, his interest had been piqued.
 \end{trenches}
 
-The \texttt{gitk} tool has a pretty awesome feature called \emph{views}.  Sometimes it may be necessary to keep track of everything a certain person has done.  Or maybe see anything that has happened in the last week.  You may even be interested in people adding certain strings to the repository.  The \emph{views} feature allows you to do just that.  By setting up a view, you can filter the results that are displayed in \texttt{gitk}, byt simply switching to it.  
+The \texttt{gitk} tool has a pretty awesome feature called \emph{views}.
+Sometimes it may be necessary to keep track of everything a certain person has done.
+Or maybe see anything that has happened in the last week.
+You may even be interested in people adding certain strings to the repository.
+The \emph{views} feature allows you to do just that.
+By setting up a view, you can filter the results that are displayed in \texttt{gitk}, byt simply switching to it.
 
-In the example we are going to go back to the search we made previously and filter the history for any changes to \texttt{my\_first\_committed\_file} that add or remove the string \texttt{Change1}.  First we are going to load the dialog box, by using the menu \textbf{\emph{View - New View...}}.  The resulting dialog is displayed below and we have already filled in the required information.
+In the example we are going to go back to the search we made previously and filter the history for any changes to \texttt{my\_first\_committed\_file} that add or remove the string \texttt{Change1}.
+First we are going to load the dialog box, by using the menu \textbf{\emph{View - New View...}}.
+The resulting dialog is displayed below and we have already filled in the required information.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d13.png}
 \caption{Setting up a \emph{view}}
-\end{figure} 
+\end{figure}
 
-We changed the \textbf{View Name} to be \texttt{Change1}.  This is simply an identifier that will allow us to choose our view in the future.  We have also ticked the \textbf{Remember this view}.  Ticking this box ensures that the view is remembered once we close \texttt{gitk}.  Sometimes, this behaviour is not desired, but in our case we want this view to be available every time we start \texttt{gitk}.
+We changed the \textbf{View Name} to be \texttt{Change1}.
+This is simply an identifier that will allow us to choose our view in the future.
+We have also ticked the \textbf{Remember this view}.
+Ticking this box ensures that the view is remembered once we close \texttt{gitk}.
+Sometimes, this behaviour is not desired, but in our case we want this view to be available every time we start \texttt{gitk}.
 
-There are many options which we can set, but in our case we have chosen to simply add \texttt{Change1} to the \textbf{Changes to files:} section.  This is equivalent to the search that we performed earlier.  We have also filtered the files which are included in the results, by putting, \texttt{my\_first\_committed\_file} in the \textbf{Enter files and directories to be included} box.
+There are many options which we can set, but in our case we have chosen to simply add \texttt{Change1} to the \textbf{Changes to files:} section.
+This is equivalent to the search that we performed earlier.
+We have also filtered the files which are included in the results, by putting, \texttt{my\_first\_committed\_file} in the \textbf{Enter files and directories to be included} box.
 
-The result of this view is shown in Figure 14.  Notice that instead of all the commits being shown, we are just shown the two that we are interested in.  Both of these commits are referred to earlier in the chapter, when we ran the search manually in \texttt{gitk}
+The result of this view is shown in Figure 14.
+Notice that instead of all the commits being shown, we are just shown the two that we are interested in.
+Both of these commits are referred to earlier in the chapter, when we ran the search manually in \texttt{gitk}
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d14.png}
 \caption{View results}
-\end{figure} 
+\end{figure}
 
-This ends our tour of the \texttt{gitk} utility.  Hopefully you have seen that it can actually present a large amount of information in a very compact and usable way.  As such it should not be forgotten about and should remain part of your arsenal of Git tools.
+This ends our tour of the \texttt{gitk} utility.
+Hopefully you have seen that it can actually present a large amount of information in a very compact and usable way.
+As such it should not be forgotten about and should remain part of your arsenal of Git tools.
 
 \section{Day 4 - ``Advanced Techniques''}
 \subsection{Getting more done graphically}
-\index{GUI!file browser}Whilst \texttt{git gui} can perform commits.  It is interesting to note that it can do a whole lot more.  One feature, which can be exceedingly useful is the \textbf{File Browser}.  This is invoked by using the \textbf{\emph{Repository - Browse Branch's Files...}} menu item.
+\index{GUI!file browser}Whilst \texttt{git gui} can perform commits.
+It is interesting to note that it can do a whole lot more.
+One feature, which can be exceedingly useful is the \textbf{File Browser}.
+This is invoked by using the \textbf{\emph{Repository - Browse Branch's Files...}} menu item.
 
-We can now select the point at which we want to browse the repository.  By default we are presented with a list of the branches present in the repository.  Note we can also choose tags, by selecting the appropriate option in the radio box.  We can also put things like \texttt{HEAD} and \texttt{HEAD~1} into the \textbf{Revision Expression:} text field.  
+We can now select the point at which we want to browse the repository.
+By default we are presented with a list of the branches present in the repository.
+Note we can also choose tags, by selecting the appropriate option in the radio box.
+We can also put things like \texttt{HEAD} and \texttt{HEAD~1} into the \textbf{Revision Expression:} text field.
 
-The dialog box is shown in Figure 15.  Notice also that when we hover over the branch names, we are presented with a small pop up, telling us who made the last commit to the branch and what the commit message was.  Clicking the \textbf{Browse} button will take us to the next window, where we can choose the file we wish to view.
+The dialog box is shown in Figure 15.
+Notice also that when we hover over the branch names, we are presented with a small pop up, telling us who made the last commit to the branch and what the commit message was.
+Clicking the \textbf{Browse} button will take us to the next window, where we can choose the file we wish to view.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d15.png}
 \caption{Point in history dialog}
-\end{figure} 
+\end{figure}
 
-The file choosing dialog is rather plain.  Just double clicking on a file will start the \indexgit{gui blame} tool.  Though primarily used as a way to see who, or what was responsible for a specific change to a line, this tool is also useful for seeing how a file has changed over time.  The file chooser dialog is shown in Figure 16.
+The file choosing dialog is rather plain.
+Just double clicking on a file will start the \indexgit{gui blame} tool.
+Though primarily used as a way to see who, or what was responsible for a specific change to a line, this tool is also useful for seeing how a file has changed over time.
+The file chooser dialog is shown in Figure 16.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d16.png}
 \caption{File chooser}
-\end{figure} 
+\end{figure}
 
-Once selected, the file is displayed in its own window.  The window is split into two sections.  The top part of the window displays the actual content of the file, along with some commit IDs on the left.  In the lower part of the window, more information on a specific commit is shown.  This window is shown in Figure 17.
+Once selected, the file is displayed in its own window.
+The window is split into two sections.
+The top part of the window displays the actual content of the file, along with some commit IDs on the left.
+In the lower part of the window, more information on a specific commit is shown.
+This window is shown in Figure 17.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d17.png}
 \caption{File viewer}
-\end{figure} 
+\end{figure}
 
-Clicking on a line in the view above, will turn that section green and will display the information related to that commit in the lower pane, along with the complete commit message.  It will also highlight all other lines in the current file that were also modified in that commit.  As shown in Figure 18.
+Clicking on a line in the view above, will turn that section green and will display the information related to that commit in the lower pane, along with the complete commit message.
+It will also highlight all other lines in the current file that were also modified in that commit.
+As shown in Figure 18.
 
-Already this is a very powerful tool, much like the \texttt{gitk} too for visualising the history of the repository, \texttt{git gui blame} is also very useful for working through the events that led to the current version of a particular file.  In larger files, being able to click on a portion and have it highlight every other line in that file that was changed in that commit can be extremely useful.  \index{history context}By right clicking on the file, we can also choose the \textbf{Show History Context}, which will load \texttt{gitk} and move the commit history pane to show the commit we are currently interested in.
+Already this is a very powerful tool, much like the \texttt{gitk} too for visualising the history of the repository, \texttt{git gui blame} is also very useful for working through the events that led to the current version of a particular file.
+In larger files, being able to click on a portion and have it highlight every other line in that file that was changed in that commit can be extremely useful.
+\index{history context}By right clicking on the file, we can also choose the \textbf{Show History Context}, which will load \texttt{gitk} and move the commit history pane to show the commit we are currently interested in.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d18.png}
 \caption{File viewer, highlighting a commit}
-\end{figure} 
+\end{figure}
 
-You should have noticed by now that each line has a commit ID associated with it, two in fact.  These are in fact links, and by clicking on these, we can wind the history of the file, back to that point, so that it shows not the state at which it originally did, but now the state as it was in the selected commit.  This is shown in Figure 19.
+You should have noticed by now that each line has a commit ID associated with it, two in fact.
+These are in fact links, and by clicking on these, we can wind the history of the file, back to that point, so that it shows not the state at which it originally did, but now the state as it was in the selected commit.
+This is shown in Figure 19.
 
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=10cm]{images/f-w5-d19.png}
 \caption{Going back to a previous commit}
-\end{figure} 
+\end{figure}
 
-Again this is a hugely powerful tool.  You can navigate back to the current version of the file, or if you have clicked on several to get to your current point, review a history of your path, by clicking on the green arrow at the top of the screen.  You will be presented with a drop down menu, and from here you can choose which point you wish to return to.  
+Again this is a hugely powerful tool.
+You can navigate back to the current version of the file, or if you have clicked on several to get to your current point, review a history of your path, by clicking on the green arrow at the top of the screen.
+You will be presented with a drop down menu, and from here you can choose which point you wish to return to.
 
 \subsection{Our last stop}
-We have shown a number of things that Git can do in its GUI form.  We are not going to dwell on the graphical interface any further as you should already be familiar with the \textbf{Merge} and \textbf{Branch} menu items, which are present.  The have a number of options which are also available from the command line.  
+We have shown a number of things that Git can do in its GUI form.
+We are not going to dwell on the graphical interface any further as you should already be familiar with the \textbf{Merge} and \textbf{Branch} menu items, which are present.
+The have a number of options which are also available from the command line.
 
-The \textbf{Branch} menu allows you to do the familiar procedures, such as checkout, create, rename and delete.  It also provides a limited reset feature.  The \textbf{Merge} menu provides shortcuts for running a merge, as well as aborting it.  
+The \textbf{Branch} menu allows you to do the familiar procedures, such as checkout, create, rename and delete.
+It also provides a limited reset feature.
+The \textbf{Merge} menu provides shortcuts for running a merge, as well as aborting it.
 
-It is here that we are going part with our newest tool in order to return to the command line interface once more.  We have one more trick up our sleeve and this will be presented in the \emph{After Hours} section for the week.  As previously stated, the GUI tools form an important part of your version control arsenal.  Never be afraid to use them.  Remember, at the end of the day, you should be focussed on getting the job done and using whichever tools you require to do just that.
+It is here that we are going part with our newest tool in order to return to the command line interface once more.
+We have one more trick up our sleeve and this will be presented in the \emph{After Hours} section for the week.
+As previously stated, the GUI tools form an important part of your version control arsenal.
+Never be afraid to use them.
+Remember, at the end of the day, you should be focussed on getting the job done and using whichever tools you require to do just that.
 
 \clearpage
 
