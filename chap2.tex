@@ -31,32 +31,31 @@ Before we go ahead and look at the diagram, let's go back to the trenches to see
 ``John, why are we all sat in here at 9:45am on Monday morning.''  Klaus whined.
 ``I haven't even ingested enough coffee to check emails yet, let alone meet with people.''
 
-John grinned, ``I don't think any amount of coffee will help you there Klaus, it's your winning personality that will pull you through.''  The rest of the team laughed and then subsided as John started drawing furiously on the board.
-``So we have our physical model.
-We know which people are going to be in charge of things, but we don't know yet how to arrange our repositories.''
+John grinned, ``I don't think any amount of coffee will help you there Klaus, it's your winning personality that will pull you through.''
+The rest of the team laughed and then subsided as John started drawing furiously on the board.
+``So we have our physical model. We know which people are going to be in charge of things, but we don't know yet how to arrange our repositories.''
 
 ``Good point,'' chimed Mike.
 
-``So.
-Obviously we're going to have a blessed repository,'' said John, drawing a circle on the board.
+``So. Obviously we're going to have a blessed repository,'' said John, drawing a circle on the board.
 He stepped back, one hand on chin.
-``Then I would imagine Klaus and I will have clones of that repository on our local machines.
-We will then modify those and push our changes back up to the central copy.''
+``Then I would imagine Klaus and I will have clones of that repository on our local machines. We will then modify those and push our changes back up to the central copy.''
 
 ``I thought Git didn't have a central copy?'' asked Martha.
 There were other moans and grunts.
 
-``Well,'' said John, ``as far as I understand it, it doesn't.
-I mean Klaus and I will have local copies of the repository too.
-We will work on those and then sync our changes back to the server.
-It's a sync, moreover a copy.
-I think it's actually called a clone.''  He nodded to himself, ``And, since Klaus and I will hardly ever overlap on code, we shouldn't ever need to merge or deal with an conflicts.''
+``Well,'' said John,
+``as far as I understand it, it doesn't. I mean Klaus and I will have local copies of the repository too. We will work on those and then sync our changes back to the server. It's a sync, moreover a copy. I think it's actually called a clone.''
+He nodded to himself, ``And, since Klaus and I will hardly ever overlap on code, we shouldn't ever need to merge or deal with an conflicts.''
 
-``But what about us monkeys?'' asked Martha, ``Where do we get our clones from?''
+``But what about us monkeys?'' asked Martha,
+``Where do we get our clones from?''
 
 ``From the central server of course,'' Rob stated smiling.
 
-``Yes,'' John said, ``but I think what Martha is trying to say, is how will you get your updates?''  He started to walk around the room, and one or two of the developers followed him as he reached the windows and leant on the sill.
+``Yes,'' John said,
+``but I think what Martha is trying to say, is how will you get your updates?''
+He started to walk around the room, and one or two of the developers followed him as he reached the windows and leant on the sill.
 ``I guess you would merge your branch with the blessed one.''
 
 The room went silent and the only noise that could be heard was the rattling of the air conditioner in the ceiling above.
@@ -65,18 +64,10 @@ Simon spoke out, ``Well, I was reading over the weekend about this thing called 
 
 ``What's rebase and how is it different to merging?'' asked Mike.
 
-``Well, rebasing is pretty darn clever.
-Think of it this way.
-You have an upstream branch, in this case, our blessed repository.
-You are happily making changes.
-When the upstream changes, you could merge the changes in from blessed.
-If you do this, you create a single commit which merges the changes in.
-It works, but\ldots'' he trailed off a little, ``it can cause problems in certain instances.
-A better way to handle it is with rebasing.
-Rebasing can take all the changes you have made, squirrel them away, pull down all the changes to bring it up to date, and then whack your changes on top.''
+``Well, rebasing is pretty darn clever. Think of it this way. You have an upstream branch, in this case, our blessed repository. You are happily making changes. When the upstream changes, you could merge the changes in from blessed. If you do this, you create a single commit which merges the changes in. It works, but\ldots'' he trailed off a little,
+``it can cause problems in certain instances. A better way to handle it is with rebasing. Rebasing can take all the changes you have made, squirrel them away, pull down all the changes to bring it up to date, and then whack your changes on top.''
 
-John breathed out, ``It sounds pretty cool Simon, but one thing is abundantly clear, we need to learn more about the Git basics before we start delving into this merging and rebasing.
-Let's spend the rest of the day playing with some test repositories and reconvene tomorrow.''
+John breathed out, ``It sounds pretty cool Simon, but one thing is abundantly clear, we need to learn more about the Git basics before we start delving into this merging and rebasing. Let's spend the rest of the day playing with some test repositories and reconvene tomorrow.''
 \end{trenches}
 
 If you've never played with a version control system before it is a good idea to take some time to just play.
@@ -213,11 +204,12 @@ So this means that Git has recognised and remembered that we are expecting these
 The entire office had heard Klaus banging his hands down on the desk for the last fifteen minutes.
 ``John!'' the shout turned into a scream.
 
-``Calm down Klaus, I'm just coming.''  John walked over to Klaus and pulled up one of the folding plastic chairs.
+``Calm down Klaus, I'm just coming.''
+John walked over to Klaus and pulled up one of the folding plastic chairs.
 After a few minutes of fumbling he finally managed to take up his position next to an infuriated Klaus.
 
-``John, Git is driving me crazy.
-I have added files to the repository and I keep running a commit, but the changes aren't getting put into the blasted repo.''  Klaus was clearly distressed and John resisted the urge make jokes.
+``John, Git is driving me crazy. I have added files to the repository and I keep running a commit, but the changes aren't getting put into the blasted repo.''
+Klaus was clearly distressed and John resisted the urge make jokes.
 
 John pointed at the screen.
 ``Run a git status Klaus and I'll show you what the problem is.''
@@ -335,13 +327,13 @@ Before we close out the week, we need to go back to the trenches one last time.
 
 ``Sure, what's up?'' replied Rob from across the office.
 ``Gimme two secs to make this commit.''  The office went silent again whilst Rob's fingers darted across the keyboard.
-``Ahh.
-Damn it!'' shouted Rob.
+``Ahh. Damn it!'' shouted Rob.
 
 Mike rose from his chair and walked over to Rob.
 ``What's up?''
 
-``I just added a file into the staging area, but I don't want it there.''  He shook his head, ``Well not yet anyway.''
+``I just added a file into the staging area, but I don't want it there.''
+He shook his head, ``Well not yet anyway.''
 
 Mike chuckled, ``Sorry for interrupting dude.''
 
@@ -351,7 +343,8 @@ Mike chuckled, ``Sorry for interrupting dude.''
 The stillness of the office was interrupted by a chair free wheeling across the floor.
 The occupant of the chair was Klaus.
 He seemed proud that he was finally getting to grips with things.
-``You can use git reset to reset a file that's in the index.''  He grabbed at the keyboard, ``Here, lemme show you.''
+``You can use git reset to reset a file that's in the index.''
+He grabbed at the keyboard, ``Here, lemme show you.''
 \end{trenches}
 
 The git reset is great at removing things from the index that you don't want to be there.
