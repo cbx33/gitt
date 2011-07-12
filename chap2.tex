@@ -3,7 +3,7 @@
 \section{Day 1 - ``We are coders, we use Git!''}
 \subsection{Setting Up the Environment}
 
-So now we are ready to begin delving into and actually using Git, right?  Well, not exactly.
+So now we are ready to begin delving into and actually using Git, right? Well, not exactly.
 First we have to decide upon how the workflow model we have envisaged is implemented in our version control system.
 With Git being so versatile, it's both a blessing and a danger.
 It is a good idea to define from early on, exactly how you would like the developers, lieutenants and dictators to behave, before you begin actually committing any code.
@@ -28,7 +28,7 @@ However, we will create a slightly different form of diagram to show how the dat
 Before we go ahead and look at the diagram, let's go back to the trenches to see how the guys are coping with their repository design.
 
 \begin{trenches}
-``John, why are we all sat in here at 9:45am on Monday morning.''  Klaus whined.
+``John, why are we all sat in here at 9:45am on Monday morning.'' Klaus whined.
 ``I haven't even ingested enough coffee to check emails yet, let alone meet with people.''
 
 John grinned, ``I don't think any amount of coffee will help you there Klaus, it's your winning personality that will pull you through.''
@@ -121,7 +121,7 @@ Of course Git is super clever here because if you have exactly the same file in 
 The commit object is also referred to by an SHA-1 hash.
 This is different to many other version control systems which use either a number that refers to the repository or a per file version number.
 Getting used to seeing 40 character SHA-1 hashes can take a little time.
-Saying "I need the commit referred to as  bf81617d6417d9380e06785f8ed23b247bea8f6d," is certainly not as easy as saying you need revision 6.
+Saying "I need the commit referred to as bf81617d6417d9380e06785f8ed23b247bea8f6d," is certainly not as easy as saying you need revision 6.
 However, Git handles these hashes well, and you can reference a commit using a few of the characters from the beginning, as long as those characters uniquely refer to that commit, i.e., as long as your choice isn't in any way ambiguous.
 
 \section{Day 2 - ``Making commitments''}
@@ -245,8 +245,8 @@ john@satsuki:~/coderepo$ git status
 john@satsuki:~/coderepo$
 \end{Verbatim}
 
-How interesting!  We now have three sections and one of our files appears twice under both Changes to be committed and Changed but not updated.
-What does this mean?  If you remember back, we spoke about a \index{staging}staging area.
+How interesting! We now have three sections and one of our files appears twice under both Changes to be committed and Changed but not updated.
+What does this mean? If you remember back, we spoke about a \index{staging}staging area.
 This is one area in which Git differs to many version control systems.
 When you \textbf{add} a file into the repository, Git will actually make a copy of that file and move it into the staging area.
 If you then go ahead and change that file, you would need to run another git add in order for Git to copy your changed file into the staging area.
@@ -326,7 +326,7 @@ Before we close out the week, we need to go back to the trenches one last time.
 ``Rob, ya got a second?'' asked Mike.
 
 ``Sure, what's up?'' replied Rob from across the office.
-``Gimme two secs to make this commit.''  The office went silent again whilst Rob's fingers darted across the keyboard.
+``Gimme two secs to make this commit.'' The office went silent again whilst Rob's fingers darted across the keyboard.
 ``Ahh. Damn it!'' shouted Rob.
 
 Mike rose from his chair and walked over to Rob.
@@ -392,11 +392,11 @@ If we did this, all the files in the index would have been discarded.
 
 \begin{trenches}
 ``So, I think we are all agreed, I'll keep a version of the repository under Git version control.
-Until everyone else feels comfortable with some of the more advanced features.''  John looked around the room for any disagreements but there were none.
+Until everyone else feels comfortable with some of the more advanced features.'' John looked around the room for any disagreements but there were none.
 
 ``Agreed John,'' said Markus, ``I'm pleased with how you guys are progressing, very pleased, but like John said, it's far better for us to take our time and to implement this correctly, than to rush it and to end up with something that we can't administrate and that we don't know how it works.''
 
-``So next week, I want you all to start playing with diffing and logs and don't forget we have an important release due too.''  John pushed his glasses further up his nose.
+``So next week, I want you all to start playing with diffing and logs and don't forget we have an important release due too.'' John pushed his glasses further up his nose.
 ``The week after that we'll start looking at branching and by then we may be at the stage where we can implement our model.''
 
 Everyone nodded in agreement.
@@ -430,7 +430,7 @@ Many people use this in preference to the modifying the Git configuration simply
 The question is, what do we do if we need to remove a file, or even rename it.
 Well, git has some commands to help with that.
 \indexgit{rm} and \indexgit{mv} delete and move files respectively.
-Usually when you want to remove files from the repository, or move them, this is how you will handle it, but what if you have already deleted a tracked file manually?  Well, you have two options.
+Usually when you want to remove files from the repository, or move them, this is how you will handle it, but what if you have already deleted a tracked file manually? Well, you have two options.
 You could run \texttt{git commit -a}, but remember this will commit all changes to tracked files.
 You could also run a \texttt{git rm <filename>} with the name of the file you have just deleted.
 Git will then push that change into the staging area ready for commit.

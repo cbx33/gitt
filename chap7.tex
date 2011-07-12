@@ -93,7 +93,7 @@ John shook his head.
 He paused for a breath.
 ``But we need to think about scalability too. Whilst I don't think all development work should be in one repository, I also don't think the best way to go is to have a repo for every person.''
 
-``I know it's a rarity, but I gotta agree with John.''  Klaus spoke whilst idly stabbing his pen lighty into a blob of what looked like modelling clay.
+``I know it's a rarity, but I gotta agree with John.'' Klaus spoke whilst idly stabbing his pen lighty into a blob of what looked like modelling clay.
 ``Think what the chimp would say to it too.''
 
 Martha furrowed her brow,
@@ -105,14 +105,14 @@ John turned to look at Martha and almost regretted having to inform her of yet a
 Martha looked a little horrified,
 ``Klaus, that's an awful thing to say.''
 
-``What?  He spends all day monkeying around in the 'datacenter'. I've never really seen him do any real work at all.''
+``What? He spends all day monkeying around in the 'datacenter'. I've never really seen him do any real work at all.''
 Klaus was looking at Martha who now had one eyebrow raised.
 He had used airquotes when voicing the word 'datacenter'.
 ``Plus he calls it a datacenter, but I've seen inside, it's more like a cupboard with a PC in it.''
 
 ``You need to show a little more respect Klaus,'' Martha threw back, a little more agressively than she had intended.
 
-``Guys!! Guys!!''  John shouted.
+``Guys!! Guys!!'' John shouted.
 ``Can we get back to the topic at hand and deal with Klaus later?''
 
 The room fell silent for a while, until the comments had transitioned from immediate to short term memory.
@@ -120,7 +120,7 @@ The room fell silent for a while, until the comments had transitioned from immed
 It was Eugene speaking now.
 ``You know, kinda like a Mob repository. Each team will have their own repository and the branches inside will belong to the different team members and be named accordingly so. Then we would have a company repository which would hold the projects and would have dev, qa and released branches.''
 
-``You know that's not a bad idea Eugene.''  Klaus said, trying to redeem himself.
+``You know that's not a bad idea Eugene.'' Klaus said, trying to redeem himself.
 ``You da man. How about a hi-five.''
 
 \end{trenches}
@@ -181,17 +181,17 @@ These repositories will contain multiple branches that the various team members 
 One item we have not yet touched upon is how to bring changes in from one branch to another.
 We have one method which we met earlier, called \emph{Merging}.
 However there are other options open to us, such as patching and rebasing.
-Why are they important you might ask?  Sometimes merging is not the best way to approach the situation.
+Why are they important you might ask? Sometimes merging is not the best way to approach the situation.
 
 \begin{trenches}
 John was beginning to get a little frustrated now.
 Some members of the team were clearly not understanding what he was saying and he was fighting hard not to raise his voice.
 ``It is just messy for me to review is all I am saying. I would much prefer not to have to see all those merge commits in the history when you are developing a simple feature.''
 
-``We could always look at using a rebase.''  Martha seemed anxious to calm John down.
+``We could always look at using a rebase.'' Martha seemed anxious to calm John down.
 ``I haven't really played with it enough yet, but rebase could be what we are looking for.''
 
-``What does rebase do when it's at home.''  Sneered Klaus, rolling his eyes.
+``What does rebase do when it's at home.'' Sneered Klaus, rolling his eyes.
 
 Martha picked up the red board pen from the board room table and gingerly took off the lid.
 She walked over to the whiteboard.
@@ -200,7 +200,7 @@ She walked over to the whiteboard.
 She began drawing little diagrams with circles on the board.
 ``Rebasing will allow you to take your branch, pick up all the development you have done, update the branch underneath to bring it inline with your blessed dev branch for example, and then replay your development on top.''
 
-``Won't that change your history?  Isn't that a big big no no?''
+``Won't that change your history? Isn't that a big big no no?''
 
 ``Yes it will change your history, and that's why for some things it isn't appropriate. But it may be just the ticket for what we are trying to do.''
 
@@ -247,12 +247,12 @@ A better way to handle this sometimes, is by using the rebase tool which will ac
 As you can see we have a slight alteration to the diagram.
 Commits \textbf{C} and \textbf{D} have little ticks next to them.
 This is to indicate that they are actually not the same commits as before.
-You may be wondering why?  Think about it for a few minutes.
+You may be wondering why? Think about it for a few minutes.
 In Git, every commits SHA-1 hash is based not only on the contents of that commit, but also on the parent.
 In this way, if we move these commits, then their SHA-1 hashes are going to change.
 Our notation is simply stating that although the contents of these commits is the same, they are the \textbf{C} and \textbf{D} that we remember, their identifier will change.
 
-Remember our discussion about changing the past?  This is very relevant here.
+Remember our discussion about changing the past? This is very relevant here.
 Rebasing is the ultimate way to change the past.
 Over the next few days, we are going to demonstrate a number of ways that rebase can aid you in your development and produce a clean and structured commit history.
 However, care must be taken not to rebase something which others have already pulled.
@@ -345,9 +345,9 @@ John and Simon began to help tidy the papers up whilst Simon started stating his
 ``Just reset back and do the work again,'' shouted an eavesdropping Klaud unhelpfully.
 A round of raised eyebrows circled the paper-stackers.
 
-``You could use rebase.''  Martha was standing next to the desk now and was arranging the stack in a more suitable position on the desk.
+``You could use rebase.'' Martha was standing next to the desk now and was arranging the stack in a more suitable position on the desk.
 
-``How so?''  John looked at Martha inquisitively.
+``How so?'' John looked at Martha inquisitively.
 
 Martha giggled.
 ``Rebase can do a lot more than just replaying commits you know. Some of the more simpler tasks are \ldots well \ldots let me show you.''
@@ -615,7 +615,7 @@ If we had, we would have to have resolved that, and then run the \texttt{git reb
 So, our wonderful branch is now sat on top of the new development changes and instead of having two diverging branch heads, we now have a single branch which \textbf{wonderful} extends from.
 
 \begin{trenches}
-``Martha!''  Simon shouted across the office at the seemingly new Git expert.
+``Martha!'' Simon shouted across the office at the seemingly new Git expert.
 ``HELP!!''
 
 Martha got up from her seat.
@@ -629,8 +629,8 @@ She placed the music on hold and put the headphones on the desk.
 \end{trenches}
 
 \index{rebasing!undoing}It's an interesting question.
-How would we move back again?  We have rewritten history, how could we possibly hope to go back again?  We have discussed before how most things in Git are never really immediately gone, even if we delete them.
-Does this apply here too?  Of course it does.
+How would we move back again? We have rewritten history, how could we possibly hope to go back again? We have discussed before how most things in Git are never really immediately gone, even if we delete them.
+Does this apply here too? Of course it does.
 Remember that a branch is really just defined by which commit the HEAD points to.
 Let us draw a few diagrams to show how the tree of commits looks before and after our rebase.
 
@@ -817,7 +817,7 @@ john@satsuki:~/coderepo$ git logg -n8
 john@satsuki:~/coderepo$
 \end{Verbatim}
 
-Whoops!  The commits were supposed to be on a branch that stemmed from \textbf{master}, not one that stems from \textbf{wonderful}.
+Whoops! The commits were supposed to be on a branch that stemmed from \textbf{master}, not one that stems from \textbf{wonderful}.
 This is where \texttt{git rebase} comes to our assistance once more.
 With one command, we can move those commits to a branch that stems from \textbf{master}.
 

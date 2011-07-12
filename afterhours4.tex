@@ -38,7 +38,7 @@ Let us consider the state of our repository at the end of Week 4, as shown in Fi
 
 For arguments sake, let us say that we were on the \textbf{wonderful} branch, and we wanted to merge the \textbf{zaney} branch into it.
 Using a standard 3-way merge algorithm, this would mean taking our current branch, which we will call \textbf{A}, the \textbf{zaney} branch, which we will call \textbf{B} and a parent which we will \textbf{C}.
-Why do we need this parent?  What is it used for?
+Why do we need this parent? What is it used for?
 
 \index{Best Common Ancestor}In order to merge changes from a specific file together, we need to know exactly how that file has changed over time.
 In order to know that, we need to have a common starting point.
@@ -64,7 +64,7 @@ We are attempting to merge in \textbf{zaney} to the \textbf{wonderful} branch.
 We need to find the \textbf{C} in our equation.
 To do this we could pour over Figure 1.
 This should yield the result to be commit \textbf{9710177}.
-Is there are way we can ask Git to do the same thing?  The following output introduces a new command that is used to find the \emph{Best Common Ancestor} for a given merge proposal.
+Is there are way we can ask Git to do the same thing? The following output introduces a new command that is used to find the \emph{Best Common Ancestor} for a given merge proposal.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo-af4$ git merge-base wonderful zaney

@@ -124,9 +124,9 @@ Looking back in \emph{Week 2} we can see the following trimmed output.
 So we need to start with the object that begins \texttt{cfe23cb}.
 Remember in the description above about the SHA-1 hashes, the first two bytes are the directory name.
 We are looking for a file that starts with the characters \texttt{e23cb} and it will be in the directory called \texttt{cf}.
-By George!  Looking at the list above, we can see that there is one file which fits the bill.
+By George! Looking at the list above, we can see that there is one file which fits the bill.
 In fact it would be a little ambiguous if there were two.
-It \emph{could} happen that we would have two SHA-1 hashes  that started with the same seven characters, but it's not likely.
+It \emph{could} happen that we would have two SHA-1 hashes that started with the same seven characters, but it's not likely.
 The line we are interested in is listed below.
 
 \begin{Verbatim}
@@ -186,7 +186,7 @@ My First Ever Commit
 john@satsuki:~/coderepo$
 \end{Verbatim}
 
-Fantastic!  We now have a way of confirming the objects are what we think they are.
+Fantastic! We now have a way of confirming the objects are what we think they are.
 If we were to run the command against every file in the repository, we would end up with a list that would look something like the one below.
 Notice our commit object sat in the middle.
 
@@ -203,7 +203,7 @@ Notice our commit object sat in the middle.
 \end{Verbatim}
 
 Now things start to get interesting.
-Did you also notice the tree SHA-1 hash mentioned when we ran \texttt{git cat-file -p}?  This is the tree object that stores the file structure.
+Did you also notice the tree SHA-1 hash mentioned when we ran \texttt{git cat-file -p}? This is the tree object that stores the file structure.
 Why don't we run the command against that file too?
 
 \begin{Verbatim}

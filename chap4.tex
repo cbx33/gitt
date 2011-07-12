@@ -21,7 +21,7 @@ It was Klaus.
 ``Maybe if you gave us some indication of who you were addressing Eugene,'' said Klaus in his usual matter-of-factly tone,
 ``we may actually be able to help you.''
 
-``John!''  Shouted Eugene, as if ignoring Klaus entirely.
+``John!'' Shouted Eugene, as if ignoring Klaus entirely.
 The manager hadn't looked up from his monitor as he had advised the tools guy and he now sat there continuing to type with one hand, the other reaching over and yanking out the earbud that was playing a droning beat in John's ear.
 
 ``Ouch!'' said John, slightly startled.
@@ -39,7 +39,7 @@ First, we should probably start off by answering that very question and describi
 In Git, a branch is just a pointer to a commit in the repository.
 At first glance this might not seem any different to a tag.
 A tag points to a commit, so does a branch.
-So what distinguishes between the two?  Let us start playing with branches a little and the answer will become obvious in a while.
+So what distinguishes between the two? Let us start playing with branches a little and the answer will become obvious in a while.
 Branches allow you to try things out and even keep a history of the things you try without actually affecting your main branch.
 In essence you are able to take things in a completely different direction, safe in the knowledge that your core code base will be safe.
 
@@ -77,7 +77,7 @@ john@satsuki:~/coderepo$
 \end{Verbatim}
 
 Now the \texttt{*} has moved to be in front of the word \texttt{wacky} and we have confirmation from the line above that we have in fact \texttt{Switched to branch 'wacky'}.
-Now we are here in wonderland, what can we do?  Well, potentially anything we could do in our previous branch, but with the added benefit that we are separated.
+Now we are here in wonderland, what can we do? Well, potentially anything we could do in our previous branch, but with the added benefit that we are separated.
 Some of you maybe be thinking, but we never created an initial branch called \textbf{master}.
 Whilst this is true in one sense, the \texttt{git init} command actually created this branch for us when we initialised the repository.
 
@@ -160,7 +160,7 @@ john@satsuki:~/coderepo$
 Brilliant.
 As you can see, we have used \texttt{git log} in a slightly different way to limit the number of commits.
 This is what the \texttt{-n} parameter is used for.
-However, what happens if we go back to the \textbf{master} branch again?  In theory we should have everything back the way we left it just before creating the branch.
+However, what happens if we go back to the \textbf{master} branch again? In theory we should have everything back the way we left it just before creating the branch.
 Let's move back into our \textbf{master} branch and examine the state of play.
 
 \begin{Verbatim}
@@ -339,7 +339,7 @@ However, we should point something out at this point.
 Even though we have not yet made any of our repositories public or available to other people, something should always be in the back of your mind.
 Allow a few minutes to read the next few paragraphs below.
 
-As someone once said, ``With great power, comes great responsibility.''  Git is hugely powerful.
+As someone once said, ``With great power, comes great responsibility.'' Git is hugely powerful.
 However, with this power comes a certain level of responsibility.
 We are referring here to Git's ability to change history.
 If you have watched any science fiction films involving time travel, you should be aware of the difficulties and problems often associated with time travel.
@@ -348,7 +348,7 @@ In Git, the same rule applies and the basics of the rule boil down to this: \tex
 If you are wondering why this is so important, consider this.
 If you are making a series of films, and you have already released the first two of a trilogy, you would not put elements in the third one that contradict the history of the others.
 You can not just act like the history of the first two did not happen.
-Occasionally this happens in the film industry and what is the reaction of the public?  People get mad.
+Occasionally this happens in the film industry and what is the reaction of the public? People get mad.
 Sometimes very mad.
 This is what will happen if you do the same with Git.
 People who are using your repository will end up with many problems and inconsistencies.
@@ -409,7 +409,7 @@ Switched to a new branch 'wonderful'
 john@satsuki:~/coderepo$
 \end{Verbatim}
 
-Did you see that?  We managed to create a new branch and move into it in one go.
+Did you see that? We managed to create a new branch and move into it in one go.
 The \texttt{git checkout} command is usually what we would use to move into a branch, not create it.
 When we use the \texttt{-b} parameter, the \texttt{git checkout} command can be used to create a new branch and switch to it in one go.
 Notice we have chosen the name \textbf{wonderful} for this particular branch.
@@ -469,7 +469,7 @@ He hung his head in shame.
 This wouldn't work in all situations, but then there are other techniques described later in the book to deal with more special cases.
 In this scenario we have created a branch, forgotten to switch into it, and carried on committing as if we were in our new branch.
 At first glance it may seem as if we are stuck.
-Once we have committed, we can't undo those commits right?  Well, that's not entirely accurate.
+Once we have committed, we can't undo those commits right? Well, that's not entirely accurate.
 
 We actually have two ways of clearing up this particular situation.
 The first of these is to use \indexgit{revert} to undo the changes of each commit.
@@ -623,8 +623,8 @@ john@satsuki:~/coderepo$
 Ooops.
 Despite the firm warning from Git, we have inadvertently deleted the \textbf{zaney} branch by mistake.
 This does happen.
-When people are in the thick of it, they do make mistakes and it is comforting to know that Git is able to recover from this, but how?  We have deleted the branch reference that pointed to the commit that was at the tip of the \textbf{zaney} branch by using the \texttt{-d} and \texttt{-D} parameters.
-So the question is, does that commit still exist any more?  Maybe we did more damage than we thought.
+When people are in the thick of it, they do make mistakes and it is comforting to know that Git is able to recover from this, but how? We have deleted the branch reference that pointed to the commit that was at the tip of the \textbf{zaney} branch by using the \texttt{-d} and \texttt{-D} parameters.
+So the question is, does that commit still exist any more? Maybe we did more damage than we thought.
 By deleting all references to the commit, how do we get it back?
 
 All is most definitely not lost.
@@ -735,7 +735,7 @@ Figure 5 shows what our repository looks like now.
 
 Our repository tree looks a little strange now.
 Notice that the most recent commit, \textbf{b119573}, has two parents.
-Can this be true?  If we run our \texttt{git show} command against that commit ID, we see something new.
+Can this be true? If we run our \texttt{git show} command against that commit ID, we see something new.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo$ git show b119573
@@ -788,11 +788,11 @@ Automatic merge failed; fix conflicts and then commit the result.
 john@satsuki:~/coderepo$
 \end{Verbatim}
 
-Oh dear!  That probably did not go as well as we had hoped.
+Oh dear! That probably did not go as well as we had hoped.
 We have two conflicts.
 The first is in \texttt{newfile1} and the second in \texttt{newfile2}.
 You may be wondering why.
-The last commit we made did not make any changes to either of those files, so why do we suddenly have a conflict?  When using a version control system like Git, conflicts are an every day part of life.
+The last commit we made did not make any changes to either of those files, so why do we suddenly have a conflict? When using a version control system like Git, conflicts are an every day part of life.
 A conflict does not mean you have done something wrong.
 It simply means that the automatic merging algorithm can not merge the changes.
 

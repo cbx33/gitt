@@ -151,7 +151,7 @@ commit
 john@satsuki:~/coderepo$
 \end{Verbatim}
 
-Excellent!  Just as we expected.
+Excellent! Just as we expected.
 So Git stores the SHA-1 hash for the commit we are referring to, in a file which has the same name as the tag.
 Just for clarity, let us run the same set of commands against our newly created annotated tag.
 
@@ -162,7 +162,7 @@ john@satsuki:~/coderepo/.git/refs/tags$ cat v1.0b
 john@satsuki:~/coderepo/.git/refs/tags$
 \end{Verbatim}
 
-Hang on a minute!  Shouldn't the output of the \texttt{v1.0a} and \texttt{v1.0b} files be the same.
+Hang on a minute! Shouldn't the output of the \texttt{v1.0a} and \texttt{v1.0b} files be the same.
 There were both created at the same point in the repositories history.
 They were both supposed to be pointing to the same commit.
 Let us use a little plumbing and see what is going on.
@@ -176,7 +176,7 @@ john@satsuki:~/coderepo$
 Interesting.
 So it seems as if there is another type of object that can be added to the list.
 The \emph{tag} object.
-So what exactly is the difference here?  To answer that we need to take a look at the difference between the two tags.
+So what exactly is the difference here? To answer that we need to take a look at the difference between the two tags.
 \texttt{v1.0a} was a simple tag, whereas \texttt{v1.0b} is an annotated tag.
 
 When the tag was merely a pointer to a commit object, the repository required nothing more that the object that it was referring to, to be stored in the file.

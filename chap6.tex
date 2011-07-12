@@ -12,7 +12,7 @@ Unfortunately things don't always go as smoothly as we would like.
 The following scenario demonstrates just this.
 
 \begin{trenches}
-``Yeh but Martha, I need you to work on this fix now!  Not in five minutes.''
+``Yeh but Martha, I need you to work on this fix now! Not in five minutes.''
 
 ``Klaus I'm kinda in the middle of something else yet, and I'm not ready to commit,'' said Martha, feeling a little concerned.
 She was used to Klaus making demands on his time, but she had spent a while working on this particular fix for John and she just wasn't ready to finish up yet.
@@ -25,7 +25,7 @@ Klaus seemed unimpressed, ``What the heck does that do?''
 ``Allows you to move your changes to somewhere else until you are ready to finish them.''
 
 ``Please Rob,'' started Martha,
-``Can you show me what you mean?  Sounds exactly like what I need''
+``Can you show me what you mean? Sounds exactly like what I need''
 \end{trenches}
 
 Sometimes you could be in the middle of something when another really important task comes up.
@@ -257,7 +257,7 @@ We now have a clone of the repository and we can start to look at how we can pla
 
 ``I'm sure they haven't gone anywhere,'' shouted John.
 
-Rob's reply was quick and certain, ``They have!  Run a git branch on your clone and see for yourself''
+Rob's reply was quick and certain, ``They have! Run a git branch on your clone and see for yourself''
 
 ``Oh!''
 
@@ -512,8 +512,8 @@ We have tried to view a diff between our local \textbf{wonderful} branch and the
 Interestingly, Git is telling us that there is no difference.
 Hang on though, we just made some changes above.
 
-Remember before we discussed the fact that our clone was disconnected from the \textbf{origin} copy?  What this means is that unless we ask Git, it won't update details about what is present in the remote copy.
-Once this is up to date, we can pull the changes into our local copy of the remote branch?  Interestingly there are actually two ways to do this.
+Remember before we discussed the fact that our clone was disconnected from the \textbf{origin} copy? What this means is that unless we ask Git, it won't update details about what is present in the remote copy.
+Once this is up to date, we can pull the changes into our local copy of the remote branch? Interestingly there are actually two ways to do this.
 
 \index{branching!updating remote}The first method is by running a \indexgit{pull} command.
 If you remember the output from the \texttt{git remote show origin}, you may remember that it showed that there was a local branch configured for \texttt{'git pull'} and the details it gave for the \textbf{wonderful} branch were as follows; \texttt{wonderful merges with remote wonderful}.
@@ -572,7 +572,7 @@ Please note, that there are occasions when you would require one over the other,
 \section{Day 5 - ``I'm putting my foot down''}
 \subsection{Pushing back!}
 
-We now know a lot about remote locations right?  We are ready to start collaborating with someone.
+We now know a lot about remote locations right? We are ready to start collaborating with someone.
 Let us first see how Tamagoyaki are getting on with things.
 
 \begin{trenches}
@@ -595,7 +595,7 @@ Klaus smiled and his head appeared over the cubicle.
 ``Come over here genius and I'll show you,'' he said with the slightest amount of gloat at being one of the only people to know something about Git that Rob didn't.
 \end{trenches}
 
-\index{bare repository}\index{non-bare repository}\index{pushing}Bare?  Non-bare?  At first glance, this may seem confusing.
+\index{bare repository}\index{non-bare repository}\index{pushing}Bare? Non-bare? At first glance, this may seem confusing.
 It isn't exactly an intuitive word to describe a repository but what Klaus mentioned was absolutely true.
 In Git, if you want to push changes back to a repository, instead of pulling them, the repository that you push to should be what is called a \emph{bare} repository.
 What this means is that the repository has no working copy.
@@ -615,7 +615,7 @@ For these reasons, it is much simpler just to push only to bare repositories.
 \end{callout}
 
 At first glance this may seem like a rather odd thing to want.
-Why would we want a repository that doesn't have a working tree?  The simple answer is that a \emph{bare} repository allows us to be able to push changes into it.
+Why would we want a repository that doesn't have a working tree? The simple answer is that a \emph{bare} repository allows us to be able to push changes into it.
 Let us recreate the error message that Rob was talking about.
 
 \begin{Verbatim}
@@ -659,7 +659,7 @@ error: failed to push some refs to '/home/john/coderepo'
 john@satsuki:~/coderepo-cl$
 \end{Verbatim}
 
-Bingo!  There is the error we were looking for.
+Bingo! There is the error we were looking for.
 In order to get round this, we are going to create another clone of the repository in \texttt{coderepo}.
 This time however, we are going to pass an option to it when we create it.
 
@@ -746,7 +746,7 @@ index 7268b97..638113c 100644
 john@satsuki:~/coderepo-cl$ git branch -v
 \end{Verbatim}
 
-There we go!  Those are the changes we just committed to the local repository.
+There we go! Those are the changes we just committed to the local repository.
 The last thing we need to do is to initiate a \texttt{git push}.
 We are going to have to define which remote we wish to push to now for two reasons.
 The first is that now we have two remotes, and so Git would not know if we meant \textbf{origin} or \textbf{backup}.

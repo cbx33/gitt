@@ -103,7 +103,7 @@ This design implementation was essential as the Linux kernel is indeed a very la
 
 When developing systems that offer any kind of security to an end user, it is essential to provide a way of auditing the history of the code, to ensure that no tampering has taken place.
 Due to the way that Git is implemented, each SHA-1 hash, used to identify a particular commit, depends on the entire history of the repository.
-What does this mean to someone viewing the repository?  Once the repository is published, it is impossible for someone to tamper with the history without someone noticing.
+What does this mean to someone viewing the repository? Once the repository is published, it is impossible for someone to tamper with the history without someone noticing.
 This is called cryptographic authentication of history.
 
 Of course the most important feature, and one which will be discussed in great detail later in the book, is that of distributed development.
