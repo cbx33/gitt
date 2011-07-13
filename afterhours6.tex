@@ -48,7 +48,7 @@ john@satsuki:~/coderepo-cl$ git remote show origin
 john@satsuki:~/coderepo-cl$
 \end{Verbatim}
 
-How though, is this data set up and configured from within Git itself.
+How though, is this data set up and configured from within Git itself?
 Looking at the \texttt{.git/config} file, we can see a glimpse of this.
 
 \begin{Verbatim}
@@ -73,4 +73,32 @@ john@satsuki:~/coderepo-cl$ cat .git/config
 john@satsuki:~/coderepo-cl$
 \end{Verbatim}
 
-As you can see
+As you can see there are two relevant sections, these are the \texttt{remote} and \texttt{branch} stanzas.
+The \texttt{remote} stanzas are there to define certain elements of the remote repository, 
+whilst the \texttt{branch} stanzas describe elements and settings for the branches that we are tracking.
+Let us look at the relevant elements that we have set out in \texttt{config} file for each type of stanza.
+
+We will start by looking at the \texttt{remote} stanza. We have two settings here in our configuration.
+The first is \texttt{url} and the second is \texttt{fetch}.
+The \texttt{url} setting tells Git the location of the remote repository defined by the name outlined within the quotation marks.
+In our example, the remote we first encounter is called \textbf{origin} and has a url of \texttt{/home/john/coderepo}.
+
+You will notice that there is also a second setting called \texttt{fetch}.
+This setting tells Git which branches, or HEADs we are interested in. In the default configuration, we ask Git to fetch all branch HEADs.
+This also has an effect on which objects are downloaded.
+Git will look at all of the branch HEADs and work backwards to find out which commit objects need to be downloaded.
+
+In the \texttt{refs/} folder there are two other folders by default called \texttt{tags} and \texttt{remotes}.
+With the default configuration as above, these references will not be fetched,
+and commits that are only pointed to by these references will not be downloaded either.
+
+Looking at the \texttt{branch} settings, we can see that there are a few more settings here that describe how Git responds to certain commands when inside a certain branch.
+In both the cases above, Git will automatically use remote of \textbf{origin} as the remote to use when performing operations.
+This means that when we run a \texttt{git pull}, we do not have to specify a remote to pull from.
+Obviously if we wanted to, we could change this and have \textbf{wonderful}, for example, update from a different remote repository.
+
+The last setting in this file that we will concern ourselves with is the \texttt{merge} setting.  
+When we are in the named branch, this setting defines the upstream version of the named branch and is used for merging and can affect pulling and rebasing too.
+
+We can set these settings and any of the others in the \texttt{config} file manually,
+using the \texttt{git config} tool, which we used in a previous chapter.
