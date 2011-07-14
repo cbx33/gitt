@@ -102,3 +102,34 @@ When we are in the named branch, this setting defines the upstream version of th
 
 We can set these settings and any of the others in the \texttt{config} file manually,
 using the \texttt{git config} tool, which we used in a previous chapter.
+
+\subsection{The Git spelling bee}
+It is now most definitely time we spoke about other ways to represent commit hashes.  
+More details can be found about this in the Git manual, but it is definitely worth spending a few minutes looking at the ways in which we can specify objects in the repository.
+As you have seen in previous chapters, we have used branch names, commits hashes and tags to specify commits, but it is also possibly to use a variety of other methods to do so.
+We are going to use the \indexgit{rev-parse} command again to return us an object hash from our description of an object.
+These descriptions are ways to \emph{spell} objects.
+
+
+\begin{itemize}
+\item\index{sha1}\textbf{$<$SHA1$>$} - This is most common way to specify an object.
+The \textbf{SHA1} is the 40 character identifier that Git generates for each object.
+As you have seen before, we do not have to specify the entire SHA1 hash, just the beginning portion that is unique.
+
+\item\index{refname}\textbf{$<$refname$>$} - We use this type of referencing a lot when checking out branches.  
+The \textbf{refname} is a symbolic name.
+An example of this would be \textbf{master}, which actually refers to \textbf{refs/heads/master}, which you have seen in the \texttt{.git} directory.
+HEAD is also a \textbf{refname}.  In general, Git will search through a number of directories to find the \textbf{refname} that is being referred to;
+\begin{itemize}
+\item .git/$<$name$>$
+\item refs/$<$name$>$
+\item refs/tags/$<$refname$>$
+\item refs/heads/$<$name$>$
+\item refs/remotes/$<$name$>$
+\item refs/remotes/$<$name$>$/HEAD
+\end{itemize}
+So if we used \textbf{master} as our \textbf{refname}, Git would search in \texttt{.git} root directory first,
+then into \texttt{refs}, followed by \texttt{refs/tags}, and finishing with \texttt{refs/heads}.
+
+\item\index{date}\textbf{$<$refname$>$@\{date\}} - Now we find a more interesting way of specifying references.
+\end{itemize}
