@@ -30,10 +30,10 @@ remote: Total 53 (delta 10), reused 0 (delta 0)
 john@akira:~$
 \end{Verbatim}
 
-Now we have done exactly as before and cloned our repository to a local folder called \texttt{coderepo-ne} from the remote url \texttt{ssh://john@satsuki/home/john/coderepo}.
+Now we have done exactly as before and cloned our repository to a local folder called \texttt{coderepo-ne} from the remote URL \texttt{ssh://john@satsuki/home/john/coderepo}.
 Notice the use of \texttt{ssh://} to denote the specification of the SSH protocol.
-We have also put the users name in the url of the remote path.
-If the SSH server was running on a different port to usual, that is, on a port other than 22, we could have also added a port number preceeded by a colon after the hostname.
+We have also put the users name in the URL of the remote path.
+If the SSH server was running on a different port to usual, that is, on a port other than 22, we could have also added a port number preceded by a colon after the hostname.
 
 \index{Git!Protocol}SSH isn't the only protocol that Git can use.
 We have already looked at two; local and SSH.
@@ -45,7 +45,7 @@ The GIT protocol is the fastest transfer protocol out there for Git repositories
 This should come as no surprise, since it was developed exclusively for use within a Git environment.
 It does however have a relatively large drawback.
 The drawback is that it provides absolutely no authentication.
-For this reason, enabling the GIT protocol on a repository and running the server backend, (described later), will allow anyone who can talk to the servers port complete read access to the repository.
+For this reason, enabling the GIT protocol on a repository and running the server back-end, (described later), will allow anyone who can talk to the servers port complete read access to the repository.
 
 If you are serving a large repository on the Internet for example, this could actually be rather beneficial and will allow you to serve pulls quickly and efficiently.
 However, though it is possible to enable \emph{pushing} using the GIT protocol, the lack of security would mean that anyone who could see the server and connect to the port, usually 9418, could make changes to the repository.
@@ -56,7 +56,7 @@ This is usually entirely undesirable and as such people will often couple a read
 Setting up this is usually as simple as creating a bare clone of your repository, keeping it up to date, usually via a post-update-hook, which is described later in the book, and simply allowing clients access to this server area.
 
 Note that the above is only to provide read-only access over HTTP.
-It is possible to allow writable access, ie pushing, over HTTPS, but this is more complicated to set up and is outside the scope of this book.
+It is possible to allow write access, i.e.\ pushing, over HTTPS, but this is more complicated to set up and is outside the scope of this book.
 
 \subsection{Protocol decision}
 \index{protocol decision}Tamagoyaki are about to embark on their decision making process regarding which protocols to use and how to perform their collaboration between themselves and their external partners.
@@ -93,7 +93,7 @@ John shook his head.
 He paused for a breath.
 ``But we need to think about scalability too. Whilst I don't think all development work should be in one repository, I also don't think the best way to go is to have a repo for every person.''
 
-``I know it's a rarity, but I gotta agree with John.'' Klaus spoke whilst idly stabbing his pen lighty into a blob of what looked like modelling clay.
+``I know it's a rarity, but I gotta agree with John.'' Klaus spoke whilst idly stabbing his pen lightly into a blob of what looked like modelling clay.
 ``Think what the chimp would say to it too.''
 
 Martha furrowed her brow,
@@ -107,10 +107,10 @@ Martha looked a little horrified,
 
 ``What? He spends all day monkeying around in the 'datacenter'. I've never really seen him do any real work at all.''
 Klaus was looking at Martha who now had one eyebrow raised.
-He had used airquotes when voicing the word 'datacenter'.
+He had used air quotes when voicing the word 'datacenter'.
 ``Plus he calls it a datacenter, but I've seen inside, it's more like a cupboard with a PC in it.''
 
-``You need to show a little more respect Klaus,'' Martha threw back, a little more agressively than she had intended.
+``You need to show a little more respect Klaus,'' Martha threw back, a little more aggressively than she had intended.
 
 ``Guys!! Guys!!'' John shouted.
 ``Can we get back to the topic at hand and deal with Klaus later?''
@@ -145,7 +145,7 @@ For Tamagoyaki Inc.
 this branch will likely contain mostly finished, but largely untested works.
 The teams will work together inside their mob repositories to create new functionality.
 Once they are happy, their team leader will push their changes up into the development branch on the \emph{blessed} repository.
-This branch is not gauranteed to be stable.
+This branch is not guaranteed to be stable.
 Sometimes things will break but the development branch is a place that all of the work of the various teams comes together.
 
 Once the teams hit feature freeze, the point at which they will no longer take any more new features into the code base, they will ask the QA manager to create a \textbf{QA} branch.
@@ -198,7 +198,7 @@ She walked over to the whiteboard.
 ``For small topics or features,'' she began,
 ``where you are not going to have to publish it or you need to take a long time developing, it would make sense to use rebase.''
 She began drawing little diagrams with circles on the board.
-``Rebasing will allow you to take your branch, pick up all the development you have done, update the branch underneath to bring it inline with your blessed dev branch for example, and then replay your development on top.''
+``Rebasing will allow you to take your branch, pick up all the development you have done, update the branch underneath to bring it in-line with your blessed dev branch for example, and then replay your development on top.''
 
 ``Won't that change your history? Isn't that a big big no no?''
 
@@ -210,7 +210,7 @@ He was beginning to feel like the team members were starting to embrace Git's po
 
 \index{rebasing}As you know, each time you merge you create a merge commit.
 Whilst this is not a problem, it can leave the tree looking messy.
-If you are working on a small feature in a branch, and you want to get the latest features and updates from the dev branch, but you do not want the hastle and untidyness of generating a ton of merge commits.
+If you are working on a small feature in a branch, and you want to get the latest features and updates from the dev branch, but you do not want the hassle and untidiness of generating a ton of merge commits.
 The best way to get round this is to use the rebase tool.
 
 \index{replaying commits}As mentioned, the rebase tool can find a common ancestor between two branches, pick up the new commits on your new branch, update the branch underneath and the replay your commits on top.
@@ -456,7 +456,7 @@ In the resulting tree, both have had their IDs changed.
 \newline
 \newline
 The reason for this is simple, remember we are replaying commits.
-In a sense we are re-commiting the changes that were made during that commit.
+In a sense we are re-committing the changes that were made during that commit.
 As we have stated previously, Git is cryptographically secure.
 By this we mean that each commit relies on the commit that preceeds it.
 So, if we change the ID of a preceeding commit, all subsequent ones have to change also.
@@ -759,7 +759,7 @@ He pulled up a chair next to the desk.
 ``Come on Rob,'' started John,
 ``What's eating you?''
 
-``Well, I have been working away, commiting to a branch, but it wasn't the right one.''
+``Well, I have been working away, committing to a branch, but it wasn't the right one.''
 He looked like he was almost in tears.
 
 John frowned, ``Can't you just move a new branch forward and then rewind the other one?''

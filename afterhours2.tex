@@ -85,7 +85,7 @@ In this way, a tree object will contain references to both tree objects and blob
 There is one object generated per revision of a file.
 However, if exactly the same data resides in two separate files, then there will only be one object created and that object will be referenced by two trees.
 In this way, multiple copies of the same file, or files which have not changed through multiple revisions are not stored multiple times.
-Even though Git stores a complete snapshot of the filesystem at every revison.
+Even though Git stores a complete snapshot of the file system at every revision.
 \end{itemize}
 
 So, when we commit into the repository we create a commit object.
@@ -134,7 +134,7 @@ The line we are interested in is listed below.
 \end{Verbatim}
 
 It would be nice if we could find out a little more about this object, and confirm that it is what we expect it to be.
-to start with, let us run the linux \texttt{file} command on it, to see what it makes of it.
+to start with, let us run the Linux \texttt{file} command on it, to see what it makes of it.
 
 \begin{Verbatim}
 john@satsuki:~/coderepo/.git/objects/cf$ file
@@ -223,7 +223,7 @@ john@satsuki:~/coderepo$
 \end{Verbatim}
 
 At first glance one may consider it odd that there is nothing in there.
-However, if we take a trip back in time and flick back to the first commit that we made to our repository, you will see that we never actuall put any content in our file at all.
+However, if we take a trip back in time and flick back to the first commit that we made to our repository, you will see that we never actually put any content in our file at all.
 So, the object contains nothing.
 Now we can draw up a diagram of our repository after the first commit.
 

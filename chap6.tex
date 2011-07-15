@@ -4,7 +4,7 @@
 \chapter{Week 6}
 
 \section{Day 1 - ``My private little stash''}
-\subsection{Getting interrrupted}
+\subsection{Getting interrupted}
 
 \index{stashing}We're getting close to the point where we can really start using Git as we originally intended, the team at Tamagoyaki Inc.
 are also getting much more acquainted with the operations of both version control and Git in particular.
@@ -291,7 +291,7 @@ john@satsuki:~/coderepo-cl$
 \end{Verbatim}
 
 Whilst we have all the objects in our repository, we do not yet have our branches set up locally.
-They are available, but they have not yet been setup locally.
+They are available, but they have not yet been set up locally.
 To explain this we need to introduce the concept of remote tracking branches.
 We are familiar with local branches.
 Local branches allowed us to make commits locally in a safe and separated environment.
@@ -382,7 +382,7 @@ Date:   Fri Apr 1 07:42:04 2011 +0100
 \end{Verbatim}
 
 Again, this requires no connection to the \textbf{origin} repository at all and works as expected.
-Let us try something really funky now, let us try checking out a remote branch so that we can view the filesystem.
+Let us try something really funky now, let us try checking out a remote branch so that we can view the file system.
 We are now going to try checking out the remote branch called \textbf{wonderful}.
 
 \begin{Verbatim}
@@ -407,7 +407,7 @@ john@satsuki:~/coderepo-cl$
 \index{dangling}Interesting.
 This is not what we are used to seeing.
 When we have checked out branches before, we have always been presented with a \texttt{Switched to branch 'xxxxxx'} message.
-Now we are seeing a funny message about having a detatched HEAD.
+Now we are seeing a funny message about having a detached HEAD.
 This is because we are not actually on a branch.
 We can make changes as we are advised, we can even make commits, but these will not actually become integrated into any branches.
 In essence these commits would be left dangling and after time, because no branch points to them, they would get deleted by garbage collection routines.
@@ -496,7 +496,7 @@ john@satsuki:~/coderepo$ git commit -a -m 'Added a new file'
 john@satsuki:~/coderepo$
 \end{Verbatim}
 
-As you can see, we have switched back to working on our old \textbf{orgin} and have bought \textbf{wonderful} to be in line with master and have added a new file and committed the changes.
+As you can see, we have switched back to working on our old \textbf{origin} and have bought \textbf{wonderful} to be in line with master and have added a new file and committed the changes.
 Now let us go back to our clone and see if we can see those changes.
 
 \begin{Verbatim}
@@ -610,7 +610,7 @@ Pushing to a non-bare repository will mean that the index will get changed, as i
 \newline
 \newline
 Now this causes a problem when we are trying to see what has been modified in the working directory when compared to the HEAD.
-As our working copy will contain older versions of the files than are in the index, it will appear as if many more changes have occured and we risk undoing those changes.
+As our working copy will contain older versions of the files than are in the index, it will appear as if many more changes have occurred and we risk undoing those changes.
 For these reasons, it is much simpler just to push only to bare repositories.
 \end{callout}
 
