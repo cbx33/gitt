@@ -74,9 +74,6 @@
 % give us a begin{trenches}
 \newenvironment{trenches}{\begin{quote}\begin{rmfamily}\textbf{In the trenches\ldots\\\\}}{\end{rmfamily}\end{quote}}
 
-% Set the default formatting options for the Verbatim environment
-\fvset{frame=leftline,framerule=1mm,fontsize=\relsize{-3}}
-
 % Callout boxes
 \newsavebox{\callout@contents}
 \newcommand{\callout@type}{}
@@ -129,3 +126,29 @@
 \texttt{git #1}%
 \index{git commands!#1@\texttt{#1}}%
 }
+
+\RequirePackage{listings}
+\RequirePackage{courier}
+\lstnewenvironment{code}{
+  \lstset{
+    basicstyle=\tiny\ttfamily,
+    identifierstyle=\tiny\ttfamily,
+    commentstyle=\tiny\ttfamily,
+    stringstyle=\tiny\ttfamily,
+    keywordstyle=\tiny\bfseries\ttfamily,
+    frame=leftline,
+    framerule=1mm,
+    framextopmargin=0pt,
+    framexbottommargin=0pt,
+    framexleftmargin=2pt,
+    framexrightmargin=2pt,
+    xleftmargin=8pt,
+    xrightmargin=2pt,
+    breaklines=true,
+    breakatwhitespace=true,
+    breakindent=4pt,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow}},
+    tabsize=2,
+    showstringspaces=false
+  }
+}{}

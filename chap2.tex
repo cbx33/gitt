@@ -86,13 +86,13 @@ The first thing we need to do is to understand two very important things:
 
 The first of these is relatively easy to perform.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~$ mkdir coderepo
 john@satsuki:~$ cd coderepo/
 john@satsuki:~/coderepo$ git init
 Initialized empty Git repository in /home/john/coderepo/.git/
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 What we've done here is create a new directory called coderepo, moved into it, and then run the \indexgit{init} command.
 The result of this command is a new directory in the coderepo directory called \texttt{.git}.
@@ -129,7 +129,7 @@ However, Git handles these hashes well, and you can reference a commit using a f
 
 The most simple way of committing a file into the repository is to create it, or bring it into your working copy and use the commands below.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ touch my_first_committed_file
 john@satsuki:~/coderepo$ git add my_first_committed_file
 john@satsuki:~/coderepo$ git commit -m 'My First Ever Commit'
@@ -137,14 +137,14 @@ john@satsuki:~/coderepo$ git commit -m 'My First Ever Commit'
  0 files changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 my_first_committed_file
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 What we have done here, is to create a new blank file and add it into the repository using the \indexgit{add} command.
 Then we have committed it into the repository using the \indexgit{commit} command.
 Let's make a few changes to our working copy and see what the result is.
 First we are going to add another two new files, then we are going to make changes to our original file and finally we are going to run git status to see what Git has to say about our changes.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ echo "Change1" > my_first_committed_file
 john@satsuki:~/coderepo$ touch my_second_committed_file
 john@satsuki:~/coderepo$ touch my_third_committed_file
@@ -166,7 +166,7 @@ john@satsuki:~/coderepo$ git status
 no changes added to commit (use "git add" and/or "git
  commit -a")
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 So we can see that \indexgit{status} is reporting that there are changes to our first committed file, and that our second and third files are \textbf{untracked}.
 \index{untracked!files}Untracked files are ones which Git detects as being present in the working directory, but which haven't yet been added and there for upon running a commit, these files will not be added to the repository.
@@ -174,7 +174,7 @@ Notice that if we tried to run a commit now, nothing would actually be committed
 Even though there are changes to to my\_first\_committed\_file, we have not asked Git to include these.
 So, let's go ahead and do that, and at the same time we'll make a few changes to my\_second\_committed\_file, and add those too.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git add my_first_committed_file
 john@satsuki:~/coderepo$ echo "Change1" > my_second_committed_file
 john@satsuki:~/coderepo$ git add my_second_committed_file
@@ -192,7 +192,7 @@ john@satsuki:~/coderepo$ git status
 #
 #	my_third_committed_file
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Now we can see that one of the sections has changed to "Changes to be committed".
 So this means that Git has recognised and remembered that we are expecting these files to be committed when we next run a \texttt{git commit}.
@@ -218,7 +218,7 @@ John pointed at the screen.
 To understand what Klaus was getting in a spin about, let's make a change to my\_second\_committed\_file now and see how this affects things.
 Remember we have already added the file, but we haven't yet made a commit.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ echo "Change2" >>
  my_second_committed_file
 john@satsuki:~/coderepo$ git status
@@ -243,7 +243,7 @@ john@satsuki:~/coderepo$ git status
 #
 #	my_third_committed_file
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 How interesting! We now have three sections and one of our files appears twice under both Changes to be committed and Changed but not updated.
 What does this mean? If you remember back, we spoke about a \index{staging}staging area.
@@ -254,14 +254,14 @@ The most important thing to remember is that Git will only ever commit what is i
 
 So, if we go ahead and run our commit now, we will only have the changes marked in Changes to be committed appearing in our repository.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git commit -m 'Made a few changes to
 first and second files'
 [master 163f061] Made a few changes to first and second files
  2 files changed, 2 insertions(+), 0 deletions(-)
  create mode 100644 my_second_committed_file
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 In our examples, we have used the syntax \texttt{git commit -m 'Message'}.
 This is a slightly special way of committing, it allows us to specify our commit log message on the command line.
@@ -272,7 +272,7 @@ This commits all of the changes to files which are already tracked.
 Consequently we do not have to specify the files with \texttt{git add}, like we have had to previously.
 Any file which has been modified and has previously been added to the repository, will have it's changes committed upon running that command.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git status
 # On branch master
 # Changed but not updated:
@@ -290,17 +290,17 @@ john@satsuki:~/coderepo$ git status
 no changes added to commit (use "git add" and/or "git commit
  -a")
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git commit -a -m 'Finished adding
  initial files'
 [master 9938a0c] Finished adding initial files
  1 files changed, 1 insertions(+), 0 deletions(-)
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git status
 # On branch master
 # Untracked files:
@@ -312,7 +312,7 @@ nothing added to commit but untracked files present (use
 "git add" to track)
 john@satsuki:~/coderepo$
 
-\end{Verbatim}
+\end{code}
 
 \section{Day 4 - ``Let's do this right, not fast''}
 
@@ -352,7 +352,7 @@ Of course, it can do a great many other things, but for now, let us concern ours
 We are working away, and have added a number of files into the index ready for committing, when we discover that we are actually not ready to commit them.
 In the following example, we are going to add the file my\_third\_committed\_file and then remove it from the index.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git add my_third_committed_file
 john@satsuki:~/coderepo$ git status
 # On branch master
@@ -362,14 +362,14 @@ john@satsuki:~/coderepo$ git status
 #	new file:   my_third_committed_file
 #
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 Notice how my\_third\_committed\_file is now ready to be committed to repository.
 The problem is we need to add something more to it before we do.
 Remember that when we run the git add command, we are copying the file from our working copy to the index.
 If we decide we no longer want that file in the repository, we can run the following.
 
-\begin{Verbatim}
+\begin{code}
 john@satsuki:~/coderepo$ git reset my_third_committed_file
 john@satsuki:~/coderepo$ git status
 # On branch master
@@ -381,7 +381,7 @@ john@satsuki:~/coderepo$ git status
 nothing added to commit but untracked files present (use
  "git add" to track)
 john@satsuki:~/coderepo$
-\end{Verbatim}
+\end{code}
 
 We have discarded the file which was residing in the index.
 This is very important to note.
@@ -412,15 +412,15 @@ Finally, Git will look in your distributions own global folder.
 
 If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;
 
-\begin{Verbatim}
+\begin{code}
 git config core.editor "nano"
-\end{Verbatim}
+\end{code}
 
 If we want the changes to apply globally, meaning it would affect all repositories we administrate as this user, unless overridden by a repository setting, we would run the following;
 
-\begin{Verbatim}
+\begin{code}
 git config --global core.editor "nano"
-\end{Verbatim}
+\end{code}
 
 It is worth noting that you can also use the \$EDITOR environment variable to accomplish the same thing.
 Many people use this in preference to the modifying the Git configuration simply because many other programs honour this setting.
