@@ -45,7 +45,7 @@ for i in $TOGA; do
     echo $line
     if [ "*" == ${line:0:1} ]; then
 		echo "Non outputable"
-		${line:1}
+		eval ${line:1}
 	fi
 	echo "${COM_STRING}" ${line} > ${OUTPUT}/${i}
 	#echo "${line}" ${line} >> ${OUTPUT}/${i}
