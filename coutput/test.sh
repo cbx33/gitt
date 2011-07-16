@@ -49,7 +49,7 @@ for i in $TOGA; do
 	fi
 	echo "${COM_STRING}" ${line} > ${OUTPUT}/${i}
 	#echo "${line}" ${line} >> ${OUTPUT}/${i}
-	${line} &>> ${OUTPUT}/${i}
+	eval ${line} &>> ${OUTPUT}/${i}
     done < $SOURCE/${i}
 done
 
@@ -58,7 +58,7 @@ done
 #runcommand 'git init'
 #runcommand 'touch my_first_committed_file'
 #runcommand 'git add my_first_committed_file'
-#runcommand 'git commit -m \"My First Ever Commit\"'
+#runcommand 'git commit -m "My First Ever Commit"'
 #runcommand 'echo "Change1" > my_first_committed_file'
 #runcommand 'touch my_second_committed_file'
 #runcommand 'touch my_third_committed_file'
