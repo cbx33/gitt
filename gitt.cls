@@ -149,6 +149,8 @@
     breakindent=4pt,
     postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow}},
     tabsize=2,
-    showstringspaces=false
+    showstringspaces=false,
+    aboveskip=14pt,
+    belowskip=14pt
   }
 }{}
