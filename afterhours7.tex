@@ -1,10 +1,11 @@
 % afterhours7.tex - Afer Hours Week 7
 \chapter{After Hours Week 7}
-\section{``Instant Website''}
+\section{``Network Communicating''}
+The last week began by looking at some networking communication.
+In the After Hours section this week, we are going to look at two tools which are used for network communication.
+
 \subsection{Brewing a website - in an instant}
-We have spoken a little about other tools which are supplied with Git.
-One of those is the \indexgit{instaweb} tool.
-This tool allows you to spawn a web service quickly and easily, using a web daemon of your choice.
+The \emph{Instaweb} tool allows you to spawn a web service quickly and easily, using a web daemon of your choice.
 The \emph{Instaweb} tool actually uses \texttt{gitweb} which is a more permanent solution for obtaining the same functionality as \emph{Instaweb}.
 If you have never played with web services before it would be worth spending a few minutes understanding a little about how web daemons work.
 This tool is not available on the Windows platform, but it can be used on both MacOS and Linux.
@@ -143,3 +144,35 @@ Hopefully you can see that this is a very useful tool to add to our Git suite.
 If you are considering setting up a permanent web based view for your Git repository, you should not use \emph{Instaweb}.
 This tool is intended for quick and easy web access to a repository.
 There are plenty of guides and tutorials available which explain the installation and configuration of \texttt{gitweb}.
+
+\subsection{Pushing and pulling with a daemon}
+The \texttt{git instaweb} daemon is very useful indeed.
+However, one function that it does not provide is the ability to clone or fetch from the URL.
+Another tool which comes with the Git package is the \indexgit{daemon} utility and it is this tool which is going to give us this functionality.
+We spoke earlier about the GIT protocol and it just so happens that \texttt{git daemon} uses the GIT protocol for transferring data.
+Let us have a look at a simple example of using \texttt{git daemon}.
+
+\begin{code}
+john@satsuki:~$ git daemon --base-path=/home/john/coderepo
+\end{code}
+
+Notice how this command has not exited.
+This is because the process is still running, waiting for communication.
+We can now log into another machine on the same network and clone the repository using our \texttt{git clone} command.
+
+\begin{code}
+rob@mimi:~$ cd /tmp
+rob@mimi:/tmp$ mkdir source
+rob@mimi:/tmp$ git clone git://satsuki/ source
+Cloning into source...
+fatal: The remote end hung up unexpectedly
+rob@mimi:/tmp$ 
+\end{code}
+
+That did not go as expected and resulted in a failed clone.
+If we look back at the source machine we can see something interesteing has appeared.
+
+\begin{code}
+john@satsuki:~$ git daemon --base-path=/home/john/coderepo
+[4687] '/home/john/coderepo/.git': repository not exported.
+\end{code}
