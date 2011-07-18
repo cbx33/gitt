@@ -5,6 +5,7 @@
 We have spoken a little about other tools which are supplied with Git.
 One of those is the \indexgit{instaweb} tool.
 This tool allows you to spawn a web service quickly and easily, using a web daemon of your choice.
+The \emph{Instaweb} tool actually uses \texttt{gitweb} which is a more permanent solution for obtaining the same functionality as \emph{Instaweb}.
 If you have never played with web services before it would be worth spending a few minutes understanding a little about how web daemons work.
 This tool is not available on the Windows platform, but it can be used on both MacOS and Linux.
 
@@ -27,6 +28,7 @@ john@satsuki:~/coderepo$
 The tool is invoked by running \texttt{git instaweb} and when started, you should be presented with a browser as pictured below.
 In our case, lighttpd has been installed, and so Git will use that as its daemon.
 Firefox is also the default browser on this machine and so this is the browser that Git will choose to display the web page in.
+If we wanted to use an alternative browser, we could have supplied an argument with \texttt{--browser}, like \texttt{--browser chromium} for example.
 
 \begin{figure}[hbt]
 \centering
@@ -59,3 +61,85 @@ john@satsuki:~/coderepo$
 \end{code}
 
 Now would be a good time to take a quick look at what running \texttt{git instaweb} has done to our repository.
+If we take a look inside the \texttt{.git} folder, we can see that there is a new folder called \texttt{gitweb}.
+This folder contains configuration a log files for the \emph{Instaweb} process.
+The file we are most interested in is \texttt{httpd.conf}.
+Looking at the beginning of this file we should see something similar to the following.
+
+\begin{code}
+server.document-root = "/usr/share/gitweb"
+server.port = 1234
+server.modules = ( "mod_setenv", "mod_cgi" )
+server.indexfiles = ( "gitweb.cgi" )
+server.pid-file = "/home/john/coderepo/.git/pid"
+server.errorlog = "/home/john/coderepo/.git/gitweb/lighttpd/error.log"
+\end{code}
+
+Here we can see the beginning of the config file that Git has created for using with lighttpd.
+If we had other web daemons installed, such as apache, we could override the default of lighttpd by supplying the \texttt{--httpd apache2}.
+Notice the port number which as been defined as \texttt{1234}.
+Let us run up \texttt{git instaweb} again and see what other features the web interface offers.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-af7-d2.png}
+\caption{Instaweb's repository page (top)}
+\end{figure}
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-af7-d3.png}
+\caption{Instaweb's repository page (bottom)}
+\end{figure}
+
+Figures 2 and 3 show how the web interface looks when browsing out repository.
+At the top of the page we see a history of commits along with a search box which works similar to the \texttt{gitk} system which was discussed earlier.
+At the bottom of the page, we see our \textbf{tags} and \textbf{heads}.
+There are several link names which we will briefly describe now.
+
+\begin{itemize}
+\item \index{gitweb!shortlog}\textbf{shortlog} - Gives a log of the commits, similar to that shown in Figure 2.
+\item \index{gitweb!commit}\textbf{commit} - Returns a page that gives details about a specific commit.
+The \textbf{commit} page is shown in Figure 4.
+\item \index{gitweb!commitdiff}\textbf{commitdiff} - Shows how the chosen diff has changed since its parent.  
+This is similar to running our \texttt{git diff HEAD~1..HEAD} command.
+\item \index{gitweb!tree}\textbf{tree} - This page is a simple listing of the tree object which shows all files present in that particular commit.
+\item \index{gitweb!snapshot}\textbf{snapshot} - Possibly one of the most useful links.
+Clicking on this will initiate a download of the repositories filesystem at that particular point in time.
+\item \index{gitweb!log}\textbf{log} - Gives a listing of the full log messages.
+\end{itemize}
+
+Let us take a little look around the interface.
+Choosing the first commit in the list on the homepage and clicking on the \textbf{commit} link moves on to the commit page.
+Here we can see detailed information about the commit.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-af7-d4.png}
+\caption{Instaweb's default page}
+\end{figure}
+
+The \textbf{commit}, \textbf{tree} and \textbf{parent} object hashes are displayed here fore reference.
+The \textbf{tree} amd \textbf{parent} lines are clickable links which will take us to those relevant sections.
+We are going to choose the \textbf{tree} link.
+A screenshot of the resulting page is shown in Figure 5.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-af7-d5.png}
+\caption{Instaweb's default page}
+\end{figure}
+
+Going back and clicking on the snapshot link will initiate a download of the entire filesystem, at that point in the repositories life.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=10cm]{images/f-af7-d6.png}
+\caption{Instaweb's default page}
+\end{figure}
+
+This has been a very brief tour around the \texttt{gitweb} system.
+Hopefully you can see that this is a very useful tool to add to our Git suite.
+If you are considering setting up a permanent web based view for your Git repository, you should not use \emph{Instaweb}.
+This tool is intended for quick and easy web access to a repository.
+There are plenty of guides and tutorials available which explain the installation and configuration of \texttt{gitweb}.
