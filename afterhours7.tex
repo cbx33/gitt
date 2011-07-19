@@ -131,7 +131,8 @@ A screenshot of the resulting page is shown in Figure 5.
 \caption{Instaweb's default page}
 \end{figure}
 
-Going back and clicking on the snapshot link will initiate a download of the entire filesystem, at that point in the repositories life.
+Going back and clicking on the snapshot link will initiate a download of the entire filesystem, at that point in the repository's life.
+As shown in Figure 6.
 
 \begin{figure}[hbt]
 \centering
@@ -159,6 +160,8 @@ john@satsuki:~$ git daemon --base-path=/home/john/coderepo
 Notice how this command has not exited.
 This is because the process is still running, waiting for communication.
 We can now log into another machine on the same network and clone the repository using our \texttt{git clone} command.
+We will supply the host name of the machine that we configured with \texttt{git daemon}, and a directory for us to clone into.
+Notice the presence of \texttt{git://} instead of \texttt{ssh://} as we used in our previous network cloning example.
 
 \begin{code}
 rob@mimi:~$ cd /tmp
@@ -176,3 +179,51 @@ If we look back at the source machine we can see something interesteing has appe
 john@satsuki:~$ git daemon --base-path=/home/john/coderepo
 [4687] '/home/john/coderepo/.git': repository not exported.
 \end{code}
+
+This is probably one of the most common of all errors when dealing with \texttt{git daemon}.
+By default, Git tries to protect your repositories and will not allow them to be exported unless you explicitly tell it to.
+We have two ways of doing this.
+We can append the \texttt{--export-all} parameter to \texttt{git daemon}, which will allow exporting of all repositories which are under the path described in \texttt{--base-path}.
+The second method is to explicitly tell Git on a repository by repository, that we would like for it to be exported, or more accurately that we would like to opportunity to export it.
+We are going to do the latter of the two and we do this by creating a special file in the \texttt{.git} directory, called \texttt{git-daemon-export-ok}.
+
+To add this file, we are going to need to stop the daemon by pressing the \textbf{ctrl+c} key combination.
+Then we ran run the commands as shown below.
+
+\begin{code}
+john@satsuki:~$ touch coderepo/.git/git-daemon-export-ok
+john@satsuki:~$ git daemon --base-path=/home/john/coderepo
+
+\end{code}
+
+Now we can go back to our second machine again and try to clone the repository as before.
+
+\begin{code}
+rob@mimi:/tmp$ git clone git://satsuki/ source
+Cloning into source...
+remote: Counting objects: 71, done.
+remote: Compressing objects: 100% (51/51), done.
+remote: Total 71 (delta 16), reused 0 (delta 0)
+Receiving objects: 100% (71/71), 6.47 KiB, done.
+Resolving deltas: 100% (16/16), done.
+rob@mimi:/tmp$
+\end{code}
+
+Et voila! Our repository has been cloned.
+As we exported the root of our repository using the \texttt{--base-path} parameter, we do not need to specify to the clone command which repository we are trying to clone.
+If you remember we did have some other repositories in the home folder and if we had exported \texttt{/home/john/}, instead of \texttt{/home/john/coderepo},
+then we could have chosen any of the repositories that lay in the home folder by appending their names to the URL.
+An example of this would be \texttt{git://satsuki/coderepo/} or \texttt{git://satsuki/coderepo-cl/}.
+
+By default the \texttt{git daemon} tool only allows people to fetch objects from the repository.
+This is quite sensible because as you can see there is no authentication present with the GIT protocol at all.
+You \emph{can} enable pushing of objects to your repository using the GIT protocol, but this is only advised within a well trusted LAN environment.
+Otherwise you are giving whoever else is on your network the capability to push whatever they want into your repository, which as you can understand is not a good idea.
+
+You can hopefully see that by using the \texttt{git daemon} tool, it is possible for us to allow other people on our network to have access to our repositories.
+Whilst the \texttt{git-daemon} tool is very useful, it does have its disadvantages as stated, primarily in areas of version control.
+However, seeing how efficient the GIT protocol is compared to its other counterparts, it often makes a fantastic device for making a repoitory available to pull from.
+
+There are much more complicated configurations that can be performed with the daemon tool, but these are out of the scope of this chapter.
+The manual page for \texttt{git daemon} has some examples to get you started,
+and even goes into the areas of virtual hosting to allow multiple Git \emph{sites} to exist on one server.
