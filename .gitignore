@@ -2,4 +2,7 @@
 *.log
 *.toc
 *.out
+*.idx
+*.ilg
+*.ind
 gitt.pdf
