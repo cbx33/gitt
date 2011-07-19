@@ -220,8 +220,15 @@ This is quite sensible because as you can see there is no authentication present
 You \emph{can} enable pushing of objects to your repository using the GIT protocol, but this is only advised within a well trusted LAN environment.
 Otherwise you are giving whoever else is on your network the capability to push whatever they want into your repository, which as you can understand is not a good idea.
 
+We can run the daemon tool in the background by supplying the \texttt{--detach} parameter.
+However if you are unfamiliar to the Linux world, this requires some knowledge to stop the daemon again.
+Running the daemon detached will result in your shell returning to the prompt, seemingly not have executed anything.
+In fact the process has been moved to the background and no longer supports shell interaction.
+The benefit of this is that you do not have to keep a shell window open to run it in.
+The downside is that you can no longer end the process with the \textbf{ctrl+c} key combination.
+
 You can hopefully see that by using the \texttt{git daemon} tool, it is possible for us to allow other people on our network to have access to our repositories.
-Whilst the \texttt{git-daemon} tool is very useful, it does have its disadvantages as stated, primarily in areas of version control.
+Whilst the \texttt{git daemon} tool is very useful, it does have its disadvantages as stated, primarily in areas of version control.
 However, seeing how efficient the GIT protocol is compared to its other counterparts, it often makes a fantastic device for making a repoitory available to pull from.
 
 There are much more complicated configurations that can be performed with the daemon tool, but these are out of the scope of this chapter.
