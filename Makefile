@@ -1,14 +1,18 @@
-all: pdf html
+all: pdf cleantmp
+quick: quickpdf cleantmp
+clean: cleantmp cleanpdf
 
 pdf:
-	pdflatex gitt.tex
+	pdflatex gitt
 	makeindex gitt
-	pdflatex gitt.tex
-	pdflatex gitt.tex
+	pdflatex gitt
+	pdflatex gitt
 
-#html:
-#	latex2html -html 4.0,unicode,latin1,utf8 -split 2 gitt.tex
+quickpdf:
+	pdflatex gitt
 
-clean:
-	rm gitt -Rf
-	rm -f *.aux *.log *.out *.toc *.idx *.ind *.ilg gitt.pdf
+cleantmp:
+	rm -f *.aux *.log *.out *.toc *.idx *.ind *.ilg
+
+cleanpdf:
+	rm -f gitt.pdf
