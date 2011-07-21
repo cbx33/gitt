@@ -287,10 +287,115 @@ In this way the commits \textbf{30900fe} and \textbf{a8281fb} are not the same a
 If you intend to use this workflow, it is worth spending some time reading the man page for \texttt{git am} and \texttt{git format-patch} as both of them hold valuable information regarding the customisation and handling of patches and emails.
 Tamagoyaki Inc. are not going to use this workflow often and so just applying a few patches here and there from contractors using the methods is prefectly acceptable to them.
 If you were a large open source establishment, or any company that accepts a large number of patches, you may want to take a closer look at how to work these.
-Now it is time to move on to some more advanced topics within Git.
+Now it is time to move on to some more advanced topics within Git, but first a little cleanup.
+
+\begin{code}
+john@satsuki:~/coderepo$ rm 0001-Some-new-dev-work.patch 
+john@satsuki:~/coderepo$ rm 0002-More-new-deving.patch 
+john@satsuki:~/coderepo$
+\end{code}
 
 \section{Day 2 - ``Give a man a patch''}
 \subsection{Collaborating with outsiders}
+
+\begin{code}
+john@satsuki:~/coderepo$ git bisect good v1.0a
+john@satsuki:~/coderepo$ git bisect bad master
+Bisecting: 9 revisions left to test after this (roughly 3 steps)
+[ed2301ba223a63a5a930b536a043444e019460a7] Removed third file
+john@satsuki:~/coderepo$ grep "Addition to the line" *
+john@satsuki:~/coderepo$ git bisect bad
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[9710177657ae00665ca8f8027b17314346a5b1c4] Added another file
+john@satsuki:~/coderepo$ grep "Addition to the line" *
+my_third_committed_file:Addition to the line
+john@satsuki:~/coderepo$ git bisect good
+Bisecting: 2 revisions left to test after this (roughly 1 step)
+[cfbecabb031696a217b77b0e1285f2d5fc2ea2a3] Fantastic new feature
+john@satsuki:~/coderepo$ grep "Addition to the line" *
+my_third_committed_file:Addition to the line
+john@satsuki:~/coderepo$ git bisect good
+Bisecting: 0 revisions left to test after this (roughly 1 step)
+[b119573f4508514c55e1c4e3bebec0ab3667d071] Merge branch 'wonderful'
+john@satsuki:~/coderepo$ grep "Addition to the line" *
+my_third_committed_file:Addition to the line
+john@satsuki:~/coderepo$ git bisect good
+ed2301ba223a63a5a930b536a043444e019460a7 is the first bad commit
+commit ed2301ba223a63a5a930b536a043444e019460a7
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Fri Apr 1 07:37:34 2011 +0100
+
+    Removed third file
+
+:100644 000000 68365cc0e5909dc366d31febf5ba94a3268751c6 0000000000000000000000000000000000000000 D	my_third_committed_file
+john@satsuki:~/coderepo$ 
+
+john@satsuki:~/coderepo$ git branch -v
+* (no branch) b119573 Merge branch 'wonderful'
+  develop     aed985c More new deving
+  master      30900fe More new deving
+  wonderful   4d91aab Updated another file again
+  zaney       7cc32db Made another awesome change
+john@satsuki:~/coderepo$ git checkout master
+Previous HEAD position was b119573... Merge branch 'wonderful'
+Switched to branch 'master'
+john@satsuki:~/coderepo$ git branch -v
+  develop   aed985c More new deving
+* master    30900fe More new deving
+  wonderful 4d91aab Updated another file again
+  zaney     7cc32db Made another awesome change
+john@satsuki:~/coderepo$ 
+
+
+john@satsuki:~/coderepo$ git bisect start master v1.0a
+Bisecting: 9 revisions left to test after this (roughly 3 steps)
+[ed2301ba223a63a5a930b536a043444e019460a7] Removed third file
+john@satsuki:~/coderepo$ git bisect run sh ./te
+temp_file  test.sh    
+john@satsuki:~/coderepo$ git bisect run sh ./te
+temp_file  test.sh    
+john@satsuki:~/coderepo$ git bisect run sh ./test.sh
+running sh ./test.sh
+Bad
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[9710177657ae00665ca8f8027b17314346a5b1c4] Added another file
+running sh ./test.sh
+Good
+Bisecting: 2 revisions left to test after this (roughly 1 step)
+[cfbecabb031696a217b77b0e1285f2d5fc2ea2a3] Fantastic new feature
+running sh ./test.sh
+Good
+Bisecting: 0 revisions left to test after this (roughly 1 step)
+[b119573f4508514c55e1c4e3bebec0ab3667d071] Merge branch 'wonderful'
+running sh ./test.sh
+Good
+ed2301ba223a63a5a930b536a043444e019460a7 is the first bad commit
+commit ed2301ba223a63a5a930b536a043444e019460a7
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Fri Apr 1 07:37:34 2011 +0100
+
+    Removed third file
+
+:100644 000000 68365cc0e5909dc366d31febf5ba94a3268751c6 0000000000000000000000000000000000000000 D	my_third_committed_file
+bisect run success
+john@satsuki:~/coderepo$ 
+
+john@satsuki:~/coderepo$ cat test.sh 
+#!/bin/bash
+
+if grep -q Addition * --exclude=test.sh
+  then echo "Good"
+  exit 0
+else 
+  echo "Bad"
+  exit 123
+fi
+john@satsuki:~/coderepo$ 
+
+
+\end{code}
+
+
 
 submodule
 subtree
