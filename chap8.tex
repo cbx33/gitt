@@ -74,24 +74,79 @@ Now they are ready to give those changes back.
 Firstly we are going to look at using the \texttt{git diff} tool to generate a patch file which we can apply.
 
 \begin{code}
-Code here for git diff
+john@satsuki:~/coderepo$ git checkout develop
+Already on 'develop'
+john@satsuki:~/coderepo$ git diff master develop
+diff --git a/newfile2 b/newfile2
+index 3545c1d..ff59f55 100644
+--- a/newfile2
++++ b/newfile2
+@@ -1,2 +1,3 @@
+ Another new file
+ and a new awesome feature
++newer dev work
+diff --git a/newfile3 b/newfile3
+index 638113c..2e00739 100644
+--- a/newfile3
++++ b/newfile3
+@@ -1 +1,2 @@
+ These changes are in the origin
++new dev work
+john@satsuki:~/coderepo$
 \end{code}
 
 That will generate us a diff from the \texttt{develop} to the \texttt{master} branch.
 We could copy and paste that information from the terminal window into a file, but Linux offers us an easier way of doing this.
 
 \begin{code}
-diff again but redirect to file
-cat file
+john@satsuki:~/coderepo$ git diff master develop > our_patch.diff
+john@satsuki:~/coderepo$ cat our_patch.diff 
+diff --git a/newfile2 b/newfile2
+index 3545c1d..ff59f55 100644
+--- a/newfile2
++++ b/newfile2
+@@ -1,2 +1,3 @@
+ Another new file
+ and a new awesome feature
++newer dev work
+diff --git a/newfile3 b/newfile3
+index 638113c..2e00739 100644
+--- a/newfile3
++++ b/newfile3
+@@ -1 +1,2 @@
+ These changes are in the origin
++new dev work
+john@satsuki:~/coderepo$
 \end{code}
 
 So we can see that the file itself has the information we are looking for.
 Now we can use the \indexgit{apply} tool to actually modify the files in \textbf{master} and bring in the changes that have happened in \textbf{develop}.
 
 \begin{code}
-use apply
-diff to see all changes have applied
-commit
+john@satsuki:~/coderepo$ git checkout master
+Switched to branch 'master'
+john@satsuki:~/coderepo$ git apply our_patch.diff
+john@satsuki:~/coderepo$ git diff
+diff --git a/newfile2 b/newfile2
+index 3545c1d..ff59f55 100644
+--- a/newfile2
++++ b/newfile2
+@@ -1,2 +1,3 @@
+ Another new file
+ and a new awesome feature
++newer dev work
+diff --git a/newfile3 b/newfile3
+index 638113c..2e00739 100644
+--- a/newfile3
++++ b/newfile3
+@@ -1 +1,2 @@
+ These changes are in the origin
++new dev work
+john@satsuki:~/coderepo$ git commit -a -m 'Updated with patch'
+[master 81eee9f] Updated with patch
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+john@satsuki:~/coderepo$ git diff develop master
+john@satsuki:~/coderepo$
 \end{code}
 
 Of course doing things this way means that we still have to commit our changes.
