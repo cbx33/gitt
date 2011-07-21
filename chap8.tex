@@ -5,3 +5,48 @@
 
 \section{Day 1 - ``Give a man a patch''}
 \subsection{Collaborating with outsiders}
+
+We have spoken at great length now about rebasing and have seen that it is a very very powerful tool.
+It can form part of your workflow in your development cycle.
+However, always heed that warning that should send alarm bells ringing in the back of your mind about rebasing.
+Rebasing changes the past. Rebasing changes history.
+As such, it should be used a) with caution, and b) only by people who understand exactly what they are doing.
+
+We are going to leave rebasing for a while now, take a quick look at a feature you really should know about
+and then focus on some of the more advanced features of Git.
+The following situation occurs fairly regularly for some people.
+
+\begin{trenches}
+John was stroking his chin and looking pensively out of the window when Simon approached his desk.
+The manager hadn't seen him yet and Simon instinctively swayed a little back and forth, try to make himself known in as subtle a way as possible.
+Klaus, who was watching from the corner of his eye took a more direct approach.
+He took the out of date org chart down from the office divider, screwed it up into a ball and launched it at John's head.
+It struck the manager squarely in the jaw causing him to almost tip from his awkwardly balanced chair.
+
+John noticed Simon standing there and looked a little surprised.
+He then noticed Klaus and in an instant understood the chain of events that had just taken place.
+``Sorry Simon,'' started John, ``I've been trying to figure out a problem all morning.''
+
+``It's no problem.''  Simon pulled up a chair and sat down. ``I was wondering if you had a few minutes to discuss Luigi?''
+
+\thoughtbreak
+
+``Well as Luigi is a contractor, he's not going to get access to our repository here to perform commits directly.
+And he doesn't have the capability, nor do I really want him, making our code available on the internet.
+But he does have a clone of our repository from last week.'' John understood the problem.
+
+``Right!''
+
+``Have you heard of patching in Git?'' asked John.
+
+Simon looked at his shoes, ``Can't say I have John, sorry.''  
+
+John smiled, ``No worrys. What we can do is get Luigi to generate a patch of his changes.
+We can then take that patch and apply it to our codebase.  Luigi can then just reset his clone when he comes into the office.''
+Simon nodded as John continued, ``Go and ask Martha about it.  I think she's pretty hot on these types of things.''
+
+Klaus giggled, ``Think she's hot eh John?''
+
+The paper was returned.
+
+\end{trenches}
