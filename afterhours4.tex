@@ -90,4 +90,33 @@ If the merge cannot take place, then as shown in \emph{Week 4}, Git will put all
 With the information presented here, you should now be able to reread the descriptions above and understand what is going on at a base level.
 If you require further information on merging, there is a wealth of documentation and papers about merge algorithms on the Internet.
 
-%reflog head
+\section{``Grepping your life away''}
+\subsection{A subtle twist on searching}
+
+As well as our \texttt{git log} tool, which we have used for searching, it is useful to know that there is actually another way to search for strings in your current directory.
+We can use the \indexgit{grep} tool to find all files in our working tree which have a certain pattern in them.
+
+\begin{code}
+john@satsuki:~/coderepo$ git grep awesome
+newfile1:and some more awesome changes
+newfile2:and a new awesome feature
+john@satsuki:~/coderepo$
+\end{code}
+
+This has returned two files, both containing the string \texttt{awesome}, as this is the parameter that we passed to the \texttt{git grep} command.
+
+We can extend this a little further and ask Git to supply the context around the line that it finds.
+In our simple case, it results in the following.
+
+\begin{code}
+john@satsuki:~/coderepo$ git grep -C3 awesome
+newfile1-A new file
+newfile1:and some more awesome changes
+--
+newfile2-Another new file
+newfile2:and a new awesome feature
+john@satsuki:~/coderepo$
+\end{code}
+
+This is just a short introduction to the \texttt{git grep} command.
+If you want to know more, you should spend some time reading the manual.
