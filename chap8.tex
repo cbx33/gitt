@@ -158,11 +158,11 @@ Sure, we could split that using some of the techniques in the After Hours sectio
 There is another tool that can come to our rescue here.
 It is primarily used for working with \index{mbox} mailboxes, but it also has some other uses which we will describe here.
 Would it not be nice to be able to have each commit that we want to use as a patch in a separate patch file.
-The file \texttt{our_patch.diff} above contained two commits worth of data.
+The file \texttt{our\_patch.diff} above contained two commits worth of data.
 We have access to another tool in our fight against disparate systems.
 This is the \indexgit{git format-patch} command.
 
-First we will undo the changes we made previously by resetting the \textbf{master} branch back to its older position and deleting the \texttt{our_patch.diff} file.
+First we will undo the changes we made previously by resetting the \textbf{master} branch back to its older position and deleting the \texttt{our\_patch.diff} file.
 
 \begin{code}
 john@satsuki:~/coderepo$ git reflog show master -n 4
