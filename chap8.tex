@@ -166,14 +166,112 @@ First we will undo the changes we made previously by resetting the \textbf{maste
 
 \begin{code}
 john@satsuki:~/coderepo$ git reflog show master -n 4
-f8d5100 master@{0}: f8d5100: updating HEAD
-81eee9f master@{1}: commit: Updated with patch
-f8d5100 master@{2}: commit: Finished new dev
-1968324 master@{3}: commit: Start new dev
+81eee9f master@{0}: commit: Updated with patch
+f8d5100 master@{1}: commit: Finished new dev
+1968324 master@{2}: commit: Start new dev
 john@satsuki:~/coderepo$ git reset --hard f8d5100
 HEAD is now at f8d5100 Finished new dev
 john@satsuki:~/coderepo$ rm our_patch.diff
 john@satsuki:~/coderepo$
 \end{code}
 
-We used the 
+We used the \texttt{git reflog} command to show what the last four \textbf{master} HEAD values were.
+Then we reset the branch back to the point before the \texttt{git apply}.
+Finally we deleted the patch.
+Now let us see how to use the \texttt{git format-patch} command to create multiple patch files.
+
+\begin{code}
+john@satsuki:~/coderepo$ git format-patch master..develop
+0001-Some-new-dev-work.patch
+0002-More-new-deving.patch
+john@satsuki:~/coderepo$
+\end{code}
+
+It would appear that the result of this command is that two files have been generated.
+Let us confirm our suspicions and \texttt{cat} the contents of them to ensure that they contain the data we expect.
+
+\begin{code}
+john@satsuki:~/coderepo$ cat 0001-Some-new-dev-work.patch 
+From af3c6d730a8632d99b5626a7c0e921d14af21f50 Mon Sep 17 00:00:00 2001
+From: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date: Thu, 7 Jul 2011 19:01:59 +0100
+Subject: [PATCH 1/2] Some new dev work
+
+---
+ newfile3 |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/newfile3 b/newfile3
+index 638113c..2e00739 100644
+--- a/newfile3
++++ b/newfile3
+@@ -1 +1,2 @@
+ These changes are in the origin
++new dev work
+-- 
+1.7.4.1
+
+john@satsuki:~/coderepo$
+\end{code}
+
+Woah! Hold on a minute. This does not seem to be a normal diff file at all.
+In fact, that is absolutely right. This is a patch file and the two are not the same.
+The patch file contains much more information than the simple diff file.
+For a start we get information about which commit this patch came from, who created it, when and a subject.
+In fact this looks almost like an email.  In fact it is created to resemble a format that would be easily emailable.
+
+We have specified a range of commits to the \texttt{git format-patch} command with the parameter \texttt{master..develop}.
+The format of that parameter should be familar from earlier chapters when we utilised it for commands like \texttt{git diff} and \texttt{git log}.
+We could now take those files, email them to someone else and they could apply them.
+Let us learn one more tool, and see how we would apply those patches when they had been received at the other end.
+
+\begin{code}
+john@satsuki:~/coderepo$ git am 0001-Some-new-dev-work.patch
+Applying: Some new dev work
+john@satsuki:~/coderepo$ git am 0002-More-new-deving.patch
+Applying: More new deving
+john@satsuki:~/coderepo$ git diff master..develop
+john@satsuki:~/coderepo$
+\end{code}
+
+Of course this is just a simple example case and in actual usage there may be cases where conflicts and other complications occur.
+Looking at a log output, we can see that the original dates and times of the commits are maintained and are not updated.
+We can ignore this if we wish and use the \texttt{--ignore-date} parameter to use the current date when committing the patch to the repository.
+
+\begin{code}
+john@satsuki:~/coderepo$ git log -n4
+commit 30900fe1b7e72411dabab8b02070f36e2431f704
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Thu Jul 7 19:02:15 2011 +0100
+
+    More new deving
+
+commit a8281fb589e36389cc8cb0da7ebee225b4d1adfc
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Thu Jul 7 19:01:59 2011 +0100
+
+    Some new dev work
+
+commit f8d5100142b43ffaba9bbd539ba4fd92af79bf0e
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Thu Jul 7 08:39:29 2011 +0100
+
+    Finished new dev
+
+commit 1968324ce2899883fca76bc25496bcf2b15e7011
+Author: John Haskins <john.haskins@tamagoyakiinc.koala>
+Date:   Thu Jul 7 08:39:07 2011 +0100
+
+    Start new dev
+john@satsuki:~/coderepo$
+\end{code}
+
+If you intend to use this workflow, it is worth spending some time reading the man page for \texttt{git am} and \texttt{git format-patch} as both of them hold valuable information regarding the customisation and handling of patches and emails.
+Tamagoyaki Inc. are not going to use this workflow often and so just applying a few patches here and there from contractors using the methods is prefectly acceptable to them.
+If you were a large open source establishment, or any company that accepts a large number of patches, you may want to take a closer look at how to work these.
+Now it is time to move on to some more advanced topics within Git.
+
+
+submodule
+subtree
+filter branch
