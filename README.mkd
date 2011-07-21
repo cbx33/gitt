@@ -14,6 +14,7 @@ The summary below shows a list of already complete chapters and items which are 
 5. GUI usage
 6. Stashing, Cloning
 7. Networking, Rebasing
+8. Patching, Bisecting, Filterbranching, subtree, modules 
 
 After Hours
 
@@ -23,7 +24,8 @@ After Hours
 4. Merging algorithms
 5. Splitting up commits, line by line, hunk committing
 6. Push and pull settings, reference discussion
-7. 
+7. Instaweb
+8. Hooks
 
 # Building the Book
 
