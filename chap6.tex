@@ -794,15 +794,31 @@ john@satsuki:~/coderepo-cl$
 By specifying the local and remote branch using the \texttt{local:remote} syntax, we have told Git to push our local \textbf{wonderful} branch to the remote branch called \textbf{newbranch}.
 As the \textbf{newbranch} did not exist in the remote \textbf{backup} repository, it was created, as can be seen above.
 
+\begin{callout}{Note}{Killing a remote branch}
+Now that we have made branches on the remote end, it is a good idea to know how to delete them also.
+After all, if all you ever did was push new branches, pretty soon you may end up with a lot of rubbish in your repository.
+To delete a remote branch, all that you need to do is to use the following syntax.
+
+\begin{code}
+git push <remote> :<branchname>
+\end{code}
+
+Notice that we are using the same syntax as before, but not specifying a local branch name, just the remote.
+Git interprets this as a call to delete the remote branch.
+
+If you have a clone of a remote repository and a remote branch is removed, you may see a message like the following if you run \texttt{git remote show <remote>};
+
+\begin{code}
+ refs/remotes/<remote>/<branchname> stale (use 'git remote prune' to remove)
+\end{code}
+
+So we can run \index{remote!pruning}\texttt{git remote prune} to remove local references to remote branches that no longer exist.
+If you have created a tracking branch of this remote branch, this will remain unaffected.
+\end{callout}
+
 So this ends the Week.
 We have learnt a lot more about how to play with branches and remotes.
 In the \emph{After Hours} section, we will take a deeper look at remote branches and how they are configured and represented in Git.
-
-DEFAULT GIT PULL
-
-%POSSIBLY Talk about the SHARED and REFERENCE in a breakout
-%POSSIBLY TALK ABOUT SSH
-%ssh://[user@]host.xz[:port]/path/to/repo.git/
 
 \clearpage
 
