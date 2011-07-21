@@ -50,3 +50,50 @@ Klaus giggled, ``Think she's hot eh John?''
 The paper was returned.
 
 \end{trenches}
+
+It is a good question though. Sometimes you may have a repository that is either publically available, or made available to a group of people.
+You do not necessarily want to set up a remote tracking branch and pull changes in from every single contributor.
+There are two primary reasons for this;
+\begin{enumerate}
+\item There are a large number of people submitting small changes to the code.
+\item There are difficulties in communicating between the two repositories either for security or general reasons.
+\end{enumerate}
+
+In these cases we need another way to apply changes from one branch into another.
+Many larger open source projects allow contributors to email in patches.
+Git does have some rather advanced ways of dealing with these types of scenarios.
+We are going to scratch the surface and look at using three commands \texttt{git apply}, \texttt{git format-patch} and \texttt{git am}.
+
+First, let us find a way of generating a patch.
+Let us take the example we have currently in our repository.
+Imagine that the \textbf{develop} branch exists on another computer in a clone of our repository.
+At some point in time, someone cloned our repository.
+They have the HEAD of our repository at the same point as we do, but they have continued to do some development in a new branch called \textbf{develop}.
+Now they are ready to give those changes back.
+
+Firstly we are going to look at using the \texttt{git diff} tool to generate a patch file which we can apply.
+
+\begin{code}
+Code here for git diff
+\end{code}
+
+That will generate us a diff from the \texttt{develop} to the \texttt{master} branch.
+We could copy and paste that information from the terminal window into a file, but Linux offers us an easier way of doing this.
+
+\begin{code}
+diff again but redirect to file
+cat file
+\end{code}
+
+So we can see that the file itself has the information we are looking for.
+Now we can use the \indexgit{apply} tool to actually modify the files in \textbf{master} and bring in the changes that have happened in \textbf{develop}.
+
+\begin{code}
+use apply
+diff to see all changes have applied
+commit
+\end{code}
+
+Of course doing things this way means that we still have to commit our changes.
+Plus, all of the changes that we have made in the patch are committed in one block.
+Sure, we could split that using some of the techniques in the After Hours sections, but then we may not always be aware of what should be split where.
