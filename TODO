@@ -10,24 +10,11 @@ Come up with more items for terminology
 Make sure to ref the version of git
 
 %git log -p
-%DIFFs
-%Patching
 
 %git show master:<path>
 %git diff -- stylesheet.css master:stylesheet.css
-%git checkout -b <branch>
-
-%SUBMODULE
-
-
-%branches
-%merge
-%remote tracking
-%Itt section about not having anything backed up
-
-%Parallel devving - ie...use both git and old for a while
 
 % git show v1.0.0^{tree}
 
-
-TREEISH IN CHAP 5?
+% make simon have changed a pw whoch broke things...this us to use bisect
+% thwn thwy disciver pw in repi
