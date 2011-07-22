@@ -5,7 +5,7 @@ Through reading about their day to day lives, the reader will learn not only how
 
 # Book Contents
 
-The summary below shows a list of already complete chapters and items which are pending
+The summary below shows a list of already complete chapters and items which are pending.  GITT now covers all 21 of the most commonly used Git commands.
 
 1. Analysing VCS requirements
 2. Initialising a repo, adding files, removing files, committing, resetting
