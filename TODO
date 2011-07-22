@@ -16,5 +16,7 @@ Make sure to ref the version of git
 
 % git show v1.0.0^{tree}
 
-% make simon have changed a pw whoch broke things...this us to use bisect
-% thwn thwy disciver pw in repi
+% make simon have changed a pw which broke things...this is to use bisect
+% then they discover pw in repo
+
+% filter branch to move project to new dir

@@ -1,8 +1,6 @@
 REAL TOPICS
 untracked files with .gitignore
 Reflog use for head git reset
-make patch
-apply patch
 blame bisect
 filter-branch
 subtree
