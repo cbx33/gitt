@@ -295,29 +295,129 @@ john@satsuki:~/coderepo$ rm 0002-More-new-deving.patch
 john@satsuki:~/coderepo$
 \end{code}
 
-\section{Day 2 - ``Give a man a patch''}
-\subsection{Collaborating with outsiders}
+\section{Day 2 - ``Looking for problems''}
+\subsection{A problem shared is a problem bisected}
+
+During most software development, bugs are introduced.
+Sometimes these bugs are fixed immediately and sometimes they sit there in the code festering away for months on end until someone tests a specific case.
+Of course it is always best to have test suites and run them regularly against the code base, but on occasions either the test case itself has a bug,
+or the test case is written in such a way that a particular bug would never present itself.
+Tamagoyaki Inc. have a fairly rigorous testing procedure.
+Unfortunately it would seem that one particularly nasty bug has slipped through the cracks.
+Cue a difficult discussion.
+
+\begin{trenches}
+``But what I don't understand John, is that you now know what happened at every step in the process.
+How can something like this break and you not know about it?''
+As always Markus was getting snappy and as always John was having to bite his lip.
+
+``It's not a question about not knowing about it,'' begain John, ``The difficulty is knowing what change introduced the problem.
+We are on such a rapid development schedule that too many things are changing at once.''
+
+``Well, this is one of the reasons you guys have spent the last two months getting this version control system running.''
+Markus got up and opened the door.  ``I suggest you fix it.''
+
+\thoughtbreak
+
+``Markus is blaming us for introducing a bug?'' Rob was pretty shocked as he and Simon chatted at the water cooler.
+
+``More like, Markus believed that a version control system was going to solve all of our problems,'' replied Simon.
+
+Rob squinted his face up as a car drove into the buildings car park, showering the room with reflected sunlight.
+He shielded his eyes. ``You know I heard there was a tool in Git for helping to find bugs.
+Think I may take a look over lunch, you know, be a real hero.''
+
+They both chuckled.
+\end{trenches}
+
+It is true that Git does have a very powerful tool for helping to detect revisions that introduced bugs into the system.
+The tool is called \indexgit{bisect} and it is used to successively checkout revisions from the repository,
+check them to see if the bug is present and then use that information to determine the revision that is most likely to have introduced the bug.
+
+Let us assume that the bug in our repository is a fairly simple one.
+For some bizarre reason our codebase is broken unless the word \texttt{Addition} is present in one of the files.
+If we run a simple Linux \texttt{grep} command across the files, we can see that the word we are after is not there.
+However, if we go back to tag \textbf{v1.0a} and run the same command, we can see that the word is there.
 
 \begin{code}
+john@satsuki:~/coderepo$ grep "Addition" *
+john@satsuki:~/coderepo$ 
+john@satsuki:~/coderepo$ git checkout v1.0a 
+Note: checking out 'v1.0a'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at a022d4d... Messed with a few files
+john@satsuki:~/coderepo$ grep "Addition" *
+my_third_committed_file:Addition to the line
+john@satsuki:~/coderepo$ 
+\end{code}
+
+Notice the warning about checking out a non-branch.
+This is perfectly normal and should not worry you but please be aware that it is obviously best to have a clean working directory before starting any type of \texttt{bisect} commands.
+We can see that the string we are looking for is present in the file called \texttt{my\_third\_committed\_file}.
+As our repository is very small, it would not take us long to go through and check each revision to see when this string was deleted.
+In fact we have other tools available to search for the adding and removal of strings.
+For now let us assume that the \emph{bug} is more complicated than this.
+
+Let us go back to the facts.
+We know that the repository was \textbf{good} at tag \textbf{v1.0a}.
+We also know that the repository is bad in its current state.
+By feeding these details to the \texttt{git bisect} command, we can begin a search for the bug.
+What will happen at each stage is that Git will checkout a revision that it wants us to test and we tell Git if we think that revision is good or bad.
+
+\begin{code}
+john@satsuki:~/coderepo$ git bisect start
+Already on 'master'
 john@satsuki:~/coderepo$ git bisect good v1.0a
 john@satsuki:~/coderepo$ git bisect bad master
 Bisecting: 9 revisions left to test after this (roughly 3 steps)
 [ed2301ba223a63a5a930b536a043444e019460a7] Removed third file
-john@satsuki:~/coderepo$ grep "Addition to the line" *
+john@satsuki:~/coderepo$
+\end{code}
+
+So we invoke the tool by running \texttt{git bisect start}.
+After this we tell Git the things that we know. It was good at \textbf{v1.0a}, \texttt{git bisect good v1.0a}.
+However, it was bad at \textbf{master}, our current revision, \texttt{git bisect bad master}.
+After this, Git checks out revision \textbf{ed2301b} and tells us that there are \texttt{9} revisions between the two points and that it should take only \texttt{3} more steps to complete.
+Now we run our test again.
+
+\begin{code}
+john@satsuki:~/coderepo$ grep "Addition" *
+john@satsuki:~/coderepo$
+\end{code}
+
+As we have no result here, this would be classed as a bad revision and so we mark it as so.
+
+\begin{code}
 john@satsuki:~/coderepo$ git bisect bad
 Bisecting: 3 revisions left to test after this (roughly 2 steps)
 [9710177657ae00665ca8f8027b17314346a5b1c4] Added another file
-john@satsuki:~/coderepo$ grep "Addition to the line" *
+john@satsuki:~/coderepo$
+\end{code}
+
+Git now presents us with a new choice and you can see that the number of revisions left to check has decreased dramatically from \texttt{9} to \texttt{3}.
+We continue marking our revisions as good and bad.
+
+\begin{code}
+john@satsuki:~/coderepo$ grep "Addition" *
 my_third_committed_file:Addition to the line
 john@satsuki:~/coderepo$ git bisect good
 Bisecting: 2 revisions left to test after this (roughly 1 step)
 [cfbecabb031696a217b77b0e1285f2d5fc2ea2a3] Fantastic new feature
-john@satsuki:~/coderepo$ grep "Addition to the line" *
+john@satsuki:~/coderepo$ grep "Addition" *
 my_third_committed_file:Addition to the line
 john@satsuki:~/coderepo$ git bisect good
 Bisecting: 0 revisions left to test after this (roughly 1 step)
 [b119573f4508514c55e1c4e3bebec0ab3667d071] Merge branch 'wonderful'
-john@satsuki:~/coderepo$ grep "Addition to the line" *
+john@satsuki:~/coderepo$ grep "Addition" *
 my_third_committed_file:Addition to the line
 john@satsuki:~/coderepo$ git bisect good
 ed2301ba223a63a5a930b536a043444e019460a7 is the first bad commit
@@ -329,7 +429,14 @@ Date:   Fri Apr 1 07:37:34 2011 +0100
 
 :100644 000000 68365cc0e5909dc366d31febf5ba94a3268751c6 0000000000000000000000000000000000000000 D	my_third_committed_file
 john@satsuki:~/coderepo$ 
+\end{code}
 
+Oh! Something different.  Git has actually finished the bisect and has suggested to us that this commit was responsible for introducing the bug in our code.
+If we look at the comment it was in this revision that we removed a particular file.
+This file was the one that contained our special \texttt{Addition} string.
+Git was right! We screwed up then.  At this point we can go back to our \textbf{master} branch and decide what to do about it.
+
+\begin{code}
 john@satsuki:~/coderepo$ git branch -v
 * (no branch) b119573 Merge branch 'wonderful'
   develop     aed985c More new deving
@@ -339,21 +446,57 @@ john@satsuki:~/coderepo$ git branch -v
 john@satsuki:~/coderepo$ git checkout master
 Previous HEAD position was b119573... Merge branch 'wonderful'
 Switched to branch 'master'
-john@satsuki:~/coderepo$ git branch -v
-  develop   aed985c More new deving
-* master    30900fe More new deving
-  wonderful 4d91aab Updated another file again
-  zaney     7cc32db Made another awesome change
+john@satsuki:~/coderepo$
+\end{code}
+
+Notice that at the end of the bisect, Git does not return us to the master branch.
+We are left in the last tested checked out revision.
+
+
+\subsection{Automating the process}
+So bisecting is a very powerful way of quickly and efficiently finding the point at which bugs were introduced or \index{regression testing}regression testing.
+Git was spot on when it suggested that that revision was the one responsible for the mistake.
+Sometimes you may not be able to test a revision that Git checks out for you for other reasons.
+In this case you can always run \texttt{git bisect skip} to skip that revision.
+It is all very well being able to run this at each revision Git asks us to but to be honest, if you have 30-40 steps to test and you have to compile code to see if the bug is present it can get a little bit boring.
+
+Git has a way of allowing us to test automatically.
+The example we are going to use is obviously based on a Linux environment, but if you are a developer on a Windows platform, you should have no trouble understanding what is happening here.
+We are going to create a small shell script that will automatically run our grep test.
+If the string is found we will exit with a status code of \texttt{0}, indicating that it was successful and if
+the string is not found, we will exit with a status code of \texttt{123}, indicating that the test was unsuccessful.
+
+Git will use these status codes and interpret a code of \texttt{0} as \textbf{good} and a code of \texttt{123} as \textbf{bad}.
+Below is a copy of our shell script which we have saved as \texttt{test.sh} and have given relevant permissions to allow it to run etc.
+Notice we have had to exclude our \texttt{test.sh} file from the test, else the string \texttt{Addition} would have been found there.
+
+\begin{code}
+john@satsuki:~/coderepo$ cat test.sh 
+#!/bin/bash
+
+if grep -q Addition * --exclude=test.sh
+  then echo "Good"
+  exit 0
+else 
+  echo "Bad"
+  exit 123
+fi
 john@satsuki:~/coderepo$ 
+\end{code}
 
+Now we invoke \texttt{git bisect} slightly differently by asking it to start and itterate over the revisions \texttt{master} to \texttt{v1.0a}.
+At this point we have not told Git anything about which revisions are good or bad.
 
+\begin{code}
 john@satsuki:~/coderepo$ git bisect start master v1.0a
 Bisecting: 9 revisions left to test after this (roughly 3 steps)
 [ed2301ba223a63a5a930b536a043444e019460a7] Removed third file
-john@satsuki:~/coderepo$ git bisect run sh ./te
-temp_file  test.sh    
-john@satsuki:~/coderepo$ git bisect run sh ./te
-temp_file  test.sh    
+john@satsuki:~/coderepo$
+\end{code}
+
+Now we ask Git to continue testing, but to run our script at each iteration to determine the success or failure of each checked out revision.
+
+\begin{code}
 john@satsuki:~/coderepo$ git bisect run sh ./test.sh
 running sh ./test.sh
 Bad
@@ -379,25 +522,41 @@ Date:   Fri Apr 1 07:37:34 2011 +0100
 :100644 000000 68365cc0e5909dc366d31febf5ba94a3268751c6 0000000000000000000000000000000000000000 D	my_third_committed_file
 bisect run success
 john@satsuki:~/coderepo$ 
-
-john@satsuki:~/coderepo$ cat test.sh 
-#!/bin/bash
-
-if grep -q Addition * --exclude=test.sh
-  then echo "Good"
-  exit 0
-else 
-  echo "Bad"
-  exit 123
-fi
-john@satsuki:~/coderepo$ 
-
-
 \end{code}
 
+The parameters after the \texttt{git bisect run} tell Git which command we wish to run at each stage.
+In our case it is \texttt{sh ./test.sh}.
+You can see Git invoking our \texttt{test.sh} script in each case, and the result of our script, either \texttt{Good} or \texttt{Bad} depending on which was echoed from the result of the grep test.
+Git has arrived at exactly the same result, but we have had to do nothing other than write a small script.
+For larger tests, this would have saved us a large amount of work.
 
+\begin{trenches}
+
+\end{trenches}
 
 submodule
 subtree
 filter branch
 bisect
+
+\clearpage
+
+\section{Summary - John's Notes}
+\subsection{Commands}
+\begin{itemize}
+
+\item\texttt{git rebase -i HEAD~3} - Runs the rebase tool interactively for the last three commits
+
+\item\texttt{git rebase <branchA> <branchB>} - Lift all commits between the common ancestor of branchA and branchB and replay them on top of branchB
+
+\item\texttt{git branch <branch\_name> <startpoint>} - Create a new branch starting from a definte start point
+
+\item\texttt{git rebase --onto master <branchC> \newline <branchA> <branchB>} - Lift all commits between the common ancestor of branchA and branchB and replay them on top of branchC
+\end{itemize}
+
+\subsection{Terminology}
+\begin{itemize}
+\index{Terminology!SSH}\item\textbf{SSH} - A type of secure network protocol
+\index{Terminology!HTTP}\item\textbf{HTTP} - The protocol that is used to serve internet pages
+\index{Terminology!Rebase}\item\textbf{Rebase} - Used primarily for lifting commits and reapplying them to another base branch
+\end{itemize}
