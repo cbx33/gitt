@@ -20,3 +20,5 @@ Make sure to ref the version of git
 % then they discover pw in repo
 
 % filter branch to move project to new dir
+
+%wmctrl -r Gui -e 0,0,0,811,500
