@@ -6,8 +6,7 @@
 If you're already a seasoned version control user, you may want to skip this chapter.
 It's kind of like an introduction to why we even need version control systems in the first place.
 This chapter looks at Tamagoyaki Inc's requirements and why they choose the VCS that seemed right for them.
-Tamagoyaki Inc.
-create software for turning a standard PC into a media center.
+Tamagoyaki Inc.\ creates software for turning a standard PC into a media center.
 Their product ships to the end user and they rely very heavily on having a good presence at trade shows, in order to bring in sales.
 The following conversation describes the events that led up to the defining "We need a VCS!" discussion.
 
@@ -28,7 +27,7 @@ Things didn't look good.
 ``I'm sorry,'' John started, before being cut off.
 
 ``Sorry doesn't cut it John,'' said the CEO, Wayne Tobi,
-``This was almost a major embarrassment for Tamagoyaki Inc. We need to ensure this doesn't happen again. The demonstration at the trade show was close to a complete failure. Luckily someone had the good sense to bring a backup machine.''
+``This was almost a major embarrassment for Tamagoyaki Inc.\ and we need to ensure this doesn't happen again. The demonstration at the trade show was close to a complete failure. Luckily someone had the good sense to bring a backup machine.''
 He turned to Markus.
 ``I want a report on my desk by the end of the day that states what the problem was, how it slipped through our fingers and what safe guards we are going to put into place so that things like this never happen again.''
 
@@ -57,7 +56,7 @@ Not so simple any more is it?
 
 People have a tendency to use folder names which mean something to them.
 However it doesn't necessarily follow that this name means something to another developer.
-``Version 2.3 - fixed bug a'' only means something to you if you know what bug a is and something like ``Version 2.3 - fixed bug a(2)'' is even worse.
+``Version 2.3 -- fixed bug a'' only means something to you if you know what bug a is and something like ``Version 2.3 -- fixed bug a(2)'' is even worse.
 Unfortunately allowing people to free form type their own descriptive file names will always lead to problems like this.
 When these files are stored on a network share, the problem is exacerbated ten fold because there is often no fixed reference point.
 
@@ -111,14 +110,15 @@ Git implements branching in a special way.
 Most older version control systems implement branching in a way that almost creates a separate copy of the repository.
 This is slow and cumbersome.
 Git's branching method gives developers the ability to create multiple local branches to play with.
-Due to it's distributed nature, when pushing code to a more central location for others to pull from, developers can choose which branches they want to push, allowing code to be experimented with privately.
+Due to its distributed nature, when pushing code to a more central location for others to pull from, developers can choose which branches they want to push, allowing code to be experimented with privately.
 
 The implementation of branching in Git is fast.
 Due to the fact that repositories are stored locally, the speed of creating a local branch is limited only by the speed of the disks on a local machine.
+Git's implementation is so lightweight that even this speed factor is negligable.
 
 \index{Staging}\subsection{Staging}
 
-Git deals with commits differently to most other version control systems by introducing the staging area.
+Git deals with commiting changes into the repository differently to most other version control systems by the introduction of the staging area.
 The staging area allows developers to prepare their commits before they are written to the repository.
 Why is this useful or any different to any other version control system.
 In Git you can make a change to a file, add it to the staging area, and then continue to make changes to that file, even though you have not yet actually committed anything.
@@ -154,7 +154,7 @@ This person is referred to as the Integration Manager.
 
 This workflow is handled exceedingly well by Git.
 Developers will work on their repositories locally and then once they are happy, will push their changes to a location where the Integration Manager can see them.
-The Integration Manager will then review the changes that the developers have made and will merge them into their own local repository.
+The Integration Manager will then review the changes that the developers have made and will merge them into his own local repository.
 Once they are happy that everything is working well, the Integration Manager will push their changes to the blessed repository so that all the other developers can access the changes.
 
 \begin{figure}[bt]
@@ -195,7 +195,7 @@ It may be undervalued because not all version control systems have it.
 Offline committing is the ability to continue adding and committing files to the repository without being connected to a centralised repository.
 
 When travelling or just simply when out of the office, developers and integrators alike are able to continue managing code, viewing histories, viewing diffs and committing changes to their repository.
-This is all due to the fact that Git does 99\% of all of it's operations locally.
+This is all due to the fact that Git does 99\% of all of its operations locally.
 When a repository is cloned, Git actually sets up a copy of the entire repository locally, giving developers the flexibility to work anywhere, without requiring access to the company network.
 
 When returning to the office, the developers simply push their changes to their ``public'' space, be it local or to a blessed location, and all of the commits that have been made whilst they are away are then made available to the rest of the team, including all history and snapshots.
@@ -216,12 +216,12 @@ Some developers prefer having a separate client with which to interact with thei
 \index{user interface!shell extension}\subsubsection{Shell Extension Integration}
 
 Shell integration allows the user to interact with their repository using the graphical environment that they would usually use for manipulating files and performing routine directory maintenance.
-One of the most common Shell Extensions for Git is the TortoiseGit interface which integrates itself into Windows Explorer, allowing a user to right click on an entity whilst inside a git working tree, and be presented with a context sensitive menu for VCS operations.
+One of the most common Shell Extensions for Git is the msysgit interface which integrates itself into Windows Explorer, allowing a user to right click on an entity whilst inside a git working tree, and be presented with a context sensitive menu for entering a shell for VCS operations.
 
 \index{user interface!command line}\subsubsection{Command Line Interface (CLI)}
 
-The command line interface is favour by many developers as they can script with it and can see exactly what is going on, often in much more detail that with a GUI.
-The CLI gives total control over the product and it is worth noting that almost all version control systems start life as command line driven interfaces.
+The command line interface is favoured by many developers as they can script with it and can see exactly what is going on, often in much more detail that with a GUI.
+The CLI gives total control over the system and it is worth noting that almost all version control systems start life as command line driven interfaces.
 Why is this so? It can take a lot of time and effort to put all the options and nuances of a system into a GUI.
 The CLI will almost always be the most powerful of all tools, especially where version control systems are concerned.
 
@@ -252,8 +252,8 @@ Very interesting.
 
 Since this book is all about Git, we won't delve too far into the workings or features of other version control systems.
 Hopefully, this chapter has given you enough information to go and check out some of the other systems, if you feel the need to.
-The main thing to bear in mind is that Git is a Distributed Version Control system.
-While this is so, it is equally important to remember that it can be used in the same workflow models as Centralised Version Control systems.
+The main thing to bear in mind is that Git is a Distributed Version Control System or DVCS.
+While this is so, it is equally important to remember that it can be used in the same workflow models as centralised version control systems.
 
 John and his teams requirements are nothing special.
 They are a smallish team looking to reap the benefits of having their code in a well organised system.
@@ -271,7 +271,7 @@ You can buy the messiest builder in the trade a nice shiny new tool box, but unl
 
 Now that we have the basics dealt with, let's take a little look at how John arranges his team, and see whether version control is going to work for them.
 It is important that the team understands how the model should work, what they are expected to do and what level of access they have.
-Most of the time people will get more frustrated about not know what they should or shouldn't be doing, rather than that they do or don't have access to certain things.
+Most of the time people will get more frustrated about not knowing what they should or should not be doing, rather than that they do or don't have access to certain things.
 
 \begin{trenches}
 It was 4:36pm on the Friday and the table in the board room was littered with empty coke cans, pizza boxes and one Japanese bento lunchbox, owned by a particularly stubborn member of the team who had vowed never to eat pizza again.
@@ -285,7 +285,7 @@ The team were trying to decide how to organise their model.
 
 ``Well, I figure, we basically have the software split into two parts. We have the library, which myself, Klaus and Jack work on. Then there's the UI elements which Simon, Martha and Rob handle. I know there are the tools which Eugene works on too.''
 Everyone had started to listen to Mike as he continued.
-``John, you don't want to have to deal with the library component as this more Klaus' space. So why don't we have two dictators. Klaus and yourself have access to push up to the blessed repository. John can pull from his guys, Klaus from his and we end up with an good model for version control.''
+``John, you don't want to have to deal with the library component as this more Klaus' space. So why don't we have two dictators. Klaus and yourself have access to push up to the blessed repository. John can pull from his guys, Klaus from his and we end up with a good model for version control.''
 
 John raised his eyebrows, ``Not bad Mike,'' he said, genuinely impressed.
 After spending a few hours going through the various models and who was in charge of what, it felt good to have finally reached a decision.
