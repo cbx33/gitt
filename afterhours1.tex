@@ -1,31 +1,29 @@
 % afterhours1.tex - Afer Hours Week 1
 \chapter{After Hours Week 1}
 \section{``History Lesson''}
-\subsection{A Brief History Of Version Control}
+\subsection{A Brief History of Version Control}
 
 \subsubsection{The Very Early Days}
 Version control systems have been around for forty years (2011 at the time of writing).
 During this time they have undergone an intense amount of change and have evolved into some of the most incredibly powerful tools utilised in software development today.
 Chances are that in the early days you will have started off storing different versions of your source code and documents in separate files and folders.
 You may have even archived them off to compressed storage files, like zip or tar.
-Rest assured, you are not the first person to do this, and in 1972, someone called Marc J.
-Rochkind, decided to create system for storing revisions of documents and source code.
+Rest assured, you are not the first person to do this, and in 1972, someone called Marc J.\ Rochkind, decided to create system for storing revisions of documents and source code.
 
 The system Marc created was called SCCS and stood for Source Code Control System, in essence probably the most apt description for what we mainly use a version control system for today.
 SCCS was originally written for an operating system called OS/360 MVT and was later ported to C, and was used as the most dominant version control system for UNIX, until ten years later, when RCS was introduced.
 
 \subsubsection{Time To Move On}
-In 1982, Walter F.
-Tichy released RCS, standing for Revision Control System.
-It was intended to be a free and off more functionality than SCCS.
+In 1982, Walter F.\ Tichy released RCS, standing for Revision Control System.
+It was intended to be a free and offer more functionality than SCCS.
 RCS is still being maintained, as part of the GNU project, and at the time of writing is about to have its first new release, version 5.8, in over fifteen years.
 
-However, RCS, like it's predecessor SCCS, has no way of dealing with groups of files.
+However, RCS, like its predecessor SCCS, has no way of dealing with groups of files.
 Essentially, each file has its own repository which is stored near to the file under a different name.
 Whilst rather advanced, with primitive forms of branching, the interface, commands and version numbering have been described by some as rather cumbersome.
 Enter some successors.
 
-CVS was created in 1986, and began life as a set of shell scripts to operate on multiple files, using RCS to perform the actual repository management.
+CVS (Concurrent Versions System) was created in 1986, and began life as a set of shell scripts to operate on multiple files, using RCS to perform the actual repository management.
 As development continued, this way of working was dropped and CVS began operating on files itself, evolving into a version control system in its own right.
 The current iteration of CVS was released in 1989 and on November 1 1990, version 1.0 was released to the Free Software Foundation for distribution.
 
@@ -40,7 +38,7 @@ Whilst active development of CVS has apparently ceased, as of May 2008, it is wo
 
 \subsubsection{Offering Commercial Support}
 Now that version control was advanced enough and people had begun to rely on VCSs in general, commercial offerings began to spring up.
-Three prominent systems that were released within a short time of each other and ClearCase, VSS and Perforce.
+Three prominent systems that were released within a short time of each other; ClearCase, VSS and Perforce.
 All three of these are proprietary systems which were developed and filled a gap in the market for commercially supported systems.
 
 VSS, originally developed by One Tree Software for several platforms, was continually developed by Microsoft, who bought One Tree Software in 1994, with the one caveat that Microsoft ceased development of all VSS on all platforms other than Windows.
@@ -62,10 +60,10 @@ It also brought in features like the tracking of files through renames and moves
 SVN moved with the times and introduced many other sought after features, such as HTTP serving, cheaper branching, efficient network operation and native support for binary files.
 
 As with all version control systems, there are aspects that people dislike.
-In Subversion, people often fine the implementation of tags - names that point to specific points in the history of a repository, an issue.
+In Subversion, people often find the implementation of tags -- that is names that point to specific points in the history of a repository, an issue.
 In SVN, a tag is actually a branch.
-What makes this different to other systems such as Git and its predecessor CVS, which literally point to a specific commit in the tag, SVN actually creates a snapshot of the file system, albeit using cheap branching.
-Whilst this is lightweight on the repository, it is incredibly heavyweight on the client.
+What makes this different to other systems such as Git and its predecessor CVS, which literally point to a specific commit in the tag, SVN actually creates a snapshot of the file system.
+Although it employs relatively cheap branching which is lightweight on the repository, the tagging model used can be incredibly heavyweight on the client.
 
 Another issue with the tagging model in SVN is that it holds no history information.
 This makes it impossible, for example, to take two tags and try to find out all logged commits that occurred from one to the other.
@@ -89,7 +87,7 @@ On June 16th, the release of the Linux kernel version 2.6.12 was managed by Git.
 Junio Hamano, who had been a major contributor to the project, took over maintenance of Git in July, and by December had released version 1.0 to the community.
 
 Interestingly enough, another project was also created as a result of this chain of events.
-Mercurial or Hg as it is often known, began development on April 19th of the same year and was started by Matt Mackall with largely the same goals as Git.
+Mercurial or Hg as it is often known, is reported to have begun development on April 19th of the same year and was started by Matt Mackall with largely the same goals as Git.
 Though Git was chosen to be the version control system used by the Linux kernel, Mercurial is actively used by many other projects and shares a very similar design and concept to Git.
 
 \subsubsection{Design Changes}
