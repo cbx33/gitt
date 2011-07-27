@@ -646,6 +646,28 @@ Ref 'refs/heads/remove_file' was rewritten
 john@satsuki:~/coderepo$
 \end{code}
 
+We have passed a few parameters to \texttt{git filter-branch} and we should take a few seconds to discuss this as the syntax may seem a little strange.
+Firstly we are invoking the \texttt{git filter-branch} tool, that should not be anything new at all.
+Next, we are passing three parameters to it.
+The first of these is the type of filter we wish to use.
+In our case we have used the \texttt{--index-filter} option.
+More information is available in the Git manual, but in a nutshell we have asked Git to work on the \emph{index} at each commit stage.
+There is another similar option called \texttt{--tree-filter}, however care must be taken to distinguish between the two as using \texttt{--tree-filter} checks out the commit at each point in history.
+This may not sound like a problem, until you discover that as well as checking each revision out, it also automatically adds any untracked files in the working tree and commits them.
+
+The next parameter is the actual command that we wish Git to perform on each revision.
+In this case we want to \texttt{git rm --cached --ignore-unmatch newfile1} each time.
+We have enclosed the command we wish to run inside quotes so that Git does not get confused with which parameters are part of the \texttt{filter-branch} and which are part of the \texttt{rm}.
+Using these options we have asked Git to work on just the \emph{index} and not to complain if it can not find the file to delete.
+
+Lastly we list the commit range we wish to filter.
+In this case we have specified the target revision as \texttt{HEAD}.
+Git will interpret this as meaning everything up to the \texttt{HEAD} revision.
+As such Git will be rewriting the entire history of the branch.
+
+Now if we list the files in the directory, we can see something important has happened.
+The file that we wanted removed, has gone and \texttt{newfile1} is no more.
+
 \begin{code}
 john@satsuki:~/coderepo$ ls -la
 total 36
@@ -658,6 +680,14 @@ drwxrwxr-x  9 john john 4096 2011-07-27 19:53 .git
 -rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3
 -rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file
 -rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh
+john@satsuki:~/coderepo$
+\end{code}
+
+Re-running the log command we ran earlier against our new branch confirms our operation.
+However checking out the \textbf{master} also confirms that the file is still present elsewhere.
+
+\begin{code}
+john@satsuki:~/coderepo$ git log --pretty=oneline remove_file -- newfile1
 john@satsuki:~/coderepo$ git checkout master
 Switched to branch 'master'
 john@satsuki:~/coderepo$ ls -la
@@ -672,13 +702,12 @@ drwxrwxr-x  9 john john 4096 2011-07-27 19:54 .git
 -rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3
 -rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file
 -rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh
-john@satsuki:~/coderepo$ git logg -n 10
-
-
-john@satsuki:~/coderepo$ git log --pretty=oneline remove_file -- newfile1
-john@satsuki:~/coderepo$ 
-
+john@satsuki:~/coderepo$
 \end{code}
+
+\begin{callout}{Note}{Since you've been gone}
+Not really gone
+\end{callout}
 
 
 PROJECT SPLIT OUT
