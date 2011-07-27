@@ -573,7 +573,115 @@ His teeth chewed into the plastic, deforming the blue lid.
 ``I think so. It's not ideal, but I think so.''
 \end{trenches}
 
+It would be useful if we could rewrite the history to remove the information that we wanted to.
+As it turns out there is a tool that we can use to do this.
+The \indexgit{filter-branch} allows us to run operations on a branch to rewrite its history.
+Hopefully you are already remembering about the care we need to take when rewriting history, but sometimes there is a real need to perform some of these operations.
+Let us take a look at a few examples to see how this can work.
+We are going to assume that our file \texttt{newfile1} contains some very sensitive information and we wish to remove it completely from the repository.
 
+\begin{code}
+john@satsuki:~/coderepo$ git checkout master
+Already on 'master'
+john@satsuki:~/coderepo$ ls -la
+total 40
+drwxr-xr-x  3 john john 4096 2011-07-27 19:54 .
+drwxr-xr-x 32 john john 4096 2011-07-27 19:00 ..
+-rw-r--r--  1 john john   35 2011-07-22 07:15 another_file
+-rw-r--r--  1 john john   25 2011-07-22 07:15 cont_dev
+drwxrwxr-x  9 john john 4096 2011-07-27 19:54 .git
+-rw-r--r--  1 john john   69 2011-07-27 19:54 newfile1
+-rw-r--r--  1 john john   58 2011-07-22 07:15 newfile2
+-rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3
+-rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file
+-rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh
+john@satsuki:~/coderepo$ 
+\end{code}
+
+As you can see, currently we have \texttt{newfile1} in our tree.
+We can also use the \texttt{git log} tool to see each commit which has touched that path.
+
+\begin{code}
+john@satsuki:~/coderepo$ git log --pretty=oneline master -- newfile1
+9cb2af2a00fd2253060e6bf8cc6c377b3d55ecea Important Update
+d50ffb2fa536d869f2c4e89e8d6a48e0a29c5cc1 Merged in zaney
+a27d49ef11d9f0e66edbad8f6c7806510ad5b2be Made an awesome change
+cfbecabb031696a217b77b0e1285f2d5fc2ea2a3 Fantastic new feature
+55fb69f4ad26fdb6b90ac6f43431be40779962dd Added two new files
+john@satsuki:~/coderepo$
+\end{code}
+
+So there were five commits in the past which have touched that path.
+In our example we require the removal of this path from the entire history of the repository.
+As this is a destructive operation that works on the current branch, meaning it will rewrite our branch HEAD, we are first going to switch into a new branch.
+
+\begin{code}
+john@satsuki:~/coderepo$ git checkout -b remove_file
+Switched to a new branch 'remove_file'
+john@satsuki:~/coderepo$ 
+\end{code}
+
+Now we need to run the \texttt{git filter-branch} tool.
+
+\begin{code}
+john@satsuki:~/coderepo$ git filter-branch --index-filter 'git rm --cached --ignore-unmatch newfile1' HEAD
+Rewrite 55fb69f4ad26fdb6b90ac6f43431be40779962dd (6/21)rm 'newfile1'
+Rewrite 9710177657ae00665ca8f8027b17314346a5b1c4 (7/21)rm 'newfile1'
+Rewrite 4ac92012609cf8ed2480aa5d7f807caf2545fe2f (8/21)rm 'newfile1'
+Rewrite cfbecabb031696a217b77b0e1285f2d5fc2ea2a3 (9/21)rm 'newfile1'
+Rewrite b119573f4508514c55e1c4e3bebec0ab3667d071 (10/21)rm 'newfile1'
+Rewrite ed2301ba223a63a5a930b536a043444e019460a7 (11/21)rm 'newfile1'
+Rewrite a27d49ef11d9f0e66edbad8f6c7806510ad5b2be (12/21)rm 'newfile1'
+Rewrite 7cc32dbf121f2afa8c40337db54bafb26de5b9c4 (13/21)rm 'newfile1'
+Rewrite d50ffb2fa536d869f2c4e89e8d6a48e0a29c5cc1 (14/21)rm 'newfile1'
+Rewrite 9cb2af2a00fd2253060e6bf8cc6c377b3d55ecea (15/21)rm 'newfile1'
+Rewrite 37950f861a3cc0868c65ee9571fc6c491aa689ea (16/21)rm 'newfile1'
+Rewrite 1c3206aac0fb012bfdaf5ff00e320b565bb89e7d (17/21)rm 'newfile1'
+Rewrite 1968324ce2899883fca76bc25496bcf2b15e7011 (18/21)rm 'newfile1'
+Rewrite f8d5100142b43ffaba9bbd539ba4fd92af79bf0e (19/21)rm 'newfile1'
+Rewrite a8281fb589e36389cc8cb0da7ebee225b4d1adfc (20/21)rm 'newfile1'
+Rewrite 30900fe1b7e72411dabab8b02070f36e2431f704 (21/21)rm 'newfile1'
+
+Ref 'refs/heads/remove_file' was rewritten
+john@satsuki:~/coderepo$
+\end{code}
+
+\begin{code}
+john@satsuki:~/coderepo$ ls -la
+total 36
+drwxr-xr-x  3 john john 4096 2011-07-27 19:53 .
+drwxr-xr-x 32 john john 4096 2011-07-27 19:00 ..
+-rw-r--r--  1 john john   35 2011-07-22 07:15 another_file
+-rw-r--r--  1 john john   25 2011-07-22 07:15 cont_dev
+drwxrwxr-x  9 john john 4096 2011-07-27 19:53 .git
+-rw-r--r--  1 john john   58 2011-07-22 07:15 newfile2
+-rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3
+-rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file
+-rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh
+john@satsuki:~/coderepo$ git checkout master
+Switched to branch 'master'
+john@satsuki:~/coderepo$ ls -la
+total 40
+drwxr-xr-x  3 john john 4096 2011-07-27 19:54 .
+drwxr-xr-x 32 john john 4096 2011-07-27 19:00 ..
+-rw-r--r--  1 john john   35 2011-07-22 07:15 another_file
+-rw-r--r--  1 john john   25 2011-07-22 07:15 cont_dev
+drwxrwxr-x  9 john john 4096 2011-07-27 19:54 .git
+-rw-r--r--  1 john john   69 2011-07-27 19:54 newfile1
+-rw-r--r--  1 john john   58 2011-07-22 07:15 newfile2
+-rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3
+-rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file
+-rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh
+john@satsuki:~/coderepo$ git logg -n 10
+
+
+john@satsuki:~/coderepo$ git log --pretty=oneline remove_file -- newfile1
+john@satsuki:~/coderepo$ 
+
+\end{code}
+
+
+PROJECT SPLIT OUT
 
 submodule
 subtree
