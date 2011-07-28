@@ -708,7 +708,7 @@ john@satsuki:~/coderepo$
 It should be stressed at this point how destructive the \texttt{git filter-branch} command can be to your repository.
 The \textbf{master} and \textbf{remove\_file} branches have diverged from the point where \texttt{newfile1} was first introduced.
 Consequently all of our other branches, such as \textbf{zaney} and \textbf{wonderful} still refer to the \textbf{master} branch.
-We would also have to rewrite those branches too, but because of the rewriting of commit objects, we would lose the relationships between the branches and their ancestors.
+We would also have to rewrite those branches too, but because of the rewriting of commit objects, we could lose the relationships between the branches and their ancestors.
 In short, though it is exceedingly powerful, this type of filtering can cause huge distress to other people working on the project.
 
 \begin{trenches}
@@ -733,13 +733,108 @@ John nodded.  ``You know Simon I think you may have just redeemed yourself.''
 Not really gone
 \end{callout}
 
-\subsection{Splitting the atom}
+The idea being proposed here is only really viable because of Tamagoyaki's situation.
+The code is due to be finished soon and once that happens, the team have decided to push a rewritten branch into the public domain and to resync all of their development repositories to this new branch.
+It should be noted that the \texttt{filter-branch} tool can be used in other circumstances too.
+We are going to take a look at just one of these.
+However, let us first clean up our repository a little and move some things around.
 
-PROJECT SPLIT OUT
+\begin{code}
+john@satsuki:~/coderepo$ mkdir tester
+john@satsuki:~/coderepo$ ls
+another_file  cont_dev  newfile1  newfile2  newfile3  temp_file  tester  test.sh
+john@satsuki:~/coderepo$ mv test.sh tester/
+john@satsuki:~/coderepo$ git mv newfile* tester
+john@satsuki:~/coderepo$ git add tester/test.sh
+john@satsuki:~/coderepo$ rm temp_file 
+john@satsuki:~/coderepo$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	renamed:    newfile1 -> tester/newfile1
+#	renamed:    newfile2 -> tester/newfile2
+#	renamed:    newfile3 -> tester/newfile3
+#	new file:   tester/test.sh
+#
+john@satsuki:~/coderepo$ git commit -a -m 'Moved testing suite'
+[master f08ac57] Moved testing suite
+ 4 files changed, 9 insertions(+), 0 deletions(-)
+ rename newfile1 => tester/newfile1 (100%)
+ rename newfile2 => tester/newfile2 (100%)
+ rename newfile3 => tester/newfile3 (100%)
+ create mode 100755 tester/test.sh
+john@satsuki:~/coderepo$ 
+\end{code}
+
+We have reverted back to our \textbf{master} branch and in doing so have regained \texttt{newfile1}.
+After that, we deleted our rewritten branch and moved \texttt{test.sh} along with all of the \texttt{newfile}s into a new folder called \texttt{tester}.
+
+\subsection{Splitting the atom}
+Sometimes, after a project has been running for a while certain components actually grow rather useful.
+When this happens, people often want to move it outside of the original project.
+Of course the easiest way to do this is to just copy and paste the files out of the main project and into a subdirectory.
+In doing this we would lose or disconnect all of the development history of that subproject up to this point.
+
+Using the \texttt{git filter-branch} we can actually pull out a folder and retain all of its history.
+The methodology behind this is that we rewrite the history to a new branch, but we only pull across changes to a particular folder and we store those in the root of the branch.
+Let us see how this works with a quick example.
+Remember we created the \texttt{tester} folder?
+We are going to make a few commits to the files in this folder to give it some history.
+
+\begin{code}
+john@satsuki:~/coderepo$ echo "More development work" >> tester/newfile1
+john@satsuki:~/coderepo$ git commit -a -m 'Work on tester nf1'
+[master 1a4956b] Work on tester nf1
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@satsuki:~/coderepo$ echo "More dev work" >> tester/newfile2
+john@satsuki:~/coderepo$ git commit -a -m 'Work on tester nf2'
+[master 7156104] Work on tester nf2
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@satsuki:~/coderepo$ echo "Even more dev work" >> tester/newfile3
+john@satsuki:~/coderepo$ git commit -a -m 'Work on tester nf3'
+[master 1433223] Work on tester nf3
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@satsuki:~/coderepo$ 
+\end{code}
+
+Now we are going to split that off into a separate branch which we will then clone into a new Git repository.
+After we have copied the history of the \texttt{tester} folder to a new branch, see if you can run through in your head, the steps we would need to take to pull this branch into a new repository.
+
+\begin{code}
+john@satsuki:~/coderepo$ git checkout -b tester_split
+Switched to a new branch 'tester_split'
+john@satsuki:~/coderepo$ git filter-branch --subdirectory-filter tester
+Rewrite 1433223d9c8a8abc35410d12cf78128c318b6e42 (4/4)
+Ref 'refs/heads/tester_split' was rewritten
+john@satsuki:~/coderepo$ git branch
+  develop
+  master
+* tester_split
+  wonderful
+  zaney
+john@satsuki:~/coderepo$ ls
+newfile1  newfile2  newfile3  test.sh
+john@satsuki:~/coderepo$ git checkout master
+Switched to branch 'master'
+john@satsuki:~/coderepo$ ls
+another_file  cont_dev  tester
+john@satsuki:~/coderepo$ 
+\end{code}
+
+So now the directory has been split away from the original source code into a new branch, have a think about what steps you would take to bring this into an entirely new repository.
+
+\begin{callout}{Note}{More backups}
+Git likes to make things easy for you.
+You may not have noticed it before, but when using the \texttt{git filter-branch} tool to rewrite a branch, Git keeps a backup of the value of HEAD before you started rewriting your branch.
+This backup is kept in \texttt{refs/original/refs/heads/<branch\_name>}.
+This file will contain a commit ID which we can use to revert our branch back to its original state, if the filter does horribly wrong.
+\end{callout}
+
+We need to XYZ
 
 submodule
 subtree
-filter branch
 
 \clearpage
 
