@@ -705,10 +705,35 @@ drwxrwxr-x  9 john john 4096 2011-07-27 19:54 .git
 john@satsuki:~/coderepo$
 \end{code}
 
+It should be stressed at this point how destructive the \texttt{git filter-branch} command can be to your repository.
+The \textbf{master} and \textbf{remove\_file} branches have diverged from the point where \texttt{newfile1} was first introduced.
+Consequently all of our other branches, such as \textbf{zaney} and \textbf{wonderful} still refer to the \textbf{master} branch.
+We would also have to rewrite those branches too, but because of the rewriting of commit objects, we would lose the relationships between the branches and their ancestors.
+In short, though it is exceedingly powerful, this type of filtering can cause huge distress to other people working on the project.
+
+\begin{trenches}
+``So what do we do?'' asked John.
+``We can't push out the repo as it is because it contains the API key.''
+He massaged his forehead moving down to his eyebrows.
+``But we seem to be introducing a real headache if we filter the branch. Any suggestions?''
+
+``Well the project is going to be finished in a few weeks right?'' Simon was sitting at the end of the table.
+He was ashamed and was talking through a pair of hands deperately trying to conceal his identity.
+
+``Yeh, but what the hell has that got to do with it?'' snorted Klaus.
+
+``I'm just thinking that we leave the repo like it is until all development has finished,'' he paused to run his hands through his hair,
+``then we filter the branch just before we release it.''
+He looked over at John, ``At that point there shouldn't be any test or dev branches, and we can just get everyone to clone the repo if we need to do anything else.''
+
+John nodded.  ``You know Simon I think you may have just redeemed yourself.''
+\end{trenches}
+
 \begin{callout}{Note}{Since you've been gone}
 Not really gone
 \end{callout}
 
+\subsection{Splitting the atom}
 
 PROJECT SPLIT OUT
 
