@@ -803,6 +803,8 @@ Let us see how this works with a quick example.
 Remember we created the \texttt{tester} folder?
 We are going to make a few commits to the files in this folder to give it some history.
 
+%\marginpar[Test]{test}
+
 \begin{code}
 john@satsuki:~/coderepo$ echo "More development work" >> tester/newfile1
 john@satsuki:~/coderepo$ git commit -a -m 'Work on tester nf1'
@@ -852,7 +854,12 @@ This backup is kept in \texttt{refs/original/refs/heads/<branch\_name>}.
 This file will contain a commit ID which we can use to revert our branch back to its original state, if the filter does horribly wrong.
 \end{callout}
 
-We actually have at least two methods 
+We actually have at least three methods we can use to do this.
+\begin{enumerate}
+\item Clone our repository, delete all of the branches other than \textbf{tester\_split} and then rename it to \textbf{master}
+\item Initialise a new repository, setup a remote to the original and then fetch our \textbf{tester\_split} branch
+\item Create a bundle of the \textbf{tester\_split} and then clone from the bundle into a new repository
+\end{enumerate}
 
 submodule
 subtree
