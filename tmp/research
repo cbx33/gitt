@@ -1,0 +1,128 @@
+john@satsuki:~$ mkdir coderepo-nbk2
+john@satsuki:~$ cd coderepo-nbk2
+john@satsuki:~/coderepo-nbk2$ git init
+Initialized empty Git repository in /home/john/coderepo-nbk2/.git/
+john@satsuki:~/coderepo-nbk2$ git remote add nbk ../coderepo-nbk
+john@satsuki:~/coderepo-nbk2$ git fetch nbk +tester_split:master
+fatal: Refusing to fetch into current branch refs/heads/master of non-bare repository
+john@satsuki:~/coderepo-nbk2$ fatal: The remote end hung up unexpectedly
+
+john@satsuki:~/coderepo-nbk2$ git fetch nbk +tester_split:master-new
+remote: Counting objects: 15, done.
+remote: Compressing objects: 100% (14/14), done.
+remote: Total 15 (delta 3), reused 0 (delta 0)
+Unpacking objects: 100% (15/15), done.
+From ../coderepo-nbk
+ * [new branch]      tester_split -> master-new
+john@satsuki:~/coderepo-nbk2$ git branch
+  master-new
+john@satsuki:~/coderepo-nbk2$ git branch
+  master-new
+john@satsuki:~/coderepo-nbk2$ git branch mv master-new master
+usage: git branch [options] [-r | -a] [--merged | --no-merged]
+   or: git branch [options] [-l] [-f] <branchname> [<start-point>]
+   or: git branch [options] [-r] (-d | -D) <branchname>
+   or: git branch [options] (-m | -M) [<oldbranch>] <newbranch>
+
+Generic options
+    -v, --verbose         show hash and subject, give twice for upstream branch
+    -t, --track           set up tracking mode (see git-pull(1))
+    --set-upstream        change upstream info
+    --color[=<when>]      use colored output
+    -r                    act on remote-tracking branches
+    --contains <commit>   print only branches that contain the commit
+    --abbrev[=<n>]        use <n> digits to display SHA-1s
+
+Specific git-branch actions:
+    -a                    list both remote-tracking and local branches
+    -d                    delete fully merged branch
+    -D                    delete branch (even if not merged)
+    -m                    move/rename a branch and its reflog
+    -M                    move/rename a branch, even if target exists
+    -l                    create the branch's reflog
+    -f, --force           force creation (when already exists)
+    --no-merged <commit>  print only not merged branches
+    --merged <commit>     print only merged branches
+
+john@satsuki:~/coderepo-nbk2$ git branch -m master-new master
+john@satsuki:~/coderepo-nbk2$ cd .git/objects/
+john@satsuki:~/coderepo-nbk2/.git/objects$ find .
+.
+./8a
+./8a/696bed1ec63f488c8f6d3a42cb13068c085a23
+./07
+./07/c484fc6f6469c7ab68ea67cde0f76628ae4570
+./ce
+./ce/5464e06220cd5b9285b48f5b0c6b4461e9fe53
+./a5
+./a5/a0d9762dd4b50d8f3228e37b315f6056d5a034
+./78
+./78/5b86d877d2a5c0679d98181a23d06ed2ba7652
+./f3
+./f3/2a0e67842e2c6ba1993bbca249aab0c000908e
+./1f
+./1f/f89f787438f081a0d74de2d26eb2d831c9c738
+./3e
+./3e/b30c7fe1862164e52aa9248e04117e1d3f11a1
+./19
+./19/620a517c3b7cc3fc9452d608b4cd0ddeac91c3
+./59
+./59/0e0eb79bc5ba0bc09f611392e643f676b00a04
+./2e
+./2e/00739ad57e073de2d9cd814e9d47c1925f2772
+./pack
+./ff
+./ff/59f558f4d9fa4c75b46daac8c369539ec57c0f
+./50
+./50/f126852fc232934a32686da00c84ba7caa11a7
+./99
+./99/14a7401c5fb00593d4c0b3e3b2c813351090f6
+./0d
+./0d/9d87c2a40adfa2fce290f129f46720f0546e57
+./info
+john@satsuki:~/coderepo-nbk2/.git/objects$ cd ..
+john@satsuki:~/coderepo-nbk2/.git$ cd ..
+john@satsuki:~/coderepo-nbk2$ gitk --all
+john@satsuki:~/coderepo-nbk2$ ls
+john@satsuki:~/coderepo-nbk2$ git checkout master
+Already on 'master'
+john@satsuki:~/coderepo-nbk2$ ls
+newfile1  newfile2  newfile3  test.sh
+john@satsuki:~/coderepo-nbk2$ gitk --all
+john@satsuki:~/coderepo-nbk2$ cd ../coderepo-nbk
+john@satsuki:~/coderepo-nbk$ git bundle 
+usage: git bundle create <file> <git-rev-list args>
+   or: git bundle verify <file>
+   or: git bundle list-heads <file> [<refname>...]
+   or: git bundle unbundle <file> [<refname>...]
+john@satsuki:~/coderepo-nbk$ git bundle create nfile.bundle tester_split 
+Counting objects: 15, done.
+Compressing objects: 100% (14/14), done.
+Writing objects: 100% (15/15), 1.50 KiB, done.
+Total 15 (delta 3), reused 0 (delta 0)
+john@satsuki:~/coderepo-nbk$ ls -la
+total 32
+drwxr-xr-x  3 john john 4096 2011-07-29 22:34 .
+drwxr-xr-x 35 john john 4096 2011-07-29 22:26 ..
+drwxr-xr-x  9 john john 4096 2011-07-29 20:49 .git
+-rw-r--r--  1 john john   91 2011-07-29 20:49 newfile1
+-rw-r--r--  1 john john   72 2011-07-29 20:49 newfile2
+-rw-r--r--  1 john john   64 2011-07-29 20:49 newfile3
+-rw-r--r--  1 john john 1618 2011-07-29 22:34 nfile.bundle
+-rwxr-xr-x  1 john john  114 2011-07-29 20:49 test.sh
+john@satsuki:~/coderepo-nbk$ mv nfile.bundle ../
+john@satsuki:~/coderepo-nbk$ cd ../
+john@satsuki:~$ git clone nfile.bundle coderepo-nbk4
+Cloning into coderepo-nbk4...
+warning: remote HEAD refers to nonexistent ref, unable to checkout.
+
+john@satsuki:~$ cd coderepo-nbk4/
+john@satsuki:~/coderepo-nbk4$ git branch
+john@satsuki:~/coderepo-nbk4$ gitk --all
+john@satsuki:~/coderepo-nbk4$ git reset --hard origin/tester_split 
+HEAD is now at 590e0eb Work on tester nf3
+john@satsuki:~/coderepo-nbk4$ git checkout master
+Already on 'master'
+john@satsuki:~/coderepo-nbk4$ ls
+newfile1  newfile2  newfile3  test.sh
+john@satsuki:~/coderepo-nbk4$ 
