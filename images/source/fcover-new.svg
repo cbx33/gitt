@@ -13,8 +13,8 @@
    inkscape:version="0.48.1 r9760"
    version="1.1"
    id="svg2"
-   height="744.09448"
-   width="524.40942"
+   height="871.29919"
+   width="669.685"
    sodipodi:docname="fcover-new.svg">
   <defs
      id="defs4">
@@ -250,7 +250,8 @@
     </clipPath>
     <filter
        inkscape:collect="always"
-       id="filter5617">
+       id="filter5617"
+       color-interpolation-filters="sRGB">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="0.80738799"
@@ -264,9 +265,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.65931569"
-     inkscape:cx="56.348874"
-     inkscape:cy="166.80794"
+     inkscape:zoom="0.52600834"
+     inkscape:cx="268.31073"
+     inkscape:cy="441.28838"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -277,7 +278,8 @@
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
-     borderlayer="true" />
+     borderlayer="true"
+     units="cm" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -286,7 +288,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -294,12 +296,12 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-308.26769)">
+     transform="translate(0,-181.06355)">
     <flowRoot
        xml:space="preserve"
        id="flowRoot4448"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
-       transform="matrix(0.94843763,-0.31696381,0.31696381,0.94843763,-80.919166,467.17365)"><flowRegion
+       transform="matrix(1.1674625,-0.39016098,0.39016098,1.1674625,-85.944395,369.61323)"><flowRegion
          id="flowRegion4450"><rect
            id="rect4452"
            width="494.34714"
@@ -337,7 +339,7 @@
          id="flowPara4510">* cfe23cb My First Ever Commit</flowPara><flowPara
          id="flowPara4512">john@satsuki:~/coderepo$ </flowPara><flowPara
          id="flowPara4514" /></flowRoot>    <rect
-       style="opacity:1;fill:#2d2d2d;fill-opacity:1;stroke:none"
+       style="fill:#2d2d2d;fill-opacity:1;stroke:none"
        id="rect3142"
        width="1174.0947"
        height="245.26596"
@@ -346,32 +348,32 @@
        ry="31.333687" />
     <text
        xml:space="preserve"
-       style="font-size:22.53083801000000008px;font-style:oblique;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#f9f9f9;fill-opacity:1;stroke:none;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold Oblique"
-       x="376.75809"
+       style="font-size:22.53083801px;font-style:oblique;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#f9f9f9;fill-opacity:1;stroke:none;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold Oblique"
+       x="466.75809"
        y="1025.5909"
        id="text5120"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5122"
-         x="376.75809"
+         x="466.75809"
          y="1025.5909">Peter Savage</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:41.7665596px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS Bold"
-       x="330.55014"
+       x="432.55014"
        y="890.71558"
        id="text5116"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5118"
-         x="330.55014"
+         x="432.55014"
          y="890.71558"
-         style="-inkscape-font-specification:LMSansDemiCond10 Semi-Bold;font-family:LMSansDemiCond10;font-weight:600;font-style:normal;font-stretch:normal;font-variant:normal">Git In The Trenches</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:LMSansDemiCond10;-inkscape-font-specification:LMSansDemiCond10 Semi-Bold">Git In The Trenches</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot4448-6"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono;filter:url(#filter5617)"
-       transform="matrix(0.94843763,-0.31696381,0.31696381,0.94843763,-80.867179,467.20962)"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;filter:url(#filter5617);font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+       transform="matrix(1.1674625,-0.39016098,0.39016098,1.1674625,-85.880403,369.65751)"
        clip-path="url(#clipPath5581)"><flowRegion
          id="flowRegion4450-6"><rect
            id="rect4452-0"
