@@ -12,9 +12,11 @@
 \ProcessOptions*\relax
 
 
-\LoadClass[a5paper,openright,12pt]{memoir}
+\LoadClass[openright,12pt]{memoir}
 
 % set paper size
+\setstocksize{9.68in}{7.44in}
+\settrimmedsize{\stockheight}{\stockwidth}{*}
 \setlrmarginsandblock{2.16cm}{1.91cm}{*}
 \setulmarginsandblock{1.91cm}{1.91cm}{*}
 \checkandfixthelayout
