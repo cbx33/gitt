@@ -16,10 +16,10 @@
 
 % set paper size
 \setstocksize{24.59cm}{18.90cm}
-\settrims{1.91cm}{0cm}
-\settrimmedsize{20.77cm}{\stockwidth}{*}
+%\settrims{1.91cm}{0cm}
+\settrimmedsize{\stockheight}{\stockwidth}{*}
 \setlrmarginsandblock{2.79cm}{2.29cm}{*}
-\setulmarginsandblock{1.91cm}{1.91cm}{*}
+\setulmarginsandblock{2.91cm}{2.91cm}{*}
 %\setmarginnotes{0.5cm}{2cm}{0.2cm}
 \checkandfixthelayout
 
