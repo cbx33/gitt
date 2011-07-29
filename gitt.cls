@@ -15,10 +15,12 @@
 \LoadClass[openright,12pt]{memoir}
 
 % set paper size
-\setstocksize{9.68in}{7.44in}
-\settrimmedsize{\stockheight}{\stockwidth}{*}
-\setlrmarginsandblock{2.16cm}{1.91cm}{*}
+\setstocksize{24.59cm}{18.90cm}
+\settrims{1.91cm}{0cm}
+\settrimmedsize{20.77cm}{\stockwidth}{*}
+\setlrmarginsandblock{2.79cm}{2.29cm}{*}
 \setulmarginsandblock{1.91cm}{1.91cm}{*}
+%\setmarginnotes{0.5cm}{2cm}{0.2cm}
 \checkandfixthelayout
 
 % Reset the figure numbering at the beginning of each chapter and print only
