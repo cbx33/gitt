@@ -730,7 +730,28 @@ John nodded.  ``You know Simon I think you may have just redeemed yourself.''
 \end{trenches}
 
 \begin{callout}{Note}{Since you've been gone}
-Not really gone
+Even though we have rewritten our tree, the fact that another branch still has the file present means that our potentially senitive data still exists somewhere inside the repository.
+In order to truly get rid of the file we would need to not only remove the file from all branches, or delete the branches that contained the file,
+but also run a few more steps if we wanted to ensure the file was gone \emph{now}.
+Be aware that these steps are potentially very destructive to a repository.
+The best way to remove the file completely would be to remove ALL references to the file and then clone the repository.
+Git will not clone objects into a new repository if nothing references them.
+Alternatively if you absolutely must work on the current repository, you would need to do the following.
+\newline
+\newline
+Delete the \texttt{filter-branch} backup using \indexgit{git update-ref <refname> -d}.  (See the callout on \emph{More backups})
+\newline
+\newline
+Expire all reflogs with \texttt{git reflog expire --expire=now --all}
+\newline
+\newline
+Repack all of the pack files with \texttt{git repack -ad}
+\newline
+\newline
+Prune all unreachable objects with \texttt{git prune}
+\newline
+\newline
+As you can see some of these are quite scary procedures and so it is important that you understand all that you are doing before you do it.
 \end{callout}
 
 The idea being proposed here is only really viable because of Tamagoyaki's situation.
@@ -831,7 +852,7 @@ This backup is kept in \texttt{refs/original/refs/heads/<branch\_name>}.
 This file will contain a commit ID which we can use to revert our branch back to its original state, if the filter does horribly wrong.
 \end{callout}
 
-We need to XYZ
+We actually have at least two methods 
 
 submodule
 subtree
