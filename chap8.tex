@@ -861,6 +861,64 @@ We actually have at least three methods we can use to do this.
 \item Create a bundle of the \textbf{tester\_split} and then clone from the bundle into a new repository
 \end{enumerate}
 
+Now the first of these is trivial and should require no explanation at all.
+We simply clone and then using the usual tools, we delete all unnecessary branches.
+However this first method does have its disadvantages, namely the fact that when we clone the repository, we take every single object from the source repository into the new one.
+Whilst this is generally not a problem it would mean that we would have to run some fairly aggressive garbage collection to remove all of these unwanted objects.
+This would happen natually over time as the objects aged and were no longer referenced, but it would result in a repository that was initially much larger than it needed to be.
+
+The other two methods deserve a little more consideration as they both perform much better in this respect.
+The second method you should be familiar enough with pervious material to be able to perform right now.
+However, using the fetch command as we have done so before would again pull in many more objects than we require.
+As such we are going to do a subtle twist to this command in the following output.
+
+\begin{code}
+john@satsuki:~/coderepo$ cd ../
+john@satsuki:~$ mkdir subrepo
+john@satsuki:~$ cd subrepo/
+john@satsuki:~/subrepo$ git init
+Initialized empty Git repository in /home/john/subrepo/.git/
+john@satsuki:~/subrepo$ git remote add source /home/john/coderepo
+john@satsuki:~/subrepo$ git fetch source +tester_split:master
+fatal: Refusing to fetch into current branch refs/heads/master of non-bare repository
+john@satsuki:~/subrepo$ fatal: The remote end hung up unexpectedly
+john@satsuki:~/subrepo$
+\end{code}
+
+What we have asked Git to do is to pull only the branch \textbf{tester_split} from the remote we called \textbf{source} and place it into \textbf{master} locally.
+Think of the \texttt{+<branch>:<branch>} as \texttt{+<source>:<destination>} and all will make sense.
+As you can see Git is not too happy about our intentions here as it does not like overwriting the \textbf{master} branch of a non-bare repository.
+That is OK, we have another way around this.
+
+\begin{code}
+john@satsuki:~/subrepo$ git fetch source +tester_split:tmp
+remote: Counting objects: 15, done.
+remote: Compressing objects: 100% (14/14), done.
+remote: Total 15 (delta 3), reused 0 (delta 0)
+Unpacking objects: 100% (15/15), done.
+From /home/john/coderepo
+ * [new branch]      tester_split -> tmp
+john@satsuki:~/subrepo$ git branch -m tmp master
+john@satsuki:~/subrepo$
+\end{code}
+
+So we have almost deceived Git a little here, but I think we can live with ourselves.
+By first pulling the branch into a \textbf{tmp} branch, we were then allowed to rename it as \textbf{master}.
+Notice the number of objects required for this branch \texttt{15}.
+If you remember when we cloned our repository a few \emph{weeks} ago, this value was a lot higher than this.
+It was the subtle \texttt{+<source>:<destination>} which prevented us from pulling every last object from the source repository into our new slim \emph{sub}-repository.
+
+\begin{code}
+john@satsuki:~/subrepo$ ls
+john@satsuki:~/subrepo$ git checkout master
+Already on 'master'
+john@satsuki:~/subrepo$ ls
+newfile1  newfile2  newfile3  test.sh
+john@satsuki:~/subrepo$ 
+\end{code}
+
+
+
 submodule
 subtree
 
