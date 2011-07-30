@@ -28,6 +28,7 @@
 \renewcommand{\thefigure}{\arabic{figure}}
 
 % Import packages
+\RequirePackage{pdfpages}
 \RequirePackage{graphicx}
 \RequirePackage{color,fancyvrb,relsize}
 \RequirePackage[final]{microtype}
