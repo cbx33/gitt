@@ -791,9 +791,10 @@ john@satsuki:~/coderepo$
 We have reverted back to our \textbf{master} branch and in doing so have regained \texttt{newfile1}.
 After that, we deleted our rewritten branch and moved \texttt{test.sh} along with all of the \texttt{newfile}s into a new folder called \texttt{tester}.
 
+\section{Day 4 - ``Let's make a library''}
 \subsection{Splitting the atom}
 Sometimes, after a project has been running for a while certain components actually grow rather useful.
-When this happens, people often want to move it outside of the original project.
+When this happens, people often want to move it outside of the original project and maintain it as a separate library.
 Of course the easiest way to do this is to just copy and paste the files out of the main project and into a subdirectory.
 In doing this we would lose or disconnect all of the development history of that subproject up to this point.
 
@@ -854,21 +855,34 @@ This backup is kept in \texttt{refs/original/refs/heads/<branch\_name>}.
 This file will contain a commit ID which we can use to revert our branch back to its original state, if the filter does horribly wrong.
 \end{callout}
 
-We actually have at least three methods we can use to do this.
+\begin{trenches}
+``So John, I managed to split the Atom library out into a new branch like you said, but I have no idea how to pull this into a new repo.''
+Jack was finally feeling like he had gotten to grips with Git, but his latest task had left him feeling a little dejected.
+He idly stabbed at his leg with a pen whilst waiting for John to finish his tapping away.
+
+John lifted his keys from the keyboard and turned his chair.
+``You really can't think of a way to coopy what we have in one repo into another?''
+
+Suddenly it was like a light bulb had exploded with light inside Jack's skull.  "CLONES!" he shouted.
+\end{trenches}
+
+We actually have at least four methods we can use to do this.
 \begin{enumerate}
+\item Copy the data from one repo to another with copy and paste
 \item Clone our repository, delete all of the branches other than \textbf{tester\_split} and then rename it to \textbf{master}
 \item Initialise a new repository, setup a remote to the original and then fetch our \textbf{tester\_split} branch
 \item Create a bundle of the \textbf{tester\_split} and then clone from the bundle into a new repository
 \end{enumerate}
 
-Now the first of these is trivial and should require no explanation at all.
+The first of these will leave us with no history of development at all, so let us ignore it, as it is not what we require.
+The second of these is trivial and should require no explanation at all.
 We simply clone and then using the usual tools, we delete all unnecessary branches.
 However this first method does have its disadvantages, namely the fact that when we clone the repository, we take every single object from the source repository into the new one.
 Whilst this is generally not a problem it would mean that we would have to run some fairly aggressive garbage collection to remove all of these unwanted objects.
 This would happen natually over time as the objects aged and were no longer referenced, but it would result in a repository that was initially much larger than it needed to be.
 
 The other two methods deserve a little more consideration as they both perform much better in this respect.
-The second method you should be familiar enough with pervious material to be able to perform right now.
+The third method you should be familiar enough with pervious material to be able to perform right now.
 However, using the fetch command as we have done so before would again pull in many more objects than we require.
 As such we are going to do a subtle twist to this command in the following output.
 
@@ -935,6 +949,61 @@ john@satsuki:~/subrepo$
 
 Unfortunately since some of our development work on these files happened outside of this directory,
 this was lost when splitting and this is something to keep in mind should you ever perform this kind of operation.
+
+\subsection{Little bundles of joy}
+Git has so many ways to do things.
+This is in part what makes it a little daunting for those just starting but after you have gained a little experience, you begin to understand just what is happening in the background.
+When this realisation hits, you are able to almost immediately think of at least two different ways of performing the same thing.
+There have been numerous examples throughout the book, where there have been multiple ways to complete the same task.
+Here we are going to look at just one more way that we can create a new repo from our \textbf{tester\_split} branch.
+
+The tool we are going to introduce here is \indexgit{bundle}.
+The \texttt{bundle} utility allows us to export a set of revisions and almost archive them to a file.
+This file then becomes a resource that can be updated and pulled or fetched from.
+This is especially useful if you have no physical connection between two computers and wish to sync some of the data from one to the other.
+Let us take a quick look at how we could use the bundle tool in this case.
+
+\begin{code}
+john@satsuki:~/coderepo$ git bundle create ../tester.bundle tester_split 
+Counting objects: 15, done.
+Compressing objects: 100% (14/14), done.
+Writing objects: 100% (15/15), 1.50 KiB, done.
+Total 15 (delta 3), reused 0 (delta 0)
+john@satsuki:~/coderepo$ cd ..
+john@satsuki:~$ git clone tester.bundle subrepo-b
+Cloning into subrepo-b...
+warning: remote HEAD refers to nonexistent ref, unable to checkout.
+
+john@satsuki:~$
+\end{code}
+
+So the problem here is that when we created the bundle, the branch which was checked out at the time was \textbf{master}.
+The objects we pulled from the source repository and placed in the bundle were all from the \textbf{tester\_split} branch.
+As such the HEAD of the working tree at the time of the bundle creation, pointed to an object in the \textbf{master} branch.
+Obviously this object does not exist in our bundle and so Git complains.
+If we had checked out \textbf{tester\_split} before creating the bundle, there would have been no complaints.
+
+So all we have to do is to remap the HEAD of \textbf{master} to that of the HEAD of \textbf{tester\_split}.
+As you can see below, it seems as if there are no branches at all and when we try to checkout master it does not exist.
+What actually happened is that the objects were cloned into the repository, but as the object that the source HEAD pointed to was unavailable,
+no branch was created.
+With a litle \texttt{git reset} trickery, we can create our \textbf{master} branch in our new repository.
+
+\begin{code}
+john@satsuki:~$ cd subrepo-b/
+john@satsuki:~/subrepo-b$ git branch
+john@satsuki:~/subrepo-b$ git checkout master
+error: pathspec 'master' did not match any file(s) known to git.
+john@satsuki:~/subrepo-b$ git reset --hard origin/tester_split 
+HEAD is now at 590e0eb Work on tester nf3
+john@satsuki:~/subrepo-b$ git checkout master
+Already on 'master'
+john@satsuki:~/subrepo-b$ ls
+newfile1  newfile2  newfile3  test.sh
+john@satsuki:~/subrepo-b$ 
+\end{code}
+
+Now we have our repository complete as before.
 
 submodule
 subtree
