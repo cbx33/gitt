@@ -152,19 +152,16 @@ john@satsuki:~/coderepo$ git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in
- working directory)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
 #
 #	modified:   my_first_committed_file
 #
 # Untracked files:
-#   (use "git add <file>..." to include in what will be
- committed)
+#   (use "git add <file>..." to include in what will be committed)
 #
 #	my_second_committed_file
 #	my_third_committed_file
-no changes added to commit (use "git add" and/or "git
- commit -a")
+no changes added to commit (use "git add" and/or "git commit -a")
 john@satsuki:~/coderepo$
 \end{code}
 
@@ -187,8 +184,7 @@ john@satsuki:~/coderepo$ git status
 #	new file:   my_second_committed_file
 #
 # Untracked files:
-#   (use "git add <file>..." to include in what will be
- committed)
+#   (use "git add <file>..." to include in what will be committed)
 #
 #	my_third_committed_file
 john@satsuki:~/coderepo$
@@ -230,16 +226,13 @@ john@satsuki:~/coderepo$ git status
 #	new file:   my_second_committed_file
 #
 # Changed but not updated:
-#   (use "git add <file>..." to update what will be
- committed)
-#   (use "git checkout -- <file>..." to discard changes in
- working directory)
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
 #
 #	modified:   my_second_committed_file
 #
 # Untracked files:
-#   (use "git add <file>..." to include in what will be
- committed)
+#   (use "git add <file>..." to include in what will be committed)
 #
 #	my_third_committed_file
 john@satsuki:~/coderepo$
@@ -255,8 +248,7 @@ The most important thing to remember is that Git will only ever commit what is i
 So, if we go ahead and run our commit now, we will only have the changes marked in Changes to be committed appearing in our repository.
 
 \begin{code}
-john@satsuki:~/coderepo$ git commit -m 'Made a few changes to
-first and second files'
+john@satsuki:~/coderepo$ git commit -m 'Made a few changes to first and second files'
 [master 163f061] Made a few changes to first and second files
  2 files changed, 2 insertions(+), 0 deletions(-)
  create mode 100644 my_second_committed_file
@@ -277,18 +269,15 @@ john@satsuki:~/coderepo$ git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in
- working directory)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
 #
 #	modified:   my_second_committed_file
 #
 # Untracked files:
-#   (use "git add <file>..." to include in what will be
- committed)
+#   (use "git add <file>..." to include in what will be committed)
 #
 #	my_third_committed_file
-no changes added to commit (use "git add" and/or "git commit
- -a")
+no changes added to commit (use "git add" and/or "git commit -a")
 john@satsuki:~/coderepo$
 \end{code}
 
@@ -304,12 +293,10 @@ john@satsuki:~/coderepo$
 john@satsuki:~/coderepo$ git status
 # On branch master
 # Untracked files:
-#   (use "git add <file>..." to include in what will be
-committed)
+#   (use "git add <file>..." to include in what will be committed)
 #
 #	my_third_committed_file
-nothing added to commit but untracked files present (use
-"git add" to track)
+nothing added to commit but untracked files present (use "git add" to track)
 john@satsuki:~/coderepo$
 
 \end{code}
@@ -374,12 +361,10 @@ john@satsuki:~/coderepo$ git reset my_third_committed_file
 john@satsuki:~/coderepo$ git status
 # On branch master
 # Untracked files:
-#   (use "git add <file>..." to include in what will be
- committed)
+#   (use "git add <file>..." to include in what will be committed)
 #
 #	my_third_committed_file
-nothing added to commit but untracked files present (use
- "git add" to track)
+nothing added to commit but untracked files present (use "git add" to track)
 john@satsuki:~/coderepo$
 \end{code}
 
