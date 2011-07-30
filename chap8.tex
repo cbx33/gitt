@@ -917,7 +917,24 @@ newfile1  newfile2  newfile3  test.sh
 john@satsuki:~/subrepo$ 
 \end{code}
 
+Notice that there are no files in the repository until we have checked out.
+This is because all the fetch did was to \emph{fetch} the objects and place them in the repository object directory.
+It did not place anything in the working directory.
+If you remember this is same behaviour we saw with fetching before.
+So now we have a complete copy of our \texttt{tester} component of our repository from the source into a new repository.
+If we do a \texttt{git log}, we can see the history of the development.
 
+\begin{code}
+john@satsuki:~/subrepo$ git log --format=oneline
+590e0eb79bc5ba0bc09f611392e643f676b00a04 Work on tester nf3
+785b86d877d2a5c0679d98181a23d06ed2ba7652 Work on tester nf2
+1ff89f787438f081a0d74de2d26eb2d831c9c738 Work on tester nf1
+a5a0d9762dd4b50d8f3228e37b315f6056d5a034 Moved testing suite
+john@satsuki:~/subrepo$ 
+\end{code}
+
+Unfortunately since some of our development work on these files happened outside of this directory,
+this was lost when splitting and this is something to keep in mind should you ever perform this kind of operation.
 
 submodule
 subtree
