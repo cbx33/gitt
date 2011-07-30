@@ -248,15 +248,6 @@
          style="fill:#000000;fill-opacity:1;stroke:none"
          transform="matrix(0.94843763,0.31696381,-0.31696381,0.94843763,0,0)" />
     </clipPath>
-    <filter
-       inkscape:collect="always"
-       id="filter5617"
-       color-interpolation-filters="sRGB">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.80738799"
-         id="feGaussianBlur5619" />
-    </filter>
     <marker
        inkscape:stockid="Arrow1Mend"
        orient="auto"
@@ -582,7 +573,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -639,7 +630,7 @@
            height="313.68323"
            x="-480.98096"
            y="310.47159" /></flowRegion><flowPara
-         id="flowPara19356"></flowPara></flowRoot>    <flowRoot
+         id="flowPara19356" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot19362"
        style="font-size:40px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:TakaoPMincho Bold"
@@ -1688,23 +1679,24 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot24226"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;text-anchor:start;text-align:justify"
        transform="translate(-12,187.06355)"><flowRegion
          id="flowRegion24228"><rect
            id="rect24230"
            width="584.00476"
            height="211.13982"
            x="56.93317"
-           y="229.02188" /></flowRegion><flowPara
-         style="font-size:14px;text-align:start;text-anchor:start"
+           y="229.02188"
+           style="text-anchor:start;text-align:justify" /></flowRegion><flowPara
+         style="font-size:14px;text-align:justify;text-anchor:start"
          id="flowPara24246">This book is designed to help you both apply and understand the subtleties of Git, perhaps the most powerful version control system in use today. This book is not supposed to be purely a technical reference. GITT follows the lives of some developers at a fictional company called Tamagoyaki Inc. a small software outfit who write bespoke software for people. </flowPara><flowPara
-         style="font-size:14px;text-align:start;text-anchor:start"
-         id="flowPara24459"></flowPara><flowPara
-         style="font-size:14px;text-align:start;text-anchor:start"
+         style="font-size:14px;text-align:justify;text-anchor:start"
+         id="flowPara24459" /><flowPara
+         style="font-size:14px;text-align:justify;text-anchor:start"
          id="flowPara24461">GITT follows developer John, as he works to implement their first version control system. The chapters are presented as weeks during the implementation of the project. Each chapter spells a new week in the project helping you to learn the tricks of the Git trade.</flowPara><flowPara
-         style="font-size:14px;text-align:start;text-anchor:start"
+         style="font-size:14px;text-align:justify;text-anchor:start"
          id="flowPara24248" /><flowPara
-         style="font-size:14px;text-align:start;text-anchor:start"
+         style="font-size:14px;text-align:justify;text-anchor:start"
          id="flowPara24250" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot19362-7"
