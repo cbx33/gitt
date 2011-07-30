@@ -160,7 +160,7 @@ It is primarily used for working with \index{mbox} mailboxes, but it also has so
 Would it not be nice to be able to have each commit that we want to use as a patch in a separate patch file.
 The file \texttt{our\_patch.diff} above contained two commits worth of data.
 We have access to another tool in our fight against disparate systems.
-This is the \indexgit{git format-patch} command.
+This is the \indexgit{format-patch} command.
 
 First we will undo the changes we made previously by resetting the \textbf{master} branch back to its older position and deleting the \texttt{our\_patch.diff} file.
 
@@ -739,7 +739,7 @@ Git will not clone objects into a new repository if nothing references them.
 Alternatively if you absolutely must work on the current repository, you would need to do the following.
 \newline
 \newline
-Delete the \texttt{filter-branch} backup using \indexgit{git update-ref <refname> -d}.  (See the callout on \emph{More backups})
+Delete the \texttt{filter-branch} backup using \index{git commands!update-ref@\texttt{update-ref}}\texttt{git update-ref <refname> -d}.  (See the callout on \emph{More backups})
 \newline
 \newline
 Expire all reflogs with \texttt{git reflog expire --expire=now --all}
