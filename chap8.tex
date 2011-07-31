@@ -1036,13 +1036,29 @@ First we must remove our \texttt{tester} directory.
 \subsection{Commands}
 \begin{itemize}
 
-\item\texttt{git rebase -i HEAD~3} - Runs the rebase tool interactively for the last three commits
+\item\texttt{git apply <filename>} - Applies a patch to the working tree
 
-\item\texttt{git rebase <branchA> <branchB>} - Lift all commits between the common ancestor of branchA and branchB and replay them on top of branchB
+\item\texttt{git reflog show <branch>} - Show the reflog only for the specified branch
 
-\item\texttt{git branch <branch\_name> <startpoint>} - Create a new branch starting from a definte start point
+\item\texttt{git format-patch <ref1>..<ref2>} - Create a set of patches of each commit between two points
 
-\item\texttt{git rebase --onto master <branchC> \newline <branchA> <branchB>} - Lift all commits between the common ancestor of branchA and branchB and replay them on top of branchC
+\item\texttt{git am <filename>} - Apply a specific patch containing a 
+
+
+%john@satsuki:~/coderepo$ git bisect start
+%Already on 'master'
+%john@satsuki:~/coderepo$ git bisect good v1.0a
+%john@satsuki:~/coderepo$ git bisect bad master
+%git bisect start master v1.0a
+
+%git bisect run
+
+%git filter-branch --index-filter 'git rm --cached --ignore-unmatch newfile1' HEAD
+%git filter-branch --subdirectory-filter tester
+%git fetch source +tester_split:master
+%git branch -m tmp master
+%git bundle create ../tester.bundle tester_split 
+
 \end{itemize}
 
 \subsection{Terminology}
