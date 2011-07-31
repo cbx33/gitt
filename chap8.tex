@@ -620,7 +620,7 @@ Switched to a new branch 'remove_file'
 john@satsuki:~/coderepo$ 
 \end{code}
 
-\index{filtering!indexNow we need to run the \texttt{git filter-branch} tool.
+\index{filtering!index}Now we need to run the \texttt{git filter-branch} tool.
 
 \begin{code}
 john@satsuki:~/coderepo$ git filter-branch --index-filter 'git rm --cached --ignore-unmatch newfile1' HEAD
