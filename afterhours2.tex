@@ -137,10 +137,8 @@ It would be nice if we could find out a little more about this object, and confi
 to start with, let us run the Linux \texttt{file} command on it, to see what it makes of it.
 
 \begin{code}
-john@satsuki:~/coderepo/.git/objects/cf$ file
- e23cbe0150fda69a004e301828097935ec4397
-e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable -
- version 5185
+john@satsuki:~/coderepo/.git/objects/cf$ file e23cbe0150fda69a004e301828097935ec4397
+e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable - version 5185
 john@satsuki:~/coderepo/.git/objects/cf$
 \end{code}
 
@@ -179,8 +177,7 @@ john@satsuki:~/coderepo$ git cat-file -s cfe23c
 john@satsuki:~/coderepo$ git cat-file -p cfe23c
 tree 34a5dff148e70c12310cda0800d6bcaf82530bdc
 author John Haskins <john.haskins@tamagoyakiinc.koala> 1301599664 +0100
-committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301599664
- +0100
+committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301599664 +0100
 
 My First Ever Commit
 john@satsuki:~/coderepo$
@@ -240,8 +237,7 @@ john@satsuki:~/coderepo$ git cat-file -p 163f061
 tree 3ffa7ab6dafef2bc38a70a39c53604c333ed4d7a
 parent cfe23cbe0150fda69a004e301828097935ec4397
 author John Haskins <john.haskins@tamagoyakiinc.koala> 1301599979 +0100
-committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301599979
- +0100
+committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301599979 +0100
 
 Made a few changes to first and second files
 john@satsuki:~/coderepo$
