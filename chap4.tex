@@ -571,8 +571,7 @@ Saves typing out those horrid commits does it not?
 Finally we are going to introduce one more use of the \texttt{git log} command to show us how our repository looks in a semi-graphical way.
 
 \begin{code}
-john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all
---abbrev-commit  --decorate
+john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit  --decorate
 * 7cc32db (zaney) Made another awesome change
 * a27d49e Made an awesome change
 | * cfbecab (wonderful) Fantastic new feature
@@ -703,8 +702,7 @@ Now that we have several branches in our test repository, let us merge them back
 First we are going to add a little change to one of our files.
 
 \begin{code}
-john@satsuki:~/coderepo$ echo "Another update to this file" >>
- my_third_committed_file
+john@satsuki:~/coderepo$ echo "Another update to this file" >> my_third_committed_file
 john@satsuki:~/coderepo$ git commit -a -m 'Updated third file'
 [master 4ac9201] Updated third file
  1 files changed, 1 insertions(+), 0 deletions(-)
