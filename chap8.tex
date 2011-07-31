@@ -1023,7 +1023,13 @@ Thanks for the help Martha.''
 \section{Day 5 - ``Shhh....we're in a library''}
 \subsection{Nuclear fusion}
 
-OK, so we are not quite at the stage of nuclear physics.
+OK, so we are not quite at the stage of nuclear physics, but it would be nice to know how to bring our library back into our repository.
+Git offers a tool called \indexgit{submodule}.  This tool allows you to link a remote repository into a branch and store it under a subdirectory of the project.
+It does have some nuances which must be learnt, but can be very useful.
+Let us add our testing suite from the \texttt{subrepo} repository into the directory called \texttt{tester} in our main \texttt{coderepo} repository.
+First we must remove our \texttt{tester} directory.
+
+
 \clearpage
 
 \section{Summary - John's Notes}
