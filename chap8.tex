@@ -51,7 +51,7 @@ The paper was returned.
 
 \end{trenches}
 
-It is a good question though. Sometimes you may have a repository that is either publically available, or made available to a group of people.
+\index{patching!process}It is a good question though. Sometimes you may have a repository that is either publically available, or made available to a group of people.
 You do not necessarily want to set up a remote tracking branch and pull changes in from every single contributor.
 There are two primary reasons for this;
 \begin{enumerate}
@@ -64,7 +64,7 @@ Many larger open source projects allow contributors to email in patches.
 Git does have some rather advanced ways of dealing with these types of scenarios.
 We are going to scratch the surface and look at using three commands \texttt{git apply}, \texttt{git format-patch} and \texttt{git am}.
 
-First, let us find a way of generating a patch.
+\index{patching!generating}First, let us find a way of generating a patch.
 Let us take the example we have currently in our repository.
 Imagine that the \textbf{develop} branch exists on another computer in a clone of our repository.
 At some point in time, someone cloned our repository.
@@ -119,7 +119,7 @@ index 638113c..2e00739 100644
 john@satsuki:~/coderepo$
 \end{code}
 
-So we can see that the file itself has the information we are looking for.
+\index{patching!applying}So we can see that the file itself has the information we are looking for.
 Now we can use the \indexgit{apply} tool to actually modify the files in \textbf{master} and bring in the changes that have happened in \textbf{develop}.
 
 \begin{code}
@@ -154,7 +154,6 @@ Plus, all of the changes that we have made in the patch are committed in one blo
 Sure, we could split that using some of the techniques in the After Hours sections, but then we may not always be aware of what should be split where.
 
 \subsection{Can we have some order please?}
-
 There is another tool that can come to our rescue here.
 It is primarily used for working with \index{mbox} mailboxes, but it also has some other uses which we will describe here.
 Would it not be nice to be able to have each commit that we want to use as a patch in a separate patch file.
@@ -178,7 +177,7 @@ john@satsuki:~/coderepo$
 We used the \texttt{git reflog} command to show what the last four \textbf{master} HEAD values were.
 Then we reset the branch back to the point before the \texttt{git apply}.
 Finally we deleted the patch.
-Now let us see how to use the \texttt{git format-patch} command to create multiple patch files.
+\index{patching!multiple file generation}Now let us see how to use the \texttt{git format-patch} command to create multiple patch files.
 
 \begin{code}
 john@satsuki:~/coderepo$ git format-patch master..develop
@@ -220,7 +219,7 @@ The patch file contains much more information than the simple diff file.
 For a start we get information about which commit this patch came from, who created it, when and a subject.
 In fact this looks almost like an email.  In fact it is created to resemble a format that would be easily emailable.
 
-We have specified a range of commits to the \texttt{git format-patch} command with the parameter \texttt{master..develop}.
+\index{patching!a range}We have specified a range of commits to the \texttt{git format-patch} command with the parameter \texttt{master..develop}.
 The format of that parameter should be familar from earlier chapters when we utilised it for commands like \texttt{git diff} and \texttt{git log}.
 We could now take those files, email them to someone else and they could apply them.
 Let us learn one more tool, and see how we would apply those patches when they had been received at the other end.
@@ -298,7 +297,7 @@ john@satsuki:~/coderepo$
 \section{Day 2 - ``Looking for problems''}
 \subsection{A problem shared is a problem bisected}
 
-During most software development, bugs are introduced.
+\index{bisecting}During most software development, bugs are introduced.
 Sometimes these bugs are fixed immediately and sometimes they sit there in the code festering away for months on end until someone tests a specific case.
 Of course it is always best to have test suites and run them regularly against the code base, but on occasions either the test case itself has a bug,
 or the test case is written in such a way that a particular bug would never present itself.
@@ -334,7 +333,7 @@ It is true that Git does have a very powerful tool for helping to detect revisio
 The tool is called \indexgit{bisect} and it is used to successively checkout revisions from the repository,
 check them to see if the bug is present and then use that information to determine the revision that is most likely to have introduced the bug.
 
-Let us assume that the bug in our repository is a fairly simple one.
+\index{bisecting!simple}Let us assume that the bug in our repository is a fairly simple one.
 For some bizarre reason our codebase is broken unless the word \texttt{Addition} is present in one of the files.
 If we run a simple Linux \texttt{grep} command across the files, we can see that the word we are after is not there.
 However, if we go back to tag \textbf{v1.0a} and run the same command, we can see that the word is there.
@@ -368,7 +367,7 @@ In fact we have other tools available to search for the adding and removal of st
 For now let us assume that the \emph{bug} is more complicated than this.
 
 Let us go back to the facts.
-We know that the repository was \textbf{good} at tag \textbf{v1.0a}.
+\index{bisecting!set good point}\index{bisecting!set bad point}We know that the repository was \textbf{good} at tag \textbf{v1.0a}.
 We also know that the repository is bad in its current state.
 By feeding these details to the \texttt{git bisect} command, we can begin a search for the bug.
 What will happen at each stage is that Git will checkout a revision that it wants us to test and we tell Git if we think that revision is good or bad.
@@ -394,7 +393,7 @@ john@satsuki:~/coderepo$ grep "Addition" *
 john@satsuki:~/coderepo$
 \end{code}
 
-As we have no result here, this would be classed as a bad revision and so we mark it as so.
+\index{bisecting!marking result}As we have no result here, this would be classed as a bad revision and so we mark it as so.
 
 \begin{code}
 john@satsuki:~/coderepo$ git bisect bad
@@ -454,7 +453,7 @@ We are left in the last tested checked out revision.
 
 
 \subsection{Automating the process}
-So bisecting is a very powerful way of quickly and efficiently finding the point at which bugs were introduced or \index{regression testing}regression testing.
+\index{bisecting!automation}So bisecting is a very powerful way of quickly and efficiently finding the point at which bugs were introduced or \index{regression testing}regression testing.
 Git was spot on when it suggested that that revision was the one responsible for the mistake.
 Sometimes you may not be able to test a revision that Git checks out for you for other reasons.
 In this case you can always run \texttt{git bisect skip} to skip that revision.
@@ -558,7 +557,7 @@ John sighed, he had been really angry to begin with but now he was calming down,
 \section{Day 3 - ``Filtered repos''}
 \subsection{Looking at a repo with rose tinted glasses}
 
-It does happen. Sometimes when people are under pressure, mistakes are made, just like earlier when we accidently deleted our branch from the repository.
+\index{filtering}It does happen. Sometimes when people are under pressure, mistakes are made, just like earlier when we accidently deleted our branch from the repository.
 This time the mistake is a little more crucial but again it does happen and it sometimes goes a long time before it is noticed.
 
 \begin{trenches}
@@ -621,7 +620,7 @@ Switched to a new branch 'remove_file'
 john@satsuki:~/coderepo$ 
 \end{code}
 
-Now we need to run the \texttt{git filter-branch} tool.
+\index{filtering!indexNow we need to run the \texttt{git filter-branch} tool.
 
 \begin{code}
 john@satsuki:~/coderepo$ git filter-branch --index-filter 'git rm --cached --ignore-unmatch newfile1' HEAD
@@ -652,7 +651,7 @@ Next, we are passing three parameters to it.
 The first of these is the type of filter we wish to use.
 In our case we have used the \texttt{--index-filter} option.
 More information is available in the Git manual, but in a nutshell we have asked Git to work on the \emph{index} at each commit stage.
-There is another similar option called \texttt{--tree-filter}, however care must be taken to distinguish between the two as using \texttt{--tree-filter} checks out the commit at each point in history.
+\index{filtering!tree}There is another similar option called \texttt{--tree-filter}, however care must be taken to distinguish between the two as using \texttt{--tree-filter} checks out the commit at each point in history.
 This may not sound like a problem, until you discover that as well as checking each revision out, it also automatically adds any untracked files in the working tree and commits them.
 
 The next parameter is the actual command that we wish Git to perform on each revision.
@@ -730,7 +729,7 @@ John nodded.  ``You know Simon I think you may have just redeemed yourself.''
 \end{trenches}
 
 \begin{callout}{Note}{Since you've been gone}
-Even though we have rewritten our tree, the fact that another branch still has the file present means that our potentially senitive data still exists somewhere inside the repository.
+\index{filtering!purging}Even though we have rewritten our tree, the fact that another branch still has the file present means that our potentially senitive data still exists somewhere inside the repository.
 In order to truly get rid of the file we would need to not only remove the file from all branches, or delete the branches that contained the file,
 but also run a few more steps if we wanted to ensure the file was gone \emph{now}.
 Be aware that these steps are potentially very destructive to a repository.
@@ -798,7 +797,7 @@ When this happens, people often want to move it outside of the original project 
 Of course the easiest way to do this is to just copy and paste the files out of the main project and into a subdirectory.
 In doing this we would lose or disconnect all of the development history of that subproject up to this point.
 
-Using the \texttt{git filter-branch} we can actually pull out a folder and retain all of its history.
+\index{filtering!sub-directory}Using the \texttt{git filter-branch} we can actually pull out a folder and retain all of its history.
 The methodology behind this is that we rewrite the history to a new branch, but we only pull across changes to a particular folder and we store those in the root of the branch.
 Let us see how this works with a quick example.
 Remember we created the \texttt{tester} folder?
@@ -849,7 +848,7 @@ john@satsuki:~/coderepo$
 So now the directory has been split away from the original source code into a new branch, have a think about what steps you would take to bring this into an entirely new repository.
 
 \begin{callout}{Note}{More backups}
-Git likes to make things easy for you.
+\index{filtering!backup}Git likes to make things easy for you.
 You may not have noticed it before, but when using the \texttt{git filter-branch} tool to rewrite a branch, Git keeps a backup of the value of HEAD before you started rewriting your branch.
 This backup is kept in \texttt{refs/original/refs/heads/<branch\_name>}.
 This file will contain a commit ID which we can use to revert our branch back to its original state, if the filter does horribly wrong.
@@ -899,7 +898,7 @@ john@satsuki:~/subrepo$ fatal: The remote end hung up unexpectedly
 john@satsuki:~/subrepo$
 \end{code}
 
-What we have asked Git to do is to pull only the branch \textbf{tester\_split} from the remote we called \textbf{source} and place it into \textbf{master} locally.
+\index{branching!fetch single branch}\index{fetching!single branch}What we have asked Git to do is to pull only the branch \textbf{tester\_split} from the remote we called \textbf{source} and place it into \textbf{master} locally.
 Think of the \texttt{+<branch>:<branch>} as \texttt{+<source>:<destination>} and all will make sense.
 As you can see Git is not too happy about our intentions here as it does not like overwriting the \textbf{master} branch of a non-bare repository.
 That is OK, we have another way around this.
@@ -952,13 +951,13 @@ this was lost when splitting and this is something to keep in mind should you ev
 
 \subsection{Little bundles of joy}
 Git has so many ways to do things.
-This is in part what makes it a little daunting for those just starting but after you have gained a little experience, you begin to understand just what is happening in the background.
+\index{bundling}This is in part what makes it a little daunting for those just starting but after you have gained a little experience, you begin to understand just what is happening in the background.
 When this realisation hits, you are able to almost immediately think of at least two different ways of performing the same thing.
 There have been numerous examples throughout the book, where there have been multiple ways to complete the same task.
 Here we are going to look at just one more way that we can create a new repo from our \textbf{tester\_split} branch.
 
 The tool we are going to introduce here is \indexgit{bundle}.
-The \texttt{bundle} utility allows us to export a set of revisions and almost archive them to a file.
+\index{bundling!creating}\index{bundling!cloning from}The \texttt{bundle} utility allows us to export a set of revisions and almost archive them to a file.
 This file then becomes a resource that can be updated and pulled or fetched from.
 This is especially useful if you have no physical connection between two computers and wish to sync some of the data from one to the other.
 Let us take a quick look at how we could use the bundle tool in this case.
