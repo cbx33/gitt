@@ -438,8 +438,7 @@ john@satsuki:~/coderepo$
 So Git has completed the operation, and by running an abbreviated \texttt{git log} command, we can see that the fruits of our labour have resulted in the second commit having its working changed.
 
 \begin{code}
-john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all
- --abbrev-commit --decorate -n 4
+john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate -n 4
 * aeb5679 (HEAD, wonderful) Updated another file again
 * 7c35dde Updated another file 2nd time
 * c0e2f5b Updated another file
@@ -504,8 +503,7 @@ john@satsuki:~/coderepo$
 By using the \texttt{git log} message, we can see that the two commits have indeed been replaced by one.
 
 \begin{code}
-john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all
- --abbrev-commit --decorate -n 4
+john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate -n 4
 * 4d91aab (HEAD, wonderful) Updated another file again
 * 1ffe37f Updated another file with 2 edits
 * 1c3206a (master) Added a new file
@@ -575,8 +573,7 @@ If you don't already have one, use the editor to add \texttt{[alias]} at the end
 
 \begin{code}
 [alias]
-        logg = log --graph --pretty=oneline --all
- \carriagereturn \dlsh --abbrev-commit --decorate
+        logg = log --graph --pretty=oneline --all --abbrev-commit --decorate
 \end{code}
 
 Once saved, we can use \texttt{git logg} just like any other Git command.
