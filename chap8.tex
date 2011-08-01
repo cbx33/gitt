@@ -1042,22 +1042,27 @@ First we must remove our \texttt{tester} directory.
 
 \item\texttt{git format-patch <ref1>..<ref2>} - Create a set of patches of each commit between two points
 
-\item\texttt{git am <filename>} - Apply a specific patch containing a 
+\item\texttt{git am <filename>} - Apply a specific patch containing a \emph{format-patch} file
 
+\item\texttt{git bisect start} - Begin a bisect session
 
-%john@satsuki:~/coderepo$ git bisect start
-%Already on 'master'
-%john@satsuki:~/coderepo$ git bisect good v1.0a
-%john@satsuki:~/coderepo$ git bisect bad master
-%git bisect start master v1.0a
+\item\texttt{git bisect good <ref>} - Mark a reference as good, during a \texttt{git bisect}
 
-%git bisect run
+\item\texttt{git bisect bad <ref>} - Mark a reference as bad, during a \texttt{git bisect}
 
-%git filter-branch --index-filter 'git rm --cached --ignore-unmatch newfile1' HEAD
-%git filter-branch --subdirectory-filter tester
-%git fetch source +tester_split:master
-%git branch -m tmp master
-%git bundle create ../tester.bundle tester_split 
+\item\texttt{git bisect start <ref\_recent> <ref\_old>} - Start a bisect session between two known points
+
+\item\texttt{git bisect run <command>} - Start an automated run of the bisect tool
+
+\item\texttt{git filter-branch --index-filter 'git rm --cached \newline --ignore-unmatch <file>' HEAD} - Rewrites the current branch to remove file
+
+\item\texttt{git filter-branch --subdirectory-filter <directory>} - Rewrites the current branch to make subdirectory directory the root of the branch
+
+\item\texttt{git fetch <remote> +<remote\_branch>:<local\_branch>} - Creates a local branch from the remote branch existing in a remote repository
+
+\item\texttt{git branch -m <old\_branch> <new\_branch>} - Move or rename a branch from old to new
+
+\item\texttt{git bundle create <filename> <branch>} - Create a bundle file in filename, containing all the objects and references from branch. 
 
 \end{itemize}
 
