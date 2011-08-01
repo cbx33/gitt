@@ -1130,6 +1130,171 @@ The second, may appear a little suprising to begin with.
 The \texttt{git log} command actually shows a log for the upstream project, not for the local root project stored in \texttt{coderepo}.
 In all honesty, the submodule repository is actually just a clone of the upstream project, with a few subtle differences.
 
+The information about which upstream url to use for the project can be found in the \texttt{.gitmodules} which we committed earlier.
+Below is an example of what the file looks like in our current repository.
+
+\begin{code}
+john@satsuki:~/coderepo$ cat .gitmodules 
+[submodule "tester"]
+	path = tester
+	url = /home/john/subrepo
+john@satsuki:~/coderepo$ 
+\end{code}
+
+\subsection{Changes down the river}
+So what happens when we want to pull in changes from the upstream project?
+Well, you can make your submodule point to whatever point you like and stay there.
+As long as you commit your changes in the super project, Git will always allow you to return to that point using the \texttt{git submodule update} command.
+
+Let us take a look at how we could pull in some changes into our \texttt{tester} submodule.
+First, we are going to make a change to our upstream project.
+
+\begin{code}
+john@satsuki:~/coderepo$ cd ..
+john@satsuki:~$ cd subrepo
+john@satsuki:~/subrepo$ ls
+newfile1  newfile2  newfile3  test.sh
+john@satsuki:~/subrepo$ echo "Added a new function" > newfile4
+john@satsuki:~/subrepo$ git add newfile4
+john@satsuki:~/subrepo$ git commit -a -m 'Added a new library file'
+[master 94ad27e] Added a new library file
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 newfile4
+john@satsuki:~/subrepo$ cd ..
+john@satsuki:~/subrepo$
+\end{code}
+
+Now that we have a new version of the project, let us try to pull those changes into our superproject.
+
+\begin{code}
+john@satsuki:~$ cd coderepo
+john@satsuki:~/coderepo$ cd tester
+john@satsuki:~/coderepo/tester$ git status
+# On branch master
+nothing to commit (working directory clean)
+john@satsuki:~/coderepo/tester$ git fetch origin 
+remote: Counting objects: 4, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From /home/john/subrepo
+   590e0eb..94ad27e  master     -> origin/master
+john@satsuki:~/coderepo/tester$ git checkout master 
+Already on 'master'
+Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.
+john@satsuki:~/coderepo/tester$
+\end{code}
+
+As you can see, we are told that our branch is currently one commit behind that of \textbf{origin/master}.
+If we want to update our \textbf{master} branch in the submodule, we need to \emph{pull} our changes in, just like a \textbf{real} Git repository.
+
+\begin{code}
+john@satsuki:~/coderepo/tester$ git pull
+Updating 590e0eb..94ad27e
+Fast-forward
+ newfile4 |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 newfile4
+john@satsuki:~/coderepo/tester$ ls
+newfile1  newfile2  newfile3  newfile4  test.sh
+john@satsuki:~/coderepo/tester$ cd ..
+\end{code}
+
+Now let us see what happens if we try to update the module.
+
+\begin{code}
+john@satsuki:~/coderepo$ git submodule update
+Submodule path 'tester': checked out '590e0eb79bc5ba0bc09f611392e643f676b00a04'
+john@satsuki:~/coderepo$ cd tester
+john@satsuki:~/coderepo/tester$ ls
+newfile1  newfile2  newfile3  test.sh
+john@satsuki:~/coderepo/tester$ 
+\end{code}
+
+Our new changes have disappeared.
+How odd!
+Well actually not really.
+As we stated earlier, when we committed our \texttt{.gitmodules} file along with the \texttt{tester} directory,
+we not only committed the fact that we required a submodule, we also committed the exact point we wanted that submodule to point to.
+If we want to change this, then we must commit that as a change.
+It may seem a little odd that we have to jump through these hoops to get an update to an upstream project, but if you think about it, it actually makes a lot of sense.
+It means that anyone cloning our repository is sure to get a version of the submodule that we have decided is right for the project.
+So keeping this in mind, let us walk through a quick example of how we would finish the job and commit a new version of the submodule.
+
+\begin{code}
+john@satsuki:~/coderepo$ cd tester/
+john@satsuki:~/coderepo/tester$ git pull
+You are not currently on a branch, so I cannot use any
+'branch.<branchname>.merge' in your configuration file.
+Please specify which remote branch you want to use on the command
+line and try again (e.g. 'git pull <repository> <refspec>').
+See git-pull(1) for details.
+john@satsuki:~/coderepo/tester$
+\end{code}
+
+Interesting!
+What has happened here is that by performing the \texttt{git submodule update} command, we effectively asked Git to checkout a commit.
+Remember in the past we talked about detached HEAD?
+This is exactly what Git has done. A submodule spends most of it's life in a detached HEAD state. 
+As we tell Git that we must have the submodule at a specific commit, it means that Git checks out a commit, rather than a branch.
+If you think about it, this makes sense, we do not want the contents of the module \emph{changing}.
+
+So to bring our module up to date, we need to first checkout master.
+Then we can issue our \texttt{git pull}.
+
+\begin{code}
+john@satsuki:~/coderepo/tester$ git checkout master
+Previous HEAD position was 590e0eb... Work on tester nf3
+Switched to branch 'master'
+john@satsuki:~/coderepo/tester$ git pull
+Already up-to-date.
+\end{code}
+
+Oh? Should we not have seen some commits pulled in here?
+Actually, no. We pulled the changes into master earlier, when we ran the \texttt{git pull}.
+When the module reverted to the earlier commit, \textbf{590e0eb}, it did not affect the master branch at all, as we simply checked out a single commit.
+So by swiching to \textbf{master}, we have already altered the contents of the submodule directory, as can be seen below.
+
+\begin{code}
+john@satsuki:~/coderepo/tester$ ls
+newfile1  newfile2  newfile3  newfile4  test.sh
+john@satsuki:~/coderepo/tester$ cd ..
+john@satsuki:~/coderepo$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   tester (new commits)
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+john@satsuki:~/coderepo$
+\end{code}
+
+All we need to do now is to commit the submodule changes into the repository and check that the update yields the new file.
+
+\begin{code}
+john@satsuki:~/coderepo$ git commit -a -m 'Up revd upstream module'
+[master 022a163] Up revd upstream module
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+john@satsuki:~/coderepo$ git submodule update
+john@satsuki:~/coderepo$ cd tester/
+john@satsuki:~/coderepo/tester$ ls
+newfile1  newfile2  newfile3  newfile4  test.sh
+john@satsuki:~/coderepo/tester$ cd ..
+john@satsuki:~/coderepo$
+\end{code}
+
+As you can see, submodules can be rather useful.
+You can even make changes to the repository in the submodule and commit them locally to perhaps keep changes that you want to make to the submodule.
+Remember though that if you did make changes, and you committed them to the submodule,
+if you then issued a \texttt{git submodule update} without first committing your changes in the superproject, your commit would be lost.
+Of course nothing in Git is ever really lost, but it would be prudent of you to always keep changes you make to submodules in a branch,
+that way they are easy to bring back if you make a mistake like the one described.
+
+With that all said and done, we have finished our tour of the major portions of Git.
+What follows in the next chapter are some other points that are added more for information on what \textbf{can} be done with Git.
+
 \clearpage
 
 \section{Summary - John's Notes}
@@ -1164,11 +1329,21 @@ In all honesty, the submodule repository is actually just a clone of the upstrea
 
 \item\texttt{git bundle create <filename> <branch>} - Create a bundle file in filename, containing all the objects and references from branch. 
 
+\item\texttt{git submodule add <repo> <path>} - Add a submodule at the directory specified by path
+
+\item\texttt{git submodule init} - Initialise any submodules in the super project
+
+\item\texttt{git submodule update} - Pull all submodules back to the points that have previously been committed to
+
 \end{itemize}
 
 \subsection{Terminology}
 \begin{itemize}
-\index{Terminology!SSH}\item\textbf{SSH} - A type of secure network protocol
-\index{Terminology!HTTP}\item\textbf{HTTP} - The protocol that is used to serve internet pages
-\index{Terminology!Rebase}\item\textbf{Rebase} - Used primarily for lifting commits and reapplying them to another base branch
+\index{Terminology!Patching}\item\textbf{Patching} - A method of distributing changes from someone elses repository without having a line of communication between the two,
+or without a user having access to commit into the destination repository
+\index{Terminology!Bundle}\item\textbf{Bundle} - A type of archive file that hold objects and commits and can be pulled from
+\index{Terminology!Bisect}\item\textbf{Bisect} - A way of progressively searching through a repository to find where bugs were introduced
+\index{Terminology!Filtering}\item\textbf{Filtering} - Takes a branch and rewrites it according to a set of rules
+\index{Terminology!Submodule}\item\textbf{Submodule} - Incorporating a remotely reachable project as a subdirectory of a superproject
+\index{Terminology!Superproject}\item\textbf{Superproject} - A Git repository containing one or more submodules
 \end{itemize}
