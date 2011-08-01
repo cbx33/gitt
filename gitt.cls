@@ -157,8 +157,8 @@
     showstringspaces=false,
     aboveskip=14pt,
     belowskip=14pt,
-    morecomment=[l][\tiny\bfseries\ttfamily]{john@satsuki:},
-    morecomment=[l][\tiny\bfseries\ttfamily]{rob@mimi:}
+    %morecomment=[l][\tiny\bfseries\ttfamily]{john@satsuki:},
+    %morecomment=[l][\tiny\bfseries\ttfamily]{rob@mimi:}
     %moredelim=[is][\tiny\bfseries\ttfamily]{|||}{|||}
   }
 }{}
