@@ -1024,11 +1024,111 @@ Thanks for the help Martha.''
 \subsection{Nuclear fusion}
 
 OK, so we are not quite at the stage of nuclear physics, but it would be nice to know how to bring our library back into our repository.
-Git offers a tool called \indexgit{submodule}.  This tool allows you to link a remote repository into a branch and store it under a subdirectory of the project.
+Git offers a tool called \indexgit{submodule}.  This tool allows you to link a remote repositories branch and store it under a subdirectory of the project.
 It does have some nuances which must be learnt, but can be very useful.
 Let us add our testing suite from the \texttt{subrepo} repository into the directory called \texttt{tester} in our main \texttt{coderepo} repository.
 First we must remove our \texttt{tester} directory.
 
+\begin{code}
+john@satsuki:~/coderepo$ git checkout master 
+Already on 'master'
+john@satsuki:~/coderepo$ git rm tester/*
+rm 'tester/newfile1'
+rm 'tester/newfile2'
+rm 'tester/newfile3'
+rm 'tester/test.sh'
+john@satsuki:~/coderepo$ git commit -a -m 'Removed tester - will be replaced by submodule'
+[master 5698499] Removed tester - will be replaced by submodule
+ 4 files changed, 0 insertions(+), 20 deletions(-)
+ delete mode 100644 tester/newfile1
+ delete mode 100644 tester/newfile2
+ delete mode 100644 tester/newfile3
+ delete mode 100755 tester/test.sh
+john@satsuki:~/coderepo$ 
+\end{code}
+
+We need to define what a submodule actualy is.
+Submodules are tricky to understand and often people use them once and conclude that they are more trouble than they are worth.
+However, if you take some time to understand what a submodule really is, then they can be very useful to you.
+A submodule is the inclusion of a repositories branch at a specific commit.
+It is not intended to track the development of the upstream library or module, (see the callout box for an explanation of \emph{upstream}).
+
+\begin{callout}{Terminology}{Upstream}
+\emph{Upstream} refers to the source of a project which may have one or more derivatives which are also distributed.
+Take the package that was used to build this book for example, \LaTeX.
+\LaTeX is distributed by the people who developed it as open source software, but it is also included with a number of Linux distributions.
+The location of the software created by the \LaTeX developers is referred to as the \emph{upstream} project.
+The projects which include it within their own are what is referred to as \emph{downstream}.
+Think of it like a river which flows from the source further \emph{upstream}.
+\end{callout}
+
+As we will see, though it can be a little longwinded to actually change the version of the code that the submodule refers to,
+it actually makes a lot of sense to handle them in this way.
+If the code in the submodule is being included in your repository, you do not want to run the risk of a change upstream resulting in a broken build for your project.
+This is why submodules always refer to a single commit.
+
+Let us go ahead, create a submodule and then discuss the steps we have taken.
+
+\begin{code}
+john@satsuki:~/coderepo$ git submodule add /home/john/subrepo tester
+Cloning into tester...
+done.
+john@satsuki:~/coderepo$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   .gitmodules
+#	new file:   tester
+#
+john@satsuki:~/coderepo$ git commit -a -m 'Added submodule (subrepo)'
+[master 2aadc11] Added submodule (subrepo)
+ 2 files changed, 4 insertions(+), 0 deletions(-)
+ create mode 100644 .gitmodules
+ create mode 160000 tester
+john@satsuki:~/coderepo/tester$ 
+\end{code}
+
+As you can see we had to perform a number of steps before we obtained the source for the \textbf{subrepo} library in our \texttt{tester} directory.
+We had to begin by using \indexgit{submodule} to add the upstream repository.
+The upstream repository is really just like any remote repository we have been using, but we will use the terminology \emph{upstream} to make a distinction.
+The command \texttt{git submodule add /home/john/subrepo tester} creates a special file in the root of our project called \texttt{.gitmodules},
+plus it clones the upstream repository into the folder we specified, in this case \texttt{tester}.
+
+Notice that when we ran \texttt{git status}, we saw two new entries, one for \texttt{.gitmodules} and one for \texttt{tester}.
+Next we have to commit those entries using the standard \texttt{git commit} command.
+When we do, we see that there is a code in front of \texttt{tester} which is special and tells Git to treat this directory as a submodule.
+
+Though the submodule has now been added, it has not yet been initialised.
+To do this, we run our next set of steps.
+
+\begin{code}
+john@satsuki:~/coderepo$ git submodule init
+Submodule 'tester' (/home/john/subrepo) registered for path 'tester'
+john@satsuki:~/coderepo$ git submodule update
+john@satsuki:~/coderepo$
+\end{code}
+
+Now our submodule has been added and initialised.
+The update command is used to ensure that the directory \texttt{tester} contains the version of the submodule that we committed earlier.
+
+\begin{code}
+john@satsuki:~/coderepo$ cd tester/
+john@satsuki:~/coderepo/tester$ ls
+newfile1  newfile2  newfile3  test.sh
+john@satsuki:~/coderepo/tester$ git log --format=oneline
+590e0eb79bc5ba0bc09f611392e643f676b00a04 Work on tester nf3
+785b86d877d2a5c0679d98181a23d06ed2ba7652 Work on tester nf2
+1ff89f787438f081a0d74de2d26eb2d831c9c738 Work on tester nf1
+a5a0d9762dd4b50d8f3228e37b315f6056d5a034 Moved testing suite
+john@satsuki:~/coderepo$
+\end{code}
+
+Looking in the directory we can see two things.
+The first, is that the files present in the \textbf{subrepo} upstream project have now been added.
+The second, may appear a little suprising to begin with.
+The \texttt{git log} command actually shows a log for the upstream project, not for the local root project stored in \texttt{coderepo}.
+In all honesty, the submodule repository is actually just a clone of the upstream project, with a few subtle differences.
 
 \clearpage
 
