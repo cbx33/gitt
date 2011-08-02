@@ -45,9 +45,72 @@ It does not affect the outcome of the merge, but does not get executed if the me
 
 So we have a large arsenal of hooks that we can employ to assist us in administrating our repository.
 We are going to set up a fairly simple example here of ensuring that we do not delete one of our core files.
-To begin with, let us add a "core-file" to the repository in a new branch and play a little with a new hook script.
+To begin with, let us add a \texttt{corefile} to the repository in a new branch and play a little with a new hook script.
 
+\begin{code}
+john@satsuki:~/coderepo$ git checkout -b hooktest
+Switched to a new branch 'hooktest'
+john@satsuki:~/coderepo$ echo "Very Important File" > corefile
+john@satsuki:~/coderepo$ git add corefile
+john@satsuki:~/coderepo$ git commit -a -m 'Added Core File'
+[hooktest 96fe8b9] Added Core File
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 corefile
+john@satsuki:~/coderepo$
+\end{code}
 
+Now let us create a hook script called \texttt{.git/hooks/pre-commit}, with the following code.
 
-Check we covered 
-pushing tags
+\begin{code}
+#!/bin/bash
+
+if [ -e "corefile" ] 
+then
+	echo "File OK"
+	exit 0
+else
+	echo "File Deleted Not Committing"
+	exit 2
+fi
+\end{code}
+
+Now let us see what happens if we make a commit that does not affect the \texttt{corefile}.
+
+\begin{code}
+john@satsuki:~/coderepo$ echo "New Development" >> cont_dev 
+john@satsuki:~/coderepo$ git commit -a -m 'Added a commit'
+File OK
+[hooktest 73656f2] Added a commit
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@satsuki:~/coderepo$
+\end{code}
+
+We see the text \texttt{File OK} in the output, which indicates that the commit is allowed to go ahead.
+What happens if we try to remove the core file and commit the result?
+
+\begin{code}
+john@satsuki:~/coderepo$ git rm corefile
+rm 'corefile'
+john@satsuki:~/coderepo$ git commit -a -m 'Removed a corefile'
+File Deleted Not Committing
+john@satsuki:~/coderepo$ 
+\end{code}
+
+We have been prevented from committing because we removed the all important \texttt{corefile}.
+To be able to commit again, we must return the file.
+
+\begin{code}
+john@satsuki:~/coderepo$ git checkout HEAD -- corefile
+john@satsuki:~/coderepo$ ls
+another_file  cont_dev  corefile  tester
+john@satsuki:~/coderepo$ echo "New development" >> cont_dev 
+john@satsuki:~/coderepo$ git commit -a -m 'Some more development'
+File OK
+[hooktest 6786dd5] Some more development
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+john@satsuki:~/coderepo$
+\end{code}
+
+So you see hooks can be really simple, or they can do highly complex things.
+Imagine a hook that would compile the code in the working tree prior to the commit and only allow it to continue if the code compiled cleanly.
+That could be pretty useful in ensuring that there is always good clean buildable code in the repository.
