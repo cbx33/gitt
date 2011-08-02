@@ -1,8 +1,40 @@
 % afterhours8.tex - Afer Hours Week 8
 \chapter{After Hours Week 8}
-\section{``Unknown''}
-\subsection{No idea yet}
-Hooks - do something like stop us from deleting a file.
+\section{``Fishing for beginners''}
+\subsection{Hooking your scripts up}
+So we come to the last After Hours section of the book and this time we are going to take a look at hook scripts.
+Hook scripts are tiny pieces of code that you are allowed to have executed at certain points during Git's processes which can affect the outcome of those same processes.
+Imagine for example that whenever you committed to a repository you wanted an email to be sent to the project manager.
+That is a job for a hook script.
+
+The are a fairly large number of hook points available.
+They are called hooks because it allows you to hook something else into the Git process.
+Below is a list of the available hook points along with a very brief description of when they are triggered and how they can affect the process.
+
+\begin{itemize}
+\item\textbf{applypatch-msg} - Invoked by \texttt{git am}, it is provided with the name of the proposed commit message for the patch and allows for sanitisation.
+Exiting with a non-zero status will cause \texttt{git am} to abort the patch.
+Will run the \textbf{commit-msg} hook if enabled.
+\item\textbf{pre-applypatch} - Invoked by \texttt{git am}, it runs immediately after the patch is applied, but before a commit is made.
+In this way, checks can be made to the working tree before committing.
+Exiting with non-zero status aborts the commit.
+Will run the \textbf{pre-commit} hook if enabled.
+\item\textbf{post-applypatch} - Invoked by \texttt{git am}, it runs after the patch is applied and the commit is made.
+It can not affect the flow of \texttt{git am} and as such is useful for actions such as notifications.
+\item\textbf{pre-commit} - This hook is invoked by \texttt{git commit} and can be bypassed with the \texttt{--no-verify} option.
+Exiting with non-zero status aborts the commit.
+\item\textbf{prepare-commit-msg} - This hook is invoked by \texttt{git commit} and is run immediately after the commit message has been prepared, but before the message editor has been loaded.
+It takes three parameters, the file containing the log message, the source of the commit message and an SHA hash.
+Exiting with non-zero status aborts the commit.
+It should not be used to replace \textbf{pre-commit}.
+\item\textbf{commit-msg} - This hook is invoked by \texttt{git commit} and can be bypassed with the \texttt{--no-verify} option.
+The hook is used to normalise messages in place before commit.
+Exiting with non-zero status aborts the commit.
+\item\textbf{post-commit} - Invoked by \texttt{git commit}, it runs immediately after a commit is made.
+It can not affect the flow of \texttt{git commit} and as such is useful for actions such as notifications.
+\item\textbf{pre-rebase} - Invoked by \texttt{git rebase}, it is useful for preventing a branch from being rebased.
+\end{itemize}
+
 
 
 Check we covered 
