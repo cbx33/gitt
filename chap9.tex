@@ -1,0 +1,78 @@
+% chap8.tex - Week 8
+\cleardoublepage
+%\phantomsection
+\chapter{A litte extra help}
+\section{Taking things further}
+
+We have completed our journey through eight weeks of intensive version control usage at Tamagoyaki Inc.
+However, there are probably still many questions that you have regarding Git and its usage.
+This chapter focusses on taking a few of the topics that were discussed a little further but does not go into as much detail as was presented in the rest of the book.
+The reason for this is purely that as the tasks you are trying to achieve become more complex, they often require greater knowledge about the implementation details
+and are often heavily customised to fit a particular scenario.
+Also, some of the topics are rather specialised and are not of use to everybody, so taking a large amount of time discussing them may be a little redundant for the majority of the people reading the book.
+
+If you have read through weeks 1-8, and supplemented it with the After Hours sections, you should have a very good understanding of the Git system.
+As with most things practice makes perfect and it is important to play with any new system before using it in earnest.
+If you are planning to migrate away from an existing version control system, take some time to test your current processes and procedures in Git to ensure that it will fit your needs.
+Always keep in mind that no matter which system you try to introduce, there will nearly always be resistance from someone.
+
+So let us touch on a few more topics and just wrap up a few loose ends.
+
+\subsection{Collaborating with a larger audience}
+We looked at a few tools within the Git system to allow access to a Git repository, but what if you want to share your repository with a larger audience.
+As stated earlier, the implementation of the tools in our testing was suitable for merely that, testing.
+In a production environment one would should never use the instaweb tool for a providing a permanent setup where people can browse a repository over HTTP.
+
+There are two distinct methods for handling the distribution of Git repositories to larger audiences.
+Generally people will either, set up the server themselves or use a third party system to host their repositories.
+
+\subsubsection{GitHub}
+No book on Git would be complete without at least a small section on GitHub.
+GitHub is a third party site for hosting and interacting with Git repositories.
+All of the information about GitHub is correct at the time of going to print.
+
+GitHub offers the ability to host both public and private repositories.
+Public repositories can be hosted for free, whereas private repositories require a subscription fee, however the pricing is tiered to allow you to start small and gradually grow your usage.
+Repositories can be pulled via HTTPS, SSH and Git protocols which allows you to be entirely flexible in the methods you use to keep up to date.
+Pushing to the repositories can be achieved via HTTPS or SSH, which again is rather flexible.
+
+The real beauty of GitHub is how it is presented.
+GitHub has a tagline of \emph{Social Coding} and it really does live up to that name.
+People can fork your project, which basically means they have cloned it to their account in GitHub.
+Whenever they make commits to their fork, you can see these changes pop up in a section of the site called Network.
+
+GitHub also allows you to edit files directly on the site and commit them.
+This means that wherever you are, as long as you have a connection to the Internet and a browser, you can edit files in your repository and commit them.
+When you return home, you can issue a pull and the changes will appear on your local system.
+
+For open source projects, GitHub really does offer a wealth of features for collaborative coding.
+When a collaborator has made enough changes to fix a bug or a feature, they can issue a pull request.
+This sends a notification to you that Person X would like you to merge their changes into your branch.
+If there are no conflicts these pull requests can be manage straight from GitHub, without requiring you to checkout the remote branch, merge it and push it back again.
+You can also comment on lines in the diff and many more features.
+
+Indeed during the writing of this book, several contributors used GitHub to make pull requests containing spelling mistakes and design suggestions.
+
+\subsubsection{Hosting yourself}
+Many people choose to host themselves, be it for security or control reasons.
+Sometimes people do not want to have their data \emph{online} and prefer to keep it internal to the company, this may be due to IP, license or other restrictions.
+However, it should be noted that this option does not pose a problem to the implementation of Git.
+Though you may not have access to the fancy interface features of GitHub, you still get the raw power of Git in your workplace.
+
+Apache is a common implementation of Git for companies as it is a robust webserver which offers the ability to serve and receive data through HTTP and HTTPS with a Git repository.
+We are not going to go into the implementation details of such a set up as each one is different.
+There are many tutorials on the Internet that deal with such set ups in different situations and for different purposes.
+
+SSH is also a good choice for implementing a Git repository and there are several means of securing the Git repository to allow only certain users access to certain paths etc.
+Git by default does not really have a security access control layer but then that is realy by design more than anything else.
+Git was intended to be used by open source projects to share and collaborate on code.
+However, this does not mean it can not be used on closed source projects, just that sometimes some modifications need to be made if more advanced features like access control are required.
+Many people rely on the work flow processes to ensure that things are done in a secure manner.
+If you have a blessed repository and have some dictators who are responsible for integrating code into it, it should be up to them to ensure that Developer X does not try to commit changes to Module Y.
+
+
+
+
+
+garbage collection
+security
