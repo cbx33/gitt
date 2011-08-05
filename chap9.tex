@@ -1,4 +1,4 @@
-% chap8.tex - Week 8
+% chap9.tex - Week 9
 \cleardoublepage
 %\phantomsection
 \chapter{A little extra help}
@@ -71,8 +71,35 @@ Many people rely on the work flow processes to ensure that things are done in a 
 If you have a blessed repository and have some dictators who are responsible for integrating code into it, it should be up to them to ensure that Developer X does not try to commit changes to Module Y.
 
 \subsection{Taking out the garbage}
+Something that we glossed over is the subject of garbage collection.
+Git handles this for us, routinely deleting objects that are older than a certain time period from the object database, as long as they are no longer referenced by any branches.
+So by this we mean that an object that exists only in one branch will only remain imune to garbage collection whilst that branch is alive.
+As soon as we delete the branch, all objects that are not longer referred to in any tree are left in a \emph{dangling} state and may be deleted when garbage collection runs.
+Of course as stated earlier, Git holds on to objects for a period of time for you, to make sure you do not do anything silly, like delete a branch you actually really wanted.
+
+***Running manual gc***
 
 \subsection{But how do you really know....you know?}
+When obtaining source code via an insecure means, over the Internet for example,
+there are times when you would really like to be as sure as possible that someone has not tampered with it.
+Let us take an example of someone distributing their content using a Git repository.
+An attacker takes control of the repository, puts in some malware and tags the commit as release version 1.0.
+People start do download it and as you can imagine all hell breaks loose.
 
-garbage collection
-security
+It does not have to be this way.
+Many developers and Internet users use GPG to encrypt and sign their emails and documents.
+GPG is a tool which can be employed to both encrypt files so that they can only be read by the intended recipient, or to sign documents and files, such that you can be reasonably sure that document is the same as when the person signed it.
+The private GPG \emph{key} of the signing party is used along with the file to generate a code which is sent along with the email.
+When it reaches the recipient a check can be made against the users public key and the content of the email, to validate that said user did actually sign that particular document or file.
+
+Git allows you to use GPG signing for tags.
+This gives people piece of mind that unless an attacker has gained access to both the repository and the developers private GPG key, if the sign a tag, that tag is exactly as it was intended.
+To use Git in this way, you must first set up a GPG key, which is out of scope of this book.
+Once you have this key, you can change your config like the example below, to tell Git to use a particular key when signing.
+
+\begin{code}
+git config user.signingkey 0xABCDEFG
+\end{code}
+
+Then when you want to sign a tag, simply append the \texttt{-s} parameter to the \texttt{git tag} command.
+You can also verify someone elses signed tag by running \texttt{git tag -v <tagname>}
