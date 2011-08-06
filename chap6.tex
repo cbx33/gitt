@@ -723,6 +723,15 @@ john@satsuki:~/coderepo-cl$
 Now we can see that all of the remote references for our \textbf{backup} remote have been updated.
 If we run a diff against our local \textbf{wonderful} branch and the remote branch \textbf{backup/wonderful}, we can see the differences.
 
+\begin{callout}{Note}{Pushing your tags}
+By default tags are not pushed when using the \texttt{git push} command.
+If we want our tags to be push to the remote repository as well, we need to append the \texttt{--tags} parameter to the \texttt{git push} command.
+\newline
+\newline
+In contrast, using \texttt{git pull} will automatically pull down any tags which refer to any objects that have been pulled.
+This behaviour can be overridden by using the \texttt{--no-tags} parameter with \texttt{git pull}.
+\end{callout}
+
 \begin{code}
 john@satsuki:~/coderepo-cl$ git diff wonderful backup/wonderful
 diff --git a/newfile3 b/newfile3
