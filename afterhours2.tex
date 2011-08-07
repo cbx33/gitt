@@ -203,6 +203,12 @@ Now things start to get interesting.
 Did you also notice the tree SHA-1 hash mentioned when we ran \texttt{git cat-file -p}? This is the tree object that stores the file structure.
 Why don't we run the command against that file too?
 
+\begin{callout}{Note}{Packing for a holiday?}
+\index{packing}It is worth noting that the objects noted above are not the only objects that you will find in the \texttt{objects} folder.
+Git will sometimes clean itself up and perform packing operations.
+This is out of scope for this chapter though.
+\end{callout}
+
 \begin{code}
 john@satsuki:~/coderepo$ git cat-file -p 34a5dff
 100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
@@ -263,9 +269,3 @@ This diagram describes the repository layout completely and if you correlate, we
 Now we know how to traverse a repository.
 In \emph{Week 3} we find the Git commands to let us do that without having to break out the wrenches and resort to plumbing.
 After all, why use a wrench to turn on a tap?
-
-\begin{callout}{Note}{Packing for a holiday?}
-\index{packing}It is worth noting that the objects noted above are not the only objects that you will find in the \texttt{objects} folder.
-Git will sometimes clean itself up and perform packing operations.
-This is out of scope for this chapter though.
-\end{callout}
