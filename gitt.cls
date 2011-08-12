@@ -6,6 +6,14 @@
 
 \ProvidesClass{gitt}[2011/05/15 v1.0.0 GITT book design]
 
+% The 'screen' option creates a PDF suitable for reading on a computer screen
+% The 'print' option creates a PDF suitable for printing
+\providecommand{\gitt@format}{screen}% default format
+\DeclareOption{screen}{\gdef\gitt@format{screen}}
+\DeclareOption{print}{\gdef\gitt@format{print}}
+
+
+% All other options are passed along to the base class
 \DeclareOption*{%
   \PassOptionsToClass{\CurrentOption}{memoir}%
 }
@@ -28,7 +36,7 @@
 \renewcommand{\thefigure}{\arabic{figure}}
 
 % Import packages
-\RequirePackage{pdfpages}
+\RequirePackage{xifthen}
 \RequirePackage{graphicx}
 \RequirePackage{color,fancyvrb,relsize}
 \RequirePackage[final]{microtype}
@@ -38,9 +46,14 @@
 \PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}
 \makeindex
 
+
 % Import a new font and use the sans-serif version by default
-\RequirePackage{lmodern}
-\renewcommand{\familydefault}{\sfdefault}
+%\RequirePackage{lmodern}
+%\renewcommand{\familydefault}{\sfdefault}
+
+% Font settings
+\RequirePackage{fontspec}
+\setmainfont[Mapping=tex-text,Numbers=OldStyle]{Linux Libertine O}
 
 % Put chapters and sections in the toc, only number the chapter
 \setcounter{tocdepth}{3}
@@ -110,13 +123,15 @@
 
 % Inserts a full-page graphic.
 \newcommand{\coverpage}[1]{%
-  \thispagestyle{empty}%
-  \IfFileExists{#1}{%
-    \AddToShipoutPicture*{\put(0,0){\includegraphics[width=\paperwidth,height=\paperheight]{#1}}}%
-  }{%
-    \ClassWarningNoLine{gitt}{Missing cover page graphic:\MessageBreak #1}%
-  }%
-  \null\cleardoublepage%
+  \ifthenelse{\equal{\gitt@format}{screen}}{%
+    \thispagestyle{empty}%
+    \IfFileExists{#1}{%
+      \AddToShipoutPicture*{\put(0,0){\includegraphics[width=\paperwidth,height=\paperheight]{#1}}}%
+    }{%
+      \ClassWarningNoLine{gitt}{Missing cover page graphic:\MessageBreak #1}%
+    }%
+    \null\cleardoublepage%
+  }{}%
 }
 
 \newcommand{\indexref}[1]{%

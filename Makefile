@@ -3,19 +3,19 @@ quick: quickpdf cleantmp
 clean: cleantmp cleanpdf
 
 print:
-	pdflatex print
-	makeindex print
-	pdflatex print
-	pdflatex print
+	xelatex '\def\mediaformat{print}\input{gitt}'
+	makeindex gitt
+	xelatex '\def\mediaformat{print}\input{gitt}'
+	xelatex '\def\mediaformat{print}\input{gitt}'
 
 pdf:
-	pdflatex gitt
+	xelatex '\def\mediaformat{screen}\input{gitt}'
 	makeindex gitt
-	pdflatex gitt
-	pdflatex gitt
+	xelatex '\def\mediaformat{screen}\input{gitt}'
+	xelatex '\def\mediaformat{screen}\input{gitt}'
 
 quickpdf:
-	pdflatex gitt
+	xelatex gitt
 
 cleantmp:
 	rm -f *.aux *.log *.out *.toc *.idx *.ind *.ilg
