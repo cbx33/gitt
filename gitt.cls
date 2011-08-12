@@ -53,7 +53,7 @@
 % Font settings
 \RequirePackage{fontspec}
 \setmainfont[Mapping=tex-text,Numbers=OldStyle]{Linux Libertine O}
-\setsansfont[Mapping=tex-text,Scale=MatchLowercase]{Fontin Sans}
+\setsansfont[Mapping=tex-text,Scale=MatchLowercase,SmallCapsFont={* Small Caps}]{Fontin Sans}
 \setmonofont[Mapping=tex-text,Scale=MatchLowercase]{DejaVu Sans Mono}
 
 
@@ -157,9 +157,7 @@
 \newenvironment{trenches}{%
   \begin{quote}%
     \begin{sffamily}%
-      \parskip\baselineskip
-      \parindent0pt%
-      \textbf{In the trenches\ldots}\par%
+      \noindent\textbf{In the trenches\ldots}\quad%
 }{%
       \end{sffamily}%
     \end{quote}%
@@ -315,6 +313,55 @@
     \clearpage
   \fi
 }
+
+% Headings
+\RequirePackage{titlesec}
+
+\titleformat{\chapter}%
+  [hang]% shape
+  {\sffamily\huge\itshape}% format applied to label+text
+  {\thechapter}% label
+  {0pt}% horizontal separation between label and title body
+  {\sffamily\huge\itshape}% before the title body
+  []% after the title body
+
+\titleformat{\section}%
+  [hang]% shape
+  {\sffamily\Large\itshape}% format applied to label+text
+  {\thesection}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+\titleformat{\subsection}%
+  [hang]% shape
+  {\sffamily\large\itshape}% format applied to label+text
+  {\thesubsection}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+\titleformat{\subsubsection}%
+  [hang]% shape
+  {\sffamily\normalsize\itshape}% format applied to label+text
+  {\thesubsection}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+\titleformat{\paragraph}%
+  [runin]% shape
+  {\normalfont\itshape}% format applied to label+text
+  {\theparagraph}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+\titlespacing*{\chapter}{0pt}{2\baselineskip}{1\baselineskip}
+\titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.25ex plus 1ex minus .2ex}{0.7ex plus.2ex}
+\titlespacing*{\subsubsection}{0pt}{1.25ex plus 1ex minus .2ex}{0.7ex plus.2ex}
+
 
 
 
