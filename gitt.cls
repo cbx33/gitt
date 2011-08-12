@@ -31,7 +31,7 @@
 %%\setmarginnotes{0.5cm}{2cm}{0.2cm}
 %\checkandfixthelayout
 
-\RequirePackage[paperheight=24.59cm,paperwidth=18.90cm,headheight=\baselineskip]{geometry}
+\RequirePackage[paperheight=24.59cm,paperwidth=18.90cm,headheight=\baselineskip,textheight=35\baselineskip]{geometry}
 
 % Reset the figure numbering at the beginning of each chapter and print only
 % the figure number (not including the chapter number).
@@ -41,7 +41,6 @@
 \RequirePackage{xifthen}
 \RequirePackage{graphicx}
 \RequirePackage{color,fancyvrb,relsize}
-\RequirePackage[final]{microtype}
 \RequirePackage{tikz}
 \RequirePackage{makeidx}
 \RequirePackage{eso-pic}
@@ -75,8 +74,7 @@
 \renewcommand\frontmatter{%
   \cleardoublepage%
   \@mainmatterfalse%
-  \pagenumbering{arabic}%
-  %\pagestyle{plain}%
+  \pagenumbering{roman}%
   \fancyhf{}%
   \renewcommand{\chaptermark}[1]{\markboth{##1}{}}%
   \renewcommand{\sectionmark}[1]{\markright{##1}}%
@@ -88,6 +86,7 @@
 \renewcommand\mainmatter{%
   \cleardoublepage%
   \@mainmattertrue%
+  \pagenumbering{arabic}%
   \fancyhf{}%
   \renewcommand{\chaptermark}[1]{\markboth{##1}{}}%
   \renewcommand{\sectionmark}[1]{\markright{##1}}%
@@ -95,7 +94,6 @@
   \fancyhead[RO]{\smallcaps{\rightmark}\quad\thepage}% section title
 }
 
-% Back matter
 
 
 
@@ -144,7 +142,6 @@
   urlcolor=black,
   citecolor=black,
   linkcolor=black,
-  pagecolor=black,
   plainpages=false,
   pdfpagelabels,
   pdftitle={Git in the Trenches},
@@ -187,17 +184,45 @@
   \par\begin{center}*\quad*\quad*\end{center}\par
 }
 
-% Inserts a full-page graphic.
+% Clear page commands from memoir.cls
+\newcommand{\cleartoevenpage}[1][\@empty]{%
+  \clearpage%
+  \ifodd\c@page\hbox{}#1\clearpage\fi%
+}
+
+\newcommand{\cleartooddpage}[1][\@empty]{%
+  \clearpage%
+  \ifodd\c@page\else\hbox{}#1\clearpage\fi%
+}
+
+
+% Inserts full-page graphics for cover pages.
 \newcommand{\coverpage}[1]{%
+  \thispagestyle{empty}%
+  \IfFileExists{#1}{%
+    \AddToShipoutPicture*{\put(0,0){\includegraphics[width=\paperwidth,height=\paperheight]{#1}}}%
+  }{%
+    \ClassWarningNoLine{gitt}{Missing cover page graphic:\MessageBreak #1}%
+  }%
+}
+
+\newcommand{\frontcover}[1]{%
   \ifthenelse{\equal{\gitt@format}{screen}}{%
-    \thispagestyle{empty}%
-    \IfFileExists{#1}{%
-      \AddToShipoutPicture*{\put(0,0){\includegraphics[width=\paperwidth,height=\paperheight]{#1}}}%
-    }{%
-      \ClassWarningNoLine{gitt}{Missing cover page graphic:\MessageBreak #1}%
-    }%
-    \null\cleardoublepage%
-  }{}%
+    \coverpage{#1}%
+    \null\cleardoublepage
+  }{%
+    \ClassWarningNoLine{gitt}{Ignoring \string\frontcover because we're not generating a screen format.}%
+  }%
+}
+
+\newcommand{\backcover}[1]{%
+  \ifthenelse{\equal{\gitt@format}{screen}}{%
+    \cleartoevenpage[\thispagestyle{empty}]%
+    \coverpage{#1}%
+    \null%
+  }{%
+    \ClassWarningNoLine{gitt}{Ignoring \string\backcover because we're not generating a screen format.}%
+  }%
 }
 
 \newcommand{\indexref}[1]{%
@@ -243,3 +268,43 @@
     %moredelim=[is][\tiny\bfseries\ttfamily]{|||}{|||}
   }
 }{}
+
+% Table of contents
+\renewcommand\tableofcontents{%
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse
+  \fi
+  \chapter*{\contentsname
+    \@mkboth{\contentsname}{\contentsname}
+  }%
+  \@starttoc{toc}%
+  \if@restonecol\twocolumn\fi
+}
+
+% Index
+\renewenvironment{theindex}{%
+  \if@twocolumn
+    \@restonecolfalse
+  \else
+    \@restonecoltrue
+  \fi
+  \twocolumn[\@makeschapterhead{\indexname}]%
+  \@mkboth{\indexname}{\indexname}%
+  \thispagestyle{plain}%
+  \parindent\z@
+  \parskip\z@ \@plus .3\p@\relax
+  \columnseprule \z@
+  \columnsep 35\p@
+  \let\item\@idxitem
+}{%
+  \if@restonecol
+    \onecolumn
+  \else
+    \clearpage
+  \fi
+}
+
+
+
