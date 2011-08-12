@@ -46,7 +46,7 @@ There were other moans and grunts.
 
 ``Well,'' said John,
 ``as far as I understand it, it doesn't. I mean Klaus and I will have local copies of the repository too. We will work on those and then sync our changes back to the server. It's a sync, moreover a copy. I think it's actually called a clone.''
-He nodded to himself, ``And, since Klaus and I will hardly ever overlap on code, we shouldn't ever need to merge or deal with an conflicts.''
+He nodded to himself, ``And, since Klaus and I will hardly ever overlap on code, we shouldn't ever need to merge or deal with conflicts.''
 
 ``But what about us monkeys?'' asked Martha,
 ``Where do we get our clones from?''
@@ -65,16 +65,19 @@ Simon spoke out, ``Well, I was reading over the weekend about this thing called 
 ``What's rebase and how is it different to merging?'' asked Mike.
 
 ``Well, rebasing is pretty darn clever. Think of it this way. You have an upstream branch, in this case, our blessed repository. You are happily making changes. When the upstream changes, you could merge the changes in from blessed. If you do this, you create a single commit which merges the changes in. It works, but\ldots'' he trailed off a little,
-``it can cause problems in certain instances. A better way to handle it is with rebasing. Rebasing can take all the changes you have made, squirrel them away, pull down all the changes to bring it up to date, and then whack your changes on top.''
+``it can cause problems in certain instances. A better way to handle it is with rebasing. Rebasing can take all the changes you have made, squirrel them away, pull down all the changes to bring it up to date, and then whack your changes on top.
+It's not always the best choice, but we should consider it.''
 
 John breathed out, ``It sounds pretty cool Simon, but one thing is abundantly clear, we need to learn more about the Git basics before we start delving into this merging and rebasing. Let's spend the rest of the day playing with some test repositories and reconvene tomorrow.''
 \end{trenches}
 
 If you've never played with a version control system before it is a good idea to take some time to just play.
-Pretty soon you'll have learnt the basics and will be in a position where you will want to put your newly honed skills into practise.
+Pretty soon you'll have learnt the basics and will be in a position where you will want to put your newly honed skills into practice.
 Though playing on test repositories is good, it is quite usual that you need to actually use the system in a real environment before real problems arise.
 The rest of this chapter is a very quick introduction to Git.
 It is presented as an introduction, because it is hoped and expected that the you will take some time out to get to know the system and how it works.
+Knowing something about the underlying mechanisms of Git will definitely help you as you progress and will save you an awful lot of frustration later on when operations do not seem to function as you expect.
+After Hours 2 focuses on the Git object model, something all Git users should have a basic understanding of.
 
 \subsection{Initialising A Repository}
 The first thing we need to do is to understand two very important things:
