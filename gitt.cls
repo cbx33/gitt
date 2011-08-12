@@ -15,21 +15,23 @@
 
 % All other options are passed along to the base class
 \DeclareOption*{%
-  \PassOptionsToClass{\CurrentOption}{memoir}%
+  \PassOptionsToClass{\CurrentOption}{book}%
 }
 \ProcessOptions*\relax
 
 
-\LoadClass[openright,12pt]{memoir}
+\LoadClass[openright,12pt]{book}
 
 % set paper size
-\setstocksize{24.59cm}{18.90cm}
-%\settrims{1.91cm}{0cm}
-\settrimmedsize{\stockheight}{\stockwidth}{*}
-\setlrmarginsandblock{2.79cm}{2.29cm}{*}
-\setulmarginsandblock{2.91cm}{2.91cm}{*}
-%\setmarginnotes{0.5cm}{2cm}{0.2cm}
-\checkandfixthelayout
+%\setstocksize{24.59cm}{18.90cm}
+%%\settrims{1.91cm}{0cm}
+%\settrimmedsize{\stockheight}{\stockwidth}{*}
+%\setlrmarginsandblock{2.79cm}{2.29cm}{*}
+%\setulmarginsandblock{2.91cm}{2.91cm}{*}
+%%\setmarginnotes{0.5cm}{2cm}{0.2cm}
+%\checkandfixthelayout
+
+\RequirePackage[paperheight=24.59cm,paperwidth=18.90cm]{geometry}
 
 % Reset the figure numbering at the beginning of each chapter and print only
 % the figure number (not including the chapter number).
@@ -66,7 +68,7 @@
 \renewcommand{\thetable}{}
 
 % Print just the chapter name without 'Chapter #.' in the running heads
-\renewcommand\chaptermark[1]{\markboth{\memUChead{#1}}{}}%
+%\renewcommand\chaptermark[1]{\markboth{\memUChead{#1}}{}}%
 
 % Make the pdf have clickable links
 \RequirePackage[
@@ -81,7 +83,7 @@
   pagecolor=black,
   plainpages=false,
   pdfpagelabels,
-  pdftitle={Git In the Trenches},
+  pdftitle={Git in the Trenches},
   pdfauthor={Peter Savage}]{hyperref}
 
 \AtBeginDocument{
