@@ -50,13 +50,10 @@
 \makeindex
 
 
-% Import a new font and use the sans-serif version by default
-%\RequirePackage{lmodern}
-%\renewcommand{\familydefault}{\sfdefault}
-
 % Font settings
 \RequirePackage{fontspec}
 \setmainfont[Mapping=tex-text,Numbers=OldStyle]{Linux Libertine O}
+\setsansfont[Mapping=tex-text,Scale=MatchLowercase]{Fontin Sans}
 \setmonofont[Mapping=tex-text,Scale=MatchLowercase]{DejaVu Sans Mono}
 
 
@@ -157,7 +154,16 @@
 }
 
 % give us a begin{trenches}
-\newenvironment{trenches}{\begin{quote}\begin{rmfamily}\textbf{In the trenches\ldots\\\\}}{\end{rmfamily}\end{quote}}
+\newenvironment{trenches}{%
+  \begin{quote}%
+    \begin{sffamily}%
+      \parskip\baselineskip
+      \parindent0pt%
+      \textbf{In the trenches\ldots}\par%
+}{%
+      \end{sffamily}%
+    \end{quote}%
+}
 
 % Callout boxes
 \newsavebox{\callout@contents}
