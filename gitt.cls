@@ -31,7 +31,7 @@
 %%\setmarginnotes{0.5cm}{2cm}{0.2cm}
 %\checkandfixthelayout
 
-\RequirePackage[paperheight=24.59cm,paperwidth=18.90cm]{geometry}
+\RequirePackage[paperheight=24.59cm,paperwidth=18.90cm,headheight=\baselineskip]{geometry}
 
 % Reset the figure numbering at the beginning of each chapter and print only
 % the figure number (not including the chapter number).
@@ -56,6 +56,70 @@
 % Font settings
 \RequirePackage{fontspec}
 \setmainfont[Mapping=tex-text,Numbers=OldStyle]{Linux Libertine O}
+
+% Small caps
+\newcommand{\smallcaps}[1]{%
+  {\addfontfeature{LetterSpace=5.0}\textsc{\MakeTextLowercase{#1}}}%
+}
+
+% Running heads and feet
+\RequirePackage{textcase}
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\thepage\quad\smallcaps{\leftmark}}
+\fancyhead[RO]{\smallcaps{\rightmark}\quad\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% Front matter
+\renewcommand\frontmatter{%
+  \cleardoublepage%
+  \@mainmatterfalse%
+  \pagenumbering{arabic}%
+  %\pagestyle{plain}%
+  \fancyhf{}%
+  \renewcommand{\chaptermark}[1]{\markboth{##1}{}}%
+  \renewcommand{\sectionmark}[1]{\markright{##1}}%
+  \fancyhead[LE]{\thepage\quad\smallcaps{\leftmark}}% chapter title
+  \fancyhead[RO]{\smallcaps{\rightmark}\quad\thepage}% section title
+}
+
+% Main matter
+\renewcommand\mainmatter{%
+  \cleardoublepage%
+  \@mainmattertrue%
+  \fancyhf{}%
+  \renewcommand{\chaptermark}[1]{\markboth{##1}{}}%
+  \renewcommand{\sectionmark}[1]{\markright{##1}}%
+  \fancyhead[LE]{\thepage\quad\smallcaps{\leftmark}}% chapter title
+  \fancyhead[RO]{\smallcaps{\rightmark}\quad\thepage}% section title
+}
+
+% Back matter
+
+
+
+% When cleardoublepage is called, produce a blank (empty) page -- i.e.,
+% without headers and footers
+\def\cleardoublepage{%
+  \clearpage
+  \if@twoside%
+    \ifodd\c@page\else
+      \hbox{}%
+      %\vspace*{\fill}
+      %\begin{center}
+      %  This page intentionally contains only this sentence.
+      %\end{center}
+      %\vspace{\fill}
+      \thispagestyle{empty}%
+      \newpage%
+      \if@twocolumn\hbox{}\newpage\fi%
+    \fi%
+  \fi%
+}
+
+
+
 
 % Put chapters and sections in the toc, only number the chapter
 \setcounter{tocdepth}{3}
