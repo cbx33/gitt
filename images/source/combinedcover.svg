@@ -15,22 +15,9 @@
    id="svg5441"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="combinedcover.pdf">
+   sodipodi:docname="combinedcover.svg">
   <defs
      id="defs5443">
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath5581">
-      <rect
-         ry="31.333687"
-         y="368.49228"
-         x="88.861565"
-         height="258.46912"
-         width="300.82034"
-         id="rect5583"
-         style="fill:#000000;fill-opacity:1;stroke:none"
-         transform="matrix(0.94843763,0.31696381,-0.31696381,0.94843763,0,0)" />
-    </clipPath>
     <filter
        inkscape:collect="always"
        id="filter5617"
@@ -334,6 +321,19 @@
          d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
          transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
     </marker>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3372">
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:none"
+         id="rect3374"
+         width="300.82034"
+         height="258.46912"
+         x="88.861549"
+         y="378.241"
+         ry="31.333685"
+         transform="matrix(0.94843763,0.31696381,-0.31696381,0.94843763,0,0)" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -342,9 +342,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.53117647"
-     inkscape:cx="903.33014"
-     inkscape:cy="442.85714"
+     inkscape:zoom="1.6511269"
+     inkscape:cx="949.77852"
+     inkscape:cy="212.73533"
      inkscape:document-units="cm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -390,7 +390,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -476,7 +476,7 @@
        id="flowRoot4448-6"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;filter:url(#filter5617);font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
        transform="matrix(1.1674625,-0.39016098,0.39016098,1.1674625,664.2574,369.65559)"
-       clip-path="url(#clipPath5581)"><flowRegion
+       clip-path="url(#clipPath3372)"><flowRegion
          id="flowRegion4450-6"><rect
            id="rect4452-0"
            width="494.34714"
