@@ -32,6 +32,7 @@
 %\checkandfixthelayout
 
 \RequirePackage[paperheight=24.59cm,paperwidth=18.90cm,headheight=\baselineskip,textheight=35\baselineskip]{geometry}
+\geometry{showframe}% comment out or remove this line when finished fiddling with margins.
 
 % Reset the figure numbering at the beginning of each chapter and print only
 % the figure number (not including the chapter number).
@@ -45,6 +46,7 @@
 \RequirePackage{makeidx}
 \RequirePackage{eso-pic}
 \PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}
+\RequirePackage{xcolor}
 \makeindex
 
 
@@ -249,6 +251,7 @@
     stringstyle=\footnotesize\ttfamily,
     keywordstyle=\footnotesize\bfseries\ttfamily,
     frame=leftline,
+    rulecolor=\color{lightgray},
     framerule=1mm,
     framextopmargin=0pt,
     framexbottommargin=0pt,
@@ -262,8 +265,8 @@
     postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow}},
     tabsize=2,
     showstringspaces=false,
-    aboveskip=14pt,
-    belowskip=14pt,
+    aboveskip=\baselineskip,
+    belowskip=\baselineskip,
     morecomment=[l][\footnotesize\bfseries\ttfamily]{john@satsuki:},
     morecomment=[l][\footnotesize\bfseries\ttfamily]{rob@mimi:}
     %moredelim=[is][\tiny\bfseries\ttfamily]{|||}{|||}
