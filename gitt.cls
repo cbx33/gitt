@@ -40,13 +40,16 @@
 
 % Import packages
 \RequirePackage{xifthen}
+
+% Load colors
+\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}
+\RequirePackage{xcolor}
+
 \RequirePackage{graphicx}
-\RequirePackage{color,fancyvrb,relsize}
+\RequirePackage{fancyvrb,relsize}
 \RequirePackage{tikz}
 \RequirePackage{makeidx}
 \RequirePackage{eso-pic}
-\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}
-\RequirePackage{xcolor}
 \makeindex
 
 
@@ -134,19 +137,30 @@
 %\renewcommand\chaptermark[1]{\markboth{\memUChead{#1}}{}}%
 
 % Make the pdf have clickable links
-\RequirePackage[
+\RequirePackage{hyperref}
+
+\hypersetup{%
   bookmarks,
   bookmarksopen,
   bookmarksnumbered=false,
-  colorlinks,
+  colorlinks=true,
   pdfpagemode=None,
-  urlcolor=black,
-  citecolor=black,
-  linkcolor=black,
+  pdfborder = {0 0 0},
+  citecolor = DarkGreen,
+  linkcolor = DarkBlue,
+  urlcolor = DarkGreen,
   plainpages=false,
   pdfpagelabels,
   pdftitle={Git in the Trenches},
-  pdfauthor={Peter Savage}]{hyperref}
+  pdfauthor={Peter Savage}
+}
+
+% Use black link colors for print edition
+\ifthenelse{\equal{\gitt@format}{print}}{%
+  \hypersetup{%
+    colorlinks=false
+  }%
+}
 
 \AtBeginDocument{
   \hyphenpenalty=1000
@@ -234,16 +248,16 @@
 }
 
 \newcommand{\indexref}[1]{%
-\index{#1|textit}%
+  \index{#1|textit}%
 }
 
 \newcommand{\indexcom}[2]{%
-\index{#1@\texttt{#2}}
+  \index{#1@\texttt{#2}}%
 }
 
 \newcommand{\indexgit}[1]{%
-\texttt{git #1}%
-\index{git commands!#1@\texttt{#1}}%
+  \texttt{git #1}%
+  \index{git commands!#1@\texttt{#1}}%
 }
 
 \RequirePackage{listings}
