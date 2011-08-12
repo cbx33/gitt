@@ -55,6 +55,8 @@
 % Font settings
 \RequirePackage{fontspec}
 \setmainfont[Mapping=tex-text,Numbers=OldStyle]{Linux Libertine O}
+\setmonofont[Mapping=tex-text,Scale=MatchLowercase]{DejaVu Sans Mono}
+
 
 % Small caps
 \newcommand{\smallcaps}[1]{%
@@ -239,14 +241,13 @@
 }
 
 \RequirePackage{listings}
-\RequirePackage{courier}
 \lstnewenvironment{code}{
   \lstset{
-    basicstyle=\tiny\ttfamily,
-    identifierstyle=\tiny\ttfamily,
-    commentstyle=\tiny\ttfamily,
-    stringstyle=\tiny\ttfamily,
-    keywordstyle=\tiny\bfseries\ttfamily,
+    basicstyle=\footnotesize\ttfamily,
+    identifierstyle=\footnotesize\ttfamily,
+    commentstyle=\footnotesize\ttfamily,
+    stringstyle=\footnotesize\ttfamily,
+    keywordstyle=\footnotesize\bfseries\ttfamily,
     frame=leftline,
     framerule=1mm,
     framextopmargin=0pt,
@@ -263,8 +264,8 @@
     showstringspaces=false,
     aboveskip=14pt,
     belowskip=14pt,
-    morecomment=[l][\tiny\bfseries\ttfamily]{john@satsuki:},
-    morecomment=[l][\tiny\bfseries\ttfamily]{rob@mimi:}
+    morecomment=[l][\footnotesize\bfseries\ttfamily]{john@satsuki:},
+    morecomment=[l][\footnotesize\bfseries\ttfamily]{rob@mimi:}
     %moredelim=[is][\tiny\bfseries\ttfamily]{|||}{|||}
   }
 }{}
