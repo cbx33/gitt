@@ -97,6 +97,11 @@ Initialized empty Git repository in /home/john/coderepo/.git/
 john@satsuki:~/coderepo$
 \end{code}
 
+If you are a Windows user, the above output may seem a little strange to you.
+In the Linux world, the shell often has a much more descriptive prompt than on Windows.
+In the case above, it takes the format \texttt{<user>@<host>:<current\_directory>}.
+The \textasciitilde{} is a shortcut meaning \emph{Home Directory}, so really \texttt{~/coderepo} actually means \texttt{/home/john/coderepo}.
+
 What we've done here is create a new directory called coderepo, moved into it, and then run the \indexgit{init} command.
 The result of this command is a new directory in the coderepo directory called \texttt{.git}.
 This directory will hold a local copy of our entire repository.
@@ -109,14 +114,15 @@ During the writing of this book several people have told me that Git is one of t
 
 Let us take a few minutes to talk about how Git works internally and how the data is actually stored.
 Git doesn't store changes to files, but actual snapshots of files at specific points in time.
-It refers to these by running an \index{SHA-1}SHA-1 hash against the file.
-By doing this, it is easy to Git to detect if a file has changed.
+In fact, each time a commit is made, Git actually makes a record of how the entire filesystem looked at that point, even if only one file is changed.
+It refers to files by calculating a \index{SHA-1}SHA-1 hash of the file and using this as an ID, because the hash is unique to the contents of the file, it is easy to detect if a file has changed.
 If the SHA-1 hash of a file changes, then the file must have been modified.
+
 
 When a commit is made to the repository, Git stores a few things.
 A \index{commit}commit object is created.
-This contains information about who made the commit, the parent of the commit and points to a tree object.
-The tree object describes what the repository looked like at the time of the commit.
+This contains, among other things, information about who made the commit, the parent of the commit and a hash that points to a tree object.
+The tree object describes what the filesystem looked like at the time of the commit.
 In other words the tree object, tells Git what files were in there.
 Lastly, Git stores the files that were in the repository under their SHA-1 names in the objects directory.
 Of course Git is super clever here because if you have exactly the same file in multiple commits, the SHA-1 hash of that file doesn't change and therefore Git only stores one copy of the file to save space.
