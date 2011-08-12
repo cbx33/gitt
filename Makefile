@@ -14,6 +14,8 @@ pdf:
 	xelatex '\def\mediaformat{screen}\input{gitt}'
 	xelatex '\def\mediaformat{screen}\input{gitt}'
 
+screen: pdf
+
 quickpdf:
 	xelatex gitt
 
