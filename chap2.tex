@@ -131,12 +131,19 @@ The commit object is also referred to by an SHA-1 hash.
 This is different to many other version control systems which use either a number that refers to the repository or a per file version number.
 Getting used to seeing 40 character SHA-1 hashes can take a little time.
 Saying "I need the commit referred to as bf81617d6417d9380e06785f8ed23b247bea8f6d," is certainly not as easy as saying you need revision 6.
-However, Git handles these hashes well, and you can reference a commit using a few of the characters from the beginning, as long as those characters uniquely refer to that commit, i.e.,\ as long as your choice isn't in any way ambiguous.
+However, Git handles these hashes well, and you can reference a commit using a few of the characters from the beginning, as long as those characters uniquely refer to that commit, i.e.,\ as long as your choice is not in any way ambiguous.
+
+The above description may sound rather foreign to you.
+If this is the case, you should really spend some time reading through it again and possibly even jump to the After Hours section at the end of this chapter.
+Understanding the way Git stores objects is a rather important aspect of Git and though it may seem rather confusing at first,
+learning this will help you later on in understanding more complex matters.
 
 \section{Day 2 - ``Making commitments''}
-\subsection{Let's Make a Repository}
+\subsection{Let's work on our repository}
 
-The most simple way of committing a file into the repository is to create it, or bring it into your working copy and use the commands below.
+The most simple way of committing a file into the repository is to create it, or copy it to the working copy of our repository and use the commands below.
+The working copy is the version of the repository we have currently checked out.
+This terminology will be explained more later on.
 
 \begin{code}
 john@satsuki:~/coderepo$ touch my_first_committed_file
@@ -148,7 +155,8 @@ john@satsuki:~/coderepo$ git commit -m 'My First Ever Commit'
 john@satsuki:~/coderepo$
 \end{code}
 
-What we have done here, is to create a new blank file and add it into the repository using the \indexgit{add} command.
+What we have done here, is to create a new blank file, using the unix \texttt{touch} command and add it into the repository using the \indexgit{add} command.
+Windows users note, you will not have the touch command in your default command set, but if you are using Git Bash from the msysgit package, you should have it available to you.
 Then we have committed it into the repository using the \indexgit{commit} command.
 Let's make a few changes to our working copy and see what the result is.
 First we are going to add another two new files, then we are going to make changes to our original file and finally we are going to run git status to see what Git has to say about our changes.
@@ -224,8 +232,7 @@ To understand what Klaus was getting in a spin about, let's make a change to my\
 Remember we have already added the file, but we haven't yet made a commit.
 
 \begin{code}
-john@satsuki:~/coderepo$ echo "Change2" >>
- my_second_committed_file
+john@satsuki:~/coderepo$ echo "Change2" >> my_second_committed_file
 john@satsuki:~/coderepo$ git status
 # On branch master
 # Changes to be committed:
