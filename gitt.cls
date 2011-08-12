@@ -167,7 +167,7 @@
   \xdef\callout@type{#1}% typeset in a box along the left
   \xdef\callout@title{#2}% typeset in a box along the top
   \begin{lrbox}{\callout@contents}%
-    \begin{minipage}{.9\textwidth}%
+    \begin{minipage}{\textwidth-30pt}%
 }{%
     \end{minipage}%
   \end{lrbox}%
