@@ -157,11 +157,7 @@ Unfortunately this can also be a drawback because no two Git setups are generall
 The set up of Git is totally customised to the situation or scenario at hand.
 In our case, we have merged together two of the workflow models that we presented in the early chapters.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=9cm]{images/f-w7-d1.pdf}
-\caption{Our workflow}
-\end{figure}
+\figuregith{9cm}{images/f-w7-d1.pdf}{Our workflow}
 
 We are using a \emph{blessed} repository with which to store our crown jewels.
 This is the repository that contains our main \textbf{release} branch.
@@ -218,31 +214,19 @@ Figure 2, shows a fairly standard commit tree.
 We have made commits \textbf{A} and \textbf{B}, and then we branch off and create \textbf{C} and \textbf{D}.
 It could well be that the \textbf{master} branch containing \textbf{A} and \textbf{B} actually came from an external source, and we are looking to do some development in our own branch locally.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=9cm]{images/f-w7-d2.pdf}
-\caption{Standard commit tree example}
-\end{figure}
+\figuregith{9cm}{images/f-w7-d2.pdf}{Standard commit tree example}
 
 Now what will inevitably happen is that some more development will continue in the source project, which is represented in the Figure below by commits \textbf{E} and \textbf{F}.
 This is shown below in Figure 3.
 In our use case, we actually want these new changes to be present during our development.
 Let us see how we can handle this.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=11cm]{images/f-w7-d3.pdf}
-\caption{Continued development}
-\end{figure}
+\figuregith{11cm}{images/f-w7-d3.pdf}{Continued development}
 
 We could quite happily merge the \textbf{master} branch into our own, but that would result in a merge commit being added, plus the fact that as we go further down the line, our development work would be interlaced with various updates from the \textbf{master}.
 A better way to handle this sometimes, is by using the rebase tool which will achieve the results displayed below in Figure 4.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=11cm]{images/f-w7-d4.pdf}
-\caption{A rebase in action}
-\end{figure}
+\figuregith{11cm}{images/f-w7-d4.pdf}{A rebase in action}
 
 As you can see we have a slight alteration to the diagram.
 Commits \textbf{C} and \textbf{D} have little ticks next to them.
@@ -631,22 +615,14 @@ Does this apply here too? Of course it does.
 Remember that a branch is really just defined by which commit the HEAD points to.
 Let us draw a few diagrams to show how the tree of commits looks before and after our rebase.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=9cm]{images/f-w7-d5.pdf}
-\caption{Our repository before the rebase}
-\end{figure}
+\figuregith{9cm}{images/f-w7-d5.pdf}{Our repository before the rebase}
 
 Figure 5 shows our repository before we perform the rebase.
 We can quite clearly see that there are two branches, diverging from the common ancestor, \textbf{1c3206a}.
 In Figure 6, we see the repository after the rebase has taken place.
 Notice that the two commits that \emph{were} forming the \textbf{wonderful} branch are now coloured in grey.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=11cm]{images/f-w7-d6.pdf}
-\caption{Our repository after the rebase}
-\end{figure}
+\figuregith{11cm}{images/f-w7-d6.pdf}{Our repository after the rebase}
 
 \index{dangling}The grey commits are no longer referenced.
 No branche HEADs point to them, and no other commits rely upon them.
@@ -732,11 +708,7 @@ john@satsuki:~/coderepo$ git logg -n7
 john@satsuki:~/coderepo$
 \end{code}
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=11cm]{images/f-w7-d7.pdf}
-\caption{Our repository after the recovery}
-\end{figure}
+\figuregith{11cm}{images/f-w7-d7.pdf}{Our repository after the recovery}
 
 Notice our branch is now created and looking at the log, it contains the same two commits and the tree looks as we would expect.
 We have our \texttt{another\_file} updates in both branches.
