@@ -6,6 +6,8 @@
 
 \ProvidesClass{gitt}[2011/05/15 v1.0.0 GITT book design]
 
+\RequirePackage{xifthen}
+
 % The 'screen' option creates a PDF suitable for reading on a computer screen
 % The 'print' option creates a PDF suitable for printing
 \providecommand{\gitt@format}{screen}% default format
@@ -32,6 +34,11 @@
 %\checkandfixthelayout
 
 \RequirePackage[paperheight=24.59cm,paperwidth=18.90cm,headheight=\baselineskip,textheight=35\baselineskip]{geometry}
+\ifthenelse{\equal{\gitt@format}{print}}{%
+  \geometry{symmetric}%
+}{%
+  \geometry{asymmetric}%
+}
 \geometry{showframe}% comment out or remove this line when finished fiddling with margins.
 
 % Reset the figure numbering at the beginning of each chapter and print only
@@ -39,8 +46,6 @@
 \renewcommand{\thefigure}{\arabic{figure}}
 
 % Import packages
-\RequirePackage{xifthen}
-
 % Load colors
 \PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}
 \RequirePackage{xcolor}
