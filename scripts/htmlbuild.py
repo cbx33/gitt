@@ -39,9 +39,13 @@ plob = re.findall("(\\\\begin\{trenches\}(.*?)\\\\end\{trenches\})", data, re.S)
 for i in plob:
 	data = data.replace(i[0], '<div style="padding:10px;">' + i[1] + "</div>")
 
-plob = re.findall("(\\\\begin\{callout\}(.*?)\\\\end\{callout\})", data, re.S)
+plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 for i in plob:
-	data = data.replace(i[0], '<div style="padding:20px;border:3px solid #000">' + i[1] + "</div>")
+	data = data.replace(i[0], '<br>image:' + i[2] + ' - ' + i[3] + "<br>")
+
+plob = re.findall("(\\\\begin\{callout\}\{(.*?)\}\{(.*?)\}(.*?)\\\\end\{callout\})", data, re.S)
+for i in plob:
+	data = data.replace(i[0], '<div style="padding:20px;border:3px solid #000"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div>")
 
 plob = re.findall("(\\\\index\{(.*?)\})", data)
 for i in plob:
