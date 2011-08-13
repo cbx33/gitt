@@ -333,7 +333,7 @@
 
 \titleformat{\chapter}%
   [hang]% shape
-  {\sffamily\huge\itshape}% format applied to label+text
+  {\sffamily\huge\itshape\bfseries}% format applied to label+text
   {\thechapter}% label
   {0pt}% horizontal separation between label and title body
   {\sffamily\huge\itshape}% before the title body
@@ -341,7 +341,7 @@
 
 \titleformat{\section}%
   [hang]% shape
-  {\sffamily\Large\itshape}% format applied to label+text
+  {\sffamily\Large\itshape\bfseries}% format applied to label+text
   {\thesection}% label
   {1em}% horizontal separation between label and title body
   {}% before the title body
@@ -349,7 +349,7 @@
 
 \titleformat{\subsection}%
   [hang]% shape
-  {\sffamily\large\itshape}% format applied to label+text
+  {\sffamily\large\itshape\bfseries}% format applied to label+text
   {\thesubsection}% label
   {1em}% horizontal separation between label and title body
   {}% before the title body
@@ -357,7 +357,7 @@
 
 \titleformat{\subsubsection}%
   [hang]% shape
-  {\sffamily\normalsize\itshape}% format applied to label+text
+  {\sffamily\normalsize\itshape\bfseries}% format applied to label+text
   {\thesubsection}% label
   {1em}% horizontal separation between label and title body
   {}% before the title body
