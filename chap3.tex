@@ -1,10 +1,10 @@
 % chap3.tex - Week 3
 \cleardoublepage
 %\phantomsection
-
 \chapter{Week 3}
 \section{Day 1 - ``But how do I see what's going on?''}
 \subsection{Logging in Git}
+
 \index{logging}
 Perhaps the best feature of a version control system is the level of accountability that it offers if set up correctly.
 What do we mean by this? People often mistake the word \textbf{accountability} for the word \textbf{blame}.
@@ -728,32 +728,22 @@ Branching can be a tricky subject, so it is important to understand what is happ
 It would be prudent to look over the \emph{After Hours} section for Week 2 before continuing as some of the terminology may be a little confusing otherwise.
 
 \clearpage
-
 \section{Summary - John's Notes}
 \subsection{Commands}
 \begin{itemize}
 \item\texttt{git log} - Return a navigable list of commits to a repository
-
 \item\texttt{git log -S<string>} - Show all commits that either introduced or removed a particular string from the repository
-
 \item\texttt{git log -S<string> <path>} - Show all commits that either introduced or removed a particular string from the repository, but restrict the search to a specific path
-
 \item\texttt{git log HEAD\textasciitilde1..HEAD} - Show all commits between HEAD~1 and HEAD, essentially the last commit
-
 \item\texttt{git diff HEAD\textasciitilde1..HEAD} - Show the actual differences between HEAD~1 and HEAD
-
 \item\texttt{git tag <name>} - Create a tag with the given name
-
 \item\texttt{git tag <name> <commit>} - Retrospectively tag a commit with a given name
-
 \item\texttt{git rev-parse <tag>} - Show the commit SHA-1 hash object referred to by the given name
 \end{itemize}
 
 \subsection{Terminology}
 \begin{itemize}
 \item\textbf{Branch} - A way of working on the same set of code in parallel without modifications overlapping
-
 \index{Terminology!Diff}\item\textbf{Diff} - Shows the actual differences between files
-
 \index{Terminology!Hunk}\item\textbf{Hunk} - A section of a diff output
 \end{itemize}

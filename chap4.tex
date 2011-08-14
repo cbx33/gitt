@@ -913,47 +913,28 @@ Conflicts do happen and when they do you should simply take your time and resolv
 The \emph{After Hours} section for Week 4, takes a closer look at merging and explains some more about what branches are at a repository level.
 
 \clearpage
-
 \section{Summary - John's Notes}
 \subsection{Commands}
 \begin{itemize}
 \item\texttt{git branch <branch\_name>} - Creates a new branch with a given name
-
 \item\texttt{git checkout <branch\_name>} - Switches to a new branch
-
 \item\texttt{git log -n1} - Limits the output of the log command to only a single commit
-
 \item\texttt{git branch -v} - Verbosely list all local branches
-
 \item\texttt{git show <reference>} - Show the information pointed to by the reference
-
 \item\texttt{git merge <branch\_name>} - Merge in a given branch to the current one
-
 \item\texttt{git checkout -b <branch\_name>} - Create a new branch and switch into it in one go
-
 \item\texttt{git reset --hard <commit\_ref>} - Reset a branch to a specific commit reference
-
 \item\texttt{git log --graph --pretty=oneline --all \newline --abbrev-commit --decorate} - Shows a graphical view of the repository
-
 \item\texttt{git log --graph --oneline --all --decorate} - A shorter form of the above command
-
 \item\texttt{git branch -d <branch\_name>} - Delete a branch that has already been merged
-
 \item\texttt{git branch -D <branch\_name>} - Forcibly delete a branch
-
 \item\texttt{git branch <branch\_name> <commit\_ref>} - Create a new branch, starting at the commit reference
-
 \item\texttt{git reset --merge} - Abort a merge and reset back to pre-merge state
-
 \item\texttt{git diff <commit\_1> <commit\_2> -- <files>} - Show the difference between the two commits, for certain files
-
 \end{itemize}
 
 \subsection{Terminology}
 \begin{itemize}
-
 \index{Terminology!Conflict}\item\textbf{Conflict} - A conflict occurs when an attempt is made to reconcile multiple changes to the same section of a file at the same time.
-
 \index{Terminology!Fast-Forward Merge}\item\textbf{Fast-Forward Merge} - The simplest merge type, which simply winds a branch forward in time to meet the tip of another.
-
 \end{itemize}

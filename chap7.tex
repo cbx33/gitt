@@ -824,17 +824,12 @@ As stated before, do not forget the fact that rebasing changes history.
 In all cases that we have used rebase, commit IDs have been changed and therefore you must be very careful when using it.
 
 \clearpage
-
 \section{Summary - John's Notes}
 \subsection{Commands}
 \begin{itemize}
-
 \item\texttt{git rebase -i HEAD~3} - Runs the rebase tool interactively for the last three commits
-
 \item\texttt{git rebase <branchA> <branchB>} - Lift all commits between the common ancestor of branchA and branchB and replay them on top of branchB
-
 \item\texttt{git branch <branch\_name> <startpoint>} - Create a new branch starting from a definte start point
-
 \item\texttt{git rebase --onto master <branchC> \newline <branchA> <branchB>} - Lift all commits between the common ancestor of branchA and branchB and replay them on top of branchC
 \end{itemize}
 
