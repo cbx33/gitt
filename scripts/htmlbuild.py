@@ -76,9 +76,9 @@ plob = re.findall("(\\\\begin\{trenches\}(.*?)\\\\end\{trenches\})", data, re.S)
 for i in plob:
 	data = data.replace(i[0], '<div style="padding:10px;">' + i[1] + "</div>")
 
-plob = re.findall("(\\\\begin\{itemize\}(.*?\\\\end\{itemize\}))", data, re.S)
+plob = re.findall("(\\\\begin\{itemize\}((.*?)\\\\end\{itemize\}))", data, re.S)
 for i in plob:
-	data = data.replace(i[0], '<div style="padding:10px;"><ul>' + i[1] + "</ul></div>")
+	data = data.replace(i[0], '<div style="padding:10px;"><ul>' + i[2] + "</ul></div>")
 	listd = i[1]
 	nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|(?=\\\\end\{itemize\})))", listd, re.S)
 	for j in nasty:
