@@ -2,7 +2,7 @@
 
 import re
 
-f = open("../chap2.tex")
+f = open("../chap4.tex")
 data = f.read()
 f.close()
 
@@ -20,6 +20,7 @@ data = data.replace("\n\n", "<br>")
 data = data.replace("\\%", "&#37;")
 data = data.replace("\\ ", "&nbsp;")
 data = data.replace("\\_", "_")
+data = data.replace("\\newline", "")
 
 data = data.replace("\\ldots", "...")
 data = data.replace("\\textasciitilde{}", "~")
@@ -37,6 +38,10 @@ for i in plob:
 	data = data.replace(i[0], '<span style="font-family:monospace;">git ' + i[1] + '</span>')
 
 plob = re.findall("(\\\\clearpage)", data)
+for i in plob:
+	data = data.replace(i, "")
+
+plob = re.findall("(\\\\cleardoublepage)", data)
 for i in plob:
 	data = data.replace(i, "")
 
@@ -83,7 +88,14 @@ for i in plob:
 	nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|(?=\\\\end\{itemize\})))", listd, re.S)
 	for j in nasty:
 		data = data.replace(j[0], '<li>' + j[1] + '</li>')
-		print j[1]
+
+plob = re.findall("(\\\\begin\{enumerate\}((.*?)\\\\end\{enumerate\}))", data, re.S)
+for i in plob:
+	data = data.replace(i[0], '<div style="padding:10px;"><ol>' + i[2] + "</ol></div>")
+	listd = i[1]
+	nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|(?=\\\\end\{enumerate\})))", listd, re.S)
+	for j in nasty:
+		data = data.replace(j[0], '<li>' + j[1] + '</li>')
 
 plob = re.findall("(\\\\begin\{code\}(.*?)\\\\end\{code\})", data, re.S)
 for i in plob:
