@@ -2,7 +2,6 @@
 \cleardoublepage
 %\phantomsection
 \chapter{Week 5}
-
 \section{Day 1 - ``This isn't working for me John''}
 \subsection{Dealing with resistance}
 
@@ -93,11 +92,7 @@ We can invoke the GUI by running the \indexgit{gui} command.
 We will be presented with a window similar to that in Figure 1.
 Note that in this case, we are running it against our test repository that we have been working on through previous chapters.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=11cm]{images/f-w5-d1.png}
-\caption{Initial Git GUI view}
-\end{figure}
+\figuregith{11cm}{images/f-w5-d1.png}{Initial Git GUI view}
 
 This initial window is composed of four key areas
 \begin{enumerate}
@@ -112,62 +107,38 @@ If the file is already tracked, then the window will show a diff between the las
 \index{GUI!unstaged}If we take a closer look at the \textbf{Unstaged} area of the screen, we see something interesting.
 This is shown in Figure 2.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=5cm]{images/f-w5-d2.png}
-\caption{Unstaged section}
-\end{figure}
+\figuregith{5cm}{images/f-w5-d2.png}{Unstaged section}
 
 This is the only file in our working copy which contains unstaged changes.
 That should not be surprising as this file has never been added to the repository so it is not considered \textbf{tracked} by Git.
 If you remember, it was actually a temporary file that we piped some output to in an earlier chapter.
 If we click on the filename of this file, the \textbf{Content View} area changes to show Figure 3.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=11cm]{images/f-w5-d3.png}
-\caption{Content view of \texttt{temp\_file}}
-\end{figure}
+\figuregith{11cm}{images/f-w5-d3.png}{Content view of \texttt{temp\_file}}
 
 \index{GUI!content view (git gui)}In the top banner section of the \textbf{Content View} we see an indication of the file's status.
 In this case it is \textbf{Untracked} and \textbf{not staged}.
 We can change this by clicking on the small blank page icon to the left of the file name in the \textbf{Unstaged} area of the screen, see Figure 4.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=5cm]{images/f-w5-d4.png}
-\caption{Staged section}
-\end{figure}
+\figuregith{5cm}{images/f-w5-d4.png}{Staged section}
 
 \index{GUI!staged}Now the file has moved into the \textbf{Staged} area of the screen as would be equivalent to us doing a \texttt{git add temp\_file}.
 The file has been added to the index and is now ready for committing.
 We also notice a difference in the \textbf{Content View} of \texttt{temp\_file}.
 This can be seen in Figure 5.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=11cm]{images/f-w5-d5.png}
-\caption{Content view of \texttt{temp\_file}}
-\end{figure}
+\figuregith{11cm}{images/f-w5-d5.png}{Content view of \texttt{temp\_file}}
 
 Now the bar reads that the file is \textbf{Staged for commit}, which is exactly what we expect.
 We are now going to fill out a commit message, which can be seen in Figure 6, and press the \textbf{Commit} button, to initialise a commit into the repository.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=11cm]{images/f-w5-d6.png}
-\caption{Preparing for commit}
-\end{figure}
+\figuregith{11cm}{images/f-w5-d6.png}{Preparing for commit}
 
 It should be noted here that we could have performed multiple operations here, adding several files to the staging area before pressing that all important \textbf{Commit} button.
 We will finish this section off by checking the status area at the very bottom of the screen.
 In Figure 7, you should see that our latest operation has been summarised by the string \texttt{Created commit 35243bf8: Added temp\_file}
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=11cm]{images/f-w5-d7.png}
-\caption{Status message showing new commit ID}
-\end{figure}
+\figuregith{11cm}{images/f-w5-d7.png}{Status message showing new commit ID}
 
 \section{Day 2 - ``Back to logging''}
 \subsection{Visualisation to the max}
@@ -177,11 +148,7 @@ The visualiser that is bundled with Git is packed with features and can be invok
 
 Whichever way we begin an instance of \texttt{gitk}, we are likely to end up with a screen like the one in Figure 8.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=11cm]{images/f-w5-d8.png}
-\caption{Initial \texttt{gitk} view}
-\end{figure}
+\figuregith{11cm}{images/f-w5-d8.png}{Initial \texttt{gitk} view}
 
 Let us spend a few minutes familiarising ourselves with the layout of the \texttt{gitk} tool.
 The window is split up into roughly seven different areas.
@@ -203,11 +170,7 @@ It also allows you to navigate through these results.
 Essentially this is just a very simplified version of the graphs we were drawing in the previous chapter.
 As you can see, the only information that appears to be missing from the graph is the commit ID, which can be obtained quite easily by clicking on the relevant commit and viewing the string presented just below the graph pane.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d9.png}
-\caption{Graphical history of repository}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d9.png}{Graphical history of repository}
 
 The historical graph shows us all active branches, tags and commits.
 From looking at this it is easy to see where our merges occurred and where the branch HEADs point to.
@@ -216,11 +179,7 @@ Each circle on the graph is a commit and is linked to the panes on the right, wh
 
 \index{GUI!content view (gitk)}If we select the \textbf{master} branch HEAD, which should be the top commit, (in fact on opening \texttt{gitk} this should already be selected), we should see a pane similar to Figure 10 in the \textbf{Content View} section of the screen.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d10.png}
-\caption{Content view of master HEAD}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d10.png}{Content view of master HEAD}
 
 Notice in this that we have two parents listed, which is what we would expect, as the last commit we did was that of a merge from \textbf{zaney} into \textbf{master}.
 Notice also that below this, we get to see a diff output of exactly what changed during this merge.
@@ -246,20 +205,12 @@ We are going to drop down the box which currently reads \texttt{contains:} in th
 Then we are going to enter \texttt{Change1} into the field on the right.
 Your changes should look similar to Figure 11.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d11.png}
-\caption{Searching for a string}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d11.png}{Searching for a string}
 
 After you have finished typing you should already have noticed a difference in the \textbf{History Graph} pane.
 Notice how some commits are now highlighted in bold, as demonstrated in Figure 12?
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d12.png}
-\caption{Search results}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d12.png}{Search results}
 
 If you remember from Week 3, when we first ran the \texttt{git log -SChange1} command, we were presented with only one commit.
 That was titled, \texttt{Made a few changes to first and second files}.
@@ -305,11 +256,7 @@ In the example we are going to go back to the search we made previously and filt
 First we are going to load the dialog box, by using the menu \textbf{\emph{View - New View...}}.
 The resulting dialog is displayed below and we have already filled in the required information.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d13.png}
-\caption{Setting up a \emph{view}}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d13.png}{Setting up a \emph{view}}
 
 We changed the \textbf{View Name} to be \texttt{Change1}.
 This is simply an identifier that will allow us to choose our view in the future.
@@ -325,11 +272,7 @@ The result of this view is shown in Figure 14.
 Notice that instead of all the commits being shown, we are just shown the two that we are interested in.
 Both of these commits are referred to earlier in the chapter, when we ran the search manually in \texttt{gitk}
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d14.png}
-\caption{View results}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d14.png}{View results}
 
 This ends our tour of the \texttt{gitk} utility.
 Hopefully you have seen that it can actually present a large amount of information in a very compact and usable way.
@@ -351,22 +294,14 @@ The dialog box is shown in Figure 15.
 Notice also that when we hover over the branch names, we are presented with a small pop up, telling us who made the last commit to the branch and what the commit message was.
 Clicking the \textbf{Browse} button will take us to the next window, where we can choose the file we wish to view.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d15.png}
-\caption{Point in history dialog}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d15.png}{Point in history dialog}
 
 The file choosing dialog is rather plain.
 Just double clicking on a file will start the \indexgit{gui blame} tool.
 Though primarily used as a way to see who, or what was responsible for a specific change to a line, this tool is also useful for seeing how a file has changed over time.
 The file chooser dialog is shown in Figure 16.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d16.png}
-\caption{File chooser}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d16.png}{File chooser}
 
 Once selected, the file is displayed in its own window.
 The window is split into two sections.
@@ -374,11 +309,7 @@ The top part of the window displays the actual content of the file, along with s
 In the lower part of the window, more information on a specific commit is shown.
 This window is shown in Figure 17.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d17.png}
-\caption{File viewer}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d17.png}{File viewer}
 
 Clicking on a line in the view above, will turn that section green and will display the information related to that commit in the lower pane, along with the complete commit message.
 It will also highlight all other lines in the current file that were also modified in that commit.
@@ -388,21 +319,13 @@ Already this is a very powerful tool, much like the \texttt{gitk} too for visual
 In larger files, being able to click on a portion and have it highlight every other line in that file that was changed in that commit can be extremely useful.
 \index{history context}By right clicking on the file, we can also choose the \textbf{Show History Context}, which will load \texttt{gitk} and move the commit history pane to show the commit we are currently interested in.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d18.png}
-\caption{File viewer, highlighting a commit}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d18.png}{File viewer, highlighting a commit}
 
 You should have noticed by now that each line has a commit ID associated with it, two in fact.
 These are in fact links, and by clicking on these, we can wind the history of the file, back to that point, so that it shows not the state at which it originally did, but now the state as it was in the selected commit.
 This is shown in Figure 19.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-w5-d19.png}
-\caption{Going back to a previous commit}
-\end{figure}
+\figuregith{10cm}{images/f-w5-d19.png}{Going back to a previous commit}
 
 Again this is a hugely powerful tool.
 You can navigate back to the current version of the file, or if you have clicked on several to get to your current point, review a history of your path, by clicking on the green arrow at the top of the screen.
@@ -424,21 +347,15 @@ Never be afraid to use them.
 Remember, at the end of the day, you should be focussed on getting the job done and using whichever tools you require to do just that.
 
 \clearpage
-
 \section{Summary - John's Notes}
 \subsection{Commands}
 \begin{itemize}
-
 \item\texttt{git gui} - Invokes the Git GUI tool
-
 \item\texttt{gitk} - Starts an instance of the graphical history tool for Git
-
 \item\texttt{git gui blame <path>} - Opens the blame window for a specific file
-
 \end{itemize}
 
 \subsection{Terminology}
 \begin{itemize}
-
 \index{Terminology!Blame}\item\textbf{Blame} - A way of find the commit that caused an issue in the repository.
 \end{itemize}

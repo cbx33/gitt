@@ -265,6 +265,22 @@
   \index{git commands!#1@\texttt{#1}}%
 }
 
+\newcommand{\figuregit}[3]{%
+\begin{figure}[bt]
+	\centering
+	\includegraphics[width=#1]{#2}
+	\caption{#3}
+\end{figure}
+}
+
+\newcommand{\figuregith}[3]{%
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=#1]{#2}
+	\caption{#3}
+\end{figure}
+}
+
 \RequirePackage{listings}
 \lstnewenvironment{code}{
   \lstset{

@@ -1300,41 +1300,23 @@ What follows in the next chapter are some other points that are added more for i
 \section{Summary - John's Notes}
 \subsection{Commands}
 \begin{itemize}
-
 \item\texttt{git apply <filename>} - Applies a patch to the working tree
-
 \item\texttt{git reflog show <branch>} - Show the reflog only for the specified branch
-
 \item\texttt{git format-patch <ref1>..<ref2>} - Create a set of patches of each commit between two points
-
 \item\texttt{git am <filename>} - Apply a specific patch containing a \emph{format-patch} file
-
 \item\texttt{git bisect start} - Begin a bisect session
-
 \item\texttt{git bisect good <ref>} - Mark a reference as good, during a \texttt{git bisect}
-
 \item\texttt{git bisect bad <ref>} - Mark a reference as bad, during a \texttt{git bisect}
-
 \item\texttt{git bisect start <ref\_recent> <ref\_old>} - Start a bisect session between two known points
-
 \item\texttt{git bisect run <command>} - Start an automated run of the bisect tool
-
 \item\texttt{git filter-branch --index-filter 'git rm --cached \newline --ignore-unmatch <file>' HEAD} - Rewrites the current branch to remove file
-
 \item\texttt{git filter-branch --subdirectory-filter <directory>} - Rewrites the current branch to make subdirectory directory the root of the branch
-
 \item\texttt{git fetch <remote> +<remote\_branch>:<local\_branch>} - Creates a local branch from the remote branch existing in a remote repository
-
-\item\texttt{git branch -m <old\_branch> <new\_branch>} - Move or rename a branch from old to new
-
+\item\texttt{git branch -m <old\_branch> <new\_branch>} - Move or rename a branch from old to ne
 \item\texttt{git bundle create <filename> <branch>} - Create a bundle file in filename, containing all the objects and references from branch. 
-
 \item\texttt{git submodule add <repo> <path>} - Add a submodule at the directory specified by path
-
 \item\texttt{git submodule init} - Initialise any submodules in the super project
-
 \item\texttt{git submodule update} - Pull all submodules back to the points that have previously been committed to
-
 \end{itemize}
 
 \subsection{Terminology}

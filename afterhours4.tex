@@ -30,11 +30,7 @@ At first it may sound like a useless idea, but it could be used to keep the hist
 Now that we are aware of the different options available to us, let us discuss what happens when we actually perform a merge.
 Let us consider the state of our repository at the end of Week 4, as shown in Figure 1.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=9cm]{images/f-w4-d6.pdf}
-\caption{Repository at the end of \emph{Week 4}}
-\end{figure}
+\figuregith{9cm}{images/f-w4-d6.pdf}{Repository at the end of \emph{Week 4}}
 
 For arguments sake, let us say that we were on the \textbf{wonderful} branch, and we wanted to merge the \textbf{zaney} branch into it.
 Using a standard 3-way merge algorithm, this would mean taking our current branch, which we will call \textbf{A}, the \textbf{zaney} branch, which we will call \textbf{B} and a parent which we will \textbf{C}.
@@ -51,11 +47,7 @@ Sometimes we may need to merge these branches together, or merge these branches 
 Which ever way we do it, we will need to find a common ancestor.
 Figure 2, demonstrates a couple of possible merge proposals, and one of their common ancestors.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=6cm]{images/f-af4-d2.pdf}
-\caption{Finding the \emph{Best Common Ancestor}}
-\end{figure}
+\figuregith{6cm}{images/f-af4-d2.pdf}{Finding the \emph{Best Common Ancestor}}
 
 \index{Common Ancestor}As you can see from the second example, branch \textbf{B} was created from a commit above the \emph{Common Ancestor}, but the \emph{Common Ancestor} remains the same.
 

@@ -340,21 +340,13 @@ If we now run our \texttt{git gui} command, we will see the changes that are pre
 Let us start with \texttt{newfile2} as we want every change from that file present in this commit.
 Figure 1 shows what \texttt{git gui} looks like at this stage.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-af5-d1.png}
-\caption{Changes to \texttt{newfile2}}
-\end{figure}
+\figuregith{10cm}{images/f-af5-d1.png}{Changes to \texttt{newfile2}}
 
 If we right click on one of the green lines, remembering that green is short for an \textbf{addition}, we get a menu which we have not seen before.
 Among other things, this menu has the ability to stage a specific line or hunk for commit.
 In our case we are going to hit the \textbf{Stage Hunk For Commit} and then move on to the next file, \texttt{newfile1}.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-af5-d2.png}
-\caption{Changes to \texttt{newfile1}}
-\end{figure}
+\figuregith{10cm}{images/f-af5-d2.png}{Changes to \texttt{newfile1}}
 
 Now we are looking at \texttt{newfile1}, we can use the \textbf{Stage Line For Commit} to add specific lines into the staging area.
 The file is shown in Figure 2.
@@ -367,11 +359,7 @@ We have the changes that we expect ready to be committed.
 If we want to check one last time that they are right, we can use the \textbf{Staged Changes} pane on the left to choose the file and inspect the diff.
 Once we are happy we can use the \textbf{Commit} area of the window to type our commit message and emblazon our changes forever.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-af5-d3.png}
-\caption{Changes to \texttt{newfile1} after staging}
-\end{figure}
+\figuregith{10cm}{images/f-af5-d3.png}{Changes to \texttt{newfile1} after staging}
 
 Figure 3, shows what our file looks like after the first commit.
 Interestingly, as our file is so small, you will probably find that \texttt{git gui} throws a corrupt patch error if you try to just commit the next line.

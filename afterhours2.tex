@@ -93,11 +93,7 @@ The commit objects houses links to a tree.
 The tree object contains links to either blobs or trees.
 Regardless, the structure of a basic repository may look something a little like Figure 1.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=9cm]{images/f-af2-d1.pdf}
-\caption{Overview of objects in a repository}
-\end{figure}
+\figuregith{9cm}{images/f-af2-d1.pdf}{Overview of objects in a repository}
 
 So now we know what a basic repository should look like, let us go through each stage of our committing in \textbf{Week 2} and see how it is built up at each stage.
 Below is a consolidated list of all the objects in the repository.
@@ -230,11 +226,7 @@ However, if we take a trip back in time and flick back to the first commit that 
 So, the object contains nothing.
 Now we can draw up a diagram of our repository after the first commit.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=9cm]{images/f-af2-d2.pdf}
-\caption{Overview of objects in repository after \textbf{first} commit}
-\end{figure}
+\figuregith{9cm}{images/f-af2-d2.pdf}{Overview of objects in repository after \textbf{first} commit}
 
 If we pick another commit object from the list and run our command on it we can see something new has appeared in the output.
 
@@ -258,11 +250,7 @@ Checking in Week 2 will confirm this.
 It seems we could now build a complete history of our repository so far.
 If we did so, we would end up with a diagram that looked a little like the one below.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=9cm]{images/f-af2-d3.pdf}
-\caption{Overview of objects in repository after \textbf{three} commits}
-\end{figure}
+\figuregith{9cm}{images/f-af2-d3.pdf}{Overview of objects in repository after \textbf{three} commits}
 
 Hopefully you can see from this diagram that Git will reuse objects as discussed above.
 This diagram describes the repository layout completely and if you correlate, we have correctly identified and accounted for each object in the repository.

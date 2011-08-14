@@ -2,7 +2,6 @@
 \cleardoublepage
 %\phantomsection
 \chapter{Week 6}
-
 \section{Day 1 - ``My private little stash''}
 \subsection{Getting interrupted}
 
@@ -819,51 +818,29 @@ We have learnt a lot more about how to play with branches and remotes.
 In the \emph{After Hours} section, we will take a deeper look at remote branches and how they are configured and represented in Git.
 
 \clearpage
-
 \section{Summary - John's Notes}
 \subsection{Commands}
 \begin{itemize}
-
 \item\texttt{git stash} - Short for \texttt{git stash save}, creates a stash of local modifications
-
 \item\texttt{git stash apply <stash\_name>} - Applies a stash back onto a branch
-
 \item\texttt{git stash drop <stash\_name>} - Remove a stash from the stash list
-
 \item\texttt{git stash list} - Show a list of current stashes
-
 \item\texttt{git stash show <stash\_name>} - Show information about a specific stash
-
 \item\texttt{git stash show <stash\_name> -p} - Show the contents of a stash
-
 \item\texttt{git clone <local> <remote>} - Clone a Git repository, from the local to the remote location.
-
 \item\texttt{git branch -r} - Show all remote branch references
-
 \item\texttt{git remote} - Show a list of remote repositories
-
 \item\texttt{git remote -v} - Show a more detailed list of remote repositories
-
 \item\texttt{git diff <branch> <remote>/<branch> -- <file>} - Show the differences between the two branches, one local, one remote, for a particular file.
-
 \item\texttt{git remote show <remote>} - Show detailed information about tracked branches for the specified remote repository
-
 \item\texttt{git log <remote>/<branch> -- <file>} - Show the log of the remote branch specified for a particular file
-
 \item\texttt{git checkout <remote>/<branch>} - Checkout a remote branch, leaving the local working tree in a detached HEAD state
-
 \item\texttt{git checkout -b <branch> <remote>/<branch>} - Create and switch to a new branch, which is set up to track a remote branch specified
-
 \item\texttt{git fetch <remote>} - Fetch updates to the remote branch specified including all objects and branches
-
 \item\texttt{git pull} - When configured, fetches and merges a remote branch into the currently checked out branch.
-
 \item\texttt{git clone <local> <remote> --bare} - Creates a bare repository, suitable for pushing into
-
 \item\texttt{git push} - When configured, pushes all changes up to the configured remote branch
-
 \item\texttt{git push <remote> <local\_brch>:<remote\_brch>} - Pushes a local branch to a remote location with a different name
-
 \end{itemize}
 
 \subsection{Terminology}
