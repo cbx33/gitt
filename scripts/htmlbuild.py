@@ -108,11 +108,11 @@ def mung(filename):
 
 	plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
-		data = data.replace(i[0], '<br>image:' + i[2] + ' - ' + i[3] + "<br>")
+		data = data.replace(i[0], '<img src="' + i[2].replace(".pdf", ".png") + '"><br>' + i[3] + "<br>")
 
 	plob = re.findall("(\\\\figuregith\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
-		data = data.replace(i[0], '<br>image:' + i[2] + ' - ' + i[3] + "<br>")
+		data = data.replace(i[0], '<img src="' + i[2].replace(".pdf", ".png") + '"><br>' + i[3] + "<br>")
 
 	plob = re.findall("(\\\\begin\{callout\}\{(.*?)\}\{(.*?)\}(.*?)\\\\end\{callout\})", data, re.S)
 	for i in plob:
