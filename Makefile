@@ -1,6 +1,7 @@
 all: pdf cleantmp
 quick: quickpdf cleantmp
 clean: cleantmp cleanpdf
+web: images html
 
 print:
 	pdflatex print
@@ -22,3 +23,13 @@ cleantmp:
 
 cleanpdf:
 	rm -f gitt.pdf
+
+html:
+	mkdir -p site/images
+	rm -f site/*.html
+	rm -f site/images/*
+	python scripts/htmlbuild.py
+	cp images/f*.png site/images/
+
+images:
+	
