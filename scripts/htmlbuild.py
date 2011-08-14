@@ -124,3 +124,8 @@ for i in range(NO_CHAPS):
 	f = open("site/chap"+str(i+1)+".html", "w")
 	f.write(mung("chap"+str(i+1)+".tex"))
 	f.close()
+
+for i in range(NO_AF):
+	f = open("site/afterhours"+str(i+1)+".html", "w")
+	f.write(mung("afterhours"+str(i+1)+".tex"))
+	f.close()
