@@ -31,11 +31,7 @@ In our case, lighttpd has been installed, and so Git will use that as its daemon
 Firefox is also the default browser on this machine and so this is the browser that Git will choose to display the web page in.
 If we wanted to use an alternative browser, we could have supplied an argument with \texttt{--browser}, like \texttt{--browser chromium} for example.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=12cm]{images/f-af7-d1.png}
-\caption{Instaweb's default page}
-\end{figure}
+\figuregith{12cm}{images/f-af7-d1.png}{Instaweb's default page}
 
 The first thing to notice is that the description of the repository is unhelpful.
 In Figure 1, it is shown as \texttt{Unnamed repository; edit this...}.
@@ -81,17 +77,9 @@ If we had other web daemons installed, such as apache, we could override the def
 Notice the port number which as been defined as \texttt{1234}.
 Let us run up \texttt{git instaweb} again and see what other features the web interface offers.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=12cm]{images/f-af7-d2.png}
-\caption{Instaweb's repository page (top)}
-\end{figure}
+\figuregith{12cm}{images/f-af7-d2.png}{Instaweb's repository page (top)}
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=12cm]{images/f-af7-d3.png}
-\caption{Instaweb's repository page (bottom)}
-\end{figure}
+\figuregith{12cm}{images/f-af7-d3.png}{Instaweb's repository page (bottom)}
 
 Figures 2 and 3 show how the web interface looks when browsing out repository.
 At the top of the page we see a history of commits along with a search box which works similar to the \texttt{gitk} system which was discussed earlier.
@@ -114,31 +102,19 @@ Let us take a little look around the interface.
 Choosing the first commit in the list on the homepage and clicking on the \textbf{commit} link moves on to the commit page.
 Here we can see detailed information about the commit.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=12cm]{images/f-af7-d4.png}
-\caption{Instaweb's default page}
-\end{figure}
+\figuregith{12cm}{images/f-af7-d4.png}{Instaweb's default page}
 
 The \textbf{commit}, \textbf{tree} and \textbf{parent} object hashes are displayed here fore reference.
 The \textbf{tree} amd \textbf{parent} lines are clickable links which will take us to those relevant sections.
 We are going to choose the \textbf{tree} link.
 A screenshot of the resulting page is shown in Figure 5.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=12cm]{images/f-af7-d5.png}
-\caption{Instaweb's default page}
-\end{figure}
+\figuregith{12cm}{images/f-af7-d5.png}{Instaweb's default page}
 
 Going back and clicking on the snapshot link will initiate a download of the entire filesystem, at that point in the repository's life.
 As shown in Figure 6.
 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=10cm]{images/f-af7-d6.png}
-\caption{Instaweb's default page}
-\end{figure}
+\figuregith{10cm}{images/f-af7-d6.png}{Instaweb's default page}
 
 This has been a very brief tour around the \texttt{gitweb} system.
 Hopefully you can see that this is a very useful tool to add to our Git suite.
