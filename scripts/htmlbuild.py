@@ -27,6 +27,18 @@ data = data.replace("\\textasciitilde{}", "~")
 plob = re.findall("(%.*?\n)", data, re.M)
 for i in plob:
 	data = data.replace(i, "")
+	
+plob = re.findall("(\\\\index\{(.*?)\})", data)
+for i in plob:
+	data = data.replace(i[0], "")
+
+plob = re.findall("(\\\\indexgit\{(.*?)\})", data)
+for i in plob:
+	data = data.replace(i[0], '<span style="font-family:monospace;">git ' + i[1] + '</span>')
+
+plob = re.findall("(\\\\clearpage)", data)
+for i in plob:
+	data = data.replace(i, "")
 
 plob = re.findall("(\\\\thoughtbreak)", data)
 for i in plob:
@@ -64,6 +76,15 @@ plob = re.findall("(\\\\begin\{trenches\}(.*?)\\\\end\{trenches\})", data, re.S)
 for i in plob:
 	data = data.replace(i[0], '<div style="padding:10px;">' + i[1] + "</div>")
 
+plob = re.findall("(\\\\begin\{itemize\}(.*?\\\\end\{itemize\}))", data, re.S)
+for i in plob:
+	data = data.replace(i[0], '<div style="padding:10px;"><ul>' + i[1] + "</ul></div>")
+	listd = i[1]
+	nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|(?=\\\\end\{itemize\})))", listd, re.S)
+	for j in nasty:
+		data = data.replace(j[0], '<li>' + j[1] + '</li>')
+		print j[1]
+
 plob = re.findall("(\\\\begin\{code\}(.*?)\\\\end\{code\})", data, re.S)
 for i in plob:
 	code = i[1].replace("\n", "<br>")
@@ -81,13 +102,6 @@ plob = re.findall("(\\\\begin\{callout\}\{(.*?)\}\{(.*?)\}(.*?)\\\\end\{callout\
 for i in plob:
 	data = data.replace(i[0], '<div style="padding:20px;border:3px solid #000"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div>")
 
-plob = re.findall("(\\\\index\{(.*?)\})", data)
-for i in plob:
-	data = data.replace(i[0], "")
-
-plob = re.findall("(\\\\indexgit\{(.*?)\})", data)
-for i in plob:
-	data = data.replace(i[0], '<span style="font-family:monospace;">git ' + i[1] + '</span>')
 
 f = open("testout.html", "w")
 f.write(data)
