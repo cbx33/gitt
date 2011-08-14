@@ -14,7 +14,7 @@
    id="svg3463"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="w7-d2.svg">
+   sodipodi:docname="w7-d3.svg">
   <defs
      id="defs3465">
     <marker
@@ -247,7 +247,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -257,106 +257,143 @@
      id="layer1">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.68328166;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect4771"
+       id="rect4771-0-5"
        width="90"
        height="50"
        x="80"
-       y="102.36218"
+       y="422.36218"
        ry="16.717764" />
     <text
        xml:space="preserve"
        style="font-size:18.30028152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
-       x="120.04232"
-       y="132.36218"
-       id="text3999"
+       x="120.04231"
+       y="452.36218"
+       id="text3999-1-9"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan4001"
-         x="120.04232"
-         y="132.36218">A</tspan></text>
+         id="tspan4001-1-7"
+         x="120.04231"
+         y="452.36218">A</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.68328166;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect4771-7"
+       id="rect4771-7-6-3"
        width="90"
        height="50"
        x="210"
-       y="102.36218"
+       y="422.36218"
        ry="16.717764" />
     <text
        xml:space="preserve"
        style="font-size:18.30028152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
-       x="249.77647"
-       y="132.36218"
-       id="text3999-6"
+       x="249.77646"
+       y="452.36218"
+       id="text3999-6-21-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan4001-0"
-         x="249.77647"
-         y="132.36218">B</tspan></text>
+         id="tspan4001-0-4-3"
+         x="249.77646"
+         y="452.36218">B</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.68328166;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect4771-7-7-9"
+       id="rect4771-7-7-72-5"
        width="90"
        height="50"
        x="340"
-       y="172.36218"
+       y="422.36218"
        ry="16.717764" />
     <text
        xml:space="preserve"
        style="font-size:18.30028152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
-       x="379.77646"
-       y="202.36218"
-       id="text3999-6-2-6"
+       x="380.92758"
+       y="452.36218"
+       id="text3999-6-2-4-6"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan4001-0-9-8"
-         x="379.77646"
-         y="202.36218">C</tspan></text>
+         id="tspan4001-0-9-4-5"
+         x="380.92758"
+         y="452.36218">E</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.68328166;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect4771-7-7-7"
+       id="rect4771-7-7-9-9-6"
        width="90"
        height="50"
-       x="470"
-       y="172.36218"
+       x="600"
+       y="492.36218"
        ry="16.717764" />
     <text
        xml:space="preserve"
        style="font-size:18.30028152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
-       x="508.92758"
-       y="202.36218"
-       id="text3999-6-2-0"
+       x="639.77649"
+       y="522.36218"
+       id="text3999-6-2-6-8-2"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan4001-0-9-2"
-         x="508.92758"
-         y="202.36218">D</tspan></text>
+         id="tspan4001-0-9-8-1-2"
+         x="639.77649"
+         y="522.36218">C'</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.68328166;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4771-7-7-7-8-2"
+       width="90"
+       height="50"
+       x="730"
+       y="492.36218"
+       ry="16.717764" />
+    <text
+       xml:space="preserve"
+       style="font-size:18.30028152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
+       x="768.92755"
+       y="522.36218"
+       id="text3999-6-2-0-9-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4001-0-9-2-8-2"
+         x="768.92755"
+         y="522.36218">D'</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
-       d="m 170,127.36218 c 40,0 40,0 40,0"
-       id="path4917"
+       d="m 170,447.36218 c 40,0 40,0 40,0"
+       id="path4917-9-6"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
-       d="m 300,127.36218 c 20,0 10,40 40,70"
-       id="path4923"
+       d="m 560,447.36218 c 20,0 10,40 40,70"
+       id="path4923-6-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
-       d="m 430,197.36218 40,0"
-       id="path5925"
+       d="m 690,517.36218 40,0"
+       id="path5925-5-0"
        inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+       d="m 300,447.36218 40,0"
+       id="path6111-4-7"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.68328166;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4771-7-7-7-7-3-2"
+       width="90"
+       height="50"
+       x="470"
+       y="422.36218"
+       ry="16.717764" />
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
-       x="330"
-       y="152.36218"
-       id="text8322"
+       style="font-size:18.30028152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS"
+       x="508.92755"
+       y="452.36218"
+       id="text3999-6-2-0-0-7-9"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan8324"
-         x="330"
-         y="152.36218">Branch</tspan></text>
+         id="tspan4001-0-9-2-6-3-9"
+         x="508.92755"
+         y="452.36218">F</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+       d="m 430,447.36218 40,0"
+       id="path5925-3-6-9"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>
