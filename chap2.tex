@@ -46,7 +46,7 @@ There were other moans and grunts.
 
 ``Well,'' said John,
 ``as far as I understand it, it doesn't. I mean Klaus and I will have local copies of the repository too. We will work on those and then sync our changes back to the server. It's a sync, moreover a copy. I think it's actually called a clone.''
-He nodded to himself, ``And, since Klaus and I will hardly ever overlap on code, we shouldn't ever need to merge or deal with an conflicts.''
+He nodded to himself, ``And, since Klaus and I will hardly ever overlap on code, we shouldn't ever need to merge or deal with conflicts.''
 
 ``But what about us monkeys?'' asked Martha,
 ``Where do we get our clones from?''
@@ -65,16 +65,19 @@ Simon spoke out, ``Well, I was reading over the weekend about this thing called 
 ``What's rebase and how is it different to merging?'' asked Mike.
 
 ``Well, rebasing is pretty darn clever. Think of it this way. You have an upstream branch, in this case, our blessed repository. You are happily making changes. When the upstream changes, you could merge the changes in from blessed. If you do this, you create a single commit which merges the changes in. It works, but\ldots'' he trailed off a little,
-``it can cause problems in certain instances. A better way to handle it is with rebasing. Rebasing can take all the changes you have made, squirrel them away, pull down all the changes to bring it up to date, and then whack your changes on top.''
+``it can cause problems in certain instances. A better way to handle it is with rebasing. Rebasing can take all the changes you have made, squirrel them away, pull down all the changes to bring it up to date, and then whack your changes on top.
+It's not always the best choice, but we should consider it.''
 
 John breathed out, ``It sounds pretty cool Simon, but one thing is abundantly clear, we need to learn more about the Git basics before we start delving into this merging and rebasing. Let's spend the rest of the day playing with some test repositories and reconvene tomorrow.''
 \end{trenches}
 
 If you've never played with a version control system before it is a good idea to take some time to just play.
-Pretty soon you'll have learnt the basics and will be in a position where you will want to put your newly honed skills into practise.
+Pretty soon you'll have learnt the basics and will be in a position where you will want to put your newly honed skills into practice.
 Though playing on test repositories is good, it is quite usual that you need to actually use the system in a real environment before real problems arise.
 The rest of this chapter is a very quick introduction to Git.
 It is presented as an introduction, because it is hoped and expected that the you will take some time out to get to know the system and how it works.
+Knowing something about the underlying mechanisms of Git will definitely help you as you progress and will save you an awful lot of frustration later on when operations do not seem to function as you expect.
+After Hours 2 focuses on the Git object model, something all Git users should have a basic understanding of.
 
 \subsection{Initialising A Repository}
 The first thing we need to do is to understand two very important things:
@@ -94,6 +97,11 @@ Initialized empty Git repository in /home/john/coderepo/.git/
 john@satsuki:~/coderepo$
 \end{code}
 
+If you are a Windows user, the above output may seem a little strange to you.
+In the Linux world, the shell often has a much more descriptive prompt than on Windows.
+In the case above, it takes the format \texttt{<user>@<host>:<current\_directory>}.
+The \textasciitilde{} is a shortcut meaning \emph{Home Directory}, so really \texttt{~/coderepo} actually means \texttt{/home/john/coderepo}.
+
 What we've done here is create a new directory called coderepo, moved into it, and then run the \indexgit{init} command.
 The result of this command is a new directory in the coderepo directory called \texttt{.git}.
 This directory will hold a local copy of our entire repository.
@@ -106,14 +114,15 @@ During the writing of this book several people have told me that Git is one of t
 
 Let us take a few minutes to talk about how Git works internally and how the data is actually stored.
 Git doesn't store changes to files, but actual snapshots of files at specific points in time.
-It refers to these by running an \index{SHA-1}SHA-1 hash against the file.
-By doing this, it is easy to Git to detect if a file has changed.
+In fact, each time a commit is made, Git actually makes a record of how the entire filesystem looked at that point, even if only one file is changed.
+It refers to files by calculating a \index{SHA-1}SHA-1 hash of the file and using this as an ID, because the hash is unique to the contents of the file, it is easy to detect if a file has changed.
 If the SHA-1 hash of a file changes, then the file must have been modified.
+
 
 When a commit is made to the repository, Git stores a few things.
 A \index{commit}commit object is created.
-This contains information about who made the commit, the parent of the commit and points to a tree object.
-The tree object describes what the repository looked like at the time of the commit.
+This contains, among other things, information about who made the commit, the parent of the commit and a hash that points to a tree object.
+The tree object describes what the filesystem looked like at the time of the commit.
 In other words the tree object, tells Git what files were in there.
 Lastly, Git stores the files that were in the repository under their SHA-1 names in the objects directory.
 Of course Git is super clever here because if you have exactly the same file in multiple commits, the SHA-1 hash of that file doesn't change and therefore Git only stores one copy of the file to save space.
@@ -122,12 +131,19 @@ The commit object is also referred to by an SHA-1 hash.
 This is different to many other version control systems which use either a number that refers to the repository or a per file version number.
 Getting used to seeing 40 character SHA-1 hashes can take a little time.
 Saying "I need the commit referred to as bf81617d6417d9380e06785f8ed23b247bea8f6d," is certainly not as easy as saying you need revision 6.
-However, Git handles these hashes well, and you can reference a commit using a few of the characters from the beginning, as long as those characters uniquely refer to that commit, i.e.,\ as long as your choice isn't in any way ambiguous.
+However, Git handles these hashes well, and you can reference a commit using a few of the characters from the beginning, as long as those characters uniquely refer to that commit, i.e.,\ as long as your choice is not in any way ambiguous.
+
+The above description may sound rather foreign to you.
+If this is the case, you should really spend some time reading through it again and possibly even jump to the After Hours section at the end of this chapter.
+Understanding the way Git stores objects is a rather important aspect of Git and though it may seem rather confusing at first,
+learning this will help you later on in understanding more complex matters.
 
 \section{Day 2 - ``Making commitments''}
-\subsection{Let's Make a Repository}
+\subsection{Let's work on our repository}
 
-The most simple way of committing a file into the repository is to create it, or bring it into your working copy and use the commands below.
+The most simple way of committing a file into the repository is to create it, or copy it to the working copy of our repository and use the commands below.
+The working copy is the version of the repository we have currently checked out.
+This terminology will be explained more later on.
 
 \begin{code}
 john@satsuki:~/coderepo$ touch my_first_committed_file
@@ -139,7 +155,8 @@ john@satsuki:~/coderepo$ git commit -m 'My First Ever Commit'
 john@satsuki:~/coderepo$
 \end{code}
 
-What we have done here, is to create a new blank file and add it into the repository using the \indexgit{add} command.
+What we have done here, is to create a new blank file, using the unix \texttt{touch} command and add it into the repository using the \indexgit{add} command.
+Windows users note, you will not have the touch command in your default command set, but if you are using Git Bash from the msysgit package, you should have it available to you.
 Then we have committed it into the repository using the \indexgit{commit} command.
 Let's make a few changes to our working copy and see what the result is.
 First we are going to add another two new files, then we are going to make changes to our original file and finally we are going to run git status to see what Git has to say about our changes.
@@ -215,8 +232,7 @@ To understand what Klaus was getting in a spin about, let's make a change to my\
 Remember we have already added the file, but we haven't yet made a commit.
 
 \begin{code}
-john@satsuki:~/coderepo$ echo "Change2" >>
- my_second_committed_file
+john@satsuki:~/coderepo$ echo "Change2" >> my_second_committed_file
 john@satsuki:~/coderepo$ git status
 # On branch master
 # Changes to be committed:
