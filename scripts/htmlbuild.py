@@ -13,6 +13,7 @@ def mung(filename):
 	data = data.replace(">", "&gt;") 
 	data = data.replace("<", "&lt;")
 
+	data = data.replace("\\ ", "&nbsp;")
 
 	data = data.replace("``", '"')
 	data = data.replace("''", '"')
@@ -25,7 +26,6 @@ def mung(filename):
 	data = data.replace("\n\n", "<br>")
 
 	data = data.replace("\\%", "&#37;")
-	data = data.replace("\\ ", "&nbsp;")
 	data = data.replace("\\_", "_")
 	data = data.replace("\\newline", "")
 
@@ -68,6 +68,10 @@ def mung(filename):
 	for i in plob:
 		data = data.replace(i[0], "<em>" + i[1] + "</em>")
 
+	plob = re.findall("(\\\\rotatebox\{(.*?)\}\{(.*?)\})", data)
+	for i in plob:
+		data = data.replace(i[0], i[2])
+
 	plob = re.findall("(\\\\texttt\{(.*?)\})", data)
 	for i in plob:
 		data = data.replace(i[0], '<span style="font-family:monospace;">' + i[1] + "</span>")
@@ -91,6 +95,28 @@ def mung(filename):
 	plob = re.findall("(\\\\begin\{trenches\}(.*?)\\\\end\{trenches\})", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], '<div style="padding:10px;">' + i[1] + "</div>")
+
+	plob = re.findall("(\\\\begin\{center\}(.*?)\\\\end\{center\})", data, re.S)
+	for i in plob:
+		data = data.replace(i[0], '<center>' + i[1] + "</center>")
+
+	plob = re.findall("(\\\\begin\{table\}(.*?)\\\\end\{table\})", data, re.S)
+	for i in plob:
+		data = data.replace(i[0], i[1])
+		
+	plob = re.findall("(\\\\begin\{tabular\}\{(.*?)\}(.*?)\\\\end\{tabular\})", data, re.S)
+	for i in plob:
+		data = data.replace(i[0], "<table>" + i[2] + "</table>")
+		listd = i[2]
+		nasty = re.findall("((.*?)\\hline)", i[2], re.S)
+		for j in nasty:
+			itemstr = ""
+			items = j[1].split(" & ")
+			for item in items:
+				itemstr += "<td>" + item + "</td>"
+			row = "<tr>" + itemstr + "</tr>"
+			data = data.replace(j[0], row)
+		print nasty
 
 	plob = re.findall("(\\\\begin\{itemize\}((.*?)\\\\end\{itemize\}))", data, re.S)
 	for i in plob:
