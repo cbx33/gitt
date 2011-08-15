@@ -18,6 +18,9 @@ def mung(filename):
 	data = data.replace("''", '"')
 
 	data = data.replace("\\%", "%")
+	data = data.replace("\\$", "$")
+
+	data = data.replace("\\LaTeX", "LaTeX")
 
 	data = data.replace("\n\n", "<br>")
 
@@ -28,6 +31,10 @@ def mung(filename):
 
 	data = data.replace("\\ldots", "...")
 	data = data.replace("\\textasciitilde{}", "~")
+	data = data.replace("\\textasciitilde", "~")
+	data = data.replace("\\textasciicircum", "^")
+	data = data.replace("\{", "{")
+	data = data.replace("\}", "}")
 
 	plob = re.findall("(%.*?\n)", data, re.M)
 	for i in plob:

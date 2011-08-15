@@ -231,7 +231,7 @@ Date:   Thu Mar 31 22:05:55 2011 +0100
 john@satsuki:~/coderepo$
 \end{code}
 
-The command \texttt{git log HEAD\textasciitilde1..HEAD} tells Git to show us the git log for all commits between \texttt{HEAD~1} and \texttt{HEAD}.
+The command \texttt{git log HEAD\textasciitilde{}1..HEAD} tells Git to show us the git log for all commits between \texttt{HEAD~1} and \texttt{HEAD}.
 The notation used here is something new to us, but seeing as HEAD points to the most current commit, HEAD~1 points to the commit previous to HEAD.
 This is how we tell Git to show us only the most recently commit.
 
@@ -520,8 +520,7 @@ This will all become clearer during the next week, but fits in with the overall 
 \end{callout}
 
 \section{Day 5 - ``Putting things back the way they were''}
-\subsection{Revert, I say.
-Revert!}
+\subsection{Revert, I say. Revert!}
 
 Whilst working with your repository, something occurs quite often, is the need to go back in time, either temporarily or permanently, or even partially.
 Git allows you to do this in a multitude of ways.
@@ -529,7 +528,7 @@ Let's see a real life situation where this need could arise.
 
 \begin{trenches}
 ``No, I don't have a copy of the file.
-I was stupid and after I submitted it to you I er\ldots\deleted it''.
+I was stupid and after I submitted it to you I er\ldots deleted it''.
 
 John gave Michael the raised eyebrow look.
 It wasn't the first time Michael had come to him with a similar problem.
