@@ -5,11 +5,7 @@ import re
 NO_CHAPS = 9
 NO_AF = 8
 
-def mung(filename):
-	f = open(filename)
-	data = f.read()
-	f.close()
-
+def mung(data):
 	data = data.replace(">", "&gt;") 
 	data = data.replace("<", "&lt;")
 
@@ -106,7 +102,6 @@ def mung(filename):
 	for i in plob:
 		data = data.replace(i[0], "<table>" + i[2] + "</table>")
 		listd = i[2]
-		print i[2]
 		nasty = re.findall(r"((.*?)([\\ ]*)\\hline)", i[2], re.S)
 		for j in nasty:
 			itemstr = ""
@@ -115,8 +110,6 @@ def mung(filename):
 				itemstr += "<td>" + item + "</td>"
 			row = "<tr>" + itemstr + "</tr>"
 			data = data.replace(j[0], row)
-		for nas in nasty:
-			print nas
 
 	plob = re.findall("(\\\\begin\{itemize\}((.*?)\\\\end\{itemize\}))", data, re.S)
 	for i in plob:
@@ -156,9 +149,13 @@ def mung(filename):
 	return data
 
 for i in range(NO_CHAPS):
-	f = open("site/chap"+str(i+1)+".html", "w")
-	f.write(mung("chap"+str(i+1)+".tex"))
-	f.close()
+	f_input = open("chap"+str(i+1)+".tex")
+	f_output = open("site/chap"+str(i+1)+".html", "w")
+	data = f_input.read()
+	f_input.close()
+	str_data = mung(data)
+	f_output.write(str_data)
+	f_output.close()
 
 for i in range(NO_AF):
 	f = open("site/afterhours"+str(i+1)+".html", "w")
