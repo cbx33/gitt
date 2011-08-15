@@ -13,8 +13,6 @@ def mung(filename):
 	data = data.replace(">", "&gt;") 
 	data = data.replace("<", "&lt;")
 
-	data = data.replace("\\ ", "&nbsp;")
-
 	data = data.replace("``", '"')
 	data = data.replace("''", '"')
 
@@ -108,7 +106,8 @@ def mung(filename):
 	for i in plob:
 		data = data.replace(i[0], "<table>" + i[2] + "</table>")
 		listd = i[2]
-		nasty = re.findall("((.*?)\\hline)", i[2], re.S)
+		print i[2]
+		nasty = re.findall(r"((.*?)([\\ ]*)\\hline)", i[2], re.S)
 		for j in nasty:
 			itemstr = ""
 			items = j[1].split(" & ")
@@ -116,7 +115,8 @@ def mung(filename):
 				itemstr += "<td>" + item + "</td>"
 			row = "<tr>" + itemstr + "</tr>"
 			data = data.replace(j[0], row)
-		print nasty
+		for nas in nasty:
+			print nas
 
 	plob = re.findall("(\\\\begin\{itemize\}((.*?)\\\\end\{itemize\}))", data, re.S)
 	for i in plob:
@@ -150,6 +150,8 @@ def mung(filename):
 	plob = re.findall("(\\\\begin\{callout\}\{(.*?)\}\{(.*?)\}(.*?)\\\\end\{callout\})", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], '<div style="padding:20px;border:3px solid #000"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div>")
+	
+	data = data.replace("\\ ", "&nbsp;")
 	
 	return data
 
