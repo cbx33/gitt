@@ -1,4 +1,4 @@
-all: pdf cleantmp
+all: pdf
 quick: quickpdf cleantmp
 clean: cleantmp cleanpdf
 web: images html
