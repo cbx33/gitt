@@ -1,19 +1,28 @@
-\documentclass{gitt}
+\providecommand{\mediaformat}{screen}
+\documentclass[\mediaformat]{gitt}
+
+% Remove or comment out the following line after the ovefull lines have been
+% corrected.
+\setlength\overfullrule{5pt}
 
 % Title/author/date
-\title{Git In the Trenches}
+\title{Git in the Trenches}
 \author{Peter Savage}
 \date{August 2011}
 
 \begin{document}
 
-% Preamble stuff
-\coverpage{images/fcover-new.pdf}
+% Front cover
+\frontcover{images/fcover-new.pdf}
+
+% Front matter
+\frontmatter
 \maketitle
 \cleardoublepage
 \tableofcontents
 
-% Include all the individual chapters
+% Main matter
+\mainmatter
 \include{intro}
 \include{setup}
 \include{chap1}
@@ -33,10 +42,14 @@
 \include{chap8}
 \include{afterhours8}
 \include{chap9}
+
+% Back matter
+\backmatter
 \include{ack}
 \include{index}
-\newpage
-\mbox{}
-\newpage
-\includepdf{images/bcover-new.pdf}
+
+% Back cover
+\backcover{images/bcover-new.pdf}
+
 \end{document}
+
