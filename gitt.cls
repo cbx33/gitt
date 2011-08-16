@@ -61,7 +61,7 @@
 % Font settings
 \RequirePackage{fontspec}
 \setmainfont[Mapping=tex-text,Numbers=OldStyle]{Linux Libertine O}
-\setsansfont[Mapping=tex-text,Scale=MatchLowercase,SmallCapsFont={* Small Caps}]{Fontin Sans}
+\setsansfont[Mapping=tex-text,Scale=MatchLowercase,SmallCapsFont={* Small Caps}]{LMSans10}
 \setmonofont[Mapping=tex-text,Scale=MatchLowercase]{DejaVu Sans Mono}
 
 
