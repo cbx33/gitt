@@ -63,7 +63,7 @@ SITEIMAGES=$(shell for IMAGE in $(IMAGES); do echo "$$(basename $${IMAGE} .svg).
 
 # Generate PNG file from SVG file
 %.png: images/source/%.svg $(SITE_IMAGES_DIR)
-	inkscape -f $< -D -d 150 -e $(SITE_IMAGES_DIR)/$(shell basename $< .svg).png >/dev/null
+	inkscape -f $< -D -w 400 -e $(SITE_IMAGES_DIR)/f-$(shell basename $< .svg).png >/dev/null
 
 # Convert all images
 images: $(SITEIMAGES)
