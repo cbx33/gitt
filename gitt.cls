@@ -419,3 +419,10 @@
 \renewcommand{\floatpagefraction}{0.7}
 \renewcommand{\dblfloatpagefraction}{0.5}
 
+
+% Caption formatting
+\RequirePackage{caption}
+\captionsetup{%
+  font={small,sf},
+}
+
