@@ -162,11 +162,11 @@ for i in range(NO_CHAPS):
 	sections = re.findall("(\\\\section\{.*?\}.*?)((?=\\\\section)|($))", data, re.S)
 	b = 1
 	for j in sections:
-		f_output = open("site/chap"+str(i+1)+"-"+b+".html", "w")
+		f_output = open("site/chap"+str(i+1)+"-"+str(b)+".html", "w")
+		f_output.write(CHAPHEAD + mung(j[0]) + CHAPFOOT)
+		f_output.close()
 	print "========================================"
-	str_data = mung(data)
-	f_output.write(str_data)
-	f_output.close()
+
 
 for i in range(NO_AF):
 	f_input = open("afterhours"+str(i+1)+".tex")
