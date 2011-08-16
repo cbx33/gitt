@@ -205,8 +205,8 @@
     \end{minipage}%
   \end{lrbox}%
   \begin{figure}[hbt]%
-    \tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt]
-    \tikzstyle{fancytitle} = [fill=black, text=white]
+    \tikzstyle{mybox} = [draw=black, fill=gray!20, very thick, rectangle, rounded corners, inner sep=15pt, inner ysep=20pt, font={\sffamily\bfseries}]
+    \tikzstyle{fancytitle} = [fill=black, text=white, font={\sffamily\bfseries}]
     \hskip-10pt% allows the type block to hang into the left margin
     \begin{tikzpicture}%
       \node[mybox] (box) {\usebox{\callout@contents}};
