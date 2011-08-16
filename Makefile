@@ -5,6 +5,8 @@ SITE_DIR=site
 # Location of website images
 SITE_IMAGES_DIR=$(SITE_DIR)/images
 
+SITE_STYLE_DIR=$(SITE_DIR)/style
+
 # List of targets that are not files
 .PHONY: all quick clean web print pdf screen quickpdf cleantmp cleanpdf cleanimages html images cleansite
 
@@ -51,9 +53,9 @@ cleansite:
 	@rm -fr $(SITE_DIR)
 
 # Convert TeX to HTML
-html: $(SITE_IMAGES_DIR)
+html: $(SITE_IMAGES_DIR) $(SITE_STYLE_DIR)
+	@cp html/chap-style.css $(SITE_STYLE_DIR)/chap-style.css
 	@python scripts/htmlbuild.py
-	@cp images/f*.png $(SITE_IMAGES_DIR)/
 
 # Get a list of all SVG images
 IMAGES=$(shell ls images/source/*.svg)
@@ -67,10 +69,19 @@ SITEIMAGES=$(shell for IMAGE in $(IMAGES); do echo "$$(basename $${IMAGE} .svg).
 
 # Convert all images
 images: $(SITEIMAGES)
-
+	@cp images/f-w5-d2.png $(SITE_IMAGES_DIR)/f-w5-d2.png
+	@cp images/f-w5-d3.png $(SITE_IMAGES_DIR)/f-w5-d3.png
+	@cp images/f-w5-d4.png $(SITE_IMAGES_DIR)/f-w5-d4.png
+	@cp images/f-w5-d5.png $(SITE_IMAGES_DIR)/f-w5-d5.png
+	@cp images/f-w5-d6.png $(SITE_IMAGES_DIR)/f-w5-d6.png
+	@cp images/f-w5-d7.png $(SITE_IMAGES_DIR)/f-w5-d7.png
+	
 # Make directories
 $(SITE_DIR):
 	@mkdir -p $(SITE_DIR)
+
+$(SITE_STYLE_DIR):
+	@mkdir -p $(SITE_STYLE_DIR)
 
 $(SITE_IMAGES_DIR):
 	@mkdir -p $(SITE_IMAGES_DIR)

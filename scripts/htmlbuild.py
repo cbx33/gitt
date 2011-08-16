@@ -148,16 +148,31 @@ def mung(data):
 	
 	return data
 
+CHAPHEAD = open("html/chap-head.html").read()
+CHAPFOOT = open("html/chap-foot.html").read()
+
 for i in range(NO_CHAPS):
 	f_input = open("chap"+str(i+1)+".tex")
-	f_output = open("site/chap"+str(i+1)+".html", "w")
 	data = f_input.read()
 	f_input.close()
+	
+	chaps = re.match(".*?\\chapter\{.*?\}\n(.*)", data, re.S)
+	chap = chaps.groups()[0]
+	#sections = re.findall("\\section\{.*?\}(.*)((?=\\\\section)|($))", data, re.S)
+	sections = re.findall("(\\\\section\{.*?\}.*?)((?=\\\\section)|($))", data, re.S)
+	b = 1
+	for j in sections:
+		f_output = open("site/chap"+str(i+1)+"-"+b+".html", "w")
+	print "========================================"
 	str_data = mung(data)
 	f_output.write(str_data)
 	f_output.close()
 
 for i in range(NO_AF):
-	f = open("site/afterhours"+str(i+1)+".html", "w")
-	f.write(mung("afterhours"+str(i+1)+".tex"))
-	f.close()
+	f_input = open("afterhours"+str(i+1)+".tex")
+	f_output = open("site/afterhours"+str(i+1)+".html", "w")
+	data = f_input.read()
+	f_input.close()
+	str_data = mung(data)
+	f_output.write(str_data)
+	f_output.close()
