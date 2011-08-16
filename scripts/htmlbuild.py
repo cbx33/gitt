@@ -5,29 +5,30 @@ import re
 NO_CHAPS = 9
 NO_AF = 8
 
-def mung(filename):
-	f = open(filename)
-	data = f.read()
-	f.close()
-
+def mung(data):
 	data = data.replace(">", "&gt;") 
 	data = data.replace("<", "&lt;")
-
 
 	data = data.replace("``", '"')
 	data = data.replace("''", '"')
 
 	data = data.replace("\\%", "%")
+	data = data.replace("\\$", "$")
+
+	data = data.replace("\\LaTeX", "LaTeX")
 
 	data = data.replace("\n\n", "<br>")
 
 	data = data.replace("\\%", "&#37;")
-	data = data.replace("\\ ", "&nbsp;")
 	data = data.replace("\\_", "_")
 	data = data.replace("\\newline", "")
 
 	data = data.replace("\\ldots", "...")
 	data = data.replace("\\textasciitilde{}", "~")
+	data = data.replace("\\textasciitilde", "~")
+	data = data.replace("\\textasciicircum", "^")
+	data = data.replace("\{", "{")
+	data = data.replace("\}", "}")
 
 	plob = re.findall("(%.*?\n)", data, re.M)
 	for i in plob:
@@ -61,6 +62,10 @@ def mung(filename):
 	for i in plob:
 		data = data.replace(i[0], "<em>" + i[1] + "</em>")
 
+	plob = re.findall("(\\\\rotatebox\{(.*?)\}\{(.*?)\})", data)
+	for i in plob:
+		data = data.replace(i[0], i[2])
+
 	plob = re.findall("(\\\\texttt\{(.*?)\})", data)
 	for i in plob:
 		data = data.replace(i[0], '<span style="font-family:monospace;">' + i[1] + "</span>")
@@ -84,6 +89,27 @@ def mung(filename):
 	plob = re.findall("(\\\\begin\{trenches\}(.*?)\\\\end\{trenches\})", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], '<div style="padding:10px;">' + i[1] + "</div>")
+
+	plob = re.findall("(\\\\begin\{center\}(.*?)\\\\end\{center\})", data, re.S)
+	for i in plob:
+		data = data.replace(i[0], '<center>' + i[1] + "</center>")
+
+	plob = re.findall("(\\\\begin\{table\}(.*?)\\\\end\{table\})", data, re.S)
+	for i in plob:
+		data = data.replace(i[0], i[1])
+		
+	plob = re.findall("(\\\\begin\{tabular\}\{(.*?)\}(.*?)\\\\end\{tabular\})", data, re.S)
+	for i in plob:
+		data = data.replace(i[0], "<table>" + i[2] + "</table>")
+		listd = i[2]
+		nasty = re.findall(r"((.*?)([\\ ]*)\\hline)", i[2], re.S)
+		for j in nasty:
+			itemstr = ""
+			items = j[1].split(" & ")
+			for item in items:
+				itemstr += "<td>" + item + "</td>"
+			row = "<tr>" + itemstr + "</tr>"
+			data = data.replace(j[0], row)
 
 	plob = re.findall("(\\\\begin\{itemize\}((.*?)\\\\end\{itemize\}))", data, re.S)
 	for i in plob:
@@ -118,12 +144,18 @@ def mung(filename):
 	for i in plob:
 		data = data.replace(i[0], '<div style="padding:20px;border:3px solid #000"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div>")
 	
+	data = data.replace("\\ ", "&nbsp;")
+	
 	return data
 
 for i in range(NO_CHAPS):
-	f = open("site/chap"+str(i+1)+".html", "w")
-	f.write(mung("chap"+str(i+1)+".tex"))
-	f.close()
+	f_input = open("chap"+str(i+1)+".tex")
+	f_output = open("site/chap"+str(i+1)+".html", "w")
+	data = f_input.read()
+	f_input.close()
+	str_data = mung(data)
+	f_output.write(str_data)
+	f_output.close()
 
 for i in range(NO_AF):
 	f = open("site/afterhours"+str(i+1)+".html", "w")

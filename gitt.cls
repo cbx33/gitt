@@ -39,7 +39,7 @@
 }{%
   \geometry{asymmetric}%
 }
-\geometry{showframe}% comment out or remove this line when finished fiddling with margins.
+%\geometry{showframe}% comment out or remove this line when finished fiddling with margins.
 
 % Reset the figure numbering at the beginning of each chapter and print only
 % the figure number (not including the chapter number).
@@ -61,6 +61,7 @@
 % Font settings
 \RequirePackage{fontspec}
 \setmainfont[Mapping=tex-text,Numbers=OldStyle]{Linux Libertine O}
+%\setsansfont[Mapping=tex-text,Scale=MatchLowercase,SmallCapsFont={* Small Caps}]{LMSans10}
 \setsansfont[Mapping=tex-text,Scale=MatchLowercase,SmallCapsFont={* Small Caps}]{Fontin Sans}
 \setmonofont[Mapping=tex-text,Scale=MatchLowercase]{DejaVu Sans Mono}
 
@@ -398,5 +399,14 @@
 \titlespacing*{\subsubsection}{0pt}{1.25ex plus 1ex minus .2ex}{0.7ex plus.2ex}
 
 
-
+% Float placement parameters
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.1}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\dbltopfraction}{\topfraction}
+\renewcommand{\floatpagefraction}{0.7}
+\renewcommand{\dblfloatpagefraction}{0.5}
 

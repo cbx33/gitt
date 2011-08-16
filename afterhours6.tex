@@ -1,4 +1,5 @@
 % afterhours6.tex - Afer Hours Week 6
+% Still need to fix nested lists :(
 \chapter{After Hours Week 6}
 \section{``Tug of war''}
 \subsection{Taking the push with the pull}
@@ -115,7 +116,6 @@ These descriptions are ways to \emph{spell} objects.
 \item\index{sha1}\texttt{<SHA1>} - This is most common way to specify an object.
 The \texttt{<SHA1>} is the 40 character identifier that Git generates for each object.
 As you have seen before, we do not have to specify the entire SHA1 hash, just the beginning portion that is unique.
-
 \item\index{refname}\texttt{<refname>} - We use this type of referencing a lot when checking out branches.  
 The \texttt{<refname>} is a symbolic name.
 An example of this would be \textbf{master}, which actually refers to \textbf{refs/heads/master}, which you have seen in the \texttt{.git} directory.
@@ -130,30 +130,23 @@ HEAD is also a \texttt{<refname>}.  In general, Git will search through a number
 \end{itemize}
 So if we used \textbf{master} as our \texttt{<refname>}, Git would search in \texttt{.git} root directory first,
 then into \texttt{refs}, followed by \texttt{refs/tags}, and finishing with \texttt{refs/heads}.
-
 \item\index{date}\texttt{<refname>@\{date\}} - Now we find a more interesting way of specifying references.
 We can use something like \textbf{master@\{yesterday\}}, to show us the closeset commit to match that date time.  
 There are more complicated date specifications we can use as well, such as \textbf{master@\{"last week"\}}, or \textbf{master@\{"3 hours 2 minutes and 10 seconds ago"\}}.
 We can even put in a specific date and time like so; \textbf{master@\{"2011-02-26 14:30:00"\}}
-
 \item\texttt{<refname>@\{<n>\}} - This curious definition returns the commit that \texttt{<refname>} referred to \texttt{<n>} times in the past.
 It uses the \emph{reflog}, which has been discussed before, to discover what commit \texttt{<refname>} pointed to.
 Be careful when using this reference.  It does not mean the commit that \texttt{<refname>} pointed \texttt{<n>} commits ago in the tree.
 If you have been doing resets and other things, these items show up in the \emph{reflog}.
-
 \item\texttt{<rev>\textasciicircum<n>} - Is a way of asking Git to traverse an object for it's parents and so \texttt{<rev>} or \texttt{<rev>\textasciicircum 1} means the first parent of a commit object.
 An example of this would be \texttt{master\textasciicircum2}.
-
 \item\texttt{<rev>\textasciitilde<n>} - Is a way of asking Git to traverse an object for it's \texttt{<n>}th grand-parent, following only first parents.
 This will take a little understanding and it is advised that you read the man page online for more information about what this really means.
-
 \item\texttt{<rev>\textasciicircum\{/<text>\}} - This definition actually initiates a search for the youngest commit where the commit message matches the regular expression after the slash.
 \texttt{master\textasciicircum\{/bug\}} is an example of the usage of this reference definition.
-
 \item\texttt{<rev>:<path>} - This allows us to obtain the object hash for the file specified at the \texttt{<rev>}.
 We could then use the \texttt{git show} command to view that file.
 As an example \texttt{git show HEAD\textasciitilde 3:readme.txt} would show us the file \texttt{readme.txt} as it was three grandparents back from HEAD.
-
 \end{itemize}
 
 All of these are valid ways to refer to commits and in some cases objects and trees too.
