@@ -14,6 +14,9 @@
 \DeclareOption{screen}{\gdef\gitt@format{screen}}
 \DeclareOption{print}{\gdef\gitt@format{print}}
 
+\newboolean{gitt@debug}
+\setboolean{gitt@debug}{false}
+\DeclareOption{debug}{\setboolean{gitt@debug}{true}}
 
 % All other options are passed along to the base class
 \DeclareOption*{%
@@ -22,7 +25,7 @@
 \ProcessOptions*\relax
 
 
-\LoadClass[openright,12pt]{book}
+\LoadClass[openright,11pt]{book}
 
 % set paper size
 %\setstocksize{24.59cm}{18.90cm}
@@ -33,13 +36,18 @@
 %%\setmarginnotes{0.5cm}{2cm}{0.2cm}
 %\checkandfixthelayout
 
-\RequirePackage[paperheight=24.59cm,paperwidth=18.90cm,headheight=\baselineskip,textheight=35\baselineskip]{geometry}
+\RequirePackage[paperheight=9.68in,paperwidth=7.44in,headheight=\baselineskip,textheight=35\baselineskip]{geometry}
 \ifthenelse{\equal{\gitt@format}{print}}{%
   \geometry{symmetric}%
 }{%
   \geometry{asymmetric}%
 }
-%\geometry{showframe}% comment out or remove this line when finished fiddling with margins.
+
+% Some special processing for debug mode
+\ifthenelse{\boolean{gitt@debug}}{%
+  %\geometry{showframe}% draws lines showing the margins
+  \RequirePackage[letter,center,cam]{crop}% draw crop marks on the page
+}{}
 
 % Reset the figure numbering at the beginning of each chapter and print only
 % the figure number (not including the chapter number).
@@ -50,7 +58,7 @@
 \PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}
 \RequirePackage{xcolor}
 
-\RequirePackage{graphicx}
+\RequirePackage[final]{graphicx}
 \RequirePackage{fancyvrb,relsize}
 \RequirePackage{tikz}
 \RequirePackage{makeidx}
@@ -61,8 +69,9 @@
 % Font settings
 \RequirePackage{fontspec}
 \setmainfont[Mapping=tex-text,Numbers=OldStyle]{Linux Libertine O}
-%\setsansfont[Mapping=tex-text,Scale=MatchLowercase,SmallCapsFont={* Small Caps}]{LMSans10}
-\setsansfont[Mapping=tex-text,Scale=MatchLowercase,SmallCapsFont={* Small Caps}]{Fontin Sans}
+%\setsansfont[Mapping=tex-text,Scale=MatchLowercase]{LMSans10}
+%\setsansfont[Mapping=tex-text,Scale=MatchLowercase,SmallCapsFont={* Small Caps}]{Fontin Sans}
+\setsansfont[Mapping=tex-text,Scale=MatchLowercase]{PT Sans}
 \setmonofont[Mapping=tex-text,Scale=MatchLowercase]{DejaVu Sans Mono}
 
 
@@ -305,8 +314,8 @@
     postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow}},
     tabsize=2,
     showstringspaces=false,
-    aboveskip=\baselineskip,
-    belowskip=\baselineskip,
+    aboveskip=\abovedisplayskip,
+    belowskip=\belowdisplayskip,
     morecomment=[l][\footnotesize\bfseries\ttfamily]{john@satsuki:},
     morecomment=[l][\footnotesize\bfseries\ttfamily]{rob@mimi:}
     %moredelim=[is][\tiny\bfseries\ttfamily]{|||}{|||}
@@ -394,9 +403,9 @@
   []% after the title body
 
 \titlespacing*{\chapter}{0pt}{2\baselineskip}{1\baselineskip}
-\titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
-\titlespacing*{\subsection}{0pt}{2.25ex plus 1ex minus .2ex}{0.7ex plus.2ex}
-\titlespacing*{\subsubsection}{0pt}{1.25ex plus 1ex minus .2ex}{0.7ex plus.2ex}
+\titlespacing*{\section}{0pt}{2.5ex plus 1ex minus 1ex}{1.3ex plus .2ex minus .2ex}
+\titlespacing*{\subsection}{0pt}{2.25ex plus 1ex minus .75ex}{0.7ex plus.2ex minus .2ex}
+\titlespacing*{\subsubsection}{0pt}{1.25ex plus 1ex minus .2ex}{0.7ex plus.2ex minus .2ex}
 
 
 % Float placement parameters
