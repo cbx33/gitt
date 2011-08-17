@@ -17,8 +17,6 @@ def mung(data):
 
 	data = data.replace("\\LaTeX", "LaTeX")
 
-	data = data.replace("\n\n", "<br>")
-
 	data = data.replace("\\%", "&#37;")
 	data = data.replace("\\_", "_")
 	data = data.replace("\\newline", "")
@@ -127,10 +125,18 @@ def mung(data):
 		for j in nasty:
 			data = data.replace(j[0], '<li>' + j[1].strip() + '</li>'+"\n")
 
-	plob = re.findall("(\\\\begin\{code\}(.*?)\\\\end\{code\})", data, re.S)
+	plob = re.findall("(\\\\begin\{code\}\n*(.*?)\\\\end\{code\})", data, re.S)
 	for i in plob:
-		code = i[1].replace("\n", "<br>")
-		data = data.replace(i[0], '<div style="padding:10px;font-family:monospace;">' + code + "</div>")
+		#code = i[1].replace("\n\n", "<br>\n<br>\n")
+		code = i[1].replace("\n", "<br>\n")
+		#bolded = re.findall("(^.*?@.*?:.*?\$.*?<br>)\n", code)
+		bolded = re.findall("(.*?@.*?:.*?\$.*?<br>)\n", code)
+		
+		print bolded
+		data = data.replace(i[0], '<div id="codeblock">' + code + "</div>")
+		for boldline in bolded:
+			data = data.replace(boldline, '<strong>' + boldline + '</strong>')
+
 
 	plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
@@ -145,6 +151,7 @@ def mung(data):
 		data = data.replace(i[0], '<div id="calloutblock"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div>")
 	
 	data = data.replace("\\ ", "&nbsp;")
+	data = data.replace("\n\n", "<br><br>")
 	
 	return data
 
