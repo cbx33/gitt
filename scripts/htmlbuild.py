@@ -148,6 +148,18 @@ def mung(data):
 	
 	return data
 
+def fix_file(data, prefix="file", index=""):
+	chaps = re.match(".*?\\chapter\{.*?\}\n(.*)", data, re.S)
+	chap = chaps.groups()[0]
+	#sections = re.findall("\\section\{.*?\}(.*)((?=\\\\section)|($))", data, re.S)
+	sections = re.findall("(\\\\section\{.*?\}.*?)((?=\\\\section)|($))", data, re.S)
+	b = 1
+	for j in sections:
+		f_output = open("site/"+prefix+index+"-"+str(b)+".html", "w")
+		f_output.write(CHAPHEAD + mung(j[0]) + CHAPFOOT)
+		f_output.close()
+		b += 1
+
 CHAPHEAD = open("html/chap-head.html").read()
 CHAPFOOT = open("html/chap-foot.html").read()
 
@@ -155,17 +167,7 @@ for i in range(NO_CHAPS):
 	f_input = open("chap"+str(i+1)+".tex")
 	data = f_input.read()
 	f_input.close()
-	
-	chaps = re.match(".*?\\chapter\{.*?\}\n(.*)", data, re.S)
-	chap = chaps.groups()[0]
-	#sections = re.findall("\\section\{.*?\}(.*)((?=\\\\section)|($))", data, re.S)
-	sections = re.findall("(\\\\section\{.*?\}.*?)((?=\\\\section)|($))", data, re.S)
-	b = 1
-	for j in sections:
-		f_output = open("site/chap"+str(i+1)+"-"+str(b)+".html", "w")
-		f_output.write(CHAPHEAD + mung(j[0]) + CHAPFOOT)
-		f_output.close()
-		b += 1
+	fix_file(data, prefix="chap", index=str(i+1))
 	print "========================================"
 
 
