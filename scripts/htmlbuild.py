@@ -165,6 +165,7 @@ for i in range(NO_CHAPS):
 		f_output = open("site/chap"+str(i+1)+"-"+str(b)+".html", "w")
 		f_output.write(CHAPHEAD + mung(j[0]) + CHAPFOOT)
 		f_output.close()
+		b += 1
 	print "========================================"
 
 
