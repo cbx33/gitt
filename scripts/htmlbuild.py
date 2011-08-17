@@ -132,7 +132,6 @@ def mung(data):
 		#bolded = re.findall("(^.*?@.*?:.*?\$.*?<br>)\n", code)
 		bolded = re.findall("(.*?@.*?:.*?\$.*?<br>)\n", code)
 		
-		print bolded
 		data = data.replace(i[0], '<div id="codeblock">' + code + "</div>")
 		for boldline in bolded:
 			data = data.replace(boldline, '<strong>' + boldline + '</strong>')
@@ -175,7 +174,6 @@ for i in range(NO_CHAPS):
 	data = f_input.read()
 	f_input.close()
 	fix_file(data, prefix="chap", index=str(i+1))
-	print "========================================"
 
 
 for i in range(NO_AF):
