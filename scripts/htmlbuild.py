@@ -4,8 +4,7 @@ import re
 import sys
 import os
 
-print sys.argv[1]
-
+NAVIGATION = open("html/nav.html").read()
 NAV = []
 NO_CHAPS = 9
 NO_AF = 8
@@ -202,19 +201,60 @@ def fix_file(data, prefix="file", index=""):
 
 def fix_simple_file(data, filename):
 	f_output = open("site/"+filename+".html", "w")
-	f_output.write(CHAPHEAD + mung(data) + CHAPFOOT)
+	f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + mung(data) + CHAPFOOT)
 	f_output.close()
 
 def return_image(filename, caption):
 	return(IMAGEBLOCK.replace("***SOURCE***", filename).replace("***CAPTION***", caption))
 
 def alltex():
+	navigation = ""
 	f = open("gitt.tex")
 	data = f.read()
+	f.close()
 	info = re.findall(r"\\mainmatter(.*?)\\backmatter", data, re.S)
 	files = re.findall(r"\\include\{(.*)\}", info[0])
 	for filename in files:
-		True
+		if "chap" in filename:
+			chapname = re.findall(r"\\chapter\{(.*?)\}", open(filename+".tex").read(), re.S)
+			secname = re.findall(r"\\section\{(.*?)\}", open(filename+".tex").read(), re.S)
+			navigation += '<strong>' + chapname[0] + '</strong><br>' + "\n"
+			for section in secname:
+				section_done = section.replace("''", '"').replace("``", '"')
+				day = re.findall("(.*?)-(.*)", section_done)
+				if not len(day) == 0:
+					navigation += '<span>&bull; ' + day[0][0] + '</span> - <a href="' + filename + '.html">' + day[0][1] + "</a><br>\n"
+				else:
+					navigation += '&bull;&nbsp;&nbsp;<a href="' + filename + '.html">' + section_done + "</a><br>\n"
+			navigation += '<div class="divider"></div>' + "\n"
+		elif "afterhour" in filename:
+			chapname = re.findall(r"\\chapter\{(.*?)\}", open(filename+".tex").read(), re.S)
+			secname = re.findall(r"\\section\{(.*?)\}", open(filename+".tex").read(), re.S)
+			navigation += '<strong>' + chapname[0] + '</strong><br>' + "\n"
+			for section in secname:
+				section_done = section.replace("''", '"').replace("``", '"')
+				day = re.findall("(.*?)-(.*)", section_done)
+				if not len(day) == 0:
+					navigation += '<span>&bull; ' + day[0][0] + '</span> - <a href="' + filename + '.html">' + day[0][1] + "</a><br>\n"
+				else:
+					navigation += '&bull;&nbsp;&nbsp;<a href="' + filename + '.html">' + section_done + "</a><br>\n"
+			navigation += '<div class="divider"></div>' + "\n"
+		else:
+			chapname = re.findall(r"\\chapter\{(.*?)\}", open(filename+".tex").read(), re.S)
+			secname = re.findall(r"\\section\{(.*?)\}", open(filename+".tex").read(), re.S)
+			navigation += '<strong>' + chapname[0] + '</strong><br>' + "\n"
+			for section in secname:
+				section_done = section.replace("''", '"').replace("``", '"')
+				day = re.findall("(.*?)-(.*)", section_done)
+				if not len(day) == 0:
+					navigation += '<span>&bull; ' + day[0][0] + '</span> - <a href="' + filename + '.html">' + day[0][1] + "</a><br>\n"
+				else:
+					navigation += '&bull;&nbsp;&nbsp;<a href="' + filename + '.html">' + section_done + "</a><br>\n"
+			navigation += '<div class="divider"></div>' + "\n"
+	f = open("html/nav.html", "w")
+	f.write(navigation)
+	f.close()
+	print navigation
 
 def allchaps():
 	for i in range(NO_CHAPS):
