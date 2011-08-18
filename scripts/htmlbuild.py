@@ -161,12 +161,16 @@ def mung(data):
 
 	plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
-		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"), i[3]))
+		fignum = re.search("([0-9]+).(png|pdf)", i[2])
+		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"), 
+							"<strong>Figure " + fignum.groups()[0] + "</strong><br>" + i[3]))
 		#data = data.replace(i[0], '<img src="' + i[2].replace(".pdf", ".png") + '"><br>' + i[3] + "<br>")
 
 	plob = re.findall("(\\\\figuregith\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
-		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"), i[3]))
+		fignum = re.search("([0-9]+).(png|pdf)", i[2])
+		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"), 
+							"<strong>Figure " + fignum.groups()[0] + "</strong><br>" + i[3]))
 		#data = data.replace(i[0], '<img src="' + i[2].replace(".pdf", ".png") + '"><br>' + i[3] + "<br>")
 
 	plob = re.findall("(\\\\begin\{callout\}\{(.*?)\}\{(.*?)\}(.*?)\\\\end\{callout\})", data, re.S)
@@ -186,7 +190,7 @@ def fix_file(data, prefix="file", index=""):
 	b = 1
 	for j in sections:
 		f_output = open("site/"+prefix+index+"-"+str(b)+".html", "w")
-		f_output.write(CHAPHEAD + mung(j[0]) + CHAPFOOT)
+		f_output.write(CHAPHEAD + "<h1>Week " + index + "</h1>" + mung(j[0]) + CHAPFOOT)
 		f_output.close()
 		b += 1
 
