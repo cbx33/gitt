@@ -1,9 +1,24 @@
 #!/usr/bin/python
 
 import re
+import sys
+
+print sys.argv[1]
 
 NO_CHAPS = 9
 NO_AF = 8
+CHAPHEAD = open("html/chap-head.html").read()
+CHAPFOOT = open("html/chap-foot.html").read()
+IMAGEBLOCK = """<table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
+                    <tr>
+                      <td><img src="***SOURCE***" width="300" height="200"></td>
+                      <td class="fade_right">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td class="fade_bot_image"><div align="center">***CAPTION***</div></td>
+                      <td class="fade_corner">&nbsp;</td>
+                    </tr>
+                  </table>"""
 
 def mung(data):
 	data = data.replace(">", "&gt;") 
@@ -132,18 +147,27 @@ def mung(data):
 		#bolded = re.findall("(^.*?@.*?:.*?\$.*?<br>)\n", code)
 		bolded = re.findall("(.*?@.*?:.*?\$.*?<br>)\n", code)
 		
+		tb = []
+		
+		for linebold in bolded:
+			if not linebold in tb:
+				tb.append(linebold)
+		for boldline in tb:
+			code = code.replace(boldline, '<strong>' + boldline + '</strong>')
+		
 		data = data.replace(i[0], '<div id="codeblock">' + code + "</div>")
-		for boldline in bolded:
-			data = data.replace(boldline, '<strong>' + boldline + '</strong>')
+		
 
 
 	plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
-		data = data.replace(i[0], '<img src="' + i[2].replace(".pdf", ".png") + '"><br>' + i[3] + "<br>")
+		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"), i[3]))
+		#data = data.replace(i[0], '<img src="' + i[2].replace(".pdf", ".png") + '"><br>' + i[3] + "<br>")
 
 	plob = re.findall("(\\\\figuregith\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
-		data = data.replace(i[0], '<img src="' + i[2].replace(".pdf", ".png") + '"><br>' + i[3] + "<br>")
+		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"), i[3]))
+		#data = data.replace(i[0], '<img src="' + i[2].replace(".pdf", ".png") + '"><br>' + i[3] + "<br>")
 
 	plob = re.findall("(\\\\begin\{callout\}\{(.*?)\}\{(.*?)\}(.*?)\\\\end\{callout\})", data, re.S)
 	for i in plob:
@@ -166,21 +190,43 @@ def fix_file(data, prefix="file", index=""):
 		f_output.close()
 		b += 1
 
-CHAPHEAD = open("html/chap-head.html").read()
-CHAPFOOT = open("html/chap-foot.html").read()
-
-for i in range(NO_CHAPS):
-	f_input = open("chap"+str(i+1)+".tex")
-	data = f_input.read()
-	f_input.close()
-	fix_file(data, prefix="chap", index=str(i+1))
-
-
-for i in range(NO_AF):
-	f_input = open("afterhours"+str(i+1)+".tex")
-	f_output = open("site/afterhours"+str(i+1)+".html", "w")
-	data = f_input.read()
-	f_input.close()
-	str_data = mung(data)
-	f_output.write(str_data)
+def fix_simple_file(data, filename):
+	f_output = open("site/"+filename+".html", "w")
+	f_output.write(CHAPHEAD + mung(data) + CHAPFOOT)
 	f_output.close()
+
+def return_image(filename, caption):
+	return(IMAGEBLOCK.replace("***SOURCE***", filename).replace("***CAPTION***", caption))
+
+def allchaps():
+	for i in range(NO_CHAPS):
+		f_input = open("chap"+str(i+1)+".tex")
+		data = f_input.read()
+		f_input.close()
+		fix_file(data, prefix="chap", index=str(i+1))
+
+def allafterhours():
+	for i in range(NO_AF):
+		f_input = open("afterhours"+str(i+1)+".tex")
+		f_output = open("site/afterhours"+str(i+1)+".html", "w")
+		data = f_input.read()
+		f_input.close()
+		str_data = mung(data)
+		f_output.write(str_data)
+		f_output.close()
+
+def singlefile(filename):
+	f_input = open(filename + ".tex")
+	data = f_input.read()
+	f_input.close()
+	fix_simple_file(data, filename)
+
+if len(sys.argv) < 2:
+	print "Need to give me something to go on here"
+else:
+	if sys.argv[1] == "allchaps":
+		allchaps()
+	elif sys.argv[1] == "allafterhours":
+		allafterhours()
+	else:
+		singlefile(sys.argv[1])
