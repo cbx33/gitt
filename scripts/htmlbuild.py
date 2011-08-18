@@ -2,13 +2,17 @@
 
 import re
 import sys
+import os
 
 print sys.argv[1]
 
+NAV = []
 NO_CHAPS = 9
 NO_AF = 8
 CHAPHEAD = open("html/chap-head.html").read()
 CHAPFOOT = open("html/chap-foot.html").read()
+TOCFILE = "gitt.tex"
+
 IMAGEBLOCK = """<table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>
                       <td><img src="***SOURCE***" width="300" height="200"></td>
@@ -189,6 +193,8 @@ def fix_file(data, prefix="file", index=""):
 	sections = re.findall("(\\\\section\{.*?\}.*?)((?=\\\\section)|($))", data, re.S)
 	b = 1
 	for j in sections:
+		#heading = re.findall("\\\\section\{Day ([0-9]).*?\}.*?", j[0], re.S)
+		#print heading
 		f_output = open("site/"+prefix+index+"-"+str(b)+".html", "w")
 		f_output.write(CHAPHEAD + "<h1>Week " + index + "</h1>" + mung(j[0]) + CHAPFOOT)
 		f_output.close()
@@ -201,6 +207,14 @@ def fix_simple_file(data, filename):
 
 def return_image(filename, caption):
 	return(IMAGEBLOCK.replace("***SOURCE***", filename).replace("***CAPTION***", caption))
+
+def alltex():
+	f = open("gitt.tex")
+	data = f.read()
+	info = re.findall(r"\\mainmatter(.*?)\\backmatter", data, re.S)
+	files = re.findall(r"\\include\{(.*)\}", info[0])
+	for filename in files:
+		True
 
 def allchaps():
 	for i in range(NO_CHAPS):
@@ -225,12 +239,21 @@ def singlefile(filename):
 	f_input.close()
 	fix_simple_file(data, filename)
 
+def buildnav():
+	info = os.listdir("site/")
+	print info
+	
+
 if len(sys.argv) < 2:
 	print "Need to give me something to go on here"
 else:
 	if sys.argv[1] == "allchaps":
 		allchaps()
+	elif sys.argv[1] == "alltex":
+		alltex()
 	elif sys.argv[1] == "allafterhours":
 		allafterhours()
+	elif sys.argv[1] == "nav":
+		buildnav()
 	else:
 		singlefile(sys.argv[1])
