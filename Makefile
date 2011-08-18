@@ -59,7 +59,6 @@ site: html htmlimages
 # Convert TeX to HTML
 html: $(SITE_IMAGES_DIR)
 	@cp html/stylesheet.css $(SITE_DIR)/
-	@cp html/read.html $(SITE_DIR)/
 	@cp html/index.html $(SITE_DIR)/
 	@python scripts/htmlbuild.py allchaps
 	@python scripts/htmlbuild.py allafterhours
