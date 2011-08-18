@@ -12,16 +12,16 @@ CHAPHEAD = open("html/chap-head.html").read()
 CHAPFOOT = open("html/chap-foot.html").read()
 TOCFILE = "gitt.tex"
 
-IMAGEBLOCK = """<table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
+IMAGEBLOCK = """<center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>
-                      <td><img src="***SOURCE***" width="300" height="200"></td>
+                      <td style="padding:10px;"><img src="***SOURCE***" width="400" ></td>
                       <td class="fade_right">&nbsp;</td>
                     </tr>
                     <tr>
                       <td class="fade_bot_image"><div align="center">***CAPTION***</div></td>
                       <td class="fade_corner">&nbsp;</td>
                     </tr>
-                  </table>"""
+                  </table></center>"""
 
 def mung(data):
 	data = data.replace(">", "&gt;") 
@@ -160,27 +160,24 @@ def mung(data):
 		
 		data = data.replace(i[0], '<div id="codeblock">' + code + "</div>")
 		
-
-
 	plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
 		fignum = re.search("([0-9]+).(png|pdf)", i[2])
 		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"), 
 							"<strong>Figure " + fignum.groups()[0] + "</strong><br>" + i[3]))
-		#data = data.replace(i[0], '<img src="' + i[2].replace(".pdf", ".png") + '"><br>' + i[3] + "<br>")
 
 	plob = re.findall("(\\\\figuregith\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
 		fignum = re.search("([0-9]+).(png|pdf)", i[2])
 		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"), 
 							"<strong>Figure " + fignum.groups()[0] + "</strong><br>" + i[3]))
-		#data = data.replace(i[0], '<img src="' + i[2].replace(".pdf", ".png") + '"><br>' + i[3] + "<br>")
 
 	plob = re.findall("(\\\\begin\{callout\}\{(.*?)\}\{(.*?)\}(.*?)\\\\end\{callout\})", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], '<div id="calloutblock"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div>")
 	
 	data = data.replace("\\ ", "&nbsp;")
+	data = data.replace("\n\n\n", "<br><br>")
 	data = data.replace("\n\n", "<br><br>")
 	
 	return data
@@ -195,7 +192,7 @@ def fix_file(data, prefix="file", index=""):
 		#heading = re.findall("\\\\section\{Day ([0-9]).*?\}.*?", j[0], re.S)
 		#print heading
 		f_output = open("site/"+prefix+index+"-"+str(b)+".html", "w")
-		f_output.write(CHAPHEAD + "<h1>Week " + index + "</h1>" + mung(j[0]) + CHAPFOOT)
+		f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + "<h1>Week " + index + "</h1>" + mung(j[0]) + CHAPFOOT)
 		f_output.close()
 		b += 1
 
@@ -216,6 +213,7 @@ def alltex():
 	files = re.findall(r"\\include\{(.*)\}", info[0])
 	for filename in files:
 		if "chap" in filename:
+			b = 1
 			chapname = re.findall(r"\\chapter\{(.*?)\}", open(filename+".tex").read(), re.S)
 			secname = re.findall(r"\\section\{(.*?)\}", open(filename+".tex").read(), re.S)
 			navigation += '<strong>' + chapname[0] + '</strong><br>' + "\n"
@@ -223,11 +221,13 @@ def alltex():
 				section_done = section.replace("''", '"').replace("``", '"')
 				day = re.findall("(.*?)-(.*)", section_done)
 				if not len(day) == 0:
-					navigation += '<span>&bull; ' + day[0][0] + '</span> - <a href="' + filename + '.html">' + day[0][1] + "</a><br>\n"
+					navigation += '<span>&bull; ' + day[0][0] + '</span> - <a href="' + filename + '-'+str(b)+'.html">' + day[0][1] + "</a><br>\n"
 				else:
-					navigation += '&bull;&nbsp;&nbsp;<a href="' + filename + '.html">' + section_done + "</a><br>\n"
+					navigation += '&bull;&nbsp;&nbsp;<a href="' + filename + '-'+str(b)+'.html">' + section_done + "</a><br>\n"
+				b += 1
 			navigation += '<div class="divider"></div>' + "\n"
 		elif "afterhour" in filename:
+			b = 1
 			chapname = re.findall(r"\\chapter\{(.*?)\}", open(filename+".tex").read(), re.S)
 			secname = re.findall(r"\\section\{(.*?)\}", open(filename+".tex").read(), re.S)
 			navigation += '<strong>' + chapname[0] + '</strong><br>' + "\n"
@@ -235,9 +235,10 @@ def alltex():
 				section_done = section.replace("''", '"').replace("``", '"')
 				day = re.findall("(.*?)-(.*)", section_done)
 				if not len(day) == 0:
-					navigation += '<span>&bull; ' + day[0][0] + '</span> - <a href="' + filename + '.html">' + day[0][1] + "</a><br>\n"
+					navigation += '<span>&bull; ' + day[0][0] + '</span> - <a href="' + filename + '-'+str(b)+'.html">' + day[0][1] + "</a><br>\n"
 				else:
-					navigation += '&bull;&nbsp;&nbsp;<a href="' + filename + '.html">' + section_done + "</a><br>\n"
+					navigation += '&bull;&nbsp;&nbsp;<a href="' + filename + '-'+str(b)+'.html">' + section_done + "</a><br>\n"
+				b += 1
 			navigation += '<div class="divider"></div>' + "\n"
 		else:
 			chapname = re.findall(r"\\chapter\{(.*?)\}", open(filename+".tex").read(), re.S)
@@ -266,12 +267,9 @@ def allchaps():
 def allafterhours():
 	for i in range(NO_AF):
 		f_input = open("afterhours"+str(i+1)+".tex")
-		f_output = open("site/afterhours"+str(i+1)+".html", "w")
 		data = f_input.read()
 		f_input.close()
-		str_data = mung(data)
-		f_output.write(str_data)
-		f_output.close()
+		fix_file(data, prefix="afterhours", index=str(i+1))
 
 def singlefile(filename):
 	f_input = open(filename + ".tex")
