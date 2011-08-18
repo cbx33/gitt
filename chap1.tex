@@ -2,7 +2,6 @@
 \chapter{Week 1}
 \section{Day 1 - ``Things need to change''}
 \subsection{Meeting the Team}
-
 If you're already a seasoned version control user, you may want to skip this chapter.
 It's kind of like an introduction to why we even need version control systems in the first place.
 This chapter looks at Tamagoyaki Inc's requirements and why they choose the VCS that seemed right for them.
@@ -47,7 +46,6 @@ The room fell silent and a few minutes of silence passed before the meeting was 
 \end{trenches}
 
 \subsection{The trouble with storage}
-
 It's not like this situation is completely uncommon.
 At one point or another most people have managed to pull old code from somewhere and mistakenly use it in place of the latest, up to date, version.
 When storing code on network shares or on local disks, it's easy to lose sight of which version is which, no matter how good your naming convention is.
@@ -67,7 +65,6 @@ In this way, the customer can ask when a certain piece of code was edited, or wh
 
 \section{Day 3 - ``A possible solution''}
 \subsection{Version Control Nuances}
-
 There are many offerings for version control out there, Git, Mercurial, Subversion, CVS, and Bazaar to name but a few of the open source ones.
 Perhaps a more pertinent question is just which version control system to use.
 Each of them has their relative advantages and disadvantages, but some will be suited to certain tasks more than others.
@@ -92,7 +89,6 @@ It is assumed that if you are reading this book, you have most likely already ma
 So let's talk about the various features that are prevalent in most version control systems.
 
 \index{Distributed Version Control}\subsection{Distributed Version Control}
-
 Version control systems usually fit into one of two categories; centralised, or distributed.
 Git is a distributed version control system.
 It has been designed to run almost everything at a local level.
@@ -101,7 +97,6 @@ This is super powerful.
 No Really!
 
 \index{Branching}\subsection{Branching}
-
 Most version control systems offer branching as part of their default feature set.
 Branching allows developers to create in essence a clone of their repository and mess around with it, safe in the knowledge that they can switch back to the original whenever they need to.
 This allows developers the freedom to experiment with all manner of things without being afraid of affecting the original/clean code base.
@@ -117,7 +112,6 @@ Due to the fact that repositories are stored locally, the speed of creating a lo
 Git's implementation is so lightweight that even this speed factor is negligable.
 
 \index{Staging}\subsection{Staging}
-
 Git deals with commiting changes into the repository differently to most other version control systems by the introduction of the staging area.
 The staging area allows developers to prepare their commits before they are written to the repository.
 Why is this useful or any different to any other version control system.
@@ -125,12 +119,10 @@ In Git you can make a change to a file, add it to the staging area, and then con
 It should be noted that it's not absolutely necessary to use the staging area, but it is there for developers wishing to utilise it.
 
 \index{workflow}\subsection{Workflow}
-
 Due to the way that Git has been designed, it's possible to use it in practically any work flow you can think of.
 Three of the most common workflows are explained below, and Git can work in any of these, making it one of the more versatile systems out there.
 
 \index{workflow!Centralised}\subsubsection{Centralised Workflow}
-
 In a centralised workflow, a single shared repository is used.
 Multiple developers pull changes from here into local working copies, work on the local version, and then push it back up to the central location.
 
@@ -156,7 +148,6 @@ Once they are happy that everything is working well, the Integration Manager wil
 \figuregit{7cm}{images/f-w1-d2.pdf}{Integration Manager Workflow}
 
 \index{workflow!Dictator and Lieutenant}\subsubsection{Dictator and Lieutenant Workflow}
-
 The dictator and lieutenant workflow is practically an extension to the integration manager workflow.
 It is more suited to larger teams, where modules or sections of the code can be assigned to a \textbf{Lieutenant} who is responsible for blessing all of the changes to that particular section.
 
@@ -177,7 +168,6 @@ The main thing to remember, is that Git can utilise any of these workflows.
 This makes it a very flexible system, allowing you to work in whichever way you decide.
 
 \index{offline committing}\subsection{Offline Committing}
-
 Perhaps one of the most useful and undervalued features of distributed version control systems is that of offline committing.
 It may be undervalued because not all version control systems have it.
 Offline committing is the ability to continue adding and committing files to the repository without being connected to a centralised repository.
@@ -189,25 +179,21 @@ When a repository is cloned, Git actually sets up a copy of the entire repositor
 When returning to the office, the developers simply push their changes to their ``public'' space, be it local or to a blessed location, and all of the commits that have been made whilst they are away are then made available to the rest of the team, including all history and snapshots.
 
 \index{developer interaction}\subsection{Developer Interaction}
-
 One factor to consider when choosing a version control system, is that of developer interaction.
 By this we are referring to the way in which developers use and interact with the version control system itself.
 There are four main methods for VCS interaction
 
 \index{user interface}\index{user interface!GUI}\subsubsection{Graphical User Interface Client (GUI)}
-
 A graphical user interface allows the developer, or user, to physically manipulate the repository using a mouse pointer and a graphically rich environment.
 A GUI client will typically consist of separate application which is run when a user wants to make changes to a repository such as adding files or committing changes.
 
 Some developers prefer having a separate client with which to interact with their repository, whilst others prefer to have things integrated a little more.
 
 \index{user interface!shell extension}\subsubsection{Shell Extension Integration}
-
 Shell integration allows the user to interact with their repository using the graphical environment that they would usually use for manipulating files and performing routine directory maintenance.
 One of the most common Shell Extensions for Git is the msysgit interface which integrates itself into Windows Explorer, allowing a user to right click on an entity whilst inside a git working tree, and be presented with a context sensitive menu for entering a shell for VCS operations.
 
 \index{user interface!command line}\subsubsection{Command Line Interface (CLI)}
-
 The command line interface is favoured by many developers as they can script with it and can see exactly what is going on, often in much more detail that with a GUI.
 The CLI gives total control over the system and it is worth noting that almost all version control systems start life as command line driven interfaces.
 Why is this so? It can take a lot of time and effort to put all the options and nuances of a system into a GUI.
@@ -215,7 +201,6 @@ The CLI will almost always be the most powerful of all tools, especially where v
 
 \section{Day 4 - ``A decision is reached''}
 \subsection{Analysing Your Requirements}
-
 The most important aspect of choosing a version control system, is to define your requirements.
 These can be few, or they can be quite specific, let's see what John and his team decide are the most important aspects for them and ultimately what they decide upon.
 
@@ -254,7 +239,6 @@ You can buy the messiest builder in the trade a nice shiny new tool box, but unl
 
 \section{Day 5 - ``Working like a team''}
 \index{team organisation}\subsection{Team Organisation}
-
 Now that we have the basics dealt with, let's take a little look at how John arranges his team, and see whether version control is going to work for them.
 It is important that the team understands how the model should work, what they are expected to do and what level of access they have.
 Most of the time people will get more frustrated about not knowing what they should or should not be doing, rather than that they do or don't have access to certain things.
