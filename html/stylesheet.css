@@ -160,11 +160,9 @@ h2 {
 	font-weight: bold;
 }
 .image_float_right {
-	float: right;
 	margin-left: 16px;
 }
 .image_float_left {
-	float: left;
 	margin-right: 10px;
 }
 .divider {
