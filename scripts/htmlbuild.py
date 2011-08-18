@@ -185,12 +185,9 @@ def mung(data):
 def fix_file(data, prefix="file", index=""):
 	chaps = re.match(".*?\\chapter\{.*?\}\n(.*)", data, re.S)
 	chap = chaps.groups()[0]
-	#sections = re.findall("\\section\{.*?\}(.*)((?=\\\\section)|($))", data, re.S)
 	sections = re.findall("(\\\\section\{.*?\}.*?)((?=\\\\section)|($))", data, re.S)
 	b = 1
 	for j in sections:
-		#heading = re.findall("\\\\section\{Day ([0-9]).*?\}.*?", j[0], re.S)
-		#print heading
 		f_output = open("site/"+prefix+index+"-"+str(b)+".html", "w")
 		f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + "<h1>Week " + index + "</h1>" + mung(j[0]) + CHAPFOOT)
 		f_output.close()
@@ -255,7 +252,6 @@ def alltex():
 	f = open("html/nav.html", "w")
 	f.write(navigation)
 	f.close()
-	print navigation
 
 def allchaps():
 	for i in range(NO_CHAPS):
