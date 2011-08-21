@@ -138,6 +138,7 @@ def mung(data):
 			row = "<tr>" + itemstr + "</tr>"
 			data = data.replace(j[0], row)
 
+	#NEED TO ITERATE UNTIL ALL LISTS ARE FOUND.....SO BASICALLY FIND A LIST WHICH DOES NOT CONTAIN A LIST AND PROCESS....AD INFIN
 	plob = re.findall("(\\\\begin\{itemize\}((.*?)\\\\end\{itemize\}))", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], '<div style="padding-left:10px;"><ul>' + i[2] + "</ul></div>")
