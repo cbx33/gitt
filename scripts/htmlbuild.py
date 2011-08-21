@@ -156,9 +156,7 @@ def mung(data):
 
 	plob = re.findall("(\\\\begin\{code\}\n*(.*?)\\\\end\{code\})", data, re.S)
 	for i in plob:
-		#code = i[1].replace("\n\n", "<br>\n<br>\n")
 		code = i[1].replace("\n", "<br>\n")
-		#bolded = re.findall("(^.*?@.*?:.*?\$.*?<br>)\n", code)
 		bolded = re.findall("(.*?@.*?:.*?\$.*?<br>)\n", code)
 		
 		tb = []
