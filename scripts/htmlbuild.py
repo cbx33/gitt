@@ -24,8 +24,27 @@ IMAGEBLOCK = """<center><table  border="0" cellpadding="0" cellspacing="0" class
                   </table></center>"""
 
 def mung(data):
+		
 	data = data.replace(">", "&gt;") 
 	data = data.replace("<", "&lt;")
+
+	plob = re.findall("(\\\\index\{(.*?)\})", data)
+	for i in plob:
+		data = data.replace(i[0], "")
+
+	plob = re.findall("(\\\\indexgit\{(.*?)\})", data)
+	for i in plob:
+		data = data.replace(i[0], '<span style="font-family:monospace;">git ' + i[1] + '</span>')
+
+	plob = re.findall("(\\\\(.*?)\{(.*?)\}\n\n)", data, re.M)
+	for i in plob:
+		print i[0]
+		data = data.replace(i[0], i[0].replace("\n\n", "<br>"))
+
+	plob = re.findall("(\n\n\\\\(.*?)\{(.*?)\})", data, re.M)
+	for i in plob:
+		print i[0]
+		data = data.replace(i[0], i[0].replace("\n\n", "<br>"))
 
 	data = data.replace("``", '"')
 	data = data.replace("''", '"')
@@ -50,14 +69,6 @@ def mung(data):
 	for i in plob:
 		data = data.replace(i, "")
 		
-	plob = re.findall("(\\\\index\{(.*?)\})", data)
-	for i in plob:
-		data = data.replace(i[0], "")
-
-	plob = re.findall("(\\\\indexgit\{(.*?)\})", data)
-	for i in plob:
-		data = data.replace(i[0], '<span style="font-family:monospace;">git ' + i[1] + '</span>')
-
 	plob = re.findall("(\\\\clearpage)", data)
 	for i in plob:
 		data = data.replace(i, "")
