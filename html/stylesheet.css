@@ -209,9 +209,14 @@ h2 {
 	color:#000;
 	border:5px #009090 solid;
 	background:#eee;
+	margin-top:20px;
 	padding:10px;
 }
 ul ol {
 	margin:0px;
 	padding:0px;
+}
+h3 {
+	margin:0px;
+	padding-bottom:10px;
 }
