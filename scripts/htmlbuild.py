@@ -137,23 +137,27 @@ def mung(data):
 			data = data.replace(j[0], row)
 
 	string = "\\begin{itemize}\n\\item Testing\n\\item Testing2\n\\item \\begin{itemize}\n \item tt\n\\end{itemize}\n\\end{itemize}\n"
-	plob = re.findall("(\\\\begin\{itemize\}((.*?)(?!\\\\begin\{itemize\})(.*?))\\\\end\{itemize\})", string, re.S)
+	#plob = re.findall("(\\\\begin\{itemize\}((.*?)(?!\\\\begin\{itemize\})(.*?))\\\\end\{itemize\})", string, re.S)
 	plob = re.findall("(\\\\begin\{itemize\}(((?!\\\\begin\{itemize\}).)*?)\\\\end\{itemize\})", string, re.S)
 	while len(plob) != 0:
 		print plob
 		for i in plob:
+			#print i[1]
 			string = string.replace(i[0], i[1])
 		plob = re.findall("(\\\\begin\{itemize\}(((?!\\\\begin\{itemize\}).)*?)\\\\end\{itemize\})", string, re.S)
 
 	#NEED TO ITERATE UNTIL ALL LISTS ARE FOUND.....SO BASICALLY FIND A LIST WHICH DOES NOT CONTAIN A LIST AND PROCESS....AD INFIN
-	plob = re.findall("(\\\\begin\{itemize\}((.*?)\\\\end\{itemize\}))", data, re.S)
-	plob = re.findall("(\\\\begin\{itemize\}((.*?)(?!\\\\end\{itemize\})(.*?)\\\\end\{itemize\}))", data, re.S)
-	for i in plob:
-		data = data.replace(i[0], '<div style="padding-left:10px;"><ul>' + i[2] + "</ul></div>")
-		listd = i[1]
-		nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|(?=\\\\end\{itemize\})))", listd, re.S)
-		for j in nasty:
-			data = data.replace(j[0], '<li>' + j[1].strip() + '</li>'+"\n")
+	#plob = re.findall("(\\\\begin\{itemize\}((.*?)\\\\end\{itemize\}))", data, re.S)
+	#plob = re.findall("(\\\\begin\{itemize\}((.*?)(?!\\\\end\{itemize\})(.*?)\\\\end\{itemize\}))", data, re.S)
+	plob = re.findall("(\\\\begin\{itemize\}(((?!\\\\begin\{itemize\}).)*?)\\\\end\{itemize\})", data, re.S)
+	while len(plob) != 0:
+		for i in plob:
+			data = data.replace(i[0], '<div style="padding-left:10px;"><ul>' + i[1] + "</ul></div>")
+			listd = i[1]
+			nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|(?=\\\\end\{itemize\})))", listd, re.S)
+			for j in nasty:
+				data = data.replace(j[0], '<li>' + j[1].strip() + '</li>'+"\n")
+		plob = re.findall("(\\\\begin\{itemize\}(((?!\\\\begin\{itemize\}).)*?)\\\\end\{itemize\})", data, re.S)
 
 	plob = re.findall("(\\\\begin\{enumerate\}((.*?)\\\\end\{enumerate\}))", data, re.S)
 	for i in plob:
