@@ -12,6 +12,17 @@ CHAPHEAD = open("html/chap-head.html").read()
 CHAPFOOT = open("html/chap-foot.html").read()
 TOCFILE = "gitt.tex"
 
+PREV_BUT = """<p align="left"><img src="images/prev.png" alt="Next Day" height="29"></p>"""
+
+NEXT_BUT = """<p align="right"><img src="images/next.png" alt="Next Day" height="29"></p>"""
+
+PREV_NEXT = """<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td>***PREV_BUT***</td>
+						<td>***NEXT_BUT***</td>
+					</tr>
+				</table>"""
+				
 IMAGEBLOCK = """<center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>
                       <td style="padding:10px;"><img src="***SOURCE***" width="400" ></td>
@@ -200,13 +211,13 @@ def fix_file(data, prefix="file", index=""):
 	b = 1
 	for j in sections:
 		f_output = open("site/"+prefix+index+"-"+str(b)+".html", "w")
-		f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + "<h1>Week " + index + "</h1>" + mung(j[0]) + CHAPFOOT)
+		f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + "<h1>Week " + index + "</h1>" + mung(j[0]) + PREV_NEXT + CHAPFOOT)
 		f_output.close()
 		b += 1
 
 def fix_simple_file(data, filename):
 	f_output = open("site/"+filename+".html", "w")
-	f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + mung(data) + CHAPFOOT)
+	f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + mung(data) + PREV_NEXT + CHAPFOOT)
 	f_output.close()
 
 def return_image(filename, caption):
