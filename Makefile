@@ -98,6 +98,15 @@ htmlimages: $(SITEIMAGES) $(SITE_CHAP_IMAGES_DIR)
 	@cp images/f-w5-d17.png $(SITE_CHAP_IMAGES_DIR)/f-w5-d17.png
 	@cp images/f-w5-d18.png $(SITE_CHAP_IMAGES_DIR)/f-w5-d18.png
 	@cp images/f-w5-d19.png $(SITE_CHAP_IMAGES_DIR)/f-w5-d19.png
+	@cp images/f-af7-d1.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d1.png
+	@cp images/f-af7-d2.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d2.png
+	@cp images/f-af7-d3.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d3.png
+	@cp images/f-af7-d4.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d4.png
+	@cp images/f-af7-d5.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d5.png
+	@cp images/f-af7-d6.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d6.png
+	@cp images/f-af5-d1.png $(SITE_CHAP_IMAGES_DIR)/f-af5-d1.png
+	@cp images/f-af5-d2.png $(SITE_CHAP_IMAGES_DIR)/f-af5-d2.png
+	@cp images/f-af5-d3.png $(SITE_CHAP_IMAGES_DIR)/f-af5-d3.png
 	@cp html/images/* $(SITE_IMAGES_DIR)/
 	
 # Make directories
