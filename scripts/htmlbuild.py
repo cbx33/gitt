@@ -38,12 +38,10 @@ def mung(data):
 
 	plob = re.findall("(\\\\(.*?)\{(.*?)\}\n\n)", data, re.M)
 	for i in plob:
-		print i[0]
 		data = data.replace(i[0], i[0].replace("\n\n", "<br>"))
 
 	plob = re.findall("(\n\n\\\\(.*?)\{(.*?)\})", data, re.M)
 	for i in plob:
-		print i[0]
 		data = data.replace(i[0], i[0].replace("\n\n", "<br>"))
 
 	data = data.replace("``", '"')
@@ -138,8 +136,18 @@ def mung(data):
 			row = "<tr>" + itemstr + "</tr>"
 			data = data.replace(j[0], row)
 
+	string = "\\begin{itemize}\n\\item Testing\n\\item Testing2\n\\item \\begin{itemize}\n \item tt\n\\end{itemize}\n\\end{itemize}\n"
+	plob = re.findall("(\\\\begin\{itemize\}((.*?)(?!\\\\begin\{itemize\})(.*?))\\\\end\{itemize\})", string, re.S)
+	plob = re.findall("(\\\\begin\{itemize\}(((?!\\\\begin\{itemize\}).)*?)\\\\end\{itemize\})", string, re.S)
+	while len(plob) != 0:
+		print plob
+		for i in plob:
+			string = string.replace(i[0], i[1])
+		plob = re.findall("(\\\\begin\{itemize\}(((?!\\\\begin\{itemize\}).)*?)\\\\end\{itemize\})", string, re.S)
+
 	#NEED TO ITERATE UNTIL ALL LISTS ARE FOUND.....SO BASICALLY FIND A LIST WHICH DOES NOT CONTAIN A LIST AND PROCESS....AD INFIN
 	plob = re.findall("(\\\\begin\{itemize\}((.*?)\\\\end\{itemize\}))", data, re.S)
+	plob = re.findall("(\\\\begin\{itemize\}((.*?)(?!\\\\end\{itemize\})(.*?)\\\\end\{itemize\}))", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], '<div style="padding-left:10px;"><ul>' + i[2] + "</ul></div>")
 		listd = i[1]
