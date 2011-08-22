@@ -155,14 +155,6 @@ def mung(data):
 			for j in nasty:
 				data = data.replace(j[0], '<li>' + j[1].strip() + '</li>'+"\n")
 		plob = re.findall("(\\\\begin\{enumerate\}(((?!\\\\begin\{enumerate\}).)*?)\\\\end\{enumerate\})", data, re.S)
-		
-	#plob = re.findall("(\\\\begin\{enumerate\}((.*?)\\\\end\{enumerate\}))", data, re.S)
-	#for i in plob:
-		#data = data.replace(i[0], '<div style="padding-left:10px;"><ol>' + i[2] + "</ol></div>")
-		#listd = i[1]
-		#nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|(?=\\\\end\{enumerate\})))", listd, re.S)
-		#for j in nasty:
-			#data = data.replace(j[0], '<li>' + j[1].strip() + '</li>'+"\n")
 
 	plob = re.findall("(\\\\begin\{code\}\n*(.*?)\\\\end\{code\})", data, re.S)
 	for i in plob:
