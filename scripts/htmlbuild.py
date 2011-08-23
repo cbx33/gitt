@@ -24,7 +24,7 @@ PREV_NEXT = """<br><br><table border="0" cellpadding="0" cellspacing="0" width="
 						<td>***NEXT_BUT***</td>
 					</tr>
 				</table>"""
-				
+
 IMAGEBLOCK = """<center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>
                       <td style="padding:10px;"><img src="***SOURCE***" width="400" ></td>
@@ -47,8 +47,8 @@ def get_prev_next(filename):
 	return PREV_NEXT.replace("***PREV_BUT***", prev_but).replace("***NEXT_BUT***", next_but)
 
 def mung(data):
-		
-	data = data.replace(">", "&gt;") 
+
+	data = data.replace(">", "&gt;")
 	data = data.replace("<", "&lt;")
 
 	plob = re.findall("(\\\\index\{(.*?)\})", data)
@@ -89,7 +89,7 @@ def mung(data):
 	plob = re.findall("(%.*?\n)", data, re.M)
 	for i in plob:
 		data = data.replace(i, "")
-		
+
 	plob = re.findall("(\\\\clearpage)", data)
 	for i in plob:
 		data = data.replace(i, "")
@@ -145,7 +145,7 @@ def mung(data):
 	plob = re.findall("(\\\\begin\{table\}(.*?)\\\\end\{table\})", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], i[1])
-		
+
 	plob = re.findall("(\\\\begin\{tabular\}\{(.*?)\}(.*?)\\\\end\{tabular\})", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], "<table>" + i[2] + "</table>")
@@ -183,37 +183,37 @@ def mung(data):
 	for i in plob:
 		code = i[1].replace("\n", "<br>\n")
 		bolded = re.findall("(.*?@.*?:.*?\$.*?<br>)\n", code)
-		
+
 		tb = []
-		
+
 		for linebold in bolded:
 			if not linebold in tb:
 				tb.append(linebold)
 		for boldline in tb:
 			code = code.replace(boldline, '<strong>' + boldline + '</strong>')
-		
+
 		data = data.replace(i[0], '<div id="codeblock">' + code + "</div>")
-		
+
 	plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
 		fignum = re.search("([0-9]+).(png|pdf)", i[2])
-		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"), 
+		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"),
 							"<strong>Figure " + fignum.groups()[0] + "</strong><br>" + i[3]))
 
 	plob = re.findall("(\\\\figuregith\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
 		fignum = re.search("([0-9]+).(png|pdf)", i[2])
-		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"), 
+		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"),
 							"<strong>Figure " + fignum.groups()[0] + "</strong><br>" + i[3]))
 
 	plob = re.findall("(\\\\begin\{callout\}\{(.*?)\}\{(.*?)\}(.*?)\\\\end\{callout\})", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], '<div id="calloutblock"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div>")
-	
+
 	data = data.replace("\\ ", "&nbsp;")
 	data = data.replace("\n\n\n", "<br><br>")
 	data = data.replace("\n\n", "<br><br>")
-	
+
 	return data
 
 def fix_file(data, prefix="file", index=""):
@@ -310,7 +310,7 @@ def singlefile(filename):
 
 def buildnav():
 	info = os.listdir("site/")
-	
+
 
 if len(sys.argv) < 2:
 	print "Need to give me something to go on here"
