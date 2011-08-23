@@ -18,7 +18,7 @@ PREV_BUT = """<p align="left"><a href="***PREV_URL***"><img src="images/prev.png
 
 NEXT_BUT = """<p align="right"><a href="***NEXT_URL***"><img src="images/next.png" alt="Next Day" height="29"></a></p>"""
 
-PREV_NEXT = """<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+PREV_NEXT = """<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td>***PREV_BUT***</td>
 						<td>***NEXT_BUT***</td>
@@ -224,13 +224,13 @@ def fix_file(data, prefix="file", index=""):
 	for j in sections:
 		filename = prefix+index+"-"+str(b)+".html"
 		f_output = open("site/"+filename, "w")
-		f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + get_prev_next(filename) + "<h1>Week " + index + "</h1>" + mung(j[0]) + get_prev_next(filename) + CHAPFOOT)
+		f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + "<h1>Week " + index + "</h1>" + mung(j[0]) + get_prev_next(filename) + CHAPFOOT)
 		f_output.close()
 		b += 1
 
 def fix_simple_file(data, filename):
 	f_output = open("site/"+filename+".html", "w")
-	f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + get_prev_next(filename + ".html") + mung(data) + get_prev_next(filename + ".html") + CHAPFOOT)
+	f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + mung(data) + get_prev_next(filename + ".html") + CHAPFOOT)
 	f_output.close()
 
 def return_image(filename, caption):
