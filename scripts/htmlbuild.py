@@ -12,9 +12,11 @@ CHAPHEAD = open("html/chap-head.html").read()
 CHAPFOOT = open("html/chap-foot.html").read()
 TOCFILE = "gitt.tex"
 
-PREV_BUT = """<p align="left"><img src="images/prev.png" alt="Next Day" height="29"></p>"""
+NAVLINKS = re.findall(r"""<a href="([^"]*)">""", NAVIGATION)
 
-NEXT_BUT = """<p align="right"><img src="images/next.png" alt="Next Day" height="29"></p>"""
+PREV_BUT = """<p align="left"><a href="***PREV_URL***"><img src="images/prev.png" alt="Previous Day" height="29"></a></p>"""
+
+NEXT_BUT = """<p align="right"><a href="***NEXT_URL***"><img src="images/next.png" alt="Next Day" height="29"></a></p>"""
 
 PREV_NEXT = """<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
@@ -33,6 +35,16 @@ IMAGEBLOCK = """<center><table  border="0" cellpadding="0" cellspacing="0" class
                       <td class="fade_corner">&nbsp;</td>
                     </tr>
                   </table></center>"""
+
+def get_prev_next(filename):
+	linknum = NAVLINKS.index(filename)
+	prev_but = ""
+	next_but = ""
+	if linknum - 1 >= 0:
+		prev_but = PREV_BUT.replace("***PREV_URL***", NAVLINKS[linknum - 1])
+	if linknum + 1 < len(NAVLINKS):
+		next_but = NEXT_BUT.replace("***NEXT_URL***", NAVLINKS[linknum + 1])
+	return PREV_NEXT.replace("***PREV_BUT***", prev_but).replace("***NEXT_BUT***", next_but)
 
 def mung(data):
 		
@@ -210,14 +222,15 @@ def fix_file(data, prefix="file", index=""):
 	sections = re.findall("(\\\\section\{.*?\}.*?)((?=\\\\section)|($))", data, re.S)
 	b = 1
 	for j in sections:
-		f_output = open("site/"+prefix+index+"-"+str(b)+".html", "w")
-		f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + "<h1>Week " + index + "</h1>" + mung(j[0]) + PREV_NEXT + CHAPFOOT)
+		filename = prefix+index+"-"+str(b)+".html"
+		f_output = open("site/"+filename, "w")
+		f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + "<h1>Week " + index + "</h1>" + mung(j[0]) + get_prev_next(filename) + CHAPFOOT)
 		f_output.close()
 		b += 1
 
 def fix_simple_file(data, filename):
 	f_output = open("site/"+filename+".html", "w")
-	f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + mung(data) + PREV_NEXT + CHAPFOOT)
+	f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + mung(data) + get_prev_next(filename + ".html") + CHAPFOOT)
 	f_output.close()
 
 def return_image(filename, caption):
