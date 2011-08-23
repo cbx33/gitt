@@ -224,13 +224,13 @@ def fix_file(data, prefix="file", index=""):
 	for j in sections:
 		filename = prefix+index+"-"+str(b)+".html"
 		f_output = open("site/"+filename, "w")
-		f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + "<h1>Week " + index + "</h1>" + mung(j[0]) + get_prev_next(filename) + CHAPFOOT)
+		f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + get_prev_next(filename) + "<h1>Week " + index + "</h1>" + mung(j[0]) + get_prev_next(filename) + CHAPFOOT)
 		f_output.close()
 		b += 1
 
 def fix_simple_file(data, filename):
 	f_output = open("site/"+filename+".html", "w")
-	f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + mung(data) + get_prev_next(filename + ".html") + CHAPFOOT)
+	f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + get_prev_next(filename + ".html") + mung(data) + get_prev_next(filename + ".html") + CHAPFOOT)
 	f_output.close()
 
 def return_image(filename, caption):
