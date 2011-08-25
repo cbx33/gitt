@@ -142,7 +142,7 @@ Git stores its objects by Zlib compressing them, which is why it is difficult fo
 Later in the book, you will find out exactly how to generate your own repository from scratch, but for now, let us just understand that Git first creates a header for the content, then adds the content to the header, creates the SHA-1 hash of such data and finally Zlib compresses it to store to disk.
 
 \subsection{Out comes the wrench}
-Wouldn't it be nice if we could view the data that was inside the file simply, without having to write out own tools.
+Wouldn't it be nice if we could view the data that was inside the file simply, without having to write our own tools.
 If you look through the Git man page, you will find one listed under the \textbf{Interrogation} section, called \texttt{git cat-file}.
 Anyone who has spent any time with Git will know what the \texttt{cat} command does.
 \texttt{cat} is used to display the contents of files.
