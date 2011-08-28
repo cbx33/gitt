@@ -10,6 +10,10 @@ NO_CHAPS = 9
 NO_AF = 8
 CHAPHEAD = open("html/chap-head.html").read()
 CHAPFOOT = open("html/chap-foot.html").read()
+
+BASEHEAD = open("html/base-head.html").read()
+BASEFOOT = open("html/base-foot.html").read()
+
 TOCFILE = "gitt.tex"
 
 NAVLINKS = re.findall(r"""<a href="([^"]*)">""", NAVIGATION)
@@ -233,6 +237,11 @@ def fix_simple_file(data, filename):
 	f_output.write(CHAPHEAD.replace("***NAV***", NAVIGATION) + mung(data) + get_prev_next(filename + ".html") + CHAPFOOT)
 	f_output.close()
 
+def build_simple_file(filename):
+	f_output = open("site/"+filename+".html", "w")
+	f_output.write(BASEHEAD + open("html/" + filename + ".html").read() + BASEFOOT)
+	f_output.close()
+
 def return_image(filename, caption):
 	return(IMAGEBLOCK.replace("***SOURCE***", filename).replace("***CAPTION***", caption))
 
@@ -323,5 +332,7 @@ else:
 		allafterhours()
 	elif sys.argv[1] == "nav":
 		buildnav()
+	elif sys.argv[1] == "simple":
+		build_simple_file(sys.argv[2])
 	else:
 		singlefile(sys.argv[1])

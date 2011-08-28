@@ -61,6 +61,8 @@ html: $(SITE_IMAGES_DIR)
 	@touch html/nav.html
 	@cp html/stylesheet.css $(SITE_DIR)/
 	@cp html/index.html $(SITE_DIR)/
+	@python scripts/htmlbuild.py simple index
+	@python scripts/htmlbuild.py simple feedback
 	@python scripts/htmlbuild.py alltex
 	@python scripts/htmlbuild.py allchaps
 	@python scripts/htmlbuild.py allafterhours
