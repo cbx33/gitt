@@ -323,7 +323,8 @@ def baseconvert():
 	files = os.listdir("./")
 	for nfile in files:
 		if ".tex" in nfile:
-			print nfile
+			dp = mung(open(nfile).read())
+			open("build/" + os.path.splitext(nfile)[0] + ".html", "w").write(dp)
 
 def buildnav():
 	info = os.listdir("site/")
