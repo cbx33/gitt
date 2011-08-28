@@ -319,9 +319,15 @@ def singlefile(filename):
 	f_input.close()
 	fix_simple_file(data, filename)
 
+def baseconvert():
+	files = os.listdir("./")
+	for nfile in files:
+		if ".tex" in nfile:
+			print nfile
+
 def buildnav():
 	info = os.listdir("site/")
-
+	return info
 
 if len(sys.argv) < 2:
 	print "Need to give me something to go on here"
@@ -334,6 +340,8 @@ else:
 		allafterhours()
 	elif sys.argv[1] == "nav":
 		buildnav()
+	elif sys.argv[1] == "baseconvert":
+		baseconvert()
 	elif sys.argv[1] == "simple":
 		build_simple_file(sys.argv[2])
 	else:

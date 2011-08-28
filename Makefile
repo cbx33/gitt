@@ -1,3 +1,5 @@
+# Location of build dir
+BUILD_DIR=build
 
 # Location of website files
 SITE_DIR=site
@@ -55,6 +57,9 @@ cleansite:
 	@rm -fr $(SITE_DIR)
 
 site: html htmlimages
+
+baseconvert: $(BUILD_DIR)
+	@python scripts/htmlbuild.py baseconvert
 
 # Convert TeX to HTML
 html: $(SITE_IMAGES_DIR)
@@ -123,3 +128,6 @@ $(SITE_IMAGES_DIR):
 
 $(SITE_CHAP_IMAGES_DIR):
 	@mkdir -p $(SITE_CHAP_IMAGES_DIR)
+
+$(BUILD_DIR):
+	@mkdir -p $(BUILD_DIR)
