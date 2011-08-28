@@ -319,7 +319,7 @@ e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable - version 5185<br>
 This is obviously not correct.
 Git stores its objects by Zlib compressing them, which is why it is difficult for the <span style="font-family:monospace;">file</span> command to make any sense out of them.
 Later in the book, you will find out exactly how to generate your own repository from scratch, but for now, let us just understand that Git first creates a header for the content, then adds the content to the header, creates the SHA-1 hash of such data and finally Zlib compresses it to store to disk.<br><h3>Out comes the wrench</h3>
-Wouldn't it be nice if we could view the data that was inside the file simply, without having to write out own tools.
+Wouldn't it be nice if we could view the data that was inside the file simply, without having to write our own tools.
 If you look through the Git man page, you will find one listed under the <strong>Interrogation</strong> section, called <span style="font-family:monospace;">git cat-file</span>.
 Anyone who has spent any time with Git will know what the <span style="font-family:monospace;">cat</span> command does.
 <span style="font-family:monospace;">cat</span> is used to display the contents of files.
