@@ -4,10 +4,12 @@ import re
 import sys
 import os
 
-NAVIGATION = open("html/nav.html").read()
 NAV = []
 NO_CHAPS = 9
 NO_AF = 8
+
+NAVIGATION = open("html/nav.html").read()
+
 CHAPHEAD = open("html/chap-head.html").read()
 CHAPFOOT = open("html/chap-foot.html").read()
 
