@@ -326,6 +326,9 @@ def baseconvert():
 			dp = mung(open(nfile).read())
 			open("build/" + os.path.splitext(nfile)[0] + ".html", "w").write(dp)
 
+def baseconcat():
+	True
+
 def buildnav():
 	info = os.listdir("site/")
 	return info
@@ -343,6 +346,8 @@ else:
 		buildnav()
 	elif sys.argv[1] == "baseconvert":
 		baseconvert()
+	elif sys.argv[1] == "baseconcat":
+		baseconcat()
 	elif sys.argv[1] == "simple":
 		build_simple_file(sys.argv[2])
 	else:

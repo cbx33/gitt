@@ -56,10 +56,14 @@ cleanimages:
 cleansite:
 	@rm -fr $(SITE_DIR)
 
+cleanbuild:
+	@rm -fr $(BUILD_DIR)
+
 site: html htmlimages
 
 baseconvert: $(BUILD_DIR)
 	@python scripts/htmlbuild.py baseconvert
+	@python scripts/htmlbuild.py baseconcat
 
 # Convert TeX to HTML
 html: $(SITE_IMAGES_DIR)
