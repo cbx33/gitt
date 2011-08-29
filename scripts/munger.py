@@ -123,10 +123,8 @@ def mung(data, IMAGE_BLOCK=""):
 		for i in plob:
 			data = data.replace(i[0], '<div style="padding-left:10px;"><ul>' + i[1] + "</ul></div>")
 			listd = i[1]
-			print listd
 			nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|($)))", listd, re.S)
 			for j in nasty:
-				print j
 				data = data.replace(j[0], '<li>' + j[1].strip() + '</li>'+"\n")
 		plob = re.findall("(\\\\begin\{itemize\}(((?!\\\\begin\{itemize\}).)*?)\\\\end\{itemize\})", data, re.S)
 
