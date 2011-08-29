@@ -121,7 +121,7 @@ def mung(data, IMAGE_BLOCK=""):
 	plob = re.findall("(\\\\begin\{itemize\}(((?!\\\\begin\{itemize\}).)*?)\\\\end\{itemize\})", data, re.S)
 	while len(plob) != 0:
 		for i in plob:
-			data = data.replace(i[0], '<div style="padding-left:10px;"><ul>' + i[1] + "</ul></div>")
+			data = data.replace(i[0], '<div style="padding-left:10px;"><ul>' + i[1].strip() + "</ul></div>")
 			listd = i[1]
 			nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|($)))", listd, re.S)
 			for j in nasty:
