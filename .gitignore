@@ -5,6 +5,7 @@
 *.idx
 *.ilg
 *.ind
+*.pyc
 gitt.pdf
 print.pdf
 scripts/outputs

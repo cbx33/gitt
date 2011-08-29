@@ -49,6 +49,7 @@ cleantmp:
 # Remove the generated PDF
 cleanpdf:
 	rm -f gitt.pdf
+	rm -f print.pdf
 
 # Remove the generated website images
 cleanimages:
@@ -57,6 +58,7 @@ cleanimages:
 # Clean up generated site files
 cleansite:
 	@rm -fr $(SITE_DIR)
+	@rm html/nav.html
 
 cleanbuild:
 	@rm -fr $(BUILD_DIR)
