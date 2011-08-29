@@ -1,6 +1,8 @@
 # Location of build dir
 BUILD_DIR=build
 
+BUILD_DIR_IMAGES=$(BUILD_DIR)/images/chaps
+
 # Location of website files
 SITE_DIR=site
 
@@ -61,9 +63,11 @@ cleanbuild:
 
 site: html htmlimages
 
-baseconvert: $(BUILD_DIR)
+baseconvert: $(BUILD_DIR) $(BUILD_DIR_IMAGES) htmlimages
+	@python scripts/htmlbuild.py alltex
 	@python scripts/htmlbuild.py baseconvert
 	@python scripts/htmlbuild.py baseconcat
+	@cp -r site/images $(BUILD_DIR)
 
 # Convert TeX to HTML
 html: $(SITE_IMAGES_DIR)
@@ -119,7 +123,7 @@ htmlimages: $(SITEIMAGES) $(SITE_CHAP_IMAGES_DIR)
 	@cp images/f-af5-d2.png $(SITE_CHAP_IMAGES_DIR)/f-af5-d2.png
 	@cp images/f-af5-d3.png $(SITE_CHAP_IMAGES_DIR)/f-af5-d3.png
 	@cp html/images/* $(SITE_IMAGES_DIR)/
-	
+		
 # Make directories
 $(SITE_DIR):
 	@mkdir -p $(SITE_DIR)
@@ -135,3 +139,6 @@ $(SITE_CHAP_IMAGES_DIR):
 
 $(BUILD_DIR):
 	@mkdir -p $(BUILD_DIR)
+
+$(BUILD_DIR_IMAGES):
+	@mkdir -p $(BUILD_DIR_IMAGES)
