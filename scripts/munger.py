@@ -10,6 +10,10 @@ def mung(data, IMAGE_BLOCK=""):
 	data = data.replace(">", "&gt;")
 	data = data.replace("<", "&lt;")
 
+	plob = re.findall("(\\\\texttt\{(.*?)\})", data)
+	for i in plob:
+		data = data.replace(i[0], '<span style="font-family:monospace;">' + i[1] + "</span>")
+
 	plob = re.findall("(\\\\index\{(.*?)\})", data)
 	for i in plob:
 		data = data.replace(i[0], "")
@@ -72,10 +76,6 @@ def mung(data, IMAGE_BLOCK=""):
 	plob = re.findall("(\\\\rotatebox\{(.*?)\}\{(.*?)\})", data)
 	for i in plob:
 		data = data.replace(i[0], i[2])
-
-	plob = re.findall("(\\\\texttt\{(.*?)\})", data)
-	for i in plob:
-		data = data.replace(i[0], '<span style="font-family:monospace;">' + i[1] + "</span>")
 
 	plob = re.findall("(\\\\subsubsection\{(.*?)\})", data)
 	for i in plob:
