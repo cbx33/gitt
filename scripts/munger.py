@@ -131,9 +131,9 @@ def mung(data, IMAGE_BLOCK=""):
 	plob = re.findall("(\\\\begin\{enumerate\}(((?!\\\\begin\{enumerate\}).)*?)\\\\end\{enumerate\})", data, re.S)
 	while len(plob) != 0:
 		for i in plob:
-			data = data.replace(i[0], '<div style="padding-left:10px;"><ol>' + i[1] + "</ol></div>")
+			data = data.replace(i[0], '<div style="padding-left:10px;"><ol>' + i[1].strip() + "</ol></div>")
 			listd = i[1]
-			nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|(?=\\\\end\{enumerate\})))", listd, re.S)
+			nasty = re.findall("(\\\\item(.*?)((?=\\\\item)|($)))", listd, re.S)
 			for j in nasty:
 				data = data.replace(j[0], '<li>' + j[1].strip() + '</li>'+"\n")
 		plob = re.findall("(\\\\begin\{enumerate\}(((?!\\\\begin\{enumerate\}).)*?)\\\\end\{enumerate\})", data, re.S)
