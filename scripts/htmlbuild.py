@@ -21,9 +21,9 @@ TOCFILE = "gitt.tex"
 
 NAVLINKS = re.findall(r"""<a href="([^"]*)">""", NAVIGATION)
 
-PREV_BUT = """<p align="left"><a href="***PREV_URL***"><img src="images/prev.png" alt="Previous Day" height="29"></a></p>"""
+PREV_BUT = """<p align="left"><a href="***PREV_URL***"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p>"""
 
-NEXT_BUT = """<p align="right"><a href="***NEXT_URL***"><img src="images/next.png" alt="Next Day" height="29"></a></p>"""
+NEXT_BUT = """<p align="right"><a href="***NEXT_URL***"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p>"""
 
 PREV_NEXT = """<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
