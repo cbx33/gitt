@@ -151,7 +151,7 @@ def mung(data, IMAGE_BLOCK=""):
 		for boldline in tb:
 			code = code.replace(boldline, '<strong>' + boldline + '</strong>')
 
-		data = data.replace(i[0], '<code id="codeblock">' + code + "</code>")
+		data = data.replace(i[0], '<div id="codeblock"><code>' + code + "</code></div>")
 
 	plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
