@@ -12,7 +12,7 @@ def mung(data, IMAGE_BLOCK=""):
 
 	plob = re.findall("(\\\\texttt\{(.*?)\})", data)
 	for i in plob:
-		data = data.replace(i[0], '<code>' + i[1] + "</code>")
+		data = data.replace(i[0], '<code class="ncode">' + i[1] + "</code>")
 
 	plob = re.findall("(\\\\index\{(.*?)\})", data)
 	for i in plob:
@@ -20,7 +20,7 @@ def mung(data, IMAGE_BLOCK=""):
 
 	plob = re.findall("(\\\\indexgit\{(.*?)\})", data)
 	for i in plob:
-		data = data.replace(i[0], '<code>git ' + i[1] + '</code>')
+		data = data.replace(i[0], '<code class="ncode">git ' + i[1] + '</code>')
 
 	plob = re.findall("(\\\\(.*?)\{(.*?)\}\n\n)", data, re.M)
 	for i in plob:
