@@ -149,7 +149,7 @@ def mung(data, IMAGE_BLOCK=""):
 			if not linebold in tb:
 				tb.append(linebold)
 		for boldline in tb:
-			code = code.replace(boldline, '<strong>' + boldline + '</strong>')
+			code = code.replace(boldline, '<strong>' + boldline.replace("<br>","") + '</strong><br>')
 
 		data = data.replace(i[0], '<div id="codeblock"><code>' + code + "</code></div>")
 
