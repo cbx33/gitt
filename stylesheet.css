@@ -220,3 +220,11 @@ h3 {
 	margin:0px;
 	padding-bottom:10px;
 }
+.ncode {
+	color:#000;
+	padding-left:3px;
+	padding-right:3px;
+	background:#ddd;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+}
