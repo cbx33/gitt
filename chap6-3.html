@@ -148,14 +148,14 @@
 We now have a clone of the repository and we can start to look at how we can play with branches and see how the two are different.<br><div id="trenchblock"><strong>In the trenches...</strong><br>
 "Klaus, this doesn't make sense though. I cloned my repo, but my branches have vanished," started Rob, rather worriedly.<br><br>"I'm sure they haven't gone anywhere," shouted John.<br><br>Rob's reply was quick and certain, "They have! Run a git branch on your clone and see for yourself"<br><br>"Oh!"<br><br>Rob smiled the smug smile of a man who is pleased he was right.<br><br> * * * <br><br>"Rob?" asked John tentatively, aware of his previous state of anguish.<br><br>His reply indicated a less than stressed demeanour, "Sup, dude?".<br><br>John was pleasantly surprised, "Did you sort out the branch issue?"<br><br>Rob began walking over to John, "Yeh, try running git branch with the r parameter."<br></div><br>You may be thinking that we now have a detached copy of the other branches in our repository.
 That's not exactly accurate.
-Let us run the command that Rob suggested and see what is happening.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git branch<br></strong>
+Let us run the command that Rob suggested and see what is happening.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git branch</strong><br>
 * master<br>
-<strong>john@satsuki:~/coderepo-cl$ git branch -r<br></strong>
+<strong>john@satsuki:~/coderepo-cl$ git branch -r</strong><br>
   origin/HEAD -&gt; origin/master<br>
   origin/master<br>
   origin/wonderful<br>
   origin/zaney<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>Whilst we have all the objects in our repository, we do not yet have our branches set up locally.
 They are available, but they have not yet been set up locally.
 To explain this we need to introduce the concept of remote tracking branches.
@@ -164,18 +164,18 @@ Local branches allowed us to make commits locally in a safe and separated enviro
 Remote tracking branches are links to remote branches which allow us to track the development of that branch and bring it in to a local one if we so desire.<br><br>Let us take a look at what we can do with these remote tracking branches.
 Notice in the output above, we have the word <code class="ncode">origin</code> in front of the branch names.
 When we clone a repository, Git automatically sets up what is called a <em>remote</em>.
-We can view this by using the <code class="ncode">git remote</code> tool.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote<br></strong>
+We can view this by using the <code class="ncode">git remote</code> tool.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote</strong><br>
 origin<br>
-<strong>john@satsuki:~/coderepo-cl$ git remote -v<br></strong>
+<strong>john@satsuki:~/coderepo-cl$ git remote -v</strong><br>
 origin	/home/john/coderepo (fetch)<br>
 origin	/home/john/coderepo (push)<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>As you can see from the output above, the <strong>origin</strong> remote definition points to the original folder that our repository came from.
 So now we know that when referring to <code class="ncode">origin/master</code>, we are really talking about the <strong>master</strong> branch which is located at the remote location <strong>origin</strong>.<br><br>We are going to spend a little while now learning about remote branches and how they differ to local branches.
 Let us spend a few minutes trying some of our normal operations against a remote branch.
 The first operation we are going to try is a diff.
 We are going to run a diff between our current <strong>master</strong> branch and the <strong>wonderful</strong> branch as it stands in the original repository, so we should be diffing between <code class="ncode">master</code> and <code class="ncode">origin/wonderful</code>.
-For brevity, we are also going to limit the changes shown to those which affect <code class="ncode">newfile1</code> only, by appending <code class="ncode"> -- &lt;filename&gt;</code> to the command.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git diff master origin/wonderful -- newfile1<br></strong>
+For brevity, we are also going to limit the changes shown to those which affect <code class="ncode">newfile1</code> only, by appending <code class="ncode"> -- &lt;filename&gt;</code> to the command.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git diff master origin/wonderful -- newfile1</strong><br>
 diff --git a/newfile1 b/newfile1<br>
 index f32a0e6..ef20984 100644<br>
 --- a/newfile1<br>
@@ -185,9 +185,9 @@ index f32a0e6..ef20984 100644<br>
 -and some more awesome changes<br>
 -Some mega important changes<br>
 +and some more changes<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>So we can see that our diff command completed successfully.
-Note that this command requires no connection to our <strong>origin</strong> repository, as all of the data has been cloned locally, more on this later.<br><br>Let us run another command now and learn a little more about what the remote reference <strong>origin</strong> really means.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote show origin<br></strong>
+Note that this command requires no connection to our <strong>origin</strong> repository, as all of the data has been cloned locally, more on this later.<br><br>Let us run another command now and learn a little more about what the remote reference <strong>origin</strong> really means.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote show origin</strong><br>
 * remote origin<br>
   Fetch URL: /home/john/coderepo<br>
   Push  URL: /home/john/coderepo<br>
@@ -200,10 +200,10 @@ Note that this command requires no connection to our <strong>origin</strong> rep
     master merges with remote master<br>
   Local ref configured for 'git push':<br>
     master pushes to master (up to date)<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>Though this command introduces some terms that we are not yet familiar with yet, like push, pull and fetch, we can see that the <strong>origin</strong> remote has been set up to <em>track</em> three branches called, <strong>master</strong>, <strong>wonderful</strong> and <strong>zaney</strong>.
 So although these branches are not yet usable in the way a local branch would be, it is comforting to know that Git does know about them.
-Let us continue playing with the remote branch and run a <code class="ncode">git log</code> command against it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git log origin/master -- newfile1<br></strong>
+Let us continue playing with the remote branch and run a <code class="ncode">git log</code> command against it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git log origin/master -- newfile1</strong><br>
 commit 9cb2af2a00fd2253060e6bf8cc6c377b3d55ecea<br>
 Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
 Date:   Tue Apr 19 16:43:59 2011 +0100<br>
@@ -222,7 +222,7 @@ Date:   Fri Apr 1 07:42:04 2011 +0100<br>
 ...<br>
 </code></div><br>Again, this requires no connection to the <strong>origin</strong> repository at all and works as expected.
 Let us try something really funky now, let us try checking out a remote branch so that we can view the file system.
-We are now going to try checking out the remote branch called <strong>wonderful</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git checkout origin/wonderful<br></strong>
+We are now going to try checking out the remote branch called <strong>wonderful</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git checkout origin/wonderful</strong><br>
 Note: checking out 'origin/wonderful'.<br>
 <br>
 You are in 'detached HEAD' state. You can look around, make experimental<br>
@@ -235,30 +235,30 @@ do so (now or later) by using -b with the checkout command again. Example:<br>
   git checkout -b new_branch_name<br>
 <br>
 HEAD is now at cfbecab... Fantastic new feature<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>Interesting.
 This is not what we are used to seeing.
 When we have checked out branches before, we have always been presented with a <code class="ncode">Switched to branch 'xxxxxx'</code> message.
 Now we are seeing a funny message about having a detached HEAD.
 This is because we are not actually on a branch.
 We can make changes as we are advised, we can even make commits, but these will not actually become integrated into any branches.
-In essence these commits would be left dangling and after time, because no branch points to them, they would get deleted by garbage collection routines.<br><br>Running the <code class="ncode">git branch</code> command below confirms our suspicions.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git branch -v<br></strong>
+In essence these commits would be left dangling and after time, because no branch points to them, they would get deleted by garbage collection routines.<br><br>Running the <code class="ncode">git branch</code> command below confirms our suspicions.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git branch -v</strong><br>
 * (no branch) cfbecab Fantastic new feature<br>
   master      37950f8 Continued Development<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>So we really need to figure out how to make these branches exist locally so that we can commit to them and retain those commits.
-To do this we use the <code class="ncode">git branch</code> tool again, but we use it in a slightly different manner.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git checkout -b wonderful origin/wonderful<br></strong>
+To do this we use the <code class="ncode">git branch</code> tool again, but we use it in a slightly different manner.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git checkout -b wonderful origin/wonderful</strong><br>
 Branch wonderful set up to track remote branch wonderful from origin.<br>
 Switched to a new branch 'wonderful'<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>We are now on a local instance of the <strong>wonderful</strong> branch.
 Let us take a minute to understand what that means.
 As Git is a distributed environment, our local <strong>wonderful</strong> branch, is not going to be synchronised with the remote end automatically.
 It would require effort on our part.
 What this does mean though, is that we are able to begin committing to this branch and experimenting with it.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap6-2.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap6-4.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap6-2.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap6-4.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

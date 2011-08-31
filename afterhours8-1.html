@@ -181,15 +181,15 @@ It does not affect the process of <code class="ncode">git clone</code> or <code 
 It does not affect the outcome of the merge, but does not get executed if the merge fails due to conflicts.</li>
 </ul></div><br>So we have a large arsenal of hooks that we can employ to assist us in administrating our repository.
 We are going to set up a fairly simple example here of ensuring that we do not delete one of our core files.
-To begin with, let us add a <code class="ncode">corefile</code> to the repository in a new branch and play a little with a new hook script.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b hooktest<br></strong>
+To begin with, let us add a <code class="ncode">corefile</code> to the repository in a new branch and play a little with a new hook script.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b hooktest</strong><br>
 Switched to a new branch 'hooktest'<br>
-<strong>john@satsuki:~/coderepo$ echo "Very Important File" &gt; corefile<br></strong>
-<strong>john@satsuki:~/coderepo$ git add corefile<br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Added Core File'<br></strong>
+<strong>john@satsuki:~/coderepo$ echo "Very Important File" &gt; corefile</strong><br>
+<strong>john@satsuki:~/coderepo$ git add corefile</strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Added Core File'</strong><br>
 [hooktest 96fe8b9] Added Core File<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
  create mode 100644 corefile<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Now let us create a hook script called <code class="ncode">.git/hooks/pre-commit</code>, with the following code.<br><div id="codeblock"><code>#!/bin/bash<br>
 <br>
 if [ -e "corefile" ] <br>
@@ -200,34 +200,34 @@ else<br>
 	echo "File Deleted Not Committing"<br>
 	exit 2<br>
 fi<br>
-</code></div><br>Now let us see what happens if we make a commit that does not affect the <code class="ncode">corefile</code>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "New Development" &gt;&gt; cont_dev <br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Added a commit'<br></strong>
+</code></div><br>Now let us see what happens if we make a commit that does not affect the <code class="ncode">corefile</code>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "New Development" &gt;&gt; cont_dev </strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Added a commit'</strong><br>
 File OK<br>
 [hooktest 73656f2] Added a commit<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>We see the text <code class="ncode">File OK</code> in the output, which indicates that the commit is allowed to go ahead.
-What happens if we try to remove the core file and commit the result?<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rm corefile<br></strong>
+What happens if we try to remove the core file and commit the result?<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rm corefile</strong><br>
 rm 'corefile'<br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Removed a corefile'<br></strong>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Removed a corefile'</strong><br>
 File Deleted Not Committing<br>
-<strong>john@satsuki:~/coderepo$ <br></strong>
+<strong>john@satsuki:~/coderepo$ </strong><br>
 </code></div><br>We have been prevented from committing because we removed the all important <code class="ncode">corefile</code>.
-To be able to commit again, we must return the file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout HEAD -- corefile<br></strong>
-<strong>john@satsuki:~/coderepo$ ls<br></strong>
+To be able to commit again, we must return the file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout HEAD -- corefile</strong><br>
+<strong>john@satsuki:~/coderepo$ ls</strong><br>
 another_file  cont_dev  corefile  tester<br>
-<strong>john@satsuki:~/coderepo$ echo "New development" &gt;&gt; cont_dev <br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Some more development'<br></strong>
+<strong>john@satsuki:~/coderepo$ echo "New development" &gt;&gt; cont_dev </strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Some more development'</strong><br>
 File OK<br>
 [hooktest 6786dd5] Some more development<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>So you see hooks can be really simple, or they can do highly complex things.
 Imagine a hook that would compile the code in the working tree prior to the commit and only allow it to continue if the code compiled cleanly.
 That could be pretty useful in ensuring that there is always good clean buildable code in the repository.<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap8-6.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap9-1.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap8-6.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap9-1.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

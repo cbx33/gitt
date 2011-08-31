@@ -154,13 +154,13 @@ Hopefully, if you have been following the text, you have not deleted this direct
 If you have, do not worry, just follow the operations we completed in Week 6, or read on and use the text in the book.<br><br>If you remember, we created two clones of our original repository.
 Once was a simple clone called <code class="ncode">coderepo-cl</code> and the other was a bare repository called <code class="ncode">coderepo-bk</code>.
 The <code class="ncode">coderepo-cl</code> and the <code class="ncode">coderepo-bk</code> repositories were both cloned from <code class="ncode">coderepo</code>, but it was <code class="ncode">coderepo-cl</code> that was configured to pull from one and push to the other.
-Running a simple <code class="ncode">git remote -v</code> command, confirms this configuration.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote -v<br></strong>
+Running a simple <code class="ncode">git remote -v</code> command, confirms this configuration.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote -v</strong><br>
 backup	/home/john/coderepo-bk (fetch)<br>
 backup	/home/john/coderepo-bk (push)<br>
 origin	/home/john/coderepo (fetch)<br>
 origin	/home/john/coderepo (push)<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
-</code></div><br>We can get even more information by running the <code class="ncode">git remote show</code> tool with the remote name as a parameter.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote show origin<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
+</code></div><br>We can get even more information by running the <code class="ncode">git remote show</code> tool with the remote name as a parameter.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote show origin</strong><br>
 * remote origin<br>
   Fetch URL: /home/john/coderepo<br>
   Push  URL: /home/john/coderepo<br>
@@ -175,9 +175,9 @@ origin	/home/john/coderepo (push)<br>
   Local refs configured for 'git push':<br>
     master    pushes to master    (up to date)<br>
     wonderful pushes to wonderful (up to date)<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>How though, is this data set up and configured from within Git itself?
-Looking at the <code class="ncode">.git/config</code> file, we can see a glimpse of this.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ cat .git/config<br></strong>
+Looking at the <code class="ncode">.git/config</code> file, we can see a glimpse of this.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ cat .git/config</strong><br>
 [core]<br>
 	repositoryformatversion = 0<br>
 	filemode = true<br>
@@ -195,7 +195,7 @@ Looking at the <code class="ncode">.git/config</code> file, we can see a glimpse
 [remote "backup"]<br>
 	url = /home/john/coderepo-bk<br>
 	fetch = +refs/heads/*:refs/remotes/backup/*<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>As you can see there are two relevant sections, these are the <code class="ncode">remote</code> and <code class="ncode">branch</code> stanzas.
 The <code class="ncode">remote</code> stanzas are there to define certain elements of the remote repository, 
 whilst the <code class="ncode">branch</code> stanzas describe elements and settings for the branches that we are tracking.
@@ -214,8 +214,8 @@ Obviously if we wanted to, we could change this and have <strong>wonderful</stro
 When we are in the named branch, this setting defines the upstream version of the named branch and is used for merging and can affect pulling and rebasing too.<br><br>We can set these settings and any of the others in the <code class="ncode">config</code> file manually,
 using the <code class="ncode">git config</code> tool, which we used in a previous chapter.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap6-6.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="afterhours6-2.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap6-6.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="afterhours6-2.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

@@ -155,7 +155,7 @@ On the other hand there is always the situation where you'd like to know a littl
 For more information about diff in general, see the diff breakout box in this chapter.
 Think of a diff as an easy way of looking at the differences between two files, surrounded by a little context.
 This can often be enhanced by a visual diff viewer, but for now, let's stick with our simple text based <code class="ncode">git diff</code>.<br><br>If we want to find out what the changes are between our current commit and one of the previous ones, we can write a command like the one below.
-Notice that below, <strong>163f06</strong> refers to the second commit that we made to the repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff 163f06<br></strong>
+Notice that below, <strong>163f06</strong> refers to the second commit that we made to the repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff 163f06</strong><br>
 diff --git a/my_second_committed_file b/my_second_committed_file<br>
 index 3ad4cc3..095b9cd 100644<br>
 --- a/my_second_committed_file<br>
@@ -163,23 +163,23 @@ index 3ad4cc3..095b9cd 100644<br>
 @@ -1 +1,2 @@<br>
  Change1<br>
 +Change2<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>What this is telling us, is that between <strong>e86dd</strong> and our current commit <strong>6ca16</strong>, we added the line <em>Change2</em> to the file <code class="ncode">my_second_committed_file</code>.
 We can see this by the preceding <code class="ncode">+</code> on the line <code class="ncode">Change2</code>.
 Let's make a few changes to our repository and see how the diffs look.
 We're actually going to make a few changes to the files using a text editor so that you can't see what we've done.
-Then, hopefully, when we run the <code class="ncode">git diff</code> you'll be able to see clearly what has happened.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log HEAD~1..HEAD<br></strong>
+Then, hopefully, when we run the <code class="ncode">git diff</code> you'll be able to see clearly what has happened.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log HEAD~1..HEAD</strong><br>
 commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br>
 Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
 Date:   Thu Mar 31 22:05:55 2011 +0100<br>
 <br>
     Messed with a few files<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>The command <code class="ncode">git log HEAD~{</code>1..HEAD} tells Git to show us the git log for all commits between <code class="ncode">HEAD~1</code> and <code class="ncode">HEAD</code>.
 The notation used here is something new to us, but seeing as HEAD points to the most current commit, HEAD~1 points to the commit previous to HEAD.
 This is how we tell Git to show us only the most recently commit.<br><br>As it turns out, John Haskins didn't really create a very meaningful log message.
 <em>Messed with a few files</em> is pretty unhelpful in the grand scheme of things.
-So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit <strong>a022d4</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff HEAD~1..HEAD<br></strong>
+So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit <strong>a022d4</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff HEAD~1..HEAD</strong><br>
 diff --git a/my_second_committed_file b/my_second_committed_file<br>
 index 095b9cd..c9887f8 100644<br>
 --- a/my_second_committed_file<br>
@@ -195,7 +195,7 @@ index 0000000..5d27866<br>
 +++ b/my_third_committed_file<br>
 @@ -0,0 +1 @@<br>
 +Addition to the line<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>As you can see, we have several things going on here, so let's take each of them in isolation and see what is going on.
 We are going to dissect the diff to see what each section means.<br><div id="codeblock"><code>diff --git a/my_second_committed_file b/my_second_committed_file<br>
 </code></div><br>This first line tells us that we are dealing with <code class="ncode">my_second_committed_file</code>.
@@ -237,7 +237,7 @@ This is one area in which the developers of Git have placed a great deal of time
 For example, we can use <code class="ncode">git log</code> to not only show us the commit message, but also provide a diff output as well.
 This means that for each commit entry in the output, we will see a diff as well.
 Now, whilst we are further empowered by having the diff output in chronological order for each commit, we can take things further by filtering the commits.<br><br>Suppose we want to view all the commits that we made in the last week, typing the following into the command line in our test repository yields the following result.
-<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -p --since="last week"<br></strong>
+<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -p --since="last week"</strong><br>
 commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br>
 Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
 Date:   Thu Mar 31 22:05:55 2011 +0100<br>
@@ -268,7 +268,7 @@ The section <code class="ncode">--since="last week"</code> tells Git to filter t
 Often when problems arise, you do not have a defined point in time that you know it was last working.
 However most of the time, you can say with some certainty, "I know it was working two weeks ago".
 Using the methods described above, will give the user all of the changes, categorised by commit, that occurred in those two weeks, allowing them to narrow down the scope of exactly where to begin looking for the offending changes.<br><br>If the developer can further categorise the issue, such as, "I know which file the change must have occurred in", then the following example will demonstrate just how easy it is to filter the results even further.
-Even in the simplified example repository that we have been using, running this command filters the output to a single file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -p --since="last week" -- my_second_committed_file<br></strong>
+Even in the simplified example repository that we have been using, running this command filters the output to a single file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -p --since="last week" -- my_second_committed_file</strong><br>
 commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br>
 Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
 Date:   Thu Mar 31 22:05:55 2011 +0100<br>
@@ -311,7 +311,7 @@ index 0000000..3ad4cc3<br>
 +++ b/my_second_committed_file<br>
 @@ -0,0 +1 @@<br>
 +Change1<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>See how easy that is.
 Note, the <code class="ncode">--</code> is necessary to tell Git the following string is a path.
 We no longer have the information for <code class="ncode">my_third_committed_file</code> present in the output.
@@ -319,8 +319,8 @@ We have filtered everything out but the information we are looking for.
 When you are up against deadlines, pouring through pages and pages of diffs and changes can be incredibly time consuming.
 Having the tools available to cut that output down to just the relevant material can be life saving.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap3-2.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap3-4.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap3-2.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap3-4.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

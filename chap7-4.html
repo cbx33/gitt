@@ -148,27 +148,27 @@
 Up until now we have used <code class="ncode">git rebase</code> to work on our current branch, modifying a few things here and there.
 This is actually one of the simplest things that rebase can perform, and as hinted to in our workflow design, we can actually use <code class="ncode">git rebase</code> to perform something called <em>Continuous Integration</em>.<br><br>As we stated before, one of the most interesting uses of using <code class="ncode">git rebase</code> is to update your branch with changes from another, whilst keeping your development intact.
 The great part about it is that there is no messy merging, your commits appear at the end of the tree which makes things nice and tidy.
-Let us go back to our example and add some more commits to the <strong>master</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master<br></strong>
+Let us go back to our example and add some more commits to the <strong>master</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
 Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo$ touch cont_dev<br></strong>
-<strong>john@satsuki:~/coderepo$ echo "New info" &gt;&gt; cont_dev<br></strong>
-<strong>john@satsuki:~/coderepo$ git add cont_dev<br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Start new dev'<br></strong>
+<strong>john@satsuki:~/coderepo$ touch cont_dev</strong><br>
+<strong>john@satsuki:~/coderepo$ echo "New info" &gt;&gt; cont_dev</strong><br>
+<strong>john@satsuki:~/coderepo$ git add cont_dev</strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Start new dev'</strong><br>
 [master 1968324] Start new dev<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
  create mode 100644 cont_dev<br>
-<strong>john@satsuki:~/coderepo$ echo "A cool function" &gt;&gt; cont_dev<br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Finished new dev'<br></strong>
+<strong>john@satsuki:~/coderepo$ echo "A cool function" &gt;&gt; cont_dev</strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Finished new dev'</strong><br>
 [master f8d5100] Finished new dev<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ git logg -n5<br></strong>
+<strong>john@satsuki:~/coderepo$ git logg -n5</strong><br>
 * f8d5100 (HEAD, master) Finished new dev<br>
 * 1968324 Start new dev<br>
 | * 4d91aab (wonderful) Updated another file again<br>
 | * 1ffe37f Updated another file with 2 edits<br>
 |/<br>
 * 1c3206a Added a new file<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>You may have noticed that we seem to have introduced a new command here called <code class="ncode">git logg</code>.
 The command seems to do exactly the same as our <code class="ncode">git log --graph --pretty=oneline --all --abbrev-commit --decorate</code> command.
 For more information about what we have done here, see the callout called <strong>An alias in our midst</strong>.<br><div id="calloutblock"><h3>Information - An alias in our midst</h3>
@@ -185,19 +185,19 @@ As you can see from the example in the text, we can even append more parameters 
 So we can do things like <code class="ncode">git logg -n5</code> to get only five entries.
 </div><br>So we have two development trees, our <strong>master</strong> which is what our development work is based on, and our <strong>wonderful</strong> branch, which is where we are performing our development work.
 The task now is to update the <strong>wonderful</strong> branch, with all of the changes that have taken place in <strong>master</strong>.
-To do this, we use the <code class="ncode">git rebase</code> tool once more, but this time in a slightly different manner.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout wonderful<br></strong>
+To do this, we use the <code class="ncode">git rebase</code> tool once more, but this time in a slightly different manner.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout wonderful</strong><br>
 Switched to branch 'wonderful'<br>
-<strong>john@satsuki:~/coderepo$ git rebase master<br></strong>
+<strong>john@satsuki:~/coderepo$ git rebase master</strong><br>
 First, rewinding head to replay your work on top of it...<br>
 Applying: Updated another file with 2 edits<br>
 Applying: Updated another file again<br>
-<strong>john@satsuki:~/coderepo$ git logg -n5<br></strong>
+<strong>john@satsuki:~/coderepo$ git logg -n5</strong><br>
 * 5167cce (HEAD, wonderful) Updated another file again<br>
 * 551086e Updated another file with 2 edits<br>
 * f8d5100 (master) Finished new dev<br>
 * 1968324 Start new dev<br>
 * 1c3206a Added a new file<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>We started by checking out the <strong>wonderful</strong>.
 With the <code class="ncode">git rebase master</code> command, we told Git to take all of the changes in our topic branch called <strong>wonderful</strong>, and replay them on top of the new <strong>master</strong>.
 We could have also used the command <code class="ncode">git rebase master topic</code> which would actually have done the original <code class="ncode">git checkout</code> for us.<br><br>Notice again, that our commit IDs have changed.
@@ -246,7 +246,7 @@ The <code class="ncode">git log</code> tool can be used with the <code class="nc
 This parameter forces the Git to refer to the <em>reflog</em> for entries, instead of traversing the usualy tree.
 If you remember, the reflog is our key to seeing what happened in the past.
 It holds a list of all the previous HEADs of each branch.
-By supplying the branch name, we can see everything that happened to the <strong>wonderful</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -g wonderful -n2<br></strong>
+By supplying the branch name, we can see everything that happened to the <strong>wonderful</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -g wonderful -n2</strong><br>
 commit 5167cce7864ca71420ce5dc37ec9b3f931727db3<br>
 Reflog: wonderful@{0} (John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;)<br>
 Reflog message: rebase finished: refs/heads/wonderful onto f8d5100142b43ffaba9bb<br>
@@ -262,31 +262,31 @@ Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
 Date:   Wed Jul 6 09:30:40 2011 +0100<br>
 <br>
     Updated another file again<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>As you can see, the log shows that we recently completed two rebases.
 The first resulted in an ID of <strong>4d91aab</strong> and the second resulted in <strong>5167cce</strong>.
 As it happens, we are trying to get back to the end of that first rebase, before we ran the second.
-So if we run the reset against that ID, we should return to our pre-rebased state.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git reset --hard 4d91aab<br></strong>
+So if we run the reset against that ID, we should return to our pre-rebased state.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git reset --hard 4d91aab</strong><br>
 HEAD is now at 4d91aab Updated another file again<br>
-<strong>john@satsuki:~/coderepo$ git logg -n5<br></strong>
+<strong>john@satsuki:~/coderepo$ git logg -n5</strong><br>
 * f8d5100 (master) Finished new dev<br>
 * 1968324 Start new dev<br>
 | * 4d91aab (HEAD, wonderful) Updated another file again<br>
 | * 1ffe37f Updated another file with 2 edits<br>
 |/<br>
 * 1c3206a Added a new file<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>As you can see, even though the commit messages are identical, the history of them differs.
 Obviously now, it is our rebased version which is left dangling and if it continues to go unused, it will eventually be deleted.
 Of course it is also possible to create a branch to point to the dangling commit.
 In this way it would never get deleted.
-Let us just see how we could achieve this.<br><br>Armed with the knowledge that the commit we are looking for is <strong>5167cce</strong>, we can run the <code class="ncode">git branch</code> command and specify a starting point.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git branch keeprebase 5167cce<br></strong>
-<strong>john@satsuki:~/coderepo$ git branch -v<br></strong>
+Let us just see how we could achieve this.<br><br>Armed with the knowledge that the commit we are looking for is <strong>5167cce</strong>, we can run the <code class="ncode">git branch</code> command and specify a starting point.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git branch keeprebase 5167cce</strong><br>
+<strong>john@satsuki:~/coderepo$ git branch -v</strong><br>
   keeprebase 5167cce Updated another file again<br>
   master     f8d5100 Finished new dev<br>
 * wonderful  4d91aab Updated another file again<br>
   zaney      7cc32db Made another awesome change<br>
-<strong>john@satsuki:~/coderepo$ git logg -n7<br></strong>
+<strong>john@satsuki:~/coderepo$ git logg -n7</strong><br>
 * 5167cce (keeprebase) Updated another file again<br>
 * 551086e Updated another file with 2 edits<br>
 * f8d5100 (master) Finished new dev<br>
@@ -295,7 +295,7 @@ Let us just see how we could achieve this.<br><br>Armed with the knowledge that 
 | * 1ffe37f Updated another file with 2 edits<br>
 |/<br>
 * 1c3206a Added a new file<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br><center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>
                       <td style="padding:10px;"><img src="images/chaps/f-w7-d7.png" width="400" ></td>
@@ -308,8 +308,8 @@ Let us just see how we could achieve this.<br><br>Armed with the knowledge that 
                   </table></center><br>Notice our branch is now created and looking at the log, it contains the same two commits and the tree looks as we would expect.
 We have our <code class="ncode">another_file</code> updates in both branches.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap7-3.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap7-5.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap7-3.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap7-5.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

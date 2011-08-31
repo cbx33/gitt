@@ -175,9 +175,9 @@ Let us take the example we have currently in our repository.
 Imagine that the <strong>develop</strong> branch exists on another computer in a clone of our repository.
 At some point in time, someone cloned our repository.
 They have the HEAD of our repository at the same point as we do, but they have continued to do some development in a new branch called <strong>develop</strong>.
-Now they are ready to give those changes back.<br><br>Firstly we are going to look at using the <code class="ncode">git diff</code> tool to generate a patch file which we can apply.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout develop<br></strong>
+Now they are ready to give those changes back.<br><br>Firstly we are going to look at using the <code class="ncode">git diff</code> tool to generate a patch file which we can apply.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout develop</strong><br>
 Already on 'develop'<br>
-<strong>john@satsuki:~/coderepo$ git diff master develop<br></strong>
+<strong>john@satsuki:~/coderepo$ git diff master develop</strong><br>
 diff --git a/newfile2 b/newfile2<br>
 index 3545c1d..ff59f55 100644<br>
 --- a/newfile2<br>
@@ -193,10 +193,10 @@ index 638113c..2e00739 100644<br>
 @@ -1 +1,2 @@<br>
  These changes are in the origin<br>
 +new dev work<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>That will generate us a diff from the <code class="ncode">develop</code> to the <code class="ncode">master</code> branch.
-We could copy and paste that information from the terminal window into a file, but Linux offers us an easier way of doing this.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff master develop &gt; our_patch.diff<br></strong>
-<strong>john@satsuki:~/coderepo$ cat our_patch.diff <br></strong>
+We could copy and paste that information from the terminal window into a file, but Linux offers us an easier way of doing this.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff master develop &gt; our_patch.diff</strong><br>
+<strong>john@satsuki:~/coderepo$ cat our_patch.diff </strong><br>
 diff --git a/newfile2 b/newfile2<br>
 index 3545c1d..ff59f55 100644<br>
 --- a/newfile2<br>
@@ -212,12 +212,12 @@ index 638113c..2e00739 100644<br>
 @@ -1 +1,2 @@<br>
  These changes are in the origin<br>
 +new dev work<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>So we can see that the file itself has the information we are looking for.
-Now we can use the <code class="ncode">git apply</code> tool to actually modify the files in <strong>master</strong> and bring in the changes that have happened in <strong>develop</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master<br></strong>
+Now we can use the <code class="ncode">git apply</code> tool to actually modify the files in <strong>master</strong> and bring in the changes that have happened in <strong>develop</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
 Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo$ git apply our_patch.diff<br></strong>
-<strong>john@satsuki:~/coderepo$ git diff<br></strong>
+<strong>john@satsuki:~/coderepo$ git apply our_patch.diff</strong><br>
+<strong>john@satsuki:~/coderepo$ git diff</strong><br>
 diff --git a/newfile2 b/newfile2<br>
 index 3545c1d..ff59f55 100644<br>
 --- a/newfile2<br>
@@ -233,11 +233,11 @@ index 638113c..2e00739 100644<br>
 @@ -1 +1,2 @@<br>
  These changes are in the origin<br>
 +new dev work<br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Updated with patch'<br></strong>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Updated with patch'</strong><br>
 [master 81eee9f] Updated with patch<br>
  2 files changed, 2 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ git diff develop master<br></strong>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$ git diff develop master</strong><br>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Of course doing things this way means that we still have to commit our changes.
 Plus, all of the changes that we have made in the patch are committed in one block.
 Sure, we could split that using some of the techniques in the After Hours sections, but then we may not always be aware of what should be split where.<br><h3>Can we have some order please?</h3>
@@ -246,23 +246,23 @@ It is primarily used for working with  mailboxes, but it also has some other use
 Would it not be nice to be able to have each commit that we want to use as a patch in a separate patch file.
 The file <code class="ncode">our_patch.diff</code> above contained two commits worth of data.
 We have access to another tool in our fight against disparate systems.
-This is the <code class="ncode">git format-patch</code> command.<br><br>First we will undo the changes we made previously by resetting the <strong>master</strong> branch back to its older position and deleting the <code class="ncode">our_patch.diff</code> file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git reflog show master -n 4<br></strong>
+This is the <code class="ncode">git format-patch</code> command.<br><br>First we will undo the changes we made previously by resetting the <strong>master</strong> branch back to its older position and deleting the <code class="ncode">our_patch.diff</code> file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git reflog show master -n 4</strong><br>
 81eee9f master@{0}: commit: Updated with patch<br>
 f8d5100 master@{1}: commit: Finished new dev<br>
 1968324 master@{2}: commit: Start new dev<br>
-<strong>john@satsuki:~/coderepo$ git reset --hard f8d5100<br></strong>
+<strong>john@satsuki:~/coderepo$ git reset --hard f8d5100</strong><br>
 HEAD is now at f8d5100 Finished new dev<br>
-<strong>john@satsuki:~/coderepo$ rm our_patch.diff<br></strong>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$ rm our_patch.diff</strong><br>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>We used the <code class="ncode">git reflog</code> command to show what the last four <strong>master</strong> HEAD values were.
 Then we reset the branch back to the point before the <code class="ncode">git apply</code>.
 Finally we deleted the patch.
-Now let us see how to use the <code class="ncode">git format-patch</code> command to create multiple patch files.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git format-patch master..develop<br></strong>
+Now let us see how to use the <code class="ncode">git format-patch</code> command to create multiple patch files.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git format-patch master..develop</strong><br>
 0001-Some-new-dev-work.patch<br>
 0002-More-new-deving.patch<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>It would appear that the result of this command is that two files have been generated.
-Let us confirm our suspicions and <code class="ncode">cat</code> the contents of them to ensure that they contain the data we expect.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cat 0001-Some-new-dev-work.patch <br></strong>
+Let us confirm our suspicions and <code class="ncode">cat</code> the contents of them to ensure that they contain the data we expect.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cat 0001-Some-new-dev-work.patch </strong><br>
 From af3c6d730a8632d99b5626a7c0e921d14af21f50 Mon Sep 17 00:00:00 2001<br>
 From: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
 Date: Thu, 7 Jul 2011 19:01:59 +0100<br>
@@ -282,7 +282,7 @@ index 638113c..2e00739 100644<br>
 -- <br>
 1.7.4.1<br>
 <br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Woah! Hold on a minute. This does not seem to be a normal diff file at all.
 In fact, that is absolutely right. This is a patch file and the two are not the same.
 The patch file contains much more information than the simple diff file.
@@ -290,15 +290,15 @@ For a start we get information about which commit this patch came from, who crea
 In fact this looks almost like an email.  In fact it is created to resemble a format that would be easily emailable.<br><br>We have specified a range of commits to the <code class="ncode">git format-patch</code> command with the parameter <code class="ncode">master..develop</code>.
 The format of that parameter should be familar from earlier chapters when we utilised it for commands like <code class="ncode">git diff</code> and <code class="ncode">git log</code>.
 We could now take those files, email them to someone else and they could apply them.
-Let us learn one more tool, and see how we would apply those patches when they had been received at the other end.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git am 0001-Some-new-dev-work.patch<br></strong>
+Let us learn one more tool, and see how we would apply those patches when they had been received at the other end.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git am 0001-Some-new-dev-work.patch</strong><br>
 Applying: Some new dev work<br>
-<strong>john@satsuki:~/coderepo$ git am 0002-More-new-deving.patch<br></strong>
+<strong>john@satsuki:~/coderepo$ git am 0002-More-new-deving.patch</strong><br>
 Applying: More new deving<br>
-<strong>john@satsuki:~/coderepo$ git diff master..develop<br></strong>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$ git diff master..develop</strong><br>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Of course this is just a simple example case and in actual usage there may be cases where conflicts and other complications occur.
 Looking at a log output, we can see that the original dates and times of the commits are maintained and are not updated.
-We can ignore this if we wish and use the <code class="ncode">--ignore-date</code> parameter to use the current date when committing the patch to the repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -n4<br></strong>
+We can ignore this if we wish and use the <code class="ncode">--ignore-date</code> parameter to use the current date when committing the patch to the repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -n4</strong><br>
 commit 30900fe1b7e72411dabab8b02070f36e2431f704<br>
 Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
 Date:   Thu Jul 7 19:02:15 2011 +0100<br>
@@ -322,8 +322,8 @@ Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
 Date:   Thu Jul 7 08:39:07 2011 +0100<br>
 <br>
     Start new dev<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
-</code></div><br>Interestingly if we use our alias for the log command we see something maybe a little unexpected.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git logg -n6<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
+</code></div><br>Interestingly if we use our alias for the log command we see something maybe a little unexpected.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git logg -n6</strong><br>
 * 30900fe (HEAD, master) More new deving<br>
 * a8281fb Some new dev work<br>
 | * aed985c (develop) More new deving<br>
@@ -331,19 +331,19 @@ Date:   Thu Jul 7 08:39:07 2011 +0100<br>
 |/  <br>
 * f8d5100 Finished new dev<br>
 * 1968324 Start new dev<br>
-<strong>john@satsuki:~/coderepo$ <br></strong>
+<strong>john@satsuki:~/coderepo$ </strong><br>
 </code></div><br>Notice that the branch <strong>master</strong> has not been simply fast forwarded to that of commit of <strong>develop</strong>.
 This is because we have not performed a merge, but in a sense we have manually made that changes to the files and created separate commits for them.
 In this way the commits <strong>30900fe</strong> and <strong>a8281fb</strong> are not the same as their <strong>develop</strong> counterparts.<br><br>If you intend to use this workflow, it is worth spending some time reading the man page for <code class="ncode">git am</code> and <code class="ncode">git format-patch</code> as both of them hold valuable information regarding the customisation and handling of patches and emails.
 Tamagoyaki Inc. are not going to use this workflow often and so just applying a few patches here and there from contractors using the methods is prefectly acceptable to them.
 If you were a large open source establishment, or any company that accepts a large number of patches, you may want to take a closer look at how to work these.
-Now it is time to move on to some more advanced topics within Git, but first a little cleanup.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ rm 0001-Some-new-dev-work.patch <br></strong>
-<strong>john@satsuki:~/coderepo$ rm 0002-More-new-deving.patch <br></strong>
-<strong>john@satsuki:~/coderepo$<br></strong>
+Now it is time to move on to some more advanced topics within Git, but first a little cleanup.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ rm 0001-Some-new-dev-work.patch </strong><br>
+<strong>john@satsuki:~/coderepo$ rm 0002-More-new-deving.patch </strong><br>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="afterhours7-1.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap8-2.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="afterhours7-1.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap8-2.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

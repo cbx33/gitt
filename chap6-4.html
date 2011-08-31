@@ -148,7 +148,7 @@
 With a remote tracking branch, we can pull in the changes from the remote repository.
 In our case, the remote repository is in the <code class="ncode">coderepo</code> directory that we created at the start of the book.
 In the <code class="ncode">coderepo-cl</code> directory we have a separate, self-contained copy of the repository.
-At the moment, because no changes have occurred to either, they contain exactly the same data.<br><br>By running the <code class="ncode">git remote</code> tool again, we can see which branches are set up locally to track their remote counterparts in <strong>origin</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote show origin<br></strong>
+At the moment, because no changes have occurred to either, they contain exactly the same data.<br><br>By running the <code class="ncode">git remote</code> tool again, we can see which branches are set up locally to track their remote counterparts in <strong>origin</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote show origin</strong><br>
 * remote origin<br>
   Fetch URL: /home/john/coderepo<br>
   Push  URL: /home/john/coderepo<br>
@@ -163,16 +163,16 @@ At the moment, because no changes have occurred to either, they contain exactly 
   Local refs configured for 'git push':<br>
     master    pushes to master    (up to date)<br>
     wonderful pushes to wonderful (up to date)<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>What we are going to do now is make some changes to our original repository and see how we can view those changes and indeed pull them into our current local working repository, or clone.
-Note that in the following code examples we have switched back to working on our original repository, in the <code class="ncode">coderepo</code> folder.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ cd ../coderepo<br></strong>
-<strong>john@satsuki:~/coderepo$ git branch<br></strong>
+Note that in the following code examples we have switched back to working on our original repository, in the <code class="ncode">coderepo</code> folder.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ cd ../coderepo</strong><br>
+<strong>john@satsuki:~/coderepo$ git branch</strong><br>
 * master<br>
   wonderful<br>
   zaney<br>
-<strong>john@satsuki:~/coderepo$ git checkout wonderful<br></strong>
+<strong>john@satsuki:~/coderepo$ git checkout wonderful</strong><br>
 Switched to branch 'wonderful'<br>
-<strong>john@satsuki:~/coderepo$ git merge master<br></strong>
+<strong>john@satsuki:~/coderepo$ git merge master</strong><br>
 Updating cfbecab..37950f8<br>
 Fast-forward<br>
  another_file            |    1 +<br>
@@ -181,19 +181,19 @@ Fast-forward<br>
  newfile2                |    2 +-<br>
  4 files changed, 4 insertions(+), 3 deletions(-)<br>
  delete mode 100644 my_third_committed_file<br>
-<strong>john@satsuki:~/coderepo$ echo "These changes are in the origin" &gt;&gt; newfile3<br></strong>
-<strong>john@satsuki:~/coderepo$ git add newfile3<br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Added a new file'<br></strong>
+<strong>john@satsuki:~/coderepo$ echo "These changes are in the origin" &gt;&gt; newfile3</strong><br>
+<strong>john@satsuki:~/coderepo$ git add newfile3</strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Added a new file'</strong><br>
 [wonderful 1c3206a] Added a new file<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
  create mode 100644 newfile3<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>As you can see, we have switched back to working on our old <strong>origin</strong> and have bought <strong>wonderful</strong> to be in line with master and have added a new file and committed the changes.
-Now let us go back to our clone and see if we can see those changes.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd ../coderepo-cl/<br></strong>
-<strong>john@satsuki:~/coderepo-cl$ git diff wonderful origin/<br></strong>
+Now let us go back to our clone and see if we can see those changes.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd ../coderepo-cl/</strong><br>
+<strong>john@satsuki:~/coderepo-cl$ git diff wonderful origin/</strong><br>
 origin/HEAD        origin/master      origin/wonderful   origin/zaney<br>
-<strong>john@satsuki:~/coderepo-cl$ git diff wonderful origin/wonderful<br></strong>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$ git diff wonderful origin/wonderful</strong><br>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>That seems a little odd at first glance.
 We have tried to view a diff between our local <strong>wonderful</strong> branch and the remote <strong>origin/wonderful</strong> branch.
 Interestingly, Git is telling us that there is no difference.
@@ -204,12 +204,12 @@ What this means, is that when we run a <code class="ncode">git pull</code> from 
 Whilst the first one is to use <code class="ncode">git pull</code>, the second one actually achieves an almost identical result, but by running two commands instead of one.
 In point of fact, these two commands are executed by the <code class="ncode">git pull</code> command.
 Running them as two separate commands allows us to understand a little more about what is happening.
-Let us run the command and then explain what we have done.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git fetch origin<br></strong>
+Let us run the command and then explain what we have done.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git fetch origin</strong><br>
 remote: Counting objects: 4, done.<br>
 remote: Compressing objects: 100remote: Total 3 (delta 1), reused 0 (delta 0)<br>
 Unpacking objects: 100From /home/john/coderepo<br>
    cfbecab..1c3206a  wonderful  -&gt; origin/wonderful<br>
-<strong>john@satsuki:~/coderepo-cl$ git diff wonderful origin/wonderful<br></strong>
+<strong>john@satsuki:~/coderepo-cl$ git diff wonderful origin/wonderful</strong><br>
 diff --git a/another_file b/another_file<br>
 index dba885d..b3a5cc5 100644<br>
 --- a/another_file<br>
@@ -221,7 +221,7 @@ index dba885d..b3a5cc5 100644<br>
 ...<br>
 ...<br>
 <br>
-<strong>john@satsuki:~/coderepo-cl$ git merge origin/wonderful<br></strong>
+<strong>john@satsuki:~/coderepo-cl$ git merge origin/wonderful</strong><br>
 Updating cfbecab..1c3206a<br>
 Fast-forward<br>
  another_file            |    1 +<br>
@@ -232,7 +232,7 @@ Fast-forward<br>
  5 files changed, 5 insertions(+), 3 deletions(-)<br>
  delete mode 100644 my_third_committed_file<br>
  create mode 100644 newfile3<br>
-<strong>john@satsuki:~/coderepo-cl$<br></strong>
+<strong>john@satsuki:~/coderepo-cl$</strong><br>
 </code></div><br>As you can see, the two commands that we used were <code class="ncode">git fetch</code> and the more familiar <code class="ncode">git merge</code>.
 The <code class="ncode">git fetch</code> command literally visits the remote repository, in our case we asked for <strong>origin</strong>, and finds which objects are new.
 These are then copied to the local clone, and the HEADs of the various remote branches are updated.
@@ -241,8 +241,8 @@ Finally we initiate a <code class="ncode">git merge</code> to pull the changes f
 The only difference would have been running one command instead of two.
 Please note, that there are occasions when you would require one over the other, but as an introduction, this should be sufficient.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap6-3.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap6-5.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap6-3.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap6-5.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

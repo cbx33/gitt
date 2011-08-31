@@ -151,18 +151,18 @@ We could switch into our <strong>wacky</strong> branch, do a little development,
 Now, this is probably the simplest way of merging possible.
 In actual fact, this is not really merging at all.
 However one thing that would be lost is the history of how that branch has developed over time.
-Sometimes this can be crucial for knowing why certain things were changed during the development process.<br><br>Let us take a little look at the command output of a simple merge, explain it a little, and then look at a diagrammatic representation.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git branch<br></strong>
+Sometimes this can be crucial for knowing why certain things were changed during the development process.<br><br>Let us take a little look at the command output of a simple merge, explain it a little, and then look at a diagrammatic representation.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git branch</strong><br>
   master<br>
 * wacky<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Firstly we check just to see what branch we are on.
 Next we checkout the branch we want our development branch to be merged into.
 In this case, we want to merge <strong>wacky</strong> into <strong>master</strong> and so we must first checkout the <strong>master</strong> branch.
-Then we can merge in the changes from our <strong>wacky</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master<br></strong>
+Then we can merge in the changes from our <strong>wacky</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
 Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Now we can run the actual merge.
-<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git merge wacky<br></strong>
+<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git merge wacky</strong><br>
 Updating a022d4d..9710177<br>
 Fast-forward<br>
  another_file             |    1 +<br>
@@ -176,22 +176,22 @@ Fast-forward<br>
  delete mode 100644 my_second_committed_file<br>
  create mode 100644 newfile1<br>
  create mode 100644 newfile2<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>We can see that the first line after our <code class="ncode">git merge</code> command shows us which commit <strong>master</strong> is the latest common ancestor to both branches and then which commit is the last in our new branch.
 In this case we are merging from <strong>a022d4d</strong> to <strong>9710177</strong>.
 The line below this is even more important.
 This type of merge is called a <em>fast-forward</em> merge.
 We have not made any changes to our <strong>master</strong> branch since we began developing and subsequently, after finishing our development work, we literally only require fast-forwarding the <strong>master</strong> branch to the same point in time as our <strong>wacky</strong> one.
-Beneath this text, we see more information about just what is included in the merge.<br><br>We are going to perform a quick check, to see that we are in fact on the master branch and that the latest log message is the one from the point we last left the <strong>wacky</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -n1<br></strong>
+Beneath this text, we see more information about just what is included in the merge.<br><br>We are going to perform a quick check, to see that we are in fact on the master branch and that the latest log message is the one from the point we last left the <strong>wacky</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -n1</strong><br>
 commit 9710177657ae00665ca8f8027b17314346a5b1c4<br>
 Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
 Date:   Fri Apr 1 00:16:17 2011 +0100<br>
 <br>
     Added another file<br>
-<strong>john@satsuki:~/coderepo$ git branch<br></strong>
+<strong>john@satsuki:~/coderepo$ git branch</strong><br>
 * master<br>
   wacky<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Now let us take a quick look at a diagram to see how this change actually affected the commit flow.
 We have included tags in this diagram, so that you can see where they point to as well.<br><center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>
@@ -238,22 +238,22 @@ How many times have you been working on something and wished that you could move
 Well, the new safe environment we spoke of sounds suspiciously like a branch.
 In Git, any changes you have in your working copy can be taken into a new branch by issuing one command.
 It is important to note that these changes can also be taken into an existing branch, but you may run into problems if those changes conflict with items already in that branch.<br><br>For now let us see how we can take our working copy changes into a new branch to continue development of some wonderful new feature.
-We are going to start by making some changes to our newfiles.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "and some more changes" &gt;&gt; newfile1<br></strong>
-<strong>john@satsuki:~/coderepo$ echo "and a new feature" &gt;&gt; newfile2<br></strong>
-<strong>john@satsuki:~/coderepo$<br></strong>
-</code></div><br>Now we are going to make a new branch and switch into it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b wonderful<br></strong>
+We are going to start by making some changes to our newfiles.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "and some more changes" &gt;&gt; newfile1</strong><br>
+<strong>john@satsuki:~/coderepo$ echo "and a new feature" &gt;&gt; newfile2</strong><br>
+<strong>john@satsuki:~/coderepo$</strong><br>
+</code></div><br>Now we are going to make a new branch and switch into it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b wonderful</strong><br>
 M	newfile1<br>
 M	newfile2<br>
 Switched to a new branch 'wonderful'<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Did you see that? We managed to create a new branch and move into it in one go.
 The <code class="ncode">git checkout</code> command is usually what we would use to move into a branch, not create it.
 When we use the <code class="ncode">-b</code> parameter, the <code class="ncode">git checkout</code> command can be used to create a new branch and switch to it in one go.
 Notice we have chosen the name <strong>wonderful</strong> for this particular branch.
-There is also a status output below this that shows we have pulled two modifications into this branch, denoted by the letter <code class="ncode">M</code> in front of the file name.<br><br>Now we can commit these changes.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git commit -a -m 'Fantastic new feature'<br></strong>
+There is also a status output below this that shows we have pulled two modifications into this branch, denoted by the letter <code class="ncode">M</code> in front of the file name.<br><br>Now we can commit these changes.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git commit -a -m 'Fantastic new feature'</strong><br>
 [wonderful cfbecab] Fantastic new feature<br>
  2 files changed, 2 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ git diff master wonderful<br></strong>
+<strong>john@satsuki:~/coderepo$ git diff master wonderful</strong><br>
 diff --git a/newfile1 b/newfile1<br>
 index 24e7dfa..ef20984 100644<br>
 --- a/newfile1<br>
@@ -268,13 +268,13 @@ index cba16cc..dac4357 100644<br>
 @@ -1 +1,2 @@<br>
  Another new file<br>
 +and a new feature<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>After running the diff, we can see the differences between the <strong>master</strong> and the <strong>wonderful</strong> branches.
 Looking more closely at the hunks, the only differences between the two branches are those that we made before we created our <strong>wonderful</strong> branch.
 We have achieved what we set out to in bringing uncommitted changes from <strong>master</strong> into <strong>wonderful</strong> and subsequently committing them.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap4-1.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap4-3.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap4-1.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap4-3.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

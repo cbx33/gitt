@@ -149,21 +149,21 @@ OK, so we are not quite at the stage of nuclear physics, but it would be nice to
 Git offers a tool called <code class="ncode">git submodule</code>.  This tool allows you to link a remote repositories branch and store it under a subdirectory of the project.
 It does have some nuances which must be learnt, but can be very useful.
 Let us add our testing suite from the <code class="ncode">subrepo</code> repository into the directory called <code class="ncode">tester</code> in our main <code class="ncode">coderepo</code> repository.
-First we must remove our <code class="ncode">tester</code> directory.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master <br></strong>
+First we must remove our <code class="ncode">tester</code> directory.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master </strong><br>
 Already on 'master'<br>
-<strong>john@satsuki:~/coderepo$ git rm tester/*<br></strong>
+<strong>john@satsuki:~/coderepo$ git rm tester/*</strong><br>
 rm 'tester/newfile1'<br>
 rm 'tester/newfile2'<br>
 rm 'tester/newfile3'<br>
 rm 'tester/test.sh'<br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Removed tester - will be replaced by submodule'<br></strong>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Removed tester - will be replaced by submodule'</strong><br>
 [master 5698499] Removed tester - will be replaced by submodule<br>
  4 files changed, 0 insertions(+), 20 deletions(-)<br>
  delete mode 100644 tester/newfile1<br>
  delete mode 100644 tester/newfile2<br>
  delete mode 100644 tester/newfile3<br>
  delete mode 100755 tester/test.sh<br>
-<strong>john@satsuki:~/coderepo$ <br></strong>
+<strong>john@satsuki:~/coderepo$ </strong><br>
 </code></div><br>We need to define what a submodule actualy is.
 Submodules are tricky to understand and often people use them once and conclude that they are more trouble than they are worth.
 However, if you take some time to understand what a submodule really is, then they can be very useful to you.
@@ -178,10 +178,10 @@ Think of it like a river which flows from the source further <em>upstream</em>.
 </div><br>As we will see, though it can be a little longwinded to actually change the version of the code that the submodule refers to,
 it actually makes a lot of sense to handle them in this way.
 If the code in the submodule is being included in your repository, you do not want to run the risk of a change upstream resulting in a broken build for your project.
-This is why submodules always refer to a single commit.<br><br>Let us go ahead, create a submodule and then discuss the steps we have taken.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git submodule add /home/john/subrepo tester<br></strong>
+This is why submodules always refer to a single commit.<br><br>Let us go ahead, create a submodule and then discuss the steps we have taken.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git submodule add /home/john/subrepo tester</strong><br>
 Cloning into tester...<br>
 done.<br>
-<strong>john@satsuki:~/coderepo$ git status<br></strong>
+<strong>john@satsuki:~/coderepo$ git status</strong><br>
 # On branch master<br>
 # Changes to be committed:<br>
 #   (use "git reset HEAD &lt;file&gt;..." to unstage)<br>
@@ -189,12 +189,12 @@ done.<br>
 #	new file:   .gitmodules<br>
 #	new file:   tester<br>
 #<br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Added submodule (subrepo)'<br></strong>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Added submodule (subrepo)'</strong><br>
 [master 2aadc11] Added submodule (subrepo)<br>
  2 files changed, 4 insertions(+), 0 deletions(-)<br>
  create mode 100644 .gitmodules<br>
  create mode 160000 tester<br>
-<strong>john@satsuki:~/coderepo/tester$ <br></strong>
+<strong>john@satsuki:~/coderepo/tester$ </strong><br>
 </code></div><br>As you can see we had to perform a number of steps before we obtained the source for the <strong>subrepo</strong> library in our <code class="ncode">tester</code> directory.
 We had to begin by using <code class="ncode">git submodule</code> to add the upstream repository.
 The upstream repository is really just like any remote repository we have been using, but we will use the terminology <em>upstream</em> to make a distinction.
@@ -202,76 +202,76 @@ The command <code class="ncode">git submodule add /home/john/subrepo tester</cod
 plus it clones the upstream repository into the folder we specified, in this case <code class="ncode">tester</code>.<br><br>Notice that when we ran <code class="ncode">git status</code>, we saw two new entries, one for <code class="ncode">.gitmodules</code> and one for <code class="ncode">tester</code>.
 Next we have to commit those entries using the standard <code class="ncode">git commit</code> command.
 When we do, we see that there is a code in front of <code class="ncode">tester</code> which is special and tells Git to treat this directory as a submodule.<br><br>Though the submodule has now been added, it has not yet been initialised.
-To do this, we run our next set of steps.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git submodule init<br></strong>
+To do this, we run our next set of steps.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git submodule init</strong><br>
 Submodule 'tester' (/home/john/subrepo) registered for path 'tester'<br>
-<strong>john@satsuki:~/coderepo$ git submodule update<br></strong>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$ git submodule update</strong><br>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Now our submodule has been added and initialised.
-The update command is used to ensure that the directory <code class="ncode">tester</code> contains the version of the submodule that we committed earlier.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd tester/<br></strong>
-<strong>john@satsuki:~/coderepo/tester$ ls<br></strong>
+The update command is used to ensure that the directory <code class="ncode">tester</code> contains the version of the submodule that we committed earlier.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd tester/</strong><br>
+<strong>john@satsuki:~/coderepo/tester$ ls</strong><br>
 newfile1  newfile2  newfile3  test.sh<br>
-<strong>john@satsuki:~/coderepo/tester$ git log --format=oneline<br></strong>
+<strong>john@satsuki:~/coderepo/tester$ git log --format=oneline</strong><br>
 590e0eb79bc5ba0bc09f611392e643f676b00a04 Work on tester nf3<br>
 785b86d877d2a5c0679d98181a23d06ed2ba7652 Work on tester nf2<br>
 1ff89f787438f081a0d74de2d26eb2d831c9c738 Work on tester nf1<br>
 a5a0d9762dd4b50d8f3228e37b315f6056d5a034 Moved testing suite<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Looking in the directory we can see two things.
 The first, is that the files present in the <strong>subrepo</strong> upstream project have now been added.
 The second, may appear a little suprising to begin with.
 The <code class="ncode">git log</code> command actually shows a log for the upstream project, not for the local root project stored in <code class="ncode">coderepo</code>.
 In all honesty, the submodule repository is actually just a clone of the upstream project, with a few subtle differences.<br><br>The information about which upstream url to use for the project can be found in the <code class="ncode">.gitmodules</code> which we committed earlier.
-Below is an example of what the file looks like in our current repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cat .gitmodules <br></strong>
+Below is an example of what the file looks like in our current repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cat .gitmodules </strong><br>
 [submodule "tester"]<br>
 	path = tester<br>
 	url = /home/john/subrepo<br>
-<strong>john@satsuki:~/coderepo$ <br></strong>
+<strong>john@satsuki:~/coderepo$ </strong><br>
 </code></div><br><h3>Changes down the river</h3>
 So what happens when we want to pull in changes from the upstream project?
 Well, you can make your submodule point to whatever point you like and stay there.
 As long as you commit your changes in the super project, Git will always allow you to return to that point using the <code class="ncode">git submodule update</code> command.<br><br>Let us take a look at how we could pull in some changes into our <code class="ncode">tester</code> submodule.
-First, we are going to make a change to our upstream project.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd ..<br></strong>
-<strong>john@satsuki:~$ cd subrepo<br></strong>
-<strong>john@satsuki:~/subrepo$ ls<br></strong>
+First, we are going to make a change to our upstream project.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd ..</strong><br>
+<strong>john@satsuki:~$ cd subrepo</strong><br>
+<strong>john@satsuki:~/subrepo$ ls</strong><br>
 newfile1  newfile2  newfile3  test.sh<br>
-<strong>john@satsuki:~/subrepo$ echo "Added a new function" &gt; newfile4<br></strong>
-<strong>john@satsuki:~/subrepo$ git add newfile4<br></strong>
-<strong>john@satsuki:~/subrepo$ git commit -a -m 'Added a new library file'<br></strong>
+<strong>john@satsuki:~/subrepo$ echo "Added a new function" &gt; newfile4</strong><br>
+<strong>john@satsuki:~/subrepo$ git add newfile4</strong><br>
+<strong>john@satsuki:~/subrepo$ git commit -a -m 'Added a new library file'</strong><br>
 [master 94ad27e] Added a new library file<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
  create mode 100644 newfile4<br>
-<strong>john@satsuki:~/subrepo$ cd ..<br></strong>
-<strong>john@satsuki:~/subrepo$<br></strong>
-</code></div><br>Now that we have a new version of the project, let us try to pull those changes into our superproject.<br><div id="codeblock"><code><strong>john@satsuki:~$ cd coderepo<br></strong>
-<strong>john@satsuki:~/coderepo$ cd tester<br></strong>
-<strong>john@satsuki:~/coderepo/tester$ git status<br></strong>
+<strong>john@satsuki:~/subrepo$ cd ..</strong><br>
+<strong>john@satsuki:~/subrepo$</strong><br>
+</code></div><br>Now that we have a new version of the project, let us try to pull those changes into our superproject.<br><div id="codeblock"><code><strong>john@satsuki:~$ cd coderepo</strong><br>
+<strong>john@satsuki:~/coderepo$ cd tester</strong><br>
+<strong>john@satsuki:~/coderepo/tester$ git status</strong><br>
 # On branch master<br>
 nothing to commit (working directory clean)<br>
-<strong>john@satsuki:~/coderepo/tester$ git fetch origin <br></strong>
+<strong>john@satsuki:~/coderepo/tester$ git fetch origin </strong><br>
 remote: Counting objects: 4, done.<br>
 remote: Compressing objects: 100remote: Total 3 (delta 1), reused 0 (delta 0)<br>
 Unpacking objects: 100From /home/john/subrepo<br>
    590e0eb..94ad27e  master     -&gt; origin/master<br>
-<strong>john@satsuki:~/coderepo/tester$ git checkout master <br></strong>
+<strong>john@satsuki:~/coderepo/tester$ git checkout master </strong><br>
 Already on 'master'<br>
 Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.<br>
-<strong>john@satsuki:~/coderepo/tester$<br></strong>
+<strong>john@satsuki:~/coderepo/tester$</strong><br>
 </code></div><br>As you can see, we are told that our branch is currently one commit behind that of <strong>origin/master</strong>.
-If we want to update our <strong>master</strong> branch in the submodule, we need to <em>pull</em> our changes in, just like a <strong>real</strong> Git repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/tester$ git pull<br></strong>
+If we want to update our <strong>master</strong> branch in the submodule, we need to <em>pull</em> our changes in, just like a <strong>real</strong> Git repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/tester$ git pull</strong><br>
 Updating 590e0eb..94ad27e<br>
 Fast-forward<br>
  newfile4 |    1 +<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
  create mode 100644 newfile4<br>
-<strong>john@satsuki:~/coderepo/tester$ ls<br></strong>
+<strong>john@satsuki:~/coderepo/tester$ ls</strong><br>
 newfile1  newfile2  newfile3  newfile4  test.sh<br>
-<strong>john@satsuki:~/coderepo/tester$ cd ..<br></strong>
-</code></div><br>Now let us see what happens if we try to update the module.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git submodule update<br></strong>
+<strong>john@satsuki:~/coderepo/tester$ cd ..</strong><br>
+</code></div><br>Now let us see what happens if we try to update the module.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git submodule update</strong><br>
 Submodule path 'tester': checked out '590e0eb79bc5ba0bc09f611392e643f676b00a04'<br>
-<strong>john@satsuki:~/coderepo$ cd tester<br></strong>
-<strong>john@satsuki:~/coderepo/tester$ ls<br></strong>
+<strong>john@satsuki:~/coderepo$ cd tester</strong><br>
+<strong>john@satsuki:~/coderepo/tester$ ls</strong><br>
 newfile1  newfile2  newfile3  test.sh<br>
-<strong>john@satsuki:~/coderepo/tester$ <br></strong>
+<strong>john@satsuki:~/coderepo/tester$ </strong><br>
 </code></div><br>Our new changes have disappeared.
 How odd!
 Well actually not really.
@@ -280,32 +280,32 @@ we not only committed the fact that we required a submodule, we also committed t
 If we want to change this, then we must commit that as a change.
 It may seem a little odd that we have to jump through these hoops to get an update to an upstream project, but if you think about it, it actually makes a lot of sense.
 It means that anyone cloning our repository is sure to get a version of the submodule that we have decided is right for the project.
-So keeping this in mind, let us walk through a quick example of how we would finish the job and commit a new version of the submodule.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd tester/<br></strong>
-<strong>john@satsuki:~/coderepo/tester$ git pull<br></strong>
+So keeping this in mind, let us walk through a quick example of how we would finish the job and commit a new version of the submodule.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd tester/</strong><br>
+<strong>john@satsuki:~/coderepo/tester$ git pull</strong><br>
 You are not currently on a branch, so I cannot use any<br>
 'branch.&lt;branchname&gt;.merge' in your configuration file.<br>
 Please specify which remote branch you want to use on the command<br>
 line and try again (e.g. 'git pull &lt;repository&gt; &lt;refspec&gt;').<br>
 See git-pull(1) for details.<br>
-<strong>john@satsuki:~/coderepo/tester$<br></strong>
+<strong>john@satsuki:~/coderepo/tester$</strong><br>
 </code></div><br>Interesting!
 What has happened here is that by performing the <code class="ncode">git submodule update</code> command, we effectively asked Git to checkout a commit.
 Remember in the past we talked about detached HEAD?
 This is exactly what Git has done. A submodule spends most of it's life in a detached HEAD state. 
 As we tell Git that we must have the submodule at a specific commit, it means that Git checks out a commit, rather than a branch.
 If you think about it, this makes sense, we do not want the contents of the module <em>changing</em>.<br><br>So to bring our module up to date, we need to first checkout master.
-Then we can issue our <code class="ncode">git pull</code>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/tester$ git checkout master<br></strong>
+Then we can issue our <code class="ncode">git pull</code>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/tester$ git checkout master</strong><br>
 Previous HEAD position was 590e0eb... Work on tester nf3<br>
 Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo/tester$ git pull<br></strong>
+<strong>john@satsuki:~/coderepo/tester$ git pull</strong><br>
 Already up-to-date.<br>
 </code></div><br>Oh? Should we not have seen some commits pulled in here?
 Actually, no. We pulled the changes into master earlier, when we ran the <code class="ncode">git pull</code>.
 When the module reverted to the earlier commit, <strong>590e0eb</strong>, it did not affect the master branch at all, as we simply checked out a single commit.
-So by swiching to <strong>master</strong>, we have already altered the contents of the submodule directory, as can be seen below.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/tester$ ls<br></strong>
+So by swiching to <strong>master</strong>, we have already altered the contents of the submodule directory, as can be seen below.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/tester$ ls</strong><br>
 newfile1  newfile2  newfile3  newfile4  test.sh<br>
-<strong>john@satsuki:~/coderepo/tester$ cd ..<br></strong>
-<strong>john@satsuki:~/coderepo$ git status<br></strong>
+<strong>john@satsuki:~/coderepo/tester$ cd ..</strong><br>
+<strong>john@satsuki:~/coderepo$ git status</strong><br>
 # On branch master<br>
 # Changes not staged for commit:<br>
 #   (use "git add &lt;file&gt;..." to update what will be committed)<br>
@@ -314,16 +314,16 @@ newfile1  newfile2  newfile3  newfile4  test.sh<br>
 #	modified:   tester (new commits)<br>
 #<br>
 no changes added to commit (use "git add" and/or "git commit -a")<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
-</code></div><br>All we need to do now is to commit the submodule changes into the repository and check that the update yields the new file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git commit -a -m 'Up revd upstream module'<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
+</code></div><br>All we need to do now is to commit the submodule changes into the repository and check that the update yields the new file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git commit -a -m 'Up revd upstream module'</strong><br>
 [master 022a163] Up revd upstream module<br>
  1 files changed, 1 insertions(+), 1 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ git submodule update<br></strong>
-<strong>john@satsuki:~/coderepo$ cd tester/<br></strong>
-<strong>john@satsuki:~/coderepo/tester$ ls<br></strong>
+<strong>john@satsuki:~/coderepo$ git submodule update</strong><br>
+<strong>john@satsuki:~/coderepo$ cd tester/</strong><br>
+<strong>john@satsuki:~/coderepo/tester$ ls</strong><br>
 newfile1  newfile2  newfile3  newfile4  test.sh<br>
-<strong>john@satsuki:~/coderepo/tester$ cd ..<br></strong>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo/tester$ cd ..</strong><br>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>As you can see, submodules can be rather useful.
 You can even make changes to the repository in the submodule and commit them locally to perhaps keep changes that you want to make to the submodule.
 Remember though that if you did make changes, and you committed them to the submodule,
@@ -333,8 +333,8 @@ that way they are easy to bring back if you make a mistake like the one describe
 What follows in the next chapter are some other points that are added more for information on what <strong>can</strong> be done with Git.<br><br>
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap8-4.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap8-6.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap8-4.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap8-6.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

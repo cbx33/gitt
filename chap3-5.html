@@ -195,32 +195,32 @@ If we have any changes in our working copy, the checkout will fail.<br><br>The l
 This command literally pulls data from a previous version and dumps it to the standard output, a little like the <code class="ncode">cat</code> command present in almost every single *nix environment.<br><br>Now that we have taken a quick look at our three methods, we must decide which one is going to be the most useful to us.
 Looking at the scenario above, we can deduce that we really only need to pull out one file.
 If our intention was to do large amounts of work on an old branch and pull many files from it, <code class="ncode">git reset</code> may have been a good choice.
-As we are looking for only a single file, we should consider looking at the checkout and show tools.<br><br>So now let us see how we can use <code class="ncode">git checkout</code> to take one of our files back to the past.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git status<br></strong>
+As we are looking for only a single file, we should consider looking at the checkout and show tools.<br><br>So now let us see how we can use <code class="ncode">git checkout</code> to take one of our files back to the past.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git status</strong><br>
 # On branch master<br>
 nothing to commit (working directory clean)<br>
-<strong>john@satsuki:~/coderepo$ git checkout v0.9 -- my_second_committed_file<br></strong>
-<strong>john@satsuki:~/coderepo$ cat my_second_committed_file<br></strong>
+<strong>john@satsuki:~/coderepo$ git checkout v0.9 -- my_second_committed_file</strong><br>
+<strong>john@satsuki:~/coderepo$ cat my_second_committed_file</strong><br>
 Change1<br>
-<strong>john@satsuki:~/coderepo$ git checkout HEAD -- my_second_committed_file<br></strong>
-<strong>john@satsuki:~/coderepo$ cat my_second_committed_file<br></strong>
+<strong>john@satsuki:~/coderepo$ git checkout HEAD -- my_second_committed_file</strong><br>
+<strong>john@satsuki:~/coderepo$ cat my_second_committed_file</strong><br>
 Changed this file completely<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
-</code></div><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git status<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
+</code></div><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git status</strong><br>
 # On branch master<br>
 nothing to commit (working directory clean)<br>
-<strong>john@satsuki:~/coderepo$ git checkout v0.9 -- my_second_committed_file<br></strong>
-<strong>john@satsuki:~/coderepo$ git status<br></strong>
+<strong>john@satsuki:~/coderepo$ git checkout v0.9 -- my_second_committed_file</strong><br>
+<strong>john@satsuki:~/coderepo$ git status</strong><br>
 # On branch master<br>
 # Changes to be committed:<br>
 #   (use "git reset HEAD &lt;file&gt;..." to unstage)<br>
 #<br>
 #	modified:   my_second_committed_file<br>
 #<br>
-<strong>john@satsuki:~/coderepo$ git checkout HEAD -- my_second_committed_file<br></strong>
-<strong>john@satsuki:~/coderepo$ git status<br></strong>
+<strong>john@satsuki:~/coderepo$ git checkout HEAD -- my_second_committed_file</strong><br>
+<strong>john@satsuki:~/coderepo$ git status</strong><br>
 # On branch master<br>
 nothing to commit (working directory clean)<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Notice how we first checked that we didn't have any local modifications by running the <code class="ncode">git status</code> command.
 Then we are safe to run the <code class="ncode">git checkout</code> command.
 We used the <code class="ncode">v0.9</code> tag from earlier to refer to an earlier commit state.
@@ -230,12 +230,12 @@ After this, when we <code class="ncode">cat</code> the file, we see that it has 
 Note that on the odd occasion, the <code class="ncode">HEAD</code> reference doesn't always point to where you think it does, but this is an area we are yet to cover.
 Then we run the command one more time, but this time we intersperse it with a <code class="ncode">git status</code> to see that there are changes made to out local working copy.<br><h3>Show me the money</h3>
 The <code class="ncode">git show</code> command will have largely the same effect, except it grabs us the data without having to change existing files in our working copy.
-Let us view a quick example.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git show v0.9:my_second_committed_file<br></strong>
+Let us view a quick example.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git show v0.9:my_second_committed_file</strong><br>
 Change1<br>
-<strong>john@satsuki:~/coderepo$ git show v0.9:my_second_committed_file &gt; temp_file<br></strong>
-<strong>john@satsuki:~/coderepo$ cat temp_file<br></strong>
+<strong>john@satsuki:~/coderepo$ git show v0.9:my_second_committed_file &gt; temp_file</strong><br>
+<strong>john@satsuki:~/coderepo$ cat temp_file</strong><br>
 Change1<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>The format of the <code class="ncode">git show</code> command is rather similar to the checkout command we used a few moments ago.
 The only difference is the presence of the colon, instead of the double hyphen.
 Notice how the effect of the first command is just to print out the contents of the requested file to the screen.
@@ -260,8 +260,8 @@ For example, the diff tool can not only show you differences between your workin
 Branching can be a tricky subject, so it is important to understand what is happening at the repository level.
 It would be prudent to look over the <em>After Hours</em> section for Week 2 before continuing as some of the terminology may be a little confusing otherwise.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap3-4.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap3-6.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap3-4.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap3-6.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

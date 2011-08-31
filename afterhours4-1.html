@@ -192,9 +192,9 @@ We are attempting to merge in <strong>zaney</strong> to the <strong>wonderful</s
 We need to find the <strong>C</strong> in our equation.
 To do this we could pour over Figure 1.
 This should yield the result to be commit <strong>9710177</strong>.
-Is there are way we can ask Git to do the same thing? The following output introduces a new command that is used to find the <em>Best Common Ancestor</em> for a given merge proposal.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-af4$ git merge-base wonderful zaney<br></strong>
+Is there are way we can ask Git to do the same thing? The following output introduces a new command that is used to find the <em>Best Common Ancestor</em> for a given merge proposal.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-af4$ git merge-base wonderful zaney</strong><br>
 9710177657ae00665ca8f8027b17314346a5b1c4<br>
-<strong>john@satsuki:~/coderepo-af4$ git cat-file -p 9710177<br></strong>
+<strong>john@satsuki:~/coderepo-af4$ git cat-file -p 9710177</strong><br>
 tree 268f487e5c29a4b01c3a91637bac0024253fb77e<br>
 parent 55fb69f4ad26fdb6b90ac6f43431be40779962dd<br>
 author John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301613377 +0100<br>
@@ -202,15 +202,15 @@ committer John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301613377<br>
  +0100<br>
 <br>
 Added another file<br>
-<strong>john@satsuki:~/coderepo-af4$<br></strong>
+<strong>john@satsuki:~/coderepo-af4$</strong><br>
 </code></div><br>In our example, <code class="ncode">git merge-base</code> uses two parameters to speficy the two heads that we wish to merge.
 We can see that the commit that Git suggests as the <em>Best Common Ancestor</em> is what we suggested above, <strong>9710177</strong>.
 We have reused our <code class="ncode">git cat-file</code> command to prove that the commit is the one we suggested, as you can see, the commit messages match.<br><br>This explains how a simple merge takes place, Git will find the common ancestor, and try to merge in the differences to produce a merged version.
 If the merge cannot take place, then as shown in <em>Week 4</em>, Git will put all the changes in the file, label them, and then raise a conflict for the user to resolve.<br><br>With the information presented here, you should now be able to reread the descriptions above and understand what is going on at a base level.
 If you require further information on merging, there is a wealth of documentation and papers about merge algorithms on the Internet.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap4-6.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="afterhours4-2.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap4-6.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="afterhours4-2.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

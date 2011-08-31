@@ -159,19 +159,19 @@ At first glance it may seem as if we are stuck.
 Once we have committed, we can't undo those commits right? Well, that's not entirely accurate.<br><br>We actually have two ways of clearing up this particular situation.
 The first of these is to use <code class="ncode">git revert</code> to undo the changes of each commit.
 Whilst this will work, we have two problems, a) we do not know how to use the <code class="ncode">git revert</code> tool yet, and b) we can actually handle this situation much more cleanly.
-We are going to make a new branch, make a few commits and then look at a diagram of our recent work to see how we can work things out.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master<br></strong>
+We are going to make a new branch, make a few commits and then look at a diagram of our recent work to see how we can work things out.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
 Already on 'master'<br>
-<strong>john@satsuki:~/coderepo$ git branch zaney<br></strong>
-<strong>john@satsuki:~/coderepo$ echo "and some awesome changes" &gt;&gt; newfile1<br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Made an awesome change'<br></strong>
+<strong>john@satsuki:~/coderepo$ git branch zaney</strong><br>
+<strong>john@satsuki:~/coderepo$ echo "and some awesome changes" &gt;&gt; newfile1</strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Made an awesome change'</strong><br>
 [master a27d49e] Made an awesome change<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ echo "and some more awesome changes" &gt;&gt;<br></strong>
+<strong>john@satsuki:~/coderepo$ echo "and some more awesome changes" &gt;&gt;</strong><br>
  newfile2<br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Made another awesome change'<br></strong>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Made another awesome change'</strong><br>
 [master 7cc32db] Made another awesome change<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br><center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>
                       <td style="padding:10px;"><img src="images/chaps/f-w4-d3.png" width="400" ></td>
@@ -199,17 +199,17 @@ We are going do the following the following steps.<br><div style="padding-left:1
 <li>Switch back to our <strong>master</strong> branch</li>
 <li>Reset our master branch back to the required point in time</li>
 </ol></div><br>So let us take a look at the command line output and see how we achieve this.
-Hopefully you should be familiar with most of the commands.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout zaney<br></strong>
+Hopefully you should be familiar with most of the commands.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout zaney</strong><br>
 Switched to branch 'zaney'<br>
-<strong>john@satsuki:~/coderepo$ git merge master<br></strong>
+<strong>john@satsuki:~/coderepo$ git merge master</strong><br>
 Updating 9710177..7cc32db<br>
 Fast-forward<br>
  newfile1 |    1 +<br>
  newfile2 |    1 +<br>
  2 files changed, 2 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ git checkout master<br></strong>
+<strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
 Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Now we reach step 4 in our set of instructions.
 The one function we do not know how to perform yet is the resetting of our branch back to a previous point in time.
 The point we need to rewind back to is the point that we initially created the <strong>zaney</strong> branch at.
@@ -220,9 +220,9 @@ You may be thinking that <code class="ncode">git reset</code> is only used to re
 We are going to use it with the <code class="ncode">--hard</code> option.
 This option can be dangerous, as it will discard all modifications in the working tree, so use with caution.
 If we had uncommitted changes in our repository at this point, we could not have used this option.
-Let's use the command and see where we get.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git reset --hard 9710177<br></strong>
+Let's use the command and see where we get.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git reset --hard 9710177</strong><br>
 HEAD is now at 9710177 Added another file<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>As you can see, we are told that the HEAD of our master branch is now at commit <strong>9710177</strong>.
 We have successfully rewound our <strong>master</strong> branch to a previous state.
 The <code class="ncode">--hard</code> parameter reset the index and the working tree to be at the state of the commit we tell it to.
@@ -231,7 +231,7 @@ It can also be used to move a branch forward in time.
 As an example of this, we used a fast-forward merge to move our <strong>zaney</strong> branch forward to be in-line with master.
 We could just have easily used <code class="ncode">git reset --hard 7cc32db</code> from within the zaney branch, to bring it to the same point as the master.
 In fact, though it looks scary, we could also have used <code class="ncode">git reset --hard master</code> to reset the <strong>zaney</strong> branch to be at the same point as <strong>master</strong>.
-Saves typing out those horrid commits does it not?<br><br>Finally we are going to introduce one more use of the <code class="ncode">git log</code> command to show us how our repository looks in a semi-graphical way.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit  --decorate<br></strong>
+Saves typing out those horrid commits does it not?<br><br>Finally we are going to introduce one more use of the <code class="ncode">git log</code> command to show us how our repository looks in a semi-graphical way.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit  --decorate</strong><br>
 * 7cc32db (zaney) Made another awesome change<br>
 * a27d49e Made an awesome change<br>
 | * cfbecab (wonderful) Fantastic new feature<br>
@@ -243,7 +243,7 @@ Saves typing out those horrid commits does it not?<br><br>Finally we are going t
 * 9938a0c Finished adding initial files<br>
 * 163f061 (v0.9) Made a few changes to first and second files<br>
 * cfe23cb My First Ever Commit<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>The <code class="ncode">--graph</code> parameter, tells Git to draw a graph down the left hand column.
 The <code class="ncode">--pretty=oneline</code> parameter reduces the commit details to one line, else we see the entire log message of the commit.
 <code class="ncode">--all</code> shows all branches.
@@ -253,8 +253,8 @@ Hopefully if you compare this tree to the diagram earlier, you will see that the
 Had we pushed our changes to a public server, which is something that will be discussed next week, we would have to force these changes to be accepted at the server end.
 Git knows we are trying to change a past that may have been viewed by others and will warn us accordingly.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap4-2.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap4-4.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap4-2.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap4-4.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

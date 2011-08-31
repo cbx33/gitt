@@ -150,44 +150,44 @@ This is the one we cloned from in Week 6 to create the <code class="ncode">coder
 When we left this repository, we were at commit <strong>1c3206a</strong>.
 If you have played with the repository at all, it would be a good opportunity for you to bring the wonderful branch to that point.
 We are also going to Fast Forward the master branch to that same point to.
-Before reading on, try to remember what commands we would use to do this and then check below to see if you are right.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout wonderful<br></strong>
+Before reading on, try to remember what commands we would use to do this and then check below to see if you are right.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout wonderful</strong><br>
 Already on 'wonderful'<br>
-<strong>john@satsuki:~/coderepo$ git reset --hard 1c3206a<br></strong>
+<strong>john@satsuki:~/coderepo$ git reset --hard 1c3206a</strong><br>
 HEAD is now at 1c3206a Added a new file<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>So we begin by ensuring that we are on the <strong>wonderful</strong> branch.
-Then we perform a hard reset, to ensure that the HEAD of <strong>wonderful</strong> points to the commit <strong>1c3206a</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master<br></strong>
+Then we perform a hard reset, to ensure that the HEAD of <strong>wonderful</strong> points to the commit <strong>1c3206a</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
 Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo$ git merge wonderful<br></strong>
+<strong>john@satsuki:~/coderepo$ git merge wonderful</strong><br>
 Updating 37950f8..1c3206a<br>
 Fast-forward<br>
  newfile3 |    1 +<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
  create mode 100644 newfile3<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Next we use the <code class="ncode">git merge</code> command as before to bring the <strong>master</strong> branch in line with the <strong>wonderful</strong> branch.
-As there have been no more commits to <strong>master</strong> since we worked on <strong>wonderful</strong>, it means that once again, the merge can be a simple Fast Forward merge, allowing us to simple change which commit HEAD points to within the <strong>master</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git branch -v<br></strong>
+As there have been no more commits to <strong>master</strong> since we worked on <strong>wonderful</strong>, it means that once again, the merge can be a simple Fast Forward merge, allowing us to simple change which commit HEAD points to within the <strong>master</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git branch -v</strong><br>
   master    1c3206a Added a new file<br>
 * wonderful 1c3206a Added a new file<br>
   zaney     7cc32db Made another awesome change<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Finally, we run a <code class="ncode">git branch</code> command to confirm that the branches point to the same commit.
 Remember there are other ways we could have achieved this, using <code class="ncode">git log</code> for example.
 Now that we can see they point to the same place, we can continue with our introduction to the <code class="ncode">git rebase</code> command.
-We will start by making some commits to the <strong>wonderful</strong> branch and see how we can update our underlying master branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "New Changes" &gt;&gt; another_file<br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Updated another file'<br></strong>
+We will start by making some commits to the <strong>wonderful</strong> branch and see how we can update our underlying master branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "New Changes" &gt;&gt; another_file</strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Updated another file'</strong><br>
 [wonderful c0e2f5b] Updated another file<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ echo "More New Changes" &gt;&gt; another_file<br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Updated another file'<br></strong>
+<strong>john@satsuki:~/coderepo$ echo "More New Changes" &gt;&gt; another_file</strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Updated another file'</strong><br>
 [wonderful 8c6a66b] Updated another file<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ echo "More Super New Changes" &gt;&gt; another_file<br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Updated another file again'<br></strong>
+<strong>john@satsuki:~/coderepo$ echo "More Super New Changes" &gt;&gt; another_file</strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Updated another file again'</strong><br>
 [wonderful b91ec84] Updated another file again<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ gitk --all<br></strong>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$ gitk --all</strong><br>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Before we continue, there is a problem in the trenches.<br><div id="trenchblock"><strong>In the trenches...</strong><br>
 "Ahh dang it" shouted Simon.
 "That's really not very helpful to anyone."<br><br>"What's up?" said Martha over the cubicle wall.
@@ -200,7 +200,7 @@ A round of raised eyebrows circled the paper-stackers.<br><br>"You could use reb
 </div><br>Looking at our example commits, it would appear that we have made the same mistake as Simon.
 Our commits, <strong>c0e2f5b</strong> and <strong>8c6a66b</strong> have got the same commit message.
 Not very helpful at all.
-Let us see how <code class="ncode">git rebase</code> can help us out here.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rebase -i HEAD~3<br></strong>
+Let us see how <code class="ncode">git rebase</code> can help us out here.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rebase -i HEAD~3</strong><br>
 </code></div><br>We have told Git to run the <code class="ncode">rebase</code> command using the <code class="ncode">-i</code> parameter.
 This will put Git into <em>interactive</em> mode.
 We have also asked Git to rebase the last three commits.
@@ -247,17 +247,17 @@ We will modify it to show the same as below, and then close the editor.<br><div 
 #   (use "git add &lt;file&gt;..." to include in what will be committed)<br>
 #<br>
 #       temp_file<br>
-</code></div><br>After Git completes working on the rebase, we are presented with the result of our operation.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rebase -i HEAD~3<br></strong>
+</code></div><br>After Git completes working on the rebase, we are presented with the result of our operation.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rebase -i HEAD~3</strong><br>
 [detached HEAD 7c35dde] Updated another file 2nd time<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
 Successfully rebased and updated refs/heads/wonderful.<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
-</code></div><br>So Git has completed the operation, and by running an abbreviated <code class="ncode">git log</code> command, we can see that the fruits of our labour have resulted in the second commit having its working changed.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate -n 4<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
+</code></div><br>So Git has completed the operation, and by running an abbreviated <code class="ncode">git log</code> command, we can see that the fruits of our labour have resulted in the second commit having its working changed.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate -n 4</strong><br>
 * aeb5679 (HEAD, wonderful) Updated another file again<br>
 * 7c35dde Updated another file 2nd time<br>
 * c0e2f5b Updated another file<br>
 * 1c3206a (master) Added a new file<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br><div id="calloutblock"><h3>Note - Rebasing and the hashes</h3>
 If you have been paying attention to the SHA-1 hashes as we have been moving through this last piece on rebasing, you may have noticed something interesting.
 Though there are commits that we have not altered at all, the commit IDs have indeed changed.
@@ -291,13 +291,13 @@ Updated another file 2nd time<br>
 </code></div><br>After completion, Git shows us that the rebase has been successful.<br><div id="codeblock"><code>[detached HEAD 1ffe37f] Updated another file with 2 edits<br>
  1 files changed, 2 insertions(+), 0 deletions(-)<br>
 Successfully rebased and updated refs/heads/wonderful.<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
-</code></div><br>By using the <code class="ncode">git log</code> message, we can see that the two commits have indeed been replaced by one.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate -n 4<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
+</code></div><br>By using the <code class="ncode">git log</code> message, we can see that the two commits have indeed been replaced by one.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate -n 4</strong><br>
 * 4d91aab (HEAD, wonderful) Updated another file again<br>
 * 1ffe37f Updated another file with 2 edits<br>
 * 1c3206a (master) Added a new file<br>
 * 37950f8 Continued Development<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br><div id="trenchblock"><strong>In the trenches...</strong><br>
 "Actually that's pretty cool," commented Simon, after Martha had shown him how to use rebase to squash and reword.
 She smiled, but said nothing.
@@ -307,8 +307,8 @@ She liked his youthful enthusiasm.
 "How about we take a crack at that tomorrow eh?"
 </div><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap7-2.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap7-4.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap7-2.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap7-4.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

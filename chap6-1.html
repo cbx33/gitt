@@ -170,27 +170,27 @@ OK, the benefit is a fairly awesome one, but at the cost of considerable command
 It would be nice if there was an easy way to do the above, and though someone of you may be screaming something like <em>shell script</em> right about now, you can rest your fingers.
 We actually have another tool in the Git toolbox to help us out.<br><br>The <code class="ncode">git stash</code> command is used for exactly these situations.
 Let us make a quick example of how to use it in our test repository.
-To begin with we are going to make a few changes to the <strong>master</strong> branch, before we are interrupted.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master<br></strong>
+To begin with we are going to make a few changes to the <strong>master</strong> branch, before we are interrupted.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
 Already on 'master'<br>
-<strong>john@satsuki:~/coderepo$ echo "Number strings rule 1234" &gt;&gt; another_file<br></strong>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$ echo "Number strings rule 1234" &gt;&gt; another_file</strong><br>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>So now we are interrupted and we have to make some important, and urgent changes to our <strong>master</strong> branch.
-The example that follows is one way that we could use the <code class="ncode">git stash</code> command to help us out.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git stash<br></strong>
+The example that follows is one way that we could use the <code class="ncode">git stash</code> command to help us out.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git stash</strong><br>
 Saved working directory and index state WIP on master: d50ffb2 Merged in zaney<br>
 HEAD is now at d50ffb2 Merged in zaney<br>
-<strong>john@satsuki:~/coderepo$ echo "Some mega important changes" &gt;&gt; newfile1<br></strong>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Important Update'<br></strong>
+<strong>john@satsuki:~/coderepo$ echo "Some mega important changes" &gt;&gt; newfile1</strong><br>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Important Update'</strong><br>
 [master 9cb2af2] Important Update<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>So using the <code class="ncode">git stash</code> command, we have squirrelled all of our developmental changes away into a <em>stash</em>.
 Now we have completed the mega important change that just could not wait, we are ready to pull our changes back from the stash.
-First let us see just what the stash contains.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git stash list<br></strong>
+First let us see just what the stash contains.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git stash list</strong><br>
 stash@{0}: WIP on master: d50ffb2 Merged in zaney<br>
-<strong>john@satsuki:~/coderepo$ git stash show stash@{0}<br></strong>
+<strong>john@satsuki:~/coderepo$ git stash show stash@{0}</strong><br>
  another_file |    1 +<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ git stash show stash@{0} -p<br></strong>
+<strong>john@satsuki:~/coderepo$ git stash show stash@{0} -p</strong><br>
 diff --git a/another_file b/another_file<br>
 index dba885d..b3a5cc5 100644<br>
 --- a/another_file<br>
@@ -198,9 +198,9 @@ index dba885d..b3a5cc5 100644<br>
 @@ -1 +1,2 @@<br>
  New stuff<br>
 +Number strings rule 1234<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>As you can see, the <code class="ncode">-p</code> option to the <code class="ncode">git stash show</code> command shows us exactly what is contained in the stash.
-We can apply this stash by running the following;<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git stash apply stash@{0}<br></strong>
+We can apply this stash by running the following;<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git stash apply stash@{0}</strong><br>
 # On branch master<br>
 # Changed but not updated:<br>
 #   (use "git add &lt;file&gt;..." to update what will be committed)<br>
@@ -214,19 +214,19 @@ We can apply this stash by running the following;<br><div id="codeblock"><code><
 #	my_third_committed_file<br>
 #	temp_file<br>
 no changes added to commit (use "git add" and/or "git commit -a")<br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Continued Development'<br></strong>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Continued Development'</strong><br>
 [master 37950f8] Continued Development<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ git stash list<br></strong>
+<strong>john@satsuki:~/coderepo$ git stash list</strong><br>
 stash@{0}: WIP on master: d50ffb2 Merged in zaney<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Our stash has been applied to the current branch, in our case <strong>master</strong>, and we have gone ahead and committed these changes into the repository.
 In this case we didn't have anything else to add to the index before we went ahead and committed it.<br><br>Interestingly though, our stash still exists.
 If we had used the <code class="ncode">git stash pop</code> command instead of the <code class="ncode">git stash apply</code>, our stash would have been removed.
 Of course we can have multiple stashes in our repository.
-For completeness sake, let us learn how to manually remove a stash, and take a look at how our repository looks with our semi-graphical <code class="ncode">git log</code><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git stash drop stash@{0}<br></strong>
+For completeness sake, let us learn how to manually remove a stash, and take a look at how our repository looks with our semi-graphical <code class="ncode">git log</code><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git stash drop stash@{0}</strong><br>
 Dropped stash@{0} (193f27172fc0df278105b981815c7718204030d8)<br>
-<strong>john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate<br></strong>
+<strong>john@satsuki:~/coderepo$ git log --graph --pretty=oneline --all --abbrev-commit --decorate</strong><br>
 * 37950f8 (HEAD, master) Continued Development<br>
 * 9cb2af2 Important Update<br>
 *   d50ffb2 Merged in zaney<br>
@@ -247,11 +247,11 @@ Dropped stash@{0} (193f27172fc0df278105b981815c7718204030d8)<br>
 * 9938a0c Finished adding initial files<br>
 * 163f061 (v0.9) Made a few changes to first and second files<br>
 * cfe23cb My First Ever Commit<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>So using the <code class="ncode">git stash drop</code> command, you can see that it is fairly simple to drop a single stash from the list.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="afterhours5-1.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap6-2.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="afterhours5-1.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap6-2.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>

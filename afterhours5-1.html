@@ -153,15 +153,15 @@ However, what happens when you have change four or five different things in the 
 The first is to copy the file in question out of the working directory, reset the working copy back to the last committed and copy your changes in line by line.
 This can be time consuming and frustrating and when you are working on many files, it can be totally impractical.
 What we need is a way to include or exclude certain lines of a file.<br><br>To demonstrate this we are going to create a new branch called <strong>fantasy</strong> and we are going to make several changes to a few files.
-We are then going to show how the same process can be achieved by using both the GUI and the command line.<br><br>So let us start by creating our branch and making some changes as shown below.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b fantasy<br></strong>
+We are then going to show how the same process can be achieved by using both the GUI and the command line.<br><br>So let us start by creating our branch and making some changes as shown below.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b fantasy</strong><br>
 Switched to a new branch 'fantasy'<br>
-<strong>john@satsuki:~/coderepo$ echo "This is line 1" &gt; newfile1<br></strong>
-<strong>john@satsuki:~/coderepo$ echo "This is line 2" &gt;&gt; newfile1<br></strong>
-<strong>john@satsuki:~/coderepo$ echo "This is line 3" &gt;&gt; newfile1<br></strong>
-<strong>john@satsuki:~/coderepo$ echo "This is line 4" &gt;&gt; newfile1<br></strong>
-<strong>john@satsuki:~/coderepo$ echo "This is a new line" &gt;&gt; newfile2<br></strong>
-<strong>john@satsuki:~/coderepo$ echo "This is another new line" &gt;&gt; newfile2<br></strong>
-</code></div><br>Let us now just run a <code class="ncode">git diff</code> to see exactly what the changes are.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff<br></strong>
+<strong>john@satsuki:~/coderepo$ echo "This is line 1" &gt; newfile1</strong><br>
+<strong>john@satsuki:~/coderepo$ echo "This is line 2" &gt;&gt; newfile1</strong><br>
+<strong>john@satsuki:~/coderepo$ echo "This is line 3" &gt;&gt; newfile1</strong><br>
+<strong>john@satsuki:~/coderepo$ echo "This is line 4" &gt;&gt; newfile1</strong><br>
+<strong>john@satsuki:~/coderepo$ echo "This is a new line" &gt;&gt; newfile2</strong><br>
+<strong>john@satsuki:~/coderepo$ echo "This is another new line" &gt;&gt; newfile2</strong><br>
+</code></div><br>Let us now just run a <code class="ncode">git diff</code> to see exactly what the changes are.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff</strong><br>
 diff --git a/newfile1 b/newfile1<br>
 index 44640b2..0eccf1a 100644<br>
 --- a/newfile1<br>
@@ -182,11 +182,11 @@ index 3545c1d..40efcce 100644<br>
  and a new awesome feature<br>
 +This is a new line<br>
 +This is another new line<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Now, we could just do <code class="ncode">git commit -a</code> and be done with it, but what if we really wanted to split this information up into four commits? We will introduce a new parameter to our <code class="ncode">git add</code> tool from before.
 We are going to use the <code class="ncode">git add -p</code> or <code class="ncode">git add --patch</code>.
 This will allow us to interactively edit the hunks before they are committed.
-To begin with, let us run <code class="ncode">git add -p</code> and see what it is we need to do.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git add -p<br></strong>
+To begin with, let us run <code class="ncode">git add -p</code> and see what it is we need to do.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git add -p</strong><br>
 diff --git a/newfile1 b/newfile1<br>
 index 44640b2..0eccf1a 100644<br>
 --- a/newfile1<br>
@@ -283,9 +283,9 @@ index 3545c1d..40efcce 100644<br>
 +This is another new line<br>
 Stage this hunk [y,n,q,a,d,/,e,?]? a<br>
 <br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>At first glance, we do not appear to have been left with any indication that anything has taken place.
-In order to perform a check we shall run our obligatory <code class="ncode">git diff</code>, both between the working copy and the index, and between the index and the last commit.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff<br></strong>
+In order to perform a check we shall run our obligatory <code class="ncode">git diff</code>, both between the working copy and the index, and between the index and the last commit.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff</strong><br>
 diff --git a/newfile1 b/newfile1<br>
 index f702b65..0eccf1a 100644<br>
 --- a/newfile1<br>
@@ -295,10 +295,10 @@ index f702b65..0eccf1a 100644<br>
 +This is line 2<br>
 +This is line 3<br>
 +This is line 4<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>So above, we can see that the difference between the working copy and the index, or staging area, is the last three lines that we are not ready to commit yet.
 Below we can see the difference between the staging area and the last commit to the repository.
-This includes the three lines that we included during our interactive commit preparation.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff --cached<br></strong>
+This includes the three lines that we included during our interactive commit preparation.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff --cached</strong><br>
 diff --git a/newfile1 b/newfile1<br>
 index 44640b2..f702b65 100644<br>
 --- a/newfile1<br>
@@ -316,12 +316,12 @@ index 3545c1d..40efcce 100644<br>
  and a new awesome feature<br>
 +This is a new line<br>
 +This is another new line<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>We can now commit in the normal way, and continue to edit the working copy to stage the sections we require.
-The following output is shortened for brevity.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git commit -m 'Added first line'<br></strong>
+The following output is shortened for brevity.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git commit -m 'Added first line'</strong><br>
 [fantasy 03bd20c] Added first line<br>
  2 files changed, 3 insertions(+), 2 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ git add -p<br></strong>
+<strong>john@satsuki:~/coderepo$ git add -p</strong><br>
 diff --git a/newfile1 b/newfile1<br>
 index f702b65..0eccf1a 100644<br>
 --- a/newfile1<br>
@@ -333,14 +333,14 @@ index f702b65..0eccf1a 100644<br>
 +This is line 4<br>
 Stage this hunk [y,n,q,a,d,/,e,?]? e<br>
 <br>
-<strong>john@satsuki:~/coderepo$ git commit -m 'Added second line'<br></strong>
+<strong>john@satsuki:~/coderepo$ git commit -m 'Added second line'</strong><br>
 [fantasy 302e3fa] Added second line<br>
  1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ git add -p<br></strong>
+<strong>john@satsuki:~/coderepo$ git add -p</strong><br>
 ...<br>
 ...<br>
 ...<br>
-</code></div><br>We have gone through the process of editing each hunk for each commit and have performed the commits.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log<br></strong>
+</code></div><br>We have gone through the process of editing each hunk for each commit and have performed the commits.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log</strong><br>
 commit a59e73b1dc571318a1154aa4c2fc591ab6f1f395<br>
 Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
 Date:   Wed Apr 13 23:56:39 2011 +0100<br>
@@ -366,7 +366,7 @@ Date:   Wed Apr 13 23:55:32 2011 +0100<br>
     Added first line<br>
 </code></div><br>Next we are going to see how to perform exactly the same procedure using <code class="ncode">git gui</code>.
 For a start, we are going to reset our branch HEAD and our index back to their state before we made the last four commits, however we are going to leave the working copy files in the state they were after these last four commits.
-This is called a <strong>mixed</strong> reset, as it modifies the staging area and the HEAD, but does not touch the working files.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --oneline<br></strong>
+This is called a <strong>mixed</strong> reset, as it modifies the staging area and the HEAD, but does not touch the working files.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --oneline</strong><br>
 a59e73b Added fourth line<br>
 3ca3d62 Added third line<br>
 302e3fa Added second line<br>
@@ -375,12 +375,12 @@ d50ffb2 Merged in zaney<br>
 ed2301b Removed third file<br>
 ...<br>
 ...<br>
-<strong>john@satsuki:~/coderepo$ git reset --mixed d50ffb2<br></strong>
+<strong>john@satsuki:~/coderepo$ git reset --mixed d50ffb2</strong><br>
 Unstaged changes after reset:<br>
 M	newfile1<br>
 M	newfile2<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
-</code></div><br>Now we will run a diff, just to be sure.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
+</code></div><br>Now we will run a diff, just to be sure.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff</strong><br>
 diff --git a/newfile1 b/newfile1<br>
 index 44640b2..0eccf1a 100644<br>
 --- a/newfile1<br>
@@ -401,7 +401,7 @@ index 3545c1d..40efcce 100644<br>
  and a new awesome feature<br>
 +This is a new line<br>
 +This is another new line<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>If we now run our <code class="ncode">git gui</code> command, we will see the changes that are present, once we click on one of the files in the left hand portion of the screen.
 Let us start with <code class="ncode">newfile2</code> as we want every change from that file present in this commit.
 Figure 1 shows what <code class="ncode">git gui</code> looks like at this stage.<br><center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
@@ -444,17 +444,17 @@ Once we are happy we can use the <strong>Commit</strong> area of the window to t
 Interestingly, as our file is so small, you will probably find that <code class="ncode">git gui</code> throws a corrupt patch error if you try to just commit the next line.
 As we mentioned earlier, it is always a good idea to know how to use the command line tools for precisely this reason.
 Often you are dealing with special cases, that the GUI just can not handle.
-In these cases, you may find you need to switch to the command line interface, to get the job done.<br><br>Let us now move back to our <strong>master</strong> branch and remove the <strong>fantasy</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master<br></strong>
+In these cases, you may find you need to switch to the command line interface, to get the job done.<br><br>Let us now move back to our <strong>master</strong> branch and remove the <strong>fantasy</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
 Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo$ git branch -D fantasy<br></strong>
+<strong>john@satsuki:~/coderepo$ git branch -D fantasy</strong><br>
 Deleted branch fantasy (was 29ceede).<br>
-<strong>john@satsuki:~/coderepo$<br></strong>
+<strong>john@satsuki:~/coderepo$</strong><br>
 </code></div><br>Notice that because we used the capitol <code class="ncode">-D</code> parameter, we were not asked if we were sure we wanted to delete the <strong>fantasy</strong> branch.<br><br>So in the <em>After Hours</em> section this week, we have found two ways to do the same complex task, one graphical and one command based.
 Staging commits in this way may seem rather odd, but it will help you to keep your commits exceedingly exact.
 Whilst this may not matter on a personal project, for Tamagoyaki Inc, grouping the right lines together in a commit will be an extremely useful process to have available.<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
-						<td><p align="left"><a href="chap5-4.html"><img src="images/prev.png" alt="Previous Day" height="29"></a></p></td>
-						<td><p align="right"><a href="chap6-1.html"><img src="images/next.png" alt="Next Day" height="29"></a></p></td>
+						<td><p align="left"><a href="chap5-4.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
+						<td><p align="right"><a href="chap6-1.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>
 					</tr>
 				</table>                  </td>
                 <td class="fade_right">&nbsp;</td>
