@@ -14,13 +14,9 @@ Come up with more items for terminology
 
 % git show v1.0.0^{tree}
 
-% make simon have changed a pw which broke things...this is to use bisect
-% then they discover pw in repo
-
-% filter branch to move project to new dir
-
 %wmctrl -r Gui -e 0,0,0,811,500
 
 Neeeed to talk about .gitignore
-Security and verification
-pushing tags
+
+Create and place nice icons in top left corner of breakout boxes
+

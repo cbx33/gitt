@@ -2,8 +2,7 @@
 \chapter{After Hours Week 3}
 \section{``A Closer Look At Diffs and Tags''}
 \subsection{The Diff Utility}
-\index{diff!algorithm}
-We learnt in \emph{Week 3} how to work with a diff, and what a diff actually represents.
+\index{diff!algorithm}We learnt in \emph{Week 3} how to work with a diff, and what a diff actually represents.
 It is interesting to note how old the \texttt{diff} utility actually is and how it works.
 The diff algorithm was developed in the early 1970s and the research published in 1976, by Douglas McIlroy, who wrote the original diff utility and James Hunt.
 The algorithm we use today to perform diffs has become known as the Hunt-McIlroy after the research papers authors.
@@ -48,8 +47,7 @@ The actual algorithm for generating the LCS and the subsequent diff is too compl
 This section was included to give you some idea of how Git performs some of its actions internally.
 
 \subsection{More about tags}
-\index{tagging!internals}
-Tags can actually do a little more than just hold a single identifier to a specific commit.
+\index{tagging!internals}Tags can actually do a little more than just hold a single identifier to a specific commit.
 A tag can also have a log message with it, similar to the commit objects we discussed earlier.
 In order to invoke this option, we need to use the \texttt{git tag -m 'message'} option.
 This will allow us to supply a message to be stored along with the tag.

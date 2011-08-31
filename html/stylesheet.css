@@ -192,6 +192,7 @@ h2 {
 }
 
 #codeblock {
+	text-align:left;
 	border-left:5px #009090 solid;
 	padding-left:5px;
 	margin:10px 10px 0px 10px;
@@ -201,12 +202,30 @@ h2 {
 
 #trenchblock {
 	margin:10px 10px 0px 10px;
-	font-family:sans-serif;
+	font-family:serif;
 }
 
 #calloutblock {
 	color:#000;
 	border:5px #009090 solid;
 	background:#eee;
+	margin-top:20px;
 	padding:10px;
+}
+ul ol {
+	margin:0px;
+	padding:0px;
+}
+h3 {
+	margin:0px;
+	padding-bottom:10px;
+	margin-top:5px;
+}
+.ncode {
+	color:#000;
+	padding-left:3px;
+	padding-right:3px;
+	background:#ddd;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
 }

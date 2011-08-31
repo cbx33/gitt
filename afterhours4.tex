@@ -2,17 +2,11 @@
 \chapter{After Hours Week 4}
 \section{``Merge merge merge''}
 \subsection{How does merging work?}
-
 To start with, we need to define which merging strategy we are talking about.
 In Git there are multiple ways to instruct a merge to take place.
 Below is a brief list of the options that you can supply to the \texttt{git merge} command along with a brief description of how each one affects the merge process.
 We will explain the details a little more further on.
-\index{merging!types}
-\index{merging!types!resolve}
-\index{merging!types!recursive}
-\index{merging!types!octopus}
-\index{merging!types!ours}
-\index{merging!types!subtree}
+\index{merging!types}\index{merging!types!resolve}\index{merging!types!recursive}\index{merging!types!octopus}\index{merging!types!ours}\index{merging!types!subtree}
 
 \begin{itemize}
 \item\textbf{resolve} - A two headed merge strategy using a 3-way merge algorithm.
@@ -84,7 +78,6 @@ If you require further information on merging, there is a wealth of documentatio
 
 \section{``Grepping your life away''}
 \subsection{A subtle twist on searching}
-
 As well as our \texttt{git log} tool, which we have used for searching, it is useful to know that there is actually another way to search for strings in your current directory.
 We can use the \indexgit{grep} tool to find all files in our working tree which have a certain pattern in them.
 

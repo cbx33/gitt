@@ -4,7 +4,6 @@
 \chapter{Week 8}
 \section{Day 1 - ``Give a man a patch''}
 \subsection{Collaborating with outsiders}
-
 We have spoken at great length now about rebasing and have seen that it is a very very powerful tool.
 It can form part of your workflow in your development cycle.
 However, always heed that warning that should send alarm bells ringing in the back of your mind about rebasing.
@@ -295,7 +294,6 @@ john@satsuki:~/coderepo$
 
 \section{Day 2 - ``Looking for problems''}
 \subsection{A problem shared is a problem bisected}
-
 \index{bisecting}During most software development, bugs are introduced.
 Sometimes these bugs are fixed immediately and sometimes they sit there in the code festering away for months on end until someone tests a specific case.
 Of course it is always best to have test suites and run them regularly against the code base, but on occasions either the test case itself has a bug,
@@ -450,7 +448,6 @@ john@satsuki:~/coderepo$
 Notice that at the end of the bisect, Git does not return us to the master branch.
 We are left in the last tested checked out revision.
 
-
 \subsection{Automating the process}
 \index{bisecting!automation}So bisecting is a very powerful way of quickly and efficiently finding the point at which bugs were introduced or \index{regression testing}regression testing.
 Git was spot on when it suggested that that revision was the one responsible for the mistake.
@@ -555,7 +552,6 @@ John sighed, he had been really angry to begin with but now he was calming down,
 
 \section{Day 3 - ``Filtered repos''}
 \subsection{Looking at a repo with rose tinted glasses}
-
 \index{filtering}It does happen. Sometimes when people are under pressure, mistakes are made, just like earlier when we accidently deleted our branch from the repository.
 This time the mistake is a little more crucial but again it does happen and it sometimes goes a long time before it is noticed.
 
@@ -1019,7 +1015,6 @@ Thanks for the help Martha.''
 
 \section{Day 5 - ``Shhh....we're in a library''}
 \subsection{Nuclear fusion}
-
 OK, so we are not quite at the stage of nuclear physics, but it would be nice to know how to bring our library back into our repository.
 Git offers a tool called \indexgit{submodule}.  This tool allows you to link a remote repositories branch and store it under a subdirectory of the project.
 It does have some nuances which must be learnt, but can be very useful.

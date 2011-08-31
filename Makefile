@@ -1,3 +1,7 @@
+# Location of build dir
+BUILD_DIR=build
+
+BUILD_DIR_IMAGES=$(BUILD_DIR)/images/chaps
 
 # Location of website files
 SITE_DIR=site
@@ -45,6 +49,7 @@ cleantmp:
 # Remove the generated PDF
 cleanpdf:
 	rm -f gitt.pdf
+	rm -f print.pdf
 
 # Remove the generated website images
 cleanimages:
@@ -53,14 +58,26 @@ cleanimages:
 # Clean up generated site files
 cleansite:
 	@rm -fr $(SITE_DIR)
+	@rm html/nav.html
+
+cleanbuild:
+	@rm -fr $(BUILD_DIR)
 
 site: html htmlimages
+
+baseconvert: $(BUILD_DIR) $(BUILD_DIR_IMAGES) htmlimages
+	@python scripts/htmlbuild.py alltex
+	@python scripts/htmlbuild.py baseconvert
+	@python scripts/htmlbuild.py baseconcat
+	@cp -r site/images $(BUILD_DIR)
 
 # Convert TeX to HTML
 html: $(SITE_IMAGES_DIR)
 	@touch html/nav.html
 	@cp html/stylesheet.css $(SITE_DIR)/
 	@cp html/index.html $(SITE_DIR)/
+	@python scripts/htmlbuild.py simple index
+	@python scripts/htmlbuild.py simple feedback
 	@python scripts/htmlbuild.py alltex
 	@python scripts/htmlbuild.py allchaps
 	@python scripts/htmlbuild.py allafterhours
@@ -98,8 +115,17 @@ htmlimages: $(SITEIMAGES) $(SITE_CHAP_IMAGES_DIR)
 	@cp images/f-w5-d17.png $(SITE_CHAP_IMAGES_DIR)/f-w5-d17.png
 	@cp images/f-w5-d18.png $(SITE_CHAP_IMAGES_DIR)/f-w5-d18.png
 	@cp images/f-w5-d19.png $(SITE_CHAP_IMAGES_DIR)/f-w5-d19.png
+	@cp images/f-af7-d1.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d1.png
+	@cp images/f-af7-d2.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d2.png
+	@cp images/f-af7-d3.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d3.png
+	@cp images/f-af7-d4.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d4.png
+	@cp images/f-af7-d5.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d5.png
+	@cp images/f-af7-d6.png $(SITE_CHAP_IMAGES_DIR)/f-af7-d6.png
+	@cp images/f-af5-d1.png $(SITE_CHAP_IMAGES_DIR)/f-af5-d1.png
+	@cp images/f-af5-d2.png $(SITE_CHAP_IMAGES_DIR)/f-af5-d2.png
+	@cp images/f-af5-d3.png $(SITE_CHAP_IMAGES_DIR)/f-af5-d3.png
 	@cp html/images/* $(SITE_IMAGES_DIR)/
-	
+		
 # Make directories
 $(SITE_DIR):
 	@mkdir -p $(SITE_DIR)
@@ -112,3 +138,9 @@ $(SITE_IMAGES_DIR):
 
 $(SITE_CHAP_IMAGES_DIR):
 	@mkdir -p $(SITE_CHAP_IMAGES_DIR)
+
+$(BUILD_DIR):
+	@mkdir -p $(BUILD_DIR)
+
+$(BUILD_DIR_IMAGES):
+	@mkdir -p $(BUILD_DIR_IMAGES)
