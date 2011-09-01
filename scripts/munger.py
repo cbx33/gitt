@@ -145,15 +145,14 @@ def mung(data, IMAGE_BLOCK="", base=False):
 	for i in plob:
 		if base == False:
 			code = i[1].replace("\n", "<br/>\n")
-			bolded = re.findall("(.*?@.*?:.*?\$.*?<br>)\n", code)
+			bolded = re.findall("(.*?@.*?:.*?\$.*?<br/>)\n", code)
 
 			tb = []
-
 			for linebold in bolded:
 				if not linebold in tb:
 					tb.append(linebold)
 			for boldline in tb:
-				code = code.replace(boldline, '<strong>' + boldline.replace("<br>","") + '</strong><br/>')
+				code = code.replace(boldline, '<strong>' + boldline.replace("<br/>","") + '</strong><br/>')
 			data = data.replace(i[0], '<div id="codeblock"><code>' + code + "</code></div>")
 
 		if base == True:
