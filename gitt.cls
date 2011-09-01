@@ -37,9 +37,7 @@
 %\checkandfixthelayout
 
 \RequirePackage[paperheight=9.68in,paperwidth=7.44in,headheight=\baselineskip,textheight=35\baselineskip]{geometry}
-\ifthenelse{\equal{\gitt@format}{print}}{%
-  \geometry{symmetric}%
-}{%
+\ifthenelse{\equal{\gitt@format}{screen}}{%
   \geometry{asymmetric}%
 }
 
