@@ -5,7 +5,7 @@
 
 import re               
 
-def mung(data, IMAGE_BLOCK=""):
+def mung(data, IMAGE_BLOCK="", base=False):
 
 	data = data.replace(">", "&gt;")
 	data = data.replace("<", "&lt;")
@@ -140,18 +140,25 @@ def mung(data, IMAGE_BLOCK=""):
 
 	plob = re.findall("(\\\\begin\{code\}\n*(.*?)\\\\end\{code\})", data, re.S)
 	for i in plob:
-		code = i[1].replace("\n", "<br>\n")
-		bolded = re.findall("(.*?@.*?:.*?\$.*?<br>)\n", code)
+		if base == False:
+			code = i[1].replace("\n", "<br/>\n")
+			bolded = re.findall("(.*?@.*?:.*?\$.*?<br>)\n", code)
 
-		tb = []
+			tb = []
 
-		for linebold in bolded:
-			if not linebold in tb:
-				tb.append(linebold)
-		for boldline in tb:
-			code = code.replace(boldline, '<strong>' + boldline.replace("<br>","") + '</strong><br>')
+			for linebold in bolded:
+				if not linebold in tb:
+					tb.append(linebold)
+			for boldline in tb:
+				code = code.replace(boldline, '<strong>' + boldline.replace("<br>","") + '</strong><br/>')
+			data = data.replace(i[0], '<div id="codeblock"><code>' + code + "</code></div>")
 
-		data = data.replace(i[0], '<div id="codeblock"><code>' + code + "</code></div>")
+		if base == True:
+			ddta = ""
+			code = i[1].split("\n")
+			for line in code:
+				ddta += "<code>" + line + "</code><br />\n"
+			data = data.replace(i[0], '<div id="codeblock">' + ddta.replace(" ", "&nbsp;") + "</div>")
 
 	plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:

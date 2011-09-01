@@ -71,6 +71,12 @@ baseconvert: $(BUILD_DIR) $(BUILD_DIR_IMAGES) htmlimages
 	@python scripts/htmlbuild.py baseconcat
 	@cp -r site/images $(BUILD_DIR)
 
+epub: baseconvert
+	@ebook-convert build/complete.html build/complete.epub --extra-css html/stylesheet.css -d --chapter '//*[name()="h1"]' 
+
+epub-view: epub
+	@ebook-viewer build/complete.epub
+
 # Convert TeX to HTML
 html: $(SITE_IMAGES_DIR)
 	@touch html/nav.html

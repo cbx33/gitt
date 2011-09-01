@@ -151,7 +151,7 @@ def baseconvert():
 	files = os.listdir("./")
 	for nfile in files:
 		if ".tex" in nfile:
-			dp = mung(open(nfile).read(), IMAGE_BLOCK)
+			dp = mung(open(nfile).read(), IMAGE_BLOCK, base=True)
 			open("build/" + os.path.splitext(nfile)[0] + ".html", "w").write(dp)
 
 def baseconcat():
