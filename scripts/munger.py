@@ -95,8 +95,10 @@ def mung(data, IMAGE_BLOCK="", base=False):
 
 	plob = re.findall("(\\\\begin\{trenches\}(.*?)\\\\end\{trenches\})", data, re.S)
 	for i in plob:
-		data = data.replace(i[0], '<div id="trenchblock"><strong>In the trenches...</strong><br>' + i[1] + "</div>")
-
+		if base == False:
+			data = data.replace(i[0], '<div id="trenchblock"><strong>In the trenches...</strong><br>' + i[1] + "</div>")
+		if base == True:
+			data = data.replace(i[0], '<hr><div id="trenchblock"><strong>In the trenches...</strong><br>' + i[1] + "</div><hr>")
 	plob = re.findall("(\\\\begin\{center\}(.*?)\\\\end\{center\})", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], '<center>' + i[1] + "</center>")
@@ -157,8 +159,8 @@ def mung(data, IMAGE_BLOCK="", base=False):
 			ddta = ""
 			code = i[1].split("\n")
 			for line in code:
-				ddta += "<code>" + line + "</code><br />\n"
-			data = data.replace(i[0], '<div id="codeblock">' + ddta.replace(" ", "&nbsp;") + "</div>")
+				ddta += "<code>" + line + "</code><br/>\n"
+			data = data.replace(i[0], '<br><div id="codeblock">' + ddta.replace(" ", "&nbsp;") + "</div>")
 
 	plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
@@ -176,7 +178,10 @@ def mung(data, IMAGE_BLOCK="", base=False):
 
 	plob = re.findall("(\\\\begin\{callout\}\{(.*?)\}\{(.*?)\}(.*?)\\\\end\{callout\})", data, re.S)
 	for i in plob:
-		data = data.replace(i[0], '<div id="calloutblock"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div>")
+		if base == False:
+			data = data.replace(i[0], '<div id="calloutblock"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div>")
+		elif base == True:
+			data = data.replace(i[0], '<hr><div id="calloutblock"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div><hr>")
 
 	data = data.replace("\\ ", "&nbsp;")
 	data = data.replace("\n\n\n", "<br><br>")

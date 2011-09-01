@@ -72,10 +72,16 @@ baseconvert: $(BUILD_DIR) $(BUILD_DIR_IMAGES) htmlimages
 	@cp -r site/images $(BUILD_DIR)
 
 epub: baseconvert
-	@ebook-convert build/complete.html build/complete.epub --extra-css html/stylesheet.css -d --chapter '//*[name()="h1"]' 
+	@ebook-convert build/complete.html build/complete.epub --chapter '//*[name()="h1"]' 
 
 epub-view: epub
 	@ebook-viewer build/complete.epub
+
+mobi: baseconvert
+	@ebook-convert build/complete.html build/complete.mobi --chapter '//*[name()="h1"]' 
+
+mobi-view: mobi
+	@ebook-viewer build/complete.mobi
 
 # Convert TeX to HTML
 html: $(SITE_IMAGES_DIR)
