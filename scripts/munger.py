@@ -3,7 +3,7 @@
 #             Peter Savage             #
                                    #####
 
-import re               
+import re
 
 def mung(data, IMAGE_BLOCK="", base=False):
 
@@ -99,6 +99,7 @@ def mung(data, IMAGE_BLOCK="", base=False):
 			data = data.replace(i[0], '<div id="trenchblock"><strong>In the trenches...</strong><br>' + i[1] + "</div>")
 		if base == True:
 			data = data.replace(i[0], '<hr><div id="trenchblock"><strong>In the trenches...</strong><br>' + i[1] + "</div><hr>")
+
 	plob = re.findall("(\\\\begin\{center\}(.*?)\\\\end\{center\})", data, re.S)
 	for i in plob:
 		data = data.replace(i[0], '<center>' + i[1] + "</center>")
