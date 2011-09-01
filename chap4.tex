@@ -180,7 +180,7 @@ john@satsuki:~/coderepo$
 Comparing that to our previous \texttt{ls} command, we can see that this is exactly what the working tree looked like at the beginning of the chapter.
 Let us take a look at a diagram of the commit history to see what has happened in our repository.
 
-\figuregit{9cm}{images/f-w4-d1.pdf}{Our first branch}
+\figuregith{9cm}{images/f-w4-d1.pdf}{Our first branch}
 
 \index{pointers}So there are really two pointers in our repository at the moment, from a branch point of view.
 One of them points to commit \textbf{a022d4d\ldots} and is called \textbf{master}.
@@ -317,7 +317,7 @@ john@satsuki:~/coderepo$
 Now let us take a quick look at a diagram to see how this change actually affected the commit flow.
 We have included tags in this diagram, so that you can see where they point to as well.
 
-\figuregit{9cm}{images/f-w4-d2.pdf}{Our first merge}
+\figuregith{9cm}{images/f-w4-d2.pdf}{Our first merge}
 
 \index{tagging!difference to branch}\index{branching!difference to tags}This picture should make it clear that the fundamental difference between tags and branches is that whilst the pointer to a branch moves with each commit to that branch, a tag points to a single commit only and never changes, unless forcibly so by the user.
 
@@ -480,9 +480,9 @@ john@satsuki:~/coderepo$ git commit -a -m 'Made another awesome change'
 john@satsuki:~/coderepo$
 \end{code}
 
-\figuregit{9cm}{images/f-w4-d3.pdf}{Repository including the mistake}
+\figuregith{9cm}{images/f-w4-d3.pdf}{Repository including the mistake}
 
-\figuregit{9cm}{images/f-w4-d4.pdf}{Repository showing how things \emph{should} look}
+\figuregith{9cm}{images/f-w4-d4.pdf}{Repository showing how things \emph{should} look}
 
 Figure 3 shows how our repository looks now, whereas Figure 4 shows how the repository should have looked if we had performed it properly.
 You should notice that the positions of \texttt{master} and \texttt{zaney} have switched places.
@@ -702,7 +702,7 @@ We have taken all of the changes that were made in the \textbf{wonderful} branch
 If we wanted to, we could continue on making changes to the \textbf{wonderful} branch and we could keep pulling changes in from one to the other as time went by.
 Figure 5 shows what our repository looks like now.
 
-\figuregit{9cm}{images/f-w4-d5.pdf}{Repository state after \textbf{wonderful} merge}
+\figuregith{9cm}{images/f-w4-d5.pdf}{Repository state after \textbf{wonderful} merge}
 
 Our repository tree looks a little strange now.
 Notice that the most recent commit, \textbf{b119573}, has two parents.
@@ -895,7 +895,7 @@ john@satsuki:~/coderepo$
 Our merge has been completed.
 Let us now see what our repository looks like graphically, in Figure 6.
 
-\figuregit{13cm}{images/f-w4-d6.pdf}{Repository state after \textbf{zaney} merge}
+\figuregith{13cm}{images/f-w4-d6.pdf}{Repository state after \textbf{zaney} merge}
 
 It is quite reasonable that you may want to continue working on branches after you have integrate those changes back into your master.
 Obviously you would have to merge your \textbf{master} branch back into \textbf{zaney} or any of the others, otherwise you could be developing on older versions of the code.
