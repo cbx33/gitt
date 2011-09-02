@@ -147,11 +147,11 @@ def singlefile(filename):
 	f_input.close()
 	fix_simple_file(data, filename)
 
-def baseconvert():
+def baseconvert(bformat="pdf"):
 	files = os.listdir("./")
 	for nfile in files:
 		if ".tex" in nfile:
-			dp = mung(open(nfile).read(), IMAGE_BLOCK, base=True)
+			dp = mung(open(nfile).read(), IMAGE_BLOCK, bformat=bformat)
 			open("build/" + os.path.splitext(nfile)[0] + ".html", "w").write(dp)
 
 def baseconcat():
@@ -181,7 +181,10 @@ else:
 	elif sys.argv[1] == "nav":
 		buildnav()
 	elif sys.argv[1] == "baseconvert":
-		baseconvert()
+		if len(sys.argv) > 2:
+			baseconvert(sys.argv[2])
+		else:
+			baseconvert()
 	elif sys.argv[1] == "baseconcat":
 		baseconcat()
 	elif sys.argv[1] == "simple":

@@ -5,7 +5,7 @@
 
 import re
 
-def mung(data, IMAGE_BLOCK="", base=False):
+def mung(data, IMAGE_BLOCK="", bformat="pdf"):
 
 	data = data.replace(">", "&gt;")
 	data = data.replace("<", "&lt;")
@@ -95,9 +95,9 @@ def mung(data, IMAGE_BLOCK="", base=False):
 
 	plob = re.findall("(\\\\begin\{trenches\}(.*?)\\\\end\{trenches\})", data, re.S)
 	for i in plob:
-		if base == False:
+		if bformat == "pdf":
 			data = data.replace(i[0], '<div id="trenchblock"><strong>In the trenches...</strong><br>' + i[1] + "</div>")
-		if base == True:
+		elif bformat == "epub" or bformat == "mobi":
 			data = data.replace(i[0], '<hr><div id="trenchblock"><strong>In the trenches...</strong><br>' + i[1] + "</div><hr>")
 
 	plob = re.findall("(\\\\begin\{center\}(.*?)\\\\end\{center\})", data, re.S)
@@ -143,7 +143,7 @@ def mung(data, IMAGE_BLOCK="", base=False):
 
 	plob = re.findall("(\\\\begin\{code\}\n*(.*?)\\\\end\{code\})", data, re.S)
 	for i in plob:
-		if base == False:
+		if bformat == "pdf":
 			code = i[1].replace("\n", "<br/>\n")
 			bolded = re.findall("(.*?@.*?:.*?\$.*?<br/>)\n", code)
 
@@ -155,32 +155,30 @@ def mung(data, IMAGE_BLOCK="", base=False):
 				code = code.replace(boldline, '<strong>' + boldline.replace("<br/>","") + '</strong><br/>')
 			data = data.replace(i[0], '<div id="codeblock"><code>' + code + "</code></div>")
 
-		if base == True:
+		elif bformat == "epub" or bformat == "mobi":
 			ddta = ""
 			code = i[1].split("\n")
 			for line in code:
 				ddta += "<code>" + line + "</code><br/>\n"
 			data = data.replace(i[0], '<br><div id="codeblock">' + ddta.replace(" ", "&nbsp;") + "</div>")
 
-	plob = re.findall("(\\\\figuregit\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
-	for i in plob:
-		fignum = re.search("([0-9]+).(png|pdf)", i[2])
-		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"),
-							"<strong>Figure " + fignum.groups()[0] + "</strong><br>" + i[3],
-							IMAGE_BLOCK))
-
 	plob = re.findall("(\\\\figuregith\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)
 	for i in plob:
 		fignum = re.search("([0-9]+).(png|pdf)", i[2])
-		data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"),
+		if bformat == "pdf" or bformat == "mobi":
+			data = data.replace(i[0], return_image(i[2].replace(".pdf", ".png").replace("images/", "images/chaps/"),
+							"<strong>Figure " + fignum.groups()[0] + "</strong><br>" + i[3],
+							IMAGE_BLOCK))
+		elif bformat == "epub":
+			data = data.replace(i[0], return_image(i[2].replace(".pdf", ".svg").replace("images/", "images/chaps/"),
 							"<strong>Figure " + fignum.groups()[0] + "</strong><br>" + i[3],
 							IMAGE_BLOCK))
 
 	plob = re.findall("(\\\\begin\{callout\}\{(.*?)\}\{(.*?)\}(.*?)\\\\end\{callout\})", data, re.S)
 	for i in plob:
-		if base == False:
+		if bformat == "pdf":
 			data = data.replace(i[0], '<div id="calloutblock"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div>")
-		elif base == True:
+		elif bformat == "epub" or bformat == "mobi":
 			data = data.replace(i[0], '<hr><div id="calloutblock"><h3>' + i[1] + ' - ' + i[2] + '</h3>' + i[3] + "</div><hr>")
 
 	data = data.replace("\\ ", "&nbsp;")
