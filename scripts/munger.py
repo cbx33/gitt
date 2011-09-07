@@ -159,7 +159,8 @@ def mung(data, IMAGE_BLOCK="", bformat="pdf"):
 			ddta = ""
 			code = i[1].split("\n")
 			for line in code:
-				ddta += "<code>" + line + "</code><br/>\n"
+				if line != "":
+					ddta += "<code>" + line + "</code><br/>\n"
 			data = data.replace(i[0], '<br><div id="codeblock">' + ddta.replace(" ", "&nbsp;") + "</div>")
 
 	plob = re.findall("(\\\\figuregith\{(.*?)\}\{(.*?)\}\{(.*?)\})", data, re.S)

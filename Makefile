@@ -80,13 +80,13 @@ baseconvert-epub: $(BUILD_DIR) $(BUILD_DIR_IMAGES) htmlimages
 	@cp -r images/source/*.svg $(BUILD_DIR_IMAGES)
 
 epub: baseconvert-epub
-	@ebook-convert build/complete.html build/complete.epub --chapter '//*[name()="h1"]' 
+	@ebook-convert build/complete.html build/complete.epub --chapter '//*[name()="h1"]' --authors 'Peter Savage' --title 'Git In The Trenches' --cover images/source/fcover-epub.png
 
 epub-view: epub
 	@ebook-viewer build/complete.epub
 
 mobi: baseconvert
-	@ebook-convert build/complete.html build/complete.mobi --chapter '//*[name()="h1"]' 
+	@ebook-convert build/complete.html build/complete.mobi --chapter '//*[name()="h1"]' --authors 'Peter Savage' --title 'Git In The Trenches' --cover images/source/fcover-epub.png
 
 mobi-view: mobi
 	@ebook-viewer build/complete.mobi
@@ -98,6 +98,8 @@ html: $(SITE_IMAGES_DIR)
 	@cp html/index.html $(SITE_DIR)/
 	@python scripts/htmlbuild.py simple index
 	@python scripts/htmlbuild.py simple feedback
+	@python scripts/htmlbuild.py simple download
+	@python scripts/htmlbuild.py simple legal
 	@python scripts/htmlbuild.py alltex
 	@python scripts/htmlbuild.py allchaps
 	@python scripts/htmlbuild.py allafterhours
