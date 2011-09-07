@@ -163,22 +163,22 @@ For some of you it may be more information than you bargained for.
 However, sometimes, when the worst happens, it is comforting to know that you at least have a basic understanding of what is happening under the hood.
 These After Hours sections are designed to give you that knowledge.
 They are for the people who are not just satisfied with knowing that things work, but they want to know <em>why</em> things work.<br><br>To start with, we are going to use the Git repository that we have been playing with in Week 2 and take a deeper look at what is actually inside a Git repository.
-Let us view the directory structure, to see what has been created in the <code class="ncode">.git</code> folder.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/.git$ ls -la</strong><br>
-total 52<br>
-drwxr-xr-x  8 john john 4096 2011-03-31 20:35 .<br>
-drwxr-xr-x  3 john john 4096 2011-03-31 20:28 ..<br>
-drwxr-xr-x  2 john john 4096 2011-03-31 20:22 branches<br>
--rw-r--r--  1 john john   30 2011-03-31 20:34 COMMIT_EDITMSG<br>
--rw-r--r--  1 john john   92 2011-03-31 20:22 config<br>
--rw-r--r--  1 john john   73 2011-03-31 20:22 description<br>
--rw-r--r--  1 john john   23 2011-03-31 20:22 HEAD<br>
-drwxr-xr-x  2 john john 4096 2011-03-31 20:22 hooks<br>
--rw-r--r--  1 john john  208 2011-03-31 20:35 index<br>
-drwxr-xr-x  2 john john 4096 2011-03-31 20:22 info<br>
-drwxr-xr-x  3 john john 4096 2011-03-31 20:27 logs<br>
-drwxr-xr-x 13 john john 4096 2011-03-31 20:34 objects<br>
-drwxr-xr-x  4 john john 4096 2011-03-31 20:22 refs<br>
-<strong>john@satsuki:~/coderepo/.git$</strong><br>
+Let us view the directory structure, to see what has been created in the <code class="ncode">.git</code> folder.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/.git$ ls -la</strong><br/>
+total 52<br/>
+drwxr-xr-x  8 john john 4096 2011-03-31 20:35 .<br/>
+drwxr-xr-x  3 john john 4096 2011-03-31 20:28 ..<br/>
+drwxr-xr-x  2 john john 4096 2011-03-31 20:22 branches<br/>
+-rw-r--r--  1 john john   30 2011-03-31 20:34 COMMIT_EDITMSG<br/>
+-rw-r--r--  1 john john   92 2011-03-31 20:22 config<br/>
+-rw-r--r--  1 john john   73 2011-03-31 20:22 description<br/>
+-rw-r--r--  1 john john   23 2011-03-31 20:22 HEAD<br/>
+drwxr-xr-x  2 john john 4096 2011-03-31 20:22 hooks<br/>
+-rw-r--r--  1 john john  208 2011-03-31 20:35 index<br/>
+drwxr-xr-x  2 john john 4096 2011-03-31 20:22 info<br/>
+drwxr-xr-x  3 john john 4096 2011-03-31 20:27 logs<br/>
+drwxr-xr-x 13 john john 4096 2011-03-31 20:34 objects<br/>
+drwxr-xr-x  4 john john 4096 2011-03-31 20:22 refs<br/>
+<strong>john@satsuki:~/coderepo/.git$</strong><br/>
 </code></div><br><strong>branches</strong> - Though deprecated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.<br><strong>COMMIT_EDITMSG</strong> - This file holds the last commit message that was displayed in the editor.<br><strong>config</strong> - This is the main configuration file for Git.
 It is the first place git looks for upon invocation.
 If this file is not present, Git will inspect <code class="ncode">~{</code>/.gitconfig}.
@@ -219,28 +219,28 @@ Regardless, the structure of a basic repository may look something a little like
                       <td class="fade_corner">&nbsp;</td>
                     </tr>
                   </table></center><br>So now we know what a basic repository should look like, let us go through each stage of our committing in <strong>Week 2</strong> and see how it is built up at each stage.
-Below is a consolidated list of all the objects in the repository.<br><div id="codeblock"><code>./09/5b9cda52807c9c11781ec0a4aee927787b61f1<br>
-./16/3f06147a449e724d0cfd484c3334709e8e1fce<br>
-./34/a5dff148e70c12310cda0800d6bcaf82530bdc<br>
-./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce<br>
-./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a<br>
-./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65<br>
-./99/38a0c30940dccaeddce4bb2eb151fba3a21ae5<br>
-./cf/e23cbe0150fda69a004e301828097935ec4397<br>
-./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391<br>
+Below is a consolidated list of all the objects in the repository.<br><div id="codeblock"><code>./09/5b9cda52807c9c11781ec0a4aee927787b61f1<br/>
+./16/3f06147a449e724d0cfd484c3334709e8e1fce<br/>
+./34/a5dff148e70c12310cda0800d6bcaf82530bdc<br/>
+./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce<br/>
+./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a<br/>
+./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65<br/>
+./99/38a0c30940dccaeddce4bb2eb151fba3a21ae5<br/>
+./cf/e23cbe0150fda69a004e301828097935ec4397<br/>
+./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391<br/>
 </code></div><br>In order to start rebuilding a picture of our repository, let us first find out what the first commit to our repository was.
-Looking back in <em>Week 2</em> we can see the following trimmed output.<br><div id="codeblock"><code>[master (root-commit) cfe23cb] My First Ever Commit<br>
+Looking back in <em>Week 2</em> we can see the following trimmed output.<br><div id="codeblock"><code>[master (root-commit) cfe23cb] My First Ever Commit<br/>
 </code></div><br>So we need to start with the object that begins <code class="ncode">cfe23cb</code>.
 Remember in the description above about the SHA-1 hashes, the first two bytes are the directory name.
 We are looking for a file that starts with the characters <code class="ncode">e23cb</code> and it will be in the directory called <code class="ncode">cf</code>.
 By George! Looking at the list above, we can see that there is one file which fits the bill.
 In fact it would be a little ambiguous if there were two.
 It <em>could</em> happen that we would have two SHA-1 hashes that started with the same seven characters, but it's not likely.
-The line we are interested in is listed below.<br><div id="codeblock"><code>./cf/e23cbe0150fda69a004e301828097935ec4397}<br>
+The line we are interested in is listed below.<br><div id="codeblock"><code>./cf/e23cbe0150fda69a004e301828097935ec4397}<br/>
 </code></div><br>It would be nice if we could find out a little more about this object, and confirm that it is what we expect it to be.
-to start with, let us run the Linux <code class="ncode">file</code> command on it, to see what it makes of it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/.git/objects/cf$ file e23cbe0150fda69a004e301828097935ec4397</strong><br>
-e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable - version 5185<br>
-<strong>john@satsuki:~/coderepo/.git/objects/cf$</strong><br>
+to start with, let us run the Linux <code class="ncode">file</code> command on it, to see what it makes of it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/.git/objects/cf$ file e23cbe0150fda69a004e301828097935ec4397</strong><br/>
+e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable - version 5185<br/>
+<strong>john@satsuki:~/coderepo/.git/objects/cf$</strong><br/>
 </code></div><br>The <code class="ncode">file</code> command, tells us that the file is actually of <code class="ncode">VAX COFF executable - version 5185</code> filetype.
 This is obviously not correct.
 Git stores its objects by Zlib compressing them, which is why it is difficult for the <code class="ncode">file</code> command to make any sense out of them.
@@ -256,42 +256,42 @@ Those that are readily available to the end user, and those that are not.<br><br
 </div><br>If we run this plumbing command against our object, and supply the <code class="ncode">-t</code> parameter, <code class="ncode">git cat-file</code> will tell us the type of the object.
 If we run it with the <code class="ncode">-s</code> parameter, it will tell us the size.
 Finally, running it with the <code class="ncode">-p</code> parameter we can see what the object actually contains.
-Each of these has been demonstrated below.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -t cfe23c</strong><br>
-commit<br>
-<strong>john@satsuki:~/coderepo$ git cat-file -s cfe23c</strong><br>
-215<br>
-<strong>john@satsuki:~/coderepo$ git cat-file -p cfe23c</strong><br>
-tree 34a5dff148e70c12310cda0800d6bcaf82530bdc<br>
-author John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301599664 +0100<br>
-committer John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301599664 +0100<br>
-<br>
-My First Ever Commit<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Each of these has been demonstrated below.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -t cfe23c</strong><br/>
+commit<br/>
+<strong>john@satsuki:~/coderepo$ git cat-file -s cfe23c</strong><br/>
+215<br/>
+<strong>john@satsuki:~/coderepo$ git cat-file -p cfe23c</strong><br/>
+tree 34a5dff148e70c12310cda0800d6bcaf82530bdc<br/>
+author John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301599664 +0100<br/>
+committer John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301599664 +0100<br/>
+<br/>
+My First Ever Commit<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Fantastic! We now have a way of confirming the objects are what we think they are.
 If we were to run the command against every file in the repository, we would end up with a list that would look something like the one below.
-Notice our commit object sat in the middle.<br><div id="codeblock"><code>./09/5b9cda52807c9c11781ec0a4aee927787b61f1     blob<br>
-./16/3f06147a449e724d0cfd484c3334709e8e1fce     commit<br>
-./34/a5dff148e70c12310cda0800d6bcaf82530bdc     tree<br>
-./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce     blob<br>
-./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a     tree<br>
-./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65     tree<br>
-./99/38a0c30940dccaeddce4bb2eb151fba3a21ae5     commit<br>
-./cf/e23cbe0150fda69a004e301828097935ec4397     commit<br>
-./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391     blob<br>
+Notice our commit object sat in the middle.<br><div id="codeblock"><code>./09/5b9cda52807c9c11781ec0a4aee927787b61f1     blob<br/>
+./16/3f06147a449e724d0cfd484c3334709e8e1fce     commit<br/>
+./34/a5dff148e70c12310cda0800d6bcaf82530bdc     tree<br/>
+./3a/d4cc3fe5a61c5563cb1b2ff3680d7e95be0fce     blob<br/>
+./3f/fa7ab6dafef2bc38a70a39c53604c333ed4d7a     tree<br/>
+./8d/664b74cce3a1f24d498d2d2bcc36e9915b5a65     tree<br/>
+./99/38a0c30940dccaeddce4bb2eb151fba3a21ae5     commit<br/>
+./cf/e23cbe0150fda69a004e301828097935ec4397     commit<br/>
+./e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391     blob<br/>
 </code></div><br>Now things start to get interesting.
 Did you also notice the tree SHA-1 hash mentioned when we ran <code class="ncode">git cat-file -p</code>? This is the tree object that stores the file structure.
 Why don't we run the command against that file too?<br><div id="calloutblock"><h3>Note - Packing for a holiday?</h3>
 It is worth noting that the objects noted above are not the only objects that you will find in the <code class="ncode">objects</code> folder.
 Git will sometimes clean itself up and perform packing operations.
 This is out of scope for this chapter though.
-</div><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p 34a5dff</strong><br>
-100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391<br>
- my_first_committed_file<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+</div><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p 34a5dff</strong><br/>
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391<br/>
+ my_first_committed_file<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>We can now see a list of all files that were present in that snapshot of the working tree.
 In our case this just happens to be one file.
-Using our command one last time against the object name of the file, we can see the actual contents of the file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p e69de29</strong><br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Using our command one last time against the object name of the file, we can see the actual contents of the file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p e69de29</strong><br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>At first glance one may consider it odd that there is nothing in there.
 However, if we take a trip back in time and flick back to the first commit that we made to our repository, you will see that we never actually put any content in our file at all.
 So, the object contains nothing.
@@ -304,14 +304,14 @@ Now we can draw up a diagram of our repository after the first commit.<br><cente
                       <td class="fade_bot_image"><div align="center"><strong>Figure 2</strong><br>Overview of objects in repository after <strong>first</strong> commit</div></td>
                       <td class="fade_corner">&nbsp;</td>
                     </tr>
-                  </table></center><br>If we pick another commit object from the list and run our command on it we can see something new has appeared in the output.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p 163f061</strong><br>
-tree 3ffa7ab6dafef2bc38a70a39c53604c333ed4d7a<br>
-parent cfe23cbe0150fda69a004e301828097935ec4397<br>
-author John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301599979 +0100<br>
-committer John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301599979 +0100<br>
-<br>
-Made a few changes to first and second files<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+                  </table></center><br>If we pick another commit object from the list and run our command on it we can see something new has appeared in the output.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p 163f061</strong><br/>
+tree 3ffa7ab6dafef2bc38a70a39c53604c333ed4d7a<br/>
+parent cfe23cbe0150fda69a004e301828097935ec4397<br/>
+author John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301599979 +0100<br/>
+committer John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301599979 +0100<br/>
+<br/>
+Made a few changes to first and second files<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>This commit object has an extra field.
 This field is the <code class="ncode">parent</code> field.
 It tells Git which commit object is the parent to this one.

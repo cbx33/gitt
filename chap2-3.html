@@ -174,27 +174,27 @@ He grabbed at the keyboard, "Here, lemme show you."
 </div><br>The git reset is great at removing things from the index that you don't want to be there.
 Of course, it can do a great many other things, but for now, let us concern ourselves with the scenario presented above.
 We are working away, and have added a number of files into the index ready for committing, when we discover that we are actually not ready to commit them.
-In the following example, we are going to add the file my_third_committed_file and then remove it from the index.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git add my_third_committed_file</strong><br>
-<strong>john@satsuki:~/coderepo$ git status</strong><br>
-# On branch master<br>
-# Changes to be committed:<br>
-#   (use "git reset HEAD &lt;file&gt;..." to unstage)<br>
-#<br>
-#	new file:   my_third_committed_file<br>
-#<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+In the following example, we are going to add the file my_third_committed_file and then remove it from the index.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git add my_third_committed_file</strong><br/>
+<strong>john@satsuki:~/coderepo$ git status</strong><br/>
+# On branch master<br/>
+# Changes to be committed:<br/>
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)<br/>
+#<br/>
+#	new file:   my_third_committed_file<br/>
+#<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Notice how my_third_committed_file is now ready to be committed to repository.
 The problem is we need to add something more to it before we do.
 Remember that when we run the git add command, we are copying the file from our working copy to the index.
-If we decide we no longer want that file in the repository, we can run the following.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git reset my_third_committed_file</strong><br>
-<strong>john@satsuki:~/coderepo$ git status</strong><br>
-# On branch master<br>
-# Untracked files:<br>
-#   (use "git add &lt;file&gt;..." to include in what will be committed)<br>
-#<br>
-#	my_third_committed_file<br>
-nothing added to commit but untracked files present (use "git add" to track)<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+If we decide we no longer want that file in the repository, we can run the following.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git reset my_third_committed_file</strong><br/>
+<strong>john@satsuki:~/coderepo$ git status</strong><br/>
+# On branch master<br/>
+# Untracked files:<br/>
+#   (use "git add &lt;file&gt;..." to include in what will be committed)<br/>
+#<br/>
+#	my_third_committed_file<br/>
+nothing added to commit but untracked files present (use "git add" to track)<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>We have discarded the file which was residing in the index.
 This is very important to note.
 We are not moving the file from the index back into our working directory, we are literally just deleting the file from the index.
@@ -210,8 +210,8 @@ Git can use any text editor you require, even a graphical one, though the need r
 As mentioned earlier, Git has a preference lever when talking about configuration.
 First and foremost it will look in the repositories own 'config' file in the .git folder.
 Then, it will look in the users <code class="ncode">~/.gitconfig</code> file.
-Finally, Git will look in your distributions own global folder.<br><br>If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;<br><div id="codeblock"><code>git config core.editor "nano"<br>
-</code></div><br>If we want the changes to apply globally, meaning it would affect all repositories we administrate as this user, unless overridden by a repository setting, we would run the following;<br><div id="codeblock"><code>git config --global core.editor "nano"<br>
+Finally, Git will look in your distributions own global folder.<br><br>If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;<br><div id="codeblock"><code>git config core.editor "nano"<br/>
+</code></div><br>If we want the changes to apply globally, meaning it would affect all repositories we administrate as this user, unless overridden by a repository setting, we would run the following;<br><div id="codeblock"><code>git config --global core.editor "nano"<br/>
 </code></div><br>It is worth noting that you can also use the $EDITOR environment variable to accomplish the same thing.
 Many people use this in preference to the modifying the Git configuration simply because many other programs honour this setting.
 </div><br>Now we know how to add files into the repository.

@@ -165,38 +165,38 @@ In doing this we would lose or disconnect all of the development history of that
 The methodology behind this is that we rewrite the history to a new branch, but we only pull across changes to a particular folder and we store those in the root of the branch.
 Let us see how this works with a quick example.
 Remember we created the <code class="ncode">tester</code> folder?
-We are going to make a few commits to the files in this folder to give it some history.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "More development work" &gt;&gt; tester/newfile1</strong><br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Work on tester nf1'</strong><br>
-[master 1a4956b] Work on tester nf1<br>
- 1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ echo "More dev work" &gt;&gt; tester/newfile2</strong><br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Work on tester nf2'</strong><br>
-[master 7156104] Work on tester nf2<br>
- 1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ echo "Even more dev work" &gt;&gt; tester/newfile3</strong><br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Work on tester nf3'</strong><br>
-[master 1433223] Work on tester nf3<br>
- 1 files changed, 1 insertions(+), 0 deletions(-)<br>
-<strong>john@satsuki:~/coderepo$ </strong><br>
+We are going to make a few commits to the files in this folder to give it some history.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "More development work" &gt;&gt; tester/newfile1</strong><br/>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Work on tester nf1'</strong><br/>
+[master 1a4956b] Work on tester nf1<br/>
+ 1 files changed, 1 insertions(+), 0 deletions(-)<br/>
+<strong>john@satsuki:~/coderepo$ echo "More dev work" &gt;&gt; tester/newfile2</strong><br/>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Work on tester nf2'</strong><br/>
+[master 7156104] Work on tester nf2<br/>
+ 1 files changed, 1 insertions(+), 0 deletions(-)<br/>
+<strong>john@satsuki:~/coderepo$ echo "Even more dev work" &gt;&gt; tester/newfile3</strong><br/>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Work on tester nf3'</strong><br/>
+[master 1433223] Work on tester nf3<br/>
+ 1 files changed, 1 insertions(+), 0 deletions(-)<br/>
+<strong>john@satsuki:~/coderepo$ </strong><br/>
 </code></div><br>Now we are going to split that off into a separate branch which we will then clone into a new Git repository.
-After we have copied the history of the <code class="ncode">tester</code> folder to a new branch, see if you can run through in your head, the steps we would need to take to pull this branch into a new repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b tester_split</strong><br>
-Switched to a new branch 'tester_split'<br>
-<strong>john@satsuki:~/coderepo$ git filter-branch --subdirectory-filter tester</strong><br>
-Rewrite 1433223d9c8a8abc35410d12cf78128c318b6e42 (4/4)<br>
-Ref 'refs/heads/tester_split' was rewritten<br>
-<strong>john@satsuki:~/coderepo$ git branch</strong><br>
-  develop<br>
-  master<br>
-* tester_split<br>
-  wonderful<br>
-  zaney<br>
-<strong>john@satsuki:~/coderepo$ ls</strong><br>
-newfile1  newfile2  newfile3  test.sh<br>
-<strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
-Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo$ ls</strong><br>
-another_file  cont_dev  tester<br>
-<strong>john@satsuki:~/coderepo$ </strong><br>
+After we have copied the history of the <code class="ncode">tester</code> folder to a new branch, see if you can run through in your head, the steps we would need to take to pull this branch into a new repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b tester_split</strong><br/>
+Switched to a new branch 'tester_split'<br/>
+<strong>john@satsuki:~/coderepo$ git filter-branch --subdirectory-filter tester</strong><br/>
+Rewrite 1433223d9c8a8abc35410d12cf78128c318b6e42 (4/4)<br/>
+Ref 'refs/heads/tester_split' was rewritten<br/>
+<strong>john@satsuki:~/coderepo$ git branch</strong><br/>
+  develop<br/>
+  master<br/>
+* tester_split<br/>
+  wonderful<br/>
+  zaney<br/>
+<strong>john@satsuki:~/coderepo$ ls</strong><br/>
+newfile1  newfile2  newfile3  test.sh<br/>
+<strong>john@satsuki:~/coderepo$ git checkout master</strong><br/>
+Switched to branch 'master'<br/>
+<strong>john@satsuki:~/coderepo$ ls</strong><br/>
+another_file  cont_dev  tester<br/>
+<strong>john@satsuki:~/coderepo$ </strong><br/>
 </code></div><br>So now the directory has been split away from the original source code into a new branch, have a think about what steps you would take to bring this into an entirely new repository.<br><div id="calloutblock"><h3>Note - More backups</h3>
 Git likes to make things easy for you.
 You may not have noticed it before, but when using the <code class="ncode">git filter-branch</code> tool to rewrite a branch, Git keeps a backup of the value of HEAD before you started rewriting your branch.
@@ -220,47 +220,47 @@ Whilst this is generally not a problem it would mean that we would have to run s
 This would happen natually over time as the objects aged and were no longer referenced, but it would result in a repository that was initially much larger than it needed to be.<br><br>The other two methods deserve a little more consideration as they both perform much better in this respect.
 The third method you should be familiar enough with pervious material to be able to perform right now.
 However, using the fetch command as we have done so before would again pull in many more objects than we require.
-As such we are going to do a subtle twist to this command in the following output.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd ../</strong><br>
-<strong>john@satsuki:~$ mkdir subrepo</strong><br>
-<strong>john@satsuki:~$ cd subrepo/</strong><br>
-<strong>john@satsuki:~/subrepo$ git init</strong><br>
-Initialized empty Git repository in /home/john/subrepo/.git/<br>
-<strong>john@satsuki:~/subrepo$ git remote add source /home/john/coderepo</strong><br>
-<strong>john@satsuki:~/subrepo$ git fetch source +tester_split:master</strong><br>
-fatal: Refusing to fetch into current branch refs/heads/master of non-bare repository<br>
-<strong>john@satsuki:~/subrepo$ fatal: The remote end hung up unexpectedly</strong><br>
-<strong>john@satsuki:~/subrepo$</strong><br>
+As such we are going to do a subtle twist to this command in the following output.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd ../</strong><br/>
+<strong>john@satsuki:~$ mkdir subrepo</strong><br/>
+<strong>john@satsuki:~$ cd subrepo/</strong><br/>
+<strong>john@satsuki:~/subrepo$ git init</strong><br/>
+Initialized empty Git repository in /home/john/subrepo/.git/<br/>
+<strong>john@satsuki:~/subrepo$ git remote add source /home/john/coderepo</strong><br/>
+<strong>john@satsuki:~/subrepo$ git fetch source +tester_split:master</strong><br/>
+fatal: Refusing to fetch into current branch refs/heads/master of non-bare repository<br/>
+<strong>john@satsuki:~/subrepo$ fatal: The remote end hung up unexpectedly</strong><br/>
+<strong>john@satsuki:~/subrepo$</strong><br/>
 </code></div><br>What we have asked Git to do is to pull only the branch <strong>tester_split</strong> from the remote we called <strong>source</strong> and place it into <strong>master</strong> locally.
 Think of the <code class="ncode">+&lt;branch&gt;:&lt;branch&gt;</code> as <code class="ncode">+&lt;source&gt;:&lt;destination&gt;</code> and all will make sense.
 As you can see Git is not too happy about our intentions here as it does not like overwriting the <strong>master</strong> branch of a non-bare repository.
-That is OK, we have another way around this.<br><div id="codeblock"><code><strong>john@satsuki:~/subrepo$ git fetch source +tester_split:tmp</strong><br>
-remote: Counting objects: 15, done.<br>
-remote: Compressing objects: 100remote: Total 15 (delta 3), reused 0 (delta 0)<br>
-Unpacking objects: 100From /home/john/coderepo<br>
- * [new branch]      tester_split -&gt; tmp<br>
-<strong>john@satsuki:~/subrepo$ git branch -m tmp master</strong><br>
-<strong>john@satsuki:~/subrepo$</strong><br>
+That is OK, we have another way around this.<br><div id="codeblock"><code><strong>john@satsuki:~/subrepo$ git fetch source +tester_split:tmp</strong><br/>
+remote: Counting objects: 15, done.<br/>
+remote: Compressing objects: 100remote: Total 15 (delta 3), reused 0 (delta 0)<br/>
+Unpacking objects: 100From /home/john/coderepo<br/>
+ * [new branch]      tester_split -&gt; tmp<br/>
+<strong>john@satsuki:~/subrepo$ git branch -m tmp master</strong><br/>
+<strong>john@satsuki:~/subrepo$</strong><br/>
 </code></div><br>So we have almost deceived Git a little here, but I think we can live with ourselves.
 By first pulling the branch into a <strong>tmp</strong> branch, we were then allowed to rename it as <strong>master</strong>.
 Notice the number of objects required for this branch <code class="ncode">15</code>.
 If you remember when we cloned our repository a few <em>weeks</em> ago, this value was a lot higher than this.
-It was the subtle <code class="ncode">+&lt;source&gt;:&lt;destination&gt;</code> which prevented us from pulling every last object from the source repository into our new slim <em>sub</em>-repository.<br><div id="codeblock"><code><strong>john@satsuki:~/subrepo$ ls</strong><br>
-<strong>john@satsuki:~/subrepo$ git checkout master</strong><br>
-Already on 'master'<br>
-<strong>john@satsuki:~/subrepo$ ls</strong><br>
-newfile1  newfile2  newfile3  test.sh<br>
-<strong>john@satsuki:~/subrepo$ </strong><br>
+It was the subtle <code class="ncode">+&lt;source&gt;:&lt;destination&gt;</code> which prevented us from pulling every last object from the source repository into our new slim <em>sub</em>-repository.<br><div id="codeblock"><code><strong>john@satsuki:~/subrepo$ ls</strong><br/>
+<strong>john@satsuki:~/subrepo$ git checkout master</strong><br/>
+Already on 'master'<br/>
+<strong>john@satsuki:~/subrepo$ ls</strong><br/>
+newfile1  newfile2  newfile3  test.sh<br/>
+<strong>john@satsuki:~/subrepo$ </strong><br/>
 </code></div><br>Notice that there are no files in the repository until we have checked out.
 This is because all the fetch did was to <em>fetch</em> the objects and place them in the repository object directory.
 It did not place anything in the working directory.
 If you remember this is same behaviour we saw with fetching before.
 So now we have a complete copy of our <code class="ncode">tester</code> component of our repository from the source into a new repository.
-If we do a <code class="ncode">git log</code>, we can see the history of the development.<br><div id="codeblock"><code><strong>john@satsuki:~/subrepo$ git log --format=oneline</strong><br>
-590e0eb79bc5ba0bc09f611392e643f676b00a04 Work on tester nf3<br>
-785b86d877d2a5c0679d98181a23d06ed2ba7652 Work on tester nf2<br>
-1ff89f787438f081a0d74de2d26eb2d831c9c738 Work on tester nf1<br>
-a5a0d9762dd4b50d8f3228e37b315f6056d5a034 Moved testing suite<br>
-<strong>john@satsuki:~/subrepo$ </strong><br>
+If we do a <code class="ncode">git log</code>, we can see the history of the development.<br><div id="codeblock"><code><strong>john@satsuki:~/subrepo$ git log --format=oneline</strong><br/>
+590e0eb79bc5ba0bc09f611392e643f676b00a04 Work on tester nf3<br/>
+785b86d877d2a5c0679d98181a23d06ed2ba7652 Work on tester nf2<br/>
+1ff89f787438f081a0d74de2d26eb2d831c9c738 Work on tester nf1<br/>
+a5a0d9762dd4b50d8f3228e37b315f6056d5a034 Moved testing suite<br/>
+<strong>john@satsuki:~/subrepo$ </strong><br/>
 </code></div><br>Unfortunately since some of our development work on these files happened outside of this directory,
 this was lost when splitting and this is something to keep in mind should you ever perform this kind of operation.<br><h3>Little bundles of joy</h3>
 Git has so many ways to do things.
@@ -271,15 +271,15 @@ Here we are going to look at just one more way that we can create a new repo fro
 The <code class="ncode">bundle</code> utility allows us to export a set of revisions and almost archive them to a file.
 This file then becomes a resource that can be updated and pulled or fetched from.
 This is especially useful if you have no physical connection between two computers and wish to sync some of the data from one to the other.
-Let us take a quick look at how we could use the bundle tool in this case.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bundle create ../tester.bundle tester_split </strong><br>
-Counting objects: 15, done.<br>
-Compressing objects: 100Writing objects: 100Total 15 (delta 3), reused 0 (delta 0)<br>
-<strong>john@satsuki:~/coderepo$ cd ..</strong><br>
-<strong>john@satsuki:~$ git clone tester.bundle subrepo-b</strong><br>
-Cloning into subrepo-b...<br>
-warning: remote HEAD refers to nonexistent ref, unable to checkout.<br>
-<br>
-<strong>john@satsuki:~$</strong><br>
+Let us take a quick look at how we could use the bundle tool in this case.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bundle create ../tester.bundle tester_split </strong><br/>
+Counting objects: 15, done.<br/>
+Compressing objects: 100Writing objects: 100Total 15 (delta 3), reused 0 (delta 0)<br/>
+<strong>john@satsuki:~/coderepo$ cd ..</strong><br/>
+<strong>john@satsuki:~$ git clone tester.bundle subrepo-b</strong><br/>
+Cloning into subrepo-b...<br/>
+warning: remote HEAD refers to nonexistent ref, unable to checkout.<br/>
+<br/>
+<strong>john@satsuki:~$</strong><br/>
 </code></div><br>So the problem here is that when we created the bundle, the branch which was checked out at the time was <strong>master</strong>.
 The objects we pulled from the source repository and placed in the bundle were all from the <strong>tester_split</strong> branch.
 As such the HEAD of the working tree at the time of the bundle creation, pointed to an object in the <strong>master</strong> branch.
@@ -288,17 +288,17 @@ If we had checked out <strong>tester_split</strong> before creating the bundle, 
 As you can see below, it seems as if there are no branches at all and when we try to checkout master it does not exist.
 What actually happened is that the objects were cloned into the repository, but as the object that the source HEAD pointed to was unavailable,
 no branch was created.
-With a litle <code class="ncode">git reset</code> trickery, we can create our <strong>master</strong> branch in our new repository.<br><div id="codeblock"><code><strong>john@satsuki:~$ cd subrepo-b/</strong><br>
-<strong>john@satsuki:~/subrepo-b$ git branch</strong><br>
-<strong>john@satsuki:~/subrepo-b$ git checkout master</strong><br>
-error: pathspec 'master' did not match any file(s) known to git.<br>
-<strong>john@satsuki:~/subrepo-b$ git reset --hard origin/tester_split </strong><br>
-HEAD is now at 590e0eb Work on tester nf3<br>
-<strong>john@satsuki:~/subrepo-b$ git checkout master</strong><br>
-Already on 'master'<br>
-<strong>john@satsuki:~/subrepo-b$ ls</strong><br>
-newfile1  newfile2  newfile3  test.sh<br>
-<strong>john@satsuki:~/subrepo-b$ </strong><br>
+With a litle <code class="ncode">git reset</code> trickery, we can create our <strong>master</strong> branch in our new repository.<br><div id="codeblock"><code><strong>john@satsuki:~$ cd subrepo-b/</strong><br/>
+<strong>john@satsuki:~/subrepo-b$ git branch</strong><br/>
+<strong>john@satsuki:~/subrepo-b$ git checkout master</strong><br/>
+error: pathspec 'master' did not match any file(s) known to git.<br/>
+<strong>john@satsuki:~/subrepo-b$ git reset --hard origin/tester_split </strong><br/>
+HEAD is now at 590e0eb Work on tester nf3<br/>
+<strong>john@satsuki:~/subrepo-b$ git checkout master</strong><br/>
+Already on 'master'<br/>
+<strong>john@satsuki:~/subrepo-b$ ls</strong><br/>
+newfile1  newfile2  newfile3  test.sh<br/>
+<strong>john@satsuki:~/subrepo-b$ </strong><br/>
 </code></div><br>Now we have our repository complete as before.<br><div id="trenchblock"><strong>In the trenches...</strong><br>
 Martha and John were sitting together in the office.
 The rest of the team had left hours ago and it was getting really late.

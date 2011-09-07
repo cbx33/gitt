@@ -182,17 +182,17 @@ Obviously we could just take the files and copy them, but a better way of doing 
 When cloning a repository, we take then entire structure and replicate it, creating an exact copy of the data in an alternative location.
 Well, that's what cloning means isn't it?<br><br>The git clone tool doesn't just copy the data though, it does several other things.
 Let us create a clone of our test repository to another local location.
-In this case, we are going to clone the repository into a folder called <code class="ncode">coderepo-cl</code>.<br><div id="codeblock"><code><strong>john@satsuki:~$ git clone coderepo coderepo-cl</strong><br>
-Initialized empty Git repository in /home/john/coderepo-cl/.git/<br>
-<strong>john@satsuki:~$</strong><br>
-</code></div><br><div id="codeblock"><code><strong>john@satsuki:~$ cd coderepo-cl</strong><br>
-<strong>john@satsuki:~/coderepo-cl$ ls</strong><br>
-another_file  newfile1  newfile2<br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
-</code></div><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git status</strong><br>
-# On branch master<br>
-nothing to commit (working directory clean)<br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
+In this case, we are going to clone the repository into a folder called <code class="ncode">coderepo-cl</code>.<br><div id="codeblock"><code><strong>john@satsuki:~$ git clone coderepo coderepo-cl</strong><br/>
+Initialized empty Git repository in /home/john/coderepo-cl/.git/<br/>
+<strong>john@satsuki:~$</strong><br/>
+</code></div><br><div id="codeblock"><code><strong>john@satsuki:~$ cd coderepo-cl</strong><br/>
+<strong>john@satsuki:~/coderepo-cl$ ls</strong><br/>
+another_file  newfile1  newfile2<br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
+</code></div><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git status</strong><br/>
+# On branch master<br/>
+nothing to commit (working directory clean)<br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>Let us take a few moments to see what has happened here.
 It would appear that our data has been copied successfully.
 If you were to run a <code class="ncode">git log</code> on this dir, you would see all the previous log messages for all our previous commits.

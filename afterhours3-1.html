@@ -164,116 +164,116 @@ The diff algorithm was developed in the early 1970s and the research published i
 The algorithm we use today to perform diffs has become known as the Hunt-McIlroy after the research papers authors.<br><br>In essence the task of calculating a diff is that of finding the differences between two files on a line by line basis.
 Mathematically, this can be described as the LCS or Longest Common Subsequence problem, which is a classic computer science problem.<br><br>Though we are not going to go into the problem in great detail, it is useful to know what actually happens at this level.
 Essentially you have two sequences, for now we are going to simplify the problem and work on a string of letters.<br><br>Old string:
-<div id="codeblock"><code>a b c d e j k l m p r s<br>
+<div id="codeblock"><code>a b c d e j k l m p r s<br/>
 </code></div><br>New string:
-<div id="codeblock"><code>a c d f g h i j n o p t u<br>
+<div id="codeblock"><code>a c d f g h i j n o p t u<br/>
 </code></div><br>The challenge is to find the longest sequence of items that is present in both of the strings above.
 This new sequence is found by deleting items from the first and second set until all that remains is a sequence of common items.<br><br>In our example case, this is as follows
 LCS string:
-<div id="codeblock"><code>a c d j p<br>
+<div id="codeblock"><code>a c d j p<br/>
 </code></div><br>Comparing this to each of our strings above, it is easy to generate a diff.
 If the items are present in the <em>Old string</em>, but not in the LCS string then they must have been deleted.
 Conversely if they are present in the <em>New string</em>, but not the LCS, then they must have been additions.
 Putting this into practice in our example and marking deletions with <code class="ncode">-</code> and additions with <code class="ncode">+</code>, we get the following:<br><br>Diff string:
-<div id="codeblock"><code>b e fghi klm o rs tu<br>
-- - ++++ --- + -- ++<br>
+<div id="codeblock"><code>b e fghi klm o rs tu<br/>
+- - ++++ --- + -- ++<br/>
 </code></div><br>The actual algorithm for generating the LCS and the subsequent diff is too complex to describe here and is out of the scope of this book.
 This section was included to give you some idea of how Git performs some of its actions internally.<br><h3>More about tags</h3>
 Tags can actually do a little more than just hold a single identifier to a specific commit.
 A tag can also have a log message with it, similar to the commit objects we discussed earlier.
 In order to invoke this option, we need to use the <code class="ncode">git tag -m 'message'</code> option.
 This will allow us to supply a message to be stored along with the tag.
-Let us see how this works in practice.<br><br>Firstly we can use the <code class="ncode">git tag</code> command to show all tags that are currently in the repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git tag</strong><br>
-v0.9<br>
-v1.0a<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
-</code></div><br>Now let us create a new tag and give it some extra information.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git tag v1.0b -m 'This is an annotated tag'</strong><br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Let us see how this works in practice.<br><br>Firstly we can use the <code class="ncode">git tag</code> command to show all tags that are currently in the repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git tag</strong><br/>
+v0.9<br/>
+v1.0a<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
+</code></div><br>Now let us create a new tag and give it some extra information.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git tag v1.0b -m 'This is an annotated tag'</strong><br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Unfortunately Git was not particularly forthcoming with information on the creation of the tag.
-On saying that, it is not difficult for us to use the <code class="ncode">git show</code> command to see what we have done.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git show v1.0b</strong><br>
-tag v1.0b<br>
-Tagger: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Thu Mar 31 23:55:50 2011 +0100<br>
-<br>
-This is an annotated tag<br>
-<br>
-commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Thu Mar 31 22:05:55 2011 +0100<br>
-<br>
-    Messed with a few files<br>
-<br>
-diff --git a/my_second_committed_file b/my_second_committed_file<br>
-index 095b9cd..c9887f8 100644<br>
---- a/my_second_committed_file<br>
-+++ b/my_second_committed_file<br>
-@@ -1,2 +1 @@<br>
--Change1<br>
--Change2<br>
-+Changed this file completely<br>
-diff --git a/my_third_committed_file b/my_third_committed_file<br>
-new file mode 100644<br>
-index 0000000..5d27866<br>
---- /dev/null<br>
-+++ b/my_third_committed_file<br>
-@@ -0,0 +1 @@<br>
-+Addition to the line<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+On saying that, it is not difficult for us to use the <code class="ncode">git show</code> command to see what we have done.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git show v1.0b</strong><br/>
+tag v1.0b<br/>
+Tagger: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Thu Mar 31 23:55:50 2011 +0100<br/>
+<br/>
+This is an annotated tag<br/>
+<br/>
+commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Thu Mar 31 22:05:55 2011 +0100<br/>
+<br/>
+    Messed with a few files<br/>
+<br/>
+diff --git a/my_second_committed_file b/my_second_committed_file<br/>
+index 095b9cd..c9887f8 100644<br/>
+--- a/my_second_committed_file<br/>
++++ b/my_second_committed_file<br/>
+@@ -1,2 +1 @@<br/>
+-Change1<br/>
+-Change2<br/>
++Changed this file completely<br/>
+diff --git a/my_third_committed_file b/my_third_committed_file<br/>
+new file mode 100644<br/>
+index 0000000..5d27866<br/>
+--- /dev/null<br/>
++++ b/my_third_committed_file<br/>
+@@ -0,0 +1 @@<br/>
++Addition to the line<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Notice that as well as showing us the tag itself, the <code class="ncode">git show</code> command also gave us a diff of what exactly changed in this commit.
 Small details like this are what makes Git in particular a joy to use for developers.<br><br>If we found that we had actually created the tag incorrectly, we have two options, we could use the <code class="ncode">-d</code> option to delete a tag, or we could use the <code class="ncode">-F</code> option to forcibly overwrite a tag with the same name with different information.
 However please remember the warning about tags in <em>Week 2</em>.
 It is very dangerous to go changing tags, especially if you have already pushed them out somewhere where other people can grab them from.<br><br>Now that we have learnt a little about how to play with tags, we should probably take a look under the hood.
 This is an After Hours section after all.<br><br>The implementation of tags in Git is very simple indeed.
-We are going to jump into the <code class="ncode">.git</code> directory and take a look at a simple output from some commands.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd .git/</strong><br>
-<strong>john@satsuki:~/coderepo/.git$ ls</strong><br>
-branches        config       HEAD   index  logs     refs<br>
-COMMIT_EDITMSG  description  hooks  info   objects<br>
-<strong>john@satsuki:~/coderepo/.git$ cd refs/tags/</strong><br>
-<strong>john@satsuki:~/coderepo/.git/refs/tags$ ls</strong><br>
-v0.9  v1.0a  v1.0b<br>
-<strong>john@satsuki:~/coderepo/.git/refs/tags$ cat v1.0a</strong><br>
-a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br>
-<strong>john@satsuki:~/coderepo/.git/refs/tags$</strong><br>
+We are going to jump into the <code class="ncode">.git</code> directory and take a look at a simple output from some commands.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd .git/</strong><br/>
+<strong>john@satsuki:~/coderepo/.git$ ls</strong><br/>
+branches        config       HEAD   index  logs     refs<br/>
+COMMIT_EDITMSG  description  hooks  info   objects<br/>
+<strong>john@satsuki:~/coderepo/.git$ cd refs/tags/</strong><br/>
+<strong>john@satsuki:~/coderepo/.git/refs/tags$ ls</strong><br/>
+v0.9  v1.0a  v1.0b<br/>
+<strong>john@satsuki:~/coderepo/.git/refs/tags$ cat v1.0a</strong><br/>
+a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br/>
+<strong>john@satsuki:~/coderepo/.git/refs/tags$</strong><br/>
 </code></div><br>Inside the <code class="ncode">.git/refs/tags</code> folder, there is a file for every single tag in the system.
 This file contains a single string of characters.
 That string looks oddly like an SHA-1 commit to me.
-Using the tricks that we learnt in the last After Hours section, we can interrogate the Git repository, by throwing a few wrenches at it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p a022d4</strong><br>
-tree 96551f45496232c0ec6b389731d55fa3d7e1c8fd<br>
-parent 9938a0c30940dccaeddce4bb2eb151fba3a21ae5<br>
-author John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301605555 +0100<br>
-committer John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301605555 +0100<br>
-<br>
-Messed with a few files<br>
-<strong>john@satsuki:~/coderepo$ git cat-file -t a022d4</strong><br>
-commit<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Using the tricks that we learnt in the last After Hours section, we can interrogate the Git repository, by throwing a few wrenches at it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p a022d4</strong><br/>
+tree 96551f45496232c0ec6b389731d55fa3d7e1c8fd<br/>
+parent 9938a0c30940dccaeddce4bb2eb151fba3a21ae5<br/>
+author John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301605555 +0100<br/>
+committer John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301605555 +0100<br/>
+<br/>
+Messed with a few files<br/>
+<strong>john@satsuki:~/coderepo$ git cat-file -t a022d4</strong><br/>
+commit<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Excellent! Just as we expected.
 So Git stores the SHA-1 hash for the commit we are referring to, in a file which has the same name as the tag.
-Just for clarity, let us run the same set of commands against our newly created annotated tag.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd .git/refs/tags/</strong><br>
-<strong>john@satsuki:~/coderepo/.git/refs/tags$ cat v1.0b</strong><br>
-6cbcf47957589bf4b84cc934a26731636d021574<br>
-<strong>john@satsuki:~/coderepo/.git/refs/tags$</strong><br>
+Just for clarity, let us run the same set of commands against our newly created annotated tag.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd .git/refs/tags/</strong><br/>
+<strong>john@satsuki:~/coderepo/.git/refs/tags$ cat v1.0b</strong><br/>
+6cbcf47957589bf4b84cc934a26731636d021574<br/>
+<strong>john@satsuki:~/coderepo/.git/refs/tags$</strong><br/>
 </code></div><br>Hang on a minute! Shouldn't the output of the <code class="ncode">v1.0a</code> and <code class="ncode">v1.0b</code> files be the same.
 There were both created at the same point in the repositories history.
 They were both supposed to be pointing to the same commit.
-Let us use a little plumbing and see what is going on.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -t 6cbcf4</strong><br>
-tag<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Let us use a little plumbing and see what is going on.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -t 6cbcf4</strong><br/>
+tag<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Interesting.
 So it seems as if there is another type of object that can be added to the list.
 The <em>tag</em> object.
 So what exactly is the difference here? To answer that we need to take a look at the difference between the two tags.
 <code class="ncode">v1.0a</code> was a simple tag, whereas <code class="ncode">v1.0b</code> is an annotated tag.<br><br>When the tag was merely a pointer to a commit object, the repository required nothing more that the object that it was referring to, to be stored in the file.
 Now we have more information, Git treats the information just as it would any other, by creating an object.
-We can investigate this further and use the <code class="ncode">-p</code> parameter to the <code class="ncode">git cat-file</code> command to see exactly what is stored within this file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p 6cbcf4</strong><br>
-object a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br>
-type commit<br>
-tag v1.0b<br>
-tagger John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
- Thu Mar 31 23:55:50 2011 +0100<br>
-<br>
-This is an annotated tag<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+We can investigate this further and use the <code class="ncode">-p</code> parameter to the <code class="ncode">git cat-file</code> command to see exactly what is stored within this file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p 6cbcf4</strong><br/>
+object a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br/>
+type commit<br/>
+tag v1.0b<br/>
+tagger John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+ Thu Mar 31 23:55:50 2011 +0100<br/>
+<br/>
+This is an annotated tag<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>So an annotated tag contains more information than just the commit ID we are referring to.
 This is pretty handy and later on in the book we will start talking about topics like signed tags, which are required if you wish to verify the identity of the person claiming to have created the tag.<br><br>A shorter After Hours section this time.
 Next time we will move on to taking a deeper look at what happens behind the scenes with branches and merging.

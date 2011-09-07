@@ -177,24 +177,24 @@ The tool is called <code class="ncode">git bisect</code> and it is used to succe
 check them to see if the bug is present and then use that information to determine the revision that is most likely to have introduced the bug.<br><br>Let us assume that the bug in our repository is a fairly simple one.
 For some bizarre reason our codebase is broken unless the word <code class="ncode">Addition</code> is present in one of the files.
 If we run a simple Linux <code class="ncode">grep</code> command across the files, we can see that the word we are after is not there.
-However, if we go back to tag <strong>v1.0a</strong> and run the same command, we can see that the word is there.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br>
-<strong>john@satsuki:~/coderepo$ </strong><br>
-<strong>john@satsuki:~/coderepo$ git checkout v1.0a </strong><br>
-Note: checking out 'v1.0a'.<br>
-<br>
-You are in 'detached HEAD' state. You can look around, make experimental<br>
-changes and commit them, and you can discard any commits you make in this<br>
-state without impacting any branches by performing another checkout.<br>
-<br>
-If you want to create a new branch to retain commits you create, you may<br>
-do so (now or later) by using -b with the checkout command again. Example:<br>
-<br>
-  git checkout -b new_branch_name<br>
-<br>
-HEAD is now at a022d4d... Messed with a few files<br>
-<strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br>
-my_third_committed_file:Addition to the line<br>
-<strong>john@satsuki:~/coderepo$ </strong><br>
+However, if we go back to tag <strong>v1.0a</strong> and run the same command, we can see that the word is there.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br/>
+<strong>john@satsuki:~/coderepo$ </strong><br/>
+<strong>john@satsuki:~/coderepo$ git checkout v1.0a </strong><br/>
+Note: checking out 'v1.0a'.<br/>
+<br/>
+You are in 'detached HEAD' state. You can look around, make experimental<br/>
+changes and commit them, and you can discard any commits you make in this<br/>
+state without impacting any branches by performing another checkout.<br/>
+<br/>
+If you want to create a new branch to retain commits you create, you may<br/>
+do so (now or later) by using -b with the checkout command again. Example:<br/>
+<br/>
+  git checkout -b new_branch_name<br/>
+<br/>
+HEAD is now at a022d4d... Messed with a few files<br/>
+<strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br/>
+my_third_committed_file:Addition to the line<br/>
+<strong>john@satsuki:~/coderepo$ </strong><br/>
 </code></div><br>Notice the warning about checking out a non-branch.
 This is perfectly normal and should not worry you but please be aware that it is obviously best to have a clean working directory before starting any type of <code class="ncode">bisect</code> commands.
 We can see that the string we are looking for is present in the file called <code class="ncode">my_third_committed_file</code>.
@@ -204,59 +204,59 @@ For now let us assume that the <em>bug</em> is more complicated than this.<br><b
 We know that the repository was <strong>good</strong> at tag <strong>v1.0a</strong>.
 We also know that the repository is bad in its current state.
 By feeding these details to the <code class="ncode">git bisect</code> command, we can begin a search for the bug.
-What will happen at each stage is that Git will checkout a revision that it wants us to test and we tell Git if we think that revision is good or bad.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bisect start</strong><br>
-Already on 'master'<br>
-<strong>john@satsuki:~/coderepo$ git bisect good v1.0a</strong><br>
-<strong>john@satsuki:~/coderepo$ git bisect bad master</strong><br>
-Bisecting: 9 revisions left to test after this (roughly 3 steps)<br>
-[ed2301ba223a63a5a930b536a043444e019460a7] Removed third file<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+What will happen at each stage is that Git will checkout a revision that it wants us to test and we tell Git if we think that revision is good or bad.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bisect start</strong><br/>
+Already on 'master'<br/>
+<strong>john@satsuki:~/coderepo$ git bisect good v1.0a</strong><br/>
+<strong>john@satsuki:~/coderepo$ git bisect bad master</strong><br/>
+Bisecting: 9 revisions left to test after this (roughly 3 steps)<br/>
+[ed2301ba223a63a5a930b536a043444e019460a7] Removed third file<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>So we invoke the tool by running <code class="ncode">git bisect start</code>.
 After this we tell Git the things that we know. It was good at <strong>v1.0a</strong>, <code class="ncode">git bisect good v1.0a</code>.
 However, it was bad at <strong>master</strong>, our current revision, <code class="ncode">git bisect bad master</code>.
 After this, Git checks out revision <strong>ed2301b</strong> and tells us that there are <code class="ncode">9</code> revisions between the two points and that it should take only <code class="ncode">3</code> more steps to complete.
-Now we run our test again.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br>
-<strong>john@satsuki:~/coderepo$</strong><br>
-</code></div><br>As we have no result here, this would be classed as a bad revision and so we mark it as so.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bisect bad</strong><br>
-Bisecting: 3 revisions left to test after this (roughly 2 steps)<br>
-[9710177657ae00665ca8f8027b17314346a5b1c4] Added another file<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Now we run our test again.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
+</code></div><br>As we have no result here, this would be classed as a bad revision and so we mark it as so.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bisect bad</strong><br/>
+Bisecting: 3 revisions left to test after this (roughly 2 steps)<br/>
+[9710177657ae00665ca8f8027b17314346a5b1c4] Added another file<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Git now presents us with a new choice and you can see that the number of revisions left to check has decreased dramatically from <code class="ncode">9</code> to <code class="ncode">3</code>.
-We continue marking our revisions as good and bad.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br>
-my_third_committed_file:Addition to the line<br>
-<strong>john@satsuki:~/coderepo$ git bisect good</strong><br>
-Bisecting: 2 revisions left to test after this (roughly 1 step)<br>
-[cfbecabb031696a217b77b0e1285f2d5fc2ea2a3] Fantastic new feature<br>
-<strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br>
-my_third_committed_file:Addition to the line<br>
-<strong>john@satsuki:~/coderepo$ git bisect good</strong><br>
-Bisecting: 0 revisions left to test after this (roughly 1 step)<br>
-[b119573f4508514c55e1c4e3bebec0ab3667d071] Merge branch 'wonderful'<br>
-<strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br>
-my_third_committed_file:Addition to the line<br>
-<strong>john@satsuki:~/coderepo$ git bisect good</strong><br>
-ed2301ba223a63a5a930b536a043444e019460a7 is the first bad commit<br>
-commit ed2301ba223a63a5a930b536a043444e019460a7<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Fri Apr 1 07:37:34 2011 +0100<br>
-<br>
-    Removed third file<br>
-<br>
-:100644 000000 68365cc0e5909dc366d31febf5ba94a3268751c6 0000000000000000000000000000000000000000 D	my_third_committed_file<br>
-<strong>john@satsuki:~/coderepo$ </strong><br>
+We continue marking our revisions as good and bad.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br/>
+my_third_committed_file:Addition to the line<br/>
+<strong>john@satsuki:~/coderepo$ git bisect good</strong><br/>
+Bisecting: 2 revisions left to test after this (roughly 1 step)<br/>
+[cfbecabb031696a217b77b0e1285f2d5fc2ea2a3] Fantastic new feature<br/>
+<strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br/>
+my_third_committed_file:Addition to the line<br/>
+<strong>john@satsuki:~/coderepo$ git bisect good</strong><br/>
+Bisecting: 0 revisions left to test after this (roughly 1 step)<br/>
+[b119573f4508514c55e1c4e3bebec0ab3667d071] Merge branch 'wonderful'<br/>
+<strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br/>
+my_third_committed_file:Addition to the line<br/>
+<strong>john@satsuki:~/coderepo$ git bisect good</strong><br/>
+ed2301ba223a63a5a930b536a043444e019460a7 is the first bad commit<br/>
+commit ed2301ba223a63a5a930b536a043444e019460a7<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Fri Apr 1 07:37:34 2011 +0100<br/>
+<br/>
+    Removed third file<br/>
+<br/>
+:100644 000000 68365cc0e5909dc366d31febf5ba94a3268751c6 0000000000000000000000000000000000000000 D	my_third_committed_file<br/>
+<strong>john@satsuki:~/coderepo$ </strong><br/>
 </code></div><br>Oh! Something different.  Git has actually finished the bisect and has suggested to us that this commit was responsible for introducing the bug in our code.
 If we look at the comment it was in this revision that we removed a particular file.
 This file was the one that contained our special <code class="ncode">Addition</code> string.
-Git was right! We screwed up then.  At this point we can go back to our <strong>master</strong> branch and decide what to do about it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git branch -v</strong><br>
-* (no branch) b119573 Merge branch 'wonderful'<br>
-  develop     aed985c More new deving<br>
-  master      30900fe More new deving<br>
-  wonderful   4d91aab Updated another file again<br>
-  zaney       7cc32db Made another awesome change<br>
-<strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
-Previous HEAD position was b119573... Merge branch 'wonderful'<br>
-Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Git was right! We screwed up then.  At this point we can go back to our <strong>master</strong> branch and decide what to do about it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git branch -v</strong><br/>
+* (no branch) b119573 Merge branch 'wonderful'<br/>
+  develop     aed985c More new deving<br/>
+  master      30900fe More new deving<br/>
+  wonderful   4d91aab Updated another file again<br/>
+  zaney       7cc32db Made another awesome change<br/>
+<strong>john@satsuki:~/coderepo$ git checkout master</strong><br/>
+Previous HEAD position was b119573... Merge branch 'wonderful'<br/>
+Switched to branch 'master'<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Notice that at the end of the bisect, Git does not return us to the master branch.
 We are left in the last tested checked out revision.<br><h3>Automating the process</h3>
 So bisecting is a very powerful way of quickly and efficiently finding the point at which bugs were introduced or regression testing.
@@ -269,47 +269,47 @@ We are going to create a small shell script that will automatically run our grep
 If the string is found we will exit with a status code of <code class="ncode">0</code>, indicating that it was successful and if
 the string is not found, we will exit with a status code of <code class="ncode">123</code>, indicating that the test was unsuccessful.<br><br>Git will use these status codes and interpret a code of <code class="ncode">0</code> as <strong>good</strong> and a code of <code class="ncode">123</code> as <strong>bad</strong>.
 Below is a copy of our shell script which we have saved as <code class="ncode">test.sh</code> and have given relevant permissions to allow it to run etc.
-Notice we have had to exclude our <code class="ncode">test.sh</code> file from the test, else the string <code class="ncode">Addition</code> would have been found there.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cat test.sh </strong><br>
-#!/bin/bash<br>
-<br>
-if grep -q Addition * --exclude=test.sh<br>
-  then echo "Good"<br>
-  exit 0<br>
-else <br>
-  echo "Bad"<br>
-  exit 123<br>
-fi<br>
-<strong>john@satsuki:~/coderepo$ </strong><br>
+Notice we have had to exclude our <code class="ncode">test.sh</code> file from the test, else the string <code class="ncode">Addition</code> would have been found there.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cat test.sh </strong><br/>
+#!/bin/bash<br/>
+<br/>
+if grep -q Addition * --exclude=test.sh<br/>
+  then echo "Good"<br/>
+  exit 0<br/>
+else <br/>
+  echo "Bad"<br/>
+  exit 123<br/>
+fi<br/>
+<strong>john@satsuki:~/coderepo$ </strong><br/>
 </code></div><br>Now we invoke <code class="ncode">git bisect</code> slightly differently by asking it to start and itterate over the revisions <code class="ncode">master</code> to <code class="ncode">v1.0a</code>.
-At this point we have not told Git anything about which revisions are good or bad.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bisect start master v1.0a</strong><br>
-Bisecting: 9 revisions left to test after this (roughly 3 steps)<br>
-[ed2301ba223a63a5a930b536a043444e019460a7] Removed third file<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
-</code></div><br>Now we ask Git to continue testing, but to run our script at each iteration to determine the success or failure of each checked out revision.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bisect run sh ./test.sh</strong><br>
-running sh ./test.sh<br>
-Bad<br>
-Bisecting: 3 revisions left to test after this (roughly 2 steps)<br>
-[9710177657ae00665ca8f8027b17314346a5b1c4] Added another file<br>
-running sh ./test.sh<br>
-Good<br>
-Bisecting: 2 revisions left to test after this (roughly 1 step)<br>
-[cfbecabb031696a217b77b0e1285f2d5fc2ea2a3] Fantastic new feature<br>
-running sh ./test.sh<br>
-Good<br>
-Bisecting: 0 revisions left to test after this (roughly 1 step)<br>
-[b119573f4508514c55e1c4e3bebec0ab3667d071] Merge branch 'wonderful'<br>
-running sh ./test.sh<br>
-Good<br>
-ed2301ba223a63a5a930b536a043444e019460a7 is the first bad commit<br>
-commit ed2301ba223a63a5a930b536a043444e019460a7<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Fri Apr 1 07:37:34 2011 +0100<br>
-<br>
-    Removed third file<br>
-<br>
-:100644 000000 68365cc0e5909dc366d31febf5ba94a3268751c6 0000000000000000000000000000000000000000 D	my_third_committed_file<br>
-bisect run success<br>
-<strong>john@satsuki:~/coderepo$ </strong><br>
+At this point we have not told Git anything about which revisions are good or bad.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bisect start master v1.0a</strong><br/>
+Bisecting: 9 revisions left to test after this (roughly 3 steps)<br/>
+[ed2301ba223a63a5a930b536a043444e019460a7] Removed third file<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
+</code></div><br>Now we ask Git to continue testing, but to run our script at each iteration to determine the success or failure of each checked out revision.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bisect run sh ./test.sh</strong><br/>
+running sh ./test.sh<br/>
+Bad<br/>
+Bisecting: 3 revisions left to test after this (roughly 2 steps)<br/>
+[9710177657ae00665ca8f8027b17314346a5b1c4] Added another file<br/>
+running sh ./test.sh<br/>
+Good<br/>
+Bisecting: 2 revisions left to test after this (roughly 1 step)<br/>
+[cfbecabb031696a217b77b0e1285f2d5fc2ea2a3] Fantastic new feature<br/>
+running sh ./test.sh<br/>
+Good<br/>
+Bisecting: 0 revisions left to test after this (roughly 1 step)<br/>
+[b119573f4508514c55e1c4e3bebec0ab3667d071] Merge branch 'wonderful'<br/>
+running sh ./test.sh<br/>
+Good<br/>
+ed2301ba223a63a5a930b536a043444e019460a7 is the first bad commit<br/>
+commit ed2301ba223a63a5a930b536a043444e019460a7<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Fri Apr 1 07:37:34 2011 +0100<br/>
+<br/>
+    Removed third file<br/>
+<br/>
+:100644 000000 68365cc0e5909dc366d31febf5ba94a3268751c6 0000000000000000000000000000000000000000 D	my_third_committed_file<br/>
+bisect run success<br/>
+<strong>john@satsuki:~/coderepo$ </strong><br/>
 </code></div><br>The parameters after the <code class="ncode">git bisect run</code> tell Git which command we wish to run at each stage.
 In our case it is <code class="ncode">sh ./test.sh</code>.
 You can see Git invoking our <code class="ncode">test.sh</code> script in each case, and the result of our script, either <code class="ncode">Good</code> or <code class="ncode">Bad</code> depending on which was echoed from the result of the grep test.

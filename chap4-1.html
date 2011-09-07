@@ -174,14 +174,14 @@ At first glance this might not seem any different to a tag.
 A tag points to a commit, so does a branch.
 So what distinguishes between the two? Let us start playing with branches a little and the answer will become obvious in a while.
 Branches allow you to try things out and even keep a history of the things you try without actually affecting your main branch.
-In essence you are able to take things in a completely different direction, safe in the knowledge that your core code base will be safe.<br><br>This is best illustrated by a little demonstration, so we are going to take our testing repository and branch off to try out new, wonderful and wacky things.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ ls</strong><br>
-my_first_committed_file   my_third_committed_file<br>
-my_second_committed_file  temp_file<br>
-<strong>john@satsuki:~/coderepo$ git branch wacky</strong><br>
-<strong>john@satsuki:~/coderepo$ git branch</strong><br>
-* master<br>
-  wacky<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+In essence you are able to take things in a completely different direction, safe in the knowledge that your core code base will be safe.<br><br>This is best illustrated by a little demonstration, so we are going to take our testing repository and branch off to try out new, wonderful and wacky things.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ ls</strong><br/>
+my_first_committed_file   my_third_committed_file<br/>
+my_second_committed_file  temp_file<br/>
+<strong>john@satsuki:~/coderepo$ git branch wacky</strong><br/>
+<strong>john@satsuki:~/coderepo$ git branch</strong><br/>
+* master<br/>
+  wacky<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>From looking at the output, it would appear that our <code class="ncode">git branch wacky</code> command did not accomplish a whole lot.
 Running the <code class="ncode">git branch</code> command will give us a list of all branches in the repository.
 You may have noticed the presence of the <code class="ncode">*</code> in front of the word <code class="ncode">master</code>.
@@ -189,92 +189,92 @@ This is telling us that we are on the branch called <strong>master</strong>.
 Hang on though, did we not just create a new branch called <strong>wacky</strong>?<br><br>Well yes we did.
 However we have not yet switched to it.
 To do this, we use our good friend <code class="ncode">git checkout</code>.
-This will change the working copy to reflect the most recent commit in that branch, and will reset our HEAD accordingly, so that it points to this latest commit<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout wacky</strong><br>
-Switched to branch 'wacky'<br>
-<strong>john@satsuki:~/coderepo$ git branch</strong><br>
-  master<br>
-* wacky<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+This will change the working copy to reflect the most recent commit in that branch, and will reset our HEAD accordingly, so that it points to this latest commit<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout wacky</strong><br/>
+Switched to branch 'wacky'<br/>
+<strong>john@satsuki:~/coderepo$ git branch</strong><br/>
+  master<br/>
+* wacky<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Now the <code class="ncode">*</code> has moved to be in front of the word <code class="ncode">wacky</code> and we have confirmation from the line above that we have in fact <code class="ncode">Switched to branch 'wacky'</code>.
 Now we are here in wonderland, what can we do? Well, potentially anything we could do in our previous branch, but with the added benefit that we are separated.
 Some of you maybe be thinking, but we never created an initial branch called <strong>master</strong>.
 Whilst this is true in one sense, the <code class="ncode">git init</code> command actually created this branch for us when we initialised the repository.<br><br>We will start off by taking a deeper look at what is present in our branch.
-Running a <code class="ncode">git log</code> shows us the history of our branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log</strong><br>
-commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Thu Mar 31 22:05:55 2011 +0100<br>
-<br>
-    Messed with a few files<br>
-<br>
-commit 9938a0c30940dccaeddce4bb2eb151fba3a21ae5<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Thu Mar 31 20:34:23 2011 +0100<br>
-<br>
-    Finished adding initial files<br>
-<br>
-commit 163f06147a449e724d0cfd484c3334709e8e1fce<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Thu Mar 31 20:32:59 2011 +0100<br>
-<br>
-    Made a few changes to first and second files<br>
-<br>
-commit cfe23cbe0150fda69a004e301828097935ec4397<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Thu Mar 31 20:27:44 2011 +0100<br>
-<br>
-    My First Ever Commit<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Running a <code class="ncode">git log</code> shows us the history of our branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log</strong><br/>
+commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Thu Mar 31 22:05:55 2011 +0100<br/>
+<br/>
+    Messed with a few files<br/>
+<br/>
+commit 9938a0c30940dccaeddce4bb2eb151fba3a21ae5<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Thu Mar 31 20:34:23 2011 +0100<br/>
+<br/>
+    Finished adding initial files<br/>
+<br/>
+commit 163f06147a449e724d0cfd484c3334709e8e1fce<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Thu Mar 31 20:32:59 2011 +0100<br/>
+<br/>
+    Made a few changes to first and second files<br/>
+<br/>
+commit cfe23cbe0150fda69a004e301828097935ec4397<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Thu Mar 31 20:27:44 2011 +0100<br/>
+<br/>
+    My First Ever Commit<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>You may notice here that the log messages being displayed are identical to that which we had before in our <strong>master</strong> branch.
 This is nothing to be worried about.
 You may be wondering how these can be present if we are in a totally separate environment.
 Well, though we have branched, the history that led us to this point is the same.
 As we have not made any changes yet, we do not notice any divergence.
 If we now make changes to the <em>repository</em> we can take a look and see how this will affect things.
-To start with, let us remove a few files from the working tree, commit these actions, then add a few more, stage them and commit the new files.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rm my_first_committed_file</strong><br>
-rm 'my_first_committed_file'<br>
-<strong>john@satsuki:~/coderepo$ git rm my_second_committed_file</strong><br>
-rm 'my_second_committed_file'<br>
-<strong>john@satsuki:~/coderepo$ git commit -m 'Removed a few files'</strong><br>
-[wacky 4a155e4] Removed a few files<br>
- 2 files changed, 0 insertions(+), 2 deletions(-)<br>
- delete mode 100644 my_first_committed_file<br>
- delete mode 100644 my_second_committed_file<br>
-<strong>john@satsuki:~/coderepo$ echo "A new file" &gt; newfile1</strong><br>
-<strong>john@satsuki:~/coderepo$ echo "Another new file" &gt; newfile2</strong><br>
-<strong>john@satsuki:~/coderepo$ git add newfile*</strong><br>
-<strong>john@satsuki:~/coderepo$ git commit -m 'Added two new files'</strong><br>
-[wacky 55fb69f] Added two new files<br>
- 2 files changed, 2 insertions(+), 0 deletions(-)<br>
- create mode 100644 newfile1<br>
- create mode 100644 newfile2<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+To start with, let us remove a few files from the working tree, commit these actions, then add a few more, stage them and commit the new files.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rm my_first_committed_file</strong><br/>
+rm 'my_first_committed_file'<br/>
+<strong>john@satsuki:~/coderepo$ git rm my_second_committed_file</strong><br/>
+rm 'my_second_committed_file'<br/>
+<strong>john@satsuki:~/coderepo$ git commit -m 'Removed a few files'</strong><br/>
+[wacky 4a155e4] Removed a few files<br/>
+ 2 files changed, 0 insertions(+), 2 deletions(-)<br/>
+ delete mode 100644 my_first_committed_file<br/>
+ delete mode 100644 my_second_committed_file<br/>
+<strong>john@satsuki:~/coderepo$ echo "A new file" &gt; newfile1</strong><br/>
+<strong>john@satsuki:~/coderepo$ echo "Another new file" &gt; newfile2</strong><br/>
+<strong>john@satsuki:~/coderepo$ git add newfile*</strong><br/>
+<strong>john@satsuki:~/coderepo$ git commit -m 'Added two new files'</strong><br/>
+[wacky 55fb69f] Added two new files<br/>
+ 2 files changed, 2 insertions(+), 0 deletions(-)<br/>
+ create mode 100644 newfile1<br/>
+ create mode 100644 newfile2<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>So we have made two new commits to the repository under our new branch.
 If we run a Linux <code class="ncode">ls</code> command to see the files which are in the working tree, we can see that our working copy has indeed altered.
-We will also use our <code class="ncode">git log</code> tool to see what the latest commit is.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ ls</strong><br>
-my_third_committed_file  newfile1  newfile2  temp_file<br>
-<strong>john@satsuki:~/coderepo$ git log -n1</strong><br>
-commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Fri Apr 1 00:10:49 2011 +0100<br>
-<br>
-    Added two new files<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+We will also use our <code class="ncode">git log</code> tool to see what the latest commit is.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ ls</strong><br/>
+my_third_committed_file  newfile1  newfile2  temp_file<br/>
+<strong>john@satsuki:~/coderepo$ git log -n1</strong><br/>
+commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Fri Apr 1 00:10:49 2011 +0100<br/>
+<br/>
+    Added two new files<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Brilliant.
 As you can see, we have used <code class="ncode">git log</code> in a slightly different way to limit the number of commits.
 This is what the <code class="ncode">-n</code> parameter is used for.
 However, what happens if we go back to the <strong>master</strong> branch again? In theory we should have everything back the way we left it just before creating the branch.
-Let's move back into our <strong>master</strong> branch and examine the state of play.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
-Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo$ ls</strong><br>
-my_first_committed_file   my_third_committed_file<br>
-my_second_committed_file  temp_file<br>
-<strong>john@satsuki:~/coderepo$ git log -n1</strong><br>
-commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Thu Mar 31 22:05:55 2011 +0100<br>
-<br>
-    Messed with a few files<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Let's move back into our <strong>master</strong> branch and examine the state of play.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br/>
+Switched to branch 'master'<br/>
+<strong>john@satsuki:~/coderepo$ ls</strong><br/>
+my_first_committed_file   my_third_committed_file<br/>
+my_second_committed_file  temp_file<br/>
+<strong>john@satsuki:~/coderepo$ git log -n1</strong><br/>
+commit a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Thu Mar 31 22:05:55 2011 +0100<br/>
+<br/>
+    Messed with a few files<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Comparing that to our previous <code class="ncode">ls</code> command, we can see that this is exactly what the working tree looked like at the beginning of the chapter.
 Let us take a look at a diagram of the commit history to see what has happened in our repository.<br><center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>
@@ -292,34 +292,34 @@ At this point you may be thinking that branches are pretty much the same thing a
 Well, they are except for one important fact.
 We are going to use our <code class="ncode">git branch</code> command, with a new parameter, to show us the difference.
 Take a look at the output of the following operations.
-We have pruned the output of the <code class="ncode">git show</code> command for brevity.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout wacky</strong><br>
-Switched to branch 'wacky'<br>
-<strong>john@satsuki:~/coderepo$ git branch -v</strong><br>
-  master a022d4d Messed with a few files<br>
-* wacky  55fb69f Added two new files<br>
-<strong>john@satsuki:~/coderepo$ git tag v2.0</strong><br>
-<strong>john@satsuki:~/coderepo$ git show v2.0</strong><br>
-commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd<br>
-...<br>
-...<br>
-...<br>
+We have pruned the output of the <code class="ncode">git show</code> command for brevity.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout wacky</strong><br/>
+Switched to branch 'wacky'<br/>
+<strong>john@satsuki:~/coderepo$ git branch -v</strong><br/>
+  master a022d4d Messed with a few files<br/>
+* wacky  55fb69f Added two new files<br/>
+<strong>john@satsuki:~/coderepo$ git tag v2.0</strong><br/>
+<strong>john@satsuki:~/coderepo$ git show v2.0</strong><br/>
+commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd<br/>
+...<br/>
+...<br/>
+...<br/>
 </code></div><br>So here we have added a tag in our current branch, <strong>wacky</strong>, and we can see that the commit ID for the tag <strong>v2.0</strong> points <strong>55fb69f</strong>.
 We can also see that the branch <strong>wacky</strong> is currently pointing to the same commit ID, <strong>55fb69f</strong>.
-Now let us add another file in, make a commit and see what happens after this.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "New stuff" &gt; another_file</strong><br>
-<strong>john@satsuki:~/coderepo$ git add another_file</strong><br>
-<strong>john@satsuki:~/coderepo$ git commit -m 'Added another file'</strong><br>
-[wacky 9710177] Added another file<br>
- 1 files changed, 1 insertions(+), 0 deletions(-)<br>
- create mode 100644 another_file<br>
-<strong>john@satsuki:~/coderepo$ git show v2.0</strong><br>
-commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd<br>
-...<br>
-...<br>
-...<br>
-<strong>john@satsuki:~/coderepo$ git branch -v</strong><br>
-  master a022d4d Messed with a few files<br>
-* wacky  9710177 Added another file<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Now let us add another file in, make a commit and see what happens after this.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "New stuff" &gt; another_file</strong><br/>
+<strong>john@satsuki:~/coderepo$ git add another_file</strong><br/>
+<strong>john@satsuki:~/coderepo$ git commit -m 'Added another file'</strong><br/>
+[wacky 9710177] Added another file<br/>
+ 1 files changed, 1 insertions(+), 0 deletions(-)<br/>
+ create mode 100644 another_file<br/>
+<strong>john@satsuki:~/coderepo$ git show v2.0</strong><br/>
+commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd<br/>
+...<br/>
+...<br/>
+...<br/>
+<strong>john@satsuki:~/coderepo$ git branch -v</strong><br/>
+  master a022d4d Messed with a few files<br/>
+* wacky  9710177 Added another file<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>How interesting.
 The difference between tags and branches now becomes pretty clear.
 Whilst a tag always points to the same commit, a branch reference always points to the tip of that branch.

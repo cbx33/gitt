@@ -212,7 +212,7 @@ The private GPG <em>key</em> of the signing party is used along with the file to
 When it reaches the recipient a check can be made against the users public key and the content of the email, to validate that said user did actually sign that particular document or file.<br><br>Git allows you to use GPG signing for tags.
 This gives people piece of mind that unless an attacker has gained access to both the repository and the developers private GPG key, if the sign a tag, that tag is exactly as it was intended.
 To use Git in this way, you must first set up a GPG key, which is out of scope of this book.
-Once you have this key, you can change your config like the example below, to tell Git to use a particular key when signing.<br><div id="codeblock"><code>git config user.signingkey 0xABCDEFG<br>
+Once you have this key, you can change your config like the example below, to tell Git to use a particular key when signing.<br><div id="codeblock"><code>git config user.signingkey 0xABCDEFG<br/>
 </code></div><br>Then when you want to sign a tag, simply append the <code class="ncode">-s</code> parameter to the <code class="ncode">git tag</code> command.
 You can also verify someone elses signed tag by running <code class="ncode">git tag -v &lt;tagname&gt;</code><br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>

@@ -170,31 +170,31 @@ A tag is simply a label in Git that points to a single commit object.
 The tag name can then be used in place of the SHA-1 to refer to a point in the repositories history.
 Due to the simplicity of tags, it is also possible and very simple to tag a commit that occurred way into the past.
 Let us take a look at a simple tag example.
-We will make the current point in the repository <code class="ncode">v1.0a</code>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git tag v1.0a</strong><br>
-<strong>john@satsuki:~/coderepo$</strong><br>
-</code></div><br>On its own, this output from <code class="ncode">git tag</code> doesn't really tell us much, but running the following, shows us a little more information<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rev-parse v1.0a</strong><br>
-a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+We will make the current point in the repository <code class="ncode">v1.0a</code>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git tag v1.0a</strong><br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
+</code></div><br>On its own, this output from <code class="ncode">git tag</code> doesn't really tell us much, but running the following, shows us a little more information<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rev-parse v1.0a</strong><br/>
+a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>By running the <code class="ncode">git rev-parse</code> with the tag name <code class="ncode">v1.0a</code>, Git has returned us the SHA-1 hash of the commit we were referring to.
 If we look back up at the earlier output, we can see that the most recent commit into the repository was indeed <strong>a022d4d1edc69970b4e8b3fe1da3dccd943a55e4</strong>.
-To give us something to work with, let's tag the commit <strong>163f06...</strong> with the tag name <code class="ncode">v0.9</code>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git tag v0.9 163f06</strong><br>
-<strong>john@satsuki:~/coderepo$</strong><br>
-</code></div><br>Now, we can do the following;<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff v0.9..v1.0a</strong><br>
-diff --git a/my_second_committed_file b/my_second_committed_file<br>
-index 3ad4cc3..c9887f8 100644<br>
---- a/my_second_committed_file<br>
-+++ b/my_second_committed_file<br>
-@@ -1 +1 @@<br>
--Change1<br>
-+Changed this file completely<br>
-diff --git a/my_third_committed_file b/my_third_committed_file<br>
-new file mode 100644<br>
-index 0000000..5d27866<br>
---- /dev/null<br>
-+++ b/my_third_committed_file<br>
-@@ -0,0 +1 @@<br>
-+Addition to the line<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+To give us something to work with, let's tag the commit <strong>163f06...</strong> with the tag name <code class="ncode">v0.9</code>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git tag v0.9 163f06</strong><br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
+</code></div><br>Now, we can do the following;<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff v0.9..v1.0a</strong><br/>
+diff --git a/my_second_committed_file b/my_second_committed_file<br/>
+index 3ad4cc3..c9887f8 100644<br/>
+--- a/my_second_committed_file<br/>
++++ b/my_second_committed_file<br/>
+@@ -1 +1 @@<br/>
+-Change1<br/>
++Changed this file completely<br/>
+diff --git a/my_third_committed_file b/my_third_committed_file<br/>
+new file mode 100644<br/>
+index 0000000..5d27866<br/>
+--- /dev/null<br/>
++++ b/my_third_committed_file<br/>
+@@ -0,0 +1 @@<br/>
++Addition to the line<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Notice that instead of using the dynamic reference HEAD, we have now used the tag names <code class="ncode">v0.9</code> and <code class="ncode">v1.0a</code> to refer to our previous commits and have returned the combined diff output of all the changes which occurred between the two.<br><br>You can find out more about tags and how to specify more information in the <em>After Hours</em> section at the end of this Week.<br><div id="calloutblock"><h3>Note - A little about tags</h3>
 Tags are great and you should most definitely use them in your repositories to make good reference points, but there is one point that you should always remember.
 Though we have not yet delved into the realms of remote branches, it is important to note that once you have tagged a certain commit, and pushed that to the repository, you cannot then remove that tag if someone else clones, or pulls your tags from that remote branch.

@@ -167,48 +167,48 @@ Hopefully, if you have been following the text, you have not deleted this direct
 If you have, do not worry, just follow the operations we completed in Week 6, or read on and use the text in the book.<br><br>If you remember, we created two clones of our original repository.
 Once was a simple clone called <code class="ncode">coderepo-cl</code> and the other was a bare repository called <code class="ncode">coderepo-bk</code>.
 The <code class="ncode">coderepo-cl</code> and the <code class="ncode">coderepo-bk</code> repositories were both cloned from <code class="ncode">coderepo</code>, but it was <code class="ncode">coderepo-cl</code> that was configured to pull from one and push to the other.
-Running a simple <code class="ncode">git remote -v</code> command, confirms this configuration.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote -v</strong><br>
-backup	/home/john/coderepo-bk (fetch)<br>
-backup	/home/john/coderepo-bk (push)<br>
-origin	/home/john/coderepo (fetch)<br>
-origin	/home/john/coderepo (push)<br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
-</code></div><br>We can get even more information by running the <code class="ncode">git remote show</code> tool with the remote name as a parameter.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote show origin</strong><br>
-* remote origin<br>
-  Fetch URL: /home/john/coderepo<br>
-  Push  URL: /home/john/coderepo<br>
-  HEAD branch: master<br>
-  Remote branches:<br>
-    master    tracked<br>
-    wonderful tracked<br>
-    zaney     tracked<br>
-  Local branches configured for 'git pull':<br>
-    master    merges with remote master<br>
-    wonderful merges with remote wonderful<br>
-  Local refs configured for 'git push':<br>
-    master    pushes to master    (up to date)<br>
-    wonderful pushes to wonderful (up to date)<br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
+Running a simple <code class="ncode">git remote -v</code> command, confirms this configuration.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote -v</strong><br/>
+backup	/home/john/coderepo-bk (fetch)<br/>
+backup	/home/john/coderepo-bk (push)<br/>
+origin	/home/john/coderepo (fetch)<br/>
+origin	/home/john/coderepo (push)<br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
+</code></div><br>We can get even more information by running the <code class="ncode">git remote show</code> tool with the remote name as a parameter.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote show origin</strong><br/>
+* remote origin<br/>
+  Fetch URL: /home/john/coderepo<br/>
+  Push  URL: /home/john/coderepo<br/>
+  HEAD branch: master<br/>
+  Remote branches:<br/>
+    master    tracked<br/>
+    wonderful tracked<br/>
+    zaney     tracked<br/>
+  Local branches configured for 'git pull':<br/>
+    master    merges with remote master<br/>
+    wonderful merges with remote wonderful<br/>
+  Local refs configured for 'git push':<br/>
+    master    pushes to master    (up to date)<br/>
+    wonderful pushes to wonderful (up to date)<br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>How though, is this data set up and configured from within Git itself?
-Looking at the <code class="ncode">.git/config</code> file, we can see a glimpse of this.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ cat .git/config</strong><br>
-[core]<br>
-	repositoryformatversion = 0<br>
-	filemode = true<br>
-	bare = false<br>
-	logallrefupdates = true<br>
-[remote "origin"]<br>
-	fetch = +refs/heads/*:refs/remotes/origin/*<br>
-	url = /home/john/coderepo<br>
-[branch "master"]<br>
-	remote = origin<br>
-	merge = refs/heads/master<br>
-[branch "wonderful"]<br>
-	remote = origin<br>
-	merge = refs/heads/wonderful<br>
-[remote "backup"]<br>
-	url = /home/john/coderepo-bk<br>
-	fetch = +refs/heads/*:refs/remotes/backup/*<br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
+Looking at the <code class="ncode">.git/config</code> file, we can see a glimpse of this.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ cat .git/config</strong><br/>
+[core]<br/>
+	repositoryformatversion = 0<br/>
+	filemode = true<br/>
+	bare = false<br/>
+	logallrefupdates = true<br/>
+[remote "origin"]<br/>
+	fetch = +refs/heads/*:refs/remotes/origin/*<br/>
+	url = /home/john/coderepo<br/>
+[branch "master"]<br/>
+	remote = origin<br/>
+	merge = refs/heads/master<br/>
+[branch "wonderful"]<br/>
+	remote = origin<br/>
+	merge = refs/heads/wonderful<br/>
+[remote "backup"]<br/>
+	url = /home/john/coderepo-bk<br/>
+	fetch = +refs/heads/*:refs/remotes/backup/*<br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>As you can see there are two relevant sections, these are the <code class="ncode">remote</code> and <code class="ncode">branch</code> stanzas.
 The <code class="ncode">remote</code> stanzas are there to define certain elements of the remote repository, 
 whilst the <code class="ncode">branch</code> stanzas describe elements and settings for the branches that we are tracking.

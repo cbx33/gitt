@@ -159,18 +159,18 @@
 <h1>Week 4</h1><h2>"Grepping your life away"</h2>
 <h3>A subtle twist on searching</h3>
 As well as our <code class="ncode">git log</code> tool, which we have used for searching, it is useful to know that there is actually another way to search for strings in your current directory.
-We can use the <code class="ncode">git grep</code> tool to find all files in our working tree which have a certain pattern in them.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git grep awesome</strong><br>
-newfile1:and some more awesome changes<br>
-newfile2:and a new awesome feature<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+We can use the <code class="ncode">git grep</code> tool to find all files in our working tree which have a certain pattern in them.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git grep awesome</strong><br/>
+newfile1:and some more awesome changes<br/>
+newfile2:and a new awesome feature<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>This has returned two files, both containing the string <code class="ncode">awesome</code>, as this is the parameter that we passed to the <code class="ncode">git grep</code> command.<br><br>We can extend this a little further and ask Git to supply the context around the line that it finds.
-In our simple case, it results in the following.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git grep -C3 awesome</strong><br>
-newfile1-A new file<br>
-newfile1:and some more awesome changes<br>
---<br>
-newfile2-Another new file<br>
-newfile2:and a new awesome feature<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+In our simple case, it results in the following.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git grep -C3 awesome</strong><br/>
+newfile1-A new file<br/>
+newfile1:and some more awesome changes<br/>
+--<br/>
+newfile2-Another new file<br/>
+newfile2:and a new awesome feature<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>This is just a short introduction to the <code class="ncode">git grep</code> command.
 If you want to know more, you should spend some time reading the manual.<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>

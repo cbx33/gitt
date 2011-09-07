@@ -181,45 +181,45 @@ As our working copy will contain older versions of the files than are in the ind
 For these reasons, it is much simpler just to push only to bare repositories.
 </div><br>At first glance this may seem like a rather odd thing to want.
 Why would we want a repository that doesn't have a working tree? The simple answer is that a <em>bare</em> repository allows us to be able to push changes into it.
-Let us recreate the error message that Rob was talking about.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ echo "This is another update to newfile3" &gt;&gt; newfile3</strong><br>
-<strong>john@satsuki:~/coderepo-cl$ git commit -a -m 'Added more to newfile3'</strong><br>
-[wonderful dbf1e9a] Added more to newfile3<br>
- 1 files changed, 1 insertions(+), 0 deletions(-)<br>
+Let us recreate the error message that Rob was talking about.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ echo "This is another update to newfile3" &gt;&gt; newfile3</strong><br/>
+<strong>john@satsuki:~/coderepo-cl$ git commit -a -m 'Added more to newfile3'</strong><br/>
+[wonderful dbf1e9a] Added more to newfile3<br/>
+ 1 files changed, 1 insertions(+), 0 deletions(-)<br/>
 </code></div><br>We have made a modification to the <strong>wonderful</strong> branch.
-So let us now try to push that back to the <strong>origin</strong> remote repository with the <code class="ncode">git push</code> command.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git push</strong><br>
-Counting objects: 5, done.<br>
-Compressing objects: 100Writing objects: 100Total 3 (delta 1), reused 0 (delta 0)<br>
-Unpacking objects: 100remote: error: refusing to update checked out branch: refs/heads/wonderful<br>
-remote: error: By default, updating the current branch in a non-bare repository<br>
-remote: error: is denied, because it will make the index and work tree inconsistent<br>
-remote: error: with what you pushed, and will require 'git reset --hard' to match<br>
-remote: error: the work tree to HEAD.<br>
-remote: error:<br>
-remote: error: You can set 'receive.denyCurrentBranch' configuration variable to<br>
-remote: error: 'ignore' or 'warn' in the remote repository to allow pushing into <br>
-remote: error: its current branch; however, this is not recommended unless you <br>
-remote: error: arranged to update its work tree to match what you pushed in some<br>
-remote: error:  other way.<br>
-remote: error:<br>
-remote: error: To squelch this message and still keep the default behaviour, set<br>
-remote: error: 'receive.denyCurrentBranch' configuration<br>
-remote: error: variable to 'refuse'.<br>
-To /home/john/coderepo<br>
- ! [remote rejected] wonderful -&gt; wonderful (branch is currently checked out)<br>
-error: failed to push some refs to '/home/john/coderepo'<br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
+So let us now try to push that back to the <strong>origin</strong> remote repository with the <code class="ncode">git push</code> command.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git push</strong><br/>
+Counting objects: 5, done.<br/>
+Compressing objects: 100Writing objects: 100Total 3 (delta 1), reused 0 (delta 0)<br/>
+Unpacking objects: 100remote: error: refusing to update checked out branch: refs/heads/wonderful<br/>
+remote: error: By default, updating the current branch in a non-bare repository<br/>
+remote: error: is denied, because it will make the index and work tree inconsistent<br/>
+remote: error: with what you pushed, and will require 'git reset --hard' to match<br/>
+remote: error: the work tree to HEAD.<br/>
+remote: error:<br/>
+remote: error: You can set 'receive.denyCurrentBranch' configuration variable to<br/>
+remote: error: 'ignore' or 'warn' in the remote repository to allow pushing into <br/>
+remote: error: its current branch; however, this is not recommended unless you <br/>
+remote: error: arranged to update its work tree to match what you pushed in some<br/>
+remote: error:  other way.<br/>
+remote: error:<br/>
+remote: error: To squelch this message and still keep the default behaviour, set<br/>
+remote: error: 'receive.denyCurrentBranch' configuration<br/>
+remote: error: variable to 'refuse'.<br/>
+To /home/john/coderepo<br/>
+ ! [remote rejected] wonderful -&gt; wonderful (branch is currently checked out)<br/>
+error: failed to push some refs to '/home/john/coderepo'<br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>Bingo! There is the error we were looking for.
 In order to get round this, we are going to create another clone of the repository in <code class="ncode">coderepo</code>.
-This time however, we are going to pass an option to it when we create it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ cd ..</strong><br>
-<strong>john@satsuki:~$ git clone coderepo coderepo-bk --bare</strong><br>
-Initialized empty Git repository in /home/john/coderepo-bk/<br>
-<strong>john@satsuki:~$ cd coderepo-bk/</strong><br>
-<strong>john@satsuki:~/coderepo-bk$ ls</strong><br>
-branches  config  description  HEAD  hooks  info  objects<br>
-packed-refs  refs<br>
-<strong>john@satsuki:~/coderepo-bk$ cd ..</strong><br>
-<strong>john@satsuki:~$ cd coderepo-cl/</strong><br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
+This time however, we are going to pass an option to it when we create it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ cd ..</strong><br/>
+<strong>john@satsuki:~$ git clone coderepo coderepo-bk --bare</strong><br/>
+Initialized empty Git repository in /home/john/coderepo-bk/<br/>
+<strong>john@satsuki:~$ cd coderepo-bk/</strong><br/>
+<strong>john@satsuki:~/coderepo-bk$ ls</strong><br/>
+branches  config  description  HEAD  hooks  info  objects<br/>
+packed-refs  refs<br/>
+<strong>john@satsuki:~/coderepo-bk$ cd ..</strong><br/>
+<strong>john@satsuki:~$ cd coderepo-cl/</strong><br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>As you can see, creating the clone with the <code class="ncode">--bare</code> option has had a definite effect on the structure of the clone itself.
 In fact, the contents of the <code class="ncode">coderepo-bk</code> folder look remarkably similar to the <code class="ncode">.git</code> folder found in our normal working tree.
 They are in fact, one and the same.
@@ -227,95 +227,95 @@ We have removed the need for a separate <code class="ncode">.git</code> folder b
 Therefore, the contents of the <code class="ncode">.git</code> folder and placed in the root <code class="ncode">coderepo-bk</code> folder.<br><br>We are getting closer to making our push.
 We have created a <em>bare</em> repository, which we should now be able to push to.
 The problem is, we have not yet defined our new repository as a remote location in the <code class="ncode">coderepo-cl</code> repository.
-This is something we will do now and to do this, we will use our <code class="ncode">git remote</code> tool once more, this time employing the <code class="ncode">add</code> parameter.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote add backup</strong><br>
- /home/john/coderepo-bk<br>
-<strong>john@satsuki:~/coderepo-cl$ git remote show backup</strong><br>
-* remote backup<br>
-  Fetch URL: /home/john/coderepo-bk<br>
-  Push  URL: /home/john/coderepo-bk<br>
-  HEAD branch: wonderful<br>
-  Remote branches:<br>
-    master    new (next fetch will store in remotes/backup)<br>
-    wonderful new (next fetch will store in remotes/backup)<br>
-    zaney     new (next fetch will store in remotes/backup)<br>
-  Local refs configured for 'git push':<br>
-    master    pushes to master    (up to date)<br>
-    wonderful pushes to wonderful (fast-forwardable)<br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
+This is something we will do now and to do this, we will use our <code class="ncode">git remote</code> tool once more, this time employing the <code class="ncode">add</code> parameter.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git remote add backup</strong><br/>
+ /home/john/coderepo-bk<br/>
+<strong>john@satsuki:~/coderepo-cl$ git remote show backup</strong><br/>
+* remote backup<br/>
+  Fetch URL: /home/john/coderepo-bk<br/>
+  Push  URL: /home/john/coderepo-bk<br/>
+  HEAD branch: wonderful<br/>
+  Remote branches:<br/>
+    master    new (next fetch will store in remotes/backup)<br/>
+    wonderful new (next fetch will store in remotes/backup)<br/>
+    zaney     new (next fetch will store in remotes/backup)<br/>
+  Local refs configured for 'git push':<br/>
+    master    pushes to master    (up to date)<br/>
+    wonderful pushes to wonderful (fast-forwardable)<br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>We have created a remote called backup.
 As you can see, some interrogation of the remote repository has taken place.
 It is already aware of the branches present in our remote location.
-Let us do a <code class="ncode">git fetch</code> to update the local references.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git fetch backup</strong><br>
-From /home/john/coderepo-bk<br>
- * [new branch]      master     -&gt; backup/master<br>
- * [new branch]      wonderful  -&gt; backup/wonderful<br>
- * [new branch]      zaney      -&gt; backup/zaney<br>
-<strong>john@satsuki:~/coderepo-cl$ git remote show backup</strong><br>
-* remote backup<br>
-  Fetch URL: /home/john/coderepo-bk<br>
-  Push  URL: /home/john/coderepo-bk<br>
-  HEAD branch: wonderful<br>
-  Remote branches:<br>
-    master    tracked<br>
-    wonderful tracked<br>
-    zaney     tracked<br>
-  Local refs configured for 'git push':<br>
-    master    pushes to master    (up to date)<br>
-    wonderful pushes to wonderful (fast-forwardable)<br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
+Let us do a <code class="ncode">git fetch</code> to update the local references.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git fetch backup</strong><br/>
+From /home/john/coderepo-bk<br/>
+ * [new branch]      master     -&gt; backup/master<br/>
+ * [new branch]      wonderful  -&gt; backup/wonderful<br/>
+ * [new branch]      zaney      -&gt; backup/zaney<br/>
+<strong>john@satsuki:~/coderepo-cl$ git remote show backup</strong><br/>
+* remote backup<br/>
+  Fetch URL: /home/john/coderepo-bk<br/>
+  Push  URL: /home/john/coderepo-bk<br/>
+  HEAD branch: wonderful<br/>
+  Remote branches:<br/>
+    master    tracked<br/>
+    wonderful tracked<br/>
+    zaney     tracked<br/>
+  Local refs configured for 'git push':<br/>
+    master    pushes to master    (up to date)<br/>
+    wonderful pushes to wonderful (fast-forwardable)<br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>Now we can see that all of the remote references for our <strong>backup</strong> remote have been updated.
 If we run a diff against our local <strong>wonderful</strong> branch and the remote branch <strong>backup/wonderful</strong>, we can see the differences.<br><div id="calloutblock"><h3>Note - Pushing your tags</h3>
 By default tags are not pushed when using the <code class="ncode">git push</code> command.
 If we want our tags to be push to the remote repository as well, we need to append the <code class="ncode">--tags</code> parameter to the <code class="ncode">git push</code> command.<br><br>In contrast, using <code class="ncode">git pull</code> will automatically pull down any tags which refer to any objects that have been pulled.
 This behaviour can be overridden by using the <code class="ncode">--no-tags</code> parameter with <code class="ncode">git pull</code>.
-</div><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git diff wonderful backup/wonderful</strong><br>
-diff --git a/newfile3 b/newfile3<br>
-index 7268b97..638113c 100644<br>
---- a/newfile3<br>
-+++ b/newfile3<br>
-@@ -1,2 +1 @@<br>
- These changes are in the origin<br>
--This is another update to newfile3<br>
-<strong>john@satsuki:~/coderepo-cl$ git branch -v</strong><br>
+</div><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git diff wonderful backup/wonderful</strong><br/>
+diff --git a/newfile3 b/newfile3<br/>
+index 7268b97..638113c 100644<br/>
+--- a/newfile3<br/>
++++ b/newfile3<br/>
+@@ -1,2 +1 @@<br/>
+ These changes are in the origin<br/>
+-This is another update to newfile3<br/>
+<strong>john@satsuki:~/coderepo-cl$ git branch -v</strong><br/>
 </code></div><br>There we go! Those are the changes we just committed to the local repository.
 The last thing we need to do is to initiate a <code class="ncode">git push</code>.
 We are going to have to define which remote we wish to push to now for two reasons.
 The first is that now we have two remotes, and so Git would not know if we meant <strong>origin</strong> or <strong>backup</strong>.
-The second reason is that by default, the <strong>wonderful</strong> branch is set up to push to the <strong>origin</strong> remote.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git push backup</strong><br>
-Counting objects: 5, done.<br>
-Compressing objects: 100Writing objects: 100Total 3 (delta 1), reused 0 (delta 0)<br>
-Unpacking objects: 100To /home/john/coderepo-bk<br>
-   1c3206a..dbf1e9a  wonderful -&gt; wonderful<br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
+The second reason is that by default, the <strong>wonderful</strong> branch is set up to push to the <strong>origin</strong> remote.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git push backup</strong><br/>
+Counting objects: 5, done.<br/>
+Compressing objects: 100Writing objects: 100Total 3 (delta 1), reused 0 (delta 0)<br/>
+Unpacking objects: 100To /home/john/coderepo-bk<br/>
+   1c3206a..dbf1e9a  wonderful -&gt; wonderful<br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>There we go, we have now managed to push our changes to a remote location.
 In this case, we have pushed an update from the <strong>wonderful</strong> branch to the <strong>backup/wonderful branch</strong>.
-If we wanted to, we could have pushed our repository to a new branch name, or indeed any of the existing branch names.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git push backup wonderful:newbranch</strong><br>
-Total 0 (delta 0), reused 0 (delta 0)<br>
-To /home/john/coderepo-bk<br>
- * [new branch]      wonderful -&gt; newbranch<br>
-<strong>john@satsuki:~/coderepo-cl$ git remote show backup</strong><br>
-* remote backup<br>
-  Fetch URL: /home/john/coderepo-bk<br>
-  Push  URL: /home/john/coderepo-bk<br>
-  HEAD branch (remote HEAD is ambiguous, may be one of the following):<br>
-    newbranch<br>
-    wonderful<br>
-  Remote branches:<br>
-    master    tracked<br>
-    newbranch tracked<br>
-    wonderful tracked<br>
-    zaney     tracked<br>
-  Local refs configured for 'git push':<br>
-    master    pushes to master    (up to date)<br>
-    wonderful pushes to wonderful (up to date)<br>
-<strong>john@satsuki:~/coderepo-cl$</strong><br>
+If we wanted to, we could have pushed our repository to a new branch name, or indeed any of the existing branch names.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-cl$ git push backup wonderful:newbranch</strong><br/>
+Total 0 (delta 0), reused 0 (delta 0)<br/>
+To /home/john/coderepo-bk<br/>
+ * [new branch]      wonderful -&gt; newbranch<br/>
+<strong>john@satsuki:~/coderepo-cl$ git remote show backup</strong><br/>
+* remote backup<br/>
+  Fetch URL: /home/john/coderepo-bk<br/>
+  Push  URL: /home/john/coderepo-bk<br/>
+  HEAD branch (remote HEAD is ambiguous, may be one of the following):<br/>
+    newbranch<br/>
+    wonderful<br/>
+  Remote branches:<br/>
+    master    tracked<br/>
+    newbranch tracked<br/>
+    wonderful tracked<br/>
+    zaney     tracked<br/>
+  Local refs configured for 'git push':<br/>
+    master    pushes to master    (up to date)<br/>
+    wonderful pushes to wonderful (up to date)<br/>
+<strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>By specifying the local and remote branch using the <code class="ncode">local:remote</code> syntax, we have told Git to push our local <strong>wonderful</strong> branch to the remote branch called <strong>newbranch</strong>.
 As the <strong>newbranch</strong> did not exist in the remote <strong>backup</strong> repository, it was created, as can be seen above.<br><div id="calloutblock"><h3>Note - Killing a remote branch</h3>
 Now that we have made branches on the remote end, it is a good idea to know how to delete them also.
 After all, if all you ever did was push new branches, pretty soon you may end up with a lot of rubbish in your repository.
-To delete a remote branch, all that you need to do is to use the following syntax.<br><div id="codeblock"><code>git push &lt;remote&gt; :&lt;branchname&gt;<br>
+To delete a remote branch, all that you need to do is to use the following syntax.<br><div id="codeblock"><code>git push &lt;remote&gt; :&lt;branchname&gt;<br/>
 </code></div><br>Notice that we are using the same syntax as before, but not specifying a local branch name, just the remote.
-Git interprets this as a call to delete the remote branch.<br><br>If you have a clone of a remote repository and a remote branch is removed, you may see a message like the following if you run <code class="ncode">git remote show &lt;remote&gt;</code>;<br><div id="codeblock"><code> refs/remotes/&lt;remote&gt;/&lt;branchname&gt; stale (use 'git remote prune' to remove)<br>
+Git interprets this as a call to delete the remote branch.<br><br>If you have a clone of a remote repository and a remote branch is removed, you may see a message like the following if you run <code class="ncode">git remote show &lt;remote&gt;</code>;<br><div id="codeblock"><code> refs/remotes/&lt;remote&gt;/&lt;branchname&gt; stale (use 'git remote prune' to remove)<br/>
 </code></div><br>So we can run <code class="ncode">git remote prune</code> to remove local references to remote branches that no longer exist.
 If you have created a tracking branch of this remote branch, this will remain unaffected.
 </div><br>So this ends the Week.

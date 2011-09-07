@@ -166,12 +166,12 @@ SSH is a secure, encrypted way to communicate with a remote repository.
 Which is a must for pushing to an important repository that people are going to pull information from.<br><br>If we assume that for a moment that our user <em>john</em> has now moved to another machine and now wishes to clone a repository that he had on his original machine to this new one.
 The commands are identical to that which we used before.
 We are going to assume that <em>john</em> already has SSH access to the machine.
-In this way, we can issue the commands as follows.<br><div id="codeblock"><code><strong>john@akira:~$ git clone ssh://john@satsuki/home/john/coderepo coderepo-ne</strong><br>
-Initialized empty Git repository in /home/john/coderepo-ne/.git/<br>
-john@akira's password:<br>
-remote: Counting objects: 53, done.<br>
-remote: Compressing objects: 100Receiving objects: 100Resolving deltas: 100remote: Total 53 (delta 10), reused 0 (delta 0)<br>
-<strong>john@akira:~$</strong><br>
+In this way, we can issue the commands as follows.<br><div id="codeblock"><code><strong>john@akira:~$ git clone ssh://john@satsuki/home/john/coderepo coderepo-ne</strong><br/>
+Initialized empty Git repository in /home/john/coderepo-ne/.git/<br/>
+john@akira's password:<br/>
+remote: Counting objects: 53, done.<br/>
+remote: Compressing objects: 100Receiving objects: 100Resolving deltas: 100remote: Total 53 (delta 10), reused 0 (delta 0)<br/>
+<strong>john@akira:~$</strong><br/>
 </code></div><br>Now we have done exactly as before and cloned our repository to a local folder called <code class="ncode">coderepo-ne</code> from the remote URL <code class="ncode">ssh://john@satsuki/home/john/coderepo</code>.
 Notice the use of <code class="ncode">ssh://</code> to denote the specification of the SSH protocol.
 We have also put the users name in the URL of the remote path.

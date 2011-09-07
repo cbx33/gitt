@@ -168,54 +168,54 @@ As it turns out there is a tool that we can use to do this.
 The <code class="ncode">git filter-branch</code> allows us to run operations on a branch to rewrite its history.
 Hopefully you are already remembering about the care we need to take when rewriting history, but sometimes there is a real need to perform some of these operations.
 Let us take a look at a few examples to see how this can work.
-We are going to assume that our file <code class="ncode">newfile1</code> contains some very sensitive information and we wish to remove it completely from the repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
-Already on 'master'<br>
-<strong>john@satsuki:~/coderepo$ ls -la</strong><br>
-total 40<br>
-drwxr-xr-x  3 john john 4096 2011-07-27 19:54 .<br>
-drwxr-xr-x 32 john john 4096 2011-07-27 19:00 ..<br>
--rw-r--r--  1 john john   35 2011-07-22 07:15 another_file<br>
--rw-r--r--  1 john john   25 2011-07-22 07:15 cont_dev<br>
-drwxrwxr-x  9 john john 4096 2011-07-27 19:54 .git<br>
--rw-r--r--  1 john john   69 2011-07-27 19:54 newfile1<br>
--rw-r--r--  1 john john   58 2011-07-22 07:15 newfile2<br>
--rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3<br>
--rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file<br>
--rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh<br>
-<strong>john@satsuki:~/coderepo$ </strong><br>
+We are going to assume that our file <code class="ncode">newfile1</code> contains some very sensitive information and we wish to remove it completely from the repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout master</strong><br/>
+Already on 'master'<br/>
+<strong>john@satsuki:~/coderepo$ ls -la</strong><br/>
+total 40<br/>
+drwxr-xr-x  3 john john 4096 2011-07-27 19:54 .<br/>
+drwxr-xr-x 32 john john 4096 2011-07-27 19:00 ..<br/>
+-rw-r--r--  1 john john   35 2011-07-22 07:15 another_file<br/>
+-rw-r--r--  1 john john   25 2011-07-22 07:15 cont_dev<br/>
+drwxrwxr-x  9 john john 4096 2011-07-27 19:54 .git<br/>
+-rw-r--r--  1 john john   69 2011-07-27 19:54 newfile1<br/>
+-rw-r--r--  1 john john   58 2011-07-22 07:15 newfile2<br/>
+-rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3<br/>
+-rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file<br/>
+-rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh<br/>
+<strong>john@satsuki:~/coderepo$ </strong><br/>
 </code></div><br>As you can see, currently we have <code class="ncode">newfile1</code> in our tree.
-We can also use the <code class="ncode">git log</code> tool to see each commit which has touched that path.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --pretty=oneline master -- newfile1</strong><br>
-9cb2af2a00fd2253060e6bf8cc6c377b3d55ecea Important Update<br>
-d50ffb2fa536d869f2c4e89e8d6a48e0a29c5cc1 Merged in zaney<br>
-a27d49ef11d9f0e66edbad8f6c7806510ad5b2be Made an awesome change<br>
-cfbecabb031696a217b77b0e1285f2d5fc2ea2a3 Fantastic new feature<br>
-55fb69f4ad26fdb6b90ac6f43431be40779962dd Added two new files<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+We can also use the <code class="ncode">git log</code> tool to see each commit which has touched that path.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --pretty=oneline master -- newfile1</strong><br/>
+9cb2af2a00fd2253060e6bf8cc6c377b3d55ecea Important Update<br/>
+d50ffb2fa536d869f2c4e89e8d6a48e0a29c5cc1 Merged in zaney<br/>
+a27d49ef11d9f0e66edbad8f6c7806510ad5b2be Made an awesome change<br/>
+cfbecabb031696a217b77b0e1285f2d5fc2ea2a3 Fantastic new feature<br/>
+55fb69f4ad26fdb6b90ac6f43431be40779962dd Added two new files<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>So there were five commits in the past which have touched that path.
 In our example we require the removal of this path from the entire history of the repository.
-As this is a destructive operation that works on the current branch, meaning it will rewrite our branch HEAD, we are first going to switch into a new branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b remove_file</strong><br>
-Switched to a new branch 'remove_file'<br>
-<strong>john@satsuki:~/coderepo$ </strong><br>
-</code></div><br>Now we need to run the <code class="ncode">git filter-branch</code> tool.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git filter-branch --index-filter 'git rm --cached --ignore-unmatch newfile1' HEAD</strong><br>
-Rewrite 55fb69f4ad26fdb6b90ac6f43431be40779962dd (6/21)rm 'newfile1'<br>
-Rewrite 9710177657ae00665ca8f8027b17314346a5b1c4 (7/21)rm 'newfile1'<br>
-Rewrite 4ac92012609cf8ed2480aa5d7f807caf2545fe2f (8/21)rm 'newfile1'<br>
-Rewrite cfbecabb031696a217b77b0e1285f2d5fc2ea2a3 (9/21)rm 'newfile1'<br>
-Rewrite b119573f4508514c55e1c4e3bebec0ab3667d071 (10/21)rm 'newfile1'<br>
-Rewrite ed2301ba223a63a5a930b536a043444e019460a7 (11/21)rm 'newfile1'<br>
-Rewrite a27d49ef11d9f0e66edbad8f6c7806510ad5b2be (12/21)rm 'newfile1'<br>
-Rewrite 7cc32dbf121f2afa8c40337db54bafb26de5b9c4 (13/21)rm 'newfile1'<br>
-Rewrite d50ffb2fa536d869f2c4e89e8d6a48e0a29c5cc1 (14/21)rm 'newfile1'<br>
-Rewrite 9cb2af2a00fd2253060e6bf8cc6c377b3d55ecea (15/21)rm 'newfile1'<br>
-Rewrite 37950f861a3cc0868c65ee9571fc6c491aa689ea (16/21)rm 'newfile1'<br>
-Rewrite 1c3206aac0fb012bfdaf5ff00e320b565bb89e7d (17/21)rm 'newfile1'<br>
-Rewrite 1968324ce2899883fca76bc25496bcf2b15e7011 (18/21)rm 'newfile1'<br>
-Rewrite f8d5100142b43ffaba9bbd539ba4fd92af79bf0e (19/21)rm 'newfile1'<br>
-Rewrite a8281fb589e36389cc8cb0da7ebee225b4d1adfc (20/21)rm 'newfile1'<br>
-Rewrite 30900fe1b7e72411dabab8b02070f36e2431f704 (21/21)rm 'newfile1'<br>
-<br>
-Ref 'refs/heads/remove_file' was rewritten<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+As this is a destructive operation that works on the current branch, meaning it will rewrite our branch HEAD, we are first going to switch into a new branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b remove_file</strong><br/>
+Switched to a new branch 'remove_file'<br/>
+<strong>john@satsuki:~/coderepo$ </strong><br/>
+</code></div><br>Now we need to run the <code class="ncode">git filter-branch</code> tool.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git filter-branch --index-filter 'git rm --cached --ignore-unmatch newfile1' HEAD</strong><br/>
+Rewrite 55fb69f4ad26fdb6b90ac6f43431be40779962dd (6/21)rm 'newfile1'<br/>
+Rewrite 9710177657ae00665ca8f8027b17314346a5b1c4 (7/21)rm 'newfile1'<br/>
+Rewrite 4ac92012609cf8ed2480aa5d7f807caf2545fe2f (8/21)rm 'newfile1'<br/>
+Rewrite cfbecabb031696a217b77b0e1285f2d5fc2ea2a3 (9/21)rm 'newfile1'<br/>
+Rewrite b119573f4508514c55e1c4e3bebec0ab3667d071 (10/21)rm 'newfile1'<br/>
+Rewrite ed2301ba223a63a5a930b536a043444e019460a7 (11/21)rm 'newfile1'<br/>
+Rewrite a27d49ef11d9f0e66edbad8f6c7806510ad5b2be (12/21)rm 'newfile1'<br/>
+Rewrite 7cc32dbf121f2afa8c40337db54bafb26de5b9c4 (13/21)rm 'newfile1'<br/>
+Rewrite d50ffb2fa536d869f2c4e89e8d6a48e0a29c5cc1 (14/21)rm 'newfile1'<br/>
+Rewrite 9cb2af2a00fd2253060e6bf8cc6c377b3d55ecea (15/21)rm 'newfile1'<br/>
+Rewrite 37950f861a3cc0868c65ee9571fc6c491aa689ea (16/21)rm 'newfile1'<br/>
+Rewrite 1c3206aac0fb012bfdaf5ff00e320b565bb89e7d (17/21)rm 'newfile1'<br/>
+Rewrite 1968324ce2899883fca76bc25496bcf2b15e7011 (18/21)rm 'newfile1'<br/>
+Rewrite f8d5100142b43ffaba9bbd539ba4fd92af79bf0e (19/21)rm 'newfile1'<br/>
+Rewrite a8281fb589e36389cc8cb0da7ebee225b4d1adfc (20/21)rm 'newfile1'<br/>
+Rewrite 30900fe1b7e72411dabab8b02070f36e2431f704 (21/21)rm 'newfile1'<br/>
+<br/>
+Ref 'refs/heads/remove_file' was rewritten<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>We have passed a few parameters to <code class="ncode">git filter-branch</code> and we should take a few seconds to discuss this as the syntax may seem a little strange.
 Firstly we are invoking the <code class="ncode">git filter-branch</code> tool, that should not be anything new at all.
 Next, we are passing three parameters to it.
@@ -230,35 +230,35 @@ Using these options we have asked Git to work on just the <em>index</em> and not
 In this case we have specified the target revision as <code class="ncode">HEAD</code>.
 Git will interpret this as meaning everything up to the <code class="ncode">HEAD</code> revision.
 As such Git will be rewriting the entire history of the branch.<br><br>Now if we list the files in the directory, we can see something important has happened.
-The file that we wanted removed, has gone and <code class="ncode">newfile1</code> is no more.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ ls -la</strong><br>
-total 36<br>
-drwxr-xr-x  3 john john 4096 2011-07-27 19:53 .<br>
-drwxr-xr-x 32 john john 4096 2011-07-27 19:00 ..<br>
--rw-r--r--  1 john john   35 2011-07-22 07:15 another_file<br>
--rw-r--r--  1 john john   25 2011-07-22 07:15 cont_dev<br>
-drwxrwxr-x  9 john john 4096 2011-07-27 19:53 .git<br>
--rw-r--r--  1 john john   58 2011-07-22 07:15 newfile2<br>
--rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3<br>
--rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file<br>
--rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+The file that we wanted removed, has gone and <code class="ncode">newfile1</code> is no more.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ ls -la</strong><br/>
+total 36<br/>
+drwxr-xr-x  3 john john 4096 2011-07-27 19:53 .<br/>
+drwxr-xr-x 32 john john 4096 2011-07-27 19:00 ..<br/>
+-rw-r--r--  1 john john   35 2011-07-22 07:15 another_file<br/>
+-rw-r--r--  1 john john   25 2011-07-22 07:15 cont_dev<br/>
+drwxrwxr-x  9 john john 4096 2011-07-27 19:53 .git<br/>
+-rw-r--r--  1 john john   58 2011-07-22 07:15 newfile2<br/>
+-rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3<br/>
+-rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file<br/>
+-rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Re-running the log command we ran earlier against our new branch confirms our operation.
-However checking out the <strong>master</strong> also confirms that the file is still present elsewhere.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --pretty=oneline remove_file -- newfile1</strong><br>
-<strong>john@satsuki:~/coderepo$ git checkout master</strong><br>
-Switched to branch 'master'<br>
-<strong>john@satsuki:~/coderepo$ ls -la</strong><br>
-total 40<br>
-drwxr-xr-x  3 john john 4096 2011-07-27 19:54 .<br>
-drwxr-xr-x 32 john john 4096 2011-07-27 19:00 ..<br>
--rw-r--r--  1 john john   35 2011-07-22 07:15 another_file<br>
--rw-r--r--  1 john john   25 2011-07-22 07:15 cont_dev<br>
-drwxrwxr-x  9 john john 4096 2011-07-27 19:54 .git<br>
--rw-r--r--  1 john john   69 2011-07-27 19:54 newfile1<br>
--rw-r--r--  1 john john   58 2011-07-22 07:15 newfile2<br>
--rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3<br>
--rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file<br>
--rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+However checking out the <strong>master</strong> also confirms that the file is still present elsewhere.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --pretty=oneline remove_file -- newfile1</strong><br/>
+<strong>john@satsuki:~/coderepo$ git checkout master</strong><br/>
+Switched to branch 'master'<br/>
+<strong>john@satsuki:~/coderepo$ ls -la</strong><br/>
+total 40<br/>
+drwxr-xr-x  3 john john 4096 2011-07-27 19:54 .<br/>
+drwxr-xr-x 32 john john 4096 2011-07-27 19:00 ..<br/>
+-rw-r--r--  1 john john   35 2011-07-22 07:15 another_file<br/>
+-rw-r--r--  1 john john   25 2011-07-22 07:15 cont_dev<br/>
+drwxrwxr-x  9 john john 4096 2011-07-27 19:54 .git<br/>
+-rw-r--r--  1 john john   69 2011-07-27 19:54 newfile1<br/>
+-rw-r--r--  1 john john   58 2011-07-22 07:15 newfile2<br/>
+-rw-r--r--  1 john john   45 2011-07-22 07:15 newfile3<br/>
+-rw-r--r--  1 john john    8 2011-03-31 22:15 temp_file<br/>
+-rwxrwxr-x  1 john john  114 2011-07-21 21:17 test.sh<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>It should be stressed at this point how destructive the <code class="ncode">git filter-branch</code> command can be to your repository.
 The <strong>master</strong> and <strong>remove_file</strong> branches have diverged from the point where <code class="ncode">newfile1</code> was first introduced.
 Consequently all of our other branches, such as <strong>zaney</strong> and <strong>wonderful</strong> still refer to the <strong>master</strong> branch.
@@ -283,28 +283,28 @@ Alternatively if you absolutely must work on the current repository, you would n
 The code is due to be finished soon and once that happens, the team have decided to push a rewritten branch into the public domain and to resync all of their development repositories to this new branch.
 It should be noted that the <code class="ncode">filter-branch</code> tool can be used in other circumstances too.
 We are going to take a look at just one of these.
-However, let us first clean up our repository a little and move some things around.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ mkdir tester</strong><br>
-<strong>john@satsuki:~/coderepo$ ls</strong><br>
-another_file  cont_dev  newfile1  newfile2  newfile3  temp_file  tester  test.sh<br>
-<strong>john@satsuki:~/coderepo$ mv test.sh tester/</strong><br>
-<strong>john@satsuki:~/coderepo$ git mv newfile* tester</strong><br>
-<strong>john@satsuki:~/coderepo$ git add tester/test.sh</strong><br>
-<strong>john@satsuki:~/coderepo$ rm temp_file </strong><br>
-<strong>john@satsuki:~/coderepo$ git status</strong><br>
-# On branch master<br>
-# Changes to be committed:<br>
-#   (use "git reset HEAD &lt;file&gt;..." to unstage)<br>
-#<br>
-#	renamed:    newfile1 -&gt; tester/newfile1<br>
-#	renamed:    newfile2 -&gt; tester/newfile2<br>
-#	renamed:    newfile3 -&gt; tester/newfile3<br>
-#	new file:   tester/test.sh<br>
-#<br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m 'Moved testing suite'</strong><br>
-[master f08ac57] Moved testing suite<br>
- 4 files changed, 9 insertions(+), 0 deletions(-)<br>
- rename newfile1 =&gt; tester/newfile1 (100 rename newfile2 =&gt; tester/newfile2 (100 rename newfile3 =&gt; tester/newfile3 (100 create mode 100755 tester/test.sh<br>
-<strong>john@satsuki:~/coderepo$ </strong><br>
+However, let us first clean up our repository a little and move some things around.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ mkdir tester</strong><br/>
+<strong>john@satsuki:~/coderepo$ ls</strong><br/>
+another_file  cont_dev  newfile1  newfile2  newfile3  temp_file  tester  test.sh<br/>
+<strong>john@satsuki:~/coderepo$ mv test.sh tester/</strong><br/>
+<strong>john@satsuki:~/coderepo$ git mv newfile* tester</strong><br/>
+<strong>john@satsuki:~/coderepo$ git add tester/test.sh</strong><br/>
+<strong>john@satsuki:~/coderepo$ rm temp_file </strong><br/>
+<strong>john@satsuki:~/coderepo$ git status</strong><br/>
+# On branch master<br/>
+# Changes to be committed:<br/>
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)<br/>
+#<br/>
+#	renamed:    newfile1 -&gt; tester/newfile1<br/>
+#	renamed:    newfile2 -&gt; tester/newfile2<br/>
+#	renamed:    newfile3 -&gt; tester/newfile3<br/>
+#	new file:   tester/test.sh<br/>
+#<br/>
+<strong>john@satsuki:~/coderepo$ git commit -a -m 'Moved testing suite'</strong><br/>
+[master f08ac57] Moved testing suite<br/>
+ 4 files changed, 9 insertions(+), 0 deletions(-)<br/>
+ rename newfile1 =&gt; tester/newfile1 (100 rename newfile2 =&gt; tester/newfile2 (100 rename newfile3 =&gt; tester/newfile3 (100 create mode 100755 tester/test.sh<br/>
+<strong>john@satsuki:~/coderepo$ </strong><br/>
 </code></div><br>We have reverted back to our <strong>master</strong> branch and in doing so have regained <code class="ncode">newfile1</code>.
 After that, we deleted our rewritten branch and moved <code class="ncode">test.sh</code> along with all of the <code class="ncode">newfile</code>s into a new folder called <code class="ncode">tester</code>.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>

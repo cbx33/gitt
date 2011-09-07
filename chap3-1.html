@@ -164,18 +164,18 @@ This is not true at all.
 Accountability is key in understanding the events that led up to a particular bug being introduced, or a situation occurring.
 How this is dealt with, is a up to the management teams, but accountability should not be something that is revered, it should be something that is looked upon as a tool to help define the cause of a problem.<br><br>By its very nature, a version control system is also a logging system.
 Every time we committed something into the repository in the last chapter, we supplied a log message.
-In fact, if we don't supply a commit message, let us see what happens.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git status</strong><br>
-# On branch master<br>
-# Untracked files:<br>
-#   (use "git add &lt;file&gt;..." to include in what will be committed)<br>
-#<br>
-#	my_third_committed_file<br>
-nothing added to commit but untracked files present (use "git add" to track)<br>
-<strong>john@satsuki:~/coderepo$ git add my_third_committed_file</strong><br>
-<strong>john@satsuki:~/coderepo$ git commit -a -m "</strong><br>
-Aborting commit due to empty commit message.<br>
-<strong>john@satsuki:~/coderepo$ git reset my_third_committed_file</strong><br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+In fact, if we don't supply a commit message, let us see what happens.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git status</strong><br/>
+# On branch master<br/>
+# Untracked files:<br/>
+#   (use "git add &lt;file&gt;..." to include in what will be committed)<br/>
+#<br/>
+#	my_third_committed_file<br/>
+nothing added to commit but untracked files present (use "git add" to track)<br/>
+<strong>john@satsuki:~/coderepo$ git add my_third_committed_file</strong><br/>
+<strong>john@satsuki:~/coderepo$ git commit -a -m "</strong><br/>
+Aborting commit due to empty commit message.<br/>
+<strong>john@satsuki:~/coderepo$ git reset my_third_committed_file</strong><br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Git will actually not allow you to commit with a blank message.
 This is actually fantastic news, as people are far less likely to write a useless message than they are a blank one.
 It is very important that when using a version control system you write in a useful commit message.
@@ -189,25 +189,25 @@ Rob placed his thumb and forefinger onto his chin.
 "Well, for now, I just want to see a list of all of my commits."<br><br>"That one's the simplest of all."
 </div><br>At its simplest, <code class="ncode">git log</code> will give an output of all of the commits that have been applied to the current branch.
 Depending on what type of machine you are using it on, the output from <code class="ncode">git log</code> will be navigable, usually using the up and down arrows, with 'q' used to quit.
-Let's have a quick look at the output of our test repository and see what the log messages look like.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log</strong><br>
-commit 9938a0c30940dccaeddce4bb2eb151fba3a21ae5<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Thu Mar 31 20:34:23 2011 +0100<br>
-<br>
-    Finished adding initial files<br>
-<br>
-commit 163f06147a449e724d0cfd484c3334709e8e1fce<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Thu Mar 31 20:32:59 2011 +0100<br>
-<br>
-    Made a few changes to first and second files<br>
-<br>
-commit cfe23cbe0150fda69a004e301828097935ec4397<br>
-Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br>
-Date:   Thu Mar 31 20:27:44 2011 +0100<br>
-<br>
-    My First Ever Commit<br>
-<strong>john@satsuki:~/coderepo$</strong><br>
+Let's have a quick look at the output of our test repository and see what the log messages look like.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log</strong><br/>
+commit 9938a0c30940dccaeddce4bb2eb151fba3a21ae5<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Thu Mar 31 20:34:23 2011 +0100<br/>
+<br/>
+    Finished adding initial files<br/>
+<br/>
+commit 163f06147a449e724d0cfd484c3334709e8e1fce<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Thu Mar 31 20:32:59 2011 +0100<br/>
+<br/>
+    Made a few changes to first and second files<br/>
+<br/>
+commit cfe23cbe0150fda69a004e301828097935ec4397<br/>
+Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
+Date:   Thu Mar 31 20:27:44 2011 +0100<br/>
+<br/>
+    My First Ever Commit<br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>The <code class="ncode">git log</code> command shows us a chronological list of all of the commits to the repository and also gives us several more important pieces of information.
 In total there are four pieces of information displayed by default.<br><div style="padding-left:10px;"><ul><li><strong>commit</strong> - This is the SHA-1 hash of the commit object that is stored inside the repository.
 You can find more information about this in the <em>What's inside the Git repository?</em> section <em>Week 2</em>.
@@ -228,9 +228,9 @@ You are advised to use them here to follow what is happening, but to substitute 
 </div><br><div id="calloutblock"><h3>Note - Changing your identity</h3>
 Particularly when working with other people, or when publishing your repository to a public location, it's a good idea to make sure people know who you are and how to get in contact with you.
 Every time you make a commit to a repository, Git gives the opportunity to take note of who posted the commit.
-When you first install Git, it probably won't have the correct information in there for you, so it's important that you take the time to set this up.<br><br>To set up your name and email address, we need to modify use <code class="ncode">git config</code> again.<br><div id="codeblock"><code>$ git config --global user.name "John Haskins"<br>
-$ git config --global user.email<br>
-"john.haskins@tamagoyakiinc.koala"<br>
+When you first install Git, it probably won't have the correct information in there for you, so it's important that you take the time to set this up.<br><br>To set up your name and email address, we need to modify use <code class="ncode">git config</code> again.<br><div id="codeblock"><code>$ git config --global user.name "John Haskins"<br/>
+$ git config --global user.email<br/>
+"john.haskins@tamagoyakiinc.koala"<br/>
 </code></div><br>That's it.
 Now by default, Git will use this setting whenever you commit to a repository, unless you override it by locally modifying the repository's <code class="ncode">.gitconfig</code>.
 </div><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
