@@ -53,9 +53,9 @@ This should yield the result to be commit \textbf{9710177}.
 Is there are way we can ask Git to do the same thing? The following output introduces a new command that is used to find the \emph{Best Common Ancestor} for a given merge proposal.
 
 \begin{code}
-john@satsuki:~/coderepo-af4$ git merge-base wonderful zaney
+john@satsuki:~/coderepo$ git merge-base wonderful zaney
 9710177657ae00665ca8f8027b17314346a5b1c4
-john@satsuki:~/coderepo-af4$ git cat-file -p 9710177
+john@satsuki:~/coderepo$ git cat-file -p 9710177
 tree 268f487e5c29a4b01c3a91637bac0024253fb77e
 parent 55fb69f4ad26fdb6b90ac6f43431be40779962dd
 author John Haskins <john.haskins@tamagoyakiinc.koala> 1301613377 +0100
@@ -63,7 +63,7 @@ committer John Haskins <john.haskins@tamagoyakiinc.koala> 1301613377
  +0100
 
 Added another file
-john@satsuki:~/coderepo-af4$
+john@satsuki:~/coderepo$
 \end{code}
 
 In our example, \indexgit{merge-base} uses two parameters to speficy the two heads that we wish to merge.
