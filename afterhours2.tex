@@ -128,7 +128,7 @@ The line we are interested in is listed below.
 \end{code}
 
 It would be nice if we could find out a little more about this object, and confirm that it is what we expect it to be.
-to start with, let us run the Linux \texttt{file} command on it, to see what it makes of it.
+To start with, let us run the Linux \texttt{file} command on it to see what it makes of the contents.
 
 \begin{code}
 john@satsuki:~/coderepo/.git/objects/cf$ file e23cbe0150fda69a004e301828097935ec4397
@@ -144,7 +144,7 @@ Later in the book, you will find out exactly how to generate your own repository
 \subsection{Out comes the wrench}
 Wouldn't it be nice if we could view the data that was inside the file simply, without having to write our own tools.
 If you look through the Git man page, you will find one listed under the \textbf{Interrogation} section, called \texttt{git cat-file}.
-Anyone who has spent any time with Git will know what the \texttt{cat} command does.
+Anyone who has spent any time with Linux will know what the \texttt{cat} command does.
 \texttt{cat} is used to display the contents of files.
 In Git, this command is used to display the contents, type or size of a repository object, be it either of type commit, tree or blob.
 
@@ -152,9 +152,9 @@ In Git, this command is used to display the contents, type or size of a reposito
 You may have noticed the less than subtle references to plumbing.
 Git has two types of commands.
 Those that are readily available to the end user, and those that are not.
-
+\newline
 The commands that are readily available to the end user are called Porcelain commands because they have been refined and are simple to use, think Tap and Sink.
-
+\newline
 Commands which get a little down and dirty with the details are called Plumbing commands because they are dealing with the primitive objects that make things work, think Pipes and Joints.
 \end{callout}
 
@@ -220,7 +220,7 @@ john@satsuki:~/coderepo$
 \end{code}
 
 At first glance one may consider it odd that there is nothing in there.
-However, if we take a trip back in time and flick back to the first commit that we made to our repository, you will see that we never actually put any content in our file at all.
+However, if we take a trip back in time and go back to the first commit that we made to our repository, you will see that we never actually put any content in our file at all.
 So, the object contains nothing.
 Now we can draw up a diagram of our repository after the first commit.
 
