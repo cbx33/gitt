@@ -368,7 +368,7 @@ index 0000000..5d27866
 +++ b/my_third_committed_file
 @@ -0,0 +1 @@
 +Addition to the line
-
+...
 ...
 \end{code}
 
@@ -378,7 +378,7 @@ Take note of the way we have specified the time period that we are interested in
 The section \texttt{--since="last week"} tells Git to filter the output and show only the entries that were committed within the last week.
 
 \index{logging!filtering}This type of filtering can be exceedingly useful to a developer.
-Often when problems arise, you do not have a defined point in time that you know it was last working.
+Often when problems arise, you do not have a defined point in time that you know when your code was last working.
 However most of the time, you can say with some certainty, ``I know it was working two weeks ago''.
 Using the methods described above, will give the user all of the changes, categorised by commit, that occurred in those two weeks, allowing them to narrow down the scope of exactly where to begin looking for the offending changes.
 
@@ -476,10 +476,10 @@ john@satsuki:~/coderepo$
 
 By running the \indexgit{rev-parse} with the tag name \texttt{v1.0a}, Git has returned us the SHA-1 hash of the commit we were referring to.
 If we look back up at the earlier output, we can see that the most recent commit into the repository was indeed \textbf{a022d4d1edc69970b4e8b3fe1da3dccd943a55e4}.
-To give us something to work with, let's tag the commit \textbf{163f06\ldots} with the tag name \texttt{v0.9}.
+To give us something to work with, let's tag the commit \textbf{163f061} with the tag name \texttt{v0.9}.
 
 \begin{code}
-john@satsuki:~/coderepo$ git tag v0.9 163f06
+john@satsuki:~/coderepo$ git tag v0.9 163f061
 john@satsuki:~/coderepo$
 \end{code}
 
@@ -639,7 +639,7 @@ john@satsuki:~/coderepo$
 Notice how we first checked that we didn't have any local modifications by running the \texttt{git status} command.
 Then we are safe to run the \texttt{git checkout} command.
 We used the \texttt{v0.9} tag from earlier to refer to an earlier commit state.
-The next part of the command is the double hyphen (\texttt{--}) that tells Git that what comes after it is the path.
+The next part of the command is the double hyphen \texttt{--} that tells Git that what comes after it is the path.
 Finally we choose \texttt{my\_second\_committed\_file} as the source file.
 After this, when we \texttt{cat} the file, we see that it has changed to what it used to be in \texttt{v0.9}.
 
