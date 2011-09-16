@@ -3,7 +3,7 @@
 \chapter{After Hours Week 6}
 \section{``Tug of war''}
 \subsection{Taking the push with the pull}
-We have spoken in fairly great length about how remote repositories work.
+We have spoken at fairly great length about how remote repositories work.
 We have seen how the \texttt{git remote} tool is used to create the various references to remote repositories, but we have no real understanding about what this means in terms of Git's internals.
 Just in the same way a branch is a single file that contains a pointer to a reference, a remote repository has to be handled within Git somehow.
 
@@ -14,7 +14,7 @@ Hopefully, if you have been following the text, you have not deleted this direct
 If you have, do not worry, just follow the operations we completed in Week 6, or read on and use the text in the book.
 
 If you remember, we created two clones of our original repository.
-Once was a simple clone called \texttt{coderepo-cl} and the other was a bare repository called \texttt{coderepo-bk}.
+One of these was a simple clone called \texttt{coderepo-cl} and the other was a bare repository called \texttt{coderepo-bk}.
 The \texttt{coderepo-cl} and the \texttt{coderepo-bk} repositories were both cloned from \texttt{coderepo}, but it was \texttt{coderepo-cl} that was configured to pull from one and push to the other.
 Running a simple \texttt{git remote -v} command, confirms this configuration.
 

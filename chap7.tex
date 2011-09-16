@@ -145,8 +145,8 @@ Once they are happy, their team leader will push their changes up into the devel
 This branch is not guaranteed to be stable.
 Sometimes things will break but the development branch is a place that all of the work of the various teams comes together.
 
-Once the teams hit feature freeze, the point at which they will no longer take any more new features into the code base, they will ask the QA manager to create a \textbf{QA} branch.
-Bug fixes for current issues will be committed here and when all bugs have been fixed and the code is ready to be released, the release branch will be synced with a specific commit of the \textbf{QA} branch.
+Once the teams hit feature freeze, the point at which they will no longer take any more new features into the code base, they will ask the QA manager to create a \textbf{qa} branch.
+Bug fixes for current issues will be committed here and when all bugs have been fixed and the code is ready to be released, the release branch will be synced with a specific commit of the \textbf{qa} branch.
 
 If this all sounds a little confusing, we will take a few minutes to digest what we have come up with and draw a few diagrams.
 The beauty of Git is that it is so configurable and so by design supports almost limitless workflows.
@@ -160,7 +160,7 @@ We are using a \emph{blessed} repository with which to store our crown jewels.
 This is the repository that contains our main \textbf{release} branch.
 This branch will always contain reliable stable releases.
 Sure, it may contain history of how we reached the stable release, but on a checkout, it will be a solid, buildable, pristine, tagged release.
-This repository also contains our \textbf{QA} branch.
+This repository also contains our \textbf{qa} branch.
 This is the branch that upon checkout would contain a fairly polished version of the product, but it may still have a few bugs and issues.
 Then we have our development branch.
 This is where the integration managers from the various teams would pull the code from their teams into a single code base, ready for the QA manager to begin his testing.
@@ -734,13 +734,13 @@ John smiled and shook his head, ``Don't worry Rob, I have a better plan''
 
 \index{cherry picking}Cherry picking is a method of copying the contents of one commit into another and is something that we will pick up on later, but we will first look at our final use of rebase.
 Imagine the scenario painted above.
-You made a branch, have been merrily committing for hours, before realising that actually you branched from the wrong place.
+You made a branch, have been merrily committing for hours, before realising that actually you branched from the wrong ancestor.
 
 In Git, this isn't a problem.
-Things get complicated if you've been doing more advanced operations during this period, but if you have been simply adding commits, we can use rebase to migrate that tree of commits to a different ancestor.
+Things get complicated if you've been doing more advanced operations during this period, but if you have been simply adding commits, we can use rebase to migrate the tree of commits to a different ancestor.
 
-Take the example we have been working on, currently we have a \textbf{master} branch and a \textbf{wonderful} branch, and these differ.
-Let us say we are currently sitting on the \textbf{wonderful} branch, but we thought we were on the \textbf{branch} and we created a new branch called develop.
+Take the example we have been working on. Currently we have a \textbf{master} branch and a \textbf{wonderful} branch, and these differ, though they have a common ancestor.
+Let us say we are currently sitting on the \textbf{wonderful} branch, but we thought we were on \textbf{master} and we created a new branch called \textbf{develop}.
 
 \begin{code}
 john@satsuki:~/coderepo$ git checkout -b develop
@@ -779,6 +779,7 @@ john@satsuki:~/coderepo$
 \end{code}
 
 Whoops! The commits were supposed to be on a branch that stemmed from \textbf{master}, not one that stems from \textbf{wonderful}.
+In other words, \textbf{develop} stems from \textbf{wonderful}, when it should have stemmed from \textbf{master}.
 This is where \texttt{git rebase} comes to our assistance once more.
 With one command, we can move those commits to a branch that stems from \textbf{master}.
 
@@ -802,8 +803,9 @@ john@satsuki:~/coderepo$
 \end{code}
 
 Notice in the output above that we have used our \texttt{git rebase} tool with a new \texttt{--onto master} parameter.
-Basically the syntax is stating that we would like to take the commits between \textbf{wonderful} and \textbf{develop} and place them onto \textbf{master} instead.
+Basically the syntax above is stating that we would like to take all of the commits between the points \textbf{wonderful} and \textbf{develop} and place them onto \textbf{master} instead.
 
+\subsection{A little housework}
 To clean up our repository, we are going to delete our \textbf{keeprebase} branch.
 
 \begin{code}

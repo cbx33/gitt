@@ -215,17 +215,9 @@ In this case, we are going to clone the repository into a folder called \texttt{
 \begin{code}
 john@satsuki:~$ git clone coderepo coderepo-cl
 Initialized empty Git repository in /home/john/coderepo-cl/.git/
-john@satsuki:~$
-\end{code}
-
-\begin{code}
 john@satsuki:~$ cd coderepo-cl
 john@satsuki:~/coderepo-cl$ ls
 another_file  newfile1  newfile2
-john@satsuki:~/coderepo-cl$
-\end{code}
-
-\begin{code}
 john@satsuki:~/coderepo-cl$ git status
 # On branch master
 nothing to commit (working directory clean)
@@ -488,8 +480,6 @@ Now let us go back to our clone and see if we can see those changes.
 
 \begin{code}
 john@satsuki:~/coderepo$ cd ../coderepo-cl/
-john@satsuki:~/coderepo-cl$ git diff wonderful origin/
-origin/HEAD        origin/master      origin/wonderful   origin/zaney
 john@satsuki:~/coderepo-cl$ git diff wonderful origin/wonderful
 john@satsuki:~/coderepo-cl$
 \end{code}
@@ -547,7 +537,8 @@ john@satsuki:~/coderepo-cl$
 \end{code}
 
 As you can see, the two commands that we used were \indexgit{fetch} and the more familiar \texttt{git merge}.
-The \texttt{git fetch} command literally visits the remote repository, in our case we asked for \textbf{origin}, and finds which objects are new.
+The \texttt{git fetch} command literally visits the remote repository, in our case we asked for \textbf{origin}, and finds which objects are new 
+and do not exist in our local clone.
 These are then copied to the local clone, and the HEADs of the various remote branches are updated.
 We now rerun our \texttt{git diff}, only this time, we see a great many more changes than before.
 Finally we initiate a \texttt{git merge} to pull the changes from the now up to date remote branch to our local one.

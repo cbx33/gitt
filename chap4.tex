@@ -180,7 +180,7 @@ john@satsuki:~/coderepo$
 Comparing that to our previous \texttt{ls} command, we can see that this is exactly what the working tree looked like at the beginning of the chapter.
 Let us take a look at a diagram of the commit history to see what has happened in our repository.
 
-\figuregith{9cm}{images/f-w4-d1.pdf}{Our first branch}
+\figuregith{7cm}{images/f-w4-d1.pdf}{Our first branch}
 
 \index{pointers}So there are really two pointers in our repository at the moment, from a branch point of view.
 One of them points to commit \textbf{a022d4d\ldots} and is called \textbf{master}.
@@ -202,7 +202,6 @@ john@satsuki:~/coderepo$ git show v2.0
 commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd
 ...
 ...
-...
 \end{code}
 
 So here we have added a tag in our current branch, \textbf{wacky}, and we can see that the commit ID for the tag \textbf{v2.0} points \textbf{55fb69f}.
@@ -218,7 +217,6 @@ john@satsuki:~/coderepo$ git commit -m 'Added another file'
  create mode 100644 another_file
 john@satsuki:~/coderepo$ git show v2.0
 commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd
-...
 ...
 ...
 john@satsuki:~/coderepo$ git branch -v
@@ -317,7 +315,7 @@ john@satsuki:~/coderepo$
 Now let us take a quick look at a diagram to see how this change actually affected the commit flow.
 We have included tags in this diagram, so that you can see where they point to as well.
 
-\figuregith{9cm}{images/f-w4-d2.pdf}{Our first merge}
+\figuregith{7cm}{images/f-w4-d2.pdf}{Our first merge}
 
 \index{tagging!difference to branch}\index{branching!difference to tags}This picture should make it clear that the fundamental difference between tags and branches is that whilst the pointer to a branch moves with each commit to that branch, a tag points to a single commit only and never changes, unless forcibly so by the user.
 
@@ -516,7 +514,7 @@ Switched to branch 'master'
 john@satsuki:~/coderepo$
 \end{code}
 
-Now we reach step 4 in our set of instructions.
+Now we reach step four in our set of instructions.
 The one function we do not know how to perform yet is the resetting of our branch back to a previous point in time.
 The point we need to rewind back to is the point that we initially created the \textbf{zaney} branch at.
 We could have gotten this information by using \texttt{git log}.
@@ -702,7 +700,7 @@ We have taken all of the changes that were made in the \textbf{wonderful} branch
 If we wanted to, we could continue on making changes to the \textbf{wonderful} branch and we could keep pulling changes in from one to the other as time went by.
 Figure 5 shows what our repository looks like now.
 
-\figuregith{9cm}{images/f-w4-d5.pdf}{Repository state after \textbf{wonderful} merge}
+\figuregith{11cm}{images/f-w4-d5.pdf}{Repository state after \textbf{wonderful} merge}
 
 Our repository tree looks a little strange now.
 Notice that the most recent commit, \textbf{b119573}, has two parents.

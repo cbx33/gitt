@@ -104,7 +104,7 @@ If the file is already tracked, then the window will show a diff between the las
 \index{GUI!unstaged}If we take a closer look at the \textbf{Unstaged} area of the screen, we see something interesting.
 This is shown in Figure 2.
 
-\figuregith{5cm}{images/f-w5-d2.png}{Unstaged section}
+\figuregith{5cm}{images/f-w5-d2.png}{Unstaged section showing our \texttt{temp\_file}}
 
 This is the only file in our working copy which contains unstaged changes.
 That should not be surprising as this file has never been added to the repository so it is not considered \textbf{tracked} by Git.
@@ -122,7 +122,7 @@ We can change this by clicking on the small blank page icon to the left of the f
 \index{GUI!staged}Now the file has moved into the \textbf{Staged} area of the screen as would be equivalent to us doing a \texttt{git add temp\_file}.
 The file has been added to the index and is now ready for committing.
 We also notice a difference in the \textbf{Content View} of \texttt{temp\_file}.
-This can be seen in Figure 5.
+This can be seen in Figure 5 and now shows a patch view of addition of the file, as opposed to just the contents of the file.
 
 \figuregith{11cm}{images/f-w5-d5.png}{Content view of \texttt{temp\_file}}
 
@@ -135,7 +135,7 @@ It should be noted here that we could have performed multiple operations here, a
 We will finish this section off by checking the status area at the very bottom of the screen.
 In Figure 7, you should see that our latest operation has been summarised by the string \texttt{Created commit 35243bf8: Added temp\_file}
 
-\figuregith{11cm}{images/f-w5-d7.png}{Status message showing new commit ID}
+\figuregith{11cm}{images/f-w5-d7.png}{Status message showing a new commit ID}
 
 \section{Day 2 - ``Back to logging''}
 \subsection{Visualisation to the max}
@@ -144,7 +144,7 @@ The visualiser that is bundled with Git is packed with features and can be invok
 
 Whichever way we begin an instance of \texttt{gitk}, we are likely to end up with a screen like the one in Figure 8.
 
-\figuregith{11cm}{images/f-w5-d8.png}{Initial \texttt{gitk} view}
+\figuregith{11cm}{images/f-w5-d8.png}{Initial \texttt{gitk} view of our repository}
 
 Let us spend a few minutes familiarising ourselves with the layout of the \texttt{gitk} tool.
 The window is split up into roughly seven different areas.
@@ -166,7 +166,7 @@ It also allows you to navigate through these results.
 Essentially this is just a very simplified version of the graphs we were drawing in the previous chapter.
 As you can see, the only information that appears to be missing from the graph is the commit ID, which can be obtained quite easily by clicking on the relevant commit and viewing the string presented just below the graph pane.
 
-\figuregith{10cm}{images/f-w5-d9.png}{Graphical history of repository}
+\figuregith{10cm}{images/f-w5-d9.png}{Graphical history of our repository}
 
 The historical graph shows us all active branches, tags and commits.
 From looking at this it is easy to see where our merges occurred and where the branch HEADs point to.
@@ -175,7 +175,7 @@ Each circle on the graph is a commit and is linked to the panes on the right, wh
 
 \index{GUI!content view (gitk)}If we select the \textbf{master} branch HEAD, which should be the top commit, (in fact on opening \texttt{gitk} this should already be selected), we should see a pane similar to Figure 10 in the \textbf{Content View} section of the screen.
 
-\figuregith{10cm}{images/f-w5-d10.png}{Content view of master HEAD}
+\figuregith{10cm}{images/f-w5-d10.png}{Content view of \textbf{master} HEAD}
 
 Notice in this that we have two parents listed, which is what we would expect, as the last commit we did was that of a merge from \textbf{zaney} into \textbf{master}.
 Notice also that below this, we get to see a diff output of exactly what changed during this merge.
@@ -206,7 +206,7 @@ Your changes should look similar to Figure 11.
 After you have finished typing you should already have noticed a difference in the \textbf{History Graph} pane.
 Notice how some commits are now highlighted in bold, as demonstrated in Figure 12?
 
-\figuregith{10cm}{images/f-w5-d12.png}{Search results}
+\figuregith{10cm}{images/f-w5-d12.png}{Search results are highlighted}
 
 If you remember from Week 3, when we first ran the \texttt{git log -S "Change1"} command, we were presented with only one commit.
 That was titled, \texttt{Made a few changes to first and second files}.

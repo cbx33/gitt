@@ -337,7 +337,6 @@ However, if we go back to tag \textbf{v1.0a} and run the same command, we can se
 
 \begin{code}
 john@satsuki:~/coderepo$ grep "Addition" *
-john@satsuki:~/coderepo$ 
 john@satsuki:~/coderepo$ git checkout v1.0a 
 Note: checking out 'v1.0a'.
 
@@ -463,7 +462,7 @@ the string is not found, we will exit with a status code of \texttt{123}, indica
 
 Git will use these status codes and interpret a code of \texttt{0} as \textbf{good} and a code of \texttt{123} as \textbf{bad}.
 Below is a copy of our shell script which we have saved as \texttt{test.sh} and have given relevant permissions to allow it to run etc.
-Notice we have had to exclude our \texttt{test.sh} file from the test, else the string \texttt{Addition} would have been found there.
+Notice we have had to exclude our \texttt{test.sh} file from the test, else the string \texttt{Addition} would have been found there which would have returned true every time.
 
 \begin{code}
 john@satsuki:~/coderepo$ cat test.sh 
@@ -535,9 +534,7 @@ Simon turned to him and grinned, ``Sure buddy what's up?''  His face dropped whe
 Simon looked confused.
 
 ``I used the bisect tool to find the bug.  But you're not gonna like what I found.''
-
 \thoughtbreak
-
 ``Simon how could you have done that?'' John was asking the questions and they were coming thick and fast.
 ``I mean changing the API key for the web sevice whilst developing was not a great idea to start with, but committing that to the repository was rediculous.''
 Simon sat there with his head in his hands.
@@ -838,7 +835,7 @@ another_file  cont_dev  tester
 john@satsuki:~/coderepo$ 
 \end{code}
 
-So now the directory has been split away from the original source code into a new branch, have a think about what steps you would take to bring this into an entirely new repository.
+So now the directory has been split away from the original source code into a new branch. Have a think about what steps you would take to bring this into an entirely new repository.
 
 \begin{callout}{Note}{More backups}
 \index{filtering!backup}Git likes to make things easy for you.
@@ -860,7 +857,7 @@ Suddenly it was like a light bulb had exploded with light inside Jack's skull.  
 
 We actually have at least four methods we can use to do this.
 \begin{enumerate}
-\item Copy the data from one repo to another with copy and paste
+\item Copy the data from one repo to another with a simple copy and paste
 \item Clone our repository, delete all of the branches other than \textbf{tester\_split} and then rename it to \textbf{master}
 \item Initialise a new repository, setup a remote to the original and then fetch our \textbf{tester\_split} branch
 \item Create a bundle of the \textbf{tester\_split} and then clone from the bundle into a new repository
@@ -874,7 +871,7 @@ Whilst this is generally not a problem it would mean that we would have to run s
 This would happen natually over time as the objects aged and were no longer referenced, but it would result in a repository that was initially much larger than it needed to be.
 
 The other two methods deserve a little more consideration as they both perform much better in this respect.
-The third method you should be familiar enough with pervious material to be able to perform right now.
+The third method you should be familiar enough with previous material to be able to perform right now.
 However, using the fetch command as we have done so before would again pull in many more objects than we require.
 As such we are going to do a subtle twist to this command in the following output.
 
@@ -950,7 +947,7 @@ There have been numerous examples throughout the book, where there have been mul
 Here we are going to look at just one more way that we can create a new repo from our \textbf{tester\_split} branch.
 
 The tool we are going to introduce here is \indexgit{bundle}.
-\index{bundling!creating}\index{bundling!cloning from}The \texttt{bundle} utility allows us to export a set of revisions and almost archive them to a file.
+\index{bundling!creating}\index{bundling!cloning from}The \texttt{bundle} utility allows us to export a set of revisions and archive them to a file.
 This file then becomes a resource that can be updated and pulled or fetched from.
 This is especially useful if you have no physical connection between two computers and wish to sync some of the data from one to the other.
 Let us take a quick look at how we could use the bundle tool in this case.
@@ -969,7 +966,9 @@ warning: remote HEAD refers to nonexistent ref, unable to checkout.
 john@satsuki:~$
 \end{code}
 
-So the problem here is that when we created the bundle, the branch which was checked out at the time was \textbf{master}.
+The syntax is fairly simple. The word \texttt{create} is used to tell Git to create a new bundle.
+After this we specify a filename and then the tip of the branch that we want to archive. However, as can be seen above, there is a problem.
+When we created the bundle, the branch which was checked out at the time was \textbf{master}.
 The objects we pulled from the source repository and placed in the bundle were all from the \textbf{tester\_split} branch.
 As such the HEAD of the working tree at the time of the bundle creation, pointed to an object in the \textbf{master} branch.
 Obviously this object does not exist in our bundle and so Git complains.
@@ -979,7 +978,7 @@ So all we have to do is to remap the HEAD of \textbf{master} to that of the HEAD
 As you can see below, it seems as if there are no branches at all and when we try to checkout master it does not exist.
 What actually happened is that the objects were cloned into the repository, but as the object that the source HEAD pointed to was unavailable,
 no branch was created.
-With a litle \texttt{git reset} trickery, we can create our \textbf{master} branch in our new repository.
+With a little \texttt{git reset} trickery, we can create our \textbf{master} branch in our new repository.
 
 \begin{code}
 john@satsuki:~$ cd subrepo-b/
@@ -995,7 +994,7 @@ newfile1  newfile2  newfile3  test.sh
 john@satsuki:~/subrepo-b$ 
 \end{code}
 
-Now we have our repository complete as before.
+Now we have our repository complete as before and we have successfully reampped the \textbf{master} branch so that it points to \textbf{origin/tester\_split}.
 
 \begin{trenches}
 Martha and John were sitting together in the office.
@@ -1042,7 +1041,7 @@ john@satsuki:~/coderepo$
 We need to define what a submodule actualy is.
 Submodules are tricky to understand and often people use them once and conclude that they are more trouble than they are worth.
 However, if you take some time to understand what a submodule really is, then they can be very useful to you.
-A submodule is the inclusion of a repositories branch at a specific commit.
+A submodule is the inclusion of a repository branch at a specific commit.
 It is not intended to track the development of the upstream library or module, (see the callout box for an explanation of \emph{upstream}).
 
 \begin{callout}{Terminology}{Upstream}
@@ -1135,7 +1134,7 @@ john@satsuki:~/coderepo$
 
 \subsection{Changes down the river}
 So what happens when we want to pull in changes from the upstream project?
-Well, you can make your submodule point to whatever point you like and stay there.
+Well, you can make your submodule point to whatever commit you like and stay there.
 As long as you commit your changes in the super project, Git will always allow you to return to that point using the \texttt{git submodule update} command.
 
 Let us take a look at how we could pull in some changes into our \texttt{tester} submodule.

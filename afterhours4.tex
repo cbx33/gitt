@@ -9,16 +9,16 @@ We will explain the details a little more further on.
 \index{merging!types}\index{merging!types!resolve}\index{merging!types!recursive}\index{merging!types!octopus}\index{merging!types!ours}\index{merging!types!subtree}
 
 \begin{itemize}
-\item\textbf{resolve} - A two headed merge strategy using a 3-way merge algorithm.
+\item\textbf{Resolve} - A two headed merge strategy using a 3-way merge algorithm.
 This is used by default in Git.
-\item\textbf{recursive} - A two headed merge strategy using a 3-way merge algorithm.
+\item\textbf{Recursive} - A two headed merge strategy using a 3-way merge algorithm.
 This algorithm looks at situations where multiple common ancestors are eligible and creates a merged tree of the common ancestors to be used as a reference.
 Usually, this method has less conflicts and carries with it multiple sub-options.
-\item\textbf{octopus} - This merge strategy can merge in multiple heads.
+\item\textbf{Octopus} - This merge strategy can merge in multiple heads.
 When trying to pull multiple topic branches into a single merge, an \textbf{octopus} is the default method that Git will use.
-\item\textbf{ours} - Another multiple head strategy, which simply ignores all changes from the other branches.
+\item\textbf{Ours} - Another multiple head strategy, which simply ignores all changes from the other branches.
 At first it may sound like a useless idea, but it could be used to keep the history of a branch without actually keeping the branch itself.
-\item\textbf{subtree} - A much more advanced merge strategy based on the \textbf{recursive} which trees are adjusted to result in a better merge.
+\item\textbf{Subtree} - A much more advanced merge strategy based on the \textbf{recursive} which trees are adjusted to result in a better merge.
 \end{itemize}
 
 Now that we are aware of the different options available to us, let us discuss what happens when we actually perform a merge.
@@ -104,4 +104,4 @@ john@satsuki:~/coderepo$
 \end{code}
 
 This is just a short introduction to the \texttt{git grep} command.
-If you want to know more, you should spend some time reading the manual.
+If you want to know more you should spend some time reading the manual.
