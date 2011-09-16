@@ -179,7 +179,7 @@ john@satsuki:~/coderepo$
 If you remember from our committing back in Week 2, we added the string \texttt{Change2} to the second file but not the first.
 So the first time we run this command, it fails, as we are searching against \texttt{my\_first\_committed\_file}.
 The second time we run it, we are searching against \texttt{my\_second\_committed\_file} and this is where we see a result.
-Commit \textbf{9938a0} contains the commit we are looking for.
+Commit \textbf{9938a0c} contains the change we are looking for.
 
 \section{Day 3 - ``What actually changed?''}
 \subsection{Doing the diff dance}
@@ -197,10 +197,10 @@ Think of a diff as an easy way of looking at the differences between two files, 
 This can often be enhanced by a visual diff viewer, but for now, let's stick with our simple text based \texttt{git diff}.
 
 If we want to find out what the changes are between our current commit and one of the previous ones, we can write a command like the one below.
-Notice that below, \textbf{163f06} refers to the second commit that we made to the repository.
+Notice that below, \textbf{163f061} refers to the second commit that we made to the repository.
 
 \begin{code}
-john@satsuki:~/coderepo$ git diff 163f06
+john@satsuki:~/coderepo$ git diff 163f061
 diff --git a/my_second_committed_file b/my_second_committed_file
 index 3ad4cc3..095b9cd 100644
 --- a/my_second_committed_file
@@ -211,7 +211,7 @@ index 3ad4cc3..095b9cd 100644
 john@satsuki:~/coderepo$
 \end{code}
 
-What this is telling us, is that between \textbf{e86dd} and our current commit \textbf{6ca16}, we added the line \emph{Change2} to the file \texttt{my\_second\_committed\_file}.
+What this is telling us, is that between \textbf{163f061} and our current commit \textbf{9938a0c}, we added the line \emph{Change2} to the file \texttt{my\_second\_committed\_file}.
 We can see this by the preceding \texttt{+} on the line \texttt{Change2}.
 Let's make a few changes to our repository and see how the diffs look.
 We're actually going to make a few changes to the files using a text editor so that you can't see what we've done.
@@ -233,7 +233,7 @@ This is how we tell Git to show us only the most recently commit.
 
 As it turns out, John Haskins didn't really create a very meaningful log message.
 \emph{Messed with a few files} is pretty unhelpful in the grand scheme of things.
-So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit \textbf{a022d4}.
+So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit \textbf{a022d4d}.
 
 \begin{code}
 john@satsuki:~/coderepo$ git diff HEAD~1..HEAD
