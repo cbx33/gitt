@@ -1278,6 +1278,7 @@ john@satsuki:~/coderepo$
 
 As you can see, submodules can be rather useful.
 You can even make changes to the repository in the submodule and commit them locally to perhaps keep changes that you want to make to the submodule.
+As this is a Git repository in its own right, you can merge \emph{upstream} changes in too!
 Remember though that if you did make changes, and you committed them to the submodule,
 if you then issued a \texttt{git submodule update} without first committing your changes in the superproject, your commit would be lost.
 Of course nothing in Git is ever really lost, but it would be prudent of you to always keep changes you make to submodules in a branch,
