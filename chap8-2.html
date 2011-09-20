@@ -178,7 +178,6 @@ check them to see if the bug is present and then use that information to determi
 For some bizarre reason our codebase is broken unless the word <code class="ncode">Addition</code> is present in one of the files.
 If we run a simple Linux <code class="ncode">grep</code> command across the files, we can see that the word we are after is not there.
 However, if we go back to tag <strong>v1.0a</strong> and run the same command, we can see that the word is there.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ grep "Addition" *</strong><br/>
-<strong>john@satsuki:~/coderepo$ </strong><br/>
 <strong>john@satsuki:~/coderepo$ git checkout v1.0a </strong><br/>
 Note: checking out 'v1.0a'.<br/>
 <br/>
@@ -269,7 +268,7 @@ We are going to create a small shell script that will automatically run our grep
 If the string is found we will exit with a status code of <code class="ncode">0</code>, indicating that it was successful and if
 the string is not found, we will exit with a status code of <code class="ncode">123</code>, indicating that the test was unsuccessful.<br><br>Git will use these status codes and interpret a code of <code class="ncode">0</code> as <strong>good</strong> and a code of <code class="ncode">123</code> as <strong>bad</strong>.
 Below is a copy of our shell script which we have saved as <code class="ncode">test.sh</code> and have given relevant permissions to allow it to run etc.
-Notice we have had to exclude our <code class="ncode">test.sh</code> file from the test, else the string <code class="ncode">Addition</code> would have been found there.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cat test.sh </strong><br/>
+Notice we have had to exclude our <code class="ncode">test.sh</code> file from the test, else the string <code class="ncode">Addition</code> would have been found there which would have returned true every time.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cat test.sh </strong><br/>
 #!/bin/bash<br/>
 <br/>
 if grep -q Addition * --exclude=test.sh<br/>
@@ -315,7 +314,9 @@ In our case it is <code class="ncode">sh ./test.sh</code>.
 You can see Git invoking our <code class="ncode">test.sh</code> script in each case, and the result of our script, either <code class="ncode">Good</code> or <code class="ncode">Bad</code> depending on which was echoed from the result of the grep test.
 Git has arrived at exactly the same result, but we have had to do nothing other than write a small script.
 For larger tests, this would have saved us a large amount of work.<br><div id="trenchblock"><strong>In the trenches...</strong><br>
-"Simon could I have a word?" It was Rob and he wasn't looking happy.<br><br>Simon turned to him and grinned, "Sure buddy what's up?"  His face dropped when he saw Rob's expression.<br><br>"I think we'd better go grab the meeting room."<br><br>Simon looked confused.<br><br>"I used the bisect tool to find the bug.  But you're not gonna like what I found."<br><br> * * * <br><br>"Simon how could you have done that?" John was asking the questions and they were coming thick and fast.
+"Simon could I have a word?" It was Rob and he wasn't looking happy.<br><br>Simon turned to him and grinned, "Sure buddy what's up?"  His face dropped when he saw Rob's expression.<br><br>"I think we'd better go grab the meeting room."<br><br>Simon looked confused.<br><br>"I used the bisect tool to find the bug.  But you're not gonna like what I found."
+ * * * 
+"Simon how could you have done that?" John was asking the questions and they were coming thick and fast.
 "I mean changing the API key for the web sevice whilst developing was not a great idea to start with, but committing that to the repository was rediculous."
 Simon sat there with his head in his hands.
 "You know how secret that API key is right?" Simon nodded.

@@ -170,9 +170,9 @@ It was Rob.
 Git has some really powerful searching within the log tool."<br><br>"Well come on then," blurted Klaus,
 "Don't keep me hanging on."<br><br>A chime of the popular 1966 hit sprang out in the office.<br><br>Klaus pulled a hand down over his face, "Oh don't you all start!"
 </div><br>Git can actually do some rather powerful searching to assist a developer in their daily tasks.
-It would have been useful if the particular item that was being searched for had been included in the log, but sometimes, things either get missed, or there are just too many changes introduced in one commit to list them all.<br><br>In these instances, the <code class="ncode">git log -S&lt;string&gt;</code> command comes to our aid.
+It would have been useful if the particular item that was being searched for had been included in the log, but sometimes, things either get missed, or there are just too many changes introduced in one commit to list them all.<br><br>In these instances, the <code class="ncode">git log -S "&lt;string&gt;"</code> command comes to our aid.
 This command will search through the commits in a repository and will return a list of commits which introduced or removed a specific string into the repository.
-First of all, let's run this against our test repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -SChange1</strong><br/>
+First of all, let's run this against our test repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -S "Change1"</strong><br/>
 commit 163f06147a449e724d0cfd484c3334709e8e1fce<br/>
 Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
 Date:   Thu Mar 31 20:32:59 2011 +0100<br/>
@@ -183,8 +183,8 @@ Date:   Thu Mar 31 20:32:59 2011 +0100<br/>
 As you can imagine, when using a large code base, this tool can be invaluable.
 It allows us to pinpoint a specific moment when a certain string of text entered the repository.
 When running this against a very large repository, this could take a long time, and so the ability to shrink the search scope down will result in a much faster result.
-To do this we can append a path to our previous command.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -SChange2 my_first_committed_file</strong><br/>
-<strong>john@satsuki:~/coderepo$ git log -SChange2 my_second_committed_file</strong><br/>
+To do this we can append a path to our previous command.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -S "Change2" my_first_committed_file</strong><br/>
+<strong>john@satsuki:~/coderepo$ git log -S "Change2" my_second_committed_file</strong><br/>
 commit 9938a0c30940dccaeddce4bb2eb151fba3a21ae5<br/>
 Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
 Date:   Thu Mar 31 20:34:23 2011 +0100<br/>
@@ -194,7 +194,7 @@ Date:   Thu Mar 31 20:34:23 2011 +0100<br/>
 </code></div><br>If you remember from our committing back in Week 2, we added the string <code class="ncode">Change2</code> to the second file but not the first.
 So the first time we run this command, it fails, as we are searching against <code class="ncode">my_first_committed_file</code>.
 The second time we run it, we are searching against <code class="ncode">my_second_committed_file</code> and this is where we see a result.
-Commit <strong>9938a0</strong> contains the commit we are looking for.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+Commit <strong>9938a0c</strong> contains the change we are looking for.<br><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td><p align="left"><a href="chap3-1.html"><img src="images/prev.png" alt="Previous Day" height="29" border="0"></a></p></td>
 						<td><p align="right"><a href="chap3-3.html"><img src="images/next.png" alt="Next Day" height="29" border="0"></a></p></td>

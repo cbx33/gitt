@@ -179,15 +179,15 @@ Once you have been using Git a while, these kind of evaluations will become seco
 <center>
   <table><tr><td>
 </td></tr><tr><td>
-    Method Name</td><td>
-    Alters Repository</td><td>
-    Changes History</td><td>
-    Alters Working Copy</td><td>
-    Reversible</td><td>
-    Multiple Files</td></tr><tr><td>
-    Reset</td><td>Possibly</td><td>Possibly</td><td>Possibly</td><td>Possibly</td><td>Yes</td></tr><tr><td>
-    Checkout</td><td>No</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td></tr><tr><td>
-    Show</td><td>No</td><td>No</td><td>No</td><td>N/A</td><td>No</td></tr>
+    <strong>Method Name</strong></td><td>
+    <strong>Alters Repository</strong></td><td>
+    <strong>Changes History</strong></td><td>
+    <strong>Alters Working Copy</strong></td><td>
+    <strong>Reversible</strong></td><td>
+    <strong>Multiple Files</strong></td></tr><tr><td>
+    <strong>Reset</strong></td><td>Possibly</td><td>Possibly</td><td>Possibly</td><td>Possibly</td><td>Yes</td></tr><tr><td>
+    <strong>Checkout</strong></td><td>No</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td></tr><tr><td>
+    <strong>Show</strong></td><td>No</td><td>No</td><td>No</td><td>N/A</td><td>No</td></tr>
   </table>
 </center>
 <br>Let's take a look at each of these in turn.
@@ -237,7 +237,7 @@ nothing to commit (working directory clean)<br/>
 </code></div><br>Notice how we first checked that we didn't have any local modifications by running the <code class="ncode">git status</code> command.
 Then we are safe to run the <code class="ncode">git checkout</code> command.
 We used the <code class="ncode">v0.9</code> tag from earlier to refer to an earlier commit state.
-The next part of the command is the double hyphen (<code class="ncode">--</code>) that tells Git that what comes after it is the path.
+The next part of the command is the double hyphen <code class="ncode">--</code> that tells Git that what comes after it is the path.
 Finally we choose <code class="ncode">my_second_committed_file</code> as the source file.
 After this, when we <code class="ncode">cat</code> the file, we see that it has changed to what it used to be in <code class="ncode">v0.9</code>.<br><br>We then switch the file back to the latest version by using the <code class="ncode">HEAD</code> reference.
 Note that on the odd occasion, the <code class="ncode">HEAD</code> reference doesn't always point to where you think it does, but this is an area we are yet to cover.

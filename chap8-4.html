@@ -197,7 +197,7 @@ Switched to branch 'master'<br/>
 <strong>john@satsuki:~/coderepo$ ls</strong><br/>
 another_file  cont_dev  tester<br/>
 <strong>john@satsuki:~/coderepo$ </strong><br/>
-</code></div><br>So now the directory has been split away from the original source code into a new branch, have a think about what steps you would take to bring this into an entirely new repository.<br><div id="calloutblock"><h3>Note - More backups</h3>
+</code></div><br>So now the directory has been split away from the original source code into a new branch. Have a think about what steps you would take to bring this into an entirely new repository.<br><div id="calloutblock"><h3>Note - More backups</h3>
 Git likes to make things easy for you.
 You may not have noticed it before, but when using the <code class="ncode">git filter-branch</code> tool to rewrite a branch, Git keeps a backup of the value of HEAD before you started rewriting your branch.
 This backup is kept in <code class="ncode">refs/original/refs/heads/&lt;branch_name&gt;</code>.
@@ -208,7 +208,7 @@ Jack was finally feeling like he had gotten to grips with Git, but his latest ta
 He idly stabbed at his leg with a pen whilst waiting for John to finish his tapping away.<br><br>John lifted his keys from the keyboard and turned his chair.
 "You really can't think of a way to coopy what we have in one repo into another?"<br><br>Suddenly it was like a light bulb had exploded with light inside Jack's skull.  "CLONES!" he shouted.
 </div><br>We actually have at least four methods we can use to do this.
-<div style="padding-left:10px;"><ol><li>Copy the data from one repo to another with copy and paste</li>
+<div style="padding-left:10px;"><ol><li>Copy the data from one repo to another with a simple copy and paste</li>
 <li>Clone our repository, delete all of the branches other than <strong>tester_split</strong> and then rename it to <strong>master</strong></li>
 <li>Initialise a new repository, setup a remote to the original and then fetch our <strong>tester_split</strong> branch</li>
 <li>Create a bundle of the <strong>tester_split</strong> and then clone from the bundle into a new repository</li>
@@ -218,7 +218,7 @@ We simply clone and then using the usual tools, we delete all unnecessary branch
 However this first method does have its disadvantages, namely the fact that when we clone the repository, we take every single object from the source repository into the new one.
 Whilst this is generally not a problem it would mean that we would have to run some fairly aggressive garbage collection to remove all of these unwanted objects.
 This would happen natually over time as the objects aged and were no longer referenced, but it would result in a repository that was initially much larger than it needed to be.<br><br>The other two methods deserve a little more consideration as they both perform much better in this respect.
-The third method you should be familiar enough with pervious material to be able to perform right now.
+The third method you should be familiar enough with previous material to be able to perform right now.
 However, using the fetch command as we have done so before would again pull in many more objects than we require.
 As such we are going to do a subtle twist to this command in the following output.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd ../</strong><br/>
 <strong>john@satsuki:~$ mkdir subrepo</strong><br/>
@@ -268,7 +268,7 @@ This is in part what makes it a little daunting for those just starting but afte
 When this realisation hits, you are able to almost immediately think of at least two different ways of performing the same thing.
 There have been numerous examples throughout the book, where there have been multiple ways to complete the same task.
 Here we are going to look at just one more way that we can create a new repo from our <strong>tester_split</strong> branch.<br><br>The tool we are going to introduce here is <code class="ncode">git bundle</code>.
-The <code class="ncode">bundle</code> utility allows us to export a set of revisions and almost archive them to a file.
+The <code class="ncode">bundle</code> utility allows us to export a set of revisions and archive them to a file.
 This file then becomes a resource that can be updated and pulled or fetched from.
 This is especially useful if you have no physical connection between two computers and wish to sync some of the data from one to the other.
 Let us take a quick look at how we could use the bundle tool in this case.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git bundle create ../tester.bundle tester_split </strong><br/>
@@ -280,7 +280,9 @@ Cloning into subrepo-b...<br/>
 warning: remote HEAD refers to nonexistent ref, unable to checkout.<br/>
 <br/>
 <strong>john@satsuki:~$</strong><br/>
-</code></div><br>So the problem here is that when we created the bundle, the branch which was checked out at the time was <strong>master</strong>.
+</code></div><br>The syntax is fairly simple. The word <code class="ncode">create</code> is used to tell Git to create a new bundle.
+After this we specify a filename and then the tip of the branch that we want to archive. However, as can be seen above, there is a problem.
+When we created the bundle, the branch which was checked out at the time was <strong>master</strong>.
 The objects we pulled from the source repository and placed in the bundle were all from the <strong>tester_split</strong> branch.
 As such the HEAD of the working tree at the time of the bundle creation, pointed to an object in the <strong>master</strong> branch.
 Obviously this object does not exist in our bundle and so Git complains.
@@ -288,7 +290,7 @@ If we had checked out <strong>tester_split</strong> before creating the bundle, 
 As you can see below, it seems as if there are no branches at all and when we try to checkout master it does not exist.
 What actually happened is that the objects were cloned into the repository, but as the object that the source HEAD pointed to was unavailable,
 no branch was created.
-With a litle <code class="ncode">git reset</code> trickery, we can create our <strong>master</strong> branch in our new repository.<br><div id="codeblock"><code><strong>john@satsuki:~$ cd subrepo-b/</strong><br/>
+With a little <code class="ncode">git reset</code> trickery, we can create our <strong>master</strong> branch in our new repository.<br><div id="codeblock"><code><strong>john@satsuki:~$ cd subrepo-b/</strong><br/>
 <strong>john@satsuki:~/subrepo-b$ git branch</strong><br/>
 <strong>john@satsuki:~/subrepo-b$ git checkout master</strong><br/>
 error: pathspec 'master' did not match any file(s) known to git.<br/>
@@ -299,7 +301,7 @@ Already on 'master'<br/>
 <strong>john@satsuki:~/subrepo-b$ ls</strong><br/>
 newfile1  newfile2  newfile3  test.sh<br/>
 <strong>john@satsuki:~/subrepo-b$ </strong><br/>
-</code></div><br>Now we have our repository complete as before.<br><div id="trenchblock"><strong>In the trenches...</strong><br>
+</code></div><br>Now we have our repository complete as before and we have successfully reampped the <strong>master</strong> branch so that it points to <strong>origin/tester_split</strong>.<br><div id="trenchblock"><strong>In the trenches...</strong><br>
 Martha and John were sitting together in the office.
 The rest of the team had left hours ago and it was getting really late.
 Martha broke the silence, "So we've pulled the Atom library out," she giggled before continuing, "but how the heck do we put it back in again?"<br><br>"I'm really not sure said John," taking another swig of coffee before placing the mug back down on the desk.

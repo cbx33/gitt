@@ -220,7 +220,11 @@ After a few minutes of fumbling he finally managed to take up his position next 
 Klaus was clearly distressed and John resisted the urge make jokes.<br><br>John pointed at the screen.
 "Run a git status Klaus and I'll show you what the problem is."
 </div><br>To understand what Klaus was getting in a spin about, let's make a change to <code class="ncode">my_second_committed_file</code> now and see how this affects things.
-Remember we have already added the file, but we haven't yet made a commit.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "Change2" &gt;&gt; my_second_committed_file</strong><br/>
+Remember we have already added the file, but we haven't yet made a commit.<br><div id="calloutblock"><h3>Note - A little Linux note</h3>It should be noted that there is a subtle difference between <code class="ncode">&gt;</code> and <code class="ncode">&gt;&gt;</code>.
+The former will <em>redirect</em> the result of a command to a file, overwriting its contents.
+A double arrow appends the result of a command to the specified file.
+We use both of them in the examples as a way to show how we can simulate changing a file completely and appending extra lines to a file.
+</div><br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "Change2" &gt;&gt; my_second_committed_file</strong><br/>
 <strong>john@satsuki:~/coderepo$ git status</strong><br/>
 # On branch master<br/>
 # Changes to be committed:<br/>

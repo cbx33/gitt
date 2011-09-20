@@ -177,7 +177,7 @@ a022d4d1edc69970b4e8b3fe1da3dccd943a55e4<br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>By running the <code class="ncode">git rev-parse</code> with the tag name <code class="ncode">v1.0a</code>, Git has returned us the SHA-1 hash of the commit we were referring to.
 If we look back up at the earlier output, we can see that the most recent commit into the repository was indeed <strong>a022d4d1edc69970b4e8b3fe1da3dccd943a55e4</strong>.
-To give us something to work with, let's tag the commit <strong>163f06...</strong> with the tag name <code class="ncode">v0.9</code>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git tag v0.9 163f06</strong><br/>
+To give us something to work with, let's tag the commit <strong>163f061</strong> with the tag name <code class="ncode">v0.9</code>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git tag v0.9 163f061</strong><br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Now, we can do the following;<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff v0.9..v1.0a</strong><br/>
 diff --git a/my_second_committed_file b/my_second_committed_file<br/>

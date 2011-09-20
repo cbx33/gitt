@@ -168,9 +168,9 @@ He looked like he was almost in tears.<br><br>John frowned, "Can't you just move
 "The ancestor of the branch isn't right. I thought I had branched from master, but I'd actually branched from a dev branch. Now I can't find a way to bring my commits back. Short of cherry picking each one, but I have over fifty of them. Guess it's time to start scripting."<br><br>John smiled and shook his head, "Don't worry Rob, I have a better plan"
 </div><br>Cherry picking is a method of copying the contents of one commit into another and is something that we will pick up on later, but we will first look at our final use of rebase.
 Imagine the scenario painted above.
-You made a branch, have been merrily committing for hours, before realising that actually you branched from the wrong place.<br><br>In Git, this isn't a problem.
-Things get complicated if you've been doing more advanced operations during this period, but if you have been simply adding commits, we can use rebase to migrate that tree of commits to a different ancestor.<br><br>Take the example we have been working on, currently we have a <strong>master</strong> branch and a <strong>wonderful</strong> branch, and these differ.
-Let us say we are currently sitting on the <strong>wonderful</strong> branch, but we thought we were on the <strong>branch</strong> and we created a new branch called develop.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b develop</strong><br/>
+You made a branch, have been merrily committing for hours, before realising that actually you branched from the wrong ancestor.<br><br>In Git, this isn't a problem.
+Things get complicated if you've been doing more advanced operations during this period, but if you have been simply adding commits, we can use rebase to migrate the tree of commits to a different ancestor.<br><br>Take the example we have been working on. Currently we have a <strong>master</strong> branch and a <strong>wonderful</strong> branch, and these differ, though they have a common ancestor.
+Let us say we are currently sitting on the <strong>wonderful</strong> branch, but we thought we were on <strong>master</strong> and we created a new branch called <strong>develop</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git checkout -b develop</strong><br/>
 Switched to a new branch 'develop'<br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Now let us commit a few files and see what we can do about fixing our problem.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "new dev work" &gt;&gt; newfile3</strong><br/>
@@ -194,6 +194,7 @@ Switched to a new branch 'develop'<br/>
 |/<br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Whoops! The commits were supposed to be on a branch that stemmed from <strong>master</strong>, not one that stems from <strong>wonderful</strong>.
+In other words, <strong>develop</strong> stems from <strong>wonderful</strong>, when it should have stemmed from <strong>master</strong>.
 This is where <code class="ncode">git rebase</code> comes to our assistance once more.
 With one command, we can move those commits to a branch that stems from <strong>master</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git rebase --onto master wonderful develop</strong><br/>
 First, rewinding head to replay your work on top of it...<br/>
@@ -212,7 +213,8 @@ Applying: More new deving<br/>
 |/<br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>Notice in the output above that we have used our <code class="ncode">git rebase</code> tool with a new <code class="ncode">--onto master</code> parameter.
-Basically the syntax is stating that we would like to take the commits between <strong>wonderful</strong> and <strong>develop</strong> and place them onto <strong>master</strong> instead.<br><br>To clean up our repository, we are going to delete our <strong>keeprebase</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git branch -D keeprebase</strong><br/>
+Basically the syntax above is stating that we would like to take all of the commits between the points <strong>wonderful</strong> and <strong>develop</strong> and place them onto <strong>master</strong> instead.<br><h3>A little housework</h3>
+To clean up our repository, we are going to delete our <strong>keeprebase</strong> branch.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git branch -D keeprebase</strong><br/>
 Deleted branch keeprebase (was 5167cce).<br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>We have reached the end of our tour with the rebase tool.

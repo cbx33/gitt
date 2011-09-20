@@ -203,8 +203,6 @@ Fast-forward<br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>As you can see, we have switched back to working on our old <strong>origin</strong> and have bought <strong>wonderful</strong> to be in line with master and have added a new file and committed the changes.
 Now let us go back to our clone and see if we can see those changes.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd ../coderepo-cl/</strong><br/>
-<strong>john@satsuki:~/coderepo-cl$ git diff wonderful origin/</strong><br/>
-origin/HEAD        origin/master      origin/wonderful   origin/zaney<br/>
 <strong>john@satsuki:~/coderepo-cl$ git diff wonderful origin/wonderful</strong><br/>
 <strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>That seems a little odd at first glance.
@@ -247,7 +245,8 @@ Fast-forward<br/>
  create mode 100644 newfile3<br/>
 <strong>john@satsuki:~/coderepo-cl$</strong><br/>
 </code></div><br>As you can see, the two commands that we used were <code class="ncode">git fetch</code> and the more familiar <code class="ncode">git merge</code>.
-The <code class="ncode">git fetch</code> command literally visits the remote repository, in our case we asked for <strong>origin</strong>, and finds which objects are new.
+The <code class="ncode">git fetch</code> command literally visits the remote repository, in our case we asked for <strong>origin</strong>, and finds which objects are new 
+and do not exist in our local clone.
 These are then copied to the local clone, and the HEADs of the various remote branches are updated.
 We now rerun our <code class="ncode">git diff</code>, only this time, we see a great many more changes than before.
 Finally we initiate a <code class="ncode">git merge</code> to pull the changes from the now up to date remote branch to our local one.<br><br>We could have used the <code class="ncode">git pull</code> command here, and if we had supplied no parameters to it, it would have achieved the exact same outcome.

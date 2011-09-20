@@ -302,7 +302,6 @@ Switched to branch 'wacky'<br/>
 commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd<br/>
 ...<br/>
 ...<br/>
-...<br/>
 </code></div><br>So here we have added a tag in our current branch, <strong>wacky</strong>, and we can see that the commit ID for the tag <strong>v2.0</strong> points <strong>55fb69f</strong>.
 We can also see that the branch <strong>wacky</strong> is currently pointing to the same commit ID, <strong>55fb69f</strong>.
 Now let us add another file in, make a commit and see what happens after this.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ echo "New stuff" &gt; another_file</strong><br/>
@@ -313,7 +312,6 @@ Now let us add another file in, make a commit and see what happens after this.<b
  create mode 100644 another_file<br/>
 <strong>john@satsuki:~/coderepo$ git show v2.0</strong><br/>
 commit 55fb69f4ad26fdb6b90ac6f43431be40779962dd<br/>
-...<br/>
 ...<br/>
 ...<br/>
 <strong>john@satsuki:~/coderepo$ git branch -v</strong><br/>

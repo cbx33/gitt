@@ -238,7 +238,7 @@ In fact it would be a little ambiguous if there were two.
 It <em>could</em> happen that we would have two SHA-1 hashes that started with the same seven characters, but it's not likely.
 The line we are interested in is listed below.<br><div id="codeblock"><code>./cf/e23cbe0150fda69a004e301828097935ec4397}<br/>
 </code></div><br>It would be nice if we could find out a little more about this object, and confirm that it is what we expect it to be.
-to start with, let us run the Linux <code class="ncode">file</code> command on it, to see what it makes of it.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/.git/objects/cf$ file e23cbe0150fda69a004e301828097935ec4397</strong><br/>
+To start with, let us run the Linux <code class="ncode">file</code> command on it to see what it makes of the contents.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/.git/objects/cf$ file e23cbe0150fda69a004e301828097935ec4397</strong><br/>
 e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable - version 5185<br/>
 <strong>john@satsuki:~/coderepo/.git/objects/cf$</strong><br/>
 </code></div><br>The <code class="ncode">file</code> command, tells us that the file is actually of <code class="ncode">VAX COFF executable - version 5185</code> filetype.
@@ -247,7 +247,7 @@ Git stores its objects by Zlib compressing them, which is why it is difficult fo
 Later in the book, you will find out exactly how to generate your own repository from scratch, but for now, let us just understand that Git first creates a header for the content, then adds the content to the header, creates the SHA-1 hash of such data and finally Zlib compresses it to store to disk.<br><h3>Out comes the wrench</h3>
 Wouldn't it be nice if we could view the data that was inside the file simply, without having to write our own tools.
 If you look through the Git man page, you will find one listed under the <strong>Interrogation</strong> section, called <code class="ncode">git cat-file</code>.
-Anyone who has spent any time with Git will know what the <code class="ncode">cat</code> command does.
+Anyone who has spent any time with Linux will know what the <code class="ncode">cat</code> command does.
 <code class="ncode">cat</code> is used to display the contents of files.
 In Git, this command is used to display the contents, type or size of a repository object, be it either of type commit, tree or blob.<br><div id="calloutblock"><h3>Information - What's with all the wrenches?</h3>
 You may have noticed the less than subtle references to plumbing.
@@ -293,7 +293,7 @@ In our case this just happens to be one file.
 Using our command one last time against the object name of the file, we can see the actual contents of the file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git cat-file -p e69de29</strong><br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>At first glance one may consider it odd that there is nothing in there.
-However, if we take a trip back in time and flick back to the first commit that we made to our repository, you will see that we never actually put any content in our file at all.
+However, if we take a trip back in time and go back to the first commit that we made to our repository, you will see that we never actually put any content in our file at all.
 So, the object contains nothing.
 Now we can draw up a diagram of our repository after the first commit.<br><center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>

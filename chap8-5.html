@@ -180,7 +180,7 @@ rm 'tester/test.sh'<br/>
 </code></div><br>We need to define what a submodule actualy is.
 Submodules are tricky to understand and often people use them once and conclude that they are more trouble than they are worth.
 However, if you take some time to understand what a submodule really is, then they can be very useful to you.
-A submodule is the inclusion of a repositories branch at a specific commit.
+A submodule is the inclusion of a repository branch at a specific commit.
 It is not intended to track the development of the upstream library or module, (see the callout box for an explanation of <em>upstream</em>).<br><div id="calloutblock"><h3>Terminology - Upstream</h3>
 <em>Upstream</em> refers to the source of a project which may have one or more derivatives which are also distributed.
 Take the package that was used to build this book for example, LaTeX.
@@ -241,7 +241,7 @@ Below is an example of what the file looks like in our current repository.<br><d
 <strong>john@satsuki:~/coderepo$ </strong><br/>
 </code></div><br><h3>Changes down the river</h3>
 So what happens when we want to pull in changes from the upstream project?
-Well, you can make your submodule point to whatever point you like and stay there.
+Well, you can make your submodule point to whatever commit you like and stay there.
 As long as you commit your changes in the super project, Git will always allow you to return to that point using the <code class="ncode">git submodule update</code> command.<br><br>Let us take a look at how we could pull in some changes into our <code class="ncode">tester</code> submodule.
 First, we are going to make a change to our upstream project.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ cd ..</strong><br/>
 <strong>john@satsuki:~$ cd subrepo</strong><br/>
@@ -339,6 +339,7 @@ newfile1  newfile2  newfile3  newfile4  test.sh<br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>As you can see, submodules can be rather useful.
 You can even make changes to the repository in the submodule and commit them locally to perhaps keep changes that you want to make to the submodule.
+As this is a Git repository in its own right, you can merge <em>upstream</em> changes in too!
 Remember though that if you did make changes, and you committed them to the submodule,
 if you then issued a <code class="ncode">git submodule update</code> without first committing your changes in the superproject, your commit would be lost.
 Of course nothing in Git is ever really lost, but it would be prudent of you to always keep changes you make to submodules in a branch,

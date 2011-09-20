@@ -193,8 +193,8 @@ this branch will likely contain mostly finished, but largely untested works.
 The teams will work together inside their mob repositories to create new functionality.
 Once they are happy, their team leader will push their changes up into the development branch on the <em>blessed</em> repository.
 This branch is not guaranteed to be stable.
-Sometimes things will break but the development branch is a place that all of the work of the various teams comes together.<br><br>Once the teams hit feature freeze, the point at which they will no longer take any more new features into the code base, they will ask the QA manager to create a <strong>QA</strong> branch.
-Bug fixes for current issues will be committed here and when all bugs have been fixed and the code is ready to be released, the release branch will be synced with a specific commit of the <strong>QA</strong> branch.<br><br>If this all sounds a little confusing, we will take a few minutes to digest what we have come up with and draw a few diagrams.
+Sometimes things will break but the development branch is a place that all of the work of the various teams comes together.<br><br>Once the teams hit feature freeze, the point at which they will no longer take any more new features into the code base, they will ask the QA manager to create a <strong>qa</strong> branch.
+Bug fixes for current issues will be committed here and when all bugs have been fixed and the code is ready to be released, the release branch will be synced with a specific commit of the <strong>qa</strong> branch.<br><br>If this all sounds a little confusing, we will take a few minutes to digest what we have come up with and draw a few diagrams.
 The beauty of Git is that it is so configurable and so by design supports almost limitless workflows.
 Unfortunately this can also be a drawback because no two Git setups are generally alike.
 The set up of Git is totally customised to the situation or scenario at hand.
@@ -211,7 +211,7 @@ In our case, we have merged together two of the workflow models that we presente
 This is the repository that contains our main <strong>release</strong> branch.
 This branch will always contain reliable stable releases.
 Sure, it may contain history of how we reached the stable release, but on a checkout, it will be a solid, buildable, pristine, tagged release.
-This repository also contains our <strong>QA</strong> branch.
+This repository also contains our <strong>qa</strong> branch.
 This is the branch that upon checkout would contain a fairly polished version of the product, but it may still have a few bugs and issues.
 Then we have our development branch.
 This is where the integration managers from the various teams would pull the code from their teams into a single code base, ready for the QA manager to begin his testing.

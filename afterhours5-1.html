@@ -352,7 +352,6 @@ Stage this hunk [y,n,q,a,d,/,e,?]? e<br/>
 <strong>john@satsuki:~/coderepo$ git add -p</strong><br/>
 ...<br/>
 ...<br/>
-...<br/>
 </code></div><br>We have gone through the process of editing each hunk for each commit and have performed the commits.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log</strong><br/>
 commit a59e73b1dc571318a1154aa4c2fc591ab6f1f395<br/>
 Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
@@ -377,6 +376,8 @@ Author: John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt;<br/>
 Date:   Wed Apr 13 23:55:32 2011 +0100<br/>
 <br/>
     Added first line<br/>
+...<br/>
+...<br/>
 </code></div><br>Next we are going to see how to perform exactly the same procedure using <code class="ncode">git gui</code>.
 For a start, we are going to reset our branch HEAD and our index back to their state before we made the last four commits, however we are going to leave the working copy files in the state they were after these last four commits.
 This is called a <strong>mixed</strong> reset, as it modifies the staging area and the HEAD, but does not touch the working files.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log --oneline</strong><br/>

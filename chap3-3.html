@@ -168,7 +168,7 @@ On the other hand there is always the situation where you'd like to know a littl
 For more information about diff in general, see the diff breakout box in this chapter.
 Think of a diff as an easy way of looking at the differences between two files, surrounded by a little context.
 This can often be enhanced by a visual diff viewer, but for now, let's stick with our simple text based <code class="ncode">git diff</code>.<br><br>If we want to find out what the changes are between our current commit and one of the previous ones, we can write a command like the one below.
-Notice that below, <strong>163f06</strong> refers to the second commit that we made to the repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff 163f06</strong><br/>
+Notice that below, <strong>163f061</strong> refers to the second commit that we made to the repository.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff 163f061</strong><br/>
 diff --git a/my_second_committed_file b/my_second_committed_file<br/>
 index 3ad4cc3..095b9cd 100644<br/>
 --- a/my_second_committed_file<br/>
@@ -177,7 +177,7 @@ index 3ad4cc3..095b9cd 100644<br/>
  Change1<br/>
 +Change2<br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
-</code></div><br>What this is telling us, is that between <strong>e86dd</strong> and our current commit <strong>6ca16</strong>, we added the line <em>Change2</em> to the file <code class="ncode">my_second_committed_file</code>.
+</code></div><br>What this is telling us, is that between <strong>163f061</strong> and our current commit <strong>9938a0c</strong>, we added the line <em>Change2</em> to the file <code class="ncode">my_second_committed_file</code>.
 We can see this by the preceding <code class="ncode">+</code> on the line <code class="ncode">Change2</code>.
 Let's make a few changes to our repository and see how the diffs look.
 We're actually going to make a few changes to the files using a text editor so that you can't see what we've done.
@@ -192,7 +192,7 @@ Date:   Thu Mar 31 22:05:55 2011 +0100<br/>
 The notation used here is something new to us, but seeing as HEAD points to the most current commit, HEAD~1 points to the commit previous to HEAD.
 This is how we tell Git to show us only the most recently commit.<br><br>As it turns out, John Haskins didn't really create a very meaningful log message.
 <em>Messed with a few files</em> is pretty unhelpful in the grand scheme of things.
-So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit <strong>a022d4</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff HEAD~1..HEAD</strong><br/>
+So let's be thankful that this isn't Tamagoyaki Inc's core repository and take a look at what actually happened in the commit <strong>a022d4d</strong>.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git diff HEAD~1..HEAD</strong><br/>
 diff --git a/my_second_committed_file b/my_second_committed_file<br/>
 index 095b9cd..c9887f8 100644<br/>
 --- a/my_second_committed_file<br/>
@@ -221,10 +221,10 @@ For more information on this, checkout the <em>Object's living in harmony</em> b
 -Change1<br/>
 -Change2<br/>
 +Changed this file completely<br/>
-</code></div><br>Now we see some lines which are generally referred to as a hunk.
+</code></div><br>Now we see a group of lines which are generally referred to as a hunk.
 The hunk has two important pieces of information.
 Section <code class="ncode">-1,2</code> tells us that in the original file, we are looking at the original file (<code class="ncode">-</code>), that the starting line where the change takes place is line 1 (<code class="ncode">1</code>) and that the hunk applies to two lines (<code class="ncode">2</code>).
-The next section tells us that in the new file, the change takes place as line 1, and because the comma and remaining number are omitted, we can infer that the hunk applies to only 1 line.<br><br>The three following lines show what actually took place.
+The next section tells us that in the new file, the change takes place as line 1, and because the comma and remaining number are omitted, we can infer that the hunk applies to only 1 line.<br><br>The three following lines show what change actually took place.
 Strings <code class="ncode">Change1</code> and <code class="ncode">Change2</code> were deleted from the file, whereas <code class="ncode">Changed this file completely</code> was added to the file.<br><br>Looking at the next diff segment, we can see it applies to a different file.
 Essentially this hunk is no different to the last, the only interesting portion is shown below.<br><div id="codeblock"><code>new file mode 100644<br/>
 index 0000000..5d27866<br/>
@@ -272,13 +272,13 @@ index 0000000..5d27866<br/>
 +++ b/my_third_committed_file<br/>
 @@ -0,0 +1 @@<br/>
 +Addition to the line<br/>
-<br/>
+...<br/>
 ...<br/>
 </code></div><br>Notice we get to see the diff that was presented before when we ran our <code class="ncode">git diff HEAD~1..HEAD</code> command, but this time, as we have used the git log command instead, we get to see the diff output as well.
 This is what the <code class="ncode">-p</code> flag is for.
 Take note of the way we have specified the time period that we are interested in.
 The section <code class="ncode">--since="last week"</code> tells Git to filter the output and show only the entries that were committed within the last week.<br><br>This type of filtering can be exceedingly useful to a developer.
-Often when problems arise, you do not have a defined point in time that you know it was last working.
+Often when problems arise, you do not have a defined point in time that you know when your code was last working.
 However most of the time, you can say with some certainty, "I know it was working two weeks ago".
 Using the methods described above, will give the user all of the changes, categorised by commit, that occurred in those two weeks, allowing them to narrow down the scope of exactly where to begin looking for the offending changes.<br><br>If the developer can further categorise the issue, such as, "I know which file the change must have occurred in", then the following example will demonstrate just how easy it is to filter the results even further.
 Even in the simplified example repository that we have been using, running this command filters the output to a single file.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git log -p --since="last week" -- my_second_committed_file</strong><br/>

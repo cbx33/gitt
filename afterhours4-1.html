@@ -162,16 +162,16 @@ To start with, we need to define which merging strategy we are talking about.
 In Git there are multiple ways to instruct a merge to take place.
 Below is a brief list of the options that you can supply to the <code class="ncode">git merge</code> command along with a brief description of how each one affects the merge process.
 We will explain the details a little more further on.
-<br><div style="padding-left:10px;"><ul><li><strong>resolve</strong> - A two headed merge strategy using a 3-way merge algorithm.
+<br><div style="padding-left:10px;"><ul><li><strong>Resolve</strong> - A two headed merge strategy using a 3-way merge algorithm.
 This is used by default in Git.</li>
-<li><strong>recursive</strong> - A two headed merge strategy using a 3-way merge algorithm.
+<li><strong>Recursive</strong> - A two headed merge strategy using a 3-way merge algorithm.
 This algorithm looks at situations where multiple common ancestors are eligible and creates a merged tree of the common ancestors to be used as a reference.
 Usually, this method has less conflicts and carries with it multiple sub-options.</li>
-<li><strong>octopus</strong> - This merge strategy can merge in multiple heads.
+<li><strong>Octopus</strong> - This merge strategy can merge in multiple heads.
 When trying to pull multiple topic branches into a single merge, an <strong>octopus</strong> is the default method that Git will use.</li>
-<li><strong>ours</strong> - Another multiple head strategy, which simply ignores all changes from the other branches.
+<li><strong>Ours</strong> - Another multiple head strategy, which simply ignores all changes from the other branches.
 At first it may sound like a useless idea, but it could be used to keep the history of a branch without actually keeping the branch itself.</li>
-<li><strong>subtree</strong> - A much more advanced merge strategy based on the <strong>recursive</strong> which trees are adjusted to result in a better merge.</li>
+<li><strong>Subtree</strong> - A much more advanced merge strategy based on the <strong>recursive</strong> which trees are adjusted to result in a better merge.</li>
 </ul></div><br>Now that we are aware of the different options available to us, let us discuss what happens when we actually perform a merge.
 Let us consider the state of our repository at the end of Week 4, as shown in Figure 1.<br><center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>
@@ -205,9 +205,9 @@ We are attempting to merge in <strong>zaney</strong> to the <strong>wonderful</s
 We need to find the <strong>C</strong> in our equation.
 To do this we could pour over Figure 1.
 This should yield the result to be commit <strong>9710177</strong>.
-Is there are way we can ask Git to do the same thing? The following output introduces a new command that is used to find the <em>Best Common Ancestor</em> for a given merge proposal.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo-af4$ git merge-base wonderful zaney</strong><br/>
+Is there are way we can ask Git to do the same thing? The following output introduces a new command that is used to find the <em>Best Common Ancestor</em> for a given merge proposal.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo$ git merge-base wonderful zaney</strong><br/>
 9710177657ae00665ca8f8027b17314346a5b1c4<br/>
-<strong>john@satsuki:~/coderepo-af4$ git cat-file -p 9710177</strong><br/>
+<strong>john@satsuki:~/coderepo$ git cat-file -p 9710177</strong><br/>
 tree 268f487e5c29a4b01c3a91637bac0024253fb77e<br/>
 parent 55fb69f4ad26fdb6b90ac6f43431be40779962dd<br/>
 author John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301613377 +0100<br/>
@@ -215,7 +215,7 @@ committer John Haskins &lt;john.haskins@tamagoyakiinc.koala&gt; 1301613377<br/>
  +0100<br/>
 <br/>
 Added another file<br/>
-<strong>john@satsuki:~/coderepo-af4$</strong><br/>
+<strong>john@satsuki:~/coderepo$</strong><br/>
 </code></div><br>In our example, <code class="ncode">git merge-base</code> uses two parameters to speficy the two heads that we wish to merge.
 We can see that the commit that Git suggests as the <em>Best Common Ancestor</em> is what we suggested above, <strong>9710177</strong>.
 We have reused our <code class="ncode">git cat-file</code> command to prove that the commit is the one we suggested, as you can see, the commit messages match.<br><br>This explains how a simple merge takes place, Git will find the common ancestor, and try to merge in the differences to produce a merged version.
