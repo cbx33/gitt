@@ -75,8 +75,7 @@ Git handles this for us, routinely deleting objects that are older than a certai
 So by this we mean that an object that exists only in one branch will only remain imune to garbage collection whilst that branch is alive.
 As soon as we delete the branch, all objects that are not longer referred to in any tree are left in a \emph{dangling} state and may be deleted when garbage collection runs.
 Of course as stated earlier, Git holds on to objects for a period of time for you, to make sure you do not do anything silly, like delete a branch you actually really wanted.
-
-***Running manual gc***
+You can invoke a garbage collection manually, but it is often better to let Git handle these things for you, unless you have a specific reason for doing so.
 
 \subsection{But how do you really know....you know?}
 When obtaining source code via an insecure means, over the Internet for example,
