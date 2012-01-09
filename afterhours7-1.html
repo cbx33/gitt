@@ -197,7 +197,7 @@ To close the instance of <em>Instaweb</em> we run the following;<br><div id="cod
 <strong>john@satsuki:~/coderepo$ </strong><br/>
 </code></div><br>Now would be a good time to take a quick look at what running <code class="ncode">git instaweb</code> has done to our repository.
 If we take a look inside the <code class="ncode">.git</code> folder, we can see that there is a new folder called <code class="ncode">gitweb</code>.
-This folder contains configuration a log files for the <em>Instaweb</em> process.
+This folder contains configuration and log files for the <em>Instaweb</em> process.
 The file we are most interested in is <code class="ncode">httpd.conf</code>.
 Looking at the beginning of this file we should see something similar to the following.<br><div id="codeblock"><code>server.document-root = "/usr/share/gitweb"<br/>
 server.port = 1234<br/>
@@ -249,8 +249,8 @@ Here we can see detailed information about the commit.<br><center><table  border
                       <td class="fade_bot_image"><div align="center"><strong>Figure 4</strong><br>Instaweb's default page</div></td>
                       <td class="fade_corner">&nbsp;</td>
                     </tr>
-                  </table></center><br>The <strong>commit</strong>, <strong>tree</strong> and <strong>parent</strong> object hashes are displayed here fore reference.
-The <strong>tree</strong> amd <strong>parent</strong> lines are clickable links which will take us to those relevant sections.
+                  </table></center><br>The <strong>commit</strong>, <strong>tree</strong> and <strong>parent</strong> object hashes are displayed here for reference.
+The <strong>tree</strong> and <strong>parent</strong> lines are clickable links which will take us to those relevant sections.
 We are going to choose the <strong>tree</strong> link.
 A screenshot of the resulting page is shown in Figure 5.<br><center><table  border="0" cellpadding="0" cellspacing="0" class="image_float_left">
                     <tr>

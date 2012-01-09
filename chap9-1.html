@@ -200,7 +200,8 @@ Something that we glossed over is the subject of garbage collection.
 Git handles this for us, routinely deleting objects that are older than a certain time period from the object database, as long as they are no longer referenced by any branches.
 So by this we mean that an object that exists only in one branch will only remain imune to garbage collection whilst that branch is alive.
 As soon as we delete the branch, all objects that are not longer referred to in any tree are left in a <em>dangling</em> state and may be deleted when garbage collection runs.
-Of course as stated earlier, Git holds on to objects for a period of time for you, to make sure you do not do anything silly, like delete a branch you actually really wanted.<br><br>***Running manual gc***<br><h3>But how do you really know....you know?</h3>
+Of course as stated earlier, Git holds on to objects for a period of time for you, to make sure you do not do anything silly, like delete a branch you actually really wanted.
+You can invoke a garbage collection manually, but it is often better to let Git handle these things for you, unless you have a specific reason for doing so.<br><h3>But how do you really know....you know?</h3>
 When obtaining source code via an insecure means, over the Internet for example,
 there are times when you would really like to be as sure as possible that someone has not tampered with it.
 Let us take an example of someone distributing their content using a Git repository.
