@@ -188,16 +188,16 @@ Be careful when using this reference.  It does not mean the commit that <code cl
 If you have been doing resets and other things, these items show up in the <em>reflog</em>.</li>
 <li><code class="ncode">&lt;rev&gt;^&lt;n&gt;</code> - Is a way of asking Git to traverse an object for it's parents and so <code class="ncode">&lt;rev&gt;</code> or <code class="ncode">&lt;rev&gt;^ 1</code> means the first parent of a commit object.
 An example of this would be <code class="ncode">master^2</code>.</li>
-<li><code class="ncode">&lt;rev&gt;~&lt;n&gt;</code> - Is a way of asking Git to traverse an object for it's <code class="ncode">&lt;n&gt;</code>th grand-parent, following only first parents.
+<li><code class="ncode">&lt;rev&gt;&#126;&lt;n&gt;</code> - Is a way of asking Git to traverse an object for it's <code class="ncode">&lt;n&gt;</code>th grand-parent, following only first parents.
 This will take a little understanding and it is advised that you read the man page online for more information about what this really means.</li>
 <li><code class="ncode">&lt;rev&gt;^{/&lt;text&gt;\</code>} - This definition actually initiates a search for the youngest commit where the commit message matches the regular expression after the slash.
 <code class="ncode">master^{/bug\</code>} is an example of the usage of this reference definition.</li>
 <li><code class="ncode">&lt;rev&gt;:&lt;path&gt;</code> - This allows us to obtain the object hash for the file specified at the <code class="ncode">&lt;rev&gt;</code>.
 We could then use the <code class="ncode">git show</code> command to view that file.
-As an example <code class="ncode">git show HEAD~ 3:readme.txt</code> would show us the file <code class="ncode">readme.txt</code> as it was three grandparents back from HEAD.</li>
+As an example <code class="ncode">git show HEAD&#126; 3:readme.txt</code> would show us the file <code class="ncode">readme.txt</code> as it was three grandparents back from HEAD.</li>
 </ul></div><br>All of these are valid ways to refer to commits and in some cases objects and trees too.
 Imagine a situation where you wanted to view a file called <code class="ncode">readme.txt</code> that was three commits back from a tag of <code class="ncode">v44</code>.
-Using our new knowledge, we could use <code class="ncode">git show v44~ 3:readme.txt</code>.
+Using our new knowledge, we could use <code class="ncode">git show v44&#126; 3:readme.txt</code>.
 There are several other ways of referring to commits, but these are out of the scope of this chapter.
 If you would like more information, refer to the man page for <code class="ncode">git rev-parse</code>.<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>

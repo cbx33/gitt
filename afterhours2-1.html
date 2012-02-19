@@ -181,7 +181,7 @@ drwxr-xr-x  4 john john 4096 2011-03-31 20:22 refs<br/>
 <strong>john@satsuki:~/coderepo/.git$</strong><br/>
 </code></div><br><strong>branches</strong> - Though deprecated now, this folder stores shorthands for git pull, push and fetch commands, by creating a file, the name of which is passed to the command instead of the repository argument.<br><strong>COMMIT_EDITMSG</strong> - This file holds the last commit message that was displayed in the editor.<br><strong>config</strong> - This is the main configuration file for Git.
 It is the first place git looks for upon invocation.
-If this file is not present, Git will inspect <code class="ncode">~{</code>/.gitconfig}.
+If this file is not present, Git will inspect <code class="ncode">&#126;/.gitconfig</code>.
 After this, Git will go to <code class="ncode">/etc/gitconfig</code>.
 The file holds information about the remotes, tracking branches, push configurations and many more items.<br><strong>description</strong> - This is a simple text file which gives a description to a repository when being view via gitweb or similar.<br><strong>HEAD</strong> - This file is a pointer to the parent commit of your current branch.<br><strong>hooks</strong> - Scripts can be placed in here to perform operations at certain points during the commit process.<br><strong>info</strong> - The info folder contains some additional information about the repository<br><strong>logs</strong> - The logs folder holds various logs regarding Git's operation<br><strong>objects</strong> - The is the directory that holds all of the actual files that are stored in the repository.
 The files are named by their SHA-1 values.

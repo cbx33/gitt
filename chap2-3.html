@@ -209,7 +209,7 @@ We spoke earlier about the configuration file and how it stores information abou
 Git can use any text editor you require, even a graphical one, though the need rarely arises.
 As mentioned earlier, Git has a preference lever when talking about configuration.
 First and foremost it will look in the repositories own 'config' file in the .git folder.
-Then, it will look in the users <code class="ncode">~/.gitconfig</code> file.
+Then, it will look in the users <code class="ncode">&#126;/.gitconfig</code> file.
 Finally, Git will look in your distributions own global folder.<br><br>If we wanted to change the editor that Git would use to modify commit messages, we can either modify the files directly, or run a command similar to the following;<br><div id="codeblock"><code>git config core.editor "nano"<br/>
 </code></div><br>If we want the changes to apply globally, meaning it would affect all repositories we administrate as this user, unless overridden by a repository setting, we would run the following;<br><div id="codeblock"><code>git config --global core.editor "nano"<br/>
 </code></div><br>It is worth noting that you can also use the $EDITOR environment variable to accomplish the same thing.

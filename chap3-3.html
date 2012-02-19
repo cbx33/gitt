@@ -188,7 +188,7 @@ Date:   Thu Mar 31 22:05:55 2011 +0100<br/>
 <br/>
     Messed with a few files<br/>
 <strong>john@satsuki:~/coderepo$</strong><br/>
-</code></div><br>The command <code class="ncode">git log HEAD~{</code>1..HEAD} tells Git to show us the git log for all commits between <code class="ncode">HEAD~1</code> and <code class="ncode">HEAD</code>.
+</code></div><br>The command <code class="ncode">git log HEAD&#126;1..HEAD</code> tells Git to show us the git log for all commits between <code class="ncode">HEAD~1</code> and <code class="ncode">HEAD</code>.
 The notation used here is something new to us, but seeing as HEAD points to the most current commit, HEAD~1 points to the commit previous to HEAD.
 This is how we tell Git to show us only the most recently commit.<br><br>As it turns out, John Haskins didn't really create a very meaningful log message.
 <em>Messed with a few files</em> is pretty unhelpful in the grand scheme of things.
@@ -274,7 +274,7 @@ index 0000000..5d27866<br/>
 +Addition to the line<br/>
 ...<br/>
 ...<br/>
-</code></div><br>Notice we get to see the diff that was presented before when we ran our <code class="ncode">git diff HEAD~1..HEAD</code> command, but this time, as we have used the git log command instead, we get to see the diff output as well.
+</code></div><br>Notice we get to see the diff that was presented before when we ran our <code class="ncode">git diff HEAD&#126;1..HEAD</code> command, but this time, as we have used the git log command instead, we get to see the diff output as well.
 This is what the <code class="ncode">-p</code> flag is for.
 Take note of the way we have specified the time period that we are interested in.
 The section <code class="ncode">--since="last week"</code> tells Git to filter the output and show only the entries that were committed within the last week.<br><br>This type of filtering can be exceedingly useful to a developer.
