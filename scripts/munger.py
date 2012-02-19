@@ -33,7 +33,7 @@ def mung(data, IMAGE_BLOCK="", bformat="pdf"):
 	data = data.replace("``", '"')
 	data = data.replace("''", '"')
 
-	data = data.replace("\\%", "%")
+	#data = data.replace("\\%", "%")
 	data = data.replace("\\$", "$")
 
 	data = data.replace("\\LaTeX", "LaTeX")
