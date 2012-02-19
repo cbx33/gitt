@@ -10,6 +10,8 @@ def mung(data, IMAGE_BLOCK="", bformat="pdf"):
 	data = data.replace(">", "&gt;")
 	data = data.replace("<", "&lt;")
 
+	data = data.replace("\\textasciitilde{}", "&#126;")
+
 	plob = re.findall("(\\\\texttt\{(.*?)\})", data)
 	for i in plob:
 		data = data.replace(i[0], '<code class="ncode">' + i[1] + "</code>")
@@ -43,8 +45,7 @@ def mung(data, IMAGE_BLOCK="", bformat="pdf"):
 	data = data.replace("\\newline", "")
 
 	data = data.replace("\\ldots", "...")
-	data = data.replace("\\textasciitilde{}", "~")
-	data = data.replace("\\textasciitilde", "~")
+	data = data.replace("\\textasciitilde", "&#126;")
 	data = data.replace("\\textasciicircum", "^")
 	data = data.replace("\{", "{")
 	data = data.replace("\}", "}")
