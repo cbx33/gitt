@@ -236,7 +236,7 @@ We are looking for a file that starts with the characters <code class="ncode">e2
 By George! Looking at the list above, we can see that there is one file which fits the bill.
 In fact it would be a little ambiguous if there were two.
 It <em>could</em> happen that we would have two SHA-1 hashes that started with the same seven characters, but it's not likely.
-The line we are interested in is listed below.<br><div id="codeblock"><code>./cf/e23cbe0150fda69a004e301828097935ec4397}<br/>
+The line we are interested in is listed below.<br><div id="codeblock"><code>./cf/e23cbe0150fda69a004e301828097935ec4397<br/>
 </code></div><br>It would be nice if we could find out a little more about this object, and confirm that it is what we expect it to be.
 To start with, let us run the Linux <code class="ncode">file</code> command on it to see what it makes of the contents.<br><div id="codeblock"><code><strong>john@satsuki:~/coderepo/.git/objects/cf$ file e23cbe0150fda69a004e301828097935ec4397</strong><br/>
 e23cbe0150fda69a004e301828097935ec4397: VAX COFF executable - version 5185<br/>
