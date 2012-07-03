@@ -72,6 +72,13 @@ baseconvert: $(BUILD_DIR) $(BUILD_DIR_IMAGES) htmlimages
 	@cp -r site/images $(BUILD_DIR)
 	@cp -r images/source/*.svg $(BUILD_DIR_IMAGES)
 
+baseconvert-mobi: $(BUILD_DIR) $(BUILD_DIR_IMAGES) htmlimages
+	@python scripts/htmlbuild.py alltex
+	@python scripts/htmlbuild.py baseconvert mobi
+	@python scripts/htmlbuild.py baseconcat
+	@cp -r site/images $(BUILD_DIR)
+	@cp -r images/source/*.svg $(BUILD_DIR_IMAGES)
+
 baseconvert-epub: $(BUILD_DIR) $(BUILD_DIR_IMAGES) htmlimages
 	@python scripts/htmlbuild.py alltex
 	@python scripts/htmlbuild.py baseconvert epub
@@ -85,7 +92,7 @@ epub: baseconvert-epub
 epub-view: epub
 	@ebook-viewer build/complete.epub
 
-mobi: baseconvert
+mobi: baseconvert-mobi
 	@ebook-convert build/complete.html build/complete.mobi --chapter '//*[name()="h1"]' --authors 'Peter Savage' --title 'Git In The Trenches' --cover images/source/fcover-epub.png
 
 mobi-view: mobi
