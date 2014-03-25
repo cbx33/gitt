@@ -163,7 +163,7 @@ def baseconcat():
 	files = re.findall(r"\\include\{(.*)\}", info[0])
 	for filename in files:
 		stringer += open("build/" + os.path.splitext(filename)[0] + ".html").read() + "\n"
-	open("build/complete.html", "w").write(stringer)
+	open("build/complete.html", "w").write("<title>Git In The Trenches</title>" + stringer)
 
 def buildnav():
 	info = os.listdir("site/")
